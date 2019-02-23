@@ -1,0 +1,136 @@
+﻿<%--
+Default skin template. The following skins are provided as examples only.
+
+1. Named control skin. The SkinId should be uniquely defined because
+   duplicate SkinId's per control type are not allowed in the same theme.
+
+<asp:GridView runat="server" SkinId="gridviewSkin" BackColor="White" >
+   <AlternatingRowStyle BackColor="Blue" />
+</asp:GridView>
+
+2. Default skin. The SkinId is not defined. Only one default 
+   control skin per control type is allowed in the same theme.
+
+<asp:Image runat="server" ImageUrl="~/images/image1.jpg" />
+--%>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+ <asp:GridView runat="server" CssClass="GridViewStyle" >
+        <RowStyle CssClass="RowStyle"/>
+        <EmptyDataRowStyle CssClass="EmptyRowStyle" />
+        <PagerStyle CssClass="PagerStyle" />
+        <SelectedRowStyle CssClass="SelectedRowStyle" />
+        <HeaderStyle CssClass="HeaderStyle"  />
+        <EditRowStyle CssClass="EditRowStyle" />
+        <AlternatingRowStyle CssClass="AltRowStyle" />
+    </asp:GridView>
+
+<asp:DetailsView runat="server" CssClass="GridViewStyle" >
+        <RowStyle CssClass="RowStyle"/>
+        <EmptyDataRowStyle CssClass="EmptyRowStyle" />
+        <PagerStyle CssClass="PagerStyle" />
+        <HeaderStyle CssClass="HeaderStyle"  />
+        <EditRowStyle CssClass="EditRowStyle" />
+        <AlternatingRowStyle CssClass="AltRowStyle" />
+    </asp:DetailsView>
+
+    <asp:GridView runat="server" CssClass="GridViewStyle02" SkinID="gv_blue" >
+        <RowStyle CssClass="RowStyle02"/>
+        <EmptyDataRowStyle CssClass="EmptyRowStyle02" />
+        <PagerStyle CssClass="PagerStyle02" />
+        <SelectedRowStyle CssClass="SelectedRowStyle02" />
+        <HeaderStyle CssClass="HeaderStyle02"  />
+        <EditRowStyle CssClass="EditRowStyle02" />
+        <AlternatingRowStyle CssClass="AltRowStyle02" />
+         
+   
+    </asp:GridView>
+    <asp:RadioButtonList CssClass="radio-button" runat="server"></asp:RadioButtonList>
+    
+
+   
+    <asp:TreeView   runat="server" >
+        <SelectedNodeStyle CssClass="treeview-select-nod"  />
+        <LeafNodeStyle CssClass="treeview-leaf"     />  
+    </asp:TreeView>
+
+    <asp:AsyncFileUpload CssClass="file-upload-box-input" SkinID="file-upload"   runat="server" />
+
+    <asp:AsyncFileUpload CssClass="photo-upload-box-input" SkinID="image-upload"  runat="server" />
+
+    <asp:TextBox CssClass="textbox icon-common" runat="server"/>
+    <asp:TextBox CssClass="textbox customer-numbers-feilds" skinId="txtPhone" runat="server"/>
+    <asp:TextBox CssClass="textarea" SkinID="text-area" runat="server"/>
+    <asp:TextBox CssClass="textbox icon-username" SkinID="user_name" runat="server"/>
+    <asp:TextBox CssClass="textbox icon-serial-num" SkinID="sereial_num" runat="server"/>
+    <asp:TextBox CssClass="textbox icon-calandar" SkinID="Calendar" runat="server"/>
+     <asp:TextBox CssClass="textbox icon-birthday" SkinID="bday" runat="server"/>
+     <asp:TextBox CssClass="textbox icon-nationality" SkinID="nationality" runat="server"/>
+     <asp:TextBox CssClass="textbox icon-job" SkinID="icon-job" runat="server"/>
+     <asp:TextBox CssClass="textbox icon-contract" SkinID="icon-contract" runat="server"/>
+     <asp:TextBox CssClass="textbox icon-doc-type" SkinID="icon-document" runat="server"/>
+         <asp:TextBox CssClass="textbox icon-doc-serial" SkinID="doc_sereial_num" runat="server"/>
+         <asp:TextBox CssClass="textbox icon-insurance" SkinID="insurance" runat="server"/>
+         <asp:TextBox CssClass="textbox icon-insurance-type" SkinID="insurance-type" runat="server"/>
+         <asp:TextBox CssClass="textbox icon-salary" SkinID="salary_icon" runat="server"/>
+         <asp:TextBox CssClass="textbox icon-bank" SkinID="bank_icon" runat="server"/>
+          <asp:TextBox CssClass="textbox account_no_icon" SkinID="account_no_icon" runat="server"/>
+          <asp:TextBox CssClass="textbox telephone_icon" SkinID="telephone_icon" runat="server"/>
+             <asp:TextBox CssClass="textbox contact_type_icon" SkinID="contact_type_icon" runat="server"/>
+              <asp:TextBox CssClass="textbox item_icon" SkinID="item_icon" runat="server"/>
+              <asp:TextBox CssClass="total-salary" SkinID="total-salary" runat="server"/>
+    
+    <asp:TextBox CssClass="textbox icon-username-ar" SkinID="user_name_ar" runat="server"/>
+    
+    <asp:TextBox CssClass="textbox03 icon-search" SkinID="search" runat="server"/>
+      
+   <asp:Button CssClass="ButtonStyle" runat="server" />
+   <asp:Button CssClass="deatails-bt" runat="server" SkinID="details" />
+   <asp:Button CssClass="browse-button" SkinID="browse" runat="server" />
+   <asp:Button CssClass="ButtonStyle2" runat="server" SkinID="ButtonGrey" />
+   <asp:Button CssClass="add" runat="server" SkinID="add" />
+   <asp:Button CssClass="update" runat="server" SkinID="update" />
+   <asp:Button CssClass="delete" runat="server" SkinID="delete" />
+   <asp:Button CssClass="print" runat="server" SkinID="print" />
+   <asp:DropDownList CssClass="listbox" runat="server"/>
+   <asp:DropDownList CssClass="listbox02" SkinID="drop-down01" runat="server"/>
+   
+            <asp:LinkButton CssClass="file-delete" SkinID="file-delete" runat="server" ></asp:LinkButton>
+            <asp:LinkButton CssClass="file-details" SkinID="file-details" runat="server" ></asp:LinkButton>
+            <asp:LinkButton CssClass="file-print" SkinID="file-print" runat="server" ></asp:LinkButton>
+            <asp:LinkButton CssClass="file-update" SkinID="file-update" runat="server" ></asp:LinkButton>
+            <asp:LinkButton CssClass="file-detail" SkinID="file-detail" runat="server" ></asp:LinkButton>
+            <asp:LinkButton CssClass="file-download" SkinID="file-download" runat="server" ></asp:LinkButton>
+            <asp:LinkButton CssClass="file-add" SkinID="file-add" runat="server" ></asp:LinkButton>
+            <asp:LinkButton CssClass="file-preview" SkinID="file-preview" runat="server" ></asp:LinkButton>
+            <asp:HyperLink CssClass="file-preview" SkinID="file-preview" runat="server" ></asp:HyperLink>
+            <asp:LinkButton CssClass="add2" SkinID="add2" runat="server" ></asp:LinkButton>
+            <asp:HyperLink CssClass="add2" SkinID="add2" runat="server" ></asp:HyperLink>
+            <asp:LinkButton CssClass="gridview-button" SkinID="gv-button" runat="server" ></asp:LinkButton>
+            <asp:LinkButton CssClass="new-icn-bt" SkinID="new-icn-bt" runat="server" ></asp:LinkButton>
+            <asp:LinkButton CssClass="v_menu" SkinID="v_menu" runat="server" ></asp:LinkButton>
+
+
+            <asp:Label  runat="server" CssClass="common-label" ></asp:Label>
+            <asp:Label  runat="server" SkinID="cp_label"  CssClass="cp-label" ></asp:Label>
+             <asp:Label  runat="server" SkinID="heading_label"  CssClass="heading_label" ></asp:Label>
+            
+
+            <asp:Label runat="server" CssClass="res-label-empty" SkinID="lbl-empty"></asp:Label>
+            <asp:Label runat="server" CssClass="res-label-info" SkinID="lbl-info"></asp:Label>
+            <asp:Label runat="server" CssClass="res-label-success" SkinID="lbl-success"></asp:Label>
+            <asp:Label runat="server" CssClass="res-label-error" SkinID="lbl-error"></asp:Label>
+            <asp:Label runat="server" CssClass="Gridview-heading" SkinID="gv-heading"></asp:Label>
+            <asp:Label runat="server" CssClass="total-salary" SkinID="total-salary"></asp:Label>
+             <asp:Label runat="server" CssClass="tab_title" SkinID="tab_title"></asp:Label>
+
+             <asp:Label runat="server" CssClass="cp_title" SkinID="cp_title"></asp:Label>
+
+
+              <asp:ValidationSummary  CssClass="ValidationSummary"  runat="server" />
+
+
+<asp:RequiredFieldValidator runat="server"  CssClass="req_validator" ></asp:RequiredFieldValidator>
+
+   
+   <asp:Panel runat="server" SkinID="collapse_panel" CssClass="collapse_panel"></asp:Panel>

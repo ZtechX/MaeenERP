@@ -1,0 +1,290 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans';
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    font-weight: 300;
+}
+
+#slider {
+    position: relative;
+    overflow: hidden;
+    margin: 20px auto 0 auto;
+    border-radius: 4px;
+}
+.ColVis_Button {
+       background: #FFFFFF !important;
+    text-align: left;
+    font-weight: bold;
+    color: #565656 !important;
+    border: 1px solid #ddd;
+    padding:5px !important;
+}
+    #slider ul {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        height: 200px;
+        list-style: none;
+    }
+.fecilities_div_textbox {
+    padding:5px;
+}
+        #slider ul li {
+            position: relative;
+            display: block;
+            float: left;
+            margin: 0;
+            padding: 0;
+            width: 500px;
+            height: 300px;
+            background: #ccc;
+            text-align: center;
+            line-height: 300px;
+        }
+
+a.control_prev, a.control_next {
+    position: absolute;
+    top: 40%;
+    z-index: 999;
+    display: block;
+    padding: 4% 3%;
+    width: auto;
+    height: auto;
+    background: #2a2a2a;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+    a.control_prev:hover, a.control_next:hover {
+        opacity: 1;
+        -webkit-transition: all 0.2s ease;
+    }
+
+a.control_prev {
+    border-radius: 0 2px 2px 0;
+}
+
+a.control_next {
+    right: 0;
+    border-radius: 2px 0 0 2px;
+}
+
+.slider_option {
+    position: relative;
+    margin: 10px auto;
+    width: 160px;
+    font-size: 18px;
+}
+
+.carousel-control {
+    padding-top: 25%;
+}
+
+.carousel-inner img {
+    width: 100%;
+}
+
+body {
+    /*font: 90%/1.45em "Helvetica Neue" , HelveticaNeue, Verdana, Arial, Helvetica, sans-serif;*/
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #F1F0F0;
+}
+
+div.container {
+    min-width: 980px;
+    margin: 0 auto;
+}
+
+tfoot {
+    display: table-row-group;
+}
+
+.divResult {
+   position: fixed;
+  width: 17%;
+  top: 170px;
+  left: 41%;
+  z-index: 9999;
+  height: auto;
+  text-align: center;
+  line-height: normal;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 10px;
+  display:none;
+  padding:50px;
+      background-color:rgb(0, 128, 0) !important;
+}
+
+.ButtonStyle {
+    border-radius:0px !important;
+}
+.form_list .ButtonStyle {
+    float:right !important;
+}
+.dataTables_wrapper {
+      padding-bottom: 10px;
+}
+#imgloader {
+      width: 30px;
+  position: absolute;
+  left: 50% !important;
+}
+
+.icon-pane-new {
+    /*margin-top:30px !important;*/
+}
+.normal_checkboxes {
+    padding-top:8px;
+}
+.checkbox_list label, .normal_checkboxes label {
+      padding:0px !important;
+}
+
+.normal_checkboxes input {
+    float:left;
+  
+}
+    .normal_checkboxes label {
+        margin-left:5px !important;
+    }
+
+.info_icon {
+ 
+      position: absolute;
+  left: 75px !important;
+  top: 10px;
+  color:#686868;
+  font-size:14px !important;
+}
+ .tooltip-inner {
+              width:auto !important;
+              font-size:11px;
+          }
+.newformstyle {
+    float:left;
+    width:100%;
+}
+
+#divControlls {
+    position:relative;
+    float:left;
+    width:auto;
+}
+.downloadPop {
+      display: block;
+  Z-index: 9999;
+  position: fixed;
+  width: 40%;
+  z-index: 999999;
+  top: 10%;
+  left: 31%;
+  background-color: #fff;
+  padding: 2%;
+  box-shadow: 2px 2px 20px rgba(64, 64, 64, 0.21);
+}
+
+.download_pop_list {
+    margin:0px;
+    padding:0px;
+}
+    .download_pop_list li {
+        width:50%;
+        float:left;
+        list-style:none;
+    }
+    .download_pop_list li p {
+        padding:5px 0;
+        margin:0px;
+    }
+    .download_pop_list input {
+        float:left;
+    }
+.text-medium {
+    font-weight:bold;
+    font-size:14px;
+}
+#divShare {
+        position: absolute;
+    width: 300px;
+    background: #fff;
+    z-index: 999;
+       /*left: 410px;*/
+    /*top: 100%;*/
+}
+#divShare a {
+    float:left;
+    border:1px solid #eee;
+    margin-top:-1px;
+    padding:0 5px;
+    width:100%;
+    color:#404040;
+    font-size:12px;
+   
+}
+    #divShare a:before  {
+            content: "\f0ed";
+            font: normal normal normal 14px/1 FontAwesome;
+            padding-right:5px;
+    }
+#btnDownload:before {
+            content: "\f0ed";
+            font: normal normal normal 14px/1 FontAwesome;
+            color:#fff;
+}
+.check_box_align {
+    margin-left:23% !important;
+}
+
+#carousel-example-generic1 {
+    width:800px;
+    margin:0px auto;
+    max-height:500px;
+    min-height:500px;
+}
+#carousel-example-generic1  .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    width:100%;
+    height:100%;
+}
+.carousel-control.left {
+    background:none !important;
+}
+.carousel-control.right {
+    background:none !important;
+}
+.filter-icon {
+        background: #FFF url("../../images/FilterClear.png") no-repeat center center;
+    background-size: 20px;
+    max-width: 38px;
+    border: 0px !important;
+}
+table.dataTable tfoot th:first-child {
+    text-align:center !important;
+}
+.margin-top-nav {
+    margin-top:40px;
+}
+.main-title {
+    background: #fff;
+    float: left;
+    width: 100%;
+    margin-top: 56px;
+}
+.pad-left-right20 {
+    padding:0 20px !important;
+}
+
+    

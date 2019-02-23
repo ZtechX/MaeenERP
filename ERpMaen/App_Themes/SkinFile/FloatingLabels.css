@@ -1,0 +1,50 @@
+﻿@import url("http://fonts.googleapis.com/css?family=Sniglet");
+
+
+/*.flp {padding: 0 50px;}*/
+/*Let's place the label over the input*/
+.flp div {position: relative;
+           margin-top: 3px;
+}
+
+.flp input, .flp label, flp textarea {
+	/*width: 400px;*/
+     display: block;
+	font: inherit; 
+    /*font-size: 16px;*/ 
+    /*line-height: 24px;*/
+	/*fixed height for FF line height issue. 
+	height = 24(lineheight) + 10*2(padding) + 2(border)*/
+	/*height: 46px;*/
+	border: 1px solid #ddd;
+}
+.flp input [type="text"] {outline: none; border-radius: 3px;
+            padding:10px 5px 6px 5px;
+}
+
+.flp textarea {outline: none; border-radius: 3px;padding:10px 5px 6px 5px}
+.flp label {
+	position: absolute; left: 0; top: 0;
+	/*left/right padding will be 2px less, adjusted by padding on .ch*/
+	padding: 10px 8px;
+	border-color: transparent; color: #999;
+	cursor: text;
+}
+
+/*label styles*/
+.ch {
+	display: block; float: left;
+	position: relative; /*for upward animation*/
+	background: white; 
+}
+.ch:first-child {padding-left: 2px;}
+.ch:last-child {padding-right: 2px;}
+
+/*active input label*/
+.focussed {
+	/*when any input is already focussed clicking on it(label) again won't do anything*/
+	pointer-events: none;
+}
+
+
+

@@ -1,0 +1,86 @@
+﻿
+ul#clock li{
+    border: none;
+}
+
+#clock {
+    position: relative;
+    width: 185px;
+    height: 185px;
+    margin: -95px auto 0;
+    background: url(../images/clockface.png) no-repeat;
+    list-style: none;
+}
+
+#sec, #min, #hour {
+    position: absolute;
+    width: 15px;
+    height: 185px;
+    top: 0px;
+    left: 83px;
+}
+
+#sec {
+    background: url(../images/sechand.png);
+    z-index: 3;
+    overflow: hidden;
+}
+
+#min {
+    background:url(../images/minhand.png);
+    z-index: 2;
+}
+
+#hour {
+    background: url(../images/hourhand.png);
+    z-index: 1;
+}
+
+.profile-nav .user-heading.clock-row {
+    padding:15px;
+}
+.clock-row {
+    text-transform:uppercase;
+    min-height:147px;
+}
+ul.clock-category {
+    padding:15px 0;
+}
+ul.clock-category li {
+    display:inline-block;
+    width:24%;
+    text-align:center;
+    border:none;
+}
+ul.clock-category li a span {
+    display:block;
+    line-height:normal;
+}
+ul.clock-category li a i {
+    font-size:30px;
+    padding-right:0;
+}
+ul.clock-category li a:hover,ul.clock-category li a.active {
+    color:#E63523 !important;
+    background:none !important;
+}
+ul.clock-category li a:hover i,ul.clock-category li a.active i {
+    color:#1fb5ad !important;
+}
+.clock-row h1 {
+    font-size:22px !important;
+    font-weight:400 !important;
+    letter-spacing:1px;
+    margin:0 0 5px 0!important;
+    letter-spacing:1px;
+    text-align:left;
+}
+.clock-row p {
+    font-size:18px;
+    font-weight:300;
+    color:#fff !important;
+    margin:0;
+}
+.terques-bg {
+    background: #04C39E;
+}

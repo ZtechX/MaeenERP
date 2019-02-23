@@ -1,0 +1,130 @@
+﻿/*This Style Sheet contaians the classes that need to be made with unique color for each theme*/
+
+.page_title
+{
+/*width:100%;*/
+margin: 0px;
+padding:5px 0;
+font-size: 18px !important;
+color: #a0cc5b  !important;
+display:inline-block;
+}
+
+/*-----------Icons & Buttons------------*/
+a {
+color:#a0cc5b;
+text-decoration:none;
+font-size:12px;
+}
+    .btn i, .save i {
+    margin-right:2px;
+    font-size:15px;
+    color:#a0cc5b;
+    }
+    .btn:hover, .save:hover
+    {
+color:#8bbd3c;
+background:#eee;
+    }
+    .ButtonStyle
+{
+border: 0px none;
+color: #fff;
+border:1px solid #fff;
+padding: 6px 32px;
+font-weight: 600;
+font-family: 'Open Sans', Arial, Tahoma;
+cursor: pointer;
+outline: none;
+margin: 0 0 3px 5px;
+float:right;
+-webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:5px;
+background:#a0cc5b;
+box-shadow:0 0 100px #a0cc5b inset;
+}
+.ButtonStyle:hover
+{
+  color:#a0cc5b;
+  border-color:#a0cc5b;
+  background:#fff;
+  box-shadow:0 0 0 #a0cc5b inset;
+}
+.uploadBtn {
+    border: 1px solid #a0cc5b;
+    color: #FFFFFF;
+    padding: 6px 13px;
+    cursor: pointer;
+    outline: none;
+    margin: 0;
+    float: left;
+    -webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:5px;
+background:#a0cc5b;
+box-shadow:0 0 100px #a0cc5b inset;
+}
+.uploadBtn:hover
+{
+  color:#a0cc5b;
+  border-color:#a0cc5b;
+  background:#fff;
+  box-shadow:0 0 0 #a0cc5b inset;
+}
+
+/*----------Ajax Tabs------------*/
+    .ajax__tab_xp .ajax__tab_header .ajax__tab_active .ajax__tab_tab {
+ box-shadow:0px 3px 0px #a0cc5b inset;
+    } 
+/*------CalendarExtender--------*/
+.custom-calendar .ajax__calendar_title
+
+{
+ height:20px;
+ line-height:20px;
+  background-color:#a0cc5b;
+  color:#fff;
+}
+.custom-calendar .ajax__calendar_prev,
+.custom-calendar .ajax__calendar_next
+
+{
+ background-color:#a0cc5b;
+height:20px;
+ width:20px;
+ margin:0;
+ z-index:10;
+}
+.custom-calendar .ajax__calendar_today
+
+{
+ height:20px;
+ padding-right:0px;
+ line-height:20px;
+ color:#a0cc5b;
+ font-weight:bold;
+}
+/*-------AutoCompleteList---------*/
+.acl .li-hover
+{
+    background:#a0cc5b;
+    margin:0px;
+    padding:5px 10px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:bold;
+}
+/*------------Focus Styles------------*/
+ .textarea:focus, .textbox:focus, .listbox:focus, .listbox02:focus,
+    .listbox03:focus, .textbox03:focus, .textbox04:focus,
+    .after-select:focus, .range-textbox:focus, .textbox_no_icon:focus,
+    .textarea01:focus {
+    border-color:#a0cc5b;
+    }

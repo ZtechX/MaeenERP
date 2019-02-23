@@ -1,0 +1,168 @@
+﻿/*This Style Sheet contaians the classes that need to be made with unique color for each theme*/
+
+.page_title
+{
+/*width:100%;*/
+margin: 0px;
+padding:5px 10px;
+font-size: 18px !important;
+color: #04C39E !important;
+display:inline-block;
+float:right;
+}
+
+/*-----------Icons & Buttons------------*/
+a {
+color:#04C39E;
+text-decoration:none;
+font-size:12px;
+}
+    .btn i, .save i {
+    /*margin-right:2px;
+    font-size:15px;
+    color:#04C39E;*/
+    }
+    .btn:hover, .save:hover
+    {
+color:#04C39E !important;
+background:#eee;
+    }
+    .ButtonStyle
+{
+border: 0px none;
+color: #fff;
+border:1px solid #fff;
+padding: 6px 32px;
+font-weight: 600;
+font-family: 'Open Sans', Arial, Tahoma;
+cursor: pointer;
+outline: none;
+margin: 0 0 3px 5px;
+float:right;
+-webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:5px;
+background:#04C39E;
+/*box-shadow:0 0 100px #FDA80 Dinset;*/
+}
+.ButtonStyle:hover
+{
+  color:#04C39E;
+  border-color:#04C39E;
+  background:#fff;
+  /*box-shadow:0 0 0 #FDA80Dinset;*/
+}
+.uploadBtn {
+    border: 1px solid #ed4c3e;
+    color: #FFFFFF;
+    padding: 6px 13px;
+    cursor: pointer;
+    outline: none;
+    margin: 0;
+    float: left;
+    -webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:0px;
+background:#ed4c3e;
+box-shadow:0 0 100px #FDA80Dinset;
+width:100%;
+}
+.uploadBtn:hover
+{
+  color:#ed4c3e;
+  border-color:#ed4c3e;
+  background:#fff;
+  box-shadow:0 0 0 #FDA80Dinset;
+}
+.uploadBtn_plus {
+    border: 1px solid #ed4c3e;
+  color: #FFFFFF;
+  padding: 4px 8px;
+  cursor: pointer;
+  outline: none;
+  margin: 0;
+  float: left;
+  -webkit-transition: all .5s;
+  -ms-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+  border-radius: 0px;
+  background: #ed4c3e;
+  position: absolute;
+  right: 7px;
+  top: 4px;
+  z-index: 999;
+}
+.uploadBtn_plus:hover
+{
+  color:#ed4c3e;
+  border-color:#FDA80D;
+  background:#fff;
+  box-shadow:0 0 0 #de1920 inset;
+}
+/*----------Ajax Tabs------------*/
+    .ajax__tab_xp .ajax__tab_header .ajax__tab_active .ajax__tab_tab {
+ box-shadow:0px 3px 0px #FDA80Dinset;
+    } 
+/*------CalendarExtender--------*/
+.custom-calendar .ajax__calendar_title
+
+{
+ height:20px;
+ line-height:20px;
+  background-color:#ed4c3e;
+  color:#fff;
+}
+.custom-calendar .ajax__calendar_prev,
+.custom-calendar .ajax__calendar_next
+
+{
+ background-color:#ed4c3e;
+height:20px;
+ width:20px;
+ margin:0;
+ z-index:10;
+}
+.custom-calendar .ajax__calendar_today
+
+{
+ height:20px;
+ padding-right:0px;
+ line-height:20px;
+ color:#ed4c3e;
+ font-weight:bold;
+}
+/*-------AutoCompleteList---------*/
+.acl .li-hover
+{
+    background:#ed4c3e;
+    margin:0px;
+    padding:5px 10px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:bold;
+}
+/*------------Focus Styles------------*/
+ .textarea:focus, .textbox:focus, .listbox:focus, .listbox02:focus,
+    .listbox03:focus, .textbox03:focus, .textbox04:focus,
+    .after-select:focus, .range-textbox:focus, .textbox_no_icon:focus,
+    .textarea01:focus {
+    border-color:#ed4c3e;
+    }
+
+ /*.btn-primary {
+    color: #fff !important;
+    background-color: #F15656 !important;
+    border: none !important;
+    border-radius: 0px !important;
+}
+    .btn-primary :hover {
+        opacity:0.8;
+    }*/

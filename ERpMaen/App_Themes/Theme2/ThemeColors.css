@@ -1,0 +1,172 @@
+﻿/*This Style Sheet contaians the classes that need to be made with unique color for each theme*/
+
+.page_title
+{
+/*width:100%;*/
+margin: 0px;
+padding:5px 0;
+font-size: 18px !important;
+color: #01bee6  !important;
+display:inline-block;
+}
+
+/*-----------Icons & Buttons------------*/
+a {
+color:#01bee6;
+text-decoration:none;
+font-size:12px;
+}
+    .btn i, .save i {
+    margin-right:2px;
+    font-size:15px;
+    color:#01bee6;
+    }
+    .btn:hover, .save:hover
+    {
+color:#0190ae;
+background:#eee;
+    }
+    .ButtonStyle
+{
+border: 0px none;
+color: #fff;
+border:1px solid #fff;
+padding: 6px 32px;
+font-weight: 600;
+font-family: 'Open Sans', Arial, Tahoma;
+cursor: pointer;
+outline: none;
+margin: 0 0 3px 5px;
+float:right;
+-webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:5px;
+background:#01bee6;
+box-shadow:0 0 100px #01bee6 inset;
+}
+.ButtonStyle:hover
+{
+  color:#01bee6;
+  border-color:#01bee6;
+  background:#fff;
+  box-shadow:0 0 0 #01bee6 inset;
+}
+.uploadBtn {
+    border: 1px solid #01bee6;
+    color: #FFFFFF;
+    padding: 6px 13px;
+    cursor: pointer;
+    outline: none;
+    margin: 0;
+    float: left;
+    -webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:5px;
+background:#01bee6;
+box-shadow:0 0 100px #01bee6 inset;
+}
+.uploadBtn:hover
+{
+  color:#a7141c;
+  border-color:#a7141c;
+  background:#fff;
+  box-shadow:0 0 0 #a7141c inset;
+}
+/*-----------LinkButtons Inside GridView-----------*/
+.file-update {
+font-size:0;
+}
+.file-update:before
+{ 
+    font-family: 'FontAwesome';
+    font-size:18px;
+    line-height:20px;
+    content:'\f044';
+    -webkit-transition:all .6s;
+} 
+.file-update:hover:before
+{   
+    cursor:pointer;
+    color:#333;
+    -webkit-transform:rotateY(90deg);
+    -moz-transform:rotateY(90deg);
+    -ms-transform:rotateY(90deg);
+    -o-transform:rotateY(90deg);
+    transform:rotateY(90deg);
+}
+.file-delete
+{   font-size:0;
+}
+.file-delete:before
+{ 
+    font-family: 'FontAwesome';
+    font-size:18px;
+    line-height:20px;
+    content:'\f014';
+    -webkit-transition:all .5s;
+} 
+.file-delete:hover:before
+{   
+    cursor:pointer;
+    color:#333;
+    -webkit-transform:rotateY(130deg);
+    -moz-transform:rotateY(130deg);
+    -ms-transform:rotateY(130deg);
+    -o-transform:rotateY(130deg);
+    transform:rotateY(130deg);
+}
+/*----------Ajax Tabs------------*/
+    .ajax__tab_xp .ajax__tab_header .ajax__tab_active .ajax__tab_tab {
+ box-shadow:0px 3px 0px #01bee6 inset;
+    } 
+/*------CalendarExtender--------*/
+.custom-calendar .ajax__calendar_title
+
+{
+ height:20px;
+ line-height:20px;
+  background-color:#01bee6;
+  color:#fff;
+}
+.custom-calendar .ajax__calendar_prev,
+.custom-calendar .ajax__calendar_next
+
+{
+ background-color:#01bee6;
+height:20px;
+ width:20px;
+ margin:0;
+ z-index:10;
+}
+.custom-calendar .ajax__calendar_today
+
+{
+ height:20px;
+ padding-right:0px;
+ line-height:20px;
+ color:#01bee6;
+ font-weight:bold;
+}
+/*-------AutoCompleteList---------*/
+.acl .li-hover
+{
+    background:#01bee6;
+    margin:0px;
+    padding:5px 10px;
+    color:#000;
+    cursor:pointer;
+    font-weight:bold;
+}
+/*------------Focus Styles------------*/
+ .textarea:focus, .textbox:focus, .listbox:focus, .listbox02:focus,
+    .listbox03:focus, .textbox03:focus, .textbox04:focus,
+    .after-select:focus, .range-textbox:focus, .textbox_no_icon:focus,
+    .textarea01:focus {
+    border-color:#01bee6;
+    }
