@@ -132,8 +132,8 @@
                                         <div class="col-md-9 col-sm-12">
 
                                             <div class="fancy-form" id="divdate2">
-                                                <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="start_dt" ID="lblstart_date"></asp:Label>
-                                                <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="start_dt_hj" ID="lblstart_date_hj"></asp:Label>
+                                                <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="start_date" ID="lblstart_date"></asp:Label>
+                                                <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="start_date_hj" ID="lblstart_date_hj"></asp:Label>
                                                 <uc1:HijriCalendar runat="server" ID="HijriCalendar3" />
                                             </div>
 
@@ -225,8 +225,8 @@
                                         <div class="col-md-9 col-sm-12">
 
                                             <div class="fancy-form" id="divdate4">
-                                                <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="dob_dt" ID="lbl_dob_m"></asp:Label>
-                                                <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="dob_dt_hj" ID="lbl_dob_h"></asp:Label>
+                                                <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="dob_date" ID="lbl_dob_m"></asp:Label>
+                                                <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="dob_date_hj" ID="lbl_dob_h"></asp:Label>
                                                 <uc1:HijriCalendar runat="server" ID="HijriCalendar1" />
                                             </div>
 
@@ -259,15 +259,13 @@
                                     </div>   
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name" class="label-required">اسم ولى الامر  </label>
+                                            <label for="Name" >اسم ولى الامر  </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
                                             <input id="respnosible_name"  type="text"  class="form-control" dbColumn="respnosible_name"  runat="server"/>
                                          
 
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="respnosible_name"
-                                                ErrorMessage="من فضلك أدخل اسم ولى الامر   " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
                                             <br />
                                         </div>
                                     </div>

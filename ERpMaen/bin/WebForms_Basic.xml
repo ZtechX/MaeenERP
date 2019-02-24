@@ -2337,15 +2337,6 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.ConsultDetails._RequiredFieldValidator3">
-<summary>
-RequiredFieldValidator3 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:ERpMaen.ConsultDetails._ddlmaritalstat">
 <summary>
 ddlmaritalstat control.
