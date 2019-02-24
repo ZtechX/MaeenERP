@@ -621,7 +621,11 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                     If dictBasicDataJson.ContainsKey(field_name) Then
                         If Not String.IsNullOrWhiteSpace(dictBasicDataJson(field_name)) Then
                             Dim field_value = dictBasicDataJson(field_name)
+<<<<<<< HEAD
                             If field_name.Contains("dt") Then
+=======
+                            If field_name.Contains("date") Then
+>>>>>>> 1614a0180fd01db6ceaefbe70623f71eb6251a08
                                 If Not field_name.Contains("h") Then
                                     field_value = ConvertDatetoNumber(field_value)
                                 End If

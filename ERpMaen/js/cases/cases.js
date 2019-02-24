@@ -99,8 +99,9 @@ $(function () {
 
             this._on(this.input, {
                 autocompleteselect: function (event, ui) {
-                    alert("yy");
+             
                     ui.item.option.selected = true;
+                    show_all($("#combobox").val());
                     this._trigger("select ", event, {
                         item: ui.item.option
                     });
