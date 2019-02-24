@@ -37,6 +37,8 @@ Public Class sms_setting
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
                 '  
+                Dim clsddltype1 As New clsFillComboByDataSource("  select * from tblcompanies where ISNUll(active,0)=1 ", "name_ar", "id", "")
+                clsddltype1.SetComboItems(ddlComps, "", True, "--اختر--", False)
 
                 'Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='RS'", "description", "id", "")
                 'clsddltype5.SetComboItems(ddltype_id, "", True, "--اختر--", False)

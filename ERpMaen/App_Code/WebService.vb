@@ -3995,6 +3995,8 @@ Public Class WebService
                 formName = formName.Split("|")(0)
             End If
             Dim daForm As New TblFormsFactory
+            Dim comp_id = LoginInfo.GetComp_id()
+            Dim user_id = LoginInfo.GetUser__Id()
 
             Dim quaryStr = daForm.GetAllBy(TblForms.TblFormsFields.FormName, formName)(0).FormQueryAr
 
@@ -4006,6 +4008,14 @@ Public Class WebService
                     quaryStr = quaryStr + " and tblshare.user_id=" + Context.Request.Cookies("UserInfo")("UserId")
                 End If
             End If
+            If formName = "Users" Then
+                If user_id = "1" Then
+                    quaryStr = quaryStr
+                Else
+                    quaryStr = quaryStr + " and tblUsers.comp_id=" + comp_id.ToString
+                End If
+            End If
+
             Return quaryStr
         Catch ex As Exception
             Return String.Empty

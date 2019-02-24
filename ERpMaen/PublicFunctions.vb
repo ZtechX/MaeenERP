@@ -64,6 +64,27 @@ Public Class PublicFunctions
         End If
     End Function
 
+    '''' <summary>
+    '''' Convert datatable to string as json format; if dt is empty then return empty string
+    '''' </summary>
+    'Public Shared Function ConvertDataTabletoString(ByVal dt As DataTable) As String
+    '    If dt.Rows.Count = 0 Then
+    '        Return String.Empty
+    '    Else
+    '        Dim serializer As New System.Web.Script.Serialization.JavaScriptSerializer()
+    '        Dim rows As New List(Of Dictionary(Of String, Object))()
+    '        Dim row As Dictionary(Of String, Object)
+    '        For Each dr As DataRow In dt.Rows
+    '            row = New Dictionary(Of String, Object)()
+    '            For Each col As DataColumn In dt.Columns
+    '                row.Add(col.ColumnName, dr(col))
+    '            Next
+    '            rows.Add(row)
+    '        Next
+    '        Return serializer.Serialize(rows)
+    '    End If
+    'End Function
+
     Public Shared Function GetIdentity(ByRef _SqlConnection As SqlConnection, ByRef _SqlTransaction As SqlTransaction) As String
         If _SqlConnection.State <> ConnectionState.Open Then
             _SqlConnection.Open()

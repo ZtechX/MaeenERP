@@ -27,7 +27,7 @@ $(function () {
 });
 function get_admin() {
     companies.get_admin(function (val) {
-
+        debugger;
         if (val[0] != 0) {
             var data = JSON.parse(val[1]);
             var users = JSON.parse(val[0]);
@@ -177,6 +177,7 @@ function save_companies() {
                                 cancel();
                                 resetAll();
                                 drawDynamicTable();
+                                showSuccessMessage('تم تسجيل البيانات بنجاح');
                             }
                             showSuccessMessage('تم تسجيل البيانات بنجاح');
                     }
