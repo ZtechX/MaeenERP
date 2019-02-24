@@ -52,7 +52,7 @@ Public Class ConsultationDetails
                 Dim Con_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
                 dictBasicDataJson1.Add("RefCode", Con_id)
                 dictBasicDataJson1.Add("NotTitle", "إنشاء استشارة")
-                dictBasicDataJson1.Add("Date", dictBasicDataJson("start_dt").ToString)
+                dictBasicDataJson1.Add("Date", dictBasicDataJson("start_date").ToString)
                 dictBasicDataJson1.Add("AssignedTo", admin_id)
                 dictBasicDataJson1.Add("CreatedBy", LoginInfo.GetUser__Id())
                 dictBasicDataJson1.Add("Remarks", "استشارة")
