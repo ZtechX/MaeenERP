@@ -122,7 +122,7 @@ Public Class consulting
         Try
             Dim dt As New DataTable
             dt = DBManager.Getdatatable("SELECT ash_consultings.code,consult_nm,lokk3.Description as 'source_id',lokk1.Description as 'category_id' ," +
-" lokk2.Description as 'status', income_notes,start_date,start_date_hj," +
+" lokk2.Description as 'status', income_notes,start_dt,start_dt_hj," +
 " isNull((select User_Name from tblNotifications left join tblUsers  on tblNotifications.CreatedBy=tblUsers.id  where RefCode= ash_consultings.id and NotTitle='إنشاء استشارة'),'') as 'From'," +
 " isNull(ash_advisors.name,'')  as 'To'" +
 " from ash_consultings" +

@@ -19,8 +19,8 @@ $(function () {
                     $("#Ctitle").html("هذة الاستشارة مقدمة من " + conslut[0].From + " <br/>إلى المستشار " + conslut[0].To);
                     $("#consult_nm").html(conslut[0].consult_nm);
                     $("#code").html(conslut[0].code);
-                    $("#lblstart_date").html("الميلادى : " + conslut[0].start_date);
-                    $("#lblstart_date_hj").html("الهجرى : " + conslut[0].start_date_hj);
+                    $("#lblstart_date").html("الميلادى : " + conslut[0].start_dt);
+                    $("#lblstart_date_hj").html("الهجرى : " + conslut[0].start_dt_hj);
                     $("#source_id").html(conslut[0].source_id);
                     $("#category_id").html(conslut[0].category_id);
                     $("#income_notes").val(conslut[0].income_notes);
@@ -42,9 +42,9 @@ function drawOldMess() {
             var conslut_mess = JSON.parse(val);
             var str = "";
             conslut_mess.forEach(function (mess) {
-                str += `<div class="col-md-9">
+                str += `<div class="col-md-12">
 <label style="float:right;">من : ${mess.full_name}</label ><label style="float:left;">التاريخ : ${mess.message_date}</label>
-<textarea readonly="readonly"  rows="5" cols="20"  class="textbox icon-common" style="margin-right: 0px;">${mess.message}</textarea>
+<textarea  rows="5" cols="20"  class="textbox icon-common" style="margin-right: 0px;">${mess.message}</textarea>
 </div><br/>
 `
             });
