@@ -64,7 +64,7 @@
     <!-- Modal content-->
     <div class="modal-content" style="overflow-y:auto ;height:-webkit-fill-available;overflow-x:hidden;" >
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" onclick="CloseConslutModal()"> &times;</button>
         <label class="modal-title">الاستشارة</label>
           
                                             <asp:LinkButton OnClientClick="save(); return false;" ID="LinkButton1" runat="server" style="float:right;"

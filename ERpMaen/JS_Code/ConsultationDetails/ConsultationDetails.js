@@ -153,7 +153,9 @@ function add() {
         alert(err);
     }
 }
-
+function CloseConslutModal() {
+    $('#ConslutModal').modal('toggle');
+}
 function setformforupdate() {
     try {
         setformforupdate_all();
