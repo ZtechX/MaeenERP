@@ -45,7 +45,7 @@ Public Class PublicFunctions
             For Each dr As DataRow In dt.Rows
                 row = New Dictionary(Of String, Object)()
                 For Each col As DataColumn In dt.Columns
-                    If col.ColumnName.ToString.Contains("dt") Then
+                    If col.ColumnName.ToString.Contains("date") Then
 
                         If col.ColumnName.ToString.Contains("h") Then
                             row.Add(col.ColumnName, dr(col))
@@ -557,7 +557,7 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                             If dictBasicDataJson.ContainsKey(field_name) Then
                                 If Not String.IsNullOrWhiteSpace(dictBasicDataJson(field_name)) Then
                                     Dim field_value = dictBasicDataJson(field_name)
-                                    If field_name.Contains("dt") Then
+                                    If field_name.Contains("date") Then
                                         If field_name.Contains("h") Then
                                             field_value = field_value
                                         Else
@@ -577,7 +577,7 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                             ElseIf dictBasicDataJson.ContainsKey(field_name1) Then
                                 If Not String.IsNullOrWhiteSpace(dictBasicDataJson(field_name1)) Then
                                     Dim field_value = dictBasicDataJson(field_name1)
-                                    If field_name1.Contains("dt") Then
+                                    If field_name1.Contains("date") Then
                                         field_value = ConvertDatetoNumber(field_value)
                                     End If
                                     strquer = strquer + " " + field_name1.ToString + ", "
@@ -621,7 +621,7 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                     If dictBasicDataJson.ContainsKey(field_name) Then
                         If Not String.IsNullOrWhiteSpace(dictBasicDataJson(field_name)) Then
                             Dim field_value = dictBasicDataJson(field_name)
-                            If field_name.Contains("dt") Then
+                            If field_name.Contains("date") Then
                                 If Not field_name.Contains("h") Then
                                     field_value = ConvertDatetoNumber(field_value)
                                 End If
