@@ -53,6 +53,7 @@ Public Class advisor
                 dictBasicDataJson1.Add("comp_id", LoginInfo.GetComp_id())
                 dictBasicDataJson1.Add("User_Type", 6)
                 dictBasicDataJson1.Add("related_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                dictBasicDataJson1.Add("group_id", 115)
 
                 Dim dtcheckemailphone As New DataTable
                 dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where User_Name='" + dictBasicDataJson1("User_Name") + "' OR  User_Email='" + dictBasicDataJson1("User_Email") + "' or User_PhoneNumber='" + dictBasicDataJson1("User_PhoneNumber") + "'")
