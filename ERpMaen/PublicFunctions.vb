@@ -47,7 +47,7 @@ Public Class PublicFunctions
                 For Each col As DataColumn In dt.Columns
                     If col.ColumnName.ToString.Contains("date") Then
 
-                        If col.ColumnName.ToString.Contains("h") Then
+                        If col.ColumnName.ToString.Contains("hh") Then
                             row.Add(col.ColumnName, dr(col))
                         Else
                             row.Add(col.ColumnName, ConvertNumbertoDate(dr(col).ToString))
