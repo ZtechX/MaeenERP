@@ -161,6 +161,7 @@
                                               
                                 <div class="panel-body" id="divForm">
                                     <div class="col-md-6">
+                                        <fieldset><legend >بيانات الجهة</legend>
                                         <div class="row form-group">
                                             <div class="col-md-3 col-sm-12">
                                                 <label class="label-required">اسم الجهة</label>
@@ -240,12 +241,12 @@
                                                 </label>
                                             </div>
                                         </div>
-
+</fieldset>
                                     </div>
 
 
                                     <div class="col-md-6">
-
+                                        <fieldset><legend >بيانات مدير الجهة</legend>
                                         <div class="row form-group">
                                             <div class="col-md-3 col-sm-12">
                                                 <label>المسئول</label>
@@ -356,7 +357,7 @@
 
                                     </div>
                                 </div>
-
+                                            </fieldset>
                                     </div>
                                 </div>
                                                                     <%--end group3--%>
