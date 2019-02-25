@@ -38,10 +38,11 @@ Public Class companies
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
                 Dim comp_id = LoginInfo.GetComp_id()
 
-                'Dim clsddltype1 As New clsFillComboByDataSource("  select * from tblcompanies where ISNUll(active,0)=1 ", "name_ar", "id", "")
-                'clsddltype1.SetComboItems(ddlComps, "", True, "--اختر--", False)
+                Dim clsCente_admin As New clsFillComboByDataSource("select id,full_name from tblUsers where type=7 and IsNull(deleted,0)=0", "full_name", "id", "")
+                clsCente_admin.SetComboItems(Centeradmin, "", True, "--اختر--", False)
 
-                ' LoginInfo.CheckPermisionsNew(cmdAdd, cmdUpdate, cmdDelete, Me.Page, UserId, lblFormName, DynamicTable)
+                Dim clsaAcadmey_admin As New clsFillComboByDataSource("select id,full_name from tblUsers where type=7 and IsNull(deleted,0)=0", "full_name", "id", "")
+                clsaAcadmey_admin.SetComboItems(AcadmeyAdmin, "", True, "--اختر--", False)
 
 
             End If

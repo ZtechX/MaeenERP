@@ -11,8 +11,6 @@
         </Services>
     </asp:ScriptManager>
 
-
-
     <style>
         .wrap {
             margin-top: 50px;
@@ -40,12 +38,14 @@
             border-color: #f5f7f9;
             padding: 16px;
             border-bottom: 1px solid transparent;
-            border-top-right-radius: 3px;
-            border-top-left-radius: 3px;
+            border-top-right-radius: 7px;
+            border-top-left-radius: 7px;
         }
 
         .block {
-            margin-bottom: 15px;
+           box-shadow: 0 7px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 9px 0 rgba(0, 0, 0, 0.19);
+           margin-bottom:25px;
+            border-radius:7px;
         }
 
         .block-title a {
@@ -117,8 +117,7 @@
     display: -webkit-box;
 }
     </style>
-
-
+    
     <div class="wrap">
          <div>
                     <script src="../JS_Code/acadmies/coursat.js"></script>
@@ -150,7 +149,7 @@
             </div>
         </section>
         <section>
-            <div class="row">
+            <div class="row" style="margin-left:5px;margin-right:10px;">
                 <div class="col-md-12 col-sm-12 col-xs-12 " id="courses-list">
 
                 </div>
@@ -158,17 +157,11 @@
         </section>
         <div class="widget-navigation">
             <ul class="pagination">
-                <li class="paginate_button previous"><a href="#">السابق</a></li>
-                <li class="paginate_button active"><a href="#">1</a></li>
-                <li class="paginate_button"><a href="#">2</a></li>
-                <li class="paginate_button"><a href="#">3</a></li>
-                <li class="paginate_button"><a href="#">4</a></li>
-                <li class="paginate_button"><a href="#">5</a></li>
-                <li class="paginate_button"><a href="#">6</a></li>
-                <li class="paginate_button next" id="default-datatable_next"><a href="#">التالي</a></li>
+                <li class="paginate_button previous"><a>السابق</a></li>
+                <li class="paginate_button next" id="default-datatable_next"><a >التالي</a></li>
             </ul>
         </div>
-
+        </div>
         <div class="modal" id="addCourse" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -222,7 +215,7 @@
                                      <div class="col-md-9 col-sm-12">
 
                                          <div class="fancy-form" required id="divdate2">
-                                             <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="end_dt_m" ID="Label1"></asp:Label>
+                                             <asp:Label runat="server" ClientIDMode="static" Sstyle="display: none" dbColumn="end_dt_m" ID="Label1"></asp:Label>
                                              <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="end_dt_hj" ID="Label2"></asp:Label>
                                              <uc1:hijricalendar runat="server" id="HijriCalendar1" />
                                          </div>

@@ -192,7 +192,7 @@ Partial Public Class training_centers
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblstart_date_hj As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''HijriCalendar control.
     '''</summary>
@@ -200,8 +200,8 @@ Partial Public Class training_centers
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-
-
+    Protected WithEvents HijriCalendar As Global.ERpMaen.UserControls_HijriCalendar
+    
     '''<summary>
     '''TextNotes control.
     '''</summary>

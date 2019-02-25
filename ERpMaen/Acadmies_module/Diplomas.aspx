@@ -40,12 +40,14 @@
             border-color: #f5f7f9;
             padding: 16px;
             border-bottom: 1px solid transparent;
-            border-top-right-radius: 3px;
-            border-top-left-radius: 3px;
+            border-top-right-radius: 7px;
+            border-top-left-radius: 7px;
         }
 
         .block {
-            margin-bottom: 15px;
+           box-shadow: 0 7px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 9px 0 rgba(0, 0, 0, 0.19);
+           margin-bottom:25px;
+           border-radius:7px;
         }
 
         .block-title a {
@@ -152,22 +154,16 @@
             </div>
         </section>
         <section>
-            <div class="row">
+            <div class="row" style="margin-left:5px;margin-right:10px;">
                 <div class="col-md-12 col-sm-12 col-xs-12 " id="diplomas-list">
 
                 </div>
             </div>
         </section>
-        <div class="widget-navigation">
+       <div class="widget-navigation">
             <ul class="pagination">
-                <li class="paginate_button previous"><a href="#">السابق</a></li>
-                <li class="paginate_button active"><a href="#">1</a></li>
-                <li class="paginate_button"><a href="#">2</a></li>
-                <li class="paginate_button"><a href="#">3</a></li>
-                <li class="paginate_button"><a href="#">4</a></li>
-                <li class="paginate_button"><a href="#">5</a></li>
-                <li class="paginate_button"><a href="#">6</a></li>
-                <li class="paginate_button next" id="default-datatable_next"><a href="#">التالي</a></li>
+                <li class="paginate_button previous"><a>السابق</a></li>
+                <li class="paginate_button next" id="default-datatable_next"><a >التالي</a></li>
             </ul>
         </div>
 

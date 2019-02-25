@@ -9,6 +9,9 @@
 <%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
+    <div>
+          <link href="../css/cases/cases.css" rel="stylesheet" />
+    </div>
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/companies.asmx" />
@@ -146,6 +149,16 @@
                                 <asp:Label ID="lbluser_id" ClientIDMode="Static" Style="display: none" runat="server" dbcolumn=""></asp:Label>
                                 <asp:Label ID="lblgroup_id" ClientIDMode="Static" Style="display: none" runat="server" dbcolumn="group_id"></asp:Label>
                                 <asp:Label ClientIDMode="Static" runat="server" Style="display: none" ID="lblEdit">1</asp:Label>
+                                       <div class="panel panel-default" style="width:95%; margin-left: auto;margin-right: auto;margin-top: 25px;">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">بيانات الجهة</a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapse1" class="panel-collapse collapse">
+                                                            <div class="panel-body" style="direction:rtl;">
+                                                                <%-- start group3--%>
+                                              
                                 <div class="panel-body" id="divForm">
                                     <div class="col-md-6">
                                         <div class="row form-group">
@@ -346,10 +359,160 @@
 
                                     </div>
                                 </div>
+                                                                    <%--end group3--%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                        <div class="panel panel-default" style="width: 95%; margin-left: auto;margin-right: auto;">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">بيانات الاكاديمية</a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapse2" class="panel-collapse collapse">
+                                                            <div class="panel-body" style="direction:rtl;">
+                                                                <%-- start group3--%>
+                                              <div id="AcadmeyDataDiv">
+                                                   <div class="col-md-6 form-group ">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="Name" class="label-required">اسم الاكاديمية</label>
+
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <asp:TextBox SkinID="form-control" class="form-control" dbColumn="name" ClientIDMode="Static" ID="TextBox1" runat="server">
+                                        </asp:TextBox>
+
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="Name"
+                                            ErrorMessage="من فضلك أدخل اسم الاكاديمية " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 form-group ">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label>المدير</label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <asp:DropDownList dbcolumn="admin" class="form-control" ClientIDMode="Static" ID="AcadmeyAdmin" runat="server" style="margin-right:0px;">
+                                        </asp:DropDownList>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 form-group ">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label class="label-required">
+                                        التاريخ   </lable>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+
+                                        <div class="fancy-form" id="divdate_3">
+                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="start_date" ID="Label3"></asp:Label>
+                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="start_date_hj" ID="Label4"></asp:Label>
+                                            <uc1:HijriCalendar runat="server" ID="HijriCalendar1" />
+                                        </div>
+                                        <br />
+                                    </div>
+                                    </div>
+                                          <div class="col-md-6 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label for="Name" class="label-required">ملاحظات </label>
+
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox2" runat="server">
+                                                                        </asp:TextBox>
 
 
+                                                                    </div>
+                                                                </div>
+                                              </div>
+                                                                    <%--end group3--%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                        <div class="panel panel-default" style="width: 95%; margin-left: auto;margin-right: auto;">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">بيانات مركز التدريب</a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapse3" class="panel-collapse collapse">
+                                                            <div class="panel-body"  style="direction:rtl;">
+                                                                <%-- start group3--%>
+                                       
+                                                                       <div id="CenterDataDiv">
+                                                      <div class="col-md-6 form-group ">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="Name" class="label-required">اسم المركز</label>
 
-                            </div>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <asp:TextBox SkinID="form-control" class="form-control" dbColumn="name" ClientIDMode="Static" ID="Name" runat="server">
+                                        </asp:TextBox>
+
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="Name"
+                                            ErrorMessage="من فضلك أدخل اسم المركز " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 form-group ">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label>المدير</label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <asp:DropDownList dbcolumn="admin" class="form-control" ClientIDMode="Static" ID="Centeradmin" runat="server" style="margin-right:0px;">
+                                        </asp:DropDownList>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 form-group ">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label class="label-required">
+                                        التاريخ   </lable>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+
+                                        <div class="fancy-form" id="divdate_4">
+                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_m" ID="Label1"></asp:Label>
+                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_hj" ID="Label2"></asp:Label>
+                                            <uc1:HijriCalendar runat="server" ID="HijriCalendar" />
+                                        </div>
+                                        <br />
+                                    </div>
+
+                                </div>
+                                                                       
+                                           <div class="col-md-6 form-group">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label for="Name" class="label-required">ملاحظات </label>
+
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextNotes" runat="server">
+                                                                        </asp:TextBox>
+
+                                                                        </div>
+                                                                    </div>
+                                                               
+                                    <%--</div>--%>
+
+                                                                      
+                                </div>
+
+                                                                    <%--end group3--%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                           </div>
                             <div id="tab2" class="tab-pane fade ">
                                 <div class="row">
                                     <div class="form-actions pull-left" style="margin-top: -10px;">

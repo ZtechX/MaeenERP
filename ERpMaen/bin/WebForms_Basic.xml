@@ -296,6 +296,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.coursat._HijriCalendar">
+<summary>
+HijriCalendar control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.coursat._Label1">
 <summary>
 Label1 control.
@@ -308,6 +317,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.coursat._Label2">
 <summary>
 Label2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.coursat._HijriCalendar1">
+<summary>
+HijriCalendar1 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -6977,6 +6995,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.companies._HijriCalendar2">
+<summary>
+HijriCalendar2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.companies._lblend_date">
 <summary>
 lblend_date control.
@@ -6989,6 +7016,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.companies._lblend_date_hj">
 <summary>
 lblend_date_hj control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._HijriCalendar3">
+<summary>
+HijriCalendar3 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -7040,6 +7076,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.companies._HijriCalendar4">
+<summary>
+HijriCalendar4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.companies._lblmaintaianace_end_date">
 <summary>
 lblmaintaianace_end_date control.
@@ -7052,6 +7097,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.companies._lblmaintaianace_end_date_hj">
 <summary>
 lblmaintaianace_end_date_hj control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._HijriCalendar5">
+<summary>
+HijriCalendar5 control.
 </summary>
 <remarks>
 Auto-generated field.

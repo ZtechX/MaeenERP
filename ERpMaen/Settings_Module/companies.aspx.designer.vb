@@ -329,6 +329,132 @@ Partial Public Class companies
     Protected WithEvents fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
     
     '''<summary>
+    '''TextBox1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator7 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''AcadmeyAdmin control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AcadmeyAdmin As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''Label3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label3 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Label4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label4 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''HijriCalendar1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar1 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''TextBox2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox2 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Name As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator6 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''Centeradmin control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Centeradmin As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''Label1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Label2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''HijriCalendar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''TextNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextNotes As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''Button2 control.
     '''</summary>
     '''<remarks>
@@ -381,7 +507,7 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblstart_date_hj As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''HijriCalendar2 control.
     '''</summary>
@@ -389,8 +515,8 @@ Partial Public Class companies
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    ' Protected WithEvents HijriCalendar2 As Global.ERpMaen.UserControls_HijriCalendar
-
+    Protected WithEvents HijriCalendar2 As Global.ERpMaen.CustomerCalendar
+    
     '''<summary>
     '''lblend_date control.
     '''</summary>
@@ -408,7 +534,7 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblend_date_hj As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''HijriCalendar3 control.
     '''</summary>
@@ -416,8 +542,8 @@ Partial Public Class companies
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    ' Protected WithEvents HijriCalendar3 As Global.ERpMaen.UserControls_HijriCalendar
-
+    Protected WithEvents HijriCalendar3 As Global.ERpMaen.CustomerCalendar
+    
     '''<summary>
     '''cmdPOP control.
     '''</summary>
@@ -462,7 +588,7 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblmaintaianace_start_date_hj As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''HijriCalendar4 control.
     '''</summary>
@@ -470,8 +596,8 @@ Partial Public Class companies
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    '  Protected WithEvents HijriCalendar4 As Global.ERpMaen.UserControls_HijriCalendar
-
+    Protected WithEvents HijriCalendar4 As Global.ERpMaen.CustomerCalendar
+    
     '''<summary>
     '''lblmaintaianace_end_date control.
     '''</summary>
@@ -489,7 +615,7 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblmaintaianace_end_date_hj As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''HijriCalendar5 control.
     '''</summary>
@@ -497,8 +623,8 @@ Partial Public Class companies
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    ' Protected WithEvents HijriCalendar5 As Global.ERpMaen.UserControls_HijriCalendar
-
+    Protected WithEvents HijriCalendar5 As Global.ERpMaen.CustomerCalendar
+    
     '''<summary>
     '''ImageSlider control.
     '''</summary>
