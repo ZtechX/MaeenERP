@@ -17,11 +17,13 @@ var arr_id = [];
 $(function () {
     
     try {
-        form_load();
         $("#pnlConfirm").hide();
-        $("#divData").show();
-        $("#SavedivLoader").hide();
-     
+        $("#divData").hide();
+        $("#SavedivLoader").show();
+
+        form_load();
+       
+      
         
    
     } catch (err) {

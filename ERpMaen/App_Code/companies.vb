@@ -121,10 +121,10 @@ Public Class companies
             _sqltrans = _sqlconn.BeginTransaction
 
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-            'dictBasicDataJson("deal_start_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("deal_start_date_m"))
-            'dictBasicDataJson("deal_end_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("deal_end_date_m"))
-            'dictBasicDataJson("maintainance_start_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("maintainance_start_date_m"))
-            'dictBasicDataJson("maintainance_end_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("maintainance_end_date_m"))
+            dictBasicDataJson("deal_start_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("deal_start_date_m"))
+            dictBasicDataJson("deal_end_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("deal_end_date_m"))
+            dictBasicDataJson("maintainance_start_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("maintainance_start_date_m"))
+            dictBasicDataJson("maintainance_end_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("maintainance_end_date_m"))
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblcompanies", id, _sqlconn, _sqltrans) Then
                 Dim letter_id = 0

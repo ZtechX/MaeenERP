@@ -88,10 +88,10 @@ function edit(val) {
 function drawDynamicTable() {
     try {
         var tableSortingColumns = [
-                { orderable: false }, null, null, null, null, null,
+                { orderable: false }, null, null, null, null, 
         ];
         var tableFilteringColumns = [
-            { type: "null" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" },
+            { type: "null" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }, 
         ];
 
         var tableColumnDefs = [
