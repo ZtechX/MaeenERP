@@ -45,7 +45,9 @@ Public Class PublicFunctions
             For Each dr As DataRow In dt.Rows
                 row = New Dictionary(Of String, Object)()
                 For Each col As DataColumn In dt.Columns
-                    If col.ColumnName.ToString.Contains("date1") Then
+
+                    If col.ColumnName.ToString.Contains("date") Then
+
 
                         If col.ColumnName.ToString.Contains("h") Then
 
