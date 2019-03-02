@@ -602,8 +602,13 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                             ElseIf dictBasicDataJson.ContainsKey(field_name1) Then
                                 If Not String.IsNullOrWhiteSpace(dictBasicDataJson(field_name1)) Then
                                     Dim field_value = dictBasicDataJson(field_name1)
-                                    If field_name1.Contains("date") Then
-                                        field_value = ConvertDatetoNumber(field_value)
+                                    If field_name.Contains("date") Then
+                                        If field_name.Contains("h") Then
+                                            field_value = field_value
+                                        Else
+                                            field_value = ConvertDatetoNumber(field_value)
+                                        End If
+
                                     End If
                                     strquer = strquer + " " + field_name1.ToString + ", "
                                     If datatype = "float" Or datatype = "money" Or datatype = "int" Then
@@ -646,7 +651,7 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                     If dictBasicDataJson.ContainsKey(field_name) Then
                         If Not String.IsNullOrWhiteSpace(dictBasicDataJson(field_name)) Then
                             Dim field_value = dictBasicDataJson(field_name)
-                            If field_name.Contains("dt") Then
+                            If field_name.Contains("date") Then
                                 If Not field_name.Contains("h") Then
                                     field_value = ConvertDatetoNumber(field_value)
                                 End If
@@ -662,6 +667,12 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                         If dictBasicDataJson.ContainsKey(field_name1) Then
                             If Not String.IsNullOrWhiteSpace(dictBasicDataJson(field_name1)) Then
                                 Dim field_value = dictBasicDataJson(field_name1)
+                                If field_name.Contains("date") Then
+                                    If Not field_name.Contains("h") Then
+                                        field_value = ConvertDatetoNumber(field_value)
+                                    End If
+
+                                End If
                                 If field_value.ToString <> "" Then
                                     strquer = strquer + " " + field_name1.ToString + "= '" + field_value.ToString + "' , "
                                 End If

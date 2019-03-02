@@ -14,54 +14,111 @@ var formAutoCodeControl = "lblunitsid";
 var index_i = 0;
 var w = 0;
 var arr_id = [];
+var Date_m = "";
+var Date_hj = "";
+
 $(function () {
     try {
-     
+        setDate();
         get_admin();
-      //  h_date();
         get_form_for_permtion();
    
     } catch (err) {
         alert(err);
     }
 });
+function setDate() {
+ 
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        today = dd + '/' + mm + '/' + yyyy;
+    $("#CurrentDate").find("#txtDatem").val(today);
+    showHideCalendar($("#CurrentDate").find("#txtDatem"));
+        cal2.callback();
+        Date_m = today;
+        Date_hj = $("#CurrentDate").find("#txtDateh").val();
+    
+  
+}
 function get_admin() {
-    companies.get_admin(function (val) {
-        debugger;
-        if (val[0] != 0) {
-            var data = JSON.parse(val[1]);
-            var users = JSON.parse(val[0]);
-            fillControlsFromJson(data[0]);
-            $("#imgItemURL").attr("src", data[0].image_path);
-            $("#user_name").val(users[0].User_Name);
-            $("#user_password").val(users[0].User_Password);
+    debugger
+    companies.get_admin( function (val) {
+        debugger
+        if (val[1] != "0") {
+            var comp = JSON.parse(val[1]);
+            var comp_admin = JSON.parse(val[0]);
+         
+            fillControlsFromJson(comp[0], "divComp");
+            fillControlsFromJson(comp_admin[0], "divAdminComp");
+            $("#compLogo").prop("src", comp[0].image_path);
+            $("#Comp_imgItemURL").prop("src", comp_admin[0].User_Image);
+
+            //fillControlsFromJson(comp[0],"divForm");
+            //$("#imgItemURL").attr("src", comp[0].image_path);
+            $("#user_name").val(comp_admin[0].User_Name);
+            $("#user_password").val(comp_admin[0].User_Password);
             $("#Li2").css("display", "none");
             $("#Li1").css("display", "none");
             $("#panel-1").css('display', "none");
 
-            $("#divdate2 #txtDatem").val(data[0].deal_start_date_m);
-            $("#divdate2 #txtDateh").val(data[0].deal_start_date_hj);
-            $("#divdate3 #txtDatem").val(data[0].deal_end_date_m);
-            $("#divdate3 #txtDateh").val(data[0].deal_end_date_hj);
-            $("#divdate4 #txtDatem").val(data[0].maintainance_start_date_m);
-            $("#divdate4 #txtDateh").val(data[0].maintainance_start_date_hj);
-            $("#divdate5 #txtDatem").val(data[0].maintainance_end_date_m);
-            $("#divdate5 #txtDateh").val(data[0].maintainance_end_date_hj);
-            $("#ddlcomp_id").html(data[0].id);
-            $("#lbluser_id").html(users[0].id);
-            $("#lblgroup_id").html(users[0].group_id);
-            get_form_for_permtion_for_edit(data[0].id, users[0].group_id)
-            $("#maintance").prop('checked', data[0].maintainance);
+            $("#divdate2 #txtDatem").val(comp[0].deal_start_date_m);
+            $("#divdate2 #txtDateh").val(comp[0].deal_start_date_hj);
+            $("#divdate3 #txtDatem").val(comp[0].deal_end_date_m);
+            $("#divdate3 #txtDateh").val(comp[0].deal_end_date_hj);
+            $("#divdate4 #txtDatem").val(comp[0].maintainance_start_date_m);
+            $("#divdate4 #txtDateh").val(comp[0].maintainance_start_date_hj);
+            $("#divdate5 #txtDatem").val(comp[0].maintainance_end_date_m);
+            $("#divdate5 #txtDateh").val(comp[0].maintainance_end_date_hj);
+            $("#ddlcomp_id").html(comp[0].id);
+            $("#lbluser_id").html(comp_admin[0].id);
+            $("#lblgroup_id").html(comp_admin[0].group_id);
+            get_form_for_permtion_for_edit(comp[0].id, comp_admin[0].group_id)
+            $("#maintance").prop('checked', comp[0].maintainance);
             get_maintance();
-        }
-        if (val[2] == 1) {
-            $("#Li2").css("display", "block");
-            $("#Li1").css("display", "block");
-            $("#clearBtn").css("display", "inline-block");
-           // form_load();
-            drawDynamicTable();
-        }
+            if (val[2] != "0") {
+                debugger
+                var Ac_admin = JSON.parse(val[2]);
+                var Acadyme = JSON.parse(val[3]);
+                fillControlsFromJson(Ac_admin[0], "Ac_adminDiv");
+                fillControlsFromJson(Acadyme[0], "AcadmeyDiv");
+                Date_m = Acadyme[0].date_m;
+                Date_hj = Acadyme[0].date_hj;
 
+                $("#Ac_imgItemURL").prop("src", Ac_admin[0].User_Image);
+
+            }
+            if (val[4] != "0") {
+                var Cen_admin = JSON.parse(val[4]);
+                var center = JSON.parse(val[5]);
+                fillControlsFromJson(Cen_admin[0], "Cen_adminDiv");
+                fillControlsFromJson(center[0], "CenterDiv");
+                Date_m = center[0].date_m;
+                Date_hj = center[0].date_hj;
+
+                $("#Cen_imgItemURL").prop("src", Cen_admin[0].User_Image);
+            }
+        }
+            if (val[6] == 1) {
+                $("#Li2").css("display", "block");
+                $("#Li1").css("display", "block");
+                $("#clearBtn").css("display", "inline-block");
+                $("#acPanal").hide();
+                $("#CenPanal").hide();
+                // form_load();
+                drawDynamicTable();
+            }
+     
     });
 
 }
@@ -90,7 +147,7 @@ function edit(val) {
         $("#maintance").prop('checked', data[0].maintainance);
         get_maintance();
       
-        fillControlsFromJson(data[0]);
+        fillControlsFromJson(data[0],"divForm");
         if (data[0].image_path != "") {
             $("#imgItemURL").prop("src", data[0].image_path);
 
@@ -149,46 +206,57 @@ function resetAll() {
 
 function save_companies() {
     try {
-        
-        if (Page_ClientValidate("vgroup")) {
-            var saveType = $("#cmdSave").attr("CommandArgument");
-            var mainImag = $("#imgItemURL").prop("src");
-            var PosId = $("#lblmainid").html();
-            var userId = $("#lbluser_id").html();
-           
-            var basicData = generateJSONFromControls("divForm");
-            companies.save_companies(PosId, userId, basicData, mainImag, userId, function (val) {
-                debugger;
-               
-                if (val[0] != '0') {
+        var arr_json = [];
+        if ($("#loginUser").val() == "1") {
+            if (Page_ClientValidate("vgroup1")) {
+                var basicData_divComp = generateJSONFromControls("divComp");
+                basicData_divComp["image_path"] = $("#compLogo").prop("src");
+                var basicData_divAdminComp = generateJSONFromControls("divAdminComp");
+                basicData_divAdminComp["User_Image"] = $("#Comp_imgItemURL").prop("src");
+                arr_json = [basicData_divComp, basicData_divAdminComp];
+                companies.save_companies(arr_json, Date_m, Date_hj, function (val) {
 
-                    if (val[0] == '2') {
-                        showErrorMessage("عفوا اسم المستخدم هذا موجود من قبل");
+                    if (val[0] == '1') {
+                        showSuccessMessage('تم تسجيل البيانات بنجاح');
+                        cancel2();
+                        get_admin();
                     }
                     else {
-                            if (val[1] != '1') {
-                                get_admin();
-                            }
-                            else {
-                                $("#ddlcomp_id").html(val[2]);
-                                $("#lbluser_id").html(val[3]);
-                                $("#email").val("");
-                                $("#user_password").val("");
-                                cancel();
-                                resetAll();
-                                drawDynamicTable();
-                                showSuccessMessage('تم تسجيل البيانات بنجاح');
-                            }
-                            showSuccessMessage('تم تسجيل البيانات بنجاح');
+                        showErrorMessage(val[0]);
                     }
+                });
+            } else {
+                showErrorMessage("يرجى ادخال البيانات المطلوبه");
+            }
+        } else {
+            if (Page_ClientValidate("vgroup") && Page_ClientValidate("vgroup1")) {
 
-                } else {
-                    showErrorMessage('لم يتم الحفظ');
-                }
-            });
-        }
-        else {
-            showErrorMessage("يرجى ادخال البيانات المطلوبه");
+                var basicData_divComp = generateJSONFromControls("divComp");
+                basicData_divComp["image_path"] = $("#compLogo").prop("src");
+                var basicData_divAdminComp = generateJSONFromControls("divAdminComp");
+                basicData_divAdminComp["User_Image"] = $("#Comp_imgItemURL").prop("src");
+                var basicData_AcadmeyDiv = generateJSONFromControls("AcadmeyDiv");
+                var basicData_Ac_adminDiv = generateJSONFromControls("Ac_adminDiv");
+                basicData_Ac_adminDiv["User_Image"] = $("#Ac_imgItemURL").prop("src");
+                var basicData_CenDiv = generateJSONFromControls("CenterDiv");
+                var basicData_Cen_adminDiv = generateJSONFromControls("Cen_adminDiv");
+                basicData_Cen_adminDiv["User_Image"] = $("#Cen_imgItemURL").prop("src");
+                 arr_json = [basicData_divComp, basicData_divAdminComp, basicData_AcadmeyDiv, basicData_Ac_adminDiv, basicData_CenDiv, basicData_Cen_adminDiv];
+                companies.save_companies(arr_json, Date_m, Date_hj, function (val) {
+
+                    if (val[0] == '1') {
+                        showSuccessMessage('تم تسجيل البيانات بنجاح');
+                        cancel2();
+                        get_admin();
+                    }
+                    else {
+                        showErrorMessage(val[0]);
+                    }
+                });
+            }
+            else {
+                showErrorMessage("يرجى ادخال البيانات المطلوبه");
+            }
         }
     } catch (err) {
         alert(err);
@@ -491,7 +559,22 @@ function check_user() {
 
 }
 function cancel2() {
-    resetAll();
+    resetDivControls("divForm");
+    resetDivControls("AcadmeyDataDiv")
+    resetDivControls("CenterDataDiv")
+
+    var basicData_divComp = generateJSONFromControls("divComp");
+    basicData_divComp["image_path"] = $("#compLogo").prop("src");
+    var basicData_divAdminComp = generateJSONFromControls("divAdminComp");
+    basicData_divAdminComp["User_Image"] = $("#Comp_imgItemURL").prop("src");
+    var basicData_AcadmeyDiv = generateJSONFromControls("AcadmeyDiv");
+    var basicData_Ac_adminDiv = generateJSONFromControls("Ac_adminDiv");
+    basicData_Ac_adminDiv["User_Image"] = $("#Ac_imgItemURL").prop("src");
+    var basicData_CenDiv = generateJSONFromControls("CenterDiv");
+    var basicData_Cen_adminDiv = generateJSONFromControls("Cen_adminDiv");
+    basicData_Cen_adminDiv["User_Image"] = $("#Cen_imgItemURL").prop("src");
+    setDate();
+
     $('#perm_table input:checkbox').prop("checked", false);
     $('#perm_table tr').css("background", "transparent");
     $("#divdate2 #txtDatem").val("");
@@ -507,7 +590,7 @@ function cancel2() {
     $("#lbluser_id").html("");
     $("#check_userName").html("");
     add();
-    
+   
 }
 //function seteditid() {
 //    $("#lblmainid").html($("#txtTemId").val());

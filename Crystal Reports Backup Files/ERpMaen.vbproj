@@ -1,0 +1,2228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{CD8E53D2-B177-494B-AE08-1CEEF98E43D7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ERpMaen</RootNamespace>
+    <AssemblyName>ERpMaen</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>WebForms_Basic.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>WebForms_Basic.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=18.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.18.1.1\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="BusinessLayer.BusinessLayer">
+      <HintPath>G:\ZTechx\مهندس محيى\Musaned_V04\Musaned_V04\Bin\BusinessLayer.BusinessLayer.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.bootstrap">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.3.7\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNet.ScriptManager.jQuery">
+      <HintPath>..\packages\AspNet.ScriptManager.jQuery.3.3.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.MSAjax">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.MSAjax.5.0.0\lib\net45\Microsoft.ScriptManager.MSAjax.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ScriptManager.WebForms">
+      <HintPath>..\packages\Microsoft.AspNet.ScriptManager.WebForms.5.0.0\lib\net45\Microsoft.ScriptManager.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Web.Optimization.WebForms">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.WebForms.1.1.3\lib\net45\Microsoft.AspNet.Web.Optimization.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.FriendlyUrls">
+      <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.Routing" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.aspx" />
+    <Content Include="Acadmies_module\acadmey.aspx" />
+    <Content Include="Acadmies_module\coursat.aspx" />
+    <Content Include="Acadmies_module\courseDetails.aspx" />
+    <Content Include="Acadmies_module\courseDetailsManage.aspx" />
+    <Content Include="Acadmies_module\courseDetailsStudent.aspx" />
+    <Content Include="Acadmies_module\courseDetailsTrainer.aspx" />
+    <Content Include="Acadmies_module\DiplomaCourses.aspx" />
+    <Content Include="Acadmies_module\Diplomas.aspx" />
+    <Content Include="Acadmies_module\training_centers.aspx" />
+    <Content Include="App_Themes\alt_raw_bg.png" />
+    <Content Include="App_Themes\cp\StyleSheet.css" />
+    <Content Include="App_Themes\design\btn-create-left.gif" />
+    <Content Include="App_Themes\design\btn-create-right.gif" />
+    <Content Include="App_Themes\design\content-h1.gif" />
+    <Content Include="App_Themes\design\content.gif" />
+    <Content Include="App_Themes\design\dot.gif" />
+    <Content Include="App_Themes\design\ico-delete.gif" />
+    <Content Include="App_Themes\design\ico-done.gif" />
+    <Content Include="App_Themes\design\ico-info.gif" />
+    <Content Include="App_Themes\design\ico-warning.gif" />
+    <Content Include="App_Themes\design\menu-left.gif" />
+    <Content Include="App_Themes\design\menu-right.gif" />
+    <Content Include="App_Themes\design\menu.gif" />
+    <Content Include="App_Themes\design\separator.gif" />
+    <Content Include="App_Themes\design\submenu-active.gif" />
+    <Content Include="App_Themes\design\submenu-sub.gif" />
+    <Content Include="App_Themes\design\switcher-1col.gif" />
+    <Content Include="App_Themes\design\switcher-2col.gif" />
+    <Content Include="App_Themes\design\tabs-l.gif" />
+    <Content Include="App_Themes\design\tabs-r.gif" />
+    <Content Include="App_Themes\design\tray-logout - Copy.gif" />
+    <Content Include="App_Themes\design\tray-logout.gif" />
+    <Content Include="App_Themes\design\tray-logout_hover.gif" />
+    <Content Include="App_Themes\design\tray.gif" />
+    <Content Include="App_Themes\design\ul-ul.gif" />
+    <Content Include="App_Themes\design\ul.gif" />
+    <Content Include="App_Themes\fonts\fontawesome-webfont.svg" />
+    <Content Include="App_Themes\images\account_no.png" />
+    <Content Include="App_Themes\images\acl.png" />
+    <Content Include="App_Themes\images\add-hover.png" />
+    <Content Include="App_Themes\images\add-icon.jpg" />
+    <Content Include="App_Themes\images\add-icon.png" />
+    <Content Include="App_Themes\images\add.png" />
+    <Content Include="App_Themes\images\add2-hover.png" />
+    <Content Include="App_Themes\images\add2.png" />
+    <Content Include="App_Themes\images\add_03-hover.png" />
+    <Content Include="App_Themes\images\add_03.png" />
+    <Content Include="App_Themes\images\ajax-loader - Copy.gif" />
+    <Content Include="App_Themes\images\ajax-loader.gif" />
+    <Content Include="App_Themes\images\ajax-loader.png" />
+    <Content Include="App_Themes\images\alt_raw_bg - Copy.png" />
+    <Content Include="App_Themes\images\alt_raw_bg.png" />
+    <Content Include="App_Themes\images\alt_raw_bg2.png" />
+    <Content Include="App_Themes\images\appartments.png" />
+    <Content Include="App_Themes\images\bank.png" />
+    <Content Include="App_Themes\images\bg-login-top.png" />
+    <Content Include="App_Themes\images\bg-login.png" />
+    <Content Include="App_Themes\images\bg-new.png" />
+    <Content Include="App_Themes\images\bg.png" />
+    <Content Include="App_Themes\images\birthday.png" />
+    <Content Include="App_Themes\images\body-bg.png" />
+    <Content Include="App_Themes\images\bt-bg - Copy %282%29.jpg" />
+    <Content Include="App_Themes\images\bt-bg-desable.jpg" />
+    <Content Include="App_Themes\images\bt-bg-hover.jpg" />
+    <Content Include="App_Themes\images\bt-bg-new.png" />
+    <Content Include="App_Themes\images\bt-bg.jpg" />
+    <Content Include="App_Themes\images\bt-bg3.jpg" />
+    <Content Include="App_Themes\images\buttonBg.png" />
+    <Content Include="App_Themes\images\buttonBgHover.png" />
+    <Content Include="App_Themes\images\button_style-hover.png" />
+    <Content Include="App_Themes\images\button_style.png" />
+    <Content Include="App_Themes\images\calender-bg-small.png" />
+    <Content Include="App_Themes\images\calender-bg.png" />
+    <Content Include="App_Themes\images\calender-icon.png" />
+    <Content Include="App_Themes\images\calls_icon.png" />
+    <Content Include="App_Themes\images\chat-user.png" />
+    <Content Include="App_Themes\images\check-out-bg.png" />
+    <Content Include="App_Themes\images\client-logo.jpg" />
+    <Content Include="App_Themes\images\client-logo.png" />
+    <Content Include="App_Themes\images\client_icon.png" />
+    <Content Include="App_Themes\images\close-bt-hover.png" />
+    <Content Include="App_Themes\images\close-bt.png" />
+    <Content Include="App_Themes\images\commercial.png" />
+    <Content Include="App_Themes\images\common-icon.png" />
+    <Content Include="App_Themes\images\contact_type.png" />
+    <Content Include="App_Themes\images\content-bg.jpg" />
+    <Content Include="App_Themes\images\contract.png" />
+    <Content Include="App_Themes\images\contracts_icon.png" />
+    <Content Include="App_Themes\images\cp_header_bg.jpg" />
+    <Content Include="App_Themes\images\delete-hover.png" />
+    <Content Include="App_Themes\images\delete-icon-hover.png" />
+    <Content Include="App_Themes\images\delete-icon.png" />
+    <Content Include="App_Themes\images\delete.png" />
+    <Content Include="App_Themes\images\details-hover.png" />
+    <Content Include="App_Themes\images\details.png" />
+    <Content Include="App_Themes\images\document.jpg" />
+    <Content Include="App_Themes\images\doc_photo.jpg" />
+    <Content Include="App_Themes\images\doc_serialnum.png" />
+    <Content Include="App_Themes\images\doc_type_icon - Copy.png" />
+    <Content Include="App_Themes\images\doc_type_icon.png" />
+    <Content Include="App_Themes\images\dollar_icon.png" />
+    <Content Include="App_Themes\images\down-arrow.png" />
+    <Content Include="App_Themes\images\download-icon-hover.png" />
+    <Content Include="App_Themes\images\download-icon.png" />
+    <Content Include="App_Themes\images\drop_down_bgl-hover.png" />
+    <Content Include="App_Themes\images\drop_down_bgl.png" />
+    <Content Include="App_Themes\images\dummy-logo.png" />
+    <Content Include="App_Themes\images\error-icon.png" />
+    <Content Include="App_Themes\images\error-icon2.png" />
+    <Content Include="App_Themes\images\error.png" />
+    <Content Include="App_Themes\images\exit-icon.png" />
+    <Content Include="App_Themes\images\Flag-blue-icon.png" />
+    <Content Include="App_Themes\images\grd_alt-hover.png" />
+    <Content Include="App_Themes\images\grd_alt.png" />
+    <Content Include="App_Themes\images\grd_head - Copy.png" />
+    <Content Include="App_Themes\images\grd_head-hover.jpg" />
+    <Content Include="App_Themes\images\grd_head.jpg" />
+    <Content Include="App_Themes\images\grd_head1.jpg" />
+    <Content Include="App_Themes\images\grd_pgr.png" />
+    <Content Include="App_Themes\images\grid-th-bg.jpg" />
+    <Content Include="App_Themes\images\grid_tr_hover.png" />
+    <Content Include="App_Themes\images\gv-th.jpg" />
+    <Content Include="App_Themes\images\gv-th.png" />
+    <Content Include="App_Themes\images\header_bg-hover.png" />
+    <Content Include="App_Themes\images\header_bg.png" />
+    <Content Include="App_Themes\images\house.png" />
+    <Content Include="App_Themes\images\icon-delete.png" />
+    <Content Include="App_Themes\images\icon-excel.png" />
+    <Content Include="App_Themes\images\icon-new-hover.png" />
+    <Content Include="App_Themes\images\icon-new.png" />
+    <Content Include="App_Themes\images\icon-pdf.png" />
+    <Content Include="App_Themes\images\icon-print.png" />
+    <Content Include="App_Themes\images\icon-save-new.png" />
+    <Content Include="App_Themes\images\icon-save.jpg" />
+    <Content Include="App_Themes\images\icon-save.png" />
+    <Content Include="App_Themes\images\icon-update - Copy.png" />
+    <Content Include="App_Themes\images\icon-update.png" />
+    <Content Include="App_Themes\images\icon-word.png" />
+    <Content Include="App_Themes\images\icon_cp_doctor.png" />
+    <Content Include="App_Themes\images\icon_cp_doctor_hover.png" />
+    <Content Include="App_Themes\images\icon_cp_events.png" />
+    <Content Include="App_Themes\images\icon_cp_events_hover.png" />
+    <Content Include="App_Themes\images\icon_cp_gallery.png" />
+    <Content Include="App_Themes\images\icon_cp_gallery_hover.png" />
+    <Content Include="App_Themes\images\icon_cp_promo.png" />
+    <Content Include="App_Themes\images\icon_cp_promo_hover.png" />
+    <Content Include="App_Themes\images\icon_cp_serv.png" />
+    <Content Include="App_Themes\images\icon_cp_serv_hover.png" />
+    <Content Include="App_Themes\images\icon_cp_tire.png" />
+    <Content Include="App_Themes\images\icon_cp_tire_hover.png" />
+    <Content Include="App_Themes\images\info-icon.png" />
+    <Content Include="App_Themes\images\inner_tab_bg.jpg" />
+    <Content Include="App_Themes\images\inner_tab_menu-hover.jpg" />
+    <Content Include="App_Themes\images\insurance-type.png" />
+    <Content Include="App_Themes\images\insurance.png" />
+    <Content Include="App_Themes\images\item_name.png" />
+    <Content Include="App_Themes\images\job-icon.png" />
+    <Content Include="App_Themes\images\key.png" />
+    <Content Include="App_Themes\images\land.png" />
+    <Content Include="App_Themes\images\left_menu_hover.jpg" />
+    <Content Include="App_Themes\images\loader.gif" />
+    <Content Include="App_Themes\images\logo-berries.png" />
+    <Content Include="App_Themes\images\logo-big.png" />
+    <Content Include="App_Themes\images\logo.png" />
+    <Content Include="App_Themes\images\logo5.swf" />
+    <Content Include="App_Themes\images\mac-book.png" />
+    <Content Include="App_Themes\images\main-menu-icon.png" />
+    <Content Include="App_Themes\images\meeting.png" />
+    <Content Include="App_Themes\images\menu-bg.png" />
+    <Content Include="App_Themes\images\menu-bg_hover.jpg" />
+    <Content Include="App_Themes\images\menu-wrapper-bg.png" />
+    <Content Include="App_Themes\images\menu_bt_bg - Copy %282%29.png" />
+    <Content Include="App_Themes\images\menu_bt_bg - Copy.png" />
+    <Content Include="App_Themes\images\menu_bt_bg.png" />
+    <Content Include="App_Themes\images\menu_bt_bg_hover.png" />
+    <Content Include="App_Themes\images\menu_li_bg.jpg" />
+    <Content Include="App_Themes\images\menu_strip_bg.jpg" />
+    <Content Include="App_Themes\images\menu_strip_li-hover.png" />
+    <Content Include="App_Themes\images\nationality.png" />
+    <Content Include="App_Themes\images\nav-arrow.png" />
+    <Content Include="App_Themes\images\nav-bg-hover.png" />
+    <Content Include="App_Themes\images\nav-bg-left.png" />
+    <Content Include="App_Themes\images\nav-bg-li-hover.png" />
+    <Content Include="App_Themes\images\nav-bg-li.png" />
+    <Content Include="App_Themes\images\nav-bg-li1.png" />
+    <Content Include="App_Themes\images\nav-bg-right.png" />
+    <Content Include="App_Themes\images\nav-bg.png" />
+    <Content Include="App_Themes\images\nav-seperator.png" />
+    <Content Include="App_Themes\images\new-bt-bg.png" />
+    <Content Include="App_Themes\images\new-bt-bg1.png" />
+    <Content Include="App_Themes\images\new-bt-bg2.png" />
+    <Content Include="App_Themes\images\new-bt-bg3.png" />
+    <Content Include="App_Themes\images\num.png" />
+    <Content Include="App_Themes\images\ok-icon.png" />
+    <Content Include="App_Themes\images\ok.png" />
+    <Content Include="App_Themes\images\pdft-bt - Copy.png" />
+    <Content Include="App_Themes\images\pdft-bt.png" />
+    <Content Include="App_Themes\images\pdf_icon - Copy.png" />
+    <Content Include="App_Themes\images\pdf_icon.png" />
+    <Content Include="App_Themes\images\Photo-bg.jpg" />
+    <Content Include="App_Themes\images\Photo.jpg" />
+    <Content Include="App_Themes\images\plus-icon-hover.png" />
+    <Content Include="App_Themes\images\plus-icon.png" />
+    <Content Include="App_Themes\images\preview-icon-hover.png" />
+    <Content Include="App_Themes\images\preview-icon.png" />
+    <Content Include="App_Themes\images\print-bt.png" />
+    <Content Include="App_Themes\images\print-hover.png" />
+    <Content Include="App_Themes\images\print-icon-hover.png" />
+    <Content Include="App_Themes\images\print-icon.png" />
+    <Content Include="App_Themes\images\print.png" />
+    <Content Include="App_Themes\images\properties_icon.png" />
+    <Content Include="App_Themes\images\renew.png" />
+    <Content Include="App_Themes\images\reply.png" />
+    <Content Include="App_Themes\images\Salesman.png" />
+    <Content Include="App_Themes\images\save-iconn - Copy.png" />
+    <Content Include="App_Themes\images\save-iconn-hover.png" />
+    <Content Include="App_Themes\images\save-iconn.png" />
+    <Content Include="App_Themes\images\sayegh-header-print.jpg" />
+    <Content Include="App_Themes\images\search-bar-bg.jpg" />
+    <Content Include="App_Themes\images\search-box-bg.png" />
+    <Content Include="App_Themes\images\search-icon-hover.png" />
+    <Content Include="App_Themes\images\search-icon.png" />
+    <Content Include="App_Themes\images\search.png" />
+    <Content Include="App_Themes\images\search_button-hover.png" />
+    <Content Include="App_Themes\images\search_button.png" />
+    <Content Include="App_Themes\images\serial-no.png" />
+    <Content Include="App_Themes\images\shadow-bottom.png" />
+    <Content Include="App_Themes\images\shadow-top.png" />
+    <Content Include="App_Themes\images\strip_bg.jpg" />
+    <Content Include="App_Themes\images\sys-refresh-hover.gif" />
+    <Content Include="App_Themes\images\sys-refresh.gif" />
+    <Content Include="App_Themes\images\sys-refresh1.gif" />
+    <Content Include="App_Themes\images\tableftF.gif" />
+    <Content Include="App_Themes\images\tableheader.png" />
+    <Content Include="App_Themes\images\tabrightF.gif" />
+    <Content Include="App_Themes\images\tab_header_bg.jpg" />
+    <Content Include="App_Themes\images\tab_header_bgm.jpg" />
+    <Content Include="App_Themes\images\tab_menu_bg.png" />
+    <Content Include="App_Themes\images\tab_title_arrow_up.png" />
+    <Content Include="App_Themes\images\telephone.png" />
+    <Content Include="App_Themes\images\texture.png" />
+    <Content Include="App_Themes\images\titlebar-bg.jpg" />
+    <Content Include="App_Themes\images\titlebar-bg2.jpg" />
+    <Content Include="App_Themes\images\tree-list-arrow.jpg" />
+    <Content Include="App_Themes\images\tree-list-head-bg.jpg" />
+    <Content Include="App_Themes\images\tree-view-img-sml.png" />
+    <Content Include="App_Themes\images\tree-view-img.png" />
+    <Content Include="App_Themes\images\tree-view-li.png" />
+    <Content Include="App_Themes\images\UM_Screens\1.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\10.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\11.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\12.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\13.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\14.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\15.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\16.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\17.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\18.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\19.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\2.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\20.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\21.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\22.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\23.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\24.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\25.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\26.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\27.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\28.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\29.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\3.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\30.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\31.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\32.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\33.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\34.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\35.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\36.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\37.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\38.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\39.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\4.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\40.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\41.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\42.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\43.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\44.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\45.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\46.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\47.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\48.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\49.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\5.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\50.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\51.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\52.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\53.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\54.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\55.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\56.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\57.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\58.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\59.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\6.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\60.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\61.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\62.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\63.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\64.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\65.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\66.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\67.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\68.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\69.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\7.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\70.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\71.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\72.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\73.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\74.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\75.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\76.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\77.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\78.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\79.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\8.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\80.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\81.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\82.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\83.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\84.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\85.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\86.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\87.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\88.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\89.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\9.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\90.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\91.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\92.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\93.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\94.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\95.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\96.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\97.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\accept.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\agent1.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\agent2.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\agent3.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\agent4.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\agent5.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\agent6.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\contact1.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\contact2.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\contact3.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\contact4.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\contact5.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\contact6.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\contact7.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\corspond1.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\corspond2.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\corspond3.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\corspond4.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\corspond5.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\corspond6.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\corspond7.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\delet.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\doc.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\Edit.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\edit01.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\edit1.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\email.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\enquiry1.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\enquiry2.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\enquiry3.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\enquiry4.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\enquiry5.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\publish1.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\publish2.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\publish3.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\publish4.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\publish5.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\publish6.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\publish7.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\refresh.jpg" />
+    <Content Include="App_Themes\images\UM_Screens\icons\xml.jpg" />
+    <Content Include="App_Themes\images\up-arrow.png" />
+    <Content Include="App_Themes\images\update-2-hover.png" />
+    <Content Include="App_Themes\images\update-2.png" />
+    <Content Include="App_Themes\images\update-hover.png" />
+    <Content Include="App_Themes\images\update-icon-hover.png" />
+    <Content Include="App_Themes\images\update-icon.png" />
+    <Content Include="App_Themes\images\update.png" />
+    <Content Include="App_Themes\images\user.png" />
+    <Content Include="App_Themes\images\validation_sum_bg.png" />
+    <Content Include="App_Themes\images\viewing_icon.png" />
+    <Content Include="App_Themes\images\villas.png" />
+    <Content Include="App_Themes\images\v_menu-bg - Copy.jpg" />
+    <Content Include="App_Themes\images\v_menu-bg-hover.png" />
+    <Content Include="App_Themes\images\v_menu-bg-hover1.png" />
+    <Content Include="App_Themes\images\v_menu-bg-hover2.png" />
+    <Content Include="App_Themes\images\v_menu-bg.jpg" />
+    <Content Include="App_Themes\images\v_menu-bg.png" />
+    <Content Include="App_Themes\images\v_menu-icon-hm.png" />
+    <Content Include="App_Themes\images\xl-bt.png" />
+    <Content Include="App_Themes\old-images\account_no.png" />
+    <Content Include="App_Themes\old-images\add-hover.png" />
+    <Content Include="App_Themes\old-images\add-icon.png" />
+    <Content Include="App_Themes\old-images\add.png" />
+    <Content Include="App_Themes\old-images\add2-hover.png" />
+    <Content Include="App_Themes\old-images\add2.png" />
+    <Content Include="App_Themes\old-images\add_03-hover.png" />
+    <Content Include="App_Themes\old-images\add_03.png" />
+    <Content Include="App_Themes\old-images\ajax-loader - Copy.gif" />
+    <Content Include="App_Themes\old-images\ajax-loader.gif" />
+    <Content Include="App_Themes\old-images\ajax-loader.png" />
+    <Content Include="App_Themes\old-images\alt_raw_bg - Copy.png" />
+    <Content Include="App_Themes\old-images\alt_raw_bg.png" />
+    <Content Include="App_Themes\old-images\alt_raw_bg2.png" />
+    <Content Include="App_Themes\old-images\bank.png" />
+    <Content Include="App_Themes\old-images\bg-login-top.png" />
+    <Content Include="App_Themes\old-images\bg-login.png" />
+    <Content Include="App_Themes\old-images\bg-new.png" />
+    <Content Include="App_Themes\old-images\bg.png" />
+    <Content Include="App_Themes\old-images\birthday.png" />
+    <Content Include="App_Themes\old-images\body-bg.png" />
+    <Content Include="App_Themes\old-images\bt-bg - Copy %282%29.jpg" />
+    <Content Include="App_Themes\old-images\bt-bg-desable.jpg" />
+    <Content Include="App_Themes\old-images\bt-bg-hover.jpg" />
+    <Content Include="App_Themes\old-images\bt-bg-new.png" />
+    <Content Include="App_Themes\old-images\bt-bg.jpg" />
+    <Content Include="App_Themes\old-images\bt-bg3.jpg" />
+    <Content Include="App_Themes\old-images\buttonBg.png" />
+    <Content Include="App_Themes\old-images\buttonBgHover.png" />
+    <Content Include="App_Themes\old-images\button_style-hover.png" />
+    <Content Include="App_Themes\old-images\button_style.png" />
+    <Content Include="App_Themes\old-images\calender-bg-small.png" />
+    <Content Include="App_Themes\old-images\calender-bg.png" />
+    <Content Include="App_Themes\old-images\calender-icon.png" />
+    <Content Include="App_Themes\old-images\check-out-bg.png" />
+    <Content Include="App_Themes\old-images\client-logo.jpg" />
+    <Content Include="App_Themes\old-images\client-logo.png" />
+    <Content Include="App_Themes\old-images\close-bt-hover.png" />
+    <Content Include="App_Themes\old-images\close-bt.png" />
+    <Content Include="App_Themes\old-images\common-icon.png" />
+    <Content Include="App_Themes\old-images\contact_type.png" />
+    <Content Include="App_Themes\old-images\content-bg.jpg" />
+    <Content Include="App_Themes\old-images\contract.png" />
+    <Content Include="App_Themes\old-images\cp_header_bg.jpg" />
+    <Content Include="App_Themes\old-images\delete-hover.png" />
+    <Content Include="App_Themes\old-images\delete-icon-hover.png" />
+    <Content Include="App_Themes\old-images\delete-icon.png" />
+    <Content Include="App_Themes\old-images\delete.png" />
+    <Content Include="App_Themes\old-images\details-hover.png" />
+    <Content Include="App_Themes\old-images\details.png" />
+    <Content Include="App_Themes\old-images\document.jpg" />
+    <Content Include="App_Themes\old-images\doc_photo.jpg" />
+    <Content Include="App_Themes\old-images\doc_serialnum.png" />
+    <Content Include="App_Themes\old-images\doc_type_icon - Copy.png" />
+    <Content Include="App_Themes\old-images\doc_type_icon.png" />
+    <Content Include="App_Themes\old-images\dollar_icon.png" />
+    <Content Include="App_Themes\old-images\down-arrow.png" />
+    <Content Include="App_Themes\old-images\download-icon-hover.png" />
+    <Content Include="App_Themes\old-images\download-icon.png" />
+    <Content Include="App_Themes\old-images\drop_down_bgl-hover.png" />
+    <Content Include="App_Themes\old-images\drop_down_bgl.png" />
+    <Content Include="App_Themes\old-images\error-icon.png" />
+    <Content Include="App_Themes\old-images\error-icon2.png" />
+    <Content Include="App_Themes\old-images\error.png" />
+    <Content Include="App_Themes\old-images\exit-icon.png" />
+    <Content Include="App_Themes\old-images\Flag-blue-icon.png" />
+    <Content Include="App_Themes\old-images\grd_alt-hover.png" />
+    <Content Include="App_Themes\old-images\grd_alt.png" />
+    <Content Include="App_Themes\old-images\grd_head - Copy.png" />
+    <Content Include="App_Themes\old-images\grd_head-hover.jpg" />
+    <Content Include="App_Themes\old-images\grd_head.jpg" />
+    <Content Include="App_Themes\old-images\grd_head1.jpg" />
+    <Content Include="App_Themes\old-images\grd_pgr.png" />
+    <Content Include="App_Themes\old-images\grid-th-bg.jpg" />
+    <Content Include="App_Themes\old-images\grid_tr_hover.png" />
+    <Content Include="App_Themes\old-images\gv-th.jpg" />
+    <Content Include="App_Themes\old-images\gv-th.png" />
+    <Content Include="App_Themes\old-images\header_bg-hover.png" />
+    <Content Include="App_Themes\old-images\header_bg.png" />
+    <Content Include="App_Themes\old-images\house.png" />
+    <Content Include="App_Themes\old-images\icon-delete.png" />
+    <Content Include="App_Themes\old-images\icon-excel.png" />
+    <Content Include="App_Themes\old-images\icon-new-hover.png" />
+    <Content Include="App_Themes\old-images\icon-new.png" />
+    <Content Include="App_Themes\old-images\icon-pdf.png" />
+    <Content Include="App_Themes\old-images\icon-print.png" />
+    <Content Include="App_Themes\old-images\icon-save-new.png" />
+    <Content Include="App_Themes\old-images\icon-save.jpg" />
+    <Content Include="App_Themes\old-images\icon-save.png" />
+    <Content Include="App_Themes\old-images\icon-update - Copy.png" />
+    <Content Include="App_Themes\old-images\icon-update.png" />
+    <Content Include="App_Themes\old-images\icon-word.png" />
+    <Content Include="App_Themes\old-images\icon_cp_doctor.png" />
+    <Content Include="App_Themes\old-images\icon_cp_doctor_hover.png" />
+    <Content Include="App_Themes\old-images\icon_cp_events.png" />
+    <Content Include="App_Themes\old-images\icon_cp_events_hover.png" />
+    <Content Include="App_Themes\old-images\icon_cp_gallery.png" />
+    <Content Include="App_Themes\old-images\icon_cp_gallery_hover.png" />
+    <Content Include="App_Themes\old-images\icon_cp_promo.png" />
+    <Content Include="App_Themes\old-images\icon_cp_promo_hover.png" />
+    <Content Include="App_Themes\old-images\icon_cp_serv.png" />
+    <Content Include="App_Themes\old-images\icon_cp_serv_hover.png" />
+    <Content Include="App_Themes\old-images\icon_cp_tire.png" />
+    <Content Include="App_Themes\old-images\icon_cp_tire_hover.png" />
+    <Content Include="App_Themes\old-images\info-icon.png" />
+    <Content Include="App_Themes\old-images\inner_tab_bg.jpg" />
+    <Content Include="App_Themes\old-images\inner_tab_menu-hover.jpg" />
+    <Content Include="App_Themes\old-images\insurance-type.png" />
+    <Content Include="App_Themes\old-images\insurance.png" />
+    <Content Include="App_Themes\old-images\item_name.png" />
+    <Content Include="App_Themes\old-images\job-icon.png" />
+    <Content Include="App_Themes\old-images\key.png" />
+    <Content Include="App_Themes\old-images\left_menu_hover.jpg" />
+    <Content Include="App_Themes\old-images\loader.gif" />
+    <Content Include="App_Themes\old-images\logo-big.png" />
+    <Content Include="App_Themes\old-images\logo.png" />
+    <Content Include="App_Themes\old-images\logo5.swf" />
+    <Content Include="App_Themes\old-images\mac-book.png" />
+    <Content Include="App_Themes\old-images\main-menu-icon.png" />
+    <Content Include="App_Themes\old-images\menu-bg.png" />
+    <Content Include="App_Themes\old-images\menu-bg_hover.jpg" />
+    <Content Include="App_Themes\old-images\menu-wrapper-bg.png" />
+    <Content Include="App_Themes\old-images\menu_bt_bg - Copy %282%29.png" />
+    <Content Include="App_Themes\old-images\menu_bt_bg - Copy.png" />
+    <Content Include="App_Themes\old-images\menu_bt_bg.png" />
+    <Content Include="App_Themes\old-images\menu_bt_bg_hover.png" />
+    <Content Include="App_Themes\old-images\menu_li_bg.jpg" />
+    <Content Include="App_Themes\old-images\menu_strip_bg.jpg" />
+    <Content Include="App_Themes\old-images\menu_strip_li-hover.png" />
+    <Content Include="App_Themes\old-images\nationality.png" />
+    <Content Include="App_Themes\old-images\nav-arrow.png" />
+    <Content Include="App_Themes\old-images\nav-bg-hover.png" />
+    <Content Include="App_Themes\old-images\nav-bg-left.png" />
+    <Content Include="App_Themes\old-images\nav-bg-li-hover.png" />
+    <Content Include="App_Themes\old-images\nav-bg-li.png" />
+    <Content Include="App_Themes\old-images\nav-bg-li1.png" />
+    <Content Include="App_Themes\old-images\nav-bg-right.png" />
+    <Content Include="App_Themes\old-images\nav-bg.png" />
+    <Content Include="App_Themes\old-images\nav-seperator.png" />
+    <Content Include="App_Themes\old-images\new-bt-bg.png" />
+    <Content Include="App_Themes\old-images\new-bt-bg1.png" />
+    <Content Include="App_Themes\old-images\new-bt-bg2.png" />
+    <Content Include="App_Themes\old-images\new-bt-bg3.png" />
+    <Content Include="App_Themes\old-images\num.png" />
+    <Content Include="App_Themes\old-images\ok-icon.png" />
+    <Content Include="App_Themes\old-images\ok.png" />
+    <Content Include="App_Themes\old-images\pdft-bt - Copy.png" />
+    <Content Include="App_Themes\old-images\pdft-bt.png" />
+    <Content Include="App_Themes\old-images\pdf_icon - Copy.png" />
+    <Content Include="App_Themes\old-images\pdf_icon.png" />
+    <Content Include="App_Themes\old-images\Photo-bg.jpg" />
+    <Content Include="App_Themes\old-images\Photo.jpg" />
+    <Content Include="App_Themes\old-images\plus-icon-hover.png" />
+    <Content Include="App_Themes\old-images\plus-icon.png" />
+    <Content Include="App_Themes\old-images\preview-icon-hover.png" />
+    <Content Include="App_Themes\old-images\preview-icon.png" />
+    <Content Include="App_Themes\old-images\print-bt.png" />
+    <Content Include="App_Themes\old-images\print-hover.png" />
+    <Content Include="App_Themes\old-images\print-icon-hover.png" />
+    <Content Include="App_Themes\old-images\print-icon.png" />
+    <Content Include="App_Themes\old-images\print.png" />
+    <Content Include="App_Themes\old-images\save-iconn - Copy.png" />
+    <Content Include="App_Themes\old-images\save-iconn-hover.png" />
+    <Content Include="App_Themes\old-images\save-iconn.png" />
+    <Content Include="App_Themes\old-images\sayegh-header-print.jpg" />
+    <Content Include="App_Themes\old-images\search-bar-bg.jpg" />
+    <Content Include="App_Themes\old-images\search-box-bg.png" />
+    <Content Include="App_Themes\old-images\search-icon-hover.png" />
+    <Content Include="App_Themes\old-images\search-icon.png" />
+    <Content Include="App_Themes\old-images\search.png" />
+    <Content Include="App_Themes\old-images\search_button-hover.png" />
+    <Content Include="App_Themes\old-images\search_button.png" />
+    <Content Include="App_Themes\old-images\serial-no.png" />
+    <Content Include="App_Themes\old-images\strip_bg.jpg" />
+    <Content Include="App_Themes\old-images\sys-refresh-hover.gif" />
+    <Content Include="App_Themes\old-images\sys-refresh.gif" />
+    <Content Include="App_Themes\old-images\sys-refresh1.gif" />
+    <Content Include="App_Themes\old-images\tableftF.gif" />
+    <Content Include="App_Themes\old-images\tableheader.png" />
+    <Content Include="App_Themes\old-images\tabrightF.gif" />
+    <Content Include="App_Themes\old-images\tab_header_bg.jpg" />
+    <Content Include="App_Themes\old-images\tab_header_bgm.jpg" />
+    <Content Include="App_Themes\old-images\tab_menu_bg.png" />
+    <Content Include="App_Themes\old-images\tab_title_arrow_up.png" />
+    <Content Include="App_Themes\old-images\telephone.png" />
+    <Content Include="App_Themes\old-images\texture.png" />
+    <Content Include="App_Themes\old-images\titlebar-bg.jpg" />
+    <Content Include="App_Themes\old-images\titlebar-bg2.jpg" />
+    <Content Include="App_Themes\old-images\tree-list-arrow.jpg" />
+    <Content Include="App_Themes\old-images\tree-list-head-bg.jpg" />
+    <Content Include="App_Themes\old-images\tree-view-img-sml.png" />
+    <Content Include="App_Themes\old-images\tree-view-img.png" />
+    <Content Include="App_Themes\old-images\tree-view-li.png" />
+    <Content Include="App_Themes\old-images\up-arrow.png" />
+    <Content Include="App_Themes\old-images\update-2-hover.png" />
+    <Content Include="App_Themes\old-images\update-2.png" />
+    <Content Include="App_Themes\old-images\update-hover.png" />
+    <Content Include="App_Themes\old-images\update-icon-hover.png" />
+    <Content Include="App_Themes\old-images\update-icon.png" />
+    <Content Include="App_Themes\old-images\update.png" />
+    <Content Include="App_Themes\old-images\user.png" />
+    <Content Include="App_Themes\old-images\validation_sum_bg.png" />
+    <Content Include="App_Themes\old-images\v_menu-bg - Copy.jpg" />
+    <Content Include="App_Themes\old-images\v_menu-bg-hover.png" />
+    <Content Include="App_Themes\old-images\v_menu-bg-hover1.png" />
+    <Content Include="App_Themes\old-images\v_menu-bg-hover2.png" />
+    <Content Include="App_Themes\old-images\v_menu-bg.jpg" />
+    <Content Include="App_Themes\old-images\v_menu-bg.png" />
+    <Content Include="App_Themes\old-images\v_menu-icon-hm.png" />
+    <Content Include="App_Themes\old-images\xl-bt.png" />
+    <Content Include="App_Themes\SkinFile\FloatingLabels.css" />
+    <Content Include="App_Themes\SkinFile\font-awesome.min.css" />
+    <Content Include="App_Themes\SkinFile\GridSystem.css" />
+    <Content Include="App_Themes\SkinFile\IconStyles.css" />
+    <Content Include="App_Themes\SkinFile\StyleSheet.css" />
+    <Content Include="App_Themes\styles\2col.css" />
+    <Content Include="App_Themes\styles\animate.css" />
+    <Content Include="App_Themes\styles\bootstrap.min.css" />
+    <Content Include="App_Themes\styles\cp_style01.css" />
+    <Content Include="App_Themes\styles\dashboardStyles.css" />
+    <Content Include="App_Themes\styles\font-awesome.css" />
+    <Content Include="App_Themes\styles\font-awesome.min.css" />
+    <Content Include="App_Themes\styles\form.css" />
+    <Content Include="App_Themes\styles\inner-style.css" />
+    <Content Include="App_Themes\styles\main.css" />
+    <Content Include="App_Themes\styles\map-content.css" />
+    <Content Include="App_Themes\styles\reset.css" />
+    <Content Include="App_Themes\Theme10\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme10\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme10\GridSystem.css" />
+    <Content Include="App_Themes\Theme10\IconStyles.css" />
+    <Content Include="App_Themes\Theme10\StyleSheet.css" />
+    <Content Include="App_Themes\Theme10\ThemeColors.css" />
+    <Content Include="App_Themes\Theme11\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme11\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme11\GridSystem.css" />
+    <Content Include="App_Themes\Theme11\IconStyles.css" />
+    <Content Include="App_Themes\Theme11\StyleSheet.css" />
+    <Content Include="App_Themes\Theme11\ThemeColors.css" />
+    <Content Include="App_Themes\Theme12\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme12\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme12\GridSystem.css" />
+    <Content Include="App_Themes\Theme12\IconStyles.css" />
+    <Content Include="App_Themes\Theme12\StyleSheet.css" />
+    <Content Include="App_Themes\Theme12\ThemeColors.css" />
+    <Content Include="App_Themes\Theme1\animate.css" />
+    <Content Include="App_Themes\Theme1\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme1\font-awesome.css" />
+    <Content Include="App_Themes\Theme1\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme1\GridSystem.css" />
+    <Content Include="App_Themes\Theme1\IconStyles.css" />
+    <Content Include="App_Themes\Theme1\StyleSheet.css" />
+    <Content Include="App_Themes\Theme1\ThemeColors.css" />
+    <Content Include="App_Themes\Theme1\vmenu.css" />
+    <Content Include="App_Themes\Theme2\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme2\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme2\GridSystem.css" />
+    <Content Include="App_Themes\Theme2\IconStyles.css" />
+    <Content Include="App_Themes\Theme2\StyleSheet.css" />
+    <Content Include="App_Themes\Theme2\ThemeColors.css" />
+    <Content Include="App_Themes\Theme3\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme3\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme3\GridSystem.css" />
+    <Content Include="App_Themes\Theme3\IconStyles.css" />
+    <Content Include="App_Themes\Theme3\StyleSheet.css" />
+    <Content Include="App_Themes\Theme3\ThemeColors.css" />
+    <Content Include="App_Themes\Theme4\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme4\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme4\GridSystem.css" />
+    <Content Include="App_Themes\Theme4\IconStyles.css" />
+    <Content Include="App_Themes\Theme4\StyleSheet.css" />
+    <Content Include="App_Themes\Theme4\ThemeColors.css" />
+    <Content Include="App_Themes\Theme5\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme5\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme5\GridSystem.css" />
+    <Content Include="App_Themes\Theme5\IconStyles.css" />
+    <Content Include="App_Themes\Theme5\StyleSheet.css" />
+    <Content Include="App_Themes\Theme5\ThemeColors.css" />
+    <Content Include="App_Themes\Theme6\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme6\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme6\GridSystem.css" />
+    <Content Include="App_Themes\Theme6\IconStyles.css" />
+    <Content Include="App_Themes\Theme6\StyleSheet.css" />
+    <Content Include="App_Themes\Theme6\ThemeColors.css" />
+    <Content Include="App_Themes\Theme7\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme7\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme7\GridSystem.css" />
+    <Content Include="App_Themes\Theme7\IconStyles.css" />
+    <Content Include="App_Themes\Theme7\StyleSheet.css" />
+    <Content Include="App_Themes\Theme7\ThemeColors.css" />
+    <Content Include="App_Themes\Theme8\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme8\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme8\GridSystem.css" />
+    <Content Include="App_Themes\Theme8\IconStyles.css" />
+    <Content Include="App_Themes\Theme8\StyleSheet.css" />
+    <Content Include="App_Themes\Theme8\ThemeColors.css" />
+    <Content Include="App_Themes\Theme9\FloatingLabels.css" />
+    <Content Include="App_Themes\Theme9\font-awesome.min.css" />
+    <Content Include="App_Themes\Theme9\GridSystem.css" />
+    <Content Include="App_Themes\Theme9\IconStyles.css" />
+    <Content Include="App_Themes\Theme9\StyleSheet.css" />
+    <Content Include="App_Themes\Theme9\ThemeColors.css" />
+    <Content Include="Aslah_Module\advisors.aspx" />
+    <Content Include="Aslah_Module\cases.aspx" />
+    <Content Include="Aslah_Module\ConsultationDetails.aspx" />
+    <Content Include="Aslah_Module\consultings.aspx" />
+    <Content Include="ASMX_WebServices\acadmiy.asmx" />
+    <Content Include="ASMX_WebServices\advisor.asmx" />
+    <Content Include="ASMX_WebServices\boards.asmx" />
+    <Content Include="ASMX_WebServices\cases.asmx" />
+    <Content Include="ASMX_WebServices\companies.asmx" />
+    <Content Include="ASMX_WebServices\ConsultationDetails.asmx" />
+    <Content Include="ASMX_WebServices\consulting.asmx" />
+    <Content Include="ASMX_WebServices\coursat.asmx" />
+    <Content Include="ASMX_WebServices\coursatCls.asmx" />
+    <Content Include="ASMX_WebServices\courseDetailsCls.asmx" />
+    <Content Include="ASMX_WebServices\Dashboard.asmx" />
+    <Content Include="ASMX_WebServices\DiplomasCls.asmx" />
+    <Content Include="ASMX_WebServices\Diploma_CoursesCls.asmx" />
+    <Content Include="ASMX_WebServices\email_setting.asmx" />
+    <Content Include="ASMX_WebServices\halls.asmx" />
+    <Content Include="ASMX_WebServices\LookupDdlBinder.asmx" />
+    <Content Include="ASMX_WebServices\members.asmx" />
+    <Content Include="ASMX_WebServices\members_abbsent.asmx" />
+    <Content Include="ASMX_WebServices\members_boards.asmx" />
+    <Content Include="ASMX_WebServices\MultiFileUploader.asmx" />
+    <Content Include="ASMX_WebServices\payments.asmx" />
+    <Content Include="ASMX_WebServices\register_company.asmx" />
+    <Content Include="ASMX_WebServices\report_settings.asmx" />
+    <Content Include="ASMX_WebServices\sessions.asmx" />
+    <Content Include="ASMX_WebServices\Signature_setting.asmx" />
+    <Content Include="ASMX_WebServices\group_permissons.asmx" />
+    <Content Include="ASMX_WebServices\sms_setting.asmx" />
+    <Content Include="ASMX_WebServices\User.asmx" />
+    <Content Include="ASMX_WebServices\WebService.asmx" />
+    <Content Include="assets\css\app.min.css" />
+    <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\core.css" />
+    <Content Include="assets\css\jquery.mCustomScrollbar.min.css" />
+    <Content Include="assets\css\misc-pages.css" />
+    <Content Include="assets\css\ontime-rtl.css" />
+    <Content Include="assets\css\ontime.css" />
+    <Content Include="assets\css\owl.carousel.css" />
+    <Content Include="assets\css\star-rating.min.css" />
+    <Content Include="assets\fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\fonts\droid-kufi\fonts-fa.css" />
+    <Content Include="assets\images\101.jpg" />
+    <Content Include="assets\images\102.jpg" />
+    <Content Include="assets\images\103.jpg" />
+    <Content Include="assets\images\104.jpg" />
+    <Content Include="assets\images\105.jpg" />
+    <Content Include="assets\images\20.jpg" />
+    <Content Include="assets\images\201.jpg" />
+    <Content Include="assets\images\202.jpg" />
+    <Content Include="assets\images\203.jpg" />
+    <Content Include="assets\images\204.jpg" />
+    <Content Include="assets\images\205.jpg" />
+    <Content Include="assets\images\206.jpg" />
+    <Content Include="assets\images\207.jpg" />
+    <Content Include="assets\images\208.jpg" />
+    <Content Include="assets\images\209.jpg" />
+    <Content Include="assets\images\210.jpg" />
+    <Content Include="assets\images\211.jpg" />
+    <Content Include="assets\images\212.jpg" />
+    <Content Include="assets\images\213.jpg" />
+    <Content Include="assets\images\214.jpg" />
+    <Content Include="assets\images\215.jpg" />
+    <Content Include="assets\images\216.jpg" />
+    <Content Include="assets\images\217.jpg" />
+    <Content Include="assets\images\218.jpg" />
+    <Content Include="assets\images\219.jpg" />
+    <Content Include="assets\images\220.jpg" />
+    <Content Include="assets\images\221.jpg" />
+    <Content Include="assets\images\AjaxLoader.gif" />
+    <Content Include="assets\images\b1.jpg" />
+    <Content Include="assets\images\b2.png" />
+    <Content Include="assets\images\grabbing.png" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\on-logo.png" />
+    <Content Include="assets\images\orders\edit.png" />
+    <Content Include="assets\images\orders\mobile.jpg" />
+    <Content Include="assets\images\orders\pro-design.png" />
+    <Content Include="assets\images\orders\video.jpg" />
+    <Content Include="assets\images\orders\web.png" />
+    <Content Include="assets\images\spir.png" />
+    <Content Include="assets\images\wiok.jpg" />
+    <Content Include="assets\js\app.min.js" />
+    <Content Include="assets\js\core.min.js" />
+    <Content Include="assets\js\fullcalendar.js" />
+    <Content Include="assets\js\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="assets\js\ontime.js" />
+    <Content Include="assets\js\owl.carousel.min.js" />
+    <Content Include="assets\js\star-rating.min.js" />
+    <Content Include="bin\AjaxControlToolkit.dll" />
+    <Content Include="bin\BusinessLayer.BusinessLayer.dll" />
+    <Content Include="bin\WebForms_Basic.xml" />
+    <Content Include="Clock\assets\components\autocomplete\css\dark_autocomplete_style.css" />
+    <Content Include="Clock\assets\components\autocomplete\css\light_autocomplete_style.css" />
+    <Content Include="Clock\assets\components\autocomplete\css\ng_autocomplete_style.css" />
+    <Content Include="Clock\assets\components\autocomplete\images\remove_icon.gif" />
+    <Content Include="Clock\assets\components\calendar\css\dark_cal_style.css" />
+    <Content Include="Clock\assets\components\calendar\css\light_cal_style.css" />
+    <Content Include="Clock\assets\components\calendar\css\ng_cal_style.css" />
+    <Content Include="Clock\assets\components\calendar\images\calendar.gif" />
+    <Content Include="Clock\assets\components\calendar\images\calendar_dis.gif" />
+    <Content Include="Clock\assets\components\calendar\images\left_arrow.gif" />
+    <Content Include="Clock\assets\components\calendar\images\left_arrow_dis.gif" />
+    <Content Include="Clock\assets\components\calendar\images\remove_icon.gif" />
+    <Content Include="Clock\assets\components\calendar\images\right_arrow.gif" />
+    <Content Include="Clock\assets\components\calendar\images\right_arrow_dis.gif" />
+    <Content Include="Clock\assets\components\colorpicker\css\dark_colorpicker_style.css" />
+    <Content Include="Clock\assets\components\colorpicker\css\light_colorpicker_style.css" />
+    <Content Include="Clock\assets\components\colorpicker\css\ng_colorpicker_style.css" />
+    <Content Include="Clock\assets\components\colorpicker\images\hue_slider_bg.jpg" />
+    <Content Include="Clock\assets\components\colorpicker\images\lightness_bg.png" />
+    <Content Include="Clock\assets\components\colorpicker\images\picker_icon.png" />
+    <Content Include="Clock\assets\components\colorpicker\images\picker_icon_disabled.png" />
+    <Content Include="Clock\assets\components\colorpicker\images\saturation_bg.png" />
+    <Content Include="Clock\assets\components\colorpicker\images\saturation_bg_rtl.png" />
+    <Content Include="Clock\assets\components\slider\css\dark_slider_style.css" />
+    <Content Include="Clock\assets\components\slider\css\light_slider_style.css" />
+    <Content Include="Clock\assets\components\slider\css\ng_slider_style.css" />
+    <Content Include="Clock\assets\components\slider\images\h_icon.png" />
+    <Content Include="Clock\assets\components\slider\images\h_icon_disabled.png" />
+    <Content Include="Clock\assets\components\slider\images\h_thumb.png" />
+    <Content Include="Clock\assets\components\slider\images\range_off_bg.png" />
+    <Content Include="Clock\assets\components\slider\images\r_icon.png" />
+    <Content Include="Clock\assets\components\slider\images\r_icon_disabled.png" />
+    <Content Include="Clock\assets\components\slider\images\r_thumb.png" />
+    <Content Include="Clock\assets\components\slider\images\stop_icon.png" />
+    <Content Include="Clock\assets\components\slider\images\v_icon.png" />
+    <Content Include="Clock\assets\components\slider\images\v_icon_disabled.png" />
+    <Content Include="Clock\assets\components\slider\images\v_thumb.png" />
+    <Content Include="Clock\assets\components\timepicker\css\dark_timepicker_style.css" />
+    <Content Include="Clock\assets\components\timepicker\css\light_timepicker_style.css" />
+    <Content Include="Clock\assets\components\timepicker\css\ng_timepicker_style.css" />
+    <Content Include="Clock\assets\components\timepicker\images\clock_icon.png" />
+    <Content Include="Clock\assets\components\timepicker\images\clock_icon_disabled.png" />
+    <Content Include="Clock\assets\css\dark_all.css" />
+    <Content Include="Clock\assets\css\dark_icons.css" />
+    <Content Include="Clock\assets\css\dark_ui.css" />
+    <Content Include="Clock\assets\css\light_all.css" />
+    <Content Include="Clock\assets\css\light_icons.css" />
+    <Content Include="Clock\assets\css\light_ui.css" />
+    <Content Include="Clock\assets\css\ng_all.css" />
+    <Content Include="Clock\assets\css\ng_icons.css" />
+    <Content Include="Clock\assets\css\ng_ui.css" />
+    <Content Include="Clock\assets\images\arrows\black_down.png" />
+    <Content Include="Clock\assets\images\arrows\black_left.png" />
+    <Content Include="Clock\assets\images\arrows\black_right.png" />
+    <Content Include="Clock\assets\images\arrows\black_rotate.png" />
+    <Content Include="Clock\assets\images\arrows\black_switch.png" />
+    <Content Include="Clock\assets\images\arrows\black_up.png" />
+    <Content Include="Clock\assets\images\arrows\white_down.png" />
+    <Content Include="Clock\assets\images\arrows\white_left.png" />
+    <Content Include="Clock\assets\images\arrows\white_right.png" />
+    <Content Include="Clock\assets\images\arrows\white_rotate.png" />
+    <Content Include="Clock\assets\images\arrows\white_switch.png" />
+    <Content Include="Clock\assets\images\arrows\white_up.png" />
+    <Content Include="Clock\assets\images\buttons\bg_black.png" />
+    <Content Include="Clock\assets\images\buttons\bg_black_down.png" />
+    <Content Include="Clock\assets\images\buttons\bg_white.png" />
+    <Content Include="Clock\assets\images\buttons\bg_white_down.png" />
+    <Content Include="Clock\assets\images\buttons\bg_white_gloss.png" />
+    <Content Include="Clock\assets\images\buttons\bg_white_gloss_down.png" />
+    <Content Include="Clock\assets\images\glow\bottom.png" />
+    <Content Include="Clock\assets\images\glow\bottom_left_crn.png" />
+    <Content Include="Clock\assets\images\glow\bottom_right_crn.png" />
+    <Content Include="Clock\assets\images\glow\left.png" />
+    <Content Include="Clock\assets\images\glow\right.png" />
+    <Content Include="Clock\assets\images\icons\attribution.txt" />
+    <Content Include="Clock\assets\images\icons\standard_10.png" />
+    <Content Include="Clock\assets\images\icons\standard_12.png" />
+    <Content Include="Clock\assets\images\icons\standard_128.png" />
+    <Content Include="Clock\assets\images\icons\standard_16.png" />
+    <Content Include="Clock\assets\images\icons\standard_24.png" />
+    <Content Include="Clock\assets\images\icons\standard_32.png" />
+    <Content Include="Clock\assets\images\icons\standard_48.png" />
+    <Content Include="Clock\assets\images\icons\standard_64.png" />
+    <Content Include="Clock\assets\images\icons\standard_8.png" />
+    <Content Include="Clock\assets\images\icons\standard_96.png" />
+    <Content Include="Clock\assets\images\progressbar\bar_indeterminate_bg.png" />
+    <Content Include="Clock\assets\images\progressbar\rtl_bar_indeterminate_bg.png" />
+    <Content Include="Clock\assets\images\shadow\bottom.png" />
+    <Content Include="Clock\assets\images\shadow\bottom_left_crn.png" />
+    <Content Include="Clock\assets\images\shadow\bottom_right_crn.png" />
+    <Content Include="Clock\assets\images\shadow\left.png" />
+    <Content Include="Clock\assets\images\shadow\right.png" />
+    <Content Include="Clock\assets\images\spacer.gif" />
+    <Content Include="Clock\assets\language\ar\calendar.js" />
+    <Content Include="Clock\assets\language\ar\colorpicker.js" />
+    <Content Include="Clock\assets\language\ar\general.js" />
+    <Content Include="Clock\assets\language\en\calendar.js" />
+    <Content Include="Clock\assets\language\en\colorpicker.js" />
+    <Content Include="Clock\assets\language\en\general.js" />
+    <Content Include="Clock\assets\language\nl\calendar.js" />
+    <Content Include="Clock\assets\language\nl\colorpicker.js" />
+    <Content Include="Clock\assets\language\nl\general.js" />
+    <Content Include="Clock\assets\language\zh\calendar.js" />
+    <Content Include="Clock\assets\language\zh\colorpicker.js" />
+    <Content Include="Clock\assets\language\zh\general.js" />
+    <Content Include="Clock\components\autocomplete.js" />
+    <Content Include="Clock\components\calendar.js" />
+    <Content Include="Clock\components\colorpicker.js" />
+    <Content Include="Clock\components\slider.js" />
+    <Content Include="Clock\components\timepicker.js" />
+    <Content Include="Clock\ng_all.js" />
+    <Content Include="Clock\ng_ui.js" />
+    <Content Include="Contact.aspx" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="css\bootstrap-responsive.min.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\calendar.css" />
+    <Content Include="css\clock.css" />
+    <Content Include="css\dashboard-calandar.css" />
+    <Content Include="css\fotorama.css" />
+    <Content Include="css\plugins\chosen\chosen.css" />
+    <Content Include="css\plugins\colorbox\colorbox.css" />
+    <Content Include="css\plugins\colorpicker\colorpicker.css" />
+    <Content Include="css\plugins\datatable\details_close.png" />
+    <Content Include="css\plugins\datatable\details_open.png" />
+    <Content Include="css\plugins\datatable\jquery.dataTables.css" />
+    <Content Include="css\plugins\datatable\jquery.dataTables.min.css" />
+    <Content Include="css\plugins\datatable\jquery.dataTables_themeroller.css" />
+    <Content Include="css\plugins\datatable\shCore.css" />
+    <Content Include="css\plugins\datatable\TableTools.css" />
+    <Content Include="css\plugins\datepicker\datepicker.css" />
+    <Content Include="css\plugins\dynatree\icons.gif" />
+    <Content Include="css\plugins\dynatree\loading.gif" />
+    <Content Include="css\plugins\dynatree\ui.dynatree.css" />
+    <Content Include="css\plugins\easy-pie-chart\jquery.easy-pie-chart.css" />
+    <Content Include="css\plugins\elfinder\elfinder.min.css" />
+    <Content Include="css\plugins\elfinder\theme.css" />
+    <Content Include="css\plugins\fullcalendar\fullcalendar.css" />
+    <Content Include="css\plugins\fullcalendar\fullcalendar.print.css" />
+    <Content Include="css\plugins\gmap\gmap3-menu.css" />
+    <Content Include="css\plugins\gritter\jquery.gritter.css" />
+    <Content Include="css\plugins\icheck\all.css" />
+    <Content Include="css\plugins\icheck\flat\aero.css" />
+    <Content Include="css\plugins\icheck\flat\blue.css" />
+    <Content Include="css\plugins\icheck\flat\flat.css" />
+    <Content Include="css\plugins\icheck\flat\green.css" />
+    <Content Include="css\plugins\icheck\flat\grey.css" />
+    <Content Include="css\plugins\icheck\flat\orange.css" />
+    <Content Include="css\plugins\icheck\flat\pink.css" />
+    <Content Include="css\plugins\icheck\flat\purple.css" />
+    <Content Include="css\plugins\icheck\flat\red.css" />
+    <Content Include="css\plugins\icheck\flat\yellow.css" />
+    <Content Include="css\plugins\icheck\flat\_all.css" />
+    <Content Include="css\plugins\icheck\futurico\futurico.css" />
+    <Content Include="css\plugins\icheck\line\aero.css" />
+    <Content Include="css\plugins\icheck\line\blue.css" />
+    <Content Include="css\plugins\icheck\line\green.css" />
+    <Content Include="css\plugins\icheck\line\grey.css" />
+    <Content Include="css\plugins\icheck\line\line.css" />
+    <Content Include="css\plugins\icheck\line\orange.css" />
+    <Content Include="css\plugins\icheck\line\pink.css" />
+    <Content Include="css\plugins\icheck\line\purple.css" />
+    <Content Include="css\plugins\icheck\line\red.css" />
+    <Content Include="css\plugins\icheck\line\yellow.css" />
+    <Content Include="css\plugins\icheck\line\_all.css" />
+    <Content Include="css\plugins\icheck\minimal\aero.css" />
+    <Content Include="css\plugins\icheck\minimal\blue.css" />
+    <Content Include="css\plugins\icheck\minimal\green.css" />
+    <Content Include="css\plugins\icheck\minimal\grey.css" />
+    <Content Include="css\plugins\icheck\minimal\minimal.css" />
+    <Content Include="css\plugins\icheck\minimal\orange.css" />
+    <Content Include="css\plugins\icheck\minimal\pink.css" />
+    <Content Include="css\plugins\icheck\minimal\purple.css" />
+    <Content Include="css\plugins\icheck\minimal\red.css" />
+    <Content Include="css\plugins\icheck\minimal\yellow.css" />
+    <Content Include="css\plugins\icheck\minimal\_all.css" />
+    <Content Include="css\plugins\icheck\polaris\polaris.css" />
+    <Content Include="css\plugins\icheck\square\aero.css" />
+    <Content Include="css\plugins\icheck\square\blue.css" />
+    <Content Include="css\plugins\icheck\square\green.css" />
+    <Content Include="css\plugins\icheck\square\grey.css" />
+    <Content Include="css\plugins\icheck\square\orange.css" />
+    <Content Include="css\plugins\icheck\square\pink.css" />
+    <Content Include="css\plugins\icheck\square\purple.css" />
+    <Content Include="css\plugins\icheck\square\red.css" />
+    <Content Include="css\plugins\icheck\square\square.css" />
+    <Content Include="css\plugins\icheck\square\yellow.css" />
+    <Content Include="css\plugins\icheck\square\_all.css" />
+    <Content Include="css\plugins\images\favicon.ico" />
+    <Content Include="css\plugins\images\sort_asc.png" />
+    <Content Include="css\plugins\images\sort_asc_disabled.png" />
+    <Content Include="css\plugins\images\sort_both.png" />
+    <Content Include="css\plugins\images\sort_desc.png" />
+    <Content Include="css\plugins\images\sort_desc_disabled.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\animated-overlay.gif" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-bg_flat_0_aaaaaa_5F40x100.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-bg_flat_75_ffffff_5F40x100.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-icons_222222_5F256x240.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-icons_2e83ff_5F256x240.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-icons_454545_5F256x240.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-icons_888888_5F256x240.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\images\ui-icons_cd0a0a_5F256x240.png" />
+    <Content Include="css\plugins\jquery-ui\smoothness\jquery-ui.css" />
+    <Content Include="css\plugins\jquery-ui\smoothness\jquery.ui.theme.css" />
+    <Content Include="css\plugins\multiselect\multi-select.css" />
+    <Content Include="css\plugins\pageguide\pageguide.css" />
+    <Content Include="css\plugins\plupload\jquery.plupload.queue.css" />
+    <Content Include="css\plugins\select2\select2.css" />
+    <Content Include="css\plugins\tagsinput\jquery.tagsinput.css" />
+    <Content Include="css\plugins\timepicker\bootstrap-timepicker.min.css" />
+    <Content Include="css\plugins\xeditable\bootstrap-editable.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\StyleSheet.css" />
+    <Content Include="css\themes.css" />
+    <Content Include="css\uploadify.css" />
+    <Content Include="Dashboard.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Hall_Module\Halls.aspx" />
+    <Content Include="js\adapters\mootools-adapter.js" />
+    <Content Include="js\adapters\mootools-adapter.src.js" />
+    <Content Include="js\adapters\prototype-adapter.js" />
+    <Content Include="js\adapters\prototype-adapter.src.js" />
+    <Content Include="js\Animations.js" />
+    <Content Include="js\application.min.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\buttons.dataTables.min.css" />
+    <Content Include="js\buttons.flash.min.js" />
+    <Content Include="js\calendar.js" />
+    <Content Include="js\canvasjs.min.js" />
+    <Content Include="js\carousel.js" />
+    <Content Include="js\cases\cases.js" />
+    <Content Include="js\collapse.js" />
+    <Content Include="js\ColReorderWithResize.js" />
+    <Content Include="js\colResizable-1.3.min.js" />
+    <Content Include="js\colResizable-1.5.min.js" />
+    <Content Include="js\css3clock.js" />
+    <Content Include="js\demonstration.min.js" />
+    <Content Include="js\dropdown.js" />
+    <Content Include="js\eakroko.js" />
+    <Content Include="js\eakroko.min.js" />
+    <Content Include="js\FloatingLabels.js" />
+    <Content Include="js\fotorama.js" />
+    <Content Include="js\global.js" />
+    <Content Include="js\highcharts-more.js" />
+    <Content Include="js\highcharts-more.src.js" />
+    <Content Include="js\highcharts.js" />
+    <Content Include="js\highcharts.src.js" />
+    <Content Include="js\hijri-date.js" />
+    <Content Include="js\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="js\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="js\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="js\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="js\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="js\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="js\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="js\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="js\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="js\images\ui-icons_222222_256x240.png" />
+    <Content Include="js\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="js\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="js\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="js\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="js\jquery-1.11.2.min.js" />
+    <Content Include="js\jquery-1.2.6.min.js" />
+    <Content Include="js\jquery-1.4.1.min.js" />
+    <Content Include="js\jquery-1.4.2.min.js" />
+    <Content Include="js\jquery-1.7.1.min.js" />
+    <Content Include="js\jquery-1.9.1.js" />
+    <Content Include="js\jquery-2.1.4.min.js" />
+    <Content Include="js\jquery-latest.min.js" />
+    <Content Include="js\jquery-ui.css" />
+    <Content Include="js\jquery-ui.js" />
+    <Content Include="js\jquery-ui.min.js" />
+    <Content Include="js\jquery.canvasjs.min.js" />
+    <Content Include="js\jquery.dataTables.min.css" />
+    <Content Include="js\jquery.easing.min.js" />
+    <Content Include="js\jquery.layerslider.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\jquery.tabSlideOut.v1.3.js" />
+    <Content Include="js\jsapi.js" />
+    <Content Include="js\jszip.min.js" />
+    <Content Include="js\loadchat.js" />
+    <Content Include="js\modules\canvas-tools.js" />
+    <Content Include="js\modules\canvas-tools.src.js" />
+    <Content Include="js\modules\data.js" />
+    <Content Include="js\modules\data.src.js" />
+    <Content Include="js\modules\exporting.js" />
+    <Content Include="js\modules\exporting.src.js" />
+    <Content Include="js\pdfmake.min.js" />
+    <Content Include="js\plugins\bootbox\jquery.bootbox.js" />
+    <Content Include="js\plugins\chosen\chosen.jquery.min.js" />
+    <Content Include="js\plugins\ckeditor\ckeditor.js" />
+    <Content Include="js\plugins\colorbox\jquery.colorbox-min.js" />
+    <Content Include="js\plugins\colorpicker\bootstrap-colorpicker.js" />
+    <Content Include="js\plugins\complexify\jquery.complexify-banlist.min.js" />
+    <Content Include="js\plugins\complexify\jquery.complexify.min.js" />
+    <Content Include="js\plugins\datatable\buttons.html5.min.js" />
+    <Content Include="js\plugins\datatable\buttons.print.min.js" />
+    <Content Include="js\plugins\datatable\ColReorder.min.js" />
+    <Content Include="js\plugins\datatable\ColVis.min.js" />
+    <Content Include="js\plugins\datatable\copy_csv_xls_pdf.swf" />
+    <Content Include="js\plugins\datatable\dataTables.buttons.min.js" />
+    <Content Include="js\plugins\datatable\dataTables.scroller.min.js" />
+    <Content Include="js\plugins\datatable\FixedColumns.min.js" />
+    <Content Include="js\plugins\datatable\fnFilterClear.js" />
+    <Content Include="js\plugins\datatable\jquery.dataTables.columnFilter.js" />
+    <Content Include="js\plugins\datatable\jquery.dataTables.js" />
+    <Content Include="js\plugins\datatable\jquery.dataTables.min.js" />
+    <Content Include="js\plugins\datatable\jquery.js" />
+    <Content Include="js\plugins\datatable\pdfmake.min.js" />
+    <Content Include="js\plugins\datatable\tableTools.js" />
+    <Content Include="js\plugins\datatable\vfs_fonts.js" />
+    <Content Include="js\plugins\datepicker\bootstrap-datepicker.js" />
+    <Content Include="js\plugins\dynatree\jquery.dynatree.js" />
+    <Content Include="js\plugins\easy-pie-chart\jquery.easy-pie-chart.min.js" />
+    <Content Include="js\plugins\elfinder\elfinder.min.js" />
+    <Content Include="js\plugins\fileupload\bootstrap-fileupload.min.js" />
+    <Content Include="js\plugins\flot\jquery.flot.bar.order.min.js" />
+    <Content Include="js\plugins\flot\jquery.flot.min.js" />
+    <Content Include="js\plugins\flot\jquery.flot.pie.min.js" />
+    <Content Include="js\plugins\flot\jquery.flot.resize.min.js" />
+    <Content Include="js\plugins\flot\jquery.flot.stack.js" />
+    <Content Include="js\plugins\form\jquery.form.min.js" />
+    <Content Include="js\plugins\fullcalendar\fullcalendar.min.js" />
+    <Content Include="js\plugins\gmap\gmap3-menu.js" />
+    <Content Include="js\plugins\gmap\gmap3.min.js" />
+    <Content Include="js\plugins\gritter\jquery.gritter.min.js" />
+    <Content Include="js\plugins\icheck\jquery.icheck.min.js" />
+    <Content Include="js\plugins\imagesLoaded\jquery.imagesloaded.min.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.core.min.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.datepicker.min.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.draggable.min.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.droppable.min.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.mouse.min.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.resizable.min.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.selectable.min.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.slider.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.sortable.min.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.spinner.js" />
+    <Content Include="js\plugins\jquery-ui\jquery.ui.widget.min.js" />
+    <Content Include="js\plugins\maskedinput\jquery.maskedinput.min.js" />
+    <Content Include="js\plugins\masonry\jquery.masonry.min.js" />
+    <Content Include="js\plugins\mockjax\jquery.mockjax.js" />
+    <Content Include="js\plugins\momentjs\jquery.moment.js" />
+    <Content Include="js\plugins\multiselect\jquery.multi-select.js" />
+    <Content Include="js\plugins\nicescroll\jquery.nicescroll.min.js" />
+    <Content Include="js\plugins\pageguide\jquery.pageguide.js" />
+    <Content Include="js\plugins\placeholder\jquery.placeholder.min.js" />
+    <Content Include="js\plugins\plupload\jquery.plupload.queue.js" />
+    <Content Include="js\plugins\plupload\plupload.full.js" />
+    <Content Include="js\plugins\select2\select2.min.js" />
+    <Content Include="js\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="js\plugins\sparklines\jquery.sparklines.min.js" />
+    <Content Include="js\plugins\tagsinput\jquery.tagsinput.min.js" />
+    <Content Include="js\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="js\plugins\touch-punch\jquery.touch-punch.min.js" />
+    <Content Include="js\plugins\touchwipe\touchwipe.min.js" />
+    <Content Include="js\plugins\validation\additional-methods.min.js" />
+    <Content Include="js\plugins\validation\jquery.validate.min.js" />
+    <Content Include="js\plugins\vmap\jquery.vmap.min.js" />
+    <Content Include="js\plugins\vmap\jquery.vmap.sampledata.js" />
+    <Content Include="js\plugins\vmap\jquery.vmap.world.js" />
+    <Content Include="js\plugins\wizard\jquery.form.wizard.min.js" />
+    <Content Include="js\plugins\xeditable\address.js" />
+    <Content Include="js\plugins\xeditable\bootstrap-editable.min.js" />
+    <Content Include="js\plugins\xeditable\demo.js" />
+    <Content Include="js\script.js" />
+    <Content Include="js\shadowbox.js" />
+    <Content Include="js\themes\dark-blue.js" />
+    <Content Include="js\themes\dark-green.js" />
+    <Content Include="js\themes\gray.js" />
+    <Content Include="js\themes\grid.js" />
+    <Content Include="js\themes\skies.js" />
+    <Content Include="js\tooltipsy.min.js" />
+    <Content Include="js\transition.js" />
+    <Content Include="js\vfs_fonts.js" />
+    <Content Include="js\vmenuModule.js" />
+    <Content Include="JS_Code\acadmies\acadmiy.js" />
+    <Content Include="JS_Code\acadmies\coursat.js" />
+    <Content Include="JS_Code\acadmies\Course_Details.js" />
+    <Content Include="JS_Code\acadmies\diplomaCourses.js" />
+    <Content Include="JS_Code\acadmies\Diplomas.js" />
+    <Content Include="JS_Code\acadmies\training_centers.js" />
+    <Content Include="JS_Code\advisors\advisor.js" />
+    <Content Include="JS_Code\boards\boards.js" />
+    <Content Include="JS_Code\Calendar.js" />
+    <Content Include="JS_Code\cases\cases.js" />
+    <Content Include="JS_Code\cases\cases_Upload.js" />
+    <Content Include="JS_Code\cases\register_company_Upload.js" />
+    <Content Include="JS_Code\companies\companies.js" />
+    <Content Include="JS_Code\companies\companies_Upload.js" />
+    <Content Include="JS_Code\ConsultationDetails\ConsultationDetails.js" />
+    <Content Include="JS_Code\consultings\consulting.js" />
+    <Content Include="JS_Code\Dashboard.js" />
+    <Content Include="JS_Code\Email.js" />
+    <Content Include="JS_Code\EmailLayout.js" />
+    <Content Include="JS_Code\email_setting\email_setting.js" />
+    <Content Include="JS_Code\halls\halls.js" />
+    <Content Include="JS_Code\halls\halls_Edit.js" />
+    <Content Include="JS_Code\halls\halls_Save.js" />
+    <Content Include="JS_Code\halls\halls_Upload.js" />
+    <Content Include="JS_Code\Invoice.js" />
+    <Content Include="JS_Code\jquery.pajinate.js" />
+    <Content Include="JS_Code\jsPDF\FileSaver.js" />
+    <Content Include="JS_Code\jsPDF\jspdf.js" />
+    <Content Include="JS_Code\jsPDF\jspdf.plugin.from_html.js" />
+    <Content Include="JS_Code\jsPDF\jspdf.plugin.split_text_to_size.js" />
+    <Content Include="JS_Code\jsPDF\jspdf.plugin.standard_fonts_metrics.js" />
+    <Content Include="JS_Code\Listing.js" />
+    <Content Include="JS_Code\ListingProperties_Edit.js" />
+    <Content Include="JS_Code\Map.js" />
+    <Content Include="JS_Code\Master.js" />
+    <Content Include="JS_Code\members\members.js" />
+    <Content Include="JS_Code\members_abbsent\members_abbsent.js" />
+    <Content Include="JS_Code\members_boards\members_boards.js" />
+    <Content Include="JS_Code\Notification.js" />
+    <Content Include="JS_Code\payments\payments.js" />
+    <Content Include="JS_Code\Public\barcode.js" />
+    <Content Include="JS_Code\Public\Details.js" />
+    <Content Include="JS_Code\Public\DynamicTable.js" />
+    <Content Include="JS_Code\Public\HtmlTableOperations.js" />
+    <Content Include="JS_Code\Public\ImageSlider.js" />
+    <Content Include="JS_Code\Public\jquery-barcode.js" />
+    <Content Include="JS_Code\Public\jquery-barcode.min.js" />
+    <Content Include="JS_Code\Public\jquery.formatCurrency-1.4.0.js" />
+    <Content Include="JS_Code\Public\LanguageSheet.js" />
+    <Content Include="JS_Code\Public\LanguageSheet1.js" />
+    <Content Include="JS_Code\Public\LookupDdlBinder.js" />
+    <Content Include="JS_Code\Public\Messages.js" />
+    <Content Include="JS_Code\Public\MultiFileUploader.js" />
+    <Content Include="JS_Code\Public\PublicFunctions.js" />
+    <Content Include="JS_Code\Public\RowsReorder.js" />
+    <Content Include="JS_Code\Public\SmartEditor.js" />
+    <Content Include="JS_Code\Publish\ApproveToPublish.js" />
+    <Content Include="JS_Code\Publish\PublishXML.js" />
+    <Content Include="JS_Code\Publish\WebSiteSettings.js" />
+    <Content Include="JS_Code\rack\rack.js" />
+    <Content Include="JS_Code\rack\rack_Edit.js" />
+    <Content Include="JS_Code\rack\rack_Save.js" />
+    <Content Include="JS_Code\register_company\register_company.js" />
+    <Content Include="JS_Code\register_company\register_company_Upload.js" />
+    <Content Include="JS_Code\Reports\booking_Report.js" />
+    <Content Include="JS_Code\Reports\Circular_Report.js" />
+    <Content Include="JS_Code\Reports\contacts_rep.js" />
+    <Content Include="JS_Code\Reports\Letters_rep.js" />
+    <Content Include="JS_Code\report_settings\report_settings.js" />
+    <Content Include="JS_Code\sessions\sessions.js" />
+    <Content Include="JS_Code\sessions\sessions_Upload.js" />
+    <Content Include="JS_Code\Signature_setting\Signature_setting.js" />
+    <Content Include="JS_Code\group_permissons\group_permissons.js" />
+    <Content Include="JS_Code\sms_setting\sms_setting.js" />
+    <Content Include="JS_Code\store_rep\store_rep.js" />
+    <Content Include="JS_Code\stors\stors.js" />
+    <Content Include="JS_Code\stors\stors_Edit.js" />
+    <Content Include="JS_Code\stors\stors_Save.js" />
+    <Content Include="JS_Code\training_centers\training_centers.js" />
+    <Content Include="JS_Code\transfers\transfers.js" />
+    <Content Include="JS_Code\transfers\transfers_Edit.js" />
+    <Content Include="JS_Code\transfers\transfers_Save.js" />
+    <Content Include="JS_Code\User\User.js" />
+    <Content Include="JS_Code\User\User_Edit.js" />
+    <Content Include="JS_Code\User\User_Save.js" />
+    <Content Include="JS_Code\User\User_Tree.js" />
+    <Content Include="JS_Code\VMenu.js" />
+    <Content Include="JS_Code\Widgets.js" />
+    <Content Include="Login\css\fonts\BebasNeue-webfont.eot" />
+    <Content Include="Login\css\fonts\BebasNeue-webfont.ttf" />
+    <Content Include="Login\css\fonts\BebasNeue-webfont.woff" />
+    <Content Include="Login\css\fonts\fontomas-webfont.eot" />
+    <Content Include="Login\css\fonts\fontomas-webfont.ttf" />
+    <Content Include="Login\css\fonts\fontomas-webfont.woff" />
+    <Content Include="Login\css\fonts\franchise-bold-webfont.eot" />
+    <Content Include="Login\css\fonts\franchise-bold-webfont.ttf" />
+    <Content Include="Login\css\fonts\franchise-bold-webfont.woff" />
+    <Content Include="Login\fonts\fontawesome-webfont.eot" />
+    <Content Include="Login\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Login\fonts\fontawesome-webfont.woff" />
+    <Content Include="Login\images\logo-login.1png" />
+    <Content Include="App_Themes\cp\all.skin" />
+    <Content Include="App_Themes\fonts\fontawesome-webfont.eot" />
+    <Content Include="App_Themes\fonts\fontawesome-webfont.ttf" />
+    <Content Include="App_Themes\fonts\fontawesome-webfont.woff" />
+    <Content Include="App_Themes\fonts\fontawesome-webfont.woff2" />
+    <Content Include="App_Themes\fonts\FontAwesome.otf" />
+    <Content Include="App_Themes\fonts\OpenSans-Regular-webfont.eot" />
+    <Content Include="App_Themes\fonts\OpenSans-Regular-webfont.ttf" />
+    <Content Include="App_Themes\fonts\OpenSans-Regular-webfont.woff" />
+    <Content Include="App_Themes\fonts\OpenSans-Regular-webfont.woff2" />
+    <Content Include="App_Themes\fonts\OpenSans-Regular.ttf" />
+    <Content Include="App_Themes\images\bt-bg.52jpg" />
+    <Content Include="App_Themes\images\exit-icon.pxr" />
+    <Content Include="App_Themes\images\search-icon.rar" />
+    <Content Include="App_Themes\old-images\bt-bg.52jpg" />
+    <Content Include="App_Themes\old-images\exit-icon.pxr" />
+    <Content Include="App_Themes\old-images\search-icon.rar" />
+    <Content Include="App_Themes\SkinFile\all.skin" />
+    <Content Include="App_Themes\Theme10\all.skin" />
+    <Content Include="App_Themes\Theme11\all.skin" />
+    <Content Include="App_Themes\Theme12\all.skin" />
+    <Content Include="App_Themes\Theme1\all.skin" />
+    <Content Include="App_Themes\Theme2\all.skin" />
+    <Content Include="App_Themes\Theme3\all.skin" />
+    <Content Include="App_Themes\Theme4\all.skin" />
+    <Content Include="App_Themes\Theme5\all.skin" />
+    <Content Include="App_Themes\Theme6\all.skin" />
+    <Content Include="App_Themes\Theme7\all.skin" />
+    <Content Include="App_Themes\Theme8\all.skin" />
+    <Content Include="App_Themes\Theme9\all.skin" />
+    <Content Include="css\M0 196v300q61 0 113 -11t95.5 -34.5t66.5 -39t59 -44.5q45 -37 72 -50t74 -13q32 0 57.5 8t40.5 18.5t48 3047DCBCA52" />
+    <Content Include="css\M200 100v1500h1300v-1500q0 -41 -29.5 -70.5t-70.5 -29.5h-1100q-41 0 -70.5 29.5t-29.5 70.5zM300 150h500F670C6A01" />
+    <Content Include="css\M42 1200q0 158 41.5 308t116 277t181.5 234t234 181.5t277 116t308 41.5t308 -41.5t277 -116t234 -181.5t105DE7DFA54" />
+    <Content Include="css\plugins\images\Sorting icons.psd" />
+    <Content Include="js\jsapi" />
+    <Content Include="Members_Module\boards.aspx" />
+    <Content Include="Members_Module\images\Hydrangeas.jpg" />
+    <Content Include="Members_Module\images\Jellyfish.jpg" />
+    <Content Include="Members_Module\images\Lighthouse.jpg" />
+    <Content Include="Members_Module\images\Tulips.jpg" />
+    <Content Include="Members_Module\member.aspx" />
+    <Content Include="Members_Module\members_boards.aspx" />
+    <Content Include="Members_Module\member_abbsent.aspx" />
+    <Content Include="Members_Module\payments.aspx" />
+    <Content Include="Members_Module\sessions.aspx" />
+    <Content Include="report_Module\Aslah\CaseDetailsRep.aspx" />
+    <Content Include="Settings_Module\email_setting.aspx" />
+    <Content Include="Settings_Module\group_permissons.aspx" />
+    <Content Include="Settings_Module\register_companies.aspx" />
+    <Content Include="Settings_Module\report_settings.aspx" />
+    <Content Include="Settings_Module\Settings.aspx" />
+    <Content Include="Settings_Module\Signature_setting.aspx" />
+    <Content Include="Settings_Module\sms_setting.aspx" />
+    <Content Include="Settings_Module\companies.aspx" />
+    <Content Include="Settings_Module\Users.aspx" />
+    <Content Include="shadowbox-3.0.3\shadowbox.css" />
+    <Content Include="UserControls\CustomerCalendar.ascx" />
+    <Content Include="UserControls\CustomerCalendar1.ascx" />
+    <Content Include="UserControls\HijriCalendar.ascx" />
+    <Content Include="UserControls\Person.ascx" />
+    <Content Include="WebForm1.aspx" />
+    <Content Include="fonts\DroidKufi-Regular.ttf" />
+    <Content Include="assets\.DS_Store" />
+    <Content Include="assets\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\fonts\droid-kufi\DroidKufi-Bold.ttf" />
+    <Content Include="assets\fonts\droid-kufi\DroidKufi-Regular.ttf" />
+    <Content Include="App_Code\CaseDetailsDS.xsc">
+      <DependentUpon>CaseDetailsDS.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Code\CaseDetailsDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CaseDetailsDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="App_Code\CaseDetailsDS.xss">
+      <DependentUpon>CaseDetailsDS.xsd</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Login\css\animate-custom.css" />
+    <Content Include="Login\css\BluebLogin.css" />
+    <Content Include="Login\css\demo.css" />
+    <Content Include="Login\css\font-awesome.min.css" />
+    <Content Include="Login\css\fonts\BebasNeue-webfont.svg" />
+    <Content Include="Login\css\fonts\Dharma Type Font License.txt" />
+    <Content Include="Login\css\fonts\fontomas-webfont.svg" />
+    <Content Include="Login\css\fonts\franchise-bold-webfont.svg" />
+    <Content Include="Login\css\GridSystem.css" />
+    <Content Include="Login\css\style.css" />
+    <Content Include="Login\fonts\fontawesome-webfont.svg" />
+    <Content Include="Login\images\bg2.jpg" />
+    <Content Include="Login\images\bg3.jpg" />
+    <Content Include="Login\images\bg4.jpg" />
+    <Content Include="Login\images\Blueberry_logo1.PNG" />
+    <Content Include="Login\images\logo-login.png" />
+    <Content Include="Login\images\logo.jpg" />
+    <Content Include="Login\images\logo.png" />
+    <Content Include="Login\images\logo1.png" />
+    <Content Include="Login\Login.aspx" />
+    <Content Include="main.aspx" />
+    <Content Include="Scripts\all.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-1.8.0.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-latest.js" />
+    <Content Include="Scripts\jquery.Jcrop.css" />
+    <Content Include="Scripts\jquery.Jcrop.js" />
+    <Content Include="Scripts\jquery.layerslider.js" />
+    <Content Include="Scripts\jquery.layout-latest.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\nicEdit.js" />
+    <Content Include="Scripts\nicEditorIcons.gif" />
+    <Content Include="Scripts\WebForms\DetailsView.js" />
+    <Content Include="Scripts\WebForms\Focus.js" />
+    <Content Include="Scripts\WebForms\GridView.js" />
+    <Content Include="Scripts\WebForms\Menu.js" />
+    <Content Include="Scripts\WebForms\MenuStandards.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjax.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxApplicationServices.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxComponentModel.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxCore.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxGlobalization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxHistory.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxNetwork.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxSerialization.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxTimer.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
+    <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
+    <Content Include="Scripts\WebForms\SmartNav.js" />
+    <Content Include="Scripts\WebForms\TreeView.js" />
+    <Content Include="Scripts\WebForms\WebForms.js" />
+    <Content Include="Scripts\WebForms\WebParts.js" />
+    <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="Styles\AutoComplete.css" />
+    <Content Include="Styles\dashboardStyles.css" />
+    <Content Include="Styles\FBstyle.css" />
+    <Content Include="Styles\flyoutmenu.css" />
+    <Content Include="Styles\font-awesome.min.css" />
+    <Content Include="Styles\fonts\Play-Regular.svg" />
+    <Content Include="Styles\fonts\report_style.css" />
+    <Content Include="Styles\inner-style.css" />
+    <Content Include="Styles\paginate.css" />
+    <Content Include="Styles\PIE.htc" />
+    <Content Include="Styles\report_style.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="UserControls\Images\ajax-loader.gif" />
+    <Content Include="UserControls\Images\calendar.gif" />
+    <Content Include="UserControls\DynamicTable.ascx" />
+    <Content Include="UserControls\ImageSlider.ascx" />
+    <Content Include="UserControls\MultiFileUpload.ascx" />
+    <Content Include="UserControls\MultiPhotoUpload.ascx" />
+    <Content Include="UserControls\PhotosUpload.ascx" />
+    <Content Include="UserControls\PnlConfirm.ascx" />
+    <Content Include="UserControls\Result.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Bundle.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\halls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\User.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\sms_setting.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\companies.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\email_setting.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\register_company.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\report_settings.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\Signature_setting.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\group_permissons.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\boards.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\acadmiy.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\advisor.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\consulting.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\coursat.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Compile Include="Acadmies_module\acadmey.aspx.designer.vb">
+      <DependentUpon>acadmey.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\acadmey.aspx.vb">
+      <DependentUpon>acadmey.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\coursat.aspx.designer.vb">
+      <DependentUpon>coursat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\coursat.aspx.vb">
+      <DependentUpon>coursat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\courseDetails.aspx.designer.vb">
+      <DependentUpon>courseDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\courseDetails.aspx.vb">
+      <DependentUpon>courseDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\courseDetailsManage.aspx.designer.vb">
+      <DependentUpon>courseDetailsManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\courseDetailsManage.aspx.vb">
+      <DependentUpon>courseDetailsManage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\courseDetailsStudent.aspx.designer.vb">
+      <DependentUpon>courseDetailsStudent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\courseDetailsStudent.aspx.vb">
+      <DependentUpon>courseDetailsStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\courseDetailsTrainer.aspx.designer.vb">
+      <DependentUpon>courseDetailsTrainer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\courseDetailsTrainer.aspx.vb">
+      <DependentUpon>courseDetailsTrainer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\DiplomaCourses.aspx.designer.vb">
+      <DependentUpon>DiplomaCourses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\DiplomaCourses.aspx.vb">
+      <DependentUpon>DiplomaCourses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\Diplomas.aspx.designer.vb">
+      <DependentUpon>Diplomas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\Diplomas.aspx.vb">
+      <DependentUpon>Diplomas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\training_centers.aspx.designer.vb">
+      <DependentUpon>training_centers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\training_centers.aspx.vb">
+      <DependentUpon>training_centers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Content Include="App_Code\cases.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\ConsultationDetails.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\CaseDetailsDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CaseDetailsDS.xsd</DependentUpon>
+    </Content>
+    <Compile Include="App_Code\members.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Content Include="App_Code\members_abbsent.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\members_boards.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\MultiFileUploader.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\payments.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\sessions.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Compile Include="App_Start\BundleConfig.vb" />
+    <Compile Include="App_Start\RouteConfig.vb" />
+    <Compile Include="About.aspx.designer.vb">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="About.aspx.vb">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="App_Code\Class1.vb" />
+    <Compile Include="App_Code\ClsCategoryType.vb" />
+    <Compile Include="App_Code\clsFillComboByDataSource.vb" />
+    <Compile Include="App_Code\clsFillMenu.vb" />
+    <Compile Include="App_Code\clsGeneralFunctions.vb" />
+    <Compile Include="App_Code\clsGeneralVariables.vb" />
+    <Compile Include="App_Code\clsGenerationCode.vb" />
+    <Compile Include="App_Code\CLSImagesHandler.vb" />
+    <Compile Include="App_Code\clsMessages.vb" />
+    <Compile Include="Aslah_Module\advisors.aspx.designer.vb">
+      <DependentUpon>advisors.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aslah_Module\advisors.aspx.vb">
+      <DependentUpon>advisors.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aslah_Module\cases.aspx.designer.vb">
+      <DependentUpon>cases.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aslah_Module\cases.aspx.vb">
+      <DependentUpon>cases.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aslah_Module\ConsultationDetails.aspx.designer.vb">
+      <DependentUpon>ConsultationDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aslah_Module\ConsultationDetails.aspx.vb">
+      <DependentUpon>ConsultationDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aslah_Module\consultings.aspx.designer.vb">
+      <DependentUpon>consultings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aslah_Module\consultings.aspx.vb">
+      <DependentUpon>consultings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.aspx.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.vb">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.vb">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.vb">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.designer.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\ExecuteQuery.vb" />
+    <Compile Include="Global.asax.vb">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\LoginInfo.vb" />
+    <Compile Include="Hall_Module\Halls.aspx.designer.vb">
+      <DependentUpon>Halls.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hall_Module\Halls.aspx.vb">
+      <DependentUpon>Halls.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Login\Login.aspx.designer.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Login.aspx.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="main.aspx.designer.vb">
+      <DependentUpon>main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="main.aspx.vb">
+      <DependentUpon>main.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Members_Module\boards.aspx.designer.vb">
+      <DependentUpon>boards.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Members_Module\boards.aspx.vb">
+      <DependentUpon>boards.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Members_Module\member.aspx.designer.vb">
+      <DependentUpon>member.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Members_Module\member.aspx.vb">
+      <DependentUpon>member.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Members_Module\members_boards.aspx.designer.vb">
+      <DependentUpon>members_boards.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Members_Module\members_boards.aspx.vb">
+      <DependentUpon>members_boards.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Members_Module\member_abbsent.aspx.designer.vb">
+      <DependentUpon>member_abbsent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Members_Module\member_abbsent.aspx.vb">
+      <DependentUpon>member_abbsent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Members_Module\payments.aspx.designer.vb">
+      <DependentUpon>payments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Members_Module\payments.aspx.vb">
+      <DependentUpon>payments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Members_Module\sessions.aspx.designer.vb">
+      <DependentUpon>sessions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Members_Module\sessions.aspx.vb">
+      <DependentUpon>sessions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\MyExtensions\MyWebExtension.vb">
+      <VBMyExtensionTemplateID>Microsoft.VisualBasic.Web.MyExtension</VBMyExtensionTemplateID>
+      <VBMyExtensionTemplateVersion>1.0.0.0</VBMyExtensionTemplateVersion>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PublicFunctions.vb" />
+    <Compile Include="report_Module\Aslah\CaseDetailsRep.aspx.designer.vb">
+      <DependentUpon>CaseDetailsRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseDetailsRep.aspx.vb">
+      <DependentUpon>CaseDetailsRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseReport.vb">
+      <DependentUpon>CaseReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseDetails.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CaseDetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Settings_Module\email_setting.aspx.designer.vb">
+      <DependentUpon>email_setting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings_Module\email_setting.aspx.vb">
+      <DependentUpon>email_setting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings_Module\group_permissons.aspx.designer.vb">
+      <DependentUpon>group_permissons.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings_Module\group_permissons.aspx.vb">
+      <DependentUpon>group_permissons.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings_Module\register_companies.aspx.designer.vb">
+      <DependentUpon>register_companies.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings_Module\register_companies.aspx.vb">
+      <DependentUpon>register_companies.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings_Module\report_settings.aspx.designer.vb">
+      <DependentUpon>report_settings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings_Module\report_settings.aspx.vb">
+      <DependentUpon>report_settings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings_Module\Settings.aspx.designer.vb">
+      <DependentUpon>Settings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings_Module\Settings.aspx.vb">
+      <DependentUpon>Settings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings_Module\Signature_setting.aspx.designer.vb">
+      <DependentUpon>Signature_setting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings_Module\Signature_setting.aspx.vb">
+      <DependentUpon>Signature_setting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings_Module\sms_setting.aspx.designer.vb">
+      <DependentUpon>sms_setting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings_Module\sms_setting.aspx.vb">
+      <DependentUpon>sms_setting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings_Module\companies.aspx.designer.vb">
+      <DependentUpon>companies.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings_Module\companies.aspx.vb">
+      <DependentUpon>companies.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings_Module\Users.aspx.designer.vb">
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings_Module\Users.aspx.vb">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.vb">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.vb">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\CustomerCalendar.ascx.designer.vb">
+      <DependentUpon>CustomerCalendar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CustomerCalendar.ascx.vb">
+      <DependentUpon>CustomerCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\CustomerCalendar1.ascx.vb">
+      <DependentUpon>CustomerCalendar1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\DynamicTable.ascx.designer.vb">
+      <DependentUpon>DynamicTable.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DynamicTable.ascx.vb">
+      <DependentUpon>DynamicTable.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\HijriCalendar.ascx.vb">
+      <DependentUpon>HijriCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\ImageSlider.ascx.designer.vb">
+      <DependentUpon>ImageSlider.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ImageSlider.ascx.vb">
+      <DependentUpon>ImageSlider.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\MultiFileUpload.ascx.designer.vb">
+      <DependentUpon>MultiFileUpload.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MultiFileUpload.ascx.vb">
+      <DependentUpon>MultiFileUpload.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\MultiPhotoUpload.ascx.designer.vb">
+      <DependentUpon>MultiPhotoUpload.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MultiPhotoUpload.ascx.vb">
+      <DependentUpon>MultiPhotoUpload.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Person.ascx.designer.vb">
+      <DependentUpon>Person.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Person.ascx.vb">
+      <DependentUpon>Person.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\PhotosUpload.ascx.designer.vb">
+      <DependentUpon>PhotosUpload.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PhotosUpload.ascx.vb">
+      <DependentUpon>PhotosUpload.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\PnlConfirm.ascx.designer.vb">
+      <DependentUpon>PnlConfirm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PnlConfirm.ascx.vb">
+      <DependentUpon>PnlConfirm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Result.ascx.designer.vb">
+      <DependentUpon>Result.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Result.ascx.vb">
+      <DependentUpon>Result.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.vb">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewSwitcher.ascx.designer.vb">
+      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.vb">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Mobile.Master.designer.vb">
+      <DependentUpon>Site.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\WebService.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.vb">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\CaseReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CaseReport.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\CaseDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CaseDetails.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="Site.Master" />
+    <Content Include="Site.Mobile.Master" />
+    <Content Include="ViewSwitcher.ascx" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Styles\fonts\Play-Regular.eot" />
+    <Content Include="Styles\fonts\Play-Regular.otf" />
+    <Content Include="Styles\fonts\Play-Regular.ttf" />
+    <Content Include="Styles\fonts\Play-Regular.woff" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Acadmies_module\images\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="Aslah_Module\images\" />
+    <Folder Include="bin\ar\" />
+    <Folder Include="bin\cs\" />
+    <Folder Include="bin\de\" />
+    <Folder Include="bin\es\" />
+    <Folder Include="bin\fr\" />
+    <Folder Include="bin\he\" />
+    <Folder Include="bin\hi\" />
+    <Folder Include="bin\it\" />
+    <Folder Include="bin\ja\" />
+    <Folder Include="bin\ko\" />
+    <Folder Include="bin\nl\" />
+    <Folder Include="bin\pt\" />
+    <Folder Include="bin\roslyn\" />
+    <Folder Include="bin\ru\" />
+    <Folder Include="bin\tr-TR\" />
+    <Folder Include="bin\zh-CHS\" />
+    <Folder Include="bin\zh-CHT\" />
+    <Folder Include="js\LeadList\" />
+    <Folder Include="Settings_Module\images\" />
+    <Folder Include="Settings_Module\images_company\" />
+    <Folder Include="Settings_Module\images_register_company\" />
+    <Folder Include="Settings_Module\images_reports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Typings\autosize\autosize.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\signalr\signalr.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>17739</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:17739/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -35,14 +35,11 @@ Public Class companies
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             If Page.IsPostBack = False Then
-                Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
+                loginUser.Value = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
+
+
                 Dim comp_id = LoginInfo.GetComp_id()
 
-                Dim clsCente_admin As New clsFillComboByDataSource("select id,full_name from tblUsers where type=7 and IsNull(deleted,0)=0", "full_name", "id", "")
-                clsCente_admin.SetComboItems(Centeradmin, "", True, "--اختر--", False)
-
-                Dim clsaAcadmey_admin As New clsFillComboByDataSource("select id,full_name from tblUsers where type=7 and IsNull(deleted,0)=0", "full_name", "id", "")
-                clsaAcadmey_admin.SetComboItems(AcadmeyAdmin, "", True, "--اختر--", False)
 
 
             End If
@@ -62,16 +59,23 @@ Public Class companies
             i = rnd.Next(10000, 99999)
             '  namer = i.ToString
             Select Case sender.id.ToString
-                Case "fuPhoto1"
-                    fu = fuPhoto1
-                    Path = "Settings_Module/images_company"
-                    Prepare_Sheet(fu)
-                    Dim PostedPhoto As System.Drawing.Image = System.Drawing.Image.FromStream(fu.PostedFile.InputStream)
-                    Dim ImgHeight As Integer = PostedPhoto.Height
-                    Dim ImgWidth As Integer = PostedPhoto.Width
-                    x = CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, ImgWidth, ImgHeight, ImgWidth, ImgHeight, "Employees", namer)
-                    Session("UserPhoto") = x
+                Case "compLogo_fuPhoto1"
+                    fu = compLogo_fuPhoto1
+                Case "comp_fuPhoto1"
+                    fu = comp_fuPhoto1
+                Case "Ac_fuPhoto1"
+                    fu = Ac_fuPhoto1
+                Case "cen_fuPhoto1"
+                    fu = cen_fuPhoto1
+
             End Select
+            Path = "Settings_Module/images_company/"
+            Prepare_Sheet(fu)
+            Dim PostedPhoto As System.Drawing.Image = System.Drawing.Image.FromStream(fu.PostedFile.InputStream)
+            Dim ImgHeight As Integer = PostedPhoto.Height
+            Dim ImgWidth As Integer = PostedPhoto.Width
+            x = CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, ImgWidth, ImgHeight, ImgWidth, ImgHeight, "Employees", namer)
+            Session("UserPhoto") = x
             ClearContents(sender)
             '    ScriptManager.RegisterClientScriptBlock(Me, Me.[GetType](), "newfile", "document.getElementById('imgEmployee').src = '" & url & "';", True)
         Catch ex As Exception

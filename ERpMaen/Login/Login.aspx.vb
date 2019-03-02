@@ -32,13 +32,13 @@ Public Class Login
                     Session("comp_id") = dt.Rows(0).Item("comp_id").ToString
                     Session("group_id") = dt.Rows(0).Item("group_id").ToString
                     Response.Cookies.Add(userCookie)
-                    If dt.Rows(0).Item("User_Type").ToString = 2 Then
-                        ' Session("partner_id") = dt.Rows(0).Item("partner_id").ToString
-                        Response.Redirect("~/partnerDashboard.aspx")
-                    Else
-                        Response.Redirect("~/main.aspx")
-                    End If
-                Else
+                    ' If dt.Rows(0).Item("User_Type").ToString = 2 Then
+
+                    '  Response.Redirect("~/partnerDashboard.aspx")
+                    '  Else
+                    Response.Redirect("~/main.aspx")
+                        ' End If
+                        Else
                     lblFail.Visible = True
                     lblFail.Text = "Login failed, Please try again"
                     lblFail.ForeColor = Drawing.Color.Yellow
@@ -67,14 +67,14 @@ Public Class Login
                     userCookie("UserType") = dt.Rows(0).Item("User_Type").ToString
                     userCookie("comp_id") = dt.Rows(0).Item("comp_id").ToString
                     userCookie("group_id") = dt.Rows(0).Item("group_id").ToString
-                    If dt.Rows(0).Item("User_Type").ToString = 2 Then
-                        'Session("partner_id") = dt.Rows(0).Item("partner_id").ToString
-                        Response.Redirect("~/partnerDashboard.aspx")
+                    ' If dt.Rows(0).Item("User_Type").ToString = 2 Then
 
-                    Else
-                        Response.Redirect("~/main.aspx")
-                    End If
-                Else
+                    '  Response.Redirect("~/partnerDashboard.aspx")
+
+                    ' Else
+                    Response.Redirect("~/main.aspx")
+                        '  End If
+                        Else
                     lblFail.Visible = True
                     lblFail.Text = "Login failed, please try again"
                     lblFail.ForeColor = Drawing.Color.Yellow
