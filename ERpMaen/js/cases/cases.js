@@ -101,7 +101,7 @@ $(function () {
                 autocompleteselect: function (event, ui) {
              
                     ui.item.option.selected = true;
-                    show_all($("#combobox").val());
+                    show_all($("#combobox").val(),1);
                     this._trigger("select ", event, {
                         item: ui.item.option
                     });

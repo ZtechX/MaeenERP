@@ -854,10 +854,12 @@
     <Content Include="App_Themes\Theme9\IconStyles.css" />
     <Content Include="App_Themes\Theme9\StyleSheet.css" />
     <Content Include="App_Themes\Theme9\ThemeColors.css" />
+    <Content Include="Aslah_Module\DualCalendar.aspx" />
     <Content Include="Aslah_Module\advisors.aspx" />
     <Content Include="Aslah_Module\cases.aspx" />
     <Content Include="Aslah_Module\ConsultationDetails.aspx" />
     <Content Include="Aslah_Module\consultings.aspx" />
+    <Content Include="Aslah_Module\Calender.aspx" />
     <Content Include="ASMX_WebServices\acadmiy.asmx" />
     <Content Include="ASMX_WebServices\advisor.asmx" />
     <Content Include="ASMX_WebServices\boards.asmx" />
@@ -945,6 +947,44 @@
     <Content Include="assets\js\ontime.js" />
     <Content Include="assets\js\owl.carousel.min.js" />
     <Content Include="assets\js\star-rating.min.js" />
+    <Content Include="assets\pages\jquery.autocomplete.init.js" />
+    <Content Include="assets\pages\jquery.c3-chart.init.js" />
+    <Content Include="assets\pages\jquery.calendar.js" />
+    <Content Include="assets\pages\jquery.chartist.init.js" />
+    <Content Include="assets\pages\jquery.chartjs.init.js" />
+    <Content Include="assets\pages\jquery.charts-sparkline.js" />
+    <Content Include="assets\pages\jquery.companies.js" />
+    <Content Include="assets\pages\jquery.dashboard-2.js" />
+    <Content Include="assets\pages\jquery.dashboard.js" />
+    <Content Include="assets\pages\jquery.datatables.editable.init.js" />
+    <Content Include="assets\pages\jquery.datatables.init.js" />
+    <Content Include="assets\pages\jquery.echart.init.js" />
+    <Content Include="assets\pages\jquery.fileuploads.init.js" />
+    <Content Include="assets\pages\jquery.flot.init.js" />
+    <Content Include="assets\pages\jquery.footable.js" />
+    <Content Include="assets\pages\jquery.form-advanced.init.js" />
+    <Content Include="assets\pages\jquery.form-pickers.init.js" />
+    <Content Include="assets\pages\jquery.gmaps-full.js" />
+    <Content Include="assets\pages\jquery.gmaps.js" />
+    <Content Include="assets\pages\jquery.google-charts.init.js" />
+    <Content Include="assets\pages\jquery.justgage.init.js" />
+    <Content Include="assets\pages\jquery.jvectormap.init.js" />
+    <Content Include="assets\pages\jquery.mapael-map.init.js" />
+    <Content Include="assets\pages\jquery.morris.init.js" />
+    <Content Include="assets\pages\jquery.nestable.init.js" />
+    <Content Include="assets\pages\jquery.profile.js" />
+    <Content Include="assets\pages\jquery.range-sliders.js" />
+    <Content Include="assets\pages\jquery.rating.js" />
+    <Content Include="assets\pages\jquery.scrollbar.js" />
+    <Content Include="assets\pages\jquery.slider.init.js" />
+    <Content Include="assets\pages\jquery.sweet-alert.init.js" />
+    <Content Include="assets\pages\jquery.toastr.js" />
+    <Content Include="assets\pages\jquery.todo.js" />
+    <Content Include="assets\pages\jquery.tooltipster.js" />
+    <Content Include="assets\pages\jquery.tree.js" />
+    <Content Include="assets\pages\jquery.typehead.init.js" />
+    <Content Include="assets\pages\jquery.wizard-init.js" />
+    <Content Include="assets\pages\jquery.xeditable.init.js" />
     <Content Include="bin\AjaxControlToolkit.dll" />
     <Content Include="bin\BusinessLayer.BusinessLayer.dll" />
     <Content Include="bin\WebForms_Basic.xml" />
@@ -1069,6 +1109,8 @@
     <Content Include="css\bootstrap-responsive.min.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\calendar.css" />
+    <Content Include="css\cases\cases.css" />
+    <Content Include="css\cases\w3.css" />
     <Content Include="css\clock.css" />
     <Content Include="css\dashboard-calandar.css" />
     <Content Include="css\fotorama.css" />
@@ -1197,6 +1239,8 @@
     <Content Include="js\buttons.dataTables.min.css" />
     <Content Include="js\buttons.flash.min.js" />
     <Content Include="js\calendar.js" />
+    <Content Include="js\calendar1.js" />
+    <Content Include="js\calendar_new.js" />
     <Content Include="js\canvasjs.min.js" />
     <Content Include="js\carousel.js" />
     <Content Include="js\cases\cases.js" />
@@ -1217,6 +1261,8 @@
     <Content Include="js\highcharts.js" />
     <Content Include="js\highcharts.src.js" />
     <Content Include="js\hijri-date.js" />
+    <Content Include="js\hijri-date1.js" />
+    <Content Include="js\hijri-date_new.js" />
     <Content Include="js\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="js\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="js\images\ui-bg_flat_10_000000_40x100.png" />
@@ -1355,6 +1401,10 @@
     <Content Include="JS_Code\advisors\advisor.js" />
     <Content Include="JS_Code\boards\boards.js" />
     <Content Include="JS_Code\Calendar.js" />
+    <Content Include="JS_Code\Calendar\Calendar.js" />
+    <Content Include="JS_Code\Calendar\Calendar_Edit.js" />
+    <Content Include="JS_Code\Calendar\Calendar_Save.js" />
+    <Content Include="JS_Code\Calendar\Calendar_Tree.js" />
     <Content Include="JS_Code\cases\cases.js" />
     <Content Include="JS_Code\cases\cases_Upload.js" />
     <Content Include="JS_Code\cases\register_company_Upload.js" />
@@ -1492,6 +1542,9 @@
     <Content Include="Members_Module\member_abbsent.aspx" />
     <Content Include="Members_Module\payments.aspx" />
     <Content Include="Members_Module\sessions.aspx" />
+    <Content Include="plugins\fullcalendar\css\fullcalendar.min.css" />
+    <Content Include="plugins\fullcalendar\js\fullcalendar.min.js" />
+    <Content Include="plugins\moment\moment.js" />
     <Content Include="Settings_Module\email_setting.aspx" />
     <Content Include="Settings_Module\group_permissons.aspx" />
     <Content Include="Settings_Module\register_companies.aspx" />
@@ -1504,6 +1557,8 @@
     <Content Include="shadowbox-3.0.3\shadowbox.css" />
     <Content Include="UserControls\CustomerCalendar.ascx" />
     <Content Include="UserControls\CustomerCalendar1.ascx" />
+    <Content Include="UserControls\DeliveryDate.ascx" />
+    <Content Include="UserControls\DeualCalendar1.ascx" />
     <Content Include="UserControls\HijriCalendar.ascx" />
     <Content Include="UserControls\Person.ascx" />
     <Content Include="WebForm1.aspx" />
@@ -1752,6 +1807,13 @@
     <Compile Include="App_Code\clsGenerationCode.vb" />
     <Compile Include="App_Code\CLSImagesHandler.vb" />
     <Compile Include="App_Code\clsMessages.vb" />
+    <Compile Include="Aslah_Module\DualCalendar.aspx.designer.vb">
+      <DependentUpon>DualCalendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aslah_Module\DualCalendar.aspx.vb">
+      <DependentUpon>DualCalendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Aslah_Module\advisors.aspx.designer.vb">
       <DependentUpon>advisors.aspx</DependentUpon>
     </Compile>
@@ -1779,6 +1841,13 @@
     <Compile Include="Aslah_Module\consultings.aspx.vb">
       <DependentUpon>consultings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aslah_Module\Calender.aspx.designer.vb">
+      <DependentUpon>Calender.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aslah_Module\Calender.aspx.vb">
+      <DependentUpon>Calender.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Contact.aspx.designer.vb">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -1968,6 +2037,20 @@
     </Compile>
     <Compile Include="UserControls\CustomerCalendar1.ascx.vb">
       <DependentUpon>CustomerCalendar1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\DeliveryDate.ascx.designer.vb">
+      <DependentUpon>DeliveryDate.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DeliveryDate.ascx.vb">
+      <DependentUpon>DeliveryDate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\DeualCalendar1.ascx.designer.vb">
+      <DependentUpon>DeualCalendar1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DeualCalendar1.ascx.vb">
+      <DependentUpon>DeualCalendar1.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\DynamicTable.ascx.designer.vb">

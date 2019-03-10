@@ -27,8 +27,8 @@ $(function () {
 });
 function get_admin() {
     companies.get_admin(function (val) {
-
-        if (val[0] != 0) {
+        alert(val[2]);
+        if (val[1] != 0) {
             var data = JSON.parse(val[1]);
             var users = JSON.parse(val[0]);
             fillControlsFromJson(data[0]);
@@ -69,7 +69,7 @@ function get_admin() {
 
 function edit(val) {
    
-    debugger
+    
     resetAll();
     if (val[0] == "1") {
         var data = JSON.parse(val[1]);
