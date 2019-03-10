@@ -334,21 +334,21 @@ width: auto;
 #cssmenu ul ul li {
     border-bottom:none;
 }
-#cssmenu ul ul li a {
-    cursor: pointer;
-    border-bottom: 1px solid #fff;
-    border-left: 0px solid #32373e;
-    border-right: 0px solid #32373e;
-    padding: 10px 13px;
-    z-index: 1;
-    text-decoration: none;
-    font-size: 12px;
-    color: #3A3A3A;
-    /*background: #49505a;*/
-    /*box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);*/
-}
+    #cssmenu ul ul li a {
+        cursor: pointer;
+        border-bottom: 1px solid #148083 !important;
+        border-left: 0px solid #32373e;
+        border-right: 0px solid #32373e;
+        padding: 10px 13px;
+        z-index: 1;
+        text-decoration: none;
+        font-size: 12px;
+        color: #fff;
+        /*background: #49505a;*/
+        /*box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);*/
+    }
     #cssmenu ul ul li a:hover {
-        color:#000 !important;
+        color:#fff !important;
     }
 #cssmenu ul ul li:hover > a,
 #cssmenu ul ul li.open > a,
@@ -708,11 +708,14 @@ ul.background01 li {
 #cssmenu ul ul ul li {
      border-left:0px solid #01609e !important;
 }
-
-
-#cssmenu ul li:nth-child(2) {
+#cssmenu  ul li a {
+ 
+    border-bottom: 1px solid #C09C67;
+}
+    #cssmenu ul li:nth-child(2) {
     border-left: 0px solid #3C96D2;
     background-color: #148083;
+
 }
 .color2 {
     color:#3C96D2;
@@ -720,6 +723,7 @@ ul.background01 li {
 #cssmenu ul li:nth-child(3) {
     /*border-left:5px solid #0284e9;*/
     background-color: #148083;
+   
 }
 .color3 {
     color:#1BB55D;
@@ -733,10 +737,11 @@ ul.background01 li {
  /*.background03 ul {
         background:#32A1F7 !important;
     }*/
-#cssmenu ul li:nth-child(4) {
-    border-left: 0px solid #F9BD0D;
-    background-color: #148083;
-}
+
+    #cssmenu ul li:nth-child(4) {
+        border-left: 0px solid #F9BD0D;
+        background-color: #148083;
+    }
 .color4 {
     color:#F9BD0D;
 }
