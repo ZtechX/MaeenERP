@@ -48,7 +48,8 @@
             input: 'txtreceiving_time', // the input field id
             start: '12:00 am',  // what's the first available hour
             end: '11:00 pm',  // what's the last avaliable hour
-            top_hour: 12  // what's the top hour (in the clock face, 0 = midnight)
+            top_hour: 12,  // what's the top hour (in the clock face, 0 = midnight)
+            name: 'txtreceiving_time',
         });
           var tp1 = new ng.TimePicker({
             input: 'txtdelivery_time',  // the input field id
@@ -56,18 +57,18 @@
             end: '11:00 pm',  // what's the last avaliable hour
             top_hour: 12  // what's the top hour (in the clock face, 0 = midnight)
         });
-               var tp2 = new ng.TimePicker({
-            input: 'txtNafqatime',  // the input field id
-            start: '12:00 am',  // what's the first available hour
-            end: '11:00 pm',  // what's the last avaliable hour
-            top_hour: 12  // what's the top hour (in the clock face, 0 = midnight)
-        });
-           var tp3 = new ng.TimePicker({
+            var tp2 = new ng.TimePicker({
             input: 'txtentry_time',  // the input field id
             start: '12:00 am',  // what's the first available hour
             end: '11:00 pm',  // what's the last avaliable hour
             top_hour: 12  // what's the top hour (in the clock face, 0 = midnight)
         });
+        //   var tp3 = new ng.TimePicker({
+        //    input: 'txtentry_time',  // the input field id
+        //    start: '12:00 am',  // what's the first available hour
+        //    end: '11:00 pm',  // what's the last avaliable hour
+        //    top_hour: 12  // what's the top hour (in the clock face, 0 = midnight)
+        //});
          var tp4= new ng.TimePicker({
             input: 'txtexite_time',  // the input field id
             start: '12:00 am',  // what's the first available hour
@@ -162,11 +163,11 @@
                                                 <br />
                                                 تسليم واستلام الاولاد
                 </a>
-                                            <a href="#" id="case_3" style="display: none" class="list-group-item text-center">
+<%--                                            <a href="#" id="case_3" style="display: none" class="list-group-item text-center">
                                                 <h4 class="fa fa-clock-o"></h4>
                                                 <br />
                                                 تواريخ التسليم والاستلام
-                </a>
+                </a>--%>
                                             <a href="#" id="case_4" style="display: none" class="list-group-item text-center">
                                                 <h4 class="fa fa-history"></h4>
                                                 <br />
@@ -182,11 +183,11 @@
                                                 <br />
                                                 تسليم واستلام النفقة
                 </a>
-                                            <a href="#" id="case_7" style="display: none" class="list-group-item text-center">
+          <%--                                  <a href="#" id="case_7" style="display: none" class="list-group-item text-center">
                                                 <h4 class="fa fa-clock-o"></h4>
                                                 <br />
                                                 تواريخ استلام النفقة
-                                            </a>
+                                            </a>--%>
                                             <a href="#" id="case_8" style="display: none" class="list-group-item text-center">
                                                 <h4 class="fa fa-tasks"></h4>
                                                 <br />
@@ -196,7 +197,7 @@
                                     </div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 bhoechie-tab" dir="rtl">
                                         <!-- بيانات الحالة -->
-                                        <div class="bhoechie-tab-content active">
+                                        <div id='case_active'  class="bhoechie-tab-content active">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <button class="btn btn-success btn-lg pull-left" onclick="save(); return false;"> حفظ بيانات الحالة</button>
@@ -789,7 +790,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-md-12 form-group ">
+                                                                <div class="col-md-12 form-group" id="time_receiving_time">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
                                                                         ساعة التسليم  </lable>
@@ -821,7 +822,7 @@
                                                                         ساعة الاستلام </lable>
                                                                     </div>
 
-                                                                    <div class="col-md-9 col-sm-12">
+                                                                    <div class="col-md-9 col-sm-12" id="time_delivery_time">
                                                                         <input onkeypress="return isNumber(event);" dbcolumn="delivery_time" type="time" id="txtdelivery_time"
                                                                             class="form-control" runat="server" clientidmode="Static" />
 
@@ -842,248 +843,7 @@
 
 
                                         </div>
-                                        <!-- تواريخ التسليم والاستلام -->
-                                        <div class="bhoechie-tab-content">
-                                            <%-- start--%>
-                                            <div class="col-md-12" id="receiving_delivery_details">
 
-                                                <div class="panel-group" id="accordion4">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">بيانات التسليم والاستلام   </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse8" class="panel-collapse collapse in">
-                                                            <div class="panel-body">
-                                                                <%-- start group 1--%>
-
-                                                                <asp:Label ID="lbldelivery_details" runat="server" Style="display: none" dbcolumn="id"></asp:Label>
-                                                                <label id="lbldelivery_date" runat="server" style="display: none"></label>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">
-                                                                        التاريخ    </lable>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-
-                                                                        <div class="fancy-form" id="divdate_delivery">
-                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_m" ID="lbldate_m"></asp:Label>
-                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_h" ID="lbldate_h"></asp:Label>
-                                                                            <uc1:HijriCalendar runat="server" ID="HijriCalendar3" />
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">بيانات المسلم </label>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="deliverer_id" required SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddldeliverer_id" runat="server">
-                                                                            <asp:ListItem Value="0">اختر</asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                                         <button class="btn btn-primary" type="button" onclick="find_persons('ddldeliverer_id',1)">اضافة مسلم </button>
-                                                                    </div>
-                                                                </div>
-                                                                              <uc1:Person runat="server" ID="Person" />
-                                                            
-                                                                <%--end of group1--%>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">بيانات المستلم </label>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="reciever_id" required SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlreciever_id" runat="server">
-                                                                            <asp:ListItem Value="0">اختر</asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                                              <button class="btn btn-primary" type="button" onclick="find_persons('ddlreciever_id',1)">اضافة مستلم </button>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">بيانات الاولاد </label>
-                                                                    </div>
-                                                                    <div class="col-md-9 col-sm-12  tbl_auto">
-                                                                        <table dir="rtl" class="table table-borderd">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>#</th>
-                                                                                    <th>اسم الولد</th>
-                                                                                    <th class="checkbox-all"><span>
-                                                                                        <input type="checkbox" id="check_child" onchange="mark_all(this,'tab_children')">الكل</span></th>
-                                                                                </tr>
-
-                                                                            </thead>
-                                                                            <tbody id="tab_children">
-                                                                            </tbody>
-
-                                                                        </table>
-                                                                    </div>
-
-
-
-                                                                </div>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label for="Name" class="label-required">الموظف المسؤل</label>
-
-                                                                    </div>
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList SkinID="form-control" class="form-control" dbColumn="employee_id" ClientIDMode="Static" ID="ddlemployee_id" runat="server">
-                                                                        </asp:DropDownList>
-                                                                    </div>
-
-
-
-                                                                </div>
-                                                                <%--end of group1--%>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="panel-group" id="accordion5">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse9">التاكد من التسليم والاستلام   </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse9" class="panel-collapse collapse in">
-                                                            <div class="panel-body">
-                                                                <%-- start group 1--%>
-
-                                                                <div class="col-md-9 col-sm-12">
-                                                                    <asp:LinkButton OnClientClick="state_setting(); return false;" ID="LinkButton1" runat="server"
-                                                                        SkinID="btn-top" CausesValidation="false">
-                                                                  <i class="fa fa-print"></i>
-                                                                   طباعة محضر الاستلام
-                                                                    </asp:LinkButton>
-                                                                </div>
-
-                                                                <div class="col-md-9 col-sm-12" id="receiving_done">
-
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label for="email">تم الاستلام والتسليم </label>
-                                                                    </div>
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <input dbcolumn="receiving_delivery_done" type="checkbox" id="doneId" style="width: 40px;" class="form-control" />
-                                                                        <br />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-9 col-sm-12">
-                                                                    <br />
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label for="email">تمت الموافقة بالجوال   </label>
-                                                                    </div>
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <input dbcolumn="moble_app_accept" type="checkbox" id="txtmoble_app_accept" style="width: 40px;" class="form-control" />
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <br />
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label for="Name" class="label-required">ملاحظات </label>
-
-                                                                    </div>
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox20" runat="server">
-                                                                        </asp:TextBox>
-
-
-                                                                    </div>
-                                                                </div>
-
-           
-
-                                                                <div class="col-md-9 col-sm-12" id="receiving_delay">
-                                                                    <br />
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label for="email">تاجيل   </label>
-                                                                    </div>
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <input dbcolumn="Delay" type="checkbox" onclick="get_receiving(2)" id="Delay" style="width: 40px;" class="form-control" />
-                                                                    </div>
-                                                                </div>
-                                                                <div id="delay_reason" style="display: none">
-                                                                    <div class="col-md-12 form-group ">
-                                                                        <div class="col-md-3 col-sm-12">
-                                                                            <label class="label-required">
-                                                                            التاريخ    </lable>
-                                                                        </div>
-                                                                        <div class="col-md-9 col-sm-12">
-
-                                                                            <div class="fancy-form" id="div_new_date">
-                                                                                <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="new_date_m" ID="lblnew_date_m"></asp:Label>
-                                                                                <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="new_date_h" ID="lblnew_date_h"></asp:Label>
-                                                                                <uc1:HijriCalendar runat="server" ID="HijriCalendar6" />
-                                                                            </div>
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-12 form-group ">
-                                                                        <br />
-                                                                        <div class="col-md-3 col-sm-12">
-                                                                            <label for="Name" class="label-required">السبب </label>
-
-                                                                        </div>
-                                                                        <div class="col-md-9 col-sm-12">
-                                                                            <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="delay_reason" ClientIDMode="Static" ID="txtdelay_reason" runat="server">
-                                                                            </asp:TextBox>
-
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="col-md-12 form-group" id="save_delivery_details" style="display: none">
-                                                                    <button onclick="save_delivery_details();" class="btn btn-success">حفظ</button>
-                                                                </div>
-
-                                                                <div class="col-md-12 form-group">
-                                                                    <button onclick="get_archive(1); return false;" class="btn btn-success">ارشفة</button>
-                                                                    <button onclick="get_archive(2); return false;" class="btn btn-success">جديد</button>
-                                                                </div>
-
-                                                                <div class="col-md-12 form-group">
-                                                                    <table id="table_delivery_data" dir="rtl" class="table table-bordered">
-                                                                        <thead>
-                                                                            <tr>
-
-                                                                                <th>التاريخ</th>
-                                                                                <th>الحالة</th>
-
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody id="delivery_details_archive" style="display: none">
-                                                                            <tr>
-                                                                            </tr>
-                                                                        </tbody>
-
-                                                                        <tbody id="delivery_details">
-                                                                            <tr>
-                                                                            </tr>
-                                                                        </tbody>
-
-
-                                                                    </table>
-                                                                </div>
-
-
-                                                                <%--end of group1--%>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-                                        </div>
 
                                         <!--  جلسات التهيئة والتدرج -->
                                         <div class="bhoechie-tab-content">
@@ -1199,7 +959,7 @@
                                                                         وقت الدخول </lable>
                                                                     </div>
 
-                                                                    <div class="col-md-9 col-sm-12">
+                                                                    <div class="col-md-9 col-sm-12" id="time_entry_time">
                                                                         <input onkeypress="return isNumber(event);" dbcolumn="entry_time" type="time" id="txtentry_time"
                                                                             class="form-control" runat="server" clientidmode="Static" />
 
@@ -1212,7 +972,7 @@
                                                                         وقت الخروج </lable>
                                                                     </div>
 
-                                                                    <div class="col-md-9 col-sm-12">
+                                                                    <div class="col-md-9 col-sm-12" id="time_exite_time">
                                                                         <input onkeypress="return isNumber(event);" dbcolumn="exite_time" type="time" id="txtexite_time"
                                                                             class="form-control" runat="server" clientidmode="Static" />
 
@@ -1503,150 +1263,7 @@
 
 
                                         </div>
-                                        <!-- تواريخ استلام النفقة -->
-                                        <div class="bhoechie-tab-content">
-                                            <div class="col-md-12">
-                                                <div class="panel-group" id="accordion10">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse14">تاكيد الاستلام والتسليم   </a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse14" class="panel-collapse collapse in">
-                                                            <div class="panel-body" id="expense_details">
-                                                                <asp:Label ID="lblexpenses_details" runat="server" Style="display: none" dbcolumn="id"></asp:Label>
-                                                                <label id="lblexpense_date" runat="server" style="display: none"></label>
-                                                                <%-- start group 2--%>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">
-                                                                        التاريخ  </lable>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-
-                                                                        <div class="fancy-form" id="date_expense_details">
-                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_m" ID="lbldate_m_expense_details"></asp:Label>
-                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_h" ID="lbldate_h_expense_details"></asp:Label>
-                                                                            <uc1:HijriCalendar runat="server" ID="HijriCalendar4" />
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">المسلم </label>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="deliverer_id" required class="form-control" SkinID="form-control" ClientIDMode="Static" ID="ddldeliverer_id_expense" runat="server">
-                                                                            <asp:ListItem Value="0">اختر</asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                                        <button class="btn btn-primary" type="button" onclick="find_persons('ddldeliverer_id_expense',1)">اضافة مسلم </button>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">المستلم </label>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="rciever_id" required SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlrciever_id_expense" runat="server">
-                                                                            <asp:ListItem Value="0">اختر</asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                                      <button class="btn btn-primary" type="button" onclick="find_persons('ddlrciever_id_expense',1)">اضافة مستلم </button>
-
-                                                                    </div>
-                                                                </div>
-                                                                        <div class=" col-md-12 form-group ">
-
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">
-                                                                        المبلغ    </lable>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);"  dbcolumn="amount" type="text" id="Text1"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label for="Name" class="label-required">الموظف المسؤل</label>
-
-                                                                    </div>
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList SkinID="form-control" class="form-control" dbColumn="employee_id" ClientIDMode="Static" ID="ddlemployee_id4" runat="server">
-                                                                        </asp:DropDownList>
-
-
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">
-                                                                        وقت التسليم </lable>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" dbcolumn="time" type="text" id="txtNafqatime"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
-
-                                                                        <br />
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="col-md-9 col-sm-12">
-
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label for="email">تم التسليم </label>
-                                                                    </div>
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <input dbcolumn="done" type="checkbox" id="doneid" style="width: 40px;" class="form-control" />
-                                                                        <br />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 form-group" id="save_expense_details" style="display: none">
-                                                                    <button onclick="save_expense_details();" class="btn btn-success">حفظ</button>
-                                                                </div>
-
-                                                                <div class="col-md-12 form-group">
-                                                                    <button onclick="get_archive_expense(1); return false;" class="btn btn-success">ارشفة</button>
-                                                                    <button onclick="get_archive_expense(2); return false;" class="btn btn-success">جديد</button>
-                                                                </div>
-
-                                                                <div class="col-md-12 form-group">
-                                                                    <table id="table_expense_data_archive" dir="rtl" class="table table-bordered">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>التاريخ</th>
-                                                                                <th>الحالة</th>
-
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody id="expense_details_archive" style="display: none">
-                                                                            <tr>
-                                                                            </tr>
-                                                                        </tbody>
-
-                                                                        <tbody id="expense_details_new" >
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-
-                                                                <%--end of group1--%>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-
-                                        </div>
+   
 
                                         <!--   اجرائات العضوالمباشر للحالة -->
                                         <div class="bhoechie-tab-content">
@@ -1775,6 +1392,7 @@
                         </button>
                                               <uc1:ImageSlider runat="server" ID="ImageSlider" />
                      <uc1:MultiPhotoUpload runat="server" ID="MultiPhotoUpload" />
+                        <uc1:Person runat="server" ID="Person" />
                         <%--  <uc1:ImageSlider runat="server" ID="ImageSlider" />
                     <uc1:MultiPhotoUpload runat="server" ID="MultiPhotoUpload" />
                     <uc1:DynamicTable runat="server" ID="DynamicTable" />

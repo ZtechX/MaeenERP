@@ -55,33 +55,13 @@ function getSerial_sessions() {
     });
 }
 
-
-function get_date_delivery(case_id) {
-    var new_date = 0;
-    cases.get_date_delivery(case_id,function (val) {
-        if (val[0] != 0) {
-            var data = JSON.parse(val[0])
-            $("#lbldelivery_date").html(data[0].date);
-        }
-    });
-}
-
-function get_date_expenses(case_id) {
-    var new_date = 0;
-    cases.get_date_expenses(case_id,function (val) {
-        if (val[0] != 0) {
-            var data = JSON.parse(val[0])
-            $("#lblexpense_date").html(data[0].date);
-        }
-    });
-}
-function get_persons(id) {
+function get_persons(id,delivery_data) {
     cases.get_persons(id,function (val) {
         if (val[0] != "0") {
             var data = JSON.parse(val[0])
             var result_person1 = "";
-            var div_data= "";
-            var div_data2= "";
+            var div_data = "";
+            var div_data2 = "";
             for (var x = 0; x < data.length; x++) {
                 result_person1 = result_person1 + "<option value=" + data[x].person_id + ">" + data[x].person_name + "</option>";
             }
@@ -94,16 +74,21 @@ function get_persons(id) {
             $("#ddlsecond_party_id_sessions").html(result_person1);
             $("#ddldeliverer_id_expense").html(result_person1);
             $("#ddlrciever_id_expense").html(result_person1);
-            
+
             for (var y = 0; y < data.length; y++) {
                 div_data = div_data + "<tr id='" + data[y].person_id + "' class='row-content' ><td>" + (y + 1) + "</td> " +
                     "<td id='tab_num'>" + data[y].person_name + "</td>" +
                     "<td class='check'><input id='persons_checked" + data[y].person_id + "' type='checkbox'></td>" +
                     "</tr > ";
-      
+
             }
             $('#persons_sessions').html(div_data);
-        }
+            console.log(delivery_data);
+            if (delivery_data != "") {
+                $("#ddlreciever_id").val(delivery_data.reciever_id)
+                $("#ddldeliverer_id").val(delivery_data.deliverer_id)
+            }
+        } 
     });
 }
 $("#combobox").on("change", function () { debugger; });
@@ -122,6 +107,7 @@ function get_option_cases() {
                 div_data = div_data + "<option value=" + data[x].case_id + ">حالة#" + data[x].cases + " " + "تاريخ" + data[x].date + "  " + "مقدمة:" + data[x].person + " </option> ";
             }
             $('#combobox').append(div_data);
+            $('#ddlcase_id').append(div_data);
             //$(".select2").select2({
             //    allowClear: true,
             //    placeholder: 'Position'
@@ -144,6 +130,7 @@ function add() {
             $("#case_" + i).css("display", "none");
         }
         $("#ddlchild_custody").html("");
+        $("#case_active").addClass("active")
     } catch (err) {
         alert(err);
     }
@@ -186,8 +173,8 @@ function save() {
                 $("#lblcase_id").html(val);
                 getSerial();
                 get_checked_tab(val);
-                show_all(val);
-                get_persons(val);
+                show_all(val,1);
+                get_persons(val,"");
                 resetDivControls("cases_info");
                 resetDivControls("person_owner");
                 resetDivControls("person_against");
@@ -223,7 +210,7 @@ function save_children() {
                 showSuccessMessage("تم الحفظ بنجاح");
             }
             resetDivControls("children_info");
-            show_all(case_id);
+            show_all(case_id,1);
    
         } else {
             showErrorMessage(val.split("|")[1]);
@@ -250,8 +237,7 @@ function save_children_receive() {
  
     cases.save_children_receive(PosId, case_id, children_receive, function (val) {
         if (val) {
-          get_date_delivery(case_id);
-            show_all(case_id);
+            show_all(case_id,1);
             showSuccessMessage("تم الحفظ بنجاح");
 
         } else {
@@ -270,28 +256,31 @@ function save_children_receive() {
 function save_delivery_details() {
 
     if (!checkRequired("receiving_delivery_details")) {
-    $("#lbldate_m").html($("#divdate_delivery #txtDatem").val());
-    $("#lbldate_h").html($("#divdate_delivery #txtDateh").val());
+    //$("#lbldate_m").html($("#divdate_delivery #txtDatem").val());
+    //$("#lbldate_h").html($("#divdate_delivery #txtDateh").val());
 
-    $("#lblnew_date_m").html($("#div_new_date #txtDatem").val());
-    $("#lblnew_date_h").html($("#div_new_date #txtDateh").val());
+    //$("#lblnew_date_m").html($("#div_new_date #txtDatem").val());
+    //$("#lblnew_date_h").html($("#div_new_date #txtDateh").val());
     var children_delivery_details = generateJSONFromControls("receiving_delivery_details");
-    var case_id = $("#lblcase_id").html();
+    var case_id = $("#ddlcase_id").val();
         var PosId = $("#lbldelivery_details").html();
-
-    var new_date_m = cal_days();
-  var children_gson=  getChildrenJson();
-
-    var d = cal_days();
-    var dateParts = new Date((Number(d.split("/")[2])), (Number(d.split("/")[1]) - 1), (Number(d.split("/")[0])));
-    var new_date_h = kuwaiticalendar(dateParts);
-
-    cases.save_delivery_details(PosId, case_id, children_delivery_details, new_date_m, new_date_h, children_gson, function (val) {
-        if (val) {
+        var new_date = $("#lbldelivery_date_h").html();
+        var new_date_m = $("#lbldelivery_date_m").html();
+        var res = new_date.substring(3, 10);
+        var children_gson = getChildrenJson();
+        cases.save_delivery_details(PosId, case_id, children_delivery_details, children_gson, res, function (val) {
+            if (val) {
+                var res_id = val.split("|")[0]
+                var res_type = val.split("|")[1]
+                if (res_type == 1) {
+                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "#039ae4");
+                } else {
+                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "red");
+                }
+                $("#dateval[date*='" + new_date_m + "']").parent().css("color", "#ffffff");
+                $("#dateval[date*='" + new_date_m + "']").parent().prop('id', res_id);
             resetDivControls("receiving_delivery_details");
-            get_date_delivery(case_id);
-            show_all(case_id);
-            
+            $('#receiving_delivery_details').dialog("close");
             showSuccessMessage("تم الحفظ بنجاح");
         } else {
             showErrorMessage(val.split("|")[1]);
@@ -321,7 +310,7 @@ function save_conciliation() {
         if (val) {
             resetDivControls("case_conciliation");
             getSerial_conciliation()
-            show_all(case_id);
+            show_all(case_id,1);
             showSuccessMessage("تم الحفظ بنجاح");
         } else {
             showErrorMessage(val.split("|")[1]);
@@ -350,7 +339,7 @@ function save_correspondences() {
         if (val) {
             resetDivControls("case_correspondences");
             getSerial_correspondencesn();
-            show_all(case_id);
+            show_all(case_id,1);
             showSuccessMessage("تم الحفظ بنجاح");
         } else {
             showErrorMessage(val.split("|")[1]);
@@ -383,7 +372,7 @@ function save_sessions() {
         if (val) {
             resetDivControls("case_sessions");
             getSerial_sessions()
-            show_all(case_id);
+            show_all(case_id,1);
             showSuccessMessage("تم الحفظ بنجاح");
         } else {
             showErrorMessage(val.split("|")[1]);
@@ -410,8 +399,7 @@ function save_expense_basic() {
 
     cases.save_expense_basic(PosId, case_id, expense_basic, function (val) {
         if (val) {
-            get_date_expenses(case_id);
-            show_all(case_id);
+            show_all(case_id,1);
             showSuccessMessage("تم الحفظ بنجاح");
         } else {
             showErrorMessage(val.split("|")[1]);
@@ -444,7 +432,7 @@ function save_expense_details() {
     cases.save_expense_details(PosId, case_id, expense_details, new_date_m, new_date_h, function (val) {
         if (val) {
             resetDivControls("expense_details");
-            show_all(case_id);
+            show_all(case_id,1);
             get_date_expenses(case_id);
             showSuccessMessage("تم الحفظ بنجاح");
 
@@ -468,13 +456,15 @@ function find_persons(flag,flag2) {
         width: "600px",
     });
 }
-function save_new_person() {
+function save_new_person(flag) {
     if (!checkRequired("collapseExample")) {
     var id = $("#lbldiv_person").html();
   var type_draw=  $("#lbldiv_type").html();
     var children_gson = generateJSONFromControls("collapseExample");
-    var person = $("#person_name").val();
-    var case_id = $("#lblcase_id").html();
+        var person = $("#person_name").val();
+            var case_id = $("#lblcase_id").html();
+      
+
     var PosId = 0;
     cases.Save_person(children_gson, PosId, case_id,  function (val) {
         if (val) {
@@ -489,7 +479,7 @@ function save_new_person() {
             }
             $("#" + id).append(result_person1);
             resetDivControls("collapseExample");
-            $('#collapseExample').modal('toggle');
+            $('#collapseExample').dialog("close");
         } else {
             showErrorMessage(val.split("|")[1]);
         }
@@ -527,6 +517,7 @@ Date.prototype.toInputFormat = function () {
     var mm = (this.getMonth() + 1).toString(); // getMonth() is zero-based
     var dd = this.getDate().toString();
     return (dd[1] ? dd : "0" + dd[0]) + "/" + (mm[1] ? mm : "0" + mm[0]) + "/" + yyyy; // padding
+    alert((dd[1] ? dd : "0" + dd[0]) + "/" + (mm[1] ? mm : "0" + mm[0]) + "/" + yyyy)
 };
 
 function cal_days_expense() {
@@ -762,13 +753,21 @@ function get_receiving() {
         }
 
 }
-function show_all(id) {
-    get_date_expenses(id);
-    get_date_delivery(id)
-    get_checked_tab(id);
-    get_persons(id);
-    cases.show_all(id, function (val) {
-        if (val[0] != "") {
+function show_all(id, flag) {
+    if (flag == 1) {
+        var case_id = id
+            get_persons(case_id);
+    } else {
+        var case_id = $("#ddlcase_id").val();
+    }
+    $("lblcase_id").html(case_id);
+    //get_date_expenses(case_id);
+    //get_date_delivery(case_id)
+    get_checked_tab(case_id);
+    //get_persons(case_id);
+    cases.show_all(case_id, function (val) {
+
+        if (val[0] != "0") {
             var data = JSON.parse(val[0])
             var data_owner = JSON.parse(val[1])
             var data_against = JSON.parse(val[2])
@@ -782,6 +781,7 @@ function show_all(id) {
             fillControlsFromJson(data_against[0], "person_against")
             fillControlsFromJson(data[0], "get_children")
             fillControlsFromJson(data[0], "get_status")
+        }
             if (val[3] != 0) {
                 var children = JSON.parse(val[3]);
                 var result_children = ""
@@ -796,8 +796,7 @@ function show_all(id) {
                 var div_data = "";
                 var div_data2 = "";
                 for (var x = 0; x < children.length; x++) {
-                        var obj = JSON.stringify(data[x]);
-                    div_data = div_data + "<tr id='" + children[x].id + "' class='row-content' data-obj='" + obj + "' ><td>" + (x + 1) + "</td> " +
+                    div_data = div_data + "<tr id='" + children[x].id + "' class='row-content' ><td>" + (x + 1) + "</td> " +
                         "<td id='tab_num'>" + children[x].name + "</td>" +
                         "<td class='check'><input id='children_checked" + children[x].id+"' type='checkbox'></td>" +
                             "</tr > ";
@@ -805,8 +804,7 @@ function show_all(id) {
                 }
                 $('#tab_children').html(div_data);
                 for (var x = 0; x < children.length; x++) {
-                    var obj = JSON.stringify(data[x]);
-                    div_data2 = div_data2 + "<tr id='" + children[x].id + "' class='row-content' data-obj='" + obj + "' ><td>" + (x + 1) + "</td> " +
+                    div_data2 = div_data2 + "<tr id='" + children[x].id + "' class='row-content'><td>" + (x + 1) + "</td> " +
                         "<td id='tab_num'>" + children[x].name + "</td>" +
                         "<td class='check'><input id='children_sessions_checked" + children[x].id + "' type='checkbox'></td>" +
                         "</tr > ";
@@ -823,26 +821,26 @@ function show_all(id) {
                 var receiving_delivery_basic = JSON.parse(val[4]);
                 $("#divdate_received #txtDatem").val(receiving_delivery_basic[0].first_date_received_m);
                 $("#divdate_received #txtDateh").val(receiving_delivery_basic[0].first_date_received_h);
-                fillControlsFromJson(receiving_delivery_basic[0], "children_receive")
-            }
-            if (val[5] != 0) {
-                var receiving_delivery_details = JSON.parse(val[5]);
-                var result_delivery_details = ""
-                var result_delivery_details_archive = ""
-                for (var h = 0; h < receiving_delivery_details.length; h++) {
-                    if (receiving_delivery_details[h].receiving_delivery_done == 0) {
-                        result_delivery_details = result_delivery_details + '<tr>' + '<td>' + receiving_delivery_details[h].date_h + '</td>' +
-                            '<td><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + receiving_delivery_details[h].id + ',2); return false; "><i class="fa fa-eye"></i></button><button class="btn btn-xs btn-danger btn-quick" title = "Delete" onclick = "delete_details(' + receiving_delivery_details[h].id + ',2); return false;" > <i class="fa fa-times"></i></button ></td>' +
-                            '</tr >';
-                    } else {
-                        result_delivery_details_archive = result_delivery_details_archive + '<tr>' + '<td>' + receiving_delivery_details[h].date_h + '</td>' +
-                            '<td><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + receiving_delivery_details[h].id + ',2); return false; "><i class="fa fa-eye"></i></button></td>' +
-                            '</tr >';
+                fillControlsFromJson(receiving_delivery_basic[0], "children_receive");
+                $("#time_receiving_time input").val(receiving_delivery_basic[0].receiving_time);
+                $("#time_delivery_time input").val(receiving_delivery_basic[0].delivery_time);
+             //   alert($("#txtdelivery_time").parent().prop("id"));
 
-                    }
-                }
-                $("#delivery_details").html(result_delivery_details);
-                $("#delivery_details_archive").html(result_delivery_details_archive);
+            }
+        if (val[5] != 0) {
+            var receiving_delivery_details = JSON.parse(val[5]);
+            get_date_children(receiving_delivery_details[0].case_id);
+            get_persons(receiving_delivery_details[0].case_id, receiving_delivery_details[0])
+              fillControlsFromJson(receiving_delivery_details[0], "receiving_delivery_details");
+            show_cases_details(receiving_delivery_details[0].id, 2);
+           
+            if (receiving_delivery_details[0].type == 1) {
+                $("#child_info").css("display", "block");
+                $("#money_data").css("display", "none");
+            } else {
+                $("#child_info").css("display", "none");
+                $("#money_data").css("display", "block");
+            }
             } else {
                 $("#delivery_details").html("");
                 $("#delivery_details_archive").html("");
@@ -852,7 +850,7 @@ function show_all(id) {
                 var conciliation= JSON.parse(val[6]);
                 $("#Date_reconciliation #txtDatem").val(conciliation[0].date_m);
                 $("#Date_reconciliation #txtDateh").val(conciliation[0].date_h);
-                fillControlsFromJson(conciliation[0], "case_conciliation")
+                fillControlsFromJson(conciliation[0], "case_conciliation");
             }
 
             if (val[7] != 0) {
@@ -913,11 +911,16 @@ function show_all(id) {
                 $("#expense_details_archive").html("");
 
             }
-        }
+
     });
 
 }
-
+function show_calender_details() {
+    var case_id = $("#ddlcase_id").val();
+    get_date_children(case_id)
+    get_persons(case_id,"")
+    $("#save_delivery_details").css("display", "block");
+}
 
 function show_cases_details(flag1,flag3) {
 
@@ -931,13 +934,6 @@ function show_cases_details(flag1,flag3) {
 
         } else if (flag3 == 2) {
             var delivery_details = JSON.parse(val[0]);
-
-            $("#divdate_delivery #txtDatem").val(delivery_details[0].date_m);
-            $("#divdate_delivery #txtDateh").val(delivery_details[0].date_h);
-
-            $("#div_new_date #txtDatem").val(delivery_details[0].new_date_m);
-            $("#div_new_date #txtDateh").val(delivery_details[0].new_date_h);
-            fillControlsFromJson(delivery_details[0], "receiving_delivery_details");
             if (delivery_details[0].receiving_delivery_done == 1) {
                 $("#save_delivery_details").css("display", "none");
             } else {
@@ -963,6 +959,8 @@ function show_cases_details(flag1,flag3) {
             $("#divdate_sessions #txtDatem").val(sessions[0].date_m);
             $("#divdate_sessions #txtDateh").val(sessions[0].date_h);
             fillControlsFromJson(sessions[0], "case_sessions");
+            $("#time_entry_time input").val(sessions[0].entry_time);
+            $("#time_exite_time input").val(sessions[0].exite_time);
             if (val[1] != 0) {
                 var childrens = JSON.parse(val[1]);
                 for (var y = 0; y < childrens.length; y++) {
@@ -997,6 +995,7 @@ function show_cases_details(flag1,flag3) {
     });
 
 }
+
 function delete_details(flag1, flag2, flag3) {
     var r = confirm("هل بالفعل تريد الحذف");
     if (r == true) {
@@ -1010,6 +1009,28 @@ function delete_details(flag1, flag2, flag3) {
 
         });
     }
+}
+function get_date_children(case_id) {
+  
+    cases.get_date_children(case_id, function (val) {
+        if (val[0] != "0") {
+            var children = JSON.parse(val[0]);
+            var div_data = ""
+            for (var x = 0; x < children.length; x++) {
+                var obj = JSON.stringify(children[x]);
+                div_data = div_data + "<tr id='" + children[x].id + "' class='row-content' data-obj='" + obj + "' ><td>" + (x + 1) + "</td> " +
+                    "<td id='tab_num'>" + children[x].name + "</td>" +
+                    "<td class='check'><input id='children_checked" + children[x].id + "' type='checkbox'></td>" +
+                    "</tr > ";
+
+            }
+            $('#tab_children').html(div_data);
+        } else {
+            $('#tab_children').html("");
+                }
+
+        });
+ 
 }
 
 function mark_all(event,table_id) {
@@ -1027,7 +1048,16 @@ function mark_all(event,table_id) {
         $('#' + table_id +'  tr').css("background", "transparent");
     }
 }
-
+function define_type() {
+    var type = $("#ddltype").val();
+    if (type == 1) {
+        $("#child_info").css("display","block")
+        $("#money_data").css("display","none")
+    } else {
+        $("#child_info").css("display", "none")
+        $("#money_data").css("display", "block")
+    }
+}
 function gmod(n, m) {
     return ((n % m) + m) % m;
 }
@@ -1039,6 +1069,7 @@ function kuwaiticalendar(today) {
     //    todaymili = today.getTime() + adjustmili;
     //    today = new Date(todaymili);
     //}
+    debugger;;
     day = today.getDate();
     month = today.getMonth();
     year = today.getFullYear();

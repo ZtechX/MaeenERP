@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="Person.ascx.vb" Inherits="ERpMaen.Person" %>
-<div class="collapse" id="collapseExample">
+<div class="collapse" id="collapseExample" dir="rtl">
     <div class="card card-body">
         <fieldset style="border: 4px groove white; border-radius: 8px; background: #f1f0f0;">
             <legend>اضافة جديد</legend>
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="col-md-12 form-group">
-                <button onclick="save_new_person(); return false" class="btn btn-success">حفظ</button>
+                <button onclick="save_new_person(); return false" style="font-family: DroidKufi !important;" class="btn btn-success pull-left">حفظ</button>
             </div>
         </fieldset>
     </div>

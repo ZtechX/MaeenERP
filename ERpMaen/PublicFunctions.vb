@@ -736,7 +736,6 @@ Optional ByVal MinNumber As Integer = 0) As Integer
             Dim Apt() As String
             Dim TempConvert As String
             Dim ConvertResult As Long
-
             Apt = xDate.Split("/")
             TempConvert = Apt(2) & Apt(1) & Apt(0)
 

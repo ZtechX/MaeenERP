@@ -12,7 +12,7 @@ Public Class Login
             '#####################################Remember me Start   ############################################
             If cklogin.Checked = True Then
                 Dim dt As New DataTable
-                dt = DBManager.Getdatatable("select * from tblUsers where User_Name = '" + txtUserName.Text + "' and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
+                dt = DBManager.Getdatatable("select * from tblUsers where User_email = '" + txtUserName.Text + "' and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
                 If dt.Rows.Count > 0 Then
                     If dt.Rows(0).Item("active") = False Then
                         lblFail.Visible = True

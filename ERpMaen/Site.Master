@@ -58,7 +58,7 @@
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/jquery.dataTables.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/tableTools.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/jquery.formatCurrency-1.4.0.js")%>"></script>
-    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/bootstrap.min.js")%>"></script>
+
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery.easing.min.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/FloatingLabels.js")%>"></script>
     <%--<script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Notification.js")%>"></script>--%>
@@ -84,6 +84,7 @@
      <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/buttons.dataTables.min.css")%>"></script>
        <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/calendar.js")%>"></script>
         <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/hijri-date.js")%>"></script>
+        <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/bootstrap.min.js")%>"></script>
               <link href="css/calendar.css" rel="stylesheet" type="text/css" />
 
     <style>
@@ -758,7 +759,6 @@
         <div id="content_area">
         </div>
         <footer id="footer" class="footer pull-left">
-           <%-- <p>Powered By <a href="http://www.linkinsoft.com/" target="_blank"></a>, All Rights Reserved © 2015.</p>--%>
         </footer>
 
         <span id="top-link-block" class="hidden">

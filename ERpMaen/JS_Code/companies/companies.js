@@ -33,7 +33,7 @@ function setDate() {
     Date_hj = Pub_date_hj;
 }
 function get_admin() {
-    
+
     companies.get_admin( function (val) {
         debugger
         if (val[1] != "0") {
@@ -107,7 +107,7 @@ function get_admin() {
 
 function edit(val) {
    
-    debugger
+    
     resetAll();
     if (val[0] == "1") {
         var data = JSON.parse(val[1]);
