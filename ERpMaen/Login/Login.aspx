@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>الدخول</title>
+    <title>نظام معين</title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -99,18 +99,17 @@ box-sizing:border-box;
             <section class="main">	
                 <div class="row">
                     <div class="hint">
-                       <h1>
-نظام مساند
-                       </h1>
-                        <p>
-                        </p>   
+                    
+<img alt="" src="images/name.png" style="width:60%;" >
+
+                      
                     </div>
                     <div class="row">
                     <div class="col-lg-4 col-md-3 col-sm-1"></div>
                     <div class="col-lg-4 col-md-6 col-sm-10" id="login">
                         <div class="content_wrapper">
                                <div class="col-xs-12">
-                                <h1><img alt="" src="images/logo.jpg" class="logo"></h1>
+                                <h1><img alt="" src="images/logo1.png" style="width:140px;"></h1>
                                    </div>
                         <div class="row">
                             <div class="col-xs-12">                                

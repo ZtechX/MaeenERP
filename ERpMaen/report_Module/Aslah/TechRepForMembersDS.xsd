@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TechRepForMembersDS" targetNamespace="http://tempuri.org/TechRepForMembersDS.xsd" xmlns:mstns="http://tempuri.org/TechRepForMembersDS.xsd" xmlns="http://tempuri.org/TechRepForMembersDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="TechRepForMembersDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TechRepForMembersDS" msprop:Generator_UserDSName="TechRepForMembersDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Details" msprop:Generator_TableClassName="DetailsDataTable" msprop:Generator_TableVarName="tableDetails" msprop:Generator_TablePropName="Details" msprop:Generator_RowDeletingName="DetailsRowDeleting" msprop:Generator_RowChangingName="DetailsRowChanging" msprop:Generator_RowEvHandlerName="DetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="DetailsRowDeleted" msprop:Generator_UserTableName="Details" msprop:Generator_RowChangedName="DetailsRowChanged" msprop:Generator_RowEvArgName="DetailsRowChangeEvent" msprop:Generator_RowClassName="DetailsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Advisor" msprop:Generator_ColumnVarNameInTable="columnAdvisor" msprop:Generator_ColumnPropNameInRow="Advisor" msprop:Generator_ColumnPropNameInTable="AdvisorColumn" msprop:Generator_UserColumnName="Advisor" type="xs:string" minOccurs="0" />
+              <xs:element name="No_attend" msprop:Generator_ColumnVarNameInTable="columnNo_attend" msprop:Generator_ColumnPropNameInRow="No_attend" msprop:Generator_ColumnPropNameInTable="No_attendColumn" msprop:Generator_UserColumnName="No_attend" type="xs:string" minOccurs="0" />
+              <xs:element name="Referred" msprop:Generator_ColumnVarNameInTable="columnReferred" msprop:Generator_ColumnPropNameInRow="Referred" msprop:Generator_ColumnPropNameInTable="ReferredColumn" msprop:Generator_UserColumnName="Referred" type="xs:string" minOccurs="0" />
+              <xs:element name="waiver" msprop:Generator_ColumnVarNameInTable="columnwaiver" msprop:Generator_ColumnPropNameInRow="waiver" msprop:Generator_ColumnPropNameInTable="waiverColumn" msprop:Generator_UserColumnName="waiver" type="xs:string" minOccurs="0" />
+              <xs:element name="without_conciliation" msprop:Generator_ColumnVarNameInTable="columnwithout_conciliation" msprop:Generator_ColumnPropNameInRow="without_conciliation" msprop:Generator_ColumnPropNameInTable="without_conciliationColumn" msprop:Generator_UserColumnName="without_conciliation" type="xs:string" minOccurs="0" />
+              <xs:element name="conciliation" msprop:Generator_ColumnVarNameInTable="columnconciliation" msprop:Generator_ColumnPropNameInRow="conciliation" msprop:Generator_ColumnPropNameInTable="conciliationColumn" msprop:Generator_UserColumnName="conciliation" type="xs:string" minOccurs="0" />
+              <xs:element name="Judgment" msprop:Generator_ColumnVarNameInTable="columnJudgment" msprop:Generator_ColumnPropNameInRow="Judgment" msprop:Generator_ColumnPropNameInTable="JudgmentColumn" msprop:Generator_UserColumnName="Judgment" type="xs:string" minOccurs="0" />
+              <xs:element name="underProcedure" msprop:Generator_ColumnVarNameInTable="columnunderProcedure" msprop:Generator_ColumnPropNameInRow="underProcedure" msprop:Generator_ColumnPropNameInTable="underProcedureColumn" msprop:Generator_UserColumnName="underProcedure" type="xs:string" minOccurs="0" />
+              <xs:element name="Total" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:string" minOccurs="0" />
+              <xs:element name="Row_num" msprop:Generator_ColumnVarNameInTable="columnRow_num" msprop:Generator_ColumnPropNameInRow="Row_num" msprop:Generator_ColumnPropNameInTable="Row_numColumn" msprop:Generator_UserColumnName="Row_num" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

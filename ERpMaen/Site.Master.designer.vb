@@ -122,6 +122,15 @@ Partial Public Class SiteMaster
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
+    '''HijriCalendar1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar1 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
     '''lblUserId control.
     '''</summary>
     '''<remarks>

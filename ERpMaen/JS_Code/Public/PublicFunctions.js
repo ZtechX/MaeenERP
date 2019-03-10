@@ -3,7 +3,11 @@
 // Create Date : 23/5/2015 12:00 PM
 // Description : This file contains all public javaScript functions for each form
 /************************************/
-
+var Pub_date_m;
+var Pub_date_hj;
+$(function () {
+    GetCurrentDate_m_hj();
+});
 // enable pnl form for update for each form
 function setformforupdate_all() {
     try {
@@ -1314,5 +1318,30 @@ function checkRequired(div = 'divForm') {
     });
 
     return requiredall;
+
+}
+
+function GetCurrentDate_m_hj() {
+    var arr_date = [];
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = dd + '/' + mm + '/' + yyyy;
+    $("#CurrentDate").find("#txtDatem").val(today);
+    showHideCalendar($("#CurrentDate").find("#txtDatem"));
+    cal2.callback();
+    Pub_date_m = today;
+    Pub_date_hj = $("#CurrentDate").find("#txtDateh").val();
+ 
 
 }

@@ -53,7 +53,7 @@ Public Class cases
                 'End dropdown instrument
 
                 'DropDownList Load for current state الحاله الحالية
-                Dim clsapprove_CurrState As New clsFillComboByDataSource("select * from tbllock_up where type='IS' and IsNull(Deleted,0)=0", "Description", "id", "")
+                Dim clsapprove_CurrState As New clsFillComboByDataSource("select * from tbllock_up where type='C_S' and IsNull(Deleted,0)=0", "Description", "id", "")
                 clsapprove_CurrState.SetComboItems(ddlstatus, "", True, "--اختر--", False)
 
                 Dim cls_DAY As New clsFillComboByDataSource("select * from tbllock_up where type='DY' and IsNull(Deleted,0)=0", "Description", "id", "")

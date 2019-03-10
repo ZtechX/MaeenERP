@@ -1496,6 +1496,24 @@
     <Content Include="Members_Module\member_abbsent.aspx" />
     <Content Include="Members_Module\payments.aspx" />
     <Content Include="Members_Module\sessions.aspx" />
+    <Content Include="report_Module\Aslah\StudyCaseRep.aspx" />
+    <Content Include="report_Module\Aslah\RegistAggregationRep.aspx" />
+    <Content Include="report_Module\Aslah\consultationRep.aspx" />
+    <Content Include="report_Module\Aslah\ReportRep.aspx" />
+    <Content Include="report_Module\Aslah\ReferralRep.aspx" />
+    <Content Include="report_Module\Aslah\ProceduresRep.aspx" />
+    <Content Include="report_Module\Aslah\ReviewRep.aspx" />
+    <Content Include="report_Module\Aslah\ConciliationRep.aspx" />
+    <Content Include="report_Module\Aslah\DeliveryProceedingRep.aspx" />
+    <Content Include="report_Module\Aslah\ReceiveProceedingRep.aspx" />
+    <Content Include="report_Module\Aslah\Receive_and_deliverRep.aspx" />
+    <Content Include="report_Module\Aslah\AttendanceRegistRep.aspx" />
+    <Content Include="report_Module\Aslah\agreementRep.aspx" />
+    <Content Include="report_Module\Aslah\MeasurementSatisfactionRep.aspx" />
+    <Content Include="report_Module\Aslah\FollowCasesRep.aspx" />
+    <Content Include="report_Module\Aslah\TechRepForMembersRep.aspx" />
+    <Content Include="report_Module\Aslah\StatisticsofcasesRep.aspx" />
+    <Content Include="report_Module\Aslah\caseClassificationRep.aspx" />
     <Content Include="report_Module\Aslah\CaseReportRep.aspx" />
     <Content Include="report_Module\Aslah\CaseDetailsRep.aspx" />
     <Content Include="report_Module\Images\header_ph.png" />
@@ -1527,6 +1545,39 @@
     <Content Include="report_Module\Aslah\CaseDetailsDS.xsc">
       <DependentUpon>CaseDetailsDS.xsd</DependentUpon>
     </Content>
+    <Content Include="report_Module\Aslah\caseClassificationDS.xsc">
+      <DependentUpon>caseClassificationDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\agreementDS.xsc">
+      <DependentUpon>agreementDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\agreementDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>agreementDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\agreementDS.xss">
+      <DependentUpon>agreementDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\AttendanceRegistDS.xsc">
+      <DependentUpon>AttendanceRegistDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\AttendanceRegistDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AttendanceRegistDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\AttendanceRegistDS.xss">
+      <DependentUpon>AttendanceRegistDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\caseClassificationDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>caseClassificationDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\caseClassificationDS.xss">
+      <DependentUpon>caseClassificationDS.xsd</DependentUpon>
+    </Content>
     <None Include="report_Module\Aslah\CaseDetailsDS.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
@@ -1545,6 +1596,105 @@
     </None>
     <Content Include="report_Module\Aslah\CaseReportDS.xss">
       <DependentUpon>CaseReportDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\StatisticsofcasesDS.xsc">
+      <DependentUpon>StatisticsofcasesDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\Receive_and_deliverDS.xsc">
+      <DependentUpon>Receive_and_deliverDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\ConciliationDS.xsc">
+      <DependentUpon>ConciliationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ConciliationDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ConciliationDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\ConciliationDS.xss">
+      <DependentUpon>ConciliationDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\ProceduresDS.xsc">
+      <DependentUpon>ProceduresDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\consultationDS.xsc">
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\consultationDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>consultationDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\consultationDS.xss">
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ProceduresDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProceduresDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\ProceduresDS.xss">
+      <DependentUpon>ProceduresDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\Receive_and_deliverDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Receive_and_deliverDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\Receive_and_deliverDS.xss">
+      <DependentUpon>Receive_and_deliverDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\ReferralDS.xsc">
+      <DependentUpon>ReferralDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ReferralDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReferralDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\ReferralDS.xss">
+      <DependentUpon>ReferralDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\ReportDS.xsc">
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\RegistAggregationDS.xsc">
+      <DependentUpon>RegistAggregationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\RegistAggregationDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RegistAggregationDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\RegistAggregationDS.xss">
+      <DependentUpon>RegistAggregationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ReportDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\ReportDS.xss">
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\StatisticsofcasesDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StatisticsofcasesDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\StatisticsofcasesDS.xss">
+      <DependentUpon>StatisticsofcasesDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\TechRepForMembersDS.xsc">
+      <DependentUpon>TechRepForMembersDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\TechRepForMembersDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TechRepForMembersDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\TechRepForMembersDS.xss">
+      <DependentUpon>TechRepForMembersDS.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Login\css\animate-custom.css" />
@@ -1920,20 +2070,306 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="PublicFunctions.vb" />
-    <Compile Include="report_Module\Aslah\R18.vb">
-      <DependentUpon>R18.rpt</DependentUpon>
+    <Compile Include="report_Module\Aslah\StudyCaseRep.aspx.designer.vb">
+      <DependentUpon>StudyCaseRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StudyCaseRep.aspx.vb">
+      <DependentUpon>StudyCaseRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StudyCase.vb">
+      <DependentUpon>StudyCase.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="report_Module\Aslah\R19.vb">
-      <DependentUpon>R19.rpt</DependentUpon>
+    <Compile Include="report_Module\Aslah\RegistAggregationRep.aspx.designer.vb">
+      <DependentUpon>RegistAggregationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\RegistAggregationRep.aspx.vb">
+      <DependentUpon>RegistAggregationRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationRep.aspx.designer.vb">
+      <DependentUpon>consultationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationRep.aspx.vb">
+      <DependentUpon>consultationRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationDS.vb">
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\RegistAggregationDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistAggregationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReportRep.aspx.designer.vb">
+      <DependentUpon>ReportRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReportRep.aspx.vb">
+      <DependentUpon>ReportRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReferralRep.aspx.designer.vb">
+      <DependentUpon>ReferralRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReferralRep.aspx.vb">
+      <DependentUpon>ReferralRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ProceduresRep.aspx.designer.vb">
+      <DependentUpon>ProceduresRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ProceduresRep.aspx.vb">
+      <DependentUpon>ProceduresRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ProceduresDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProceduresDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReferralDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReferralDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReportDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReviewRep.aspx.designer.vb">
+      <DependentUpon>ReviewRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReviewRep.aspx.vb">
+      <DependentUpon>ReviewRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\RegistAggregation.vb">
+      <DependentUpon>RegistAggregation.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="report_Module\Aslah\R20.vb">
-      <DependentUpon>R20.rpt</DependentUpon>
+    <Compile Include="report_Module\Aslah\Report.vb">
+      <DependentUpon>Report.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultation.vb">
+      <DependentUpon>consultation.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Referral.vb">
+      <DependentUpon>Referral.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Procedures.vb">
+      <DependentUpon>Procedures.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Review.vb">
+      <DependentUpon>Review.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ConciliationRep.aspx.designer.vb">
+      <DependentUpon>ConciliationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ConciliationRep.aspx.vb">
+      <DependentUpon>ConciliationRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ConciliationDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConciliationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\DeliveryProceeding.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliveryProceeding.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReceiveProceeding.vb">
+      <DependentUpon>ReceiveProceeding.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\MeasurementSatisfaction.vb">
+      <DependentUpon>MeasurementSatisfaction.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\MeasurementSatisfactionRep.aspx.designer.vb">
+      <DependentUpon>MeasurementSatisfactionRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\MeasurementSatisfactionRep.aspx.vb">
+      <DependentUpon>MeasurementSatisfactionRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Conciliation.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Conciliation.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\DeliveryProceedingRep.aspx.designer.vb">
+      <DependentUpon>DeliveryProceedingRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\DeliveryProceedingRep.aspx.vb">
+      <DependentUpon>DeliveryProceedingRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReceiveProceedingRep.aspx.designer.vb">
+      <DependentUpon>ReceiveProceedingRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReceiveProceedingRep.aspx.vb">
+      <DependentUpon>ReceiveProceedingRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\FollowCases.vb">
+      <DependentUpon>FollowCases.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\FollowCasesRep.aspx.designer.vb">
+      <DependentUpon>FollowCasesRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\FollowCasesRep.aspx.vb">
+      <DependentUpon>FollowCasesRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembersDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechRepForMembersDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembersRep.aspx.designer.vb">
+      <DependentUpon>TechRepForMembersRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembersRep.aspx.vb">
+      <DependentUpon>TechRepForMembersRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembers.vb">
+      <DependentUpon>TechRepForMembers.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\subReceive_and_deliver.vb">
+      <DependentUpon>subReceive_and_deliver.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliverRep.aspx.designer.vb">
+      <DependentUpon>Receive_and_deliverRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliverRep.aspx.vb">
+      <DependentUpon>Receive_and_deliverRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliver.vb">
+      <DependentUpon>Receive_and_deliver.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegistRep.aspx.designer.vb">
+      <DependentUpon>AttendanceRegistRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegistRep.aspx.vb">
+      <DependentUpon>AttendanceRegistRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegist.vb">
+      <DependentUpon>AttendanceRegist.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\agreementDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>agreementDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegistDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttendanceRegistDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassificationDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>caseClassificationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\agreementRep.aspx.designer.vb">
+      <DependentUpon>agreementRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\agreementRep.aspx.vb">
+      <DependentUpon>agreementRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliverDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Receive_and_deliverDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\subReportAttendance.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>subReportAttendance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StatisticsofcasesRep.aspx.designer.vb">
+      <DependentUpon>StatisticsofcasesRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StatisticsofcasesRep.aspx.vb">
+      <DependentUpon>StatisticsofcasesRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassificationRep.aspx.designer.vb">
+      <DependentUpon>caseClassificationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassificationRep.aspx.vb">
+      <DependentUpon>caseClassificationRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\agreement.vb">
+      <DependentUpon>agreement.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Statisticsofcases.vb">
+      <DependentUpon>Statisticsofcases.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassification.vb">
+      <DependentUpon>caseClassification.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
@@ -1973,6 +2409,11 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StatisticsofcasesDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StatisticsofcasesDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="Settings_Module\email_setting.aspx.designer.vb">
       <DependentUpon>email_setting.aspx</DependentUpon>
@@ -2147,17 +2588,85 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="report_Module\Aslah\R18.rpt">
+    <EmbeddedResource Include="report_Module\Aslah\StudyCase.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>R18.vb</LastGenOutput>
+      <LastGenOutput>StudyCase.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="report_Module\Aslah\R19.rpt">
+    <EmbeddedResource Include="report_Module\Aslah\RegistAggregation.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>R19.vb</LastGenOutput>
+      <LastGenOutput>RegistAggregation.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="report_Module\Aslah\R20.rpt">
+    <EmbeddedResource Include="report_Module\Aslah\Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>R20.vb</LastGenOutput>
+      <LastGenOutput>Report.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\consultation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>consultation.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Referral.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Referral.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Procedures.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Procedures.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Review.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Review.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\DeliveryProceeding.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliveryProceeding.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\ReceiveProceeding.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReceiveProceeding.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\MeasurementSatisfaction.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MeasurementSatisfaction.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Conciliation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Conciliation.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\FollowCases.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FollowCases.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\TechRepForMembers.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TechRepForMembers.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\subReceive_and_deliver.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>subReceive_and_deliver.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Receive_and_deliver.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Receive_and_deliver.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\AttendanceRegist.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AttendanceRegist.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\agreement.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>agreement.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\subReportAttendance.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>subReportAttendance.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Statisticsofcases.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Statisticsofcases.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\caseClassification.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>caseClassification.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="report_Module\Aslah\CaseDetails.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
