@@ -86,6 +86,15 @@ Partial Public Class companies
     Protected WithEvents Result As Global.ERpMaen.Result
     
     '''<summary>
+    '''loginUser control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents loginUser As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''cmdSave control.
     '''</summary>
     '''<remarks>
@@ -158,6 +167,24 @@ Partial Public Class companies
     Protected WithEvents lblEdit As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''HijriCalendar1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar1 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''comp_id control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents comp_id As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''txtname_ar control.
     '''</summary>
     '''<remarks>
@@ -194,51 +221,6 @@ Partial Public Class companies
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''Text8 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Text8 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''email control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents email As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RequiredFieldValidator2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
-    '''chkManual control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents chkManual As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
-    
-    '''<summary>
-    '''person control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents person As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''fax control.
     '''</summary>
     '''<remarks>
@@ -266,13 +248,103 @@ Partial Public Class companies
     Protected WithEvents tax_number As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''user_name control.
+    '''compLogo control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents user_name As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents compLogo As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''compLogo_fuPhoto1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents compLogo_fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
+    '''chkManual control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkManual As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
+    
+    '''<summary>
+    '''comp_AdminID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents comp_AdminID As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''comp_AdminName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents comp_AdminName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator14 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator14 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''comp_AdminNum control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents comp_AdminNum As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator15 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator15 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''comp_Adminemail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents comp_Adminemail As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''comp_Adminuser_name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents comp_Adminuser_name As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''RequiredFieldValidator5 control.
@@ -284,13 +356,13 @@ Partial Public Class companies
     Protected WithEvents RequiredFieldValidator5 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''user_password control.
+    '''Comp_user_password control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents user_password As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents Comp_user_password As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''RequiredFieldValidator3 control.
@@ -302,31 +374,310 @@ Partial Public Class companies
     Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''imgItemURL control.
+    '''Comp_imgItemURL control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents imgItemURL As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents Comp_imgItemURL As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''imgLoader control.
+    '''comp_fuPhoto1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents imgLoader As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents comp_fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
     
     '''<summary>
-    '''fuPhoto1 control.
+    '''Aca_id control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
+    Protected WithEvents Aca_id As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''Ac_name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Ac_name As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator7 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''Ac_AdminID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Ac_AdminID As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''Ac_AdminName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Ac_AdminName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator_7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator_7 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''Ac_adminTele control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Ac_adminTele As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''AcUser_Email control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AcUser_Email As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator8 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator8 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''Acuser_name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Acuser_name As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator9 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator9 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''Acuser_password control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Acuser_password As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator10 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator10 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''Ac_imgItemURL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Ac_imgItemURL As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''Ac_fuPhoto1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Ac_fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
+    '''cen_id control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cen_id As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''Cen_Name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Cen_Name As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator6 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''TextNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextNotes As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CenAdminID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CenAdminID As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''Cen_AdminName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Cen_AdminName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator11 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator11 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''Cen_AdminNum control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Cen_AdminNum As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator12 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator12 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''cen_Adminemail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cen_Adminemail As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator13 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator13 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''cen_Adminuser_name control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cen_Adminuser_name As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator16 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator16 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''Cen_user_password control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Cen_user_password As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator17 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator17 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''Cen_imgItemURL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Cen_imgItemURL As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''cen_fuPhoto1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cen_fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
     
     '''<summary>
     '''Button2 control.
@@ -381,7 +732,7 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblstart_date_hj As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''HijriCalendar2 control.
     '''</summary>
@@ -389,8 +740,8 @@ Partial Public Class companies
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    ' Protected WithEvents HijriCalendar2 As Global.ERpMaen.UserControls_HijriCalendar
-
+    Protected WithEvents HijriCalendar2 As Global.ERpMaen.CustomerCalendar
+    
     '''<summary>
     '''lblend_date control.
     '''</summary>
@@ -408,7 +759,7 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblend_date_hj As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''HijriCalendar3 control.
     '''</summary>
@@ -416,8 +767,8 @@ Partial Public Class companies
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    ' Protected WithEvents HijriCalendar3 As Global.ERpMaen.UserControls_HijriCalendar
-
+    Protected WithEvents HijriCalendar3 As Global.ERpMaen.CustomerCalendar
+    
     '''<summary>
     '''cmdPOP control.
     '''</summary>
@@ -462,7 +813,7 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblmaintaianace_start_date_hj As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''HijriCalendar4 control.
     '''</summary>
@@ -470,8 +821,8 @@ Partial Public Class companies
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    '  Protected WithEvents HijriCalendar4 As Global.ERpMaen.UserControls_HijriCalendar
-
+    Protected WithEvents HijriCalendar4 As Global.ERpMaen.CustomerCalendar
+    
     '''<summary>
     '''lblmaintaianace_end_date control.
     '''</summary>
@@ -489,7 +840,7 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblmaintaianace_end_date_hj As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''HijriCalendar5 control.
     '''</summary>
@@ -497,8 +848,8 @@ Partial Public Class companies
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    ' Protected WithEvents HijriCalendar5 As Global.ERpMaen.UserControls_HijriCalendar
-
+    Protected WithEvents HijriCalendar5 As Global.ERpMaen.CustomerCalendar
+    
     '''<summary>
     '''ImageSlider control.
     '''</summary>

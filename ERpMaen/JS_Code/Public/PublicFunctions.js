@@ -19,16 +19,16 @@ function setformforupdate_all() {
 function row_click(event) {
     try {
         checlAllRowsSelecte();
-        
+
         var row = $(event.target).closest("tr");
         var chk = $(row).find('input[type="checkbox"]');
 
-        if (event.target.type != 'checkbox'  || $(chk).prop("checked")==true) {
+        if (event.target.type != 'checkbox' || $(chk).prop("checked") == true) {
             var row = $(event.target).closest("tr");
             $(chk).prop("checked", true);
-           
+
             FilterShareDropdown();
-            
+
             if (typeof editWebServiceMethod != 'undefined') // Any scope
             {
                 $.ajax({
@@ -45,7 +45,7 @@ function row_click(event) {
                     }
                 });
             }
-           
+
         }
         else {
 
@@ -60,7 +60,7 @@ function row_click(event) {
             else {
                 if ($(chk).prop("checked")) {
                     $(chk).prop("checked", true);
-                   FilterShareDropdown();
+                    FilterShareDropdown();
 
                 }
                 else {
@@ -121,32 +121,32 @@ function deleteItem() {
         var r = confirm("are you sure you want to delete the records");
         if (r == true) {
             var deleteBool = false;
-                var autoCodeValue = getControlValueById(formAutoCodeControl);
-                if (autoCodeValue != "") {
-                    $("#" + autoCodeValue).hide();
-                    deletedItems = autoCodeValue;
-                    deleteBool = true;
-                }
-                else {
-                    showErrorMessage("No records selected");
-                }
-        }
-            if (deleteBool == true) {
-                $.ajax({
-                    type: "POST",
-                    url: "../ASMX_WebServices/" + deleteWebServiceMethod,
-                    data: "{'deleteItem': '" + deletedItems + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (val) {
-                        onSuccessDeleteItem(val.d);
-                    },
-                    error: function (err) {
-                        console.log(err);
-                        alert(err);
-                    }
-                });
+            var autoCodeValue = getControlValueById(formAutoCodeControl);
+            if (autoCodeValue != "") {
+                $("#" + autoCodeValue).hide();
+                deletedItems = autoCodeValue;
+                deleteBool = true;
             }
+            else {
+                showErrorMessage("No records selected");
+            }
+        }
+        if (deleteBool == true) {
+            $.ajax({
+                type: "POST",
+                url: "../ASMX_WebServices/" + deleteWebServiceMethod,
+                data: "{'deleteItem': '" + deletedItems + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (val) {
+                    onSuccessDeleteItem(val.d);
+                },
+                error: function (err) {
+                    console.log(err);
+                    alert(err);
+                }
+            });
+        }
     }
     catch (err) {
         alert(err);
@@ -206,7 +206,7 @@ function checkFormOperation() {
         var par = getUrlVars();
         if (jQuery.isEmptyObject(par) == false) {
             var operation = par.operation;
-            if (operation.toLowerCase() == "add") {           
+            if (operation.toLowerCase() == "add") {
                 add();
                 if (par.hasOwnProperty('code')) {
                     var lblPropertyCode = $("<span>" + par.code + "</span>");
@@ -257,7 +257,7 @@ function checkFormOperation() {
             }
         }
     } catch (err) {
-       alert(err);
+        alert(err);
     }
 }
 
@@ -295,7 +295,7 @@ function prepareAdd() {
         $("#pnlConfirm").show();
         $("#pnlFunctions").hide();
         $("#cmdSave").prop("CommandArgument", "New");
-        
+
     } catch (err) {
         alert(err);
     }
@@ -388,7 +388,7 @@ function cancel() {
         $("#pnlFunctions").show();
         $("#lblResult").hide();
         $("#txtSearchAll").val('');
-        try{
+        try {
             Page_ClientValidate('');
         } catch (err) {
         }
@@ -401,9 +401,9 @@ function cancel() {
 // handle click event of cancel button
 function cancelClick() {
     try {
-            if (confirm("هل تريد الالغاء ؟")) {
-                cancel();
-    }
+        if (confirm("هل تريد الالغاء ؟")) {
+            cancel();
+        }
     }
     catch (err) {
         alert(err);
@@ -414,7 +414,7 @@ function enableDivFormControls(bool) {
     try {
         var b = !bool;
         $('#divForm').find('input').prop("disabled", b);
-		$("#txtUploadedFiles").prop("disabled", false);
+        $("#txtUploadedFiles").prop("disabled", false);
         $('#divForm').find('select').prop("disabled", b);
         $('#divForm').find('textarea').prop("disabled", b);
         $('#divForm').find('div').prop("disabled", b);
@@ -637,7 +637,7 @@ function resetControlValueById(controlId) {
 // calc square meter based on square feet
 function calcsqmt() {
     try {
-        var unitAreasqft = $("#txtAreasqft").val().replace(/\,/g, '').replace(",","");
+        var unitAreasqft = $("#txtAreasqft").val().replace(/\,/g, '').replace(",", "");
         var unitAreaM2 = parseFloat(unitAreasqft) * 0.09290304;
         $("#txtAreaM2").val(unitAreaM2.toFixed(2));
         $("#txtAreasqft").val(parseFloat($("#txtAreasqft").val().replace(",", "")).toFixed(2));
@@ -832,8 +832,8 @@ function FilterShareDropdown() {
             $('#lbdownloadxlsAllTbl').show();
             //$('#liHTML').show();
             //$('#lblPropertyIds').html(chk.id);
-            
-            setPropertyIds();            
+
+            setPropertyIds();
         }
         else {
             $('#liDownloadPDF').hide();
@@ -1132,7 +1132,7 @@ function getTodayDate() {
         var output = d.getFullYear() + '/' +
             (('' + month).length < 2 ? '0' : '') + month + '/' +
             (('' + day).length < 2 ? '0' : '') + day;
-        return output ;
+        return output;
     } catch (err) {
         alert(err);
     }
@@ -1149,8 +1149,8 @@ function returnDate(date1) {
         var output = d.getFullYear() + '/' +
             (('' + month).length < 2 ? '0' : '') + month + '/' +
             (('' + day).length < 2 ? '0' : '') + day;
-alert(output );
-        return output ;
+        alert(output);
+        return output;
     } catch (err) {
         alert(err);
     }
@@ -1184,8 +1184,7 @@ function getValueOrEmpty(value) {
 function getLockupValues(Type) {
     try {
         var LockupValues = "";
-        WebService.GetlockupValues(Type, function (Values)
-        {
+        WebService.GetlockupValues(Type, function (Values) {
             LockupValues = Values;
         });
         return LockupValues;
@@ -1197,73 +1196,73 @@ function getLockupValues(Type) {
 // check language of app and load from with this language
 function checkLanguage() {
     try {
-//        if (currentLanguage == "Arabic") {
-//            $("#HDasboard").find("span").remove();
-//            var data = allLanguage;
-//            var numberOfMngrName = 0;
-//            for (var i = 0; i < allLanguage.length; i++) {
-//                if (allLanguage[i].arabic != null) {
-//                    var arabic = allLanguage[i].arabic;
-//                    var english = allLanguage[i].english;
-//                    numberOfMngrName++;
-//                    var pageTitle = document.title;
-//                    english = english.replace(/\s/g, '');
-//                    english = english.toLowerCase();
-//                    pageTitle = pageTitle.replace(/\s/g, '');
-//                    pageTitle = pageTitle.replace(/\-/g, '');
-//                    pageTitle = pageTitle.toLowerCase();
-//                    if (pageTitle == english) {
-//                        document.title = arabic;
-//                    }
-//                    $("span ,label,:button,a,legend,option, :button,table tbody tr td div a span,table thead tr th ").each(function () {
-//                        var str = $(this).html();
-//                        str = str.replace(/<\/?span[^>]*>/g, "");
-//                        str = str.replace(/<\/?i[^>]*>/g, "");
-//                        str = str.replace(/<\/?pseudo[^>]*>/g, "");
-//                        var englishText = str;
-//                        str = str.replace(/(\r\n|\n|\r)/gm, "");
-//                        
-//                        str = str.replace(/\s/g, '');
-//                        str = str.replace(/\-/g, '');
-//                        str = str.toLowerCase();
-//                        if (str == english) {
-//                            $(this).html(arabic)
-//                            //$(this).html($(this).html().replace(/(\r\n|\n|\r)/gm, "").replace(/  +/g, ' ').replace(englishText.replace(/  +/g, ' '), arabic));
-//                        }
-//                    });
-//                    $(":submit,ul li :button").each(function () {
-//                        var str = $(this).val();
-//                        str = str.replace(/<\/?span[^>]*>/g, "");
-//                        str = str.replace(/<\/?i[^>]*>/g, "");
-//                        str = str.replace(/<\/?pseudo[^>]*>/g, "");
-//                        //str = element.html();
-//                        str = str.replace(/(\r\n|\n|\r)/gm, "");
-//                        str = str.replace(/\s/g, '');
-//                        str = str.replace(/\-/g, '');
-//                        str = str.replace(/\&/g, '');
-//                        str = str.toLowerCase();
-//                        if (str == english) {
-//                            alert(str);
-//                            $(this).val(arabic);
-//                        }
-//                        $("#lnbootstrapmin").attr("href", "App_ThemesEn/styles/bootstrap.min.css");
-//                        $("#lnStyleSheet").attr("href", "App_ThemesEn/Theme1/StyleSheet.css");
-//                        $("#lnawesome").attr("href", "App_ThemesEn/Theme1/font-awesome.min.css");
-//                        $("#lnvmenu").attr("href", "App_ThemesEn/Theme1/vmenu.css");
-//                        $("#lnstylesheetscc").attr("href", "cssEn/StyleSheet.css");
-//                        $("#lnanimate").attr("href", "App_ThemesEn/Theme1/animate.css");
-//                        $("#lnform").attr("href", "App_ThemesEn/styles/form.css");
-//                        $("#lnDatatable").attr("href", "cssEn/plugins/datatable/jquery.dataTables.css");
-//                        $("#lnDatatableTool").attr("href", "cssEn/plugins/datatable/tableTools.css");
-//                       
-//                    });
-//                }
-//            }
-//            $("#spnLanguage").html("English");
-//           
-//        } else {
-//            $("#spnLanguage").html("عربى");
-//        }
+        //        if (currentLanguage == "Arabic") {
+        //            $("#HDasboard").find("span").remove();
+        //            var data = allLanguage;
+        //            var numberOfMngrName = 0;
+        //            for (var i = 0; i < allLanguage.length; i++) {
+        //                if (allLanguage[i].arabic != null) {
+        //                    var arabic = allLanguage[i].arabic;
+        //                    var english = allLanguage[i].english;
+        //                    numberOfMngrName++;
+        //                    var pageTitle = document.title;
+        //                    english = english.replace(/\s/g, '');
+        //                    english = english.toLowerCase();
+        //                    pageTitle = pageTitle.replace(/\s/g, '');
+        //                    pageTitle = pageTitle.replace(/\-/g, '');
+        //                    pageTitle = pageTitle.toLowerCase();
+        //                    if (pageTitle == english) {
+        //                        document.title = arabic;
+        //                    }
+        //                    $("span ,label,:button,a,legend,option, :button,table tbody tr td div a span,table thead tr th ").each(function () {
+        //                        var str = $(this).html();
+        //                        str = str.replace(/<\/?span[^>]*>/g, "");
+        //                        str = str.replace(/<\/?i[^>]*>/g, "");
+        //                        str = str.replace(/<\/?pseudo[^>]*>/g, "");
+        //                        var englishText = str;
+        //                        str = str.replace(/(\r\n|\n|\r)/gm, "");
+        //                        
+        //                        str = str.replace(/\s/g, '');
+        //                        str = str.replace(/\-/g, '');
+        //                        str = str.toLowerCase();
+        //                        if (str == english) {
+        //                            $(this).html(arabic)
+        //                            //$(this).html($(this).html().replace(/(\r\n|\n|\r)/gm, "").replace(/  +/g, ' ').replace(englishText.replace(/  +/g, ' '), arabic));
+        //                        }
+        //                    });
+        //                    $(":submit,ul li :button").each(function () {
+        //                        var str = $(this).val();
+        //                        str = str.replace(/<\/?span[^>]*>/g, "");
+        //                        str = str.replace(/<\/?i[^>]*>/g, "");
+        //                        str = str.replace(/<\/?pseudo[^>]*>/g, "");
+        //                        //str = element.html();
+        //                        str = str.replace(/(\r\n|\n|\r)/gm, "");
+        //                        str = str.replace(/\s/g, '');
+        //                        str = str.replace(/\-/g, '');
+        //                        str = str.replace(/\&/g, '');
+        //                        str = str.toLowerCase();
+        //                        if (str == english) {
+        //                            alert(str);
+        //                            $(this).val(arabic);
+        //                        }
+        //                        $("#lnbootstrapmin").attr("href", "App_ThemesEn/styles/bootstrap.min.css");
+        //                        $("#lnStyleSheet").attr("href", "App_ThemesEn/Theme1/StyleSheet.css");
+        //                        $("#lnawesome").attr("href", "App_ThemesEn/Theme1/font-awesome.min.css");
+        //                        $("#lnvmenu").attr("href", "App_ThemesEn/Theme1/vmenu.css");
+        //                        $("#lnstylesheetscc").attr("href", "cssEn/StyleSheet.css");
+        //                        $("#lnanimate").attr("href", "App_ThemesEn/Theme1/animate.css");
+        //                        $("#lnform").attr("href", "App_ThemesEn/styles/form.css");
+        //                        $("#lnDatatable").attr("href", "cssEn/plugins/datatable/jquery.dataTables.css");
+        //                        $("#lnDatatableTool").attr("href", "cssEn/plugins/datatable/tableTools.css");
+        //                       
+        //                    });
+        //                }
+        //            }
+        //            $("#spnLanguage").html("English");
+        //           
+        //        } else {
+        //            $("#spnLanguage").html("عربى");
+        //        }
     } catch (err) {
         alert(err);
     }
@@ -1273,10 +1272,10 @@ function checkLanguage() {
 function changeLanguage() {
     try {
         if (currentLanguage == "English") {
-            setCookie("Language","Arabic",1000)
+            setCookie("Language", "Arabic", 1000)
             location.reload();
         } else {
-            setCookie("Language", "English", 1000)           
+            setCookie("Language", "English", 1000)
             location.reload();
         }
     } catch (err) {
@@ -1317,4 +1316,3 @@ function checkRequired(div = 'divForm') {
     return requiredall;
 
 }
-

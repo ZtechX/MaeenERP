@@ -194,15 +194,6 @@ Partial Public Class training_centers
     Protected WithEvents lblstart_date_hj As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''HijriCalendar control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-
-
-    '''<summary>
     '''TextNotes control.
     '''</summary>
     '''<remarks>

@@ -27,83 +27,240 @@ Public Class companies
     Dim _sqlconn As New SqlConnection(DBManager.GetConnectionString)
     Dim _sqltrans As SqlTransaction
 #End Region
+#Region "check_userData"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function check_userData(ByVal id As String, ByVal User_Name As String, ByVal User_Email As String, ByVal User_PhoneNumber As String) As Boolean
+
+        Try
+            Dim dt As New DataTable
+            If id = "" Then
+                dt = DBManager.Getdatatable("Select * from TblUsers where User_Name='" + User_Name + "' OR  User_Email='" + User_Email + "' or User_PhoneNumber='" + User_PhoneNumber + "'")
+            Else
+                dt = DBManager.Getdatatable("Select * from TblUsers where ( User_Name='" + User_Name + "' OR User_Email='" + User_Email + "' or User_PhoneNumber='" + User_PhoneNumber + "')  and  Id!='" + id + "'")
+            End If
+
+            If dt.Rows.Count = 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+#End Region
 #Region "save_companies"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function save_companies(ByVal id As String, ByVal users_id As String, ByVal basicDataJson As Object, ByVal imagePath As String, ByVal user_id As String) As String()
-        Dim company_id = 0
+    Public Function save_companies(ByVal arrDataJson As Object(), ByVal date_m As String, ByVal data_hj As String) As String()
+        Dim login_user = LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString()
         Dim Names As New List(Of String)(10)
+
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
 
-            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            Dim dictCompAdminDataJson As Dictionary(Of String, Object) = arrDataJson(1)
+            Dim CompAdmin_id = dictCompAdminDataJson("id")
+            Dim CompAdmin_User_n = dictCompAdminDataJson("User_Name")
+            Dim CompAdmin_email = dictCompAdminDataJson("User_Email")
+            Dim CompAdmin_Phone = dictCompAdminDataJson("User_PhoneNumber")
+            If check_userData(CompAdmin_id, CompAdmin_User_n, CompAdmin_email, CompAdmin_Phone) Then
 
-            Dim email = dictBasicDataJson("email").ToString
-            Dim user_name = dictBasicDataJson("User_Name").ToString
-            Dim dtcheckemailphone As DataTable
-            If id = "" Then
-                dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where User_Name='" + dictBasicDataJson("User_Name") + "' OR  User_Email='" + dictBasicDataJson("email") + "' or User_PhoneNumber='" + dictBasicDataJson("tel") + "'")
-            Else
-                dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where ( User_Name='" + dictBasicDataJson("User_Name") + "' OR User_Email='" + dictBasicDataJson("email") + "' or User_PhoneNumber='" + dictBasicDataJson("tel") + "')  and  Id!='" + users_id.ToString + "'")
-            End If
-            If dtcheckemailphone.Rows.Count = 0 Then
-                dictBasicDataJson.Add("image_path", imagePath)
-                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblcompanies", id, _sqlconn, _sqltrans) Then
+                If login_user = "1" Then
+                    Dim dictCompDataJson As Dictionary(Of String, Object) = arrDataJson(0)
+                    dictCompDataJson.Add("person", dictCompAdminDataJson("full_name"))
+                    dictCompDataJson.Add("email", dictCompAdminDataJson("User_Email"))
+                    Dim Comp_id = dictCompDataJson("id")
 
-                    If id = "" Then
-                        company_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
-                    Else
-                        company_id = id
-                    End If
-                    dictBasicDataJson.Add("User_Type", 2)
-                    dictBasicDataJson.Add("managment_id", 1)
-                    dictBasicDataJson.Add("jop_id", 1)
-                    dictBasicDataJson.Add("User_Image", imagePath)
-                    dictBasicDataJson.Add("comp_id", company_id)
-                    dictBasicDataJson.Add("full_name", dictBasicDataJson("name_ar"))
-                    dictBasicDataJson.Add("User_PhoneNumber", dictBasicDataJson("tel"))
-                    dictBasicDataJson.Add("User_Email", dictBasicDataJson("email"))
-                    If LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString() <> 1 Or user_id <> "" Then
-                        If user_id <> "" Then
-                            id = user_id
+                    If PublicFunctions.TransUpdateInsert(dictCompDataJson, "tblcompanies", Comp_id, _sqlconn, _sqltrans) Then
+                        If Comp_id = "" Then
+                            Comp_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                        End If
+                        dictCompAdminDataJson.Add("User_Type", 2)
+                        dictCompAdminDataJson.Add("group_id", 120)
+                        dictCompAdminDataJson.Add("Active", dictCompDataJson("active"))
+                        dictCompAdminDataJson.Add("comp_id", Comp_id)
+
+                        If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
+                            'DBManager.ExcuteQuery("delete from tblboards where comp_id=" + Comp_id.ToString)
+                            'Dim dict = New Dictionary(Of String, Object)
+                            'dict.Add("name", "جمعية عمومية")
+                            'dict.Add("members_number", "200")
+                            'dict.Add("comp_id", Comp_id)
+                            'dict.Add("active", 1)
+                            'dict.Add("type", 1)
+                            'Dim board_id = ""
+                            'If login_user <> 1 Or CompAdmin_id <> "" Then
+                            '    If CompAdmin_id <> "" Then
+                            '        board_id = CompAdmin_id
+                            '    Else
+                            '        board_id = login_user
+                            '    End If
+                            'End If
+                            'If PublicFunctions.TransUpdateInsert(dict, "tblboards", CompAdmin_id, _sqlconn, _sqltrans) Then
+                            _sqltrans.Commit()
+                            _sqlconn.Close()
+                            Names.Add("1")
+                            'Else
+                            '    _sqltrans.Rollback()
+                            '    _sqlconn.Close()
+                            '    Names.Add("لم يتم الحفظ")
+                            'End If
                         Else
-                            id = LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString()
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Names.Add("لم يتم الحفظ")
                         End If
                     End If
-                    PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblUsers", id, _sqlconn, _sqltrans)
-                    DBManager.ExcuteQuery("delete from tblboards where comp_id=" + company_id.ToString)
-                    Dim dict = New Dictionary(Of String, Object)
-                    dict.Add("name", "جمعية عمومية")
-                    dict.Add("members_number", "200")
-                    dict.Add("comp_id", company_id)
-                    dict.Add("active", 1)
-                    dict.Add("type", 1)
-                    PublicFunctions.TransUpdateInsert(dict, "tblboards", id, _sqlconn, _sqltrans)
-                    _sqltrans.Commit()
-                    _sqlconn.Close()
-                    Names.Add("1")
-                    Names.Add(LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
-                    Names.Add(company_id)
-                    Names.Add(users_id)
                 Else
-                    _sqltrans.Rollback()
-                    _sqlconn.Close()
-                    Names.Add("0")
-                End If
+                    Dim dictAcaAdminDataJson As Dictionary(Of String, Object) = arrDataJson(3)
+                    Dim AcAdmin_id = dictAcaAdminDataJson("id")
+                    Dim AcAdmin_User_n = dictAcaAdminDataJson("User_Name")
+                    Dim AcAdmin_email = dictAcaAdminDataJson("User_Email")
+                    Dim AcAdmin_Phone = dictAcaAdminDataJson("User_PhoneNumber")
+                    If check_userData(AcAdmin_id, AcAdmin_User_n, AcAdmin_email, AcAdmin_Phone) And AcAdmin_User_n <> CompAdmin_User_n And AcAdmin_email <> CompAdmin_email And AcAdmin_Phone <> CompAdmin_Phone Then
+                        Dim dictCenAdminDataJson As Dictionary(Of String, Object) = arrDataJson(5)
+                        Dim CenAdmin_id = dictCenAdminDataJson("id")
+                        Dim CenAdmin_User_n = dictCenAdminDataJson("User_Name")
+                        Dim CenAdmin_email = dictCenAdminDataJson("User_Email")
+                        Dim CenAdmin_Phone = dictCenAdminDataJson("User_PhoneNumber")
+                        If check_userData(CenAdmin_id, CenAdmin_User_n, CenAdmin_email, CenAdmin_Phone) And CenAdmin_User_n <> AcAdmin_User_n And CenAdmin_User_n <> CompAdmin_User_n And CenAdmin_email <> AcAdmin_email And CenAdmin_email <> CompAdmin_email And CenAdmin_Phone <> AcAdmin_Phone And CenAdmin_Phone <> CompAdmin_Phone Then
+                            Dim dictCompDataJson As Dictionary(Of String, Object) = arrDataJson(0)
+                            dictCompDataJson.Add("person", dictCompAdminDataJson("full_name"))
+                            dictCompDataJson.Add("email", dictCompAdminDataJson("User_Email"))
+                            Dim Comp_id = dictCompDataJson("id")
+                            If PublicFunctions.TransUpdateInsert(dictCompDataJson, "tblcompanies", Comp_id, _sqlconn, _sqltrans) Then
+                                If Comp_id = "" Then
+                                    Comp_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                                End If
+                                dictCompAdminDataJson.Add("User_Type", 2)
+                                dictCompAdminDataJson.Add("group_id", 120)
+                                dictCompAdminDataJson.Add("Active", dictCompDataJson("active"))
+                                dictCompAdminDataJson.Add("comp_id", Comp_id)
 
+                                If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
+
+                                    dictAcaAdminDataJson.Add("User_Type", 7)
+                                    dictAcaAdminDataJson.Add("group_id", 122)
+                                    dictAcaAdminDataJson.Add("comp_id", Comp_id)
+                                    If PublicFunctions.TransUpdateInsert(dictAcaAdminDataJson, "tblUsers", AcAdmin_id, _sqlconn, _sqltrans) Then
+                                        If AcAdmin_id = "" Then
+                                            AcAdmin_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                                        End If
+                                        Dim dictAcaDataJson As Dictionary(Of String, Object) = arrDataJson(2)
+                                        Dim Ac_id = dictAcaDataJson("id")
+                                        dictAcaDataJson.Add("date_m", date_m)
+                                        dictAcaDataJson.Add("date_hj", data_hj)
+                                        dictAcaDataJson.Add("admin", AcAdmin_id)
+                                        dictAcaDataJson.Add("comp_id", Comp_id)
+                                        dictAcaDataJson.Add("add_by", login_user)
+                                        If PublicFunctions.TransUpdateInsert(dictAcaDataJson, "acd_acadmies", Ac_id, _sqlconn, _sqltrans) Then
+
+                                            dictCenAdminDataJson.Add("User_Type", 7)
+                                            dictCenAdminDataJson.Add("group_id", 121)
+                                            dictCenAdminDataJson.Add("comp_id", Comp_id)
+                                            If PublicFunctions.TransUpdateInsert(dictCenAdminDataJson, "tblUsers", CenAdmin_id, _sqlconn, _sqltrans) Then
+                                                If CenAdmin_id = "" Then
+                                                    CenAdmin_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                                                End If
+                                                Dim dictCenDataJson As Dictionary(Of String, Object) = arrDataJson(4)
+                                                Dim Cen_id = dictCenDataJson("id")
+
+                                                dictCenDataJson.Add("date_m", date_m)
+                                                dictCenDataJson.Add("date_hj", data_hj)
+                                                dictCenDataJson.Add("admin", CenAdmin_id)
+                                                dictCenDataJson.Add("comp_id", Comp_id)
+                                                dictCenDataJson.Add("add_by", login_user)
+                                                If PublicFunctions.TransUpdateInsert(dictCenDataJson, "acd_training_centers", Cen_id, _sqlconn, _sqltrans) Then
+
+                                                    'DBManager.ExcuteQuery("delete from tblboards where comp_id=" + Comp_id.ToString)
+                                                    'Dim dict = New Dictionary(Of String, Object)
+                                                    'dict.Add("name", "جمعية عمومية")
+                                                    'dict.Add("members_number", "200")
+                                                    'dict.Add("comp_id", Comp_id)
+                                                    'dict.Add("active", 1)
+                                                    'dict.Add("type", 1)
+                                                    'Dim board_id = ""
+                                                    'If login_user <> 1 Or CompAdmin_id <> "" Then
+                                                    '    If CompAdmin_id <> "" Then
+                                                    '        board_id = CompAdmin_id
+                                                    '    Else
+                                                    '        board_id = login_user
+                                                    '    End If
+                                                    'End If
+                                                    'If PublicFunctions.TransUpdateInsert(dict, "tblboards", CompAdmin_id, _sqlconn, _sqltrans) Then
+                                                    _sqltrans.Commit()
+                                                    _sqlconn.Close()
+                                                    Names.Add("1")
+                                                    'Else
+                                                    '    _sqltrans.Rollback()
+                                                    '    _sqlconn.Close()
+                                                    '    Names.Add("لم يتم الحفظ")
+                                                    'End If
+
+                                                Else
+                                                    _sqltrans.Rollback()
+                                                    _sqlconn.Close()
+                                                    Names.Add("لم يتم الحفظ")
+                                                End If
+
+                                            Else
+                                                _sqltrans.Rollback()
+                                                _sqlconn.Close()
+                                                Names.Add("لم يتم الحفظ")
+                                            End If
+
+
+                                        Else
+                                            _sqltrans.Rollback()
+                                            _sqlconn.Close()
+                                            Names.Add("لم يتم الحفظ")
+                                        End If
+
+                                    Else
+                                        _sqltrans.Rollback()
+                                        _sqlconn.Close()
+                                        Names.Add("لم يتم الحفظ")
+                                    End If
+
+                                Else
+                                    _sqltrans.Rollback()
+                                    _sqlconn.Close()
+                                    Names.Add("لم يتم الحفظ")
+                                End If
+                            Else
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Names.Add("لم يتم الحفظ")
+                            End If
+                        Else
+                            Names.Add("اسم المستخدم او البريد الالكترونى او التلفون لمدير مركز التدريب مستخدم")
+
+                        End If
+                    Else
+                        Names.Add("اسم المستخدم او البريد الالكترونى او التلفون لمدير الاكاديمية مستخدم")
+
+                    End If
+
+                End If
             Else
-                Names.Add("2")
+                Names.Add("اسم المستخدم او البريد الالكترونى او التلفون لمدير الجهة مستخدم")
 
             End If
 
         Catch ex As Exception
             _sqltrans.Rollback()
             _sqlconn.Close()
-            Names.Add("0")
+            Names.Add("لم يتم الحفظ")
         End Try
         Return Names.ToArray
     End Function
@@ -113,18 +270,18 @@ Public Class companies
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-    <WebMethod(True)>
-  <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                <WebMethod(True)>
+                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
     Public Function save_contract(ByVal id As String, ByVal basicDataJson As Object, ByVal attch_file_DataJsonList As List(Of Object)) As Boolean
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
 
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-            'dictBasicDataJson("deal_start_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("deal_start_date_m"))
-            'dictBasicDataJson("deal_end_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("deal_end_date_m"))
-            'dictBasicDataJson("maintainance_start_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("maintainance_start_date_m"))
-            'dictBasicDataJson("maintainance_end_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("maintainance_end_date_m"))
+            dictBasicDataJson("deal_start_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("deal_start_date_m"))
+            dictBasicDataJson("deal_end_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("deal_end_date_m"))
+            dictBasicDataJson("maintainance_start_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("maintainance_start_date_m"))
+            dictBasicDataJson("maintainance_end_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("maintainance_end_date_m"))
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblcompanies", id, _sqlconn, _sqltrans) Then
                 Dim letter_id = 0
@@ -165,8 +322,8 @@ Public Class companies
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                            <WebMethod(True)>
+                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function save_modules(ByVal id As String, ByVal comp_name As String, ByVal userId As String, ByVal comp_group_permission_id As String, ByVal basicDataJson As List(Of Object)) As Boolean
         Try
             _sqlconn.Close()
@@ -260,8 +417,8 @@ Public Class companies
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                    <WebMethod(True)>
+                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function save_info(ByVal id As String, ByVal basicDataJson As Object, ByVal imagePath As String) As Boolean
         Try
             _sqlconn.Open()
@@ -301,7 +458,7 @@ Public Class companies
 #End Region
 #Region "Get data"
     <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function Get_data() As String()
         Dim dtm As New DataTable
         Dim dtm2 As New DataTable
@@ -344,8 +501,8 @@ Public Class companies
 #Region "Delete"
     ''' <summary>
     ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                        <WebMethod()>
+                                                                                                                                                                                                                                            <System.Web.Script.Services.ScriptMethod()>
     Public Function Delete(ByVal deleteItems As String) As String()
         Dim Names As New List(Of String)(10)
         Dim dt As DataTable
@@ -376,8 +533,8 @@ Public Class companies
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                <WebMethod()>
+                                                                                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
     Public Function show_all(ByVal printItemId As String) As String()
 
         Dim Names As New List(Of String)(10)
@@ -435,8 +592,8 @@ Public Class companies
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-                                                                                                                           <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                        <WebMethod()>
+                                                                                                                                                                                                                                                                            <System.Web.Script.Services.ScriptMethod()>
     Public Function show_project_details(ByVal printItemId As String, ByVal project_id As String, ByVal type As String) As String()
 
         Dim Names As New List(Of String)(10)
@@ -486,8 +643,8 @@ Public Class companies
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-                                                                                                                                   <WebMethod()>
-                                                                                                                                       <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                    <WebMethod()>
+                                                                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function delete_details(ByVal printItemId As String, ByVal project_id As String, ByVal type As String) As Boolean
 
         Dim Names As New List(Of String)(10)
@@ -533,8 +690,8 @@ Public Class companies
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-                                                                                                                                           <WebMethod()>
-                                                                                                                                               <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                            <WebMethod()>
+                                                                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function get_main_menu(ByVal editItemId As String) As String()
         Dim UserId = editItemId
         Dim Names As New List(Of String)(10)
@@ -562,8 +719,8 @@ Public Class companies
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                        <WebMethod()>
+                                                                                                                                                                                                                                                                                                            <System.Web.Script.Services.ScriptMethod()>
     Public Function get_main_menu_for_edit(ByVal comp_Id As String, ByVal group_Id As String) As String()
         '  Dim UserId = editItemId
         Dim Names As New List(Of String)(10)
@@ -627,22 +784,63 @@ Public Class companies
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-                                                                                                                                                           <WebMethod()>
-                                                                                                                                                               <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                        <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
     Public Function get_admin() As String()
-        Dim dt_companies As DataTable
-        Dim dt_user As DataTable
+        Dim dt_company As DataTable
+        Dim dt_center As DataTable
+        Dim dt_acadyme As DataTable
+        Dim dt_compAdmin As DataTable
+        Dim dt_cenAdmin As DataTable
+        Dim dt_acAdmin As DataTable
         Dim Names As New List(Of String)(10)
+        Dim condation = ""
+
+        Dim compAdmin_id = LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString()
+
+        If compAdmin_id <> 1 Then
+            condation = " and User_Type = 2"
+        End If
         Try
-            dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
-            If dt_user.Rows.Count <> 0 Then
-                Dim str3 = PublicFunctions.ConvertDataTabletoString(dt_user)
+            dt_compAdmin = DBManager.Getdatatable("select * from tblUsers where  id=" + compAdmin_id + condation)
+            If dt_compAdmin.Rows.Count <> 0 Then
+                Dim str3 = PublicFunctions.ConvertDataTabletoString(dt_compAdmin)
                 Names.Add(str3)
 
-                dt_companies = DBManager.Getdatatable("SELECT * from tblcompanies  where  id= " + dt_user.Rows(0).Item("comp_id").ToString())
-                If dt_companies.Rows.Count <> 0 Then
-                    Dim str2 = PublicFunctions.ConvertDataTabletoString(dt_companies)
+                dt_company = DBManager.Getdatatable("SELECT * from tblcompanies  where  id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                If dt_company.Rows.Count <> 0 Then
+                    Dim str2 = PublicFunctions.ConvertDataTabletoString(dt_company)
                     Names.Add(str2)
+                    dt_acAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=122 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                    If dt_acAdmin.Rows.Count <> 0 Then
+                        Dim str4 = PublicFunctions.ConvertDataTabletoString(dt_acAdmin)
+                        Names.Add(str4)
+                        dt_acadyme = DBManager.Getdatatable("SELECT * from acd_acadmies  where admin=" + dt_acAdmin.Rows(0).Item("id").ToString() + " and  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                        If dt_acadyme.Rows.Count <> 0 Then
+                            Dim str5 = PublicFunctions.ConvertDataTabletoString(dt_acadyme)
+                            Names.Add(str5)
+                        Else
+                            Names.Add("0")
+                        End If
+                    Else
+                        Names.Add("0")
+                        Names.Add("0")
+                    End If
+                    dt_cenAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=121 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                    If dt_cenAdmin.Rows.Count <> 0 Then
+                        Dim str6 = PublicFunctions.ConvertDataTabletoString(dt_cenAdmin)
+                        Names.Add(str6)
+                        dt_center = DBManager.Getdatatable("SELECT * from acd_training_centers  where admin=" + dt_cenAdmin.Rows(0).Item("id").ToString() + " and  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                        If dt_center.Rows.Count <> 0 Then
+                            Dim str7 = PublicFunctions.ConvertDataTabletoString(dt_center)
+                            Names.Add(str7)
+                        Else
+                            Names.Add("0")
+                        End If
+                    Else
+                        Names.Add("0")
+                        Names.Add("0")
+                    End If
                 Else
                     Names.Add("0")
                 End If
@@ -669,7 +867,7 @@ Public Class companies
     ''' Save  Type
     ''' </summary>
     <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function check_user(ByVal user_name As String) As Boolean
         Dim Names As New List(Of String)(10)
         Dim str = ""
@@ -697,8 +895,8 @@ Public Class companies
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                        <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                            <System.Web.Script.Services.ScriptMethod()>
     Public Function Edit(ByVal editItemId As String) As String()
 
         Dim Names As New List(Of String)(10)

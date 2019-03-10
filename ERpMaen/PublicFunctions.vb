@@ -45,9 +45,13 @@ Public Class PublicFunctions
             For Each dr As DataRow In dt.Rows
                 row = New Dictionary(Of String, Object)()
                 For Each col As DataColumn In dt.Columns
+
                     If col.ColumnName.ToString.Contains("date") Then
 
+
                         If col.ColumnName.ToString.Contains("h") Then
+
+
                             row.Add(col.ColumnName, dr(col))
                         Else
                             row.Add(col.ColumnName, ConvertNumbertoDate(dr(col).ToString))
@@ -63,6 +67,27 @@ Public Class PublicFunctions
             Return serializer.Serialize(rows)
         End If
     End Function
+
+    '''' <summary>
+    '''' Convert datatable to string as json format; if dt is empty then return empty string
+    '''' </summary>
+    'Public Shared Function ConvertDataTabletoString(ByVal dt As DataTable) As String
+    '    If dt.Rows.Count = 0 Then
+    '        Return String.Empty
+    '    Else
+    '        Dim serializer As New System.Web.Script.Serialization.JavaScriptSerializer()
+    '        Dim rows As New List(Of Dictionary(Of String, Object))()
+    '        Dim row As Dictionary(Of String, Object)
+    '        For Each dr As DataRow In dt.Rows
+    '            row = New Dictionary(Of String, Object)()
+    '            For Each col As DataColumn In dt.Columns
+    '                row.Add(col.ColumnName, dr(col))
+    '            Next
+    '            rows.Add(row)
+    '        Next
+    '        Return serializer.Serialize(rows)
+    '    End If
+    'End Function
 
     Public Shared Function GetIdentity(ByRef _SqlConnection As SqlConnection, ByRef _SqlTransaction As SqlTransaction) As String
         If _SqlConnection.State <> ConnectionState.Open Then
@@ -577,8 +602,13 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                             ElseIf dictBasicDataJson.ContainsKey(field_name1) Then
                                 If Not String.IsNullOrWhiteSpace(dictBasicDataJson(field_name1)) Then
                                     Dim field_value = dictBasicDataJson(field_name1)
-                                    If field_name1.Contains("date") Then
-                                        field_value = ConvertDatetoNumber(field_value)
+                                    If field_name.Contains("date") Then
+                                        If field_name.Contains("h") Then
+                                            field_value = field_value
+                                        Else
+                                            field_value = ConvertDatetoNumber(field_value)
+                                        End If
+
                                     End If
                                     strquer = strquer + " " + field_name1.ToString + ", "
                                     If datatype = "float" Or datatype = "money" Or datatype = "int" Then
@@ -637,6 +667,12 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                         If dictBasicDataJson.ContainsKey(field_name1) Then
                             If Not String.IsNullOrWhiteSpace(dictBasicDataJson(field_name1)) Then
                                 Dim field_value = dictBasicDataJson(field_name1)
+                                If field_name.Contains("date") Then
+                                    If Not field_name.Contains("h") Then
+                                        field_value = ConvertDatetoNumber(field_value)
+                                    End If
+
+                                End If
                                 If field_value.ToString <> "" Then
                                     strquer = strquer + " " + field_name1.ToString + "= '" + field_value.ToString + "' , "
                                 End If
