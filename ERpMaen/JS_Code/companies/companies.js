@@ -29,27 +29,8 @@ $(function () {
 });
 function setDate() {
  
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-
-        today = dd + '/' + mm + '/' + yyyy;
-    $("#CurrentDate").find("#txtDatem").val(today);
-    showHideCalendar($("#CurrentDate").find("#txtDatem"));
-        cal2.callback();
-        Date_m = today;
-        Date_hj = $("#CurrentDate").find("#txtDateh").val();
-    
-  
+    Date_m =  Pub_date_m;
+    Date_hj = Pub_date_hj;
 }
 function get_admin() {
 

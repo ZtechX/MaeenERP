@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="caseClassificationDS" targetNamespace="http://tempuri.org/caseClassificationDS.xsd" xmlns:mstns="http://tempuri.org/caseClassificationDS.xsd" xmlns="http://tempuri.org/caseClassificationDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="caseClassificationDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="caseClassificationDS" msprop:Generator_UserDSName="caseClassificationDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Details" msprop:Generator_TableClassName="DetailsDataTable" msprop:Generator_TableVarName="tableDetails" msprop:Generator_TablePropName="Details" msprop:Generator_RowDeletingName="DetailsRowDeleting" msprop:Generator_RowChangingName="DetailsRowChanging" msprop:Generator_RowEvHandlerName="DetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="DetailsRowDeleted" msprop:Generator_UserTableName="Details" msprop:Generator_RowChangedName="DetailsRowChanged" msprop:Generator_RowEvArgName="DetailsRowChangeEvent" msprop:Generator_RowClassName="DetailsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="code" msprop:Generator_ColumnVarNameInTable="columncode" msprop:Generator_ColumnPropNameInRow="code" msprop:Generator_ColumnPropNameInTable="codeColumn" msprop:Generator_UserColumnName="code" type="xs:string" minOccurs="0" />
+              <xs:element name="from" msprop:Generator_ColumnVarNameInTable="columnfrom" msprop:Generator_ColumnPropNameInRow="from" msprop:Generator_ColumnPropNameInTable="fromColumn" msprop:Generator_UserColumnName="from" type="xs:string" minOccurs="0" />
+              <xs:element name="service_type" msprop:Generator_ColumnVarNameInTable="columnservice_type" msprop:Generator_ColumnPropNameInRow="service_type" msprop:Generator_ColumnPropNameInTable="service_typeColumn" msprop:Generator_UserColumnName="service_type" type="xs:string" minOccurs="0" />
+              <xs:element name="court_details" msprop:Generator_ColumnVarNameInTable="columncourt_details" msprop:Generator_ColumnPropNameInRow="court_details" msprop:Generator_ColumnPropNameInTable="court_detailsColumn" msprop:Generator_UserColumnName="court_details" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

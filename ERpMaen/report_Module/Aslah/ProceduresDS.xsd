@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ProceduresDS" targetNamespace="http://tempuri.org/ProceduresDS.xsd" xmlns:mstns="http://tempuri.org/ProceduresDS.xsd" xmlns="http://tempuri.org/ProceduresDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ProceduresDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ProceduresDS" msprop:Generator_UserDSName="ProceduresDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Details" msprop:Generator_TableClassName="DetailsDataTable" msprop:Generator_TableVarName="tableDetails" msprop:Generator_TablePropName="Details" msprop:Generator_RowDeletingName="DetailsRowDeleting" msprop:Generator_RowChangingName="DetailsRowChanging" msprop:Generator_RowEvHandlerName="DetailsRowChangeEventHandler" msprop:Generator_RowDeletedName="DetailsRowDeleted" msprop:Generator_UserTableName="Details" msprop:Generator_RowChangedName="DetailsRowChanged" msprop:Generator_RowEvArgName="DetailsRowChangeEvent" msprop:Generator_RowClassName="DetailsRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Call_owner" msprop:Generator_ColumnVarNameInTable="columnCall_owner" msprop:Generator_ColumnPropNameInRow="Call_owner" msprop:Generator_ColumnPropNameInTable="Call_ownerColumn" msprop:Generator_UserColumnName="Call_owner" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Call_against" msprop:Generator_ColumnVarNameInTable="columnCall_against" msprop:Generator_ColumnPropNameInRow="Call_against" msprop:Generator_ColumnPropNameInTable="Call_againstColumn" msprop:Generator_UserColumnName="Call_against" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Call_up_aginst" msprop:Generator_ColumnVarNameInTable="columnCall_up_aginst" msprop:Generator_ColumnPropNameInRow="Call_up_aginst" msprop:Generator_ColumnPropNameInTable="Call_up_aginstColumn" msprop:Generator_UserColumnName="Call_up_aginst" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Meet_owner" msprop:Generator_ColumnVarNameInTable="columnMeet_owner" msprop:Generator_ColumnPropNameInRow="Meet_owner" msprop:Generator_ColumnPropNameInTable="Meet_ownerColumn" msprop:Generator_UserColumnName="Meet_owner" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Meet_aginst" msprop:Generator_ColumnVarNameInTable="columnMeet_aginst" msprop:Generator_ColumnPropNameInRow="Meet_aginst" msprop:Generator_ColumnPropNameInTable="Meet_aginstColumn" msprop:Generator_UserColumnName="Meet_aginst" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Prepare_conciliation" msprop:Generator_ColumnVarNameInTable="columnPrepare_conciliation" msprop:Generator_ColumnPropNameInRow="Prepare_conciliation" msprop:Generator_ColumnPropNameInTable="Prepare_conciliationColumn" msprop:Generator_UserColumnName="Prepare_conciliation" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Owner_phon_Close" msprop:Generator_ColumnVarNameInTable="columnOwner_phon_Close" msprop:Generator_ColumnPropNameInRow="Owner_phon_Close" msprop:Generator_ColumnPropNameInTable="Owner_phon_CloseColumn" msprop:Generator_UserColumnName="Owner_phon_Close" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Aginst_phon_Close" msprop:Generator_ColumnVarNameInTable="columnAginst_phon_Close" msprop:Generator_ColumnPropNameInRow="Aginst_phon_Close" msprop:Generator_ColumnPropNameInTable="Aginst_phon_CloseColumn" msprop:Generator_UserColumnName="Aginst_phon_Close" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Prepare_Rep" msprop:Generator_ColumnVarNameInTable="columnPrepare_Rep" msprop:Generator_ColumnPropNameInRow="Prepare_Rep" msprop:Generator_ColumnPropNameInTable="Prepare_RepColumn" msprop:Generator_UserColumnName="Prepare_Rep" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Owner_not_answer" msprop:Generator_ColumnVarNameInTable="columnOwner_not_answer" msprop:Generator_ColumnPropNameInRow="Owner_not_answer" msprop:Generator_ColumnPropNameInTable="Owner_not_answerColumn" msprop:Generator_UserColumnName="Owner_not_answer" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Against_Not_answer" msprop:Generator_ColumnVarNameInTable="columnAgainst_Not_answer" msprop:Generator_ColumnPropNameInRow="Against_Not_answer" msprop:Generator_ColumnPropNameInTable="Against_Not_answerColumn" msprop:Generator_UserColumnName="Against_Not_answer" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="Action_on_case" msprop:Generator_ColumnVarNameInTable="columnAction_on_case" msprop:Generator_ColumnPropNameInRow="Action_on_case" msprop:Generator_ColumnPropNameInTable="Action_on_caseColumn" msprop:Generator_UserColumnName="Action_on_case" type="xs:int" default="0" minOccurs="0" />
+              <xs:element name="date" msprop:Generator_ColumnVarNameInTable="columndate" msprop:Generator_ColumnPropNameInRow="_date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_UserColumnName="date" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

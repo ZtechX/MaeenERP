@@ -63,7 +63,7 @@ Public Class companies
     Public Function save_companies(ByVal arrDataJson As Object(), ByVal date_m As String, ByVal data_hj As String) As String()
         Dim login_user = LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString()
         Dim Names As New List(Of String)(10)
-
+        Dim success As Boolean = False
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
@@ -82,8 +82,11 @@ Public Class companies
                     Dim Comp_id = dictCompDataJson("id")
 
                     If PublicFunctions.TransUpdateInsert(dictCompDataJson, "tblcompanies", Comp_id, _sqlconn, _sqltrans) Then
+                        Dim addboard As Boolean = True
                         If Comp_id = "" Then
                             Comp_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                        Else
+                            addboard = False
                         End If
                         dictCompAdminDataJson.Add("User_Type", 2)
                         dictCompAdminDataJson.Add("group_id", 120)
@@ -91,30 +94,22 @@ Public Class companies
                         dictCompAdminDataJson.Add("comp_id", Comp_id)
 
                         If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
-                            'DBManager.ExcuteQuery("delete from tblboards where comp_id=" + Comp_id.ToString)
-                            'Dim dict = New Dictionary(Of String, Object)
-                            'dict.Add("name", "جمعية عمومية")
-                            'dict.Add("members_number", "200")
-                            'dict.Add("comp_id", Comp_id)
-                            'dict.Add("active", 1)
-                            'dict.Add("type", 1)
-                            'Dim board_id = ""
-                            'If login_user <> 1 Or CompAdmin_id <> "" Then
-                            '    If CompAdmin_id <> "" Then
-                            '        board_id = CompAdmin_id
-                            '    Else
-                            '        board_id = login_user
-                            '    End If
-                            'End If
-                            'If PublicFunctions.TransUpdateInsert(dict, "tblboards", CompAdmin_id, _sqlconn, _sqltrans) Then
+                            If addboard Then
+                                Dim dict = New Dictionary(Of String, Object)
+                                dict.Add("name", "جمعية عمومية")
+                                dict.Add("members_number", "200")
+                                dict.Add("comp_id", Comp_id)
+                                dict.Add("active", 1)
+                                dict.Add("type", 1)
+                                If Not PublicFunctions.TransUpdateInsert(dict, "tblboards", "", _sqlconn, _sqltrans) Then
+                                    _sqltrans.Rollback()
+                                    _sqlconn.Close()
+                                    Names.Add("لم يتم الحفظ")
+                                End If
+                            End If
                             _sqltrans.Commit()
                             _sqlconn.Close()
                             Names.Add("1")
-                            'Else
-                            '    _sqltrans.Rollback()
-                            '    _sqlconn.Close()
-                            '    Names.Add("لم يتم الحفظ")
-                            'End If
                         Else
                             _sqltrans.Rollback()
                             _sqlconn.Close()
@@ -122,6 +117,7 @@ Public Class companies
                         End If
                     End If
                 Else
+
                     Dim dictAcaAdminDataJson As Dictionary(Of String, Object) = arrDataJson(3)
                     Dim AcAdmin_id = dictAcaAdminDataJson("id")
                     Dim AcAdmin_User_n = dictAcaAdminDataJson("User_Name")
@@ -139,8 +135,11 @@ Public Class companies
                             dictCompDataJson.Add("email", dictCompAdminDataJson("User_Email"))
                             Dim Comp_id = dictCompDataJson("id")
                             If PublicFunctions.TransUpdateInsert(dictCompDataJson, "tblcompanies", Comp_id, _sqlconn, _sqltrans) Then
+                                Dim addboard As Boolean = True
                                 If Comp_id = "" Then
                                     Comp_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                                Else
+                                    addboard = False
                                 End If
                                 dictCompAdminDataJson.Add("User_Type", 2)
                                 dictCompAdminDataJson.Add("group_id", 120)
@@ -164,7 +163,6 @@ Public Class companies
                                         dictAcaDataJson.Add("comp_id", Comp_id)
                                         dictAcaDataJson.Add("add_by", login_user)
                                         If PublicFunctions.TransUpdateInsert(dictAcaDataJson, "acd_acadmies", Ac_id, _sqlconn, _sqltrans) Then
-
                                             dictCenAdminDataJson.Add("User_Type", 7)
                                             dictCenAdminDataJson.Add("group_id", 121)
                                             dictCenAdminDataJson.Add("comp_id", Comp_id)
@@ -181,80 +179,45 @@ Public Class companies
                                                 dictCenDataJson.Add("comp_id", Comp_id)
                                                 dictCenDataJson.Add("add_by", login_user)
                                                 If PublicFunctions.TransUpdateInsert(dictCenDataJson, "acd_training_centers", Cen_id, _sqlconn, _sqltrans) Then
+                                                    If addboard Then
+                                                        Dim dict = New Dictionary(Of String, Object)
+                                                        dict.Add("name", "جمعية عمومية")
+                                                        dict.Add("members_number", "200")
+                                                        dict.Add("comp_id", Comp_id)
+                                                        dict.Add("active", 1)
+                                                        dict.Add("type", 1)
+                                                        If PublicFunctions.TransUpdateInsert(dict, "tblboards", "", _sqlconn, _sqltrans) Then
+                                                            success = True
+                                                        End If
+                                                    Else
+                                                        success = True
+                                                    End If
 
-                                                    'DBManager.ExcuteQuery("delete from tblboards where comp_id=" + Comp_id.ToString)
-                                                    'Dim dict = New Dictionary(Of String, Object)
-                                                    'dict.Add("name", "جمعية عمومية")
-                                                    'dict.Add("members_number", "200")
-                                                    'dict.Add("comp_id", Comp_id)
-                                                    'dict.Add("active", 1)
-                                                    'dict.Add("type", 1)
-                                                    'Dim board_id = ""
-                                                    'If login_user <> 1 Or CompAdmin_id <> "" Then
-                                                    '    If CompAdmin_id <> "" Then
-                                                    '        board_id = CompAdmin_id
-                                                    '    Else
-                                                    '        board_id = login_user
-                                                    '    End If
-                                                    'End If
-                                                    'If PublicFunctions.TransUpdateInsert(dict, "tblboards", CompAdmin_id, _sqlconn, _sqltrans) Then
-                                                    _sqltrans.Commit()
-                                                    _sqlconn.Close()
-                                                    Names.Add("1")
-                                                    'Else
-                                                    '    _sqltrans.Rollback()
-                                                    '    _sqlconn.Close()
-                                                    '    Names.Add("لم يتم الحفظ")
-                                                    'End If
-
-                                                Else
-                                                    _sqltrans.Rollback()
-                                                    _sqlconn.Close()
-                                                    Names.Add("لم يتم الحفظ")
                                                 End If
 
-                                            Else
-                                                _sqltrans.Rollback()
-                                                _sqlconn.Close()
-                                                Names.Add("لم يتم الحفظ")
                                             End If
-
-
-                                        Else
-                                            _sqltrans.Rollback()
-                                            _sqlconn.Close()
-                                            Names.Add("لم يتم الحفظ")
                                         End If
-
-                                    Else
-                                        _sqltrans.Rollback()
-                                        _sqlconn.Close()
-                                        Names.Add("لم يتم الحفظ")
                                     End If
-
-                                Else
-                                    _sqltrans.Rollback()
-                                    _sqlconn.Close()
-                                    Names.Add("لم يتم الحفظ")
                                 End If
-                            Else
-                                _sqltrans.Rollback()
-                                _sqlconn.Close()
-                                Names.Add("لم يتم الحفظ")
                             End If
                         Else
                             Names.Add("اسم المستخدم او البريد الالكترونى او التلفون لمدير مركز التدريب مستخدم")
-
                         End If
                     Else
                         Names.Add("اسم المستخدم او البريد الالكترونى او التلفون لمدير الاكاديمية مستخدم")
-
                     End If
-
                 End If
             Else
                 Names.Add("اسم المستخدم او البريد الالكترونى او التلفون لمدير الجهة مستخدم")
-
+            End If
+            If success Then
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Names.Add("1")
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Names.Add("لم يتم الحفظ")
             End If
 
         Catch ex As Exception
@@ -264,14 +227,16 @@ Public Class companies
         End Try
         Return Names.ToArray
     End Function
+
+
 #End Region
 
 #Region "save_contract"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-                                                                                                                                                                                <WebMethod(True)>
-                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
     Public Function save_contract(ByVal id As String, ByVal basicDataJson As Object, ByVal attch_file_DataJsonList As List(Of Object)) As Boolean
         Try
             _sqlconn.Open()
@@ -322,7 +287,7 @@ Public Class companies
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-                                                                                                                                                                                            <WebMethod(True)>
+    <WebMethod(True)>
                                                                                                                                                                                                 <System.Web.Script.Services.ScriptMethod()>
     Public Function save_modules(ByVal id As String, ByVal comp_name As String, ByVal userId As String, ByVal comp_group_permission_id As String, ByVal basicDataJson As List(Of Object)) As Boolean
         Try

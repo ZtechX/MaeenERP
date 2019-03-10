@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="ERpMaen.SiteMaster" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -117,7 +117,7 @@
 }
                 /*#pnlMultiFileUpload{display:none;}*/
                       #UlMenu li ul li {
-    background: antiquewhite !important;
+    background: #4DB4B6 !important;
 }
 
 .btn3d:active:focus,
@@ -630,6 +630,9 @@
       </script>
     <%--<body>--%>
     <form id="form1" runat="server" enctype="multipart/form-data" method="post">
+        <div class="fancy-form" id="CurrentDate" style="display:none;"> 
+                                <uc1:HijriCalendar runat="server" ID="HijriCalendar1" />  
+                                    </div>
         <div class="zeromarg_pad col-md-12 ">
             <asp:Label ID="lblUserId" runat="server" Style="display: none"></asp:Label>
             <asp:Label ID="lblQueryString" runat="server" Style="display: none"></asp:Label>

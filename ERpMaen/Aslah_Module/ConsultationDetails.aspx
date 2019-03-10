@@ -176,11 +176,11 @@
                                     </div>
                                        <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
-                                                                        <label>ملاحظات  حول الاستشارة</label>
+                                                                        <label>وصف الاستشارة</label>
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox  TextMode="multiline" class="form-control" dbColumn="income_notes" ClientIDMode="Static" ID="income_notes" runat="server" style="margin-right: 0px;">
+                                                                        <asp:TextBox  TextMode="multiline" class="form-control" dbColumn="consult_notes" ClientIDMode="Static" ID="income_notes" runat="server" style="margin-right: 0px;">
                                                                         </asp:TextBox>
 
 
@@ -351,6 +351,18 @@
                                             <br />
                                         </div>
                                     </div>
+                                                                           <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label>ملاحظات حول الدخل</label>
+
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <asp:TextBox  TextMode="multiline" class="form-control" dbColumn="income_notes" ClientIDMode="Static" ID="TextBox1" runat="server" style="margin-right: 0px;">
+                                                                        </asp:TextBox>
+
+
+                                                                    </div>
+                                                                </div>
                                      
                                                                             <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
