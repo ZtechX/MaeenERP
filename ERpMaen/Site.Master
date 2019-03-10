@@ -6,6 +6,7 @@
 <head id="Head1" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <title>   نظام معيين </title>
+   
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
      <link id="lnbootstrapmin" rel="stylesheet" href="App_Themes/styles/bootstrap.min.css" />
@@ -641,7 +642,13 @@
                 <asp:Panel ID="pnlVMenu" runat="server" ClientIDMode="Static">
                     <div id='cssmenu' onclick="menu()" class="menu_continer">
                         <ul class="col-sm-12 col-xs-12 hidden-sm hidden-xs" runat="server" id="UlMenu"  >
-                            <li class="logocontiner"><a href='#' onclick="SwapMenu('VMenu');return false;"></a></li>
+                            <li class="logocontiner"><a href='#' onclick="SwapMenu('VMenu');return false;">     
+                                <asp:Image runat="server" ID="Image1" Height="51" ImageUrl="~/Login/images/logo1.png" />
+
+                                                     </a>
+                                        
+
+                            </li>
                             <li class="active hastip" title="Dashboard">
                                 <asp:HyperLink runat="server" ID="VDashbaord" NavigateUrl="~/main.aspx">
                                 <i class="fa fa-th color2"></i><span>القائمة الرئيسية</span>
@@ -677,7 +684,7 @@
                                 <div class="collapse navbar-collapse pull-left" id="bs-example-navbar-collapse-1 ">
                                     <ul class="nav navbar-nav" runat="server" id="HlMenu">
                                         <li class="logocontinerH"><a href='#' onclick="SwapMenu('HMenu');return false;">
-                                            <asp:Image runat="server" ID="imgLogo" Height="51" ImageUrl="images/logo.png" /></a></li>
+                                            <asp:Image runat="server" ID="imgLogo" Height="51" ImageUrl="~/Login/images/logo1.png" /></a></li>
                                         <li class="active">
                                             <asp:HyperLink NavigateUrl="~/main.aspx" runat="server" ID="HDasboard">
                                     <i class="fa-th fa"></i> الرئيسية <span class="sr-only">(الحالية)</span>
