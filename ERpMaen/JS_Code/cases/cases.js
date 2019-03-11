@@ -288,9 +288,9 @@ function save_delivery_details() {
                 $("#lblapprisal_date_m").html(new_date_m)
                 $("#lblapprisal_date_h").html(new_date)
                 if (res_type == 1) {
-                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "#039ae4");
+                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(20, 128, 131)");
                 } else {
-                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "red");
+                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(192, 156, 103)");
                 }
                 $("#dateval[date*='" + new_date_m + "']").parent().css("color", "#ffffff");
                 $("#dateval[date*='" + new_date_m + "']").parent().prop('id', res_id);
