@@ -16,8 +16,8 @@
 }
 
 .level_onevertical .signout {
-    padding-top:10px;
-    border-top:1px solid #eee;
+    padding-top: 10px;
+    border-top: 1px solid #C09C67;
 }
 .level_onevertical .user_name {
     border-bottom:0px;
@@ -30,7 +30,7 @@
     padding-right:5px;
 }
 .level_onevertical {
-  background:rgba(137,195,235,1);
+  background:#148083;
   width: 100%;
   margin: 0px !important;
   position: fixed !important;
@@ -42,7 +42,7 @@
     padding:8px
 }
     .level_onevertical .user_continer a {
-        color:#333;
+        color:#fff;
         /*line-height: 33px;*/
     }
 .notifications {
@@ -172,13 +172,13 @@
   padding-left: 10px;
 }
 .user_photo_menu {
-        width: 35px;
+    width: 35px;
     height: 35px;
     border-radius: 30px;
     padding: 5px;
-        border: 1px solid #064875;
+    border: 1px solid #C09C67;
     float: right;
-    background-color: #074D7B;
+    background-color: #C09C67;
 }
     .logocontiner li {
         text-align:center;
@@ -186,7 +186,7 @@
     .logocontiner a {
         padding:0px 0 3px 0 !important;
         margin:0px;
-        background:#022C56 !important;
+        background:#fff !important;
         border-top:0px !important;
         
     }
@@ -331,9 +331,7 @@ width: auto;
   border-top-color: inherit;
   border-left-color: inherit;
 }
-#cssmenu ul ul li {
-    border-bottom:none;
-}
+
     #cssmenu ul ul li a {
         cursor: pointer;
         border-bottom: 1px solid #148083 !important;
@@ -702,8 +700,9 @@ body {
 ul.background01 li {
     background:wheat !important;
 }
-#cssmenu ul ul li {
-     border-left:0px solid #01609e !important;
+#cssmenu ul ul  {
+    border-left: 1px solid #148083 !important;
+    border-bottom: none;
 }
 #cssmenu ul ul ul li {
      border-left:0px solid #01609e !important;
@@ -854,7 +853,7 @@ ul.background01 li {
 .logocontiner a {
         padding: 36px 0 20px 0 !important;
     margin: 0px;
-    background: white  url(../../images/logo.png) center center no-repeat !important;
+    
     border-top: 0px !important;
     background-size: 71% !important;
     width: 100%;
@@ -874,16 +873,15 @@ ul.background01 li {
 .toggle_menu_btn {
     cursor:pointer;
 }
-  .menu_continersmall .logocontiner a {
-        padding:0px 10px 3px 5px !important;
-        margin:0px;
-        background:#023556  url(../../images/berries.png) center center no-repeat !important;
-        border-top:0px !important;
-          background-size:70% !important;
-           height: 56px;
-  width: 100%;
-        
-    }
+.menu_continersmall .logocontiner a {
+    padding: 0px 10px 3px 5px !important;
+    margin: 0px;
+   
+    border-top: 0px !important;
+    background-size: 70% !important;
+    height: 56px;
+    width: 100%;
+}
     .menu_continersmall .logocontiner {
        
 
@@ -984,7 +982,7 @@ max-height: 400px
         }
         .menu_continersmall .logocontiner a {
             width:100%;
-             background: #022C56 url(../../images/Blueberry_logo.png) center center no-repeat !important;
+           
               background-size: 30% !important;
         }
         .menu_continersmall ul li a {

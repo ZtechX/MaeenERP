@@ -8,7 +8,7 @@ ul#clock li{
     width: 185px;
     height: 185px;
     margin: -95px auto 0;
-    background: url(../images/clockface.png) no-repeat;
+    background: url(../Login/images/clockface.png) no-repeat;
     list-style: none;
 }
 
@@ -27,13 +27,11 @@ ul#clock li{
 }
 
 #min {
-    background:url(../images/minhand.png);
-    z-index: 2;
+    background: url(../Login/images/minhand.png); z-index: 2;
 }
 
 #hour {
-    background: url(../images/hourhand.png);
-    z-index: 1;
+    background: url(../Login/images/hourhand.png); z-index: 1;
 }
 
 .profile-nav .user-heading.clock-row {
@@ -82,5 +80,5 @@ ul.clock-category li a:hover i,ul.clock-category li a.active i {
     margin:0;
 }
 .terques-bg {
-    background: #04C39E;
+    background: #148083;
 }

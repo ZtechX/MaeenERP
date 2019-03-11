@@ -104,13 +104,15 @@ div.bhoechie-tab-menu {
 
             div.bhoechie-tab-menu div.list-group > a .glyphicon,
             div.bhoechie-tab-menu div.list-group > a .fa {
-                color: #5A55A3;
+                color: #C09C67;
             }
-
-            div.bhoechie-tab-menu div.list-group > a:first-child {
-                border-top-right-radius: 0;
-                -moz-border-top-right-radius: 0;
-            }
+.list-group-item.active {
+    border-color: #ecd7b7 !important;
+}
+div.bhoechie-tab-menu div.list-group > a:first-child {
+    border-top-right-radius: 0;
+    -moz-border-top-right-radius: 0;
+}
 
             div.bhoechie-tab-menu div.list-group > a:last-child {
                 border-bottom-right-radius: 0;
@@ -120,8 +122,8 @@ div.bhoechie-tab-menu {
             div.bhoechie-tab-menu div.list-group > a.active,
             div.bhoechie-tab-menu div.list-group > a.active .glyphicon,
             div.bhoechie-tab-menu div.list-group > a.active .fa {
-                background-color: #5A55A3;
-                background-image: #5A55A3;
+                background-color: #C09C67;
+                background-image: #C09C67;
                 color: #ffffff;
             }
 
@@ -134,7 +136,7 @@ div.bhoechie-tab-menu {
                     border-left: 0;
                     border-bottom: 13px solid transparent;
                     border-top: 13px solid transparent;
-                    border-right: 10px solid #5A55A3;
+                    border-right: 10px solid #C09C67;
                 }
 
 div.bhoechie-tab-content {

@@ -121,6 +121,20 @@
          
         }
     </script>
+    <style>
+        .w3-display-container {
+            background-color:#4DB4B6 !important;
+            color:white !important;
+        }
+        .w3-dark-grey {
+                background-color: #4DB4B6!important;
+
+        }
+       .w3-round-large {
+                margin-right: 3px;
+                    width: 14% !important;
+        }
+    </style>
 </div>
       <script>
           'use strict';

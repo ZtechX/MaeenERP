@@ -218,7 +218,12 @@
                                                             <div class="panel-body" id="cases_info">
                                                                 <asp:Label ID="lblmainid" runat="server" ClientIDMode="static" Style="display: none" dbcolumn="id"></asp:Label>
                                                                 <%-- start group 1--%>
-                                   
+                                   <div id="caseReportDive" class="col-md-12 form-group" style="display:none;">
+                                            <button class="btn btn-info btn-lg pull-right" onclick="getCaseReport(); return false;"> تقرير عن الحالة</button>
+                                               
+                                            <button class="btn btn-info btn-lg pull-left" onclick="getCaseDetails(); return false;">تقرير بيانات الحالة الأولية</button>
+                                         
+                                   </div>
                                                                 <div class=" col-md-12 form-group ">
 
                                                                     <div class="col-md-3 col-sm-12">

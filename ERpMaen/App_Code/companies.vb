@@ -765,64 +765,63 @@ Public Class companies
 
         If compAdmin_id <> 1 Then
             condation = " and User_Type = 2"
-        End If
-        Try
-            dt_compAdmin = DBManager.Getdatatable("select * from tblUsers where  id=" + compAdmin_id + condation)
-            If dt_compAdmin.Rows.Count <> 0 Then
-                Dim str3 = PublicFunctions.ConvertDataTabletoString(dt_compAdmin)
-                Names.Add(str3)
+            Try
+                dt_compAdmin = DBManager.Getdatatable("select * from tblUsers where  id=" + compAdmin_id + condation)
+                If dt_compAdmin.Rows.Count <> 0 Then
+                    Dim str3 = PublicFunctions.ConvertDataTabletoString(dt_compAdmin)
+                    Names.Add(str3)
 
-                dt_company = DBManager.Getdatatable("SELECT * from tblcompanies  where  id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                If dt_company.Rows.Count <> 0 Then
-                    Dim str2 = PublicFunctions.ConvertDataTabletoString(dt_company)
-                    Names.Add(str2)
-                    dt_acAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=122 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                    If dt_acAdmin.Rows.Count <> 0 Then
-                        Dim str4 = PublicFunctions.ConvertDataTabletoString(dt_acAdmin)
-                        Names.Add(str4)
-                        dt_acadyme = DBManager.Getdatatable("SELECT * from acd_acadmies  where admin=" + dt_acAdmin.Rows(0).Item("id").ToString() + " and  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                        If dt_acadyme.Rows.Count <> 0 Then
-                            Dim str5 = PublicFunctions.ConvertDataTabletoString(dt_acadyme)
-                            Names.Add(str5)
+                    dt_company = DBManager.Getdatatable("SELECT * from tblcompanies  where  id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                    If dt_company.Rows.Count <> 0 Then
+                        Dim str2 = PublicFunctions.ConvertDataTabletoString(dt_company)
+                        Names.Add(str2)
+                        dt_acAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=122 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                        If dt_acAdmin.Rows.Count <> 0 Then
+                            Dim str4 = PublicFunctions.ConvertDataTabletoString(dt_acAdmin)
+                            Names.Add(str4)
+                            dt_acadyme = DBManager.Getdatatable("SELECT * from acd_acadmies  where admin=" + dt_acAdmin.Rows(0).Item("id").ToString() + " and  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                            If dt_acadyme.Rows.Count <> 0 Then
+                                Dim str5 = PublicFunctions.ConvertDataTabletoString(dt_acadyme)
+                                Names.Add(str5)
+                            Else
+                                Names.Add("0")
+                            End If
                         Else
+                            Names.Add("0")
+                            Names.Add("0")
+                        End If
+                        dt_cenAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=121 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                        If dt_cenAdmin.Rows.Count <> 0 Then
+                            Dim str6 = PublicFunctions.ConvertDataTabletoString(dt_cenAdmin)
+                            Names.Add(str6)
+                            dt_center = DBManager.Getdatatable("SELECT * from acd_training_centers  where admin=" + dt_cenAdmin.Rows(0).Item("id").ToString() + " and  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                            If dt_center.Rows.Count <> 0 Then
+                                Dim str7 = PublicFunctions.ConvertDataTabletoString(dt_center)
+                                Names.Add(str7)
+                            Else
+                                Names.Add("0")
+                            End If
+                        Else
+                            Names.Add("0")
                             Names.Add("0")
                         End If
                     Else
-                        Names.Add("0")
-                        Names.Add("0")
-                    End If
-                    dt_cenAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=121 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                    If dt_cenAdmin.Rows.Count <> 0 Then
-                        Dim str6 = PublicFunctions.ConvertDataTabletoString(dt_cenAdmin)
-                        Names.Add(str6)
-                        dt_center = DBManager.Getdatatable("SELECT * from acd_training_centers  where admin=" + dt_cenAdmin.Rows(0).Item("id").ToString() + " and  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                        If dt_center.Rows.Count <> 0 Then
-                            Dim str7 = PublicFunctions.ConvertDataTabletoString(dt_center)
-                            Names.Add(str7)
-                        Else
-                            Names.Add("0")
-                        End If
-                    Else
-                        Names.Add("0")
                         Names.Add("0")
                     End If
                 Else
                     Names.Add("0")
+                    Names.Add("0")
                 End If
-            Else
+
+
+            Catch ex As Exception
                 Names.Add("0")
-                Names.Add("0")
-            End If
-            If LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")) <> 0 Then
-                Names.Add(LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")))
-            Else
-                Names.Add("0")
-            End If
-            Return Names.ToArray
-        Catch ex As Exception
-            Names.Add("0")
-            Return Names.ToArray
-        End Try
+                Return Names.ToArray
+            End Try
+        Else
+            Names.Add("admin")
+        End If
+        Return Names.ToArray
     End Function
 
 #End Region
