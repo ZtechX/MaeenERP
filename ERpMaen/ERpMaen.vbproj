@@ -57,6 +57,9 @@
     <Reference Include="BusinessLayer.BusinessLayer">
       <HintPath>G:\ZTechx\مهندس محيى\Musaned_V04\Musaned_V04\Bin\BusinessLayer.BusinessLayer.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -1555,6 +1558,7 @@
     <Content Include="Settings_Module\companies.aspx" />
     <Content Include="Settings_Module\Users.aspx" />
     <Content Include="shadowbox-3.0.3\shadowbox.css" />
+    <Content Include="UserControls\Appraisal.ascx" />
     <Content Include="UserControls\CustomerCalendar.ascx" />
     <Content Include="UserControls\CustomerCalendar1.ascx" />
     <Content Include="UserControls\DeliveryDate.ascx" />
@@ -1570,6 +1574,19 @@
     <Content Include="assets\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <Content Include="assets\fonts\droid-kufi\DroidKufi-Bold.ttf" />
     <Content Include="assets\fonts\droid-kufi\DroidKufi-Regular.ttf" />
+    <Content Include="Report\53ty5wyh3o0oyfvb4rmnaq4z.pdf" />
+    <Content Include="Report\dulmuuuw30c2nezj1yz1hgql.pdf" />
+    <Content Include="Report\f4lnyn5cvuvsdfwbs0lykbia.pdf" />
+    <Content Include="Report\gersv0x2dz5hjpsias5iw02o.pdf" />
+    <Content Include="Report\ghgoxf30s2ubpzeasjylffnq.pdf" />
+    <Content Include="Report\h5an1sqfsy0pbvyimeubx1oh.pdf" />
+    <Content Include="Report\hlhhoerwcgxgrltqrq1nvhse.pdf" />
+    <Content Include="Report\huorgg2i1hundg33f5zsdjhz.pdf" />
+    <Content Include="Report\qfzospn33ikeatnf1z4dg3bw.pdf" />
+    <Content Include="Report\r0prgmzkkm2xqnpx3trr5ibl.pdf" />
+    <Content Include="Report\r43ewp3rb2hm3vrkws3hs00v.pdf" />
+    <Content Include="Report\ukrqofauoarowc0m5xefdo4d.pdf" />
+    <Content Include="Report\ysr0x0ittk25ixmbdj0pmuuh.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Login\css\animate-custom.css" />
     <Content Include="Login\css\BluebLogin.css" />
@@ -2028,6 +2045,13 @@
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControls\Appraisal.ascx.designer.vb">
+      <DependentUpon>Appraisal.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Appraisal.ascx.vb">
+      <DependentUpon>Appraisal.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControls\CustomerCalendar.ascx.designer.vb">
       <DependentUpon>CustomerCalendar.ascx</DependentUpon>
     </Compile>
@@ -2207,6 +2231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
