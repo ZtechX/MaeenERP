@@ -8,8 +8,8 @@ Public Class CaseDetailsRep
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
-        ' Dim Case_id = Request.QueryString("Case_id")
-        Dim Case_id = "32"
+        Dim Case_id = Request.QueryString("Case_id")
+
         If String.IsNullOrWhiteSpace(Case_id) Then
             Dim script As String = "<script type='text/javascript' defer='defer'> alert('لا يوجد بيانات متاحة للعرض');</script>"
             ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)

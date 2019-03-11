@@ -296,6 +296,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.coursat._HijriCalendar">
+<summary>
+HijriCalendar control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.coursat._Label1">
 <summary>
 Label1 control.
@@ -308,6 +317,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.coursat._Label2">
 <summary>
 Label2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.coursat._HijriCalendar1">
+<summary>
+HijriCalendar1 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -852,294 +870,6 @@ To modify move field declaration from designer file to code-behind file.
  Save  Type
  </summary>
 </member>
-<member name="F:ERpMaen.DualCalendar._ToolkitScriptManager1">
-<summary>
-ToolkitScriptManager1 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._up">
-<summary>
-up control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._upg">
-<summary>
-upg control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._lblFormName">
-<summary>
-lblFormName control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._pnlOps">
-<summary>
-pnlOps control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._pnlFunctions">
-<summary>
-pnlFunctions control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._cmdAdd">
-<summary>
-cmdAdd control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._cmdDelete">
-<summary>
-cmdDelete control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._pnlDelete">
-<summary>
-pnlDelete control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._cmdUpdate">
-<summary>
-cmdUpdate control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._PnlConfirm">
-<summary>
-PnlConfirm control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._Result">
-<summary>
-Result control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._DeualCalendar11">
-<summary>
-DeualCalendar11 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._ValidationSummary2">
-<summary>
-ValidationSummary2 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._lblmainid">
-<summary>
-lblmainid control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._pnlForm">
-<summary>
-pnlForm control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._code">
-<summary>
-code control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._Name">
-<summary>
-Name control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._RequiredFieldValidator4">
-<summary>
-RequiredFieldValidator4 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._txttel">
-<summary>
-txttel control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._RequiredFieldValidator1">
-<summary>
-RequiredFieldValidator1 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._txtNumber">
-<summary>
-txtNumber control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._ddlspecial_id">
-<summary>
-ddlspecial_id control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._TextEmail">
-<summary>
-TextEmail control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._TextBox1">
-<summary>
-TextBox1 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._TextBox3">
-<summary>
-TextBox3 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._cmdPOP">
-<summary>
-cmdPOP control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._txtUploadedFiles">
-<summary>
-txtUploadedFiles control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._MultiPhotoUpload">
-<summary>
-MultiPhotoUpload control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._DynamicTable">
-<summary>
-DynamicTable control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._lblRes">
-<summary>
-lblRes control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DualCalendar._tblH">
-<summary>
-tblH control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:ERpMaen.advisors._ToolkitScriptManager1">
 <summary>
 ToolkitScriptManager1 control.
@@ -1422,6 +1152,42 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.advisors._tblH">
 <summary>
 tblH control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.test._ToolkitScriptManager1">
+<summary>
+ToolkitScriptManager1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.test._up">
+<summary>
+up control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.test._upg">
+<summary>
+upg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.test._DeliveryDate1">
+<summary>
+DeliveryDate1 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2517,15 +2283,6 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.ConsultDetails._RequiredFieldValidator3">
-<summary>
-RequiredFieldValidator3 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:ERpMaen.ConsultDetails._ddlmaritalstat">
 <summary>
 ddlmaritalstat control.
@@ -2592,6 +2349,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.ConsultDetails._ddlincome_status">
 <summary>
 ddlincome_status control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ConsultDetails._TextBox1">
+<summary>
+TextBox1 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2805,7 +2571,7 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.test._ToolkitScriptManager1">
+<member name="F:ERpMaen.DualCalendar._ToolkitScriptManager1">
 <summary>
 ToolkitScriptManager1 control.
 </summary>
@@ -2814,7 +2580,7 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.test._up">
+<member name="F:ERpMaen.DualCalendar._up">
 <summary>
 up control.
 </summary>
@@ -2823,7 +2589,7 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.test._upg">
+<member name="F:ERpMaen.DualCalendar._upg">
 <summary>
 upg control.
 </summary>
@@ -2832,9 +2598,261 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.test._DeliveryDate1">
+<member name="F:ERpMaen.DualCalendar._lblFormName">
 <summary>
-DeliveryDate1 control.
+lblFormName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._pnlOps">
+<summary>
+pnlOps control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._pnlFunctions">
+<summary>
+pnlFunctions control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._cmdAdd">
+<summary>
+cmdAdd control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._cmdDelete">
+<summary>
+cmdDelete control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._pnlDelete">
+<summary>
+pnlDelete control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._cmdUpdate">
+<summary>
+cmdUpdate control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._PnlConfirm">
+<summary>
+PnlConfirm control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._Result">
+<summary>
+Result control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._DeualCalendar11">
+<summary>
+DeualCalendar11 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._ValidationSummary2">
+<summary>
+ValidationSummary2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._lblmainid">
+<summary>
+lblmainid control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._pnlForm">
+<summary>
+pnlForm control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._code">
+<summary>
+code control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._Name">
+<summary>
+Name control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._RequiredFieldValidator4">
+<summary>
+RequiredFieldValidator4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._txttel">
+<summary>
+txttel control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._RequiredFieldValidator1">
+<summary>
+RequiredFieldValidator1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._txtNumber">
+<summary>
+txtNumber control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._ddlspecial_id">
+<summary>
+ddlspecial_id control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._TextEmail">
+<summary>
+TextEmail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._TextBox1">
+<summary>
+TextBox1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._TextBox3">
+<summary>
+TextBox3 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._cmdPOP">
+<summary>
+cmdPOP control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._txtUploadedFiles">
+<summary>
+txtUploadedFiles control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._MultiPhotoUpload">
+<summary>
+MultiPhotoUpload control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._DynamicTable">
+<summary>
+DynamicTable control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._lblRes">
+<summary>
+lblRes control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DualCalendar._tblH">
+<summary>
+tblH control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2850,54 +2868,27 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.Dashboard._iframe1">
+<member name="F:ERpMaen.Dashboard._imgUser1">
 <summary>
-iframe1 control.
+imgUser1 control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.Dashboard._communicteUL">
+<member name="F:ERpMaen.Dashboard._lblLink">
 <summary>
-communicteUL control.
+lblLink control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.Dashboard._hallUL">
+<member name="F:ERpMaen.Dashboard._lblUserName">
 <summary>
-hallUL control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.Dashboard._storeUL">
-<summary>
-storeUL control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.Dashboard._custodyUL">
-<summary>
-custodyUL control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.Dashboard._contactsUL">
-<summary>
-contactsUL control.
+lblUserName control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2913,36 +2904,36 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.Dashboard._reportsUL">
+<member name="F:ERpMaen.Dashboard._bordsUL">
 <summary>
-reportsUL control.
+bordsUL control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.Dashboard._usersUL">
+<member name="F:ERpMaen.Dashboard._FamilyConcUL">
 <summary>
-usersUL control.
+FamilyConcUL control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.Dashboard._Ul1">
+<member name="F:ERpMaen.Dashboard._SMSUL">
 <summary>
-Ul1 control.
+SMSUL control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.Dashboard._Ul2">
+<member name="F:ERpMaen.Dashboard._AcadymicUL">
 <summary>
-Ul2 control.
+AcadymicUL control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -5113,6 +5104,646 @@ To modify move field declaration from designer file to code-behind file.
  <returns></returns>
  <remarks></remarks>
 </member>
+<member name="F:ERpMaen.StudyCaseRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.StudyCaseRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.RegistAggregationRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.RegistAggregationRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.consultationRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.consultationRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="T:ERpMaen.consultationDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.consultationDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.consultationDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.consultationDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ERpMaen.RegistAggregationDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.RegistAggregationDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.RegistAggregationDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.RegistAggregationDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="F:ERpMaen.ReportRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ReportRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ReferralRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ReferralRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ProceduresRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ProceduresRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="T:ERpMaen.ProceduresDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.ProceduresDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.ProceduresDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.ProceduresDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ERpMaen.ReferralDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.ReferralDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.ReferralDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.ReferralDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ERpMaen.ReportDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.ReportDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.ReportDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.ReportDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="F:ERpMaen.ReviewRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ReviewRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ConciliationRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ConciliationRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="T:ERpMaen.ConciliationDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.ConciliationDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.ConciliationDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.ConciliationDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="F:ERpMaen.MeasurementSatisfactionRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.MeasurementSatisfactionRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DeliveryProceedingRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DeliveryProceedingRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ReceiveProceedingRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.ReceiveProceedingRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.FollowCasesRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.FollowCasesRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="T:ERpMaen.TechRepForMembersDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.TechRepForMembersDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.TechRepForMembersDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.TechRepForMembersDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="F:ERpMaen.TechRepForMembersRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.TechRepForMembersRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.Receive_and_deliverRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.Receive_and_deliverRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.AttendanceRegistRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.AttendanceRegistRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="T:ERpMaen.agreementDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.agreementDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.agreementDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.agreementDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ERpMaen.AttendanceRegistDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.AttendanceRegistDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.AttendanceRegistDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.AttendanceRegistDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ERpMaen.caseClassificationDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.caseClassificationDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.caseClassificationDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.caseClassificationDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="F:ERpMaen.agreementRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.agreementRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="T:ERpMaen.Receive_and_deliverDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.Receive_and_deliverDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.Receive_and_deliverDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.Receive_and_deliverDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="F:ERpMaen.StatisticsofcasesRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.StatisticsofcasesRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.caseClassificationRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.caseClassificationRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="T:ERpMaen.CaseDetailsDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.CaseDetailsDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.CaseDetailsDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.CaseDetailsDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:ERpMaen.CaseReportDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.CaseReportDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.CaseReportDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.CaseReportDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="F:ERpMaen.CaseReportRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CaseReportRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CaseDetailsRep._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CaseDetailsRep._CrystalReportViewer1">
+<summary>
+CrystalReportViewer1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="T:ERpMaen.StatisticsofcasesDS">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.StatisticsofcasesDS.DetailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.StatisticsofcasesDS.DetailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.StatisticsofcasesDS.DetailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
 <member name="F:ERpMaen.email_setting._ToolkitScriptManager1">
 <summary>
 ToolkitScriptManager1 control.
@@ -6905,6 +7536,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.companies._loginUser">
+<summary>
+loginUser control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.companies._cmdSave">
 <summary>
 cmdSave control.
@@ -6977,6 +7617,24 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.companies._HijriCalendar1">
+<summary>
+HijriCalendar1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._comp_id">
+<summary>
+comp_id control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.companies._txtname_ar">
 <summary>
 txtname_ar control.
@@ -7013,51 +7671,6 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.companies._Text8">
-<summary>
-Text8 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.companies._email">
-<summary>
-email control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.companies._RequiredFieldValidator2">
-<summary>
-RequiredFieldValidator2 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.companies._chkManual">
-<summary>
-chkManual control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.companies._person">
-<summary>
-person control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:ERpMaen.companies._fax">
 <summary>
 fax control.
@@ -7085,9 +7698,99 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.companies._user_name">
+<member name="F:ERpMaen.companies._compLogo">
 <summary>
-user_name control.
+compLogo control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._compLogo_fuPhoto1">
+<summary>
+compLogo_fuPhoto1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._chkManual">
+<summary>
+chkManual control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._comp_AdminID">
+<summary>
+comp_AdminID control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._comp_AdminName">
+<summary>
+comp_AdminName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator14">
+<summary>
+RequiredFieldValidator14 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._comp_AdminNum">
+<summary>
+comp_AdminNum control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator15">
+<summary>
+RequiredFieldValidator15 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._comp_Adminemail">
+<summary>
+comp_Adminemail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator2">
+<summary>
+RequiredFieldValidator2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._comp_Adminuser_name">
+<summary>
+comp_Adminuser_name control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -7103,9 +7806,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.companies._user_password">
+<member name="F:ERpMaen.companies._Comp_user_password">
 <summary>
-user_password control.
+Comp_user_password control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -7121,27 +7824,306 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.companies._imgItemURL">
+<member name="F:ERpMaen.companies._Comp_imgItemURL">
 <summary>
-imgItemURL control.
+Comp_imgItemURL control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.companies._imgLoader">
+<member name="F:ERpMaen.companies._comp_fuPhoto1">
 <summary>
-imgLoader control.
+comp_fuPhoto1 control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.companies._fuPhoto1">
+<member name="F:ERpMaen.companies._Aca_id">
 <summary>
-fuPhoto1 control.
+Aca_id control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Ac_name">
+<summary>
+Ac_name control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator7">
+<summary>
+RequiredFieldValidator7 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Ac_AdminID">
+<summary>
+Ac_AdminID control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Ac_AdminName">
+<summary>
+Ac_AdminName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator_7">
+<summary>
+RequiredFieldValidator_7 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Ac_adminTele">
+<summary>
+Ac_adminTele control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._AcUser_Email">
+<summary>
+AcUser_Email control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator8">
+<summary>
+RequiredFieldValidator8 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Acuser_name">
+<summary>
+Acuser_name control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator9">
+<summary>
+RequiredFieldValidator9 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Acuser_password">
+<summary>
+Acuser_password control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator10">
+<summary>
+RequiredFieldValidator10 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Ac_imgItemURL">
+<summary>
+Ac_imgItemURL control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Ac_fuPhoto1">
+<summary>
+Ac_fuPhoto1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._cen_id">
+<summary>
+cen_id control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Cen_Name">
+<summary>
+Cen_Name control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator6">
+<summary>
+RequiredFieldValidator6 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._TextNotes">
+<summary>
+TextNotes control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._CenAdminID">
+<summary>
+CenAdminID control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Cen_AdminName">
+<summary>
+Cen_AdminName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator11">
+<summary>
+RequiredFieldValidator11 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Cen_AdminNum">
+<summary>
+Cen_AdminNum control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator12">
+<summary>
+RequiredFieldValidator12 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._cen_Adminemail">
+<summary>
+cen_Adminemail control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator13">
+<summary>
+RequiredFieldValidator13 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._cen_Adminuser_name">
+<summary>
+cen_Adminuser_name control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator16">
+<summary>
+RequiredFieldValidator16 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Cen_user_password">
+<summary>
+Cen_user_password control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._RequiredFieldValidator17">
+<summary>
+RequiredFieldValidator17 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._Cen_imgItemURL">
+<summary>
+Cen_imgItemURL control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._cen_fuPhoto1">
+<summary>
+cen_fuPhoto1 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -7202,6 +8184,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.companies._HijriCalendar2">
+<summary>
+HijriCalendar2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.companies._lblend_date">
 <summary>
 lblend_date control.
@@ -7214,6 +8205,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.companies._lblend_date_hj">
 <summary>
 lblend_date_hj control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._HijriCalendar3">
+<summary>
+HijriCalendar3 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -7265,6 +8265,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.companies._HijriCalendar4">
+<summary>
+HijriCalendar4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.companies._lblmaintaianace_end_date">
 <summary>
 lblmaintaianace_end_date control.
@@ -7277,6 +8286,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.companies._lblmaintaianace_end_date_hj">
 <summary>
 lblmaintaianace_end_date_hj control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.companies._HijriCalendar5">
+<summary>
+HijriCalendar5 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -7733,6 +8751,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.SiteMaster._HijriCalendar1">
+<summary>
+HijriCalendar1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.SiteMaster._lblUserId">
 <summary>
 lblUserId control.
@@ -7763,6 +8790,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.SiteMaster._UlMenu">
 <summary>
 UlMenu control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.SiteMaster._Image1">
+<summary>
+Image1 control.
 </summary>
 <remarks>
 Auto-generated field.

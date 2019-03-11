@@ -760,6 +760,7 @@ function show_all(id, flag) {
     } else {
         var case_id = $("#ddlcase_id").val();
     }
+    $("#caseReportDive").show();
     $("lblcase_id").html(case_id);
     //get_date_expenses(case_id);
     //get_date_delivery(case_id)
@@ -1141,4 +1142,12 @@ function kuwaiticalendar(today) {
     myRes[3] = iy; //islamic year
   return (id >= 10 ? id : "0" + id) + "/" + ((im) >= 10 ? (im) : "0" + (im) ) + "/" + iy; // padding
 }
-
+function getCaseReport() {
+    window.open("../report_Module/Aslah/CaseReportRep?Case_id=" + $("#combobox").val(),"_blank");
+}
+function getCaseDetails() {
+    window.open("../report_Module/Aslah/CaseDetailsRep?Case_id=" + $("#combobox").val(), "_blank");
+}
+function getReceive_and_deliver() {
+    window.open("../report_Module/Aslah/Receive_and_deliverRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
+}

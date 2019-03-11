@@ -6,6 +6,8 @@
     }
 </style>
 <div class="collapse" id="receiving_delivery_details" dir="rtl">
+      <button class="btn btn-info btn-lg pull-left" onclick="getReceive_and_deliver(); return false;">تقرير استلام وتسليم</button>
+                                         
     <div class="card card-body">
         <%-- start group 1--%>
         <ul class="nav nav-tabs">

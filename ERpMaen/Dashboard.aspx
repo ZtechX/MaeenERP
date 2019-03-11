@@ -217,6 +217,7 @@
 
         .min-height-more {
             height: 250px;
+    overflow: auto;
         }
 
         #clock_tab .tab-content > .active {
@@ -642,7 +643,7 @@
     </asp:ScriptManager>
 
     <div class="graybg row margin-top-nav">
-        <div class="pad-top-10 col-md-12" style="display:none;">
+        <div class="pad-top-10 col-md-12" >
         <div class="pad-top-10 col-md-4">
             <div class=" col-sm-12 col-md-12">
                 <div id="User" class="divcol bounceIn animated">
@@ -651,7 +652,35 @@
                             <a href="#">المستخدم</a>
                         </h2>
                         <div class="min-height-more">
-                            <iframe id="iframe1" runat="server" src="Dashboard_Module/userFrame.aspx" class="full-width" width="100%" height="180"></iframe>
+                           <div style="padding: 10px;" dir="rtl"  >
+  <div style="display:block;">
+        <center>
+           <asp:Image ID="imgUser1" ImageUrl="~/images/user_icon.png" runat="server" Width="100px" Height="100px" />
+           </center>
+             </div>    
+         <table   style="width:100% ; margin-top:10px;">
+            
+            <tr>
+                <td style="font-weight:bold;">البريد الالكترونى </td>
+                <td>
+                    <div class="userInfo">
+                        <a id="lblLink" runat="server"></a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-weight:bold;">
+                    <label style="margin-top:5px;">الاسم</label></td>
+                <td>
+                    <%--<img src="Forms/agent.png" class="icon" />--%>
+                    <asp:Label ID="lblUserName" runat="server" ></asp:Label>
+                </td>
+            </tr>
+        </table>
+        
+        
+    
+    </div>
                         </div>
                     </div>
                 </div>
@@ -752,30 +781,21 @@
         </div>
            <div class="marg_top_10 col-md-8 colmnpadding">
 
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
 
                 <div class="card-container">
                     <div class="card">
-                        <div class="front" style="background-color: #3F9CD2;">
-                            <h1 style="font-size: 80px;"><i class="fa fa-phone-square"></i></h1>
-                            <h1 class="">الاتصالات الادارية</h1>
+                        <div class="front" style="background-color: #61b8ea;">
+                            <h1 style="font-size: 80px;"><i class="fa fa-cogs"></i></h1>
+                            <h1 class="">الإعدادات</h1>
 
                         </div>
                         <!-- end front panel -->
                         <div class="back">
                             <div class="main">
                                 <div class="min-height-more">
-                                    <ul class="links-list" id="communicteUL" runat="server" style="text-align: center;">
-                                       <%-- <li>
-                                            <a id="A4" href="communicte_Module/letters_issued.aspx" target="_blank">الصادر والوارد
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-                                                                                <li>
-                                            <a id="A1" href="communicte_Module/Circular.aspx" target="_blank">التعاميم
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>--%>
+                                    <ul class="links-list" id="settingsUL" runat="server" style="text-align: center;">
+                                     
                                     </ul>
                                 </div>
                             </div>
@@ -789,13 +809,13 @@
 
                 </div>
             </div>
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
 
                 <div class="card-container">
                     <div class="card">
-                        <div class="front" style="background-color: #00af8b;">
-                            <h1 style="font-size: 80px;"><i class="fa fa-university"></i></h1>
-                            <h1 class="">القاعات</h1>
+                        <div class="front" style="background-color: #55b7a3;">
+                            <h1 style="font-size: 80px;"><i class="fa fa-users"></i></h1>
+                            <h1 class="">مجالس الجمعية</h1>
 
                         </div>
                         <!-- end front panel -->
@@ -803,18 +823,8 @@
 
                             <div class="main">
                                 <div class="min-height-more">
-                                    <ul class="links-list" id="hallUL" runat="server"  style="text-align: center;">
-                                    <%--    <li>
-                                            <a id="A9" href="Hall_Module/Halls.aspx" target="_blank">القاعات
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a id="A10" href="Hall_Module/bookings.aspx" target="_blank">حجز القاعات
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>--%>
+                                    <ul class="links-list" id="bordsUL" runat="server"  style="text-align: center;">
+                                   
                                      
                                     </ul>
                                 </div>
@@ -830,13 +840,13 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
 
                 <div class="card-container">
                     <div class="card">
-                        <div class="front" style="background-color: #FB5302;">
-                            <h1 style="font-size: 80px;"><i class="fa fa-home"></i></h1>
-                            <h1 class="">المستودعات</h1>
+                        <div class="front" style="background-color: #09c0c5;">
+                            <h1 style="font-size: 80px;"><i class="fa fa-handshake-o"></i></h1>
+                            <h1 class="">الإصلاح الاسرى</h1>
 
                         </div>
                         <!-- end front panel -->
@@ -844,33 +854,8 @@
 
                             <div class="main">
                                 <div class="min-height-more">
-                                    <ul class="links-list" id="storeUL" runat="server" style="text-align: center;">
-                                        <%--<li>
-                                            <a id="A19" href="Work_Module/stors.aspx" target="_blank">المستودعات
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a id="A20" href="Work_Module/cupbord.aspx" target="_blank">الدواليب
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a id="A21" href="Work_Module/rack.aspx" target="_blank">الارفف
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a id="A22" href="Work_Module/rack.aspx" target="_blank">الاصناف
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a id="A23" href="Work_Module/transfer.aspx" target="_blank">حركة الأصناف
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>--%>
+                                    <ul class="links-list" id="FamilyConcUL" runat="server" style="text-align: center;">
+                                  
                                     </ul>
                                 </div>
                             </div>
@@ -884,13 +869,13 @@
 
                 </div>
             </div>
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
 
                 <div class="card-container">
                     <div class="card">
-                        <div class="front" style="background-color: #5D1A8B;">
-                            <h1 style="font-size: 80px;"><i class="fa fa-briefcase"></i></h1>
-                            <h1 class="">العهد</h1>
+                        <div class="front" style="background-color: #C09C67;">
+                            <h1 style="font-size: 80px;"><i class="fa fa-envelope-o"></i></h1>
+                            <h1 class="">رسائل SMS</h1>
 
                         </div>
                         <!-- end front panel -->
@@ -898,24 +883,8 @@
 
                             <div class="main">
                                 <div class="min-height-more">
-                                    <ul class="links-list" id="custodyUL" runat="server" style="text-align: center;">
-                                        <%--<li>
-                                            <a id="A14" href="custody_Module/Custodyf.aspx" target="_blank">العهدة
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a id="A15" href="custody_Module/custody_category.aspx" target="_blank">تصنيف العهدة
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a id="A16" href="custody_Module/custody_transaction.aspx" target="_blank">حركة العهدة
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>--%>
-                                      
+                                    <ul class="links-list" id="SMSUL" runat="server" style="text-align: center;">
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -930,13 +899,13 @@
                 </div>
             </div>
         
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
 
                 <div class="card-container">
                     <div class="card">
-                        <div class="front" style="background-color: #6D9E10;">
+                        <div class="front" style="background-color: #618fea;">
                             <h1 style="font-size: 80px;"><i class="fa fa-address-card" aria-hidden="true"></i></h1>
-                            <h1 class=""> دليل الاتصالات</h1>
+                            <h1 class="">الإكاديمية</h1>
 
                         </div>
                         <!-- end front panel -->
@@ -944,19 +913,8 @@
 
                             <div class="main">
                                 <div class="min-height-more">
-                                    <ul class="links-list" id="contactsUL" runat="server" style="text-align: center;">
-                                      <%--  <li>
-                                            <a id="A24" href="Contacts_Module/Contacts_Sub.aspx" target="_blank">التصنيفات الفرعية
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a id="A25" href="Contacts_Module/Contacts.aspx" target="_blank">جهات الاتصال
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>--%>
-                                       
+                                    <ul class="links-list" id="AcadymicUL" runat="server" style="text-align: center;">
+                               
                                     </ul>
                                 </div>
                             </div>
@@ -972,226 +930,7 @@
             </div>
        
             
-            <div class="col-sm-12 col-md-3">
-
-                <div class="card-container">
-                    <div class="card">
-                        <div class="front" style="background-color: #F9BD0D;">
-                            <h1 style="font-size: 80px;"><i class="fa fa-wrench" aria-hidden="true"></i></h1>
-                            <h1 class="">  الاعدادات</h1>
-                        </div>
-                        <!-- end front panel -->
-                        <div class="back">
-                            <div class="main">
-                                <div class="min-height-more">
-                                    <ul class="links-list" id="settingsUL" runat="server"  style="text-align: center;">
-                                      <%--  <li>
-                                            <a id="A30" href="Admin_Module/Settings.aspx" target="_blank">اعدادات عامة
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>--%>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- end back panel -->
-                        </div>
-                        <!-- end card -->
-                    </div>
-                    <!-- end card-container -->
-                </div>
-            </div>
-             <div class="col-sm-12 col-md-3">
-
-                <div class="card-container">
-                    <div class="card">
-                        <div class="front" style="background-color: #9E7910;">
-                            <h1 style="font-size: 80px;"><i class="fa fa-flag" aria-hidden="true"></i></h1>
-                            <h1 class="">  التقارير</h1>
-                        </div>
-                        <!-- end front panel -->
-                        <div class="back">
-                            <div class="main">
-                                <div class="min-height-more">
-                                    <ul class="links-list" id="reportsUL" runat="server" style="text-align: center;">
-                                      <%--  <li>
-                                            <a id="A5" href="Work_Module/store_rep.aspx" target="_blank">احصائيات المستودعات
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a id="A6" href="Work_Module/item_rep.aspx" target="_blank">احصائيات الاصناف
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-                                         <li>
-                                            <a id="A7" href="Reports_Module/Contacts_Report.aspx" target="_blank">دليل الاتصالات
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>--%>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- end back panel -->
-                        </div>
-                        <!-- end card -->
-                    </div>
-                    <!-- end card-container -->
-                </div>
-            </div>
-                         <div class="col-sm-12 col-md-3">
-
-                <div class="card-container">
-                    <div class="card">
-                        <div class="front" style="background-color: #494848;">
-                            <h1 style="font-size: 80px;"><i class="fa fa-users" aria-hidden="true"></i></h1>
-                            <h1 class="">  الموظفين</h1>
-                        </div>
-                        <!-- end front panel -->
-                        <div class="back">
-                            <div class="main">
-                                <div class="min-height-more">
-                                    <ul class="links-list" id="usersUL" runat="server"   style="text-align: center;">
-                                       <%-- <li>
-                                            <a id="A29" href="Admin_Module/Users.aspx" target="_blank">الموظفين والصلاحيات
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>--%>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- end back panel -->
-                        </div>
-                        <!-- end card -->
-                    </div>
-                    <!-- end card-container -->
-                </div>
-            </div>
-
                </div>
-
-
-
-            <div class="col-sm-12 col-md-4">
-
-                <div class="card-container">
-                    <div class="card">
-                        <div class="front" style="background-color:  #00af8b;">
-                            <h1 style="font-size: 80px;"><i class="fa fa-users" aria-hidden="true"></i></h1>
-                            <h1 class="">  عرض الميزانية  </h1>
-                        </div>
-                        <!-- end front panel -->
-                        <div class="back">
-                            <div class="main">
-                                <div class="min-height-more">
-                                    <ul class="links-list" id="Ul1" runat="server"   style="text-align: center;">
-                                        <li>
-                                            <a id="A29" href="https://dark0past.000webhostapp.com/Services/index.php" target="_blank">ميزانية الخدمات 
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-
-                                         <li>
-                                            <a id="A1" href="https://dark0past.000webhostapp.com/Programs/index.php" target="_blank">ميزانية البرامج 
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-                                           <li>
-                                            <a id="A6" href="https://dark0past.000webhostapp.com/PR/index.php" target="_blank">ميزانية العلاقات العامة والإعلام 
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-                                           <li>
-                                            <a id="A7" href="https://dark0past.000webhostapp.com/HR/index.php" target="_blank">ميزانية الموارد البشرية والتشغيلية 
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-
-                                      
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- end back panel -->
-                        </div>
-                        <!-- end card -->
-                    </div>
-                    <!-- end card-container -->
-                </div>
-            </div>
-
-
-
-            <div class="col-sm-12 col-md-4">
-
-                <div class="card-container">
-                    <div class="card">
-                        <div class="front" style="background-color: #494848;">
-                            <h1 style="font-size: 80px;"><i class="fa fa-users" aria-hidden="true"></i></h1>
-                            <h1 class="">  تعديل الميزانية</h1>
-                        </div>
-                        <!-- end front panel -->
-                        <div class="back">
-                            <div class="main">
-                                <div class="min-height-more">
-                                    <ul class="links-list" id="Ul2" runat="server"   style="text-align: center;">
-                                        <li>
-                                            <a id="A3" href="https://dark0past.000webhostapp.com/Services/index2.php" target="_blank">ميزانية الخدمات 
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-
-                                         <li>
-                                            <a id="A4" href="https://dark0past.000webhostapp.com/Programs/index2.php" target="_blank">ميزانية البرامج 
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-
-                                       <li>
-                                            <a id="A2" href="https://dark0past.000webhostapp.com/PR/index2.php" target="_blank">ميزانية العلاقات العامة والإعلام 
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-                                           <li>
-                                            <a id="A5" href="https://dark0past.000webhostapp.com/HR/index2.php" target="_blank">ميزانية الموارد البشرية والتشغيلية 
-                                      <span style="float: left;" class="highlight"></span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- end back panel -->
-                        </div>
-                        <!-- end card -->
-                    </div>
-                    <!-- end card-container -->
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
              </div>
           </div>
