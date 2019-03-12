@@ -875,7 +875,7 @@ function show_all(id, flag) {
                 for (var y = 0; y < sessions.length; y++) {
                     result_sessions = result_sessions + '<tr>' + '<td>' + sessions[y].code + '</td>' +
                         '<td>' + sessions[y].date_h + '</td>' +
-                        '<td><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + sessions[y].id + ',4); return false; "><i class="fa fa-eye"></i></button><button class="btn btn-xs btn-danger btn-quick" title = "Delete" onclick = "delete_details(' + sessions[y].id + ',4); return false;" > <i class="fa fa-times"></i></button ></td>' +
+                        '<td><button class="btn btn-xs btn-primary btn-quick" title="Print Session" onclick="getAttendanceRegist(' + sessions[y].id + '); return false; "><i class="fa fa-print"></i></button><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + sessions[y].id + ',4); return false; "><i class="fa fa-eye"></i></button><button class="btn btn-xs btn-danger btn-quick" title = "Delete" onclick = "delete_details(' + sessions[y].id + ',4); return false;" > <i class="fa fa-times"></i></button ></td>' +
                         '</tr >';
                 }
                 $("#sessions").html(result_sessions);
@@ -1150,4 +1150,17 @@ function getCaseDetails() {
 }
 function getReceive_and_deliver() {
     window.open("../report_Module/Aslah/Receive_and_deliverRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
+}
+function getProceedingReps(DeliveryProceeding){
+    window.open("../report_Module/Aslah/ReceiveProceedingRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html() , "_blank");
+    DeliveryProceeding();
+}
+function DeliveryProceeding() {
+    window.open("../report_Module/Aslah/DeliveryProceedingRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
+}
+function getAttendanceRegist(session_id) {
+    window.open("../report_Module/Aslah/AttendanceRegistRep?Case_id=" + $("#combobox").val() + "&session_id="+session_id, "_blank");
+}
+function getConciliation() {
+    window.open("../report_Module/Aslah/ConciliationRep?Conc_id=" + $("#case_conciliation").find("#lblconciliation_id").html(), "_blank");
 }

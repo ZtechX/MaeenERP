@@ -8,8 +8,9 @@ Public Class ConciliationRep
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
-        ' Dim Case_id = Request.QueryString("Case_id")
-        Dim Conc_id = "7"
+
+        Dim Conc_id = Request.QueryString("Conc_id")
+
         If String.IsNullOrWhiteSpace(Conc_id) Then
             Dim script As String = "<script type='text/javascript' defer='defer'> alert('لا يوجد بيانات متاحة للعرض');</script>"
             ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)

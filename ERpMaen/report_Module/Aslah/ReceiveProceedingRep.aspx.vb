@@ -8,9 +8,9 @@ Public Class ReceiveProceedingRep
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
-        ' Dim Case_id = Request.QueryString("Case_id")
-        Dim Case_id = "32"
-        Dim details_id = "68"
+
+        Dim Case_id = Request.QueryString("Case_id")
+        Dim details_id = Request.QueryString("details_id")
         If String.IsNullOrWhiteSpace(Case_id) Or String.IsNullOrWhiteSpace(details_id) Then
             Dim script As String = "<script type='text/javascript' defer='defer'> alert('لا يوجد بيانات متاحة للعرض');</script>"
             ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)

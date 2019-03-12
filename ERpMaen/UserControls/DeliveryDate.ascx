@@ -137,7 +137,7 @@
 
         </div>
         <div class="col-md-9 col-sm-12">
-            <asp:LinkButton OnClientClick="state_setting(); return false;" ID="LinkButton1" runat="server"
+            <asp:LinkButton OnClientClick="getProceedingReps(DeliveryProceeding); return false;" ID="LinkButton1" runat="server"
                 SkinID="btn-top pull-left" CssClass="pull-left" CausesValidation="false">
                                                                   <i class="fa fa-print"></i>
                                                                    طباعة محضر الاستلام
