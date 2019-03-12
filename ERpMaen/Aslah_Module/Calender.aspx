@@ -3,6 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%--<%@ Register Src="~/UserControls/Person.ascx" TagPrefix="uc1" TagName="Person" %>--%>
 <%@ Register Src="~/UserControls/DeliveryDate.ascx" TagPrefix="uc1" TagName="DeliveryDate" %>
+<%@ Register Src="~/UserControls/Appraisal.ascx" TagPrefix="uc1" TagName="Appraisal" %>
     
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
@@ -33,6 +34,7 @@
 		</button>
 	</div>
     <uc1:DeliveryDate runat="server" ID="DeliveryDate1" />
+    <uc1:Appraisal runat="server" ID="Appraisal1" />
 	<div id="calendar"     class="w3-container w3-margin-top"></div>
 
   

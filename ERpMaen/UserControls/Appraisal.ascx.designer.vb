@@ -11,50 +11,68 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class test
+Partial Public Class Appraisal
     
     '''<summary>
-    '''ToolkitScriptManager1 control.
+    '''lblitem_id control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ToolkitScriptManager1 As Global.System.Web.UI.ScriptManager
+    Protected WithEvents lblitem_id As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''up control.
+    '''lblcase_apprisal_id control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents up As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents lblcase_apprisal_id As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''upg control.
+    '''lbldetail_id control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents upg As Global.System.Web.UI.UpdateProgress
+    Protected WithEvents lbldetail_id As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''DeliveryDate1 control.
+    '''lbltype control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents DeliveryDate1 As Global.ERpMaen.DeliveryDate
+    Protected WithEvents lbltype As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Appraisal1 control.
+    '''lblapprisal_date_m control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Appraisal1 As Global.ERpMaen.Appraisal
+    Protected WithEvents lblapprisal_date_m As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblapprisal_date_h control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblapprisal_date_h As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''TextBox20 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox20 As Global.System.Web.UI.WebControls.TextBox
 End Class

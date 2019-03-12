@@ -230,6 +230,15 @@ Partial Public Class cases
     Protected WithEvents txtauthorization_no As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
+    '''txtpassword control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtpassword As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''txtname2 control.
     '''</summary>
     '''<remarks>
@@ -264,6 +273,15 @@ Partial Public Class cases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtauthorization_no2 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''txtpassword2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtpassword2 As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''ddlchild_custody control.
@@ -822,4 +840,13 @@ Partial Public Class cases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Person As Global.ERpMaen.Person
+    
+    '''<summary>
+    '''Appraisal1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Appraisal1 As Global.ERpMaen.Appraisal
 End Class
