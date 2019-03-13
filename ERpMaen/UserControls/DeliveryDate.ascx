@@ -6,8 +6,10 @@
     }
 </style>
 <div class="collapse" id="receiving_delivery_details" dir="rtl">
-      <button class="btn btn-info btn-lg pull-left" onclick="getReceive_and_deliver(); return false;">تقرير استلام وتسليم</button>
-                                         
+    <div class="row">
+      <button class="btn btn-info btn-lg pull-left" onclick="getReceive_and_deliver(); return false;" style="margin-right:10px;">تقرير استلام وتسليم</button>
+               <button class="btn btn-info btn-lg pull-left" onclick="getagreement(); return false;">طباعة اتفاق تنفيذ استلام وتسليم</button>
+          </div>                                
     <div class="card card-body">
         <%-- start group 1--%>
         <ul class="nav nav-tabs">
@@ -64,6 +66,8 @@
                     <asp:ListItem Value="0">اختر</asp:ListItem>
                 </asp:DropDownList>
                 <button class="btn btn-primary" type="button" onclick="find_persons('ddldeliverer_id',1)">اضافة مسلم </button>
+                 <button class="btn btn-primary pull-left"" type="button" onclick="getReview('deliverer_id')">طباعة إفادة مراجعة </button>
+           
             </div>
         </div>
 
@@ -79,7 +83,8 @@
                     <asp:ListItem Value="0">اختر</asp:ListItem>
                 </asp:DropDownList>
                 <button class="btn btn-primary" type="button" onclick="find_persons('ddlreciever_id',1)">اضافة مستلم </button>
-            </div>
+           <button class="btn btn-primary pull-left"" type="button" onclick="getReview('reciever_id')">طباعة إفادة مراجعة </button>
+                </div>
         </div>
           </div>
           </div>

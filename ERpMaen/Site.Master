@@ -26,7 +26,7 @@
 <%--    <link href="http://lscrm.blueberry.software/Widgets/style.css" rel="stylesheet" />--%>
 
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0" />
-
+ 
 <%--    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script src="http://www.google.com/jsapi"></script>
     <script src="http://ajax.microsoft.com/ajax/jquery.ui/1.11.4/jquery-ui.min.js"></script>
@@ -642,7 +642,7 @@
                 </div>
                 <asp:Panel ID="pnlVMenu" runat="server" ClientIDMode="Static">
                     <div id='cssmenu' onclick="menu()" class="menu_continer">
-                        <ul class="col-sm-12 col-xs-12 hidden-sm hidden-xs" runat="server" id="UlMenu"  >
+                        <ul class="col-sm-12 col-xs-12 hidden-sm hidden-xs" runat="server" id="UlMenu" style="overflow-y: scroll;" >
                             <li class="logocontiner" style ="background-color :white ;"><a href='#' onclick="SwapMenu('VMenu');return false;">
                             
                                             <asp:Image runat="server" ID="Image1" Height="51" ImageUrl="~/Login/images/logo1.png" />    
@@ -681,7 +681,7 @@
                             <%-- Horizontal menu ================== --%>
                             <asp:Panel ID="pnlHMenu" runat="server" Style="display: none" ClientIDMode="Static">
                                 <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1 ">
-                                    <ul class="nav navbar-nav" runat="server" id="HlMenu">
+                                    <ul class="nav navbar-nav" runat="server" id="HlMenu" >
                                         <li class="logocontinerH"><a href='#' onclick="SwapMenu('HMenu');return false;">
                                             <asp:Image runat="server" ID="imgLogo" Height="51" ImageUrl="~/Login/images/logo1.png" /></a></li>
                                         <li class="active">

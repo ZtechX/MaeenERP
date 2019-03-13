@@ -240,6 +240,9 @@ Public Class SiteMaster
                 Dim spanName As New LiteralControl("<span>" + FormName + "</span>")
                 lb.Controls.Add(spanName)
                 lb.NavigateUrl = "~/" + FormUrl
+                If SubMenuId = 8 Then
+                    lb.Target = "_blank"
+                End If
                 UlMenu.Controls.Add(lb)
                 Dim liFormClose As New LiteralControl("</li>")
                 UlMenu.Controls.Add(liFormClose)
@@ -254,7 +257,9 @@ Public Class SiteMaster
                 lbH.ClientIDMode = UI.ClientIDMode.Static
                 lbH.NavigateUrl = "~/" + FormUrl
                 lbH.Text = FormName
-
+                If SubMenuId = 8 Then
+                    lbH.Target = "_blank"
+                End If
                 HlMenu.Controls.Add(lbH)
                 Dim liHFormClose As New LiteralControl("</li>")
                 HlMenu.Controls.Add(liHFormClose)

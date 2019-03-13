@@ -2976,6 +2976,24 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.Dashboard._ManagementCallsUl">
+<summary>
+ManagementCallsUl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.Dashboard._ReportUL">
+<summary>
+ReportUL control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="M:ERpMaen.Dashboard.fillMenu">
  <summary>
  Get Menus, sub menus and forms.

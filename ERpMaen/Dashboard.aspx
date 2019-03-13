@@ -781,7 +781,7 @@
         </div>
            <div class="marg_top_10 col-md-8 colmnpadding">
 
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-3">
 
                 <div class="card-container">
                     <div class="card">
@@ -809,7 +809,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-3">
 
                 <div class="card-container">
                     <div class="card">
@@ -840,7 +840,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-3">
 
                 <div class="card-container">
                     <div class="card">
@@ -869,7 +869,7 @@
 
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-3">
 
                 <div class="card-container">
                     <div class="card">
@@ -899,12 +899,12 @@
                 </div>
             </div>
         
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-3">
 
                 <div class="card-container">
                     <div class="card">
                         <div class="front" style="background-color: #618fea;">
-                            <h1 style="font-size: 80px;"><i class="fa fa-address-card" aria-hidden="true"></i></h1>
+                            <h1 style="font-size: 80px;"><i class="fa fa-graduation-cap" aria-hidden="true"></i></h1>
                             <h1 class="">الإكاديمية</h1>
 
                         </div>
@@ -928,8 +928,65 @@
 
                 </div>
             </div>
-       
-            
+               <div class="col-sm-12 col-md-3">
+
+                <div class="card-container">
+                    <div class="card">
+                        <div class="front" style="background-color: #61b8ea;">
+                            <h1 style="font-size: 80px;"><i class="fa fa-cogs"></i></h1>
+                            <h1 class="">الاتصالات الإدارية</h1>
+
+                        </div>
+                        <!-- end front panel -->
+                        <div class="back">
+                            <div class="main">
+                                <div class="min-height-more">
+                                    <ul class="links-list" id="ManagementCallsUl" runat="server" style="text-align: center;">
+                                     
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <!-- end back panel -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end card-container -->
+
+                </div>
+            </div>
+              
+           <div class="col-sm-12 col-md-3">
+
+                <div class="card-container">
+                    <div class="card">
+                        <div class="front" style="background-color: #55b7a3;">
+                            <h1 style="font-size: 80px;"><i class="fa fa-flag"></i></h1>
+                            <h1 class="">التقارير</h1>
+
+                        </div>
+                        <!-- end front panel -->
+                        <div class="back">
+
+                            <div class="main">
+                                <div class="min-height-more">
+                                    <ul class="links-list" id="ReportUL" runat="server"  style="text-align: center;">
+                                   
+                                     
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <!-- end back panel -->
+                        </div>
+                        <!-- end card -->
+                    </div>
+                    <!-- end card-container -->
+
+                </div>
+            </div>
                </div>
 
              </div>

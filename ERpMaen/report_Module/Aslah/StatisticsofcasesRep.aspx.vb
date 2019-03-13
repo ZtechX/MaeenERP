@@ -25,7 +25,7 @@ Public Class StatisticsofcasesRep
 isNull((select count(ash_case_persons.id) from ash_case_persons where ash_case_persons.case_id=ash_cases.id) ,0)+isNull(ash_cases.childrens_no,0)  as 'beneficiaries_num'
   FROM ash_cases left join ash_courts on ash_cases.court_id= ash_courts.id
    left join tbllock_up on tbllock_up.id=ash_cases.depart  
-  left join ash_case_persons persons1 on ash_cases.person1_id=persons1.id"
+  left join ash_case_persons persons1 on ash_cases.person1_id=persons1.id  where ash_cases.comp_id is not null"
             dt2 = DBManager.Getdatatable(query)
             Dim index = 0
             Dim ds As New StatisticsofcasesDS

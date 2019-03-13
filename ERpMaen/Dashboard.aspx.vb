@@ -190,6 +190,9 @@ Public Class Dashboard
                 Dim spanName As New LiteralControl("<span>" + FormName + "</span>")
                 lb.Controls.Add(spanName)
                 lb.NavigateUrl = "~/" + FormUrl
+                If SubMenuId = 8 Then
+                    lb.Target = "_blank"
+                End If
                 'UlMenu.Controls.Add(lb)
                 Dim liFormClose As New LiteralControl("</li>")
                 If SubMenuId = 1 Then
@@ -212,6 +215,14 @@ Public Class Dashboard
                     AcadymicUL.Controls.Add(liForm)
                     AcadymicUL.Controls.Add(lb)
                     AcadymicUL.Controls.Add(liFormClose)
+                ElseIf SubMenuId = 8 Then
+                    ReportUL.Controls.Add(liForm)
+                    ReportUL.Controls.Add(lb)
+                    ReportUL.Controls.Add(liFormClose)
+                ElseIf SubMenuId = 5 Then
+                    ManagementCallsUl.Controls.Add(liForm)
+                    ManagementCallsUl.Controls.Add(lb)
+                    ManagementCallsUl.Controls.Add(liFormClose)
                 End If
 
 
@@ -226,6 +237,9 @@ Public Class Dashboard
                 lbH.ClientIDMode = UI.ClientIDMode.Static
                 lbH.NavigateUrl = "~/" + FormUrl
                 lbH.Text = FormName
+                If SubMenuId = 8 Then
+                    lbH.Target = "_blank"
+                End If
 
                 'HlMenu.Controls.Add(lbH)
                 Dim liHFormClose As New LiteralControl("</li>")

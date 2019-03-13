@@ -1319,6 +1319,10 @@
                                                             <div class="panel-body" id="case_correspondences">
                                                                 <%-- start group 2--%>
                                                                 <asp:Label ID="lblcorrespondences_id" ClientIDMode="static" runat="server" Style="display: none" dbcolumn="id"></asp:Label>
+                                                                 <div class=" col-md-12 form-group ">
+                                                                <button class="btn btn-info btn-lg pull-left" onclick="getProcedure(); return false;">طباعة إجراءات العضو المباشر</button>
+                                         </div>
+                                                                
                                                                 <div class=" col-md-12 form-group ">
 
                                                                     <div class="col-md-3 col-sm-12">

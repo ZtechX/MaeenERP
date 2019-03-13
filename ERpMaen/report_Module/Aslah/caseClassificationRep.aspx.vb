@@ -23,7 +23,7 @@ Public Class caseClassificationRep
             Dim query = "SELECT ash_cases.code,ash_courts.name as 'from',
 tbllock_up.Description as 'service_type',court_details   
   FROM ash_cases left join ash_courts on ash_cases.court_id= ash_courts.id
-   left join tbllock_up on tbllock_up.id=ash_cases.depart  "
+   left join tbllock_up on tbllock_up.id=ash_cases.depart  where ash_cases.comp_id is not null"
             dt2 = DBManager.Getdatatable(query)
             Dim index = 0
             Dim ds As New caseClassificationDS

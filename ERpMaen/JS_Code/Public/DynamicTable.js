@@ -483,10 +483,10 @@ function applyDatatable(val) {
                 else if (getFormName() == "ConsultationDetails") {
                     ConsultationDetails.isSuperAdmin(function (val) {
                         if (val) {
-                            $('td:last-child', nRow).html('<div class="hidden-sm hidden-xs action-buttons"><a onclick="viewConslute(' + aData[0] + '); return 0;"   style="color:green;margin-left:10px;" ><i class="ace-icon fa fa-pencil fa-lg"></i></a><a target="_blank" href="consultings.aspx?id=' + aData[0] + '" style="color:#89c3ea;margin-left:10px;"  ><i class="ace-icon fa fa-envelope fa-lg"></i></a><a onclick="assignAdvisor(' + aData[0] +'); return 0;" style="color:black;margin-left:10px;" ><i class="ace-icon fa fa-hand-pointer-o fa-lg"></i></a></div>');
+                            $('td:last-child', nRow).html('<div class="hidden-sm hidden-xs action-buttons"><a onclick="viewConslute(' + aData[0] + '); return 0;"   style="color:green;margin-left:10px;" ><i class="ace-icon fa fa-pencil fa-lg"></i></a><a target="_blank" href="consultings.aspx?id=' + aData[0] + '" style="color:#89c3ea;margin-left:10px;"  ><i class="ace-icon fa fa-envelope fa-lg"></i></a><a onclick="assignAdvisor(' + aData[0] + '); return 0;" style="color:black;margin-left:10px;" ><i class="ace-icon fa fa-hand-pointer-o fa-lg"></i></a><a onclick="getconsultation(' + aData[0] + '); return 0;"   style="color:#4db4b6;margin-left:10px;" ><i class="ace-icon fa fa-print fa-lg"></i></a></div>');
 
                         } else {
-                            $('td:last-child', nRow).html('<div class="hidden-sm hidden-xs action-buttons"><a onclick="viewConslute(' + aData[0] + '); return 0;"   style="color:green;margin-left:10px;" ><i class="ace-icon fa fa-pencil fa-lg"></i></a><a target="_blank" href="consultings.aspx?id=' + aData[0] +'" style="color:#89c3ea;margin-left:10px;"  ><i class="ace-icon fa fa-envelope fa-lg"></i></a></div>');
+                            $('td:last-child', nRow).html('<div class="hidden-sm hidden-xs action-buttons"><a onclick="viewConslute(' + aData[0] + '); return 0;"   style="color:green;margin-left:10px;" ><i class="ace-icon fa fa-pencil fa-lg"></i></a><a target="_blank" href="consultings.aspx?id=' + aData[0] + '" style="color:#89c3ea;margin-left:10px;"  ><i class="ace-icon fa fa-envelope fa-lg"></i></a><a onclick="getconsultation(' + aData[0] + '); return 0;"   style="color:#4db4b6;margin-left:10px;" ><i class="ace-icon fa fa-print fa-lg"></i></a></div>');
 
                         }
                     });

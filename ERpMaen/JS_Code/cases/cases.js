@@ -1232,3 +1232,19 @@ function getAttendanceRegist(session_id) {
 function getConciliation() {
     window.open("../report_Module/Aslah/ConciliationRep?Conc_id=" + $("#case_conciliation").find("#lblconciliation_id").html(), "_blank");
 }
+function getagreement() {
+    window.open("../report_Module/Aslah/agreementRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
+}
+function getReview(type) {
+    var person_id ;
+    if (type == "deliverer_id") {
+        person_id = $("#receiving_delivery_details").find("#ddldeliverer_id").val();
+    } else if (type == "reciever_id") {
+        person_id = $("#receiving_delivery_details").find("#ddlreciever_id").val();
+    }
+    window.open("../report_Module/Aslah/ReviewRep?details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html() + "&type=" + type + "&person_id="+person_id + "&_date=" + Pub_date_hj, "_blank");
+
+}
+function getProcedure() {
+    window.open("../report_Module/Aslah/ProceduresRep?Case_id=" + $("#combobox").val() , "_blank");
+}

@@ -93,4 +93,22 @@ Partial Public Class Dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents AcadymicUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''ManagementCallsUl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ManagementCallsUl As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''ReportUL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ReportUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class
