@@ -63,6 +63,9 @@
                     <div class="main-title">
                         <asp:Label ID="lblFormName" runat="server" Text="صلاحيات المجموعات" SkinID="page_title"></asp:Label>
                     </div>
+                     <div id="SavedivLoader" class="loader" style="display: none; text-align: center;">
+                                            <asp:Image ID="img" runat="server" ImageUrl="../App_Themes/images/loader.gif" />
+                                        </div>
                     <div class="strip_menu">
                         <asp:Panel ID="pnlOps" runat="server" Style="text-align: right">
                          <asp:Panel ID="pnlFunctions" runat="server" CssClass="row" Enabled="true">
@@ -108,7 +111,10 @@
                             <div class="clear"></div>
                             <asp:Panel ID="pnlForm" runat="server">
                                 <div class="col-md-6">
-                                
+                                <div class="row">
+                                      <button onclick="addNewGroup(); return false;" class="btn btn-info btn-lg pull-right"  >إنشاء مجموعة</button>
+       
+                                </div>
                                         
                                             <div class="row">
                                                   <div class="col-md-3 col-sm-12">
@@ -139,6 +145,31 @@
                         </div>
                    
                     </div>
+
+                    <div  id="groupModal" dir="rtl" style="display:none;">
+    <div class="card card-body">
+            <div class="form-group">
+                
+                                        <div class="col-md-3 col-sm-12">
+                                            <label class="label-required">
+                                             اسم ألمجموعة  </lable>
+                                        </div>
+
+                                        <div class="col-md-9 col-sm-12">
+                                            <input  dbcolumn="consult_nm" type="text" id="txtGroup_nm"
+                                                class="form-control" runat="server" clientidmode="Static" />
+
+                                            <br />
+                                        </div>
+                                    </div>
+            <div class="row">
+                                      <button onclick="savegroup(); return false;" class="btn btn-info btn-lg pull-left"  >حفظ</button>
+       
+                                </div>
+    
+        </div>
+                  </div>      
+                 
                           <%--<uc1:ImageSlider runat="server" ID="ImageSlider" />
                        <uc1:MultiPhotoUpload runat="server" id="MultiPhotoUpload" />
                     <uc1:DynamicTable runat="server" ID="DynamicTable" />--%>
@@ -146,6 +177,7 @@
                     <asp:HiddenField ID="tblH" runat="server" />
                 </div>
             </div>
+             
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

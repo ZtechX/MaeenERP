@@ -50,6 +50,15 @@ Partial Public Class group_permissons
     Protected WithEvents lblFormName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''img control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
     '''pnlOps control.
     '''</summary>
     '''<remarks>
@@ -183,6 +192,15 @@ Partial Public Class group_permissons
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''txtGroup_nm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtGroup_nm As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''lblRes control.

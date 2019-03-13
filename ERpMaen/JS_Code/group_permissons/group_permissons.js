@@ -256,7 +256,32 @@ function select_unselectAll(obj) {
         }
     }
 }
+function addNewGroup() {
+    $('#groupModal').modal({ backdrop: 'static', keyboard: false });
+    
+    $("#groupModal").dialog({
+        title: "إضافة محجموعة" 
+    });
+}
+function savegroup() {
+    var group_nm = $("#txtGroup_nm").val();
+    if (group_nm != "") {
+        $("#SavedivLoader").show();
+        group_permissons.savegroup(group_nm, function (val) {
+            if (val == "True") {
+                showSuccessMessage("تم الحفظ بنجاح");
+                location.reload();
+            } else {
+                showErrorMessage(val.split("|")[1]);
+                $("#SavedivLoader").hide();
+            }
+           
+        });
+    } else {
+        showErrorMessage("إدخل أسم المجموعة");
+    }
 
+}
 //function get_form_for_permtion() {
 //    try {
 //        group_permissons.get_main_menu(function (val) {

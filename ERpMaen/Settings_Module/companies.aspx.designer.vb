@@ -50,31 +50,13 @@ Partial Public Class companies
     Protected WithEvents lblFormName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''ladd control.
+    '''img control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ladd As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''Li1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Li1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''Li2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Li2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
     '''Result control.
@@ -93,24 +75,6 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents loginUser As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''cmdSave control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cmdSave As Global.System.Web.UI.HtmlControls.HtmlButton
-    
-    '''<summary>
-    '''clearBtn control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents clearBtn As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
     '''lblmainid control.
@@ -680,24 +644,6 @@ Partial Public Class companies
     Protected WithEvents cen_fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
     
     '''<summary>
-    '''Button2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Button2 As Global.System.Web.UI.HtmlControls.HtmlButton
-    
-    '''<summary>
-    '''Button3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Button3 As Global.System.Web.UI.HtmlControls.HtmlButton
-    
-    '''<summary>
     '''lblprposal_id control.
     '''</summary>
     '''<remarks>
@@ -705,15 +651,6 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblprposal_id As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Button1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Button1 As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
     '''lblstart_date control.
@@ -849,6 +786,24 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents HijriCalendar5 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''cmdSave control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cmdSave As Global.System.Web.UI.HtmlControls.HtmlButton
+    
+    '''<summary>
+    '''clearBtn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents clearBtn As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
     '''ImageSlider control.

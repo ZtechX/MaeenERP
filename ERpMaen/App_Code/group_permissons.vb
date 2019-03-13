@@ -285,8 +285,8 @@ Public Class group_permissons
                 dt = DBManager.Getdatatable("SELECT  * from tblMenus  ")
             Else
                 dt = DBManager.Getdatatable("SELECT * FROM tblMenus" +
-                " where id in (SELECT MenueId FROM tblPermissions left join tblForms on tblPermissions.FormId =tblForms.Id" +
-               " where PAccess = 1 And userID = " + user_id + ")")
+                " where id in (SELECT module_id FROM tblcomp_modules " +
+               " where comp_id = " + LoginInfo.GetComp_id() + " )")
             End If
 
             If dt.Rows.Count <> 0 Then
@@ -298,8 +298,8 @@ Public Class group_permissons
                 Else
                     dt2 = DBManager.Getdatatable("SELECT tblForms.Id,FormName,FormTitle ,ArFormTitle,FormUrl" +
                 " ,FormQuery,GroupId,Icon,OPeration,MenueId,tblForms.Deleted,FormQueryAr" +
-                " FROM tblPermissions left join tblForms on tblPermissions.FormId =tblForms.Id" +
-                " where PAccess=1 and  UserId = " + user_id)
+                " FROM tblgroup_permissons left join tblForms on tblgroup_permissons.form_id =tblForms.Id" +
+                " where   group_id = " + LoginInfo.Getgroup_id())
                 End If
 
 
@@ -370,6 +370,44 @@ Public Class group_permissons
         End Try
     End Function
 
+#End Region
+#Region "Save Group"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function savegroup(ByVal group_nm As String) As String
+        Try
+
+            Dim Comp_id = LoginInfo.GetComp_id()
+            If DBManager.Getdatatable("select * from tbllock_up where Description='" + group_nm + "' and Comp_id=" + Comp_id).Rows.Count <> 0 Then
+                Return "False|اسم المجموعة موجود بالفعل"
+            Else
+                _sqlconn.Open()
+                _sqltrans = _sqlconn.BeginTransaction
+                Dim dictBasicDataJson As New Dictionary(Of String, Object)
+                dictBasicDataJson.Add("Description", group_nm)
+                dictBasicDataJson.Add("Type", "PG")
+                dictBasicDataJson.Add("Comp_id", Comp_id)
+                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tbllock_up", "", _sqlconn, _sqltrans) Then
+                    _sqltrans.Commit()
+                    _sqlconn.Close()
+                    Return "True"
+                End If
+
+            End If
+
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return "False|لم يتم الحفظ"
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return "False|لم يتم الحفظ"
+        End Try
+    End Function
 #End Region
 
 End Class

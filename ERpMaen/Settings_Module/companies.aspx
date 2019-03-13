@@ -76,6 +76,58 @@
                         function clearContents(sender) {
                             { $(sender._element).find('input').val(''); }
                         }
+
+                        $(document).ready(function() {
+    
+    var navListItems = $('ul.setup-panel li a'),
+        allWells = $('.setup-content');
+
+    allWells.hide();
+
+    navListItems.click(function(e)
+    {
+        e.preventDefault();
+        var $target = $($(this).attr('href')),
+            $item = $(this).closest('li');
+        
+        if (!$item.hasClass('disabled')) {
+            navListItems.closest('li').removeClass('active');
+            $item.addClass('active');
+            allWells.hide();
+            $target.show();
+        }
+    });
+    
+    $('ul.setup-panel li.active a').trigger('click');
+    
+    // DEMO ONLY //
+                            $('#activate-step-2').on('click', function (e) {
+                              
+                               
+                                if (!checkRequired("divForm")) { 
+                                $('ul.setup-panel li:eq(1)').removeClass('disabled');
+                                $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+                                $(this).remove();
+                            }
+                            })    
+                            $('#activate-step-3').on('click', function (e) {
+                                if ($('#perm_table tbody').find('input[type="checkbox"]:checked').length > 0) {
+                                    $('ul.setup-panel li:eq(2)').removeClass('disabled');
+                                    $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+                                    $(this).remove();
+                                }
+                                else { alert("اختر على الاقل موديول واحد");}
+                            }) 
+                            $('#activate-step-4').on('click', function (e) { 
+                                if (!checkRequired("div_contract")) {
+                                    $('ul.setup-panel li:eq(3)').removeClass('disabled');
+                                    $('ul.setup-panel li a[href="#step-4"]').trigger('click');
+                                    $(this).remove();
+                                }
+    }) 
+});
+
+
                     </script>
                     <script src="../JS_Code/companies/companies.js"></script>
                     <script src="../JS_Code/companies/companies_Upload.js"></script>
@@ -84,66 +136,40 @@
                 <div class="main-title">
                     <asp:Label ID="lblFormName" runat="server" Text="الجهات المشتركة" SkinID="page_title"></asp:Label>
                 </div>
-                <div class="strip_menu">
-                    <!-- #  tab list start  -->
-                    <ul class="nav nav-tabs" id="myTab">
-                        <li runat="server" id="ladd" class="active">
-                            <a data-toggle="tab" href="#home">
-                                <i class="green ace-icon fa fa-home bigger-120"></i>
-                                <!-- # عنوان التبويب -->
-                                المعلومات الاساسية للجهة
-                            </a>
-
-                        </li>
-                        <li runat="server" id="Li1" style="display: block">
-                            <a data-toggle="tab" href="#tab2">
-                                <i class="green ace-icon fa fa-tasks"></i>
-                                <!-- # عنوان التبويب -->
-                                صلاحيات الجهة
-                            </a>
-
-                        </li>
-                        <li runat="server" id="Li2" style="display: block">
-                            <a data-toggle="tab" href="#tab3">
-                                <i class="green ace-icon fa fa-money"></i>
-                                <!-- # عنوان التبويب -->
-                                بيانات التعاقد 
-                            </a>
-
-                        </li>
-
-                    </ul>
-                    <!-- #  tab list end  -->
-
-                    <%--                        <uc1:PnlConfirm runat="server" ID="PnlConfirm" />--%>
-                </div>
-                <uc1:Result runat="server" ID="Result" />
-
-                <div id="content" class="padding-20" dir="rtl">
-                    <!--     -------tabs start-------->
-                    <div class="tabbable">
-
-                        <!-- #  tab list content start  -->
-
-                        <div class="tab-content" style="background: white;">
-
-
-                            <div id="home" class="tab-pane fade in active">
-                                <input type="text" style="display:none;" id="loginUser"  runat="server"/>
-                                <div class="row">
-                                    <!------ form action button start-->
-                                    <div class="form-actions pull-left" style="margin-top: -10px;">
-                                        <button validationgroup="vgroup" id="cmdSave" runat="server" clientidmode="Static" commandargument="New" type="button" onclick="save_companies();" class="btn btn-success btn3d">
-                                            حفظ البيانات
-		                       	<i class="ace-icon fa fa-save "></i>
-                                        </button>
-                                        <button id="clearBtn" runat="server" clientidmode="Static" style="display: none" type="button" onclick="cancel2(); return false;" class="btn btn-white btn3d">
-                                            <i class=" fa fa-eraser "></i>
-                                            <span>مسح البيانات</span>
-                                        </button>
-                                    </div>
-                                    <!------ form action button end -->
-                                </div>
+                     <div id="SavedivLoader" class="loader" style="display: none; text-align: center;">
+                                            <asp:Image ID="img" runat="server" ImageUrl="../App_Themes/images/loader.gif" />
+                                        </div>
+                          <%--/////////--%>
+                
+<div class="container" dir="rtl">
+	<div class="row form-group">
+        <div class="col-xs-12">
+            <ul class="nav nav-pills nav-justified thumbnail setup-panel " dir="rtl">
+                <li class="active"><a href="#step-1">
+                    <h4 class="list-group-item-heading"> بيانات الجهة</h4>
+                    <p class="list-group-item-text">البيانات الاساسية للجهة  </p>
+                </a></li>
+                <li class="disabled"><a href="#step-2">
+                    <h4 class="list-group-item-heading">صلاحيات الجهة</h4>
+                    <p class="list-group-item-text">الموديولات المشتركة بها الجهة</p>
+                </a></li>
+                <li class="disabled"><a href="#step-3">
+                    <h4 class="list-group-item-heading">التعاقد </h4>
+                    <p class="list-group-item-text">بيانات التعاقد للجهة  </p>
+                </a></li>
+                            <li class="disabled"><a href="#step-4">
+                    <h4 class="list-group-item-heading">تاكيد </h4>
+                    <p class="list-group-item-text">  حفظ البيانات  </p>
+                </a></li>
+            </ul>
+        </div>
+	</div>
+     <uc1:Result runat="server" ID="Result" />
+    <div class="row setup-content" id="step-1">
+        <div class="col-xs-12">
+            <div class="col-md-12 well text-center">
+                   <input type="text" style="display:none;" id="loginUser"  runat="server"/>
+                             
                                 <asp:Label ID="lblmainid" ClientIDMode="Static" Style="display: none" runat="server" dbColumn="id"></asp:Label>
                                 <asp:TextBox runat="server" ID="txtTemId" Style="display: none"></asp:TextBox>
                                 <asp:Label ID="ddlcomp_id" ClientIDMode="Static" Style="display: none" runat="server" dbcolumn=""></asp:Label>
@@ -153,13 +179,13 @@
                                 <div class="fancy-form" id="CurrentDate" style="display:none;"> 
                                 <uc1:HijriCalendar runat="server" ID="HijriCalendar1" />  
                                     </div>
-                                <div class="panel panel-default" style="width:95%; margin-left: auto;margin-right: auto;margin-top: 25px;">
+                                <div class="panel panel-default" style="width:100%; margin-left: auto;margin-right: auto;margin: 0px;">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
                                                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">بيانات الجهة</a>
                                                             </h4>
                                                         </div>
-                                                        <div id="collapse1" class="panel-collapse collapse">
+                                                        <div id="collapse1" class="panel-collapse collapse in">
                                                             <div class="panel-body" style="direction:rtl;">
                                                                 <%-- start group3--%>
                                               
@@ -176,7 +202,7 @@
                                             </div>
                                             <div class="col-md-9 col-sm-12">
 
-                                               <asp:TextBox  class="form-control" dbcolumn="name_ar" ClientIDMode="Static" ID="txtname_ar" runat="server">
+                                               <asp:TextBox  class="form-control" required dbcolumn="name_ar" ClientIDMode="Static" ID="txtname_ar" runat="server">
                                                 </asp:TextBox>
 
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtname_ar"
@@ -191,7 +217,7 @@
 
                                             </div>
                                             <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox   dbcolumn="tel"   ID="tele"   class="form-control"  ClientIDMode="Static" runat="server">
+                                                <asp:TextBox   dbcolumn="tel" required   ID="tele"   class="form-control"  ClientIDMode="Static" runat="server">
                                                 </asp:TextBox>
 
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tele"
@@ -272,8 +298,7 @@
                                           
                                     </div>
 
-
-                                    <div class="col-md-6" id="divAdminComp">
+                                       <div class="col-md-6" id="divAdminComp">
                                           <input id="comp_AdminID" type="text" style="display: none" runat="server" dbcolumn="id"/>
                                 
                                         <fieldset style="border:none;"><legend >بيانات مدير الجهة</legend>
@@ -283,7 +308,7 @@
 
                                             </div>
                                             <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox   dbcolumn="full_name" type="text" id="comp_AdminName"   class="form-control"  ClientIDMode="Static" runat="server">
+                                                <asp:TextBox   dbcolumn="full_name" required type="text" id="comp_AdminName"   class="form-control"  ClientIDMode="Static" runat="server">
                                                 </asp:TextBox>
                                                   <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="comp_AdminName"
                                                     ErrorMessage="من فضلك أدخل اسم مدير الجهة " ValidationGroup="vgroup1"></asp:RequiredFieldValidator>
@@ -297,7 +322,7 @@
 
                                             </div>
                                             <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox   dbcolumn="User_PhoneNumber" type="text" id="comp_AdminNum"   class="form-control"  ClientIDMode="Static" runat="server">
+                                                <asp:TextBox   dbcolumn="User_PhoneNumber" required type="text" id="comp_AdminNum"   class="form-control"  ClientIDMode="Static" runat="server">
                                                 </asp:TextBox>
                                                  <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="comp_AdminNum"
                                                     ErrorMessage="من فضلك أدخل رقم التليفون لمدير الجهة " ValidationGroup="vgroup1"></asp:RequiredFieldValidator>
@@ -313,7 +338,7 @@
                                             </div>
                                             <div class="col-md-9 col-sm-12">
                                          
-                                                <asp:TextBox   dbcolumn="User_Email"   type="email" id="comp_Adminemail"   class="form-control"  ClientIDMode="Static" runat="server">
+                                                <asp:TextBox   dbcolumn="User_Email" required  type="email" id="comp_Adminemail"   class="form-control"  ClientIDMode="Static" runat="server">
                                                 </asp:TextBox>
 
                                               <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="comp_Adminemail"
@@ -328,7 +353,7 @@
 
                                             </div>
                                             <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox   dbcolumn="User_Name" type="text" id="comp_Adminuser_name"   class="form-control"  ClientIDMode="Static" runat="server">
+                                                <asp:TextBox   dbcolumn="User_Name" required type="text" id="comp_Adminuser_name"   class="form-control"  ClientIDMode="Static" runat="server">
                                                 </asp:TextBox>
 
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="comp_Adminuser_name"
@@ -342,7 +367,7 @@
                                                 <label class="label-required">كلمة المرور</label>
                                             </div>
                                             <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox   dbcolumn="User_Password"   type="password" id="Comp_user_password"   class="form-control"  ClientIDMode="Static" runat="server">
+                                                <asp:TextBox   dbcolumn="User_Password"  required  type="password" id="Comp_user_password"   class="form-control"  ClientIDMode="Static" runat="server">
                                                 </asp:TextBox>
 
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="Comp_user_password"
@@ -368,6 +393,7 @@
                                 </div>
                                             </fieldset>
                                     </div>
+                                
                                 </div>
                                                                     <%--end group3--%>
                                                             </div>
@@ -670,21 +696,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                           </div>
-                            <div id="tab2" class="tab-pane fade ">
-                                <div class="row">
-                                    <div class="form-actions pull-left" style="margin-top: -10px;">
-                                        <button validationgroup="vgroup" id="Button2" runat="server" clientidmode="Static" commandargument="New" type="button" onclick="save_modules();" class="btn btn-success btn3d">
-                                            حفظ البيانات
-		                       	<i class="ace-icon fa fa-save "></i>
-                                        </button>
-                                        <button id="Button3" runat="server" clientidmode="Static" type="button" onclick="cancel(); return false;" class="btn btn-white btn3d">
-                                            <i class=" fa fa-eraser "></i>
-                                            <span>مسح البيانات</span>
-                                        </button>
-                                    </div>
-                                </div>
+                <button id="activate-step-2" type="button" class="btn btn-primary btn-lg">التالى</button>
+            </div>
+        </div>
+    </div>
+    <div class="row setup-content" id="step-2">
+        <div class="col-xs-12">
+            <div class="col-md-12 well">
+                
                                 <asp:Label ID="lblprposal_id" ClientIDMode="Static" Style="display: none" runat="server"></asp:Label>
 
                                 <div id="div_modules">
@@ -709,20 +728,15 @@
                                     </div>
                                     <!-- /panel content -->
                                 </div>
+                                 <button id="activate-step-3" type="button" class="btn btn-primary btn-lg"> التالى</button>
 
-                            </div>
-                            <div id="tab3" class="tab-pane fade ">
-                                <div class="row">
-                                    <!------ form action button start-->
-                                    <div class="form-actions pull-left" style="margin-top: -10px;">
-                                        <button validationgroup="vgroup" id="Button1" runat="server" clientidmode="Static" commandargument="New" type="button" onclick="save_contract(); return false;" class="btn btn-success btn3d">
-                                            حفظ التعاقد
-		                       	<i class="ace-icon fa fa-save "></i>
-                                        </button>
-
-                                    </div>
-                                    <!------ form action button end -->
-                                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row setup-content" id="step-3">
+        <div class="col-xs-12">
+            <div class="col-md-12 well">
+              
                                 <div class="panel-body" id="div_contract">
                                                   <div class="col-md-6">
                                                   <div class="row form-group">
@@ -805,20 +819,33 @@
                                       </div> 
                                    </div>
                             </div>
-                           </div>
-                                <!------tabs end ----->
+             <button id="activate-step-4" type="button" class="btn btn-primary btn-lg"> التالى</button>
             </div>
-
-            <!------tabs end ----->
-
-                    </div>
-
-
-                </div>
+        </div>
+    </div>
+    <div class="row setup-content" id="step-4">
 
 
-
-
+         <div class="col-xs-12 well">
+                         <div class="row">
+                                    <!------ form action button start-->
+                                    <div class="form-actions pull-left" style="margin-top: -10px;">
+                                        <button validationgroup="vgroup" id="cmdSave" runat="server" clientidmode="Static" commandargument="New" type="button" onclick="save_companies();" class="btn btn-success btn3d">
+                                            حفظ البيانات
+		                       	<i class="ace-icon fa fa-save "></i>
+                                        </button>
+                                        <button id="clearBtn" runat="server" clientidmode="Static" style="display: none" type="button" onclick="cancel2(); return false;" class="btn btn-white btn3d">
+                                            <i class=" fa fa-eraser "></i>
+                                            <span>مسح البيانات</span>
+                                        </button>
+                                    </div>
+                                    <!------ form action button end -->
+                                </div>
+             </div>
+        </div>
+</div>
+                <%--///////////--%>
+             
 
 
                 <uc1:ImageSlider runat="server" ID="ImageSlider" />

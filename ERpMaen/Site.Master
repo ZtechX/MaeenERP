@@ -642,7 +642,7 @@
                 </div>
                 <asp:Panel ID="pnlVMenu" runat="server" ClientIDMode="Static">
                     <div id='cssmenu' onclick="menu()" class="menu_continer">
-                        <ul class="col-sm-12 col-xs-12 hidden-sm hidden-xs" runat="server" id="UlMenu" style="overflow-y: scroll;" >
+                        <ul class="col-sm-12 col-xs-12 hidden-sm hidden-xs" runat="server" id="UlMenu" style="overflow-y: scroll;overflow-x:hidden;" >
                             <li class="logocontiner" style ="background-color :white ;"><a href='#' onclick="SwapMenu('VMenu');return false;">
                             
                                             <asp:Image runat="server" ID="Image1" Height="51" ImageUrl="~/Login/images/logo1.png" />    

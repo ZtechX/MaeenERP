@@ -9365,10 +9365,10 @@ table.dataTable thead th, table.dataTable thead td:first-child {
 }
 .loader {
     position: fixed;
-    left: 48%;
-    width: 2%;
-    top: 40%;
+    width: 100%;
+    height: 100%;
     z-index: 9999;
+    padding-top: 30%;
 }
     .loader img {
         max-width:100px;

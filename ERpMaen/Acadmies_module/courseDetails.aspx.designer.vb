@@ -32,13 +32,121 @@ Partial Public Class CourseDetails
     Protected WithEvents Lblcourse_id As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''Text2 control.
+    '''lblStudentID control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text2 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents lblStudentID As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''userComments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents userComments As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''res1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents res1 As Global.ERpMaen.Result
+    
+    '''<summary>
+    '''courseTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents courseTitle As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''HijriCalendar2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar2 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''HijriCalendar6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar6 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''price control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents price As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''ddlcategory control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlcategory As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''description control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents description As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''ddltrainer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddltrainer As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''activity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents activity As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''HijriCalendar3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar3 As Global.ERpMaen.CustomerCalendar
     
     '''<summary>
     '''Text1 control.
@@ -48,8 +156,16 @@ Partial Public Class CourseDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Text1 As Global.System.Web.UI.HtmlControls.HtmlInputText
-
-
+    
+    '''<summary>
+    '''HijriCalendar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar As Global.ERpMaen.CustomerCalendar
+    
     '''<summary>
     '''startTime control.
     '''</summary>
@@ -60,20 +176,380 @@ Partial Public Class CourseDetails
     Protected WithEvents startTime As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
-    '''hallNum control.
+    '''ddlhallNum control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hallNum As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents ddlhallNum As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''NoteContent control.
+    '''lecNotes control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents NoteContent As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents lecNotes As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''condition control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents condition As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''fileURL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fileURL As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
+    '''FName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FName As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''fuFile1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fuFile1 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
+    '''notes3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents notes3 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''coursefileURL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents coursefileURL As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
+    '''EXFName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EXFName As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''fuFile4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fuFile4 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
+    '''Result1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Result1 As Global.ERpMaen.Result
+    
+    '''<summary>
+    '''TextBox1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''HijriCalendar4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar4 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''fileURL3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fileURL3 As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
+    '''FName3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FName3 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''fuFile2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fuFile2 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
+    '''details control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents details As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''notes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents notes As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Result2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Result2 As Global.ERpMaen.Result
+    
+    '''<summary>
+    '''TextBox2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox2 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RequiredFieldValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''HijriCalendar5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar5 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''fileURL4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fileURL4 As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
+    '''FName4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FName4 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''fuFile3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fuFile3 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
+    '''TextBox3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''notes2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents notes2 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''activityDegree control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents activityDegree As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''finaldegree control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents finaldegree As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''comment control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents comment As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''HijriCalendar1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar1 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''Result3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Result3 As Global.ERpMaen.Result
+    
+    '''<summary>
+    '''evalute control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents evalute As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''Rating1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Rating1 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Rating2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Rating2 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Rating3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Rating3 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Rating4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Rating4 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''Rating5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Rating5 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''lblRate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblRate As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''evaluteNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents evaluteNotes As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Text2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Text2 As Global.System.Web.UI.HtmlControls.HtmlInputText
 End Class

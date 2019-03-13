@@ -145,10 +145,10 @@ function add() {
           prepareAdd();
         resetAll();
         getConsultNum();
-        $('#ConslutModal').modal({ backdrop: 'static', keyboard: false })  
+        $('#ConslutModal').modal({ backdrop: 'static', keyboard: false });
         $("#ConslutModal").modal();
         $("#ddlstatus").val("100");
-        $("#ddlstatus").attr("disabled", "disabled")
+        $("#ddlstatus").attr("disabled", "disabled");
     } catch (err) {
         alert(err);
     }

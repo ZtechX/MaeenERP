@@ -60,10 +60,11 @@ Public Class companies
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function save_companies(ByVal arrDataJson As Object(), ByVal date_m As String, ByVal data_hj As String) As String()
+    Public Function save_companies(ByVal formId As String, ByVal arrDataJson As Object(), ByVal date_m As String, ByVal data_hj As String) As String()
         Dim login_user = LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString()
         Dim Names As New List(Of String)(10)
         Dim success As Boolean = False
+
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
@@ -74,48 +75,138 @@ Public Class companies
             Dim CompAdmin_email = dictCompAdminDataJson("User_Email")
             Dim CompAdmin_Phone = dictCompAdminDataJson("User_PhoneNumber")
             If check_userData(CompAdmin_id, CompAdmin_User_n, CompAdmin_email, CompAdmin_Phone) Then
-
+                '///////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ' if super admin
                 If login_user = "1" Then
+
+                    '//////////////////////////////////////////////////////////////////////////////////////
+                    ' save comp basic data
+                    Dim addboard As Boolean
+
+
+                    Dim contractdictDataJson As Dictionary(Of String, Object) = arrDataJson(3)
+
                     Dim dictCompDataJson As Dictionary(Of String, Object) = arrDataJson(0)
                     dictCompDataJson.Add("person", dictCompAdminDataJson("full_name"))
                     dictCompDataJson.Add("email", dictCompAdminDataJson("User_Email"))
-                    Dim Comp_id = dictCompDataJson("id")
+                    dictCompDataJson.Add("deal_start_date_m", PublicFunctions.ConvertDatetoNumber(contractdictDataJson("deal_start_date_m")))
+                    dictCompDataJson.Add("deal_end_date_m", PublicFunctions.ConvertDatetoNumber(contractdictDataJson("deal_end_date_m")))
+                    dictCompDataJson.Add("maintainance_start_date_m", PublicFunctions.ConvertDatetoNumber(contractdictDataJson("maintainance_start_date_m")))
+                    dictCompDataJson.Add("maintainance_end_date_m", PublicFunctions.ConvertDatetoNumber(contractdictDataJson("maintainance_end_date_m")))
 
+
+
+                    Dim Comp_id = dictCompDataJson("id")
                     If PublicFunctions.TransUpdateInsert(dictCompDataJson, "tblcompanies", Comp_id, _sqlconn, _sqltrans) Then
-                        Dim addboard As Boolean = True
+                        addboard = True
                         If Comp_id = "" Then
                             Comp_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
                         Else
                             addboard = False
                         End If
-                        dictCompAdminDataJson.Add("User_Type", 2)
-                        dictCompAdminDataJson.Add("group_id", 120)
-                        dictCompAdminDataJson.Add("Active", dictCompDataJson("active"))
-                        dictCompAdminDataJson.Add("comp_id", Comp_id)
 
-                        If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
-                            If addboard Then
-                                Dim dict = New Dictionary(Of String, Object)
-                                dict.Add("name", "جمعية عمومية")
-                                dict.Add("members_number", "200")
-                                dict.Add("comp_id", Comp_id)
-                                dict.Add("active", 1)
-                                dict.Add("type", 1)
-                                If Not PublicFunctions.TransUpdateInsert(dict, "tblboards", "", _sqlconn, _sqltrans) Then
-                                    _sqltrans.Rollback()
-                                    _sqlconn.Close()
-                                    Names.Add("لم يتم الحفظ")
-                                End If
-                            End If
-                            _sqltrans.Commit()
-                            _sqlconn.Close()
-                            Names.Add("1")
-                        Else
+                        success = True
+
+                    Else
+                        success = False
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Names.Add("لم يتم الحفظ")
+                    End If
+                    '////////////////////////////////////////////////////////////////////////////////////////
+                    ' save comp board
+                    If addboard Then
+                        Dim dict = New Dictionary(Of String, Object)
+                        dict.Add("name", "جمعية عمومية")
+                        dict.Add("members_number", "200")
+                        dict.Add("comp_id", Comp_id)
+                        dict.Add("active", 1)
+                        dict.Add("type", 1)
+                        If Not PublicFunctions.TransUpdateInsert(dict, "tblboards", "", _sqlconn, _sqltrans) Then
+                            success = False
                             _sqltrans.Rollback()
                             _sqlconn.Close()
                             Names.Add("لم يتم الحفظ")
                         End If
                     End If
+                    '///////////////////////////////////////////////////////////////////////////////////////////
+                    'save comp modules
+
+                    ' delete old modules if exist
+                    If DBManager.ExcuteQueryTransaction("delete  from tblcomp_modules where comp_id=" + Comp_id + " ", _sqlconn, _sqltrans) = -1 Then
+                        success = False
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Names.Add("لم يتم الحفظ")
+                    End If
+
+                    Dim comp_group_permission_id = 0
+                    If formId = "" Then
+                        '//////////////////////////////////////////////////
+                        'insert new group for comp
+                        Dim comp_permission_name As String = "صلاحيات" + "  " + dictCompDataJson("name_ar")
+
+                        If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id) values('" + comp_permission_name.ToString + "','PG'," + Comp_id + ")", _sqlconn, _sqltrans) = -1 Then
+                            success = False
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Names.Add("لم يتم الحفظ")
+                        Else
+                            comp_group_permission_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString
+                        End If
+                    Else
+                        DBManager.ExcuteQueryTransaction("delete  from tblgroup_permissons where group_id=" + comp_group_permission_id.ToString, _sqlconn, _sqltrans)
+
+                    End If
+
+                    ' insert  comp modules 
+
+                    For Each ModulesJSON As Dictionary(Of String, Object) In arrDataJson(2)
+                        Dim dictBasicDataJson As Dictionary(Of String, Object) = ModulesJSON
+                        Dim id = 0
+                        dictBasicDataJson.Add("comp_id", Comp_id.ToString)
+                        '     dictBasicDataJson.Add("user_id", Comp_id.ToString)
+                        If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblcomp_modules", id, _sqlconn, _sqltrans) Then
+                            success = False
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Names.Add("لم يتم الحفظ")
+                        End If
+
+                        'add module forms permissions
+                        Dim dt2 As DataTable = DBManager.Getdatatable("Select * from tblForms where type=1 And MenueId=" + dictBasicDataJson("module_id").ToString)
+                        For Each row2 As DataRow In dt2.Rows
+                            Dim dict = New Dictionary(Of String, Object)
+                            dict.Add("group_id", comp_group_permission_id.ToString)
+                            dict.Add("form_id", row2.Item("Id").ToString)
+                            dict.Add("f_add", 1)
+                            dict.Add("f_update", 1)
+                            dict.Add("f_access", 1)
+                            dict.Add("f_delete", 1)
+
+                            PublicFunctions.TransUpdateInsert(dict, "tblgroup_permissons", id, _sqlconn, _sqltrans)
+                        Next
+
+
+                    Next
+
+                    '///////////////////////////////////////////////////////////////////////////////////////////
+                    ' save comp admin
+                    dictCompAdminDataJson.Add("User_Type", 2)
+                    dictCompAdminDataJson.Add("group_id", comp_group_permission_id)
+                    dictCompAdminDataJson.Add("Active", dictCompDataJson("active"))
+                    dictCompAdminDataJson.Add("comp_id", Comp_id)
+
+                    If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
+                        success = True
+
+                    Else
+                        success = False
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Names.Add("لم يتم الحفظ")
+                    End If
+
                 Else
 
                     Dim dictAcaAdminDataJson As Dictionary(Of String, Object) = arrDataJson(3)

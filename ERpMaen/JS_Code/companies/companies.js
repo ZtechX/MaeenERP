@@ -189,14 +189,40 @@ function save_companies() {
     try {
         var arr_json = [];
         if ($("#loginUser").val() == "1") {
-            if (Page_ClientValidate("vgroup1")) {
+            if (1) {
+                $("#SavedivLoader").show();
+                var FormId = $("#lblmainid").html();
+                ///////////////basic
                 var basicData_divComp = generateJSONFromControls("divComp");
                 basicData_divComp["image_path"] = $("#compLogo").prop("src");
                 var basicData_divAdminComp = generateJSONFromControls("divAdminComp");
                 basicData_divAdminComp["User_Image"] = $("#Comp_imgItemURL").prop("src");
-                arr_json = [basicData_divComp, basicData_divAdminComp];
-                companies.save_companies(arr_json, Date_m, Date_hj, function (val) {
+                ///////////modules
+                var objects_arr = [];
+                $('#perm_table tbody tr').each(function () {
+                    var row = $(this);
 
+                    if (row.find('input[type="checkbox"]').is(':checked')) {
+                        var module_id = $(this).find("#contact_id").html();
+                        var data = {  "module_id": module_id };
+                        objects_arr.push(data);
+                    }
+                });
+                //////////contract
+                $("#lblstart_date").html($("#divdate2 #txtDatem").val());
+                $("#lblstart_date_hj").html($("#divdate2 #txtDateh").val());
+                $("#lblend_date").html($("#divdate3 #txtDatem").val());
+                $("#lblend_date_hj").html($("#divdate3 #txtDateh").val());
+                $("#lblmaintaianace_start_date").html($("#divdate4 #txtDatem").val());
+                $("#lblmaintaianace_start_date_hj").html($("#divdate4 #txtDateh").val());
+                $("#lblmaintaianace_end_date").html($("#divdate5 #txtDatem").val());
+                $("#lblmaintaianace_end_date_hj").html($("#divdate5 #txtDateh").val());
+                var contractData = generateJSONFromControls("div_contract");
+                var atch_files = get_files_ArrJson();
+                ///////////////////
+                arr_json = [basicData_divComp, basicData_divAdminComp, objects_arr, contractData, atch_files];
+                companies.save_companies(FormId,arr_json, Date_m, Date_hj, function (val) {
+                    $("#SavedivLoader").hide();
                     if (val[0] == '1') {
                         showSuccessMessage('تم تسجيل البيانات بنجاح');
                         cancel2();
@@ -245,7 +271,6 @@ function save_companies() {
 }
 // save_payments
 function save_modules() {
-    if (Page_ClientValidate("vgroup")) {
         var comp_id = $("#ddlcomp_id").html();
         var PosId = $("#lblmainid").html();
         var objects_arr = [];
@@ -285,9 +310,6 @@ function save_modules() {
                 showErrorMessage('لم يتم الحفظ');
             }
         });
-    } else {
-        showErrorMessage("يرجى ادخال البيانات المطلوبه");
-    }
 
 }
 
