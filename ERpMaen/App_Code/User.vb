@@ -54,6 +54,8 @@ Public Class User
 
 
             If dtcheckemailphone.Rows.Count = 0 Then
+
+                dictBasicDataJson("group_id") = LoginInfo.Getgroup_id()
                 If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblUsers", UserId, _sqlconn, _sqltrans) Then
                     success = True
                 Else
@@ -65,8 +67,8 @@ Public Class User
 
             If UserId = "" And success Then
                 Dim Id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
-                If save_permtion(permDataJsonList, Id, "Insert") Then
-                    If Researcher Then
+                'If save_permtion(permDataJsonList, Id, "Insert") Then
+                If Researcher Then
                         If save_researchArea(researchAreaJsonList, Id) Then
                             success = True
                         Else
@@ -75,13 +77,13 @@ Public Class User
                     Else
                         success = True
                     End If
-                Else
-                    success = False
-                End If
-            ElseIf UserId <> "" And success Then
+                    'Else
+                    '    success = False
+                    'End If
+                ElseIf UserId <> "" And success Then
 
-                If save_permtion(permDataJsonList, UserId, "Update") Then
-                    If Researcher Then
+                ' If save_permtion(permDataJsonList, UserId, "Update") Then
+                If Researcher Then
                         If save_researchArea(researchAreaJsonList, UserId) Then
                             success = True
                         Else
@@ -92,10 +94,10 @@ Public Class User
                         success = True
                     End If
 
-                Else
-                    success = False
+                    'Else
+                    '    success = False
+                    'End If
                 End If
-            End If
             If success Then
                 _sqltrans.Commit()
                 _sqlconn.Close()
@@ -122,9 +124,11 @@ Public Class User
         Try
             For Each permJSON As Object In permDataJsonList
 
+
                 Dim dictperm As Dictionary(Of String, Object) = permJSON
                 Dim id = ""
                 dictperm("UserId") = usertId
+
                 If operation = "Insert" Then
                     id = ""
                 ElseIf operation = "Update" Then

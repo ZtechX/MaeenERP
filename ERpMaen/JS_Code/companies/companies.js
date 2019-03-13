@@ -34,12 +34,20 @@ function setDate() {
 }
 function get_admin() {
 
-    companies.get_admin( function (val) {
-        debugger
+    companies.get_admin(function (val) {
+        if (val[0] == "admin") {
+            $("#Li2").css("display", "block");
+            $("#Li1").css("display", "block");
+            $("#clearBtn").css("display", "inline-block");
+            $("#acPanal").hide();
+            $("#CenPanal").hide();
+            // form_load();
+            drawDynamicTable();
+        } else {
         if (val[1] != "0") {
             var comp = JSON.parse(val[1]);
             var comp_admin = JSON.parse(val[0]);
-         
+
             fillControlsFromJson(comp[0], "divComp");
             fillControlsFromJson(comp_admin[0], "divAdminComp");
             $("#compLogo").prop("src", comp[0].image_path);
@@ -90,15 +98,7 @@ function get_admin() {
                 $("#Cen_imgItemURL").prop("src", Cen_admin[0].User_Image);
             }
         }
-            if (val[6] == 1) {
-                $("#Li2").css("display", "block");
-                $("#Li1").css("display", "block");
-                $("#clearBtn").css("display", "inline-block");
-                $("#acPanal").hide();
-                $("#CenPanal").hide();
-                // form_load();
-                drawDynamicTable();
-            }
+    }
      
     });
 

@@ -8,19 +8,21 @@ Public Class ReviewRep
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
-        ' Dim Case_id = Request.QueryString("Case_id")
-        Dim Case_id = "36"
-        If String.IsNullOrWhiteSpace(Case_id) Then
+        Dim details_id = Request.QueryString("details_id")
+        Dim type = Request.QueryString("type")
+        Dim person_id = Request.QueryString("person_id")
+        Dim _date = Request.QueryString("_date")
+        If String.IsNullOrWhiteSpace(details_id) Or String.IsNullOrWhiteSpace(_date) Then
             Dim script As String = "<script type='text/javascript' defer='defer'> alert('لا يوجد بيانات متاحة للعرض');</script>"
             ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)
             ClientScript.RegisterStartupScript(Me.GetType(), "closePage", "window.close();", True)
 
         Else
-            getReportData(Case_id)
+            getReportData(details_id, type, person_id, _date)
         End If
 
     End Sub
-    Private Sub getReportData(ByVal Case_id As String)
+    Private Sub getReportData(ByVal details_id As String, ByVal type As String, ByVal person_id As String, ByVal _date As String)
         Try
             Dim message As String = " لا يوجد بيانات متاحة للعرض"
             Dim rdoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument
@@ -28,14 +30,14 @@ Public Class ReviewRep
             'dt1 = DBManager.Getdatatable("SELECT img_header,img_footer FROM tbl_company_info")
             Dim dt2 As New DataTable
 
-            Dim query = "SELECT ash_cases.date_h as 'case_dt',persons1.name as 'person_from'
-                FROM ash_cases left join ash_case_persons persons1 on ash_cases.person1_id=persons1.id where ash_cases.id=" + Case_id
+            Dim query = "SELECT persons.name
+                FROM ash_case_receiving_delivery_details left join ash_case_persons persons on ash_case_receiving_delivery_details." + type + "=persons.id where ash_case_receiving_delivery_details.id=" + details_id
             dt2 = DBManager.Getdatatable(query)
             If dt2.Rows.Count <> 0 Then
 
                 rdoc.Load(Server.MapPath("Review.rpt"))
-                rdoc.SetParameterValue("name", dt2.Rows(0)("person_from").ToString)
-                rdoc.SetParameterValue("Case_date", dt2.Rows(0)("case_dt").ToString)
+                rdoc.SetParameterValue("name", dt2.Rows(0)("name").ToString)
+                rdoc.SetParameterValue("_date", _date)
                 ' rdoc.SetParameterValue("img_header_URL", dt1.Rows(0)("img_header").ToString)
                 ' rdoc.SetParameterValue("img_footer_URL", dt1.Rows(0)("img_footer").ToString)
                 CrystalReportViewer1.ReportSource = rdoc

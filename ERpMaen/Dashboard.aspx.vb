@@ -20,9 +20,21 @@ Imports AjaxControlToolkit
 #End Region
 Public Class Dashboard
     Inherits System.Web.UI.Page
-
+    Dim group_id As String = ""
+    Dim UserId = ""
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
+            group_id = LoginInfo.Getgroup_id()
+            UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
+            Dim dt As New DataTable
+            dt = DBManager.Getdatatable("select * from TblUsers where Id ='" + UserId + "'")
+            If Not dt Is Nothing Then
+                If dt.Rows.Count > 0 Then
+                    lblLink.InnerText = dt.Rows(0).Item("User_Email").ToString
+                    lblUserName.Text = dt.Rows(0).Item("User_Name").ToString
+                    imgUser1.ImageUrl = dt.Rows(0).Item("User_Image").ToString
+                End If
+            End If
             fillMenu()
         Catch ex As Exception
         End Try
@@ -34,15 +46,15 @@ Public Class Dashboard
     ''' </summary>
     Sub fillMenu()
         Try
-            Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
+
             Dim dtMenu As DataTable = DBManager.Getdatatable("SELECT  TF.Id as FormID, TF.FormName as FormName, TF.FormTitle as FormTitle, TF.ArFormTitle as ArFormTitle, TF.FormUrl as FormUrl, TF.GroupId as FormGroupId , TF.Icon as FormIcon, TF.OPeration as FormOperation" &
                         " , TM.Id as MenuID, TM.MenuName, TM.ArMenuName as 'MenuNameAr', TM.OrderId as MenuOrderID, TM.Icon as MenuIcon,TM.ParentMenuId as MenuParentId, TM.Report as MenuReport" &
                         " ,TMP.Id as ParentMenuID, TMP.MenuName as ParentMenuName, TMP.ArMenuName as ParentArMenuName, TMP.OrderId as ParentMenuOrderID, TMP.Icon as ParentMenuIcon, TMP.Report as ParentMenuReport" &
                         " FROM  tblforms AS TF" &
                         " left outer join tblMenus AS TM  on(TF.MenueId  = TM.ID )" &
                         " left outer join tblMenus AS TMP on(TM.ParentMenuId =TMP .ID )" &
-                            " inner join TblPermissions TP on(TP.FormId =TF.Id )" &
-                      " where TP.UserId='" & UserId & "' and TP.PAccess =1 and TF.FormName not in ('LeadSalesProperty','LeadRentProperty','SellingPaymentSchedule','MenuSetup')" &
+                            " inner join tblgroup_permissons TP on(TP.form_id =TF.Id )" &
+                      " where TP.group_id='" & group_id & "' and TP.f_access =1 and TF.FormName not in ('LeadSalesProperty','LeadRentProperty','SellingPaymentSchedule','MenuSetup')" &
                                         " order by TMP.OrderId,tm.OrderId,TF.Id")
             Dim dtParentMenu As New DataTable
             Dim dtSubMenu As New DataTable
@@ -178,49 +190,41 @@ Public Class Dashboard
                 Dim spanName As New LiteralControl("<span>" + FormName + "</span>")
                 lb.Controls.Add(spanName)
                 lb.NavigateUrl = "~/" + FormUrl
+                If SubMenuId = 8 Then
+                    lb.Target = "_blank"
+                End If
                 'UlMenu.Controls.Add(lb)
                 Dim liFormClose As New LiteralControl("</li>")
-                If SubMenuId = 8 Then
-                    communicteUL.Controls.Add(liForm)
-                    communicteUL.Controls.Add(lb)
-                    communicteUL.Controls.Add(liFormClose)
-                End If
-                If SubMenuId = 7 Then
-                    hallUL.Controls.Add(liForm)
-                    hallUL.Controls.Add(lb)
-                    hallUL.Controls.Add(liFormClose)
-                End If
                 If SubMenuId = 1 Then
-                    storeUL.Controls.Add(liForm)
-                    storeUL.Controls.Add(lb)
-                    storeUL.Controls.Add(liFormClose)
-                End If
-                If SubMenuId = 9 Then
-                    custodyUL.Controls.Add(liForm)
-                    custodyUL.Controls.Add(lb)
-                    custodyUL.Controls.Add(liFormClose)
-                End If
-
-                If SubMenuId = 10 Then
-                    contactsUL.Controls.Add(liForm)
-                    contactsUL.Controls.Add(lb)
-                    contactsUL.Controls.Add(liFormClose)
-                End If
-                If FormId = 15 Then
                     settingsUL.Controls.Add(liForm)
                     settingsUL.Controls.Add(lb)
                     settingsUL.Controls.Add(liFormClose)
+                ElseIf SubMenuId = 3 Then
+                    bordsUL.Controls.Add(liForm)
+                    bordsUL.Controls.Add(lb)
+                    bordsUL.Controls.Add(liFormClose)
+                ElseIf SubMenuId = 6 Then
+                    FamilyConcUL.Controls.Add(liForm)
+                    FamilyConcUL.Controls.Add(lb)
+                    FamilyConcUL.Controls.Add(liFormClose)
+                ElseIf SubMenuId = 4 Then
+                    SMSUL.Controls.Add(liForm)
+                    SMSUL.Controls.Add(lb)
+                    SMSUL.Controls.Add(liFormClose)
+                ElseIf SubMenuId = 7 Then
+                    AcadymicUL.Controls.Add(liForm)
+                    AcadymicUL.Controls.Add(lb)
+                    AcadymicUL.Controls.Add(liFormClose)
+                ElseIf SubMenuId = 8 Then
+                    ReportUL.Controls.Add(liForm)
+                    ReportUL.Controls.Add(lb)
+                    ReportUL.Controls.Add(liFormClose)
+                ElseIf SubMenuId = 5 Then
+                    ManagementCallsUl.Controls.Add(liForm)
+                    ManagementCallsUl.Controls.Add(lb)
+                    ManagementCallsUl.Controls.Add(liFormClose)
                 End If
-                If FormId = 6 Then
-                    usersUL.Controls.Add(liForm)
-                    usersUL.Controls.Add(lb)
-                    usersUL.Controls.Add(liFormClose)
-                End If
-                If SubMenuId = 4 Then
-                    reportsUL.Controls.Add(liForm)
-                    reportsUL.Controls.Add(lb)
-                    reportsUL.Controls.Add(liFormClose)
-                End If
+
 
                 ''''''''''''''''''''''' End''''''''''''''''''''''
 
@@ -233,6 +237,9 @@ Public Class Dashboard
                 lbH.ClientIDMode = UI.ClientIDMode.Static
                 lbH.NavigateUrl = "~/" + FormUrl
                 lbH.Text = FormName
+                If SubMenuId = 8 Then
+                    lbH.Target = "_blank"
+                End If
 
                 'HlMenu.Controls.Add(lbH)
                 Dim liHFormClose As New LiteralControl("</li>")

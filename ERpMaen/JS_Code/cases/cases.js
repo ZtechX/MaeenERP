@@ -288,9 +288,9 @@ function save_delivery_details() {
                 $("#lblapprisal_date_m").html(new_date_m)
                 $("#lblapprisal_date_h").html(new_date)
                 if (res_type == 1) {
-                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "#039ae4");
+                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(20, 128, 131)");
                 } else {
-                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "red");
+                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(192, 156, 103)");
                 }
                 $("#dateval[date*='" + new_date_m + "']").parent().css("color", "#ffffff");
                 $("#dateval[date*='" + new_date_m + "']").parent().prop('id', res_id);
@@ -816,6 +816,7 @@ function show_all(id, flag) {
     } else {
         var case_id = $("#ddlcase_id").val();
     }
+    $("#caseReportDive").show();
     $("lblcase_id").html(case_id);
     //get_date_expenses(case_id);
     //get_date_delivery(case_id)
@@ -930,7 +931,7 @@ function show_all(id, flag) {
                 for (var y = 0; y < sessions.length; y++) {
                     result_sessions = result_sessions + '<tr>' + '<td>' + sessions[y].code + '</td>' +
                         '<td>' + sessions[y].date_h + '</td>' +
-                        '<td><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + sessions[y].id + ',4); return false; "><i class="fa fa-eye"></i></button><button class="btn btn-xs btn-danger btn-quick" title = "Delete" onclick = "delete_details(' + sessions[y].id + ',4); return false;" > <i class="fa fa-times"></i></button ></td>' +
+                        '<td><button class="btn btn-xs btn-primary btn-quick" title="Print Session" onclick="getAttendanceRegist(' + sessions[y].id + '); return false; "><i class="fa fa-print"></i></button><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + sessions[y].id + ',4); return false; "><i class="fa fa-eye"></i></button><button class="btn btn-xs btn-danger btn-quick" title = "Delete" onclick = "delete_details(' + sessions[y].id + ',4); return false;" > <i class="fa fa-times"></i></button ></td>' +
                         '</tr >';
                 }
                 $("#sessions").html(result_sessions);
@@ -1209,4 +1210,41 @@ function kuwaiticalendar(today) {
     myRes[3] = iy; //islamic year
   return (id >= 10 ? id : "0" + id) + "/" + ((im) >= 10 ? (im) : "0" + (im) ) + "/" + iy; // padding
 }
+function getCaseReport() {
+    window.open("../report_Module/Aslah/CaseReportRep?Case_id=" + $("#combobox").val(),"_blank");
+}
+function getCaseDetails() {
+    window.open("../report_Module/Aslah/CaseDetailsRep?Case_id=" + $("#combobox").val(), "_blank");
+}
+function getReceive_and_deliver() {
+    window.open("../report_Module/Aslah/Receive_and_deliverRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
+}
+function getProceedingReps(DeliveryProceeding){
+    window.open("../report_Module/Aslah/ReceiveProceedingRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html() , "_blank");
+    DeliveryProceeding();
+}
+function DeliveryProceeding() {
+    window.open("../report_Module/Aslah/DeliveryProceedingRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
+}
+function getAttendanceRegist(session_id) {
+    window.open("../report_Module/Aslah/AttendanceRegistRep?Case_id=" + $("#combobox").val() + "&session_id="+session_id, "_blank");
+}
+function getConciliation() {
+    window.open("../report_Module/Aslah/ConciliationRep?Conc_id=" + $("#case_conciliation").find("#lblconciliation_id").html(), "_blank");
+}
+function getagreement() {
+    window.open("../report_Module/Aslah/agreementRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
+}
+function getReview(type) {
+    var person_id ;
+    if (type == "deliverer_id") {
+        person_id = $("#receiving_delivery_details").find("#ddldeliverer_id").val();
+    } else if (type == "reciever_id") {
+        person_id = $("#receiving_delivery_details").find("#ddlreciever_id").val();
+    }
+    window.open("../report_Module/Aslah/ReviewRep?details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html() + "&type=" + type + "&person_id="+person_id + "&_date=" + Pub_date_hj, "_blank");
 
+}
+function getProcedure() {
+    window.open("../report_Module/Aslah/ProceduresRep?Case_id=" + $("#combobox").val() , "_blank");
+}

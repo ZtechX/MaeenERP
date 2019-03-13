@@ -7,9 +7,13 @@
 <head runat="server">
     <title></title>
      <script>
-        function showpdf(pdfname) {
-            try {
+        
+         function showpdf(pdfname) {
+             try {
+                 sessionStorage.setItem("reloading", "true");
                 window.location.replace("../../Report/" + pdfname + ".pdf");
+                 
+
             } catch (err) {
             }
         }

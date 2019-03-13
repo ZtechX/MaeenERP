@@ -218,7 +218,12 @@
                                                             <div class="panel-body" id="cases_info">
                                                                 <asp:Label ID="lblmainid" runat="server" ClientIDMode="static" Style="display: none" dbcolumn="id"></asp:Label>
                                                                 <%-- start group 1--%>
-                                   
+                                   <div id="caseReportDive" class="col-md-12 form-group" style="display:none;">
+                                            <button class="btn btn-info btn-lg pull-right" onclick="getCaseReport(); return false;"> تقرير عن الحالة</button>
+                                               
+                                            <button class="btn btn-info btn-lg pull-left" onclick="getCaseDetails(); return false;">طباعة بيانات الحالة الأولية</button>
+                                         
+                                   </div>
                                                                 <div class=" col-md-12 form-group ">
 
                                                                     <div class="col-md-3 col-sm-12">
@@ -891,7 +896,7 @@
                                                                 <asp:Label ID="lbl_sessions_id" ClientIDMode="static" runat="server" Style="display: none" dbcolumn="id"></asp:Label>
 
                                                                 <%-- start group 1--%>
-
+           
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label>
@@ -1128,6 +1133,9 @@
                                                             <div class="panel-body" id="case_conciliation">
                                                                 <%-- start group 1--%>
                                                                 <asp:Label ID="lblconciliation_id" ClientIDMode="static" runat="server" Style="display: none" dbcolumn="id"></asp:Label>
+                                                                                                          <div class="col-sm-12 form-group">
+                                            <button class="btn btn-info btn-lg pull-left" onclick="getConciliation(); return false;"> طباعة محضر الصلح </button>
+        </div>
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label>
@@ -1311,6 +1319,10 @@
                                                             <div class="panel-body" id="case_correspondences">
                                                                 <%-- start group 2--%>
                                                                 <asp:Label ID="lblcorrespondences_id" ClientIDMode="static" runat="server" Style="display: none" dbcolumn="id"></asp:Label>
+                                                                 <div class=" col-md-12 form-group ">
+                                                                <button class="btn btn-info btn-lg pull-left" onclick="getProcedure(); return false;">طباعة إجراءات العضو المباشر</button>
+                                         </div>
+                                                                
                                                                 <div class=" col-md-12 form-group ">
 
                                                                     <div class="col-md-3 col-sm-12">

@@ -206,11 +206,12 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                             $(grid).prop("id", res_id);
                             $(grid).css("color", "#ffffff");
                             if (res_type == 1) {
-                                $(grid).css("background-color", "#039ae4");
+                                $(grid).css("background-color", "#148083");
                             } else {
-                                $(grid).css("background-color", "red");
+                                $(grid).css("background-color", "#C09C67");
 
                             }
+                            $(grid).addClass("w3-round-large");
                         }
                         pde.innerHTML = Calendar.getDigit(pdate); sde.innerHTML = Calendar.getDigit(sdate) + ' ' + smsn; pdate++; $(sde).prop('id', 'dateval'); $(sde).attr('date', (sdate < 10 ? "0" + sdate : sdate) + '/' + ((getOppsDate().getMonth() + 1) < 10 ? "0" + (getOppsDate().getMonth() + 1) : (getOppsDate().getMonth() + 1)) + '/' + (getOppsDate().getFullYear())); $(sde).attr('hdate', ((pdate - 1) < 10 ? "0" + (pdate - 1) : (pdate - 1)) + '/' + ((dispDate.getMonth() + 1) < 10 ? "0" + (dispDate.getMonth() + 1) : (dispDate.getMonth() + 1)) + '/' + (dispDate.getFullYear()));
                         if (pdate > pdim) { pdate = 1; dispDate.setMonth(dispDate.getMonth() + 1); pdim = dispDate.getDayCountInMonth() }

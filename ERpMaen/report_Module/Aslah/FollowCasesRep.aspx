@@ -9,7 +9,7 @@
      <script>
         function showpdf(pdfname) {
             try {
-                window.location.replace("../../Report/" + pdfname + ".pdf");
+               window.location.replace("../../Report/" + pdfname + ".pdf");
             } catch (err) {
             }
         }

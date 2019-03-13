@@ -7,20 +7,19 @@ Public Class agreementRep
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-
-        ' Dim Case_id = Request.QueryString("Case_id")
-        Dim Case_id = "32"
+        Dim Case_id = Request.QueryString("Case_id")
+        Dim details_id = Request.QueryString("details_id")
         If String.IsNullOrWhiteSpace(Case_id) Then
             Dim script As String = "<script type='text/javascript' defer='defer'> alert('لا يوجد بيانات متاحة للعرض');</script>"
             ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)
             ClientScript.RegisterStartupScript(Me.GetType(), "closePage", "window.close();", True)
 
         Else
-            getReportData(Case_id)
+            getReportData(Case_id, details_id)
         End If
 
     End Sub
-    Private Sub getReportData(ByVal Case_id As String)
+    Private Sub getReportData(ByVal Case_id As String, ByVal details_id As String)
         Try
             Dim message As String = " لا يوجد بيانات متاحة للعرض"
             Dim rdoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument
@@ -40,7 +39,8 @@ Public Class agreementRep
             If dt2.Rows.Count <> 0 Then
 
 
-                query = "select name,age from ash_case_childrens where case_id=" + Case_id
+                query = "SELECT  name,age FROM ash_case_children_receiving_details left join ash_case_childrens
+on ash_case_childrens.id=ash_case_children_receiving_details.children_id where details_id=" + details_id
                 dt3 = DBManager.Getdatatable(query)
                 Dim row = 0
                 If dt3.Rows.Count <> 0 Then

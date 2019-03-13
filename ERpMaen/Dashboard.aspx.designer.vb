@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Dashboard
-
+    
     '''<summary>
     '''ToolkitScriptManager1 control.
     '''</summary>
@@ -21,61 +21,34 @@ Partial Public Class Dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ToolkitScriptManager1 As Global.System.Web.UI.ScriptManager
-
+    
     '''<summary>
-    '''iframe1 control.
+    '''imgUser1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents iframe1 As Global.System.Web.UI.HtmlControls.HtmlIframe
-
+    Protected WithEvents imgUser1 As Global.System.Web.UI.WebControls.Image
+    
     '''<summary>
-    '''communicteUL control.
+    '''lblLink control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents communicteUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+    Protected WithEvents lblLink As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
     '''<summary>
-    '''hallUL control.
+    '''lblUserName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hallUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''storeUL control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents storeUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''custodyUL control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents custodyUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''contactsUL control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents contactsUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+    Protected WithEvents lblUserName As Global.System.Web.UI.WebControls.Label
+    
     '''<summary>
     '''settingsUL control.
     '''</summary>
@@ -84,40 +57,58 @@ Partial Public Class Dashboard
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents settingsUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+    
     '''<summary>
-    '''reportsUL control.
+    '''bordsUL control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents reportsUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+    Protected WithEvents bordsUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
     '''<summary>
-    '''usersUL control.
+    '''FamilyConcUL control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents usersUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+    Protected WithEvents FamilyConcUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
     '''<summary>
-    '''Ul1 control.
+    '''SMSUL control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Ul1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
+    Protected WithEvents SMSUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
     '''<summary>
-    '''Ul2 control.
+    '''AcadymicUL control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Ul2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents AcadymicUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''ManagementCallsUl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ManagementCallsUl As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''ReportUL control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ReportUL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class

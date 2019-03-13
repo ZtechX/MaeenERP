@@ -7,6 +7,7 @@ var Pub_date_m;
 var Pub_date_hj;
 $(function () {
     GetCurrentDate_m_hj();
+    $("#UlMenu").css("height", document.documentElement.clientHeight);
 });
 // enable pnl form for update for each form
 function setformforupdate_all() {

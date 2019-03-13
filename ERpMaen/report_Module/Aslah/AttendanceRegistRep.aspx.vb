@@ -8,19 +8,20 @@ Public Class AttendanceRegistRep
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
-        ' Dim Case_id = Request.QueryString("Case_id")
-        Dim Case_id = "32"
+
+        Dim Case_id = Request.QueryString("Case_id")
+        Dim session_id = Request.QueryString("session_id")
         If String.IsNullOrWhiteSpace(Case_id) Then
             Dim script As String = "<script type='text/javascript' defer='defer'> alert('لا يوجد بيانات متاحة للعرض');</script>"
             ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)
             ClientScript.RegisterStartupScript(Me.GetType(), "closePage", "window.close();", True)
 
         Else
-            getReportData(Case_id)
+            getReportData(Case_id, session_id)
         End If
 
     End Sub
-    Private Sub getReportData(ByVal Case_id As String)
+    Private Sub getReportData(ByVal Case_id As String, ByVal session_id As String)
         Try
             Dim message As String = " لا يوجد بيانات متاحة للعرض"
             Dim rdoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument
@@ -79,7 +80,7 @@ Public Class AttendanceRegistRep
                 query = "SELECT persons1.name  as 'Pfrom' ,persons2.name as 'PAgainst',date_h ,entry_time,exite_time
   FROM ash_case_sessions left join ash_case_persons persons1 on ash_case_sessions.owner_id=persons1.id 
   left join ash_case_persons persons2 on ash_case_sessions.second_party_id=persons2.id
-  where  ash_case_sessions.case_id=" + Case_id
+  where  ash_case_sessions.id=" + session_id
                 dt4 = DBManager.Getdatatable(query)
                 Dim row_index = 0
                 If dt4.Rows.Count <> 0 Then

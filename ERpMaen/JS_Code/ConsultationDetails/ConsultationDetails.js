@@ -169,3 +169,6 @@ function getConsultNum() {
         $("#txtNumber").val(Number(val) + 1);
     });
 }
+function getconsultation(Consult_id) {
+    window.open("../report_Module/Aslah/consultationRep?Consult_id=" + Consult_id, "_blank");
+}
