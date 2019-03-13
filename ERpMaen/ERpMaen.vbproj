@@ -57,6 +57,9 @@
     <Reference Include="BusinessLayer.BusinessLayer">
       <HintPath>G:\ZTechx\مهندس محيى\Musaned_V04\Musaned_V04\Bin\BusinessLayer.BusinessLayer.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -1412,6 +1415,8 @@
     <Content Include="JS_Code\companies\companies_Upload.js" />
     <Content Include="JS_Code\ConsultationDetails\ConsultationDetails.js" />
     <Content Include="JS_Code\consultings\consulting.js" />
+    <Content Include="JS_Code\contact\contact.js" />
+    <Content Include="JS_Code\contact_group\contact_group.js" />
     <Content Include="JS_Code\Dashboard.js" />
     <Content Include="JS_Code\Email.js" />
     <Content Include="JS_Code\EmailLayout.js" />
@@ -1469,11 +1474,13 @@
     <Content Include="JS_Code\sessions\sessions_Upload.js" />
     <Content Include="JS_Code\Signature_setting\Signature_setting.js" />
     <Content Include="JS_Code\group_permissons\group_permissons.js" />
+    <Content Include="JS_Code\sms\sms.js" />
     <Content Include="JS_Code\sms_setting\sms_setting.js" />
     <Content Include="JS_Code\store_rep\store_rep.js" />
     <Content Include="JS_Code\stors\stors.js" />
     <Content Include="JS_Code\stors\stors_Edit.js" />
     <Content Include="JS_Code\stors\stors_Save.js" />
+    <Content Include="JS_Code\template_sms\template_sms.js" />
     <Content Include="JS_Code\training_centers\training_centers.js" />
     <Content Include="JS_Code\transfers\transfers.js" />
     <Content Include="JS_Code\transfers\transfers_Edit.js" />
@@ -1555,6 +1562,11 @@
     <Content Include="Settings_Module\companies.aspx" />
     <Content Include="Settings_Module\Users.aspx" />
     <Content Include="shadowbox-3.0.3\shadowbox.css" />
+    <Content Include="Sms_Module\template_sms.aspx" />
+    <Content Include="Sms_Module\contact_group.aspx" />
+    <Content Include="Sms_Module\contact.aspx" />
+    <Content Include="Sms_Module\sms.aspx" />
+    <Content Include="UserControls\Appraisal.ascx" />
     <Content Include="UserControls\CustomerCalendar.ascx" />
     <Content Include="UserControls\CustomerCalendar1.ascx" />
     <Content Include="UserControls\DeliveryDate.ascx" />
@@ -1570,6 +1582,19 @@
     <Content Include="assets\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <Content Include="assets\fonts\droid-kufi\DroidKufi-Bold.ttf" />
     <Content Include="assets\fonts\droid-kufi\DroidKufi-Regular.ttf" />
+    <Content Include="Report\53ty5wyh3o0oyfvb4rmnaq4z.pdf" />
+    <Content Include="Report\dulmuuuw30c2nezj1yz1hgql.pdf" />
+    <Content Include="Report\f4lnyn5cvuvsdfwbs0lykbia.pdf" />
+    <Content Include="Report\gersv0x2dz5hjpsias5iw02o.pdf" />
+    <Content Include="Report\ghgoxf30s2ubpzeasjylffnq.pdf" />
+    <Content Include="Report\h5an1sqfsy0pbvyimeubx1oh.pdf" />
+    <Content Include="Report\hlhhoerwcgxgrltqrq1nvhse.pdf" />
+    <Content Include="Report\huorgg2i1hundg33f5zsdjhz.pdf" />
+    <Content Include="Report\qfzospn33ikeatnf1z4dg3bw.pdf" />
+    <Content Include="Report\r0prgmzkkm2xqnpx3trr5ibl.pdf" />
+    <Content Include="Report\r43ewp3rb2hm3vrkws3hs00v.pdf" />
+    <Content Include="Report\ukrqofauoarowc0m5xefdo4d.pdf" />
+    <Content Include="Report\ysr0x0ittk25ixmbdj0pmuuh.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Login\css\animate-custom.css" />
     <Content Include="Login\css\BluebLogin.css" />
@@ -1771,6 +1796,12 @@
     <Content Include="App_Code\ConsultationDetails.vb">
       <SubType>Component</SubType>
     </Content>
+    <Content Include="App_Code\contact.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\contact_group.vb">
+      <SubType>Component</SubType>
+    </Content>
     <Compile Include="App_Code\members.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -1787,6 +1818,12 @@
       <SubType>Component</SubType>
     </Content>
     <Content Include="App_Code\sessions.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\sms.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\template_sms.vb">
       <SubType>Component</SubType>
     </Content>
     <Compile Include="App_Start\BundleConfig.vb" />
@@ -2028,6 +2065,41 @@
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Sms_Module\template_sms.aspx.designer.vb">
+      <DependentUpon>template_sms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sms_Module\template_sms.aspx.vb">
+      <DependentUpon>template_sms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sms_Module\contact_group.aspx.designer.vb">
+      <DependentUpon>contact_group.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sms_Module\contact_group.aspx.vb">
+      <DependentUpon>contact_group.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sms_Module\contact.aspx.designer.vb">
+      <DependentUpon>contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sms_Module\contact.aspx.vb">
+      <DependentUpon>contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sms_Module\sms.aspx.designer.vb">
+      <DependentUpon>sms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sms_Module\sms.aspx.vb">
+      <DependentUpon>sms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\Appraisal.ascx.designer.vb">
+      <DependentUpon>Appraisal.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Appraisal.ascx.vb">
+      <DependentUpon>Appraisal.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControls\CustomerCalendar.ascx.designer.vb">
       <DependentUpon>CustomerCalendar.ascx</DependentUpon>
     </Compile>
@@ -2207,6 +2279,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

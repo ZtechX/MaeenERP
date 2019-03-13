@@ -169,7 +169,7 @@ function save() {
         if (!checkRequired("cases_info") && !checkRequired("person_owner") && !checkRequired("person_against") && !checkRequired("get_children") && !checkRequired("get_status")  ) {
             var PosId = $("#lblmainid").html();
         cases.Save(PosId, cases_info, persons_owner, person_against, children, status, tabs, atch_files, function (val) {
-            if (val) {
+            if (val !=0) {
                 $("#lblcase_id").html(val);
                 getSerial();
                 get_checked_tab(val);
@@ -181,8 +181,8 @@ function save() {
                 resetDivControls("get_children");
                 resetDivControls("get_status");
                     showSuccessMessage("تم الحفظ بنجاح");
-                } else {
-                    showErrorMessage(val.split("|")[1]);
+                } else if(val==-1) {
+                alert("عفوا رقم هوية المنفذ اغو المنفذ ضده موجود من قبل");
                 }
             });
         } else {
@@ -262,16 +262,31 @@ function save_delivery_details() {
     //$("#lblnew_date_m").html($("#div_new_date #txtDatem").val());
     //$("#lblnew_date_h").html($("#div_new_date #txtDateh").val());
     var children_delivery_details = generateJSONFromControls("receiving_delivery_details");
-    var case_id = $("#ddlcase_id").val();
+       var case_id = $("#ddlcase_id").val();
+        var ddltype = $("#ddltype").val();
         var PosId = $("#lbldelivery_details").html();
         var new_date = $("#lbldelivery_date_h").html();
         var new_date_m = $("#lbldelivery_date_m").html();
         var res = new_date.substring(3, 10);
         var children_gson = getChildrenJson();
+        if (ddltype == 1) {
+            if (children_gson == "") {
+                alert("يجب ان تختار الاولاد");
+                return;
+            }
+        }
         cases.save_delivery_details(PosId, case_id, children_delivery_details, children_gson, res, function (val) {
             if (val) {
+                $("#Appraisal").dialog({
+                    width: "800px",
+                });
                 var res_id = val.split("|")[0]
                 var res_type = val.split("|")[1]
+                $("#lbltype").html(res_type)
+                $("#lbldetail_id").html(res_id)
+                $("#lblcase_apprisal_id").html(case_id)
+                $("#lblapprisal_date_m").html(new_date_m)
+                $("#lblapprisal_date_h").html(new_date)
                 if (res_type == 1) {
                     $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "#039ae4");
                 } else {
@@ -370,10 +385,17 @@ function save_sessions() {
 
     cases.save_sessions(PosId, case_id, sessions, children_gson, persons_gson, function (val) {
         if (val) {
+            $("#Appraisal").dialog({
+                width: "800px",
+            });
+            $("#lbltype").html(3)
+            $("#lbldetail_id").html(val)
+            $("#lblcase_apprisal_id").html(case_id)
+            $("#lblapprisal_date_m").html($("#divdate_sessions #txtDatem").val())
+            $("#lblapprisal_date_h").html($("#divdate_sessions #txtDateh").val())
             resetDivControls("case_sessions");
             getSerial_sessions()
             show_all(case_id,1);
-            showSuccessMessage("تم الحفظ بنجاح");
         } else {
             showErrorMessage(val.split("|")[1]);
         }
@@ -491,6 +513,40 @@ function save_new_person(flag) {
 }
 }
 // end save_person
+// save_apprisal
+function save_apprisal() {
+    var apprisal_gson = generateJSONFromControls("Appraisal");
+    var PosId = $("#lblitem_id").html();
+    var PosId = 0;
+    cases.save_apprisal(PosId,apprisal_gson, function (val) {
+        if (val) {
+            $('#Appraisal').dialog("close");
+        }
+    });
+
+}
+//end save_apprisal
+function rate(sender, rate, control_id) {
+    var i = 1;
+    $(".star_test").val(rate);
+    $("#Appraisal span").each(function () {
+        $(this).removeClass("check");
+        var id = $(this).attr("id");
+        var new_id = id.replace("star", "");
+        if (new_id <= rate && new_id != 0) {
+            $(this).addClass("check");
+        }
+
+
+        // $(id).;
+
+    });
+
+
+
+
+
+}
 // cal_days
 function cal_days() {
    
@@ -1032,7 +1088,19 @@ function get_date_children(case_id) {
         });
  
 }
+function check_user() {
+    var user_name = $("#user_name").val();
+    companies.check_user(user_name, function (val) {
+        if (val == true) {
+            $("#check_userName").val('1')
+        } else {
+            $("#check_userName").val('0')
+        }
 
+    });
+
+
+}
 function mark_all(event,table_id) {
    var id=$(event).attr("id");
     //if (event.attr("checked")) {

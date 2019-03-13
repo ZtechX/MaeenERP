@@ -48,4 +48,13 @@ Partial Public Class test
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DeliveryDate1 As Global.ERpMaen.DeliveryDate
+    
+    '''<summary>
+    '''Appraisal1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Appraisal1 As Global.ERpMaen.Appraisal
 End Class

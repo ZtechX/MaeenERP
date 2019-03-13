@@ -45,17 +45,26 @@ Public Class cases
             Dim dictperson_against As Dictionary(Of String, Object) = person_against
             Dim dt_user As DataTable
             Dim dt_person_cases As DataTable
+            Dim dt_person_users As DataTable
             Dim result = 0
             Dim person1_id = 0
             Dim person2_id = 0
             dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+            dt_person_users = DBManager.Getdatatable("select * from tblUsers where User_name='" + dictperson_owner("indenty").ToString + "' Or User_name = '" + dictperson_against("indenty").ToString + "'")
             If id <> "" Then
                 'DBManager.ExcuteQuery("delete from ash_cases where case_id=" + id.ToString)
-                dt_person_cases = DBManager.Getdatatable("select * from ash_cases where id=" + id.ToString())
+                dt_person_cases = DBManager.Getdatatable("Select * from ash_cases where id=" + id.ToString())
                 person1_id = dt_person_cases.Rows(0).Item("person1_id")
                 person2_id = dt_person_cases.Rows(0).Item("person2_id")
             End If
-            dictBasicDataJson.Add("comp_id", dt_user.Rows(0).Item("comp_id"))
+            If id = "" Then
+                If dt_person_users.Rows.Count <> 0 Then
+                    _sqltrans.Rollback()
+                    _sqlconn.Close()
+                    Return -1
+                End If
+            End If
+                dictBasicDataJson.Add("comp_id", dt_user.Rows(0).Item("comp_id"))
             dictBasicDataJson.Add("person1_id", Save_person(persons_owner, person1_id, ""))
             dictBasicDataJson.Add("person2_id", Save_person(person_against, person2_id, ""))
             dictBasicDataJson.Add("boys_no", dictchildren("boys_no"))
@@ -119,15 +128,28 @@ Public Class cases
     Public Function Save_person(ByVal basicDataJson As Dictionary(Of String, Object), ByVal id As String, ByVal case_id As String) As Integer
         Try
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-
+            Dim dt_user As New DataTable
+            Dim user_id = 0
             dictBasicDataJson.Add("case_id", case_id)
             dictBasicDataJson.Add("user_id", LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+            DBManager.Getdatatable("delete  from tblUsers where User_name='" + dictBasicDataJson("indenty").ToString + "'")
+
             Dim result = 0
             Dim person = 0
-
+            If case_id <> "" Then
+                Dim dict = New Dictionary(Of String, Object)
+                dict.Add("User_Password", dictBasicDataJson("User_Password").ToString)
+                dict.Add("User_Name", dictBasicDataJson("indenty").ToString)
+                dict.Add("related_id", case_id)
+                PublicFunctions.TransUpdateInsert(dict, "tblUsers", user_id, _sqlconn, _sqltrans)
+                dict.Remove("User_Password")
+                dict.Remove("User_Name")
+                dict.Remove("related_id")
+            End If
             PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_case_persons", id, _sqlconn, _sqltrans)
             dictBasicDataJson.Remove("case_id")
             dictBasicDataJson.Remove("user_id")
+
             If id = "" Or id = 0 Then
                 person = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
             Else
@@ -139,13 +161,13 @@ Public Class cases
             Else
                 _sqltrans.Rollback()
                 _sqlconn.Close()
-                Return False
+                Return 0
             End If
 
         Catch ex As Exception
             _sqltrans.Rollback()
             _sqlconn.Close()
-            Return False
+            Return 0
         End Try
     End Function
 #End Region
@@ -166,8 +188,8 @@ Public Class cases
             Dim girls = 0
             Dim children = 1
             Dim gender = dictBasicDataJson("gender").ToString
-            dt_cases = DBManager.Getdatatable("select * from ash_cases where  id=" + case_id.ToString())
-            dt_childrens = DBManager.Getdatatable(" select (select count(id) as boy from ash_case_childrens where gender=1 and case_id=" + case_id.ToString() + " ) as boy,(select count(id) as girl from ash_case_childrens where gender=2 and case_id=" + case_id.ToString() + ") As girl from ash_case_childrens")
+            dt_cases = DBManager.Getdatatable("Select * from ash_cases where  id=" + case_id.ToString())
+            dt_childrens = DBManager.Getdatatable(" Select (Select count(id) As boy from ash_case_childrens where gender=1 And case_id=" + case_id.ToString() + " ) As boy,(Select count(id) As girl from ash_case_childrens where gender= 2 And case_id = " + case_id.ToString() + ") As girl from ash_case_childrens")
             If dt_childrens.Rows.Count <> 0 Then
                 boys = dt_childrens.Rows(0).Item("boy").ToString
                 girls = dt_childrens.Rows(0).Item("girl").ToString
@@ -346,7 +368,7 @@ Public Class cases
 #Region "save_sessions"
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function save_sessions(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal childrens As List(Of Object), ByVal persons As List(Of Object)) As Boolean
+    Public Function save_sessions(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal childrens As List(Of Object), ByVal persons As List(Of Object)) As Integer
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
@@ -377,17 +399,17 @@ Public Class cases
                 Next
                 _sqltrans.Commit()
                 _sqlconn.Close()
-                Return True
+                Return session_id
             Else
                 _sqltrans.Rollback()
                 _sqlconn.Close()
-                Return False
+                Return 0
             End If
 
         Catch ex As Exception
             _sqltrans.Rollback()
             _sqlconn.Close()
-            Return False
+            Return 0
         End Try
 
     End Function
@@ -460,7 +482,36 @@ Public Class cases
     End Function
 #End Region
 
+#Region "save_apprisal"
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function save_apprisal(ByVal id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+        Try
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            dictBasicDataJson.Add("user_id", LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+            DBManager.ExcuteQuery("delete from ash_appraisal where detail_id=" + dictBasicDataJson("detail_id").ToString)
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_appraisal", id, _sqlconn, _sqltrans) Then
 
+                Dim basic_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+
+    End Function
+#End Region
 #Region "Get Serial"
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>

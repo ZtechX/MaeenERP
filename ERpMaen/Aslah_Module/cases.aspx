@@ -8,6 +8,7 @@
 <%@ Register Src="~/UserControls/PnlConfirm.ascx" TagPrefix="uc1" TagName="PnlConfirm" %>
 <%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
 <%@ Register Src="~/UserControls/Person.ascx" TagPrefix="uc1" TagName="Person" %>
+<%@ Register Src="~/UserControls/Appraisal.ascx" TagPrefix="uc1" TagName="Appraisal" %>
 
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
@@ -349,6 +350,19 @@
                                                                         <br />
                                                                     </div>
                                                                 </div>
+                                                                      <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label class="label-required">
+                                                                        الرقم السرى </lable>
+                                                                    </div>
+
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <input onkeypress="return isNumber(event);" required dbcolumn="User_Password" type="text" id="txtpassword"
+                                                                            class="form-control" runat="server" clientidmode="Static" />
+
+                                                                        <br />
+                                                                    </div>
+                                                                </div>
 
 
 
@@ -410,6 +424,20 @@
 
                                                                         <div class="col-md-9 col-sm-12">
                                                                             <input onkeypress="return isNumber(event);" dbcolumn="authorization_no" type="text" id="txtauthorization_no2"
+                                                                                class="form-control" runat="server" clientidmode="Static" />
+
+                                                                            <br />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-12 form-group ">
+                                                                        <div class="col-md-3 col-sm-12">
+                                                                            <label class="label-required">
+                                                                            الرقم السرى </lable>
+                                                                        </div>
+
+                                                                        <div class="col-md-9 col-sm-12">
+                                                                            <input onkeypress="return isNumber(event);" required dbcolumn="User_Password" type="text" id="txtpassword2"
                                                                                 class="form-control" runat="server" clientidmode="Static" />
 
                                                                             <br />
@@ -1393,6 +1421,7 @@
                                               <uc1:ImageSlider runat="server" ID="ImageSlider" />
                      <uc1:MultiPhotoUpload runat="server" ID="MultiPhotoUpload" />
                         <uc1:Person runat="server" ID="Person" />
+                           <uc1:Appraisal runat="server" ID="Appraisal1" />
                         <%--  <uc1:ImageSlider runat="server" ID="ImageSlider" />
                     <uc1:MultiPhotoUpload runat="server" ID="MultiPhotoUpload" />
                     <uc1:DynamicTable runat="server" ID="DynamicTable" />
