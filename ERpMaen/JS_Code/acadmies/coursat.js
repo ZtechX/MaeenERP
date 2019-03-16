@@ -10,7 +10,7 @@ var current_page = 1;
 $(function () {
     $("#pnlConfirm").hide();
     $("#divData").hide();
-    $("#SavedivLoader").show();
+    //$("#SavedivLoader").show();
 
     try {
 
@@ -24,85 +24,62 @@ function resetAll() {
     try {
         resetFormControls();
         $("#lblmainid").html("");
-    
+
     } catch (err) {
         alert(err);
     }
 }
 
+
+
+
 function saveCourse() {
 
-    try {
-        
-       
-        if (!checkRequired()) {
-            debugger
-            $("#Label1").html($("#txtDatem").val());
-            $("#Label2").html($("#txtDateh").val());
 
-            $("#date_m").val($("#txtDatem").val());
-            $("#date_hj").val($("#txtDateh").val());
-            
+    try {
+
+
+        if (checkRequired("divForm") == 1) {
+
+            alert("يرجى ادخال البيانات المطلوبة");
+        } else {
+
+
+            //debugger
+
+            $("#end_datem").val($("#divdate2 #txtDatem").val());
+            $("#end_datehj").val($("#divdate2 #txtDateh").val());
+
+
+
+            $("#start_date_m").val($("#divdate1 #txtDatem").val());
+            $("#start_date_hj").val($("#divdate1 #txtDateh").val());
+
             var basicData = generateJSONFromControls("divForm");
-      
+
             var Id = "";
             console.log(basicData);
             coursatCls.Save(Id, basicData, function (val) {
                 if (val == true) {
                     debugger;
                     alert("تم الحفظ بنجاح");
-                    resetAll();
-                    prepareAdd();
+                    $("#addCourse").modal('hide');
+                    resetDivControls("divForm");
+                    drawCourses();
 
-                    //drawDynamicTable();
-                 
 
                 } else {
                     alert("لم يتم الحفظ");
                 }
 
-                //  $("#SavedivLoader").hide();
             });
         }
-           
-       
+
+
     } catch (err) {
         alert(err);
     }
 }
-//function savefile() {
-
-//    try {
-
-//        $("input").removeClass('error');
-//        $("select").removeClass('error');
-
-//        if (Page_ClientValidate("vgroup")) {
-//            $("#pnlConfirm").hide();
-//            $("#SavedivLoader").show();
-//            var basicData = generateJSONFromControls("divForm");
-//            var PosId = $("#lblmainid").html();
-//            coursat.Save(PosId, basicData, function (val) {
-//                if (val == true) {
-//                    debugger;
-//                    showSuccessMessage("تم الحفظ بنجاح");
-
-//                    //drawDynamicTable();
-//                    cancel();
-
-//                } else {
-//                    showErrorMessage("لم يتم الحفظ");
-//                }
-
-//                $("#SavedivLoader").hide();
-//            });
-
-
-//        }
-//    } catch (err) {
-//        alert(err);
-//    }
-//}
 
 function edit(val) {
     debugger
@@ -132,7 +109,7 @@ function prevPage() {
     }
 }
 function changePage(page) {
-    debugger
+    //debugger
     current_page = page;
     if (page < 1) {
         page = 1;

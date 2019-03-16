@@ -167,15 +167,6 @@ Partial Public Class advisors
     Protected WithEvents Name As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''txttel control.
     '''</summary>
     '''<remarks>
@@ -183,15 +174,6 @@ Partial Public Class advisors
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txttel As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''RequiredFieldValidator1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
     '''txtNumber control.

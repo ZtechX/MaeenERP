@@ -50,6 +50,15 @@ Partial Public Class ConsultDetails
     Protected WithEvents lblFormName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''loginUser control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents loginUser As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''cmdAdd control.
     '''</summary>
     '''<remarks>
@@ -329,13 +338,13 @@ Partial Public Class ConsultDetails
     Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''nationality control.
+    '''ddlnationality control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents nationality As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents ddlnationality As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''tel control.
@@ -399,6 +408,15 @@ Partial Public Class ConsultDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents girlsId As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''appear_data control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents appear_data As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
     
     '''<summary>
     '''ddlhouse_type control.

@@ -1,0 +1,780 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="ERpMaen.SiteMaster" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>   نظام معيين </title>
+   
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+     <link id="lnbootstrapmin" rel="stylesheet" href="App_Themes/styles/bootstrap.min.css" />
+    <link id="lnStyleSheet" rel="stylesheet" href="App_Themes/Theme1/StyleSheet.css" />
+    <link id="lnawesome" rel="stylesheet" href="App_Themes/Theme1/font-awesome.min.css" />
+    <link id="lnvmenu"  rel="stylesheet" href="App_Themes/Theme1/vmenu.css" />
+    <link  id="lnstylesheetscc" rel="stylesheet" href="css/StyleSheet.css" />
+    <link id="lnanimate"  rel="stylesheet" href="App_Themes/Theme1/animate.css" />
+    <link id="lnform" rel="stylesheet" href="App_Themes/styles/form.css" />
+    <link rel="stylesheet" href="shadowbox-3.0.3/shadowbox.css" />
+
+<%--    <link rel="stylesheet" type="text/css" href="js/jquery-ui.css" />--%>
+    <link id="lnDatatable" rel="stylesheet" type="text/css" href="css/plugins/datatable/jquery.dataTables.css" />
+    <link id="lnDatatableTool" rel="stylesheet" type="text/css" href="css/plugins/datatable/tableTools.css" />
+   <%-- <link rel="shortcut icon" href="images/favicon.png" />--%>
+    <link href="css/plugins/jquery-ui/smoothness/jquery-ui.css" rel="stylesheet" />
+<%--    <link href="http://lscrm.blueberry.software/Widgets/style.css" rel="stylesheet" />--%>
+
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0" />
+ 
+<%--    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="http://www.google.com/jsapi"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery.ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+     <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>--%>
+
+
+   
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery-latest.min.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery-ui.min.js")%>"></script>
+     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery-1.9.1.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery-ui.js")%>"></script>
+
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/tooltipsy.min.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/script.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/scripts/nicEdit.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery.easing.min.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/DynamicTable.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/LookupDdlBinder.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/RowsReorder.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/SmartEditor.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/PublicFunctions.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/MultiFileUploader.js")%>"></script>
+    <%--  <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/barcode.js")%>"></script>
+      <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/jquery-barcode.js")%>"></script>--%>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/Messages.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/Details.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/ImageSlider.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/jquery.dataTables.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/tableTools.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/jquery.formatCurrency-1.4.0.js")%>"></script>
+
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery.easing.min.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/FloatingLabels.js")%>"></script>
+    <%--<script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Notification.js")%>"></script>--%>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Master.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/jquery.dataTables.columnFilter.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/ColVis.min.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/ColReorderWithResize.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/fnFilterClear.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/dataTables.buttons.min.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/buttons.print.min.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/buttons.html5.min.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/vfs_fonts.js")%>"></script>
+
+     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/barcode.js")%>"></script>
+     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/jquery-barcode.js")%>"></script>
+     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/jquery-barcode.min.js")%>"></script>
+
+        <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/buttons.flash.min.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jszip.min.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/pdfmake.min.js")%>"></script>
+     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/vfs_fonts.js")%>"></script>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery.dataTables.min.css")%>"></script>
+     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/buttons.dataTables.min.css")%>"></script>
+       <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/calendar.js")%>"></script>
+        <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/hijri-date.js")%>"></script>
+        <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/bootstrap.min.js")%>"></script>
+              <link href="css/calendar.css" rel="stylesheet" type="text/css" />
+
+    <style>
+         .error {
+	border:#bf6464 2px dashed !important;
+	background-color:#fdfbfb !important;
+
+	-webkit-transition: all 0.2s ease-in;
+	   -moz-transition: all 0.2s ease-in;
+		 -o-transition: all 0.2s ease-in;
+			transition: all 0.2s ease-in;
+}
+        @media (min-width: 992px){
+            .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+                float: right;
+            }
+}
+          
+                btn3d {
+    position:relative;
+    top: -6px;
+    border:0;
+     transition: all 40ms linear;
+     margin-top:10px;
+     margin-bottom:10px;
+     margin-left:2px;
+     margin-right:2px;
+
+}
+                /*#pnlMultiFileUpload{display:none;}*/
+                      #UlMenu li ul li {
+    background: #4DB4B6 !important;
+}
+
+.btn3d:active:focus,
+.btn3d:focus:hover,
+.btn3d:focus {
+    -moz-outline-style:none;
+         outline:medium none;
+}
+.btn3d:active, .btn3d.active {
+    top:2px;
+}
+.btn3d.btn-white {
+    color: #666666;
+    box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.10) inset, 0 8px 0 0 #f5f5f5, 0 8px 8px 1px rgba(0,0,0,.2);
+    background-color:#fff;
+}
+
+               .btn3d.btn-success i {
+                    color:white;
+                }
+.btn3d.btn-success {
+    box-shadow:0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#78d739;
+    color:white;
+}
+.btn3d.btn-success:active, .btn3d.btn-success.active {
+    box-shadow:0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color: #78d739;
+}
+.btn3d.btn-info {
+    box-shadow:0 0 0 1px #00a5c3 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #348FD2, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#39B3D7;
+}
+.btn3d.btn-info:active, .btn3d.btn-info.active {
+    box-shadow:0 0 0 1px #00a5c3 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color: #39B3D7;
+}
+.btn3d.btn-warning {
+    box-shadow:0 0 0 1px #d79a47 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #D79A34, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#FEAF20;
+}
+.btn3d.btn-warning:active, .btn3d.btn-warning.active {
+    box-shadow:0 0 0 1px #d79a47 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color: #FEAF20;
+}
+.btn3d.btn-danger {
+    box-shadow:0 0 0 1px #b93802 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #AA0000, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#D73814;
+}
+.btn3d.btn-danger:active, .btn3d.btn-danger.active {
+    box-shadow:0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color: #D73814;
+}
+.btn3d.btn-magick {
+    color: #fff;
+    box-shadow:0 0 0 1px #9a00cd inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #9823d5, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#bb39d7;
+}
+.btn3d.btn-magick:active, .btn3d.btn-magick.active {
+    box-shadow:0 0 0 1px #9a00cd inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color: #bb39d7;
+}
+
+            </style>
+
+    <script>
+        function directAddCommunity() {
+            alert(0);
+            window.location.replace("http:/always.linkinsoft.com/addCommunity.aspx");
+        }
+        $(document).ready(function () {
+            checkLanguage();
+            $(".access_btn_User").click(function () {
+                $(".toggle_box_User").slideToggle();
+            });
+        });
+
+        $('.hastip').tooltipsy();
+
+
+        // scroll top
+
+
+
+        $(function () {
+
+            $(document).on('scroll', function () {
+
+                if ($(window).scrollTop() > 100) {
+                    $('.scroll-top-wrapper').addClass('show');
+                } else {
+                    $('.scroll-top-wrapper').removeClass('show');
+                }
+            });
+
+            $('.scroll-top-wrapper').on('click', scrollToTop);
+        });
+
+        function scrollToTop() {
+            verticalOffset = typeof (verticalOffset) != 'undefined' ? verticalOffset : 0;
+            element = $('body');
+            offset = element.offset();
+            offsetTop = offset.top;
+            $('html, body').animate({ scrollTop: offsetTop }, 500, 'linear');
+        }
+
+        // scroll top
+
+
+
+    </script>
+    <script>
+        jQuery(document).ready(function () {
+            var contentHeight = jQuery(window).height();
+            var footerHeight = jQuery('#footer').height();
+            var footerTop = jQuery('#footer').position().top + footerHeight;
+            if (footerTop < contentHeight) {
+                jQuery('#footer').css('margin-top', 10 + (contentHeight - footerTop) + 'px');
+            }
+        });
+</script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        $(document).ready(function () {
+            $("button").tooltip({
+                'selector': '',
+                'placement': 'top',
+                'container': 'body'
+            });
+
+        });
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+           
+            $("#cssmenu").click(
+            function () {
+            
+                if ($(this).attr('class') == 'menu_continersmall') {
+                    $(this).removeClass('menu_continersmall');
+                    $(this).addClass('menu_continer');
+                    $('#right_cont').width = '';
+                    $('#right_cont').width('88%');
+                    $('#navTopMenu').width('88%');
+                }
+
+            });
+
+
+        });
+    </script>
+
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        #footer {
+            height: 35px;
+            /*position: fixed;*/
+            text-align: center;
+            bottom: 0px;
+            z-index: 999;
+        }
+
+        .Repeater, .Repeater td, .Repeater td {
+            border: 1px solid #ccc;
+        }
+
+            .Repeater td {
+                background-color: #eee !important;
+            }
+
+            .Repeater th {
+                background-color: #6C6C6C !important;
+                color: White;
+                font-size: 10pt;
+                line-height: 200%;
+            }
+
+            .Repeater span {
+                color: black;
+                font-size: 10pt;
+                line-height: 200%;
+            }
+
+        .page_enabled, .page_disabled {
+            display: inline-block;
+            height: 20px;
+            min-width: 20px;
+            line-height: 20px;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #ccc;
+        }
+
+        .page_enabled {
+            background-color: #eee;
+            color: #000;
+        }
+
+        .page_disabled {
+            background-color: #6C6C6C;
+            color: #fff !important;
+        }
+
+        .HiddenText label {
+            display: none;
+        }
+
+        .auto-style1 {
+            width: 396px;
+        }
+
+        #imgloader {
+            width: 30px;
+            position: absolute;
+            left: 47%;
+        }
+        .scroll-top-wrapper {
+       position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    text-align: center;
+    z-index: 99999999;
+    background-color: #FFFFFF;
+    color: #8E8E8E;
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+    left:49%;
+    bottom: 30px;
+    padding-top: 2px;
+    border-radius: 50%;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0px 0px 10px rgba(64, 64, 64, 0.26);
+}
+.scroll-top-wrapper:hover {
+	background-color: #888888;
+    color:#fff;
+}
+.scroll-top-wrapper.show {
+    visibility:visible;
+    cursor:pointer;
+	opacity: 1.0;
+}
+.scroll-top-wrapper i.fa {
+	line-height: inherit;
+}
+    </style>
+
+        <style type="text/css">
+             .form-control {
+                        height: 40px;
+                          margin-bottom: 10px;
+                    }
+        @media print {
+    #divForm1,#pnlForm {
+       display:none;
+    }
+            #reportDiv table {
+                  direction :rtl;
+            }
+            #divBarcodeDraw {
+                width:100% !important;
+                margin:0px !important;
+                padding:0px !important;
+                border:8px solid black !important;
+            }
+            #divBarcodeDraw label,#divBarcodeDraw .col-md-12 { 
+                   margin:0px !important;
+                padding:0px !important;
+                text-align:right !important; direction:rtl !important; float:right !important;
+            }
+        table span {
+            font-weight:normal;
+        }
+                #reportDiv {
+                    width:100% !important;
+                    margin:0px;
+                    padding :0px;
+                    direction :rtl;
+                }
+                h3 {
+                    font-size:11px !important;
+                }
+                #divLogoContainer {
+                    direction:rtl;
+                    float:right;
+                     width:50% !important;
+                }
+        #lblStudentName {
+            display:inline-block;
+        }
+        #divLogoContainer .col-md-6 ,#divLogoContainer .col-md-3{
+            width:50% !important;
+            display:inline-block !important;
+            margin:0px !important; 
+            padding:0px !important;
+            vertical-align:top;
+
+        }
+          #divLogoContainer .col-md-3 img{
+              width:80% !important;
+              float:right !important;
+        }
+        .circles {
+            width:100% !important;
+           
+        } 
+         .circle-big {
+            width:100px !important;
+            height:100px !important;
+            padding:25px !important;
+           
+        } 
+           .circle {
+            width:50px !important;
+            height:50px !important;
+            padding:18px !important;
+           
+        }    
+        
+        svg {
+            width:100% !important;
+        }
+        #divLogoContainer .col-md-6 {
+           margin-top: 50px !important;
+             
+        }
+     #lblStudentName {
+                        text-align:center !important;
+                        float:right;
+                        direction:rtl;
+                    }
+}
+
+           #reportDiv {
+    background: #fff;
+    padding-top: 10px !important;
+        padding-left: 40px !important;
+    padding-right: 40px !important;
+    padding-bottom: 40px ;
+    width: 70%;
+    margin-right: 14%;
+    
+        }
+            #reportDiv table td, #reportDiv table th {
+                text-align:center ;
+            }
+            #reportDiv table th {
+                font-weight :bold;
+            }
+            #reportDiv .basic_tbl table thead {
+                 background: #89c3eb;
+            }
+              
+
+        .fa {
+            font-family: FontAwesome !important;
+        }
+        #divAreaList th,#divAreaList td{
+            text-align:center;
+        }
+        #divAreaList td label {
+            text-align:center;
+            max-width:100%;
+        }
+        body,label {
+            font-family:DroidKufi !important;
+            font-size: 9pt;
+        }
+
+        #footer {
+            height: 35px;
+            /*position: fixed;*/
+            text-align: center;
+            bottom: 0px;
+            z-index: 999;
+        }
+
+        .Repeater, .Repeater td, .Repeater td {
+            border: 1px solid #ccc;
+        }
+
+            .Repeater td {
+                background-color: #eee !important;
+            }
+
+            .Repeater th {
+                background-color: #6C6C6C !important;
+                color: White;
+                font-size: 10pt;
+                line-height: 200%;
+            }
+
+            .Repeater span {
+                color: black;
+                font-size: 10pt;
+                line-height: 200%;
+            }
+
+        .page_enabled, .page_disabled {
+            display: inline-block;
+            height: 20px;
+            min-width: 20px;
+            line-height: 20px;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #ccc;
+        }
+
+        .page_enabled {
+            background-color: #eee;
+            color: #000;
+        }
+
+        .page_disabled {
+            background-color: #6C6C6C;
+            color: #fff !important;
+        }
+
+        .HiddenText label {
+            display: none;
+        }
+
+        .auto-style1 {
+            width: 396px;
+        }
+
+        #imgloader {
+            width: 30px;
+            position: absolute;
+            left: 47%;
+        }
+        .scroll-top-wrapper {
+       position: fixed;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    text-align: center;
+    z-index: 99999999;
+    background-color: #FFFFFF;
+    color: #8E8E8E;
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+    left:49%;
+    bottom: 30px;
+    padding-top: 2px;
+    border-radius: 50%;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0px 0px 10px rgba(64, 64, 64, 0.26);
+}
+.scroll-top-wrapper:hover {
+	background-color: #888888;
+    color:#fff;
+}
+.scroll-top-wrapper.show {
+    visibility:visible;
+    cursor:pointer;
+	opacity: 1.0;
+}
+            .tbl-header {
+                border: 1px solid gainsboro;
+    width: 100%;
+    margin-bottom: 11px;
+    background: ghostwhite;
+            }
+.scroll-top-wrapper i.fa {
+	line-height: inherit;
+}
+        a.fa {
+            font-family:FontAwesome !important;
+        }
+          
+   
+            .form-control {
+                        height: 40px;
+                    }
+    </style>
+  
+<script>
+
+    document.createElement('header'); document.createElement('footer'); document.createElement('section'); document.createElement('article'); document.createElement('aside'); document.createElement('nav');
+
+</script>
+
+</head>
+<body onload="IconsMenu();" onbeforeunload="return myFunction();">
+    <script>
+        checkLanguage();
+        
+
+    </script>
+   <script>
+         function  ShowMenu(){
+               $("#cssmenu ul").removeClass("hidden-sm");
+               $("#cssmenu ul").removeClass("hidden-xs");
+           }
+      </script>
+    <%--<body>--%>
+    <form id="form1" runat="server" enctype="multipart/form-data" method="post">
+        <div class="fancy-form" id="CurrentDate" style="display:none;"> 
+                                <uc1:HijriCalendar runat="server" ID="HijriCalendar1" />  
+                                    </div>
+        <div class="zeromarg_pad col-md-12 ">
+            <asp:Label ID="lblUserId" runat="server" Style="display: none"></asp:Label>
+            <asp:Label ID="lblQueryString" runat="server" Style="display: none"></asp:Label>
+            <div class="animated fadeIn col-md-12 zeromarg_pad">
+                <div class="update-progress02">
+                </div>
+                <asp:Panel ID="pnlVMenu" runat="server" ClientIDMode="Static">
+                    <div id='cssmenu' onclick="menu()" class="menu_continer">
+                        <ul class="col-sm-12 col-xs-12 hidden-sm hidden-xs" runat="server" id="UlMenu" style="overflow-y: scroll;overflow-x:hidden;" >
+                            <li class="logocontiner" style ="background-color :white ;"><a href='#' onclick="SwapMenu('VMenu');return false;">
+                            
+                                            <asp:Image runat="server" ID="Image1" Height="51" ImageUrl="~/Login/images/logo1.png" />    
+                            </a>
+                            </li>
+                            <li class="active hastip" title="Dashboard">
+                                <asp:HyperLink runat="server" ID="VDashbaord" NavigateUrl="~/main.aspx">
+                                <i class="fa fa-th color2"></i><span>القائمة الرئيسية</span>
+                                </asp:HyperLink></li>
+                        </ul>
+                    </div>
+                </asp:Panel>
+
+                <div id="right_cont" class="right_sec zeromarg_pad fadeIn animated">
+                    <asp:Panel ID="pnlForm" runat="server">
+                      
+                        <div class="col-md-12 level_onevertical fadeIn animated" id="navTopMenu" >
+                            <asp:Panel ID="pnlVMenu2" runat="server" ClientIDMode="Static">
+                                <div class="toggle_menu_left">
+                                    <a class="toggle_menu_btn" onclick="IconsMenu()">
+                                        <i class="fa-bars fa"></i></a>
+                                </div>
+                                <div class="menu_search">
+                                    <asp:TextBox ID="txtSearch" runat="server" placeholder="Search" CssClass="thin_textbox" SkinID="thin_textbox" OnTextChanged="ChangeForm" AutoPostBack="true"></asp:TextBox>
+                                    <asp:AutoCompleteExtender ID="aceSearchMain" runat="server" BehaviorID="aceSearchMain"
+                                        FirstRowSelected="false" EnableCaching="false" Enabled="True" MinimumPrefixLength="1"
+                                        CompletionListCssClass="acl" CompletionListItemCssClass="li" CompletionListHighlightedItemCssClass="li-hover"
+                                        ServiceMethod="GetForms" ServicePath="~/ASMX_WebServices/WebService.asmx" TargetControlID="txtSearch"
+                                        CompletionInterval="500">
+                                    </asp:AutoCompleteExtender>
+                                    <i class="fa-search fa"></i>
+                                </div>
+
+                            </asp:Panel>
+
+                            <%-- Horizontal menu ================== --%>
+                            <asp:Panel ID="pnlHMenu" runat="server" Style="display: none" ClientIDMode="Static">
+                                <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1 ">
+                                    <ul class="nav navbar-nav" runat="server" id="HlMenu" >
+                                        <li class="logocontinerH"><a href='#' onclick="SwapMenu('HMenu');return false;">
+                                            <asp:Image runat="server" ID="imgLogo" Height="51" ImageUrl="~/Login/images/logo1.png" /></a></li>
+                                        <li class="active">
+                                            <asp:HyperLink NavigateUrl="~/main.aspx" runat="server" ID="HDasboard">
+                                    <i class="fa-th fa"></i> الرئيسية <span class="sr-only">(الحالية)</span>
+
+                                            </asp:HyperLink></li>
+                                    </ul>
+
+                                </div>
+                            </asp:Panel>
+
+                            <%-- Horizontal Menu ============================= --%>
+
+                            <div class="info_button_continer">
+                                <a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'" class="info_button2"><i class="fa fa-info-circle"></i></a>
+                            </div>
+                            <div id="light" class="white_content">
+
+                                <a class="close_icon" href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none' ">x</a>
+                               
+                            </div>
+                           <div id="fade" class="black_overlay"></div>
+                            <div class="user_continer">
+                                <a class="access_btn_User">
+                                    <asp:Image ID="imgUser" runat="server" CssClass="user_photo_menu" />
+                                    <span id="lbUsername" runat="server" class="user_text"></span><i class="fa fa-caret-down"></i></a>
+                                <div class="toggle_box_User popover bottom dropdown-menu">
+                                    <div class="arrow"></div>
+                                    <ul>
+                                    <li class="signout">
+                                            <asp:LinkButton  ID="lbLogout" runat="server" OnClick="LogOut"><i class="fa-sign-out fa"></i><span>خروج</span></asp:LinkButton></li>
+                                    
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="" style="position: absolute;left: 170px;">
+                                <button id="notification_btn" class="bg_none" data-toggle="dropdown" aria-expanded="false">
+                                    <div class="notifications">
+                                        <a href="#" data-toggle="popover">
+                                            <i class="fa fa-bell"></i>
+                                            <span id="lblNotCount"></span>
+                                        </a>
+                                    </div>
+                                </button>
+                                <p class="btn btn-warning  hidden-md hidden-lg" onclick="ShowMenu();" style="background-color:#f9ebd7;">القائمة الرئيسية</p>
+                                <div id="notifications" class="popover bottom dropdown-menu notification_box" role="menu">
+                                    <div class="arrow"></div>
+                                    <h3 class="popover-title">الإشعارات</h3>
+                                    <div id="divLoaderPart" class="popover-content">
+                                        <asp:Image ID="imgloader" runat="server" ImageUrl="~/App_Themes/images/ajax-loader.gif" />
+                                    </div>
+                                    <div id="divNotificationPart" class="pad10">
+                                        <ul id="ulNotifications">
+                                        </ul>
+                                    </div>
+                                    <asp:HyperLink ID="lbViewAll" runat="server" CssClass="view_all_btn" NavigateUrl="~/Notification.aspx">عرض الكل</asp:HyperLink>
+                                </div>
+                            </div>
+
+                        </div>
+                    </asp:Panel>
+                    <asp:ContentPlaceHolder ID="content" ClientIDMode="Static" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <asp:ContentPlaceHolder ID="content2" runat="server" ClientIDMode="AutoID">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+
+
+        </div>
+        <div id="content_area">
+        </div>
+        <footer id="footer" class="footer pull-left">
+        </footer>
+
+        <span id="top-link-block" class="hidden">
+    <a href="#top" class="well well-sm"  onclick="$('html,body').animate({scrollTop:0},'slow');return false;">
+        <i class="glyphicon glyphicon-chevron-up"></i> العودة للاعلى
+    </a>
+</span>
+        
+
+<div class="scroll-top-wrapper ">
+	<span class="scroll-top-inner">
+		<i class="fa fa-2x fa-arrow-circle-up"></i>
+	</span>
+</div>
+    </form>
+</body>
+</html>

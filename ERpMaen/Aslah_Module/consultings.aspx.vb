@@ -36,6 +36,8 @@ Public Class consultings
         Try
             If Page.IsPostBack = False Then
                 consulting_id.Text = Request.QueryString("id")
+                loginUser.Value = LoginInfo.GetUser__Id()
+
 
             End If
         Catch ex As Exception

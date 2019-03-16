@@ -3943,11 +3943,12 @@ Public Class WebService
             Dim daForm As New TblFormsFactory
             Dim quaryStr = daForm.GetAllBy(TblForms.TblFormsFields.FormName, formName)(0).FormQueryAr
             If formName = "ConsultationDetails" Then
-                If Not LoginInfo.isSuperAdmin() Then
+                quaryStr = quaryStr + " where ash_consultings.comp_id=" + LoginInfo.GetComp_id()
+                If Not LoginInfo.ConsultationSuperAdmin() Then
                     If LoginInfo.getUserType() = "6" Then
-                        quaryStr = quaryStr + " where advisor_id=" + LoginInfo.getrelatedId()
+                        quaryStr = quaryStr + " and advisor_id=" + LoginInfo.getrelatedId()
                     Else
-                        quaryStr = quaryStr + " where created_By = " + LoginInfo.GetUser__Id()
+                        quaryStr = quaryStr + " and created_By = " + LoginInfo.GetUser__Id()
 
                     End If
 

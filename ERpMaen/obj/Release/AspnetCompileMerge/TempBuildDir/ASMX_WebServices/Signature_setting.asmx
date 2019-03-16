@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="VB" CodeBehind="~/App_Code/Signature_setting.vb" Class="Signature_setting" %>

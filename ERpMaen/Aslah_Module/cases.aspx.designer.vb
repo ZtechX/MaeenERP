@@ -50,6 +50,15 @@ Partial Public Class cases
     Protected WithEvents lblFormName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''img control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
     '''pnlOps control.
     '''</summary>
     '''<remarks>
@@ -221,6 +230,15 @@ Partial Public Class cases
     Protected WithEvents txtindenty As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
+    '''tel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tel As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''txtauthorization_no control.
     '''</summary>
     '''<remarks>
@@ -264,6 +282,15 @@ Partial Public Class cases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtindenty2 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''tel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tel1 As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''txtauthorization_no2 control.

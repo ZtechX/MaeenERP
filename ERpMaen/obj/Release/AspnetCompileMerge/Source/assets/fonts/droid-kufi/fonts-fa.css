@@ -1,0 +1,9 @@
+@font-face {
+    font-family: dr-reg;
+    src: url(../droid-kufi/DroidKufi-Regular.ttf);
+}
+
+@font-face {
+    font-family: dr-bold;
+    src: url(../droid-kufi/DroidKufi-Bold.ttf);
+}

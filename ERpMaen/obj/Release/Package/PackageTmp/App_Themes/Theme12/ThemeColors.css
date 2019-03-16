@@ -1,0 +1,142 @@
+﻿/*This Style Sheet contaians the classes that need to be made with unique color for each theme*/
+
+.page_title
+{
+/*width:100%;*/
+margin: 0px;
+padding:5px 0;
+font-size: 18px !important;
+color: #999  !important;
+display:inline-block;
+}
+
+/*-----------Icons & Buttons------------*/
+a {
+color:#999;
+text-decoration:none;
+font-size:12px;
+}
+    .btn i, .save i {
+    margin-right:2px;
+    font-size:15px;
+    color:#999;
+    }
+    .btn:hover, .save:hover
+    {
+color:#777;
+background:#eee;
+    }
+    .ButtonStyle
+{
+border: 0px none;
+color: #fff;
+border:1px solid #fff;
+padding: 6px 32px;
+font-weight: 600;
+font-family: 'Open Sans', Arial, Tahoma;
+cursor: pointer;
+outline: none;
+margin: 0 0 3px 5px;
+float:right;
+-webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:0px;
+background:#272727;
+box-shadow:0 0 100px #999 inset;
+}
+.ButtonStyle:hover
+{
+  color:#272727;
+  border-color:#272727;
+  background:#fff;
+  box-shadow:0 0 0 #999 inset;
+}
+.uploadBtn {
+    border: 1px solid #999;
+    color: #FFFFFF;
+    padding: 6px 13px;
+    cursor: pointer;
+    outline: none;
+    margin: 0;
+    float: left;
+    -webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:5px;
+background:#999;
+box-shadow:0 0 100px #999 inset;
+}
+.uploadBtn:hover
+{
+  color:#999;
+  border-color:#999;
+  background:#fff;
+  box-shadow:0 0 0 #999 inset;
+}
+
+/*----------Ajax Tabs------------*/
+    .ajax__tab_xp .ajax__tab_header .ajax__tab_active .ajax__tab_tab {
+ box-shadow:0px 3px 0px #999 inset;
+    } 
+/*------CalendarExtender--------*/
+.custom-calendar .ajax__calendar_title
+
+{
+ height:20px;
+ line-height:20px;
+  background-color:#999;
+  color:#fff;
+}
+.custom-calendar .ajax__calendar_prev,
+.custom-calendar .ajax__calendar_next
+
+{
+ background-color:#999;
+height:20px;
+ width:20px;
+ margin:0;
+ z-index:10;
+}
+.custom-calendar .ajax__calendar_today
+
+{
+ height:20px;
+ padding-right:0px;
+ line-height:20px;
+ color:#555;
+ font-weight:bold;
+}
+/*-------AutoCompleteList---------*/
+.acl .li-hover
+{
+    background:#999;
+    margin:0px;
+    padding:5px 10px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:bold;
+}
+/*------------Focus Styles------------*/
+ .textarea:focus, .textbox:focus, .listbox:focus, .listbox02:focus,
+    .listbox03:focus, .textbox03:focus, .textbox04:focus,
+    .after-select:focus, .range-textbox:focus, .textbox_no_icon:focus,
+    .textarea01:focus {
+    border-color:#999;
+    }
+ /*-----Hover style required in this theme only-----*/
+    .table_View table tr:hover td {
+        background: rgb(235,241,246);  /*Old browsers*/ 
+background: -moz-linear-gradient(top,  rgba(235,241,246,1) 0%, rgba(171,211,238,1) 50%, rgba(137,195,235,1) 51%, rgba(213,235,251,1) 100%);  /*FF3.6+*/ 
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(235,241,246,1)), color-stop(50%,rgba(171,211,238,1)), color-stop(51%,rgba(137,195,235,1)), color-stop(100%,rgba(213,235,251,1)));  /*Chrome,Safari4+*/ 
+background: -webkit-linear-gradient(top,  rgba(235,241,246,1) 0%,rgba(171,211,238,1) 50%,rgba(137,195,235,1) 51%,rgba(213,235,251,1) 100%);  /*Chrome10+,Safari5.1+*/ 
+background: -o-linear-gradient(top,  rgba(235,241,246,1) 0%,rgba(171,211,238,1) 50%,rgba(137,195,235,1) 51%,rgba(213,235,251,1) 100%);  /*Opera 11.10+*/ 
+background: -ms-linear-gradient(top,  rgba(235,241,246,1) 0%,rgba(171,211,238,1) 50%,rgba(137,195,235,1) 51%,rgba(213,235,251,1) 100%);  /*IE10+*/ 
+background: linear-gradient(to bottom,  rgba(235,241,246,1) 0%,rgba(171,211,238,1) 50%,rgba(137,195,235,1) 51%,rgba(213,235,251,1) 100%);  /*W3C*/ 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', endColorstr='#d5ebfb',GradientType=0 );  /*IE6-9*/ 
+
+    }

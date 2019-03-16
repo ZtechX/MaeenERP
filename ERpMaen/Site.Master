@@ -42,12 +42,12 @@
 
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/tooltipsy.min.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/script.js")%>"></script>
-    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/scripts/nicEdit.js")%>"></script>
+   <%-- <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/scripts/nicEdit.js")%>"></script>--%>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery.easing.min.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/DynamicTable.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/LookupDdlBinder.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/RowsReorder.js")%>"></script>
-    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/SmartEditor.js")%>"></script>
+   <%-- <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/SmartEditor.js")%>"></script>--%>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/PublicFunctions.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/MultiFileUploader.js")%>"></script>
     <%--  <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/barcode.js")%>"></script>
@@ -102,9 +102,7 @@
                 float: right;
             }
 }
-           .form-group {
-                            margin-bottom: 10px;
-                        }
+          
                 btn3d {
     position:relative;
     top: -6px;
@@ -382,6 +380,10 @@
     </style>
 
         <style type="text/css">
+             .form-control {
+                        height: 40px;
+                          margin-bottom: 10px;
+                    }
         @media print {
     #divForm1,#pnlForm {
        display:none;
@@ -607,7 +609,9 @@
         }
           
    
-            
+            .form-control {
+                        height: 40px;
+                    }
     </style>
   
 <script>

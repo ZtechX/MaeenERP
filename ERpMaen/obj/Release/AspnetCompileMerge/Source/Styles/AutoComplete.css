@@ -1,0 +1,105 @@
+.autocomplete {
+    font-family: arial;
+    font-size: 8pt;
+    line-height:15px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    position: absolute;
+    cursor: default;
+    overflow: auto;
+    list-style:none;
+    overflow-x: hidden;
+    z-index:9999999;
+    padding:0px 0;
+    box-shadow:0px 0px 7px #666;
+    margin:4px 0px 0px 0px;
+    border-radius:5px;
+  
+    padding:3px 0px;
+}
+
+.autocomplete li {
+    width: 100%;
+    float:left;
+    padding:6px 8px 0px 8px;
+    background:#fff;
+    
+}
+.autocomplete li a {
+    
+    color: black;
+    width: 100%;
+    border-bottom:1px dotted #E6E6E6;
+    float:left;
+    background:white;
+    padding-bottom:6px;
+
+
+}
+.autocomplete li a:hover {
+    text-decoration:none;
+}
+.autocomplete li a .img_wrap {
+    float:left;
+    width: 85px;
+    height: 85px;
+    padding:4px;
+    margin:0px;
+    color: black;
+    background:white;
+     overflow:hidden;
+     border:1px solid #ddd;
+      -webkit-transition: all .5s;
+-moz-transition: all .5s;
+transition: all .5s;
+}
+.autocomplete li a .img_wrap img {
+margin:0; 
+width: 85px;
+         -webkit-transition: all .5s;
+-moz-transition: all .5s;
+transition: all .5s;
+
+
+}
+.autocomplete li a .detail_wrap {
+    padding:0px;
+    padding-left:10px;
+    color: black;
+    overflow:hidden;
+    float:left;
+    height: 95px;
+    width: 220px;
+}
+ .autocomplete li a .detail_wrap .item_name {
+        color:#31880b;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 12px;
+      padding-top:4px;
+      padding-bottom:1px;
+        float:left;
+        font-style:normal;
+        text-shadow:1px 1px 0px #eee;
+         -webkit-transition: all .5s;
+-moz-transition: all .5s;
+transition: all .5s;
+
+    }
+
+.autocomplete li a .detail_wrap .item_desc {
+        font-size:10px;
+        line-height:18px;
+        font-style:italic !important;
+        
+    }
+    .autocomplete li a:hover .detail_wrap .item_name  {
+    
+    color:#ff8a00;
+    
+    }
+    .autocomplete li a:hover .img_wrap img  {
+    
+    opacity:.7;
+    
+    }

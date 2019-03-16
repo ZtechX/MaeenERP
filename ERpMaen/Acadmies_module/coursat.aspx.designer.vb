@@ -50,24 +50,6 @@ Partial Public Class coursat
     Protected WithEvents HijriCalendar As Global.ERpMaen.CustomerCalendar
     
     '''<summary>
-    '''Label1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''Label2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''HijriCalendar1 control.
     '''</summary>
     '''<remarks>

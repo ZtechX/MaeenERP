@@ -154,7 +154,8 @@ function get_form_for_permtion() {
         User.get_main_menu( function (val) {
             var data = JSON.parse(val[1]);
             var data2 = JSON.parse(val[2]);
-            var div_show = "<div class='accordion panel-group' id='accordion'>";
+            var div_show = "";
+             div_show = "<div class='accordion panel-group' id='accordion'>";
             if (val[0] != "0") {
                 for (var x = 0; x < data.length; x++) {
                   
@@ -233,14 +234,11 @@ function get_form_for_permtion() {
                                                 </ul> </tr>";
                         }
                     }
-                    div_show += "</body></table> </div>\
-                                                 </div> \
-                                     </div> \
-                              ";
+                    div_show += "</body></table> </div></div> </div>";
 
                 }
-                div_show += "</div>";
-                document.getElementById('tablePrint').innerHTML = div_show;
+                div_show = div_show + "</div>";
+                $('#tablePrint').html( div_show);
 
             } else {
                 showErrorMessage("No data found !!");

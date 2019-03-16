@@ -41,6 +41,15 @@ Partial Public Class CourseDetails
     Protected WithEvents lblStudentID As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''img control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
     '''userComments control.
     '''</summary>
     '''<remarks>
@@ -131,13 +140,13 @@ Partial Public Class CourseDetails
     Protected WithEvents ddltrainer As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''activity control.
+    '''TextBox4 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents activity As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents TextBox4 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''HijriCalendar3 control.
@@ -446,13 +455,13 @@ Partial Public Class CourseDetails
     Protected WithEvents finaldegree As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
-    '''comment control.
+    '''txtnote control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents comment As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtnote As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''HijriCalendar1 control.
@@ -545,11 +554,20 @@ Partial Public Class CourseDetails
     Protected WithEvents evaluteNotes As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''Text2 control.
+    '''conmsg control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text2 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents conmsg As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''message control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents message As Global.System.Web.UI.WebControls.TextBox
 End Class

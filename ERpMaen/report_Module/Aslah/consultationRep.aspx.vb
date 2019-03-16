@@ -27,7 +27,7 @@ Public Class consultationRep
             Dim dt2 As New DataTable
 
             Dim query = "SELECT ash_consultings.code,start_date_hj,source.Description as 'source',type.Description as 'type',
-ash_consultings.name,nationality_id,identiy,gender.Description as'gender',dob_date_hj,
+ash_consultings.name,nat.Description as nationality_id,identiy,gender.Description as'gender',dob_date_hj,
 marital_stat.Description as'marital_status',wifes_no,(girls_no+boys_no) childerns_num ,girls_no,boys_no
 ,respnosible_name,Home.Description as 'home',T_ownership.Description as 'Type_ownership'
 ,edu_level.Description as 'edu_level',income_stat.Description as 'income_status'
@@ -40,6 +40,7 @@ marital_stat.Description as'marital_status',wifes_no,(girls_no+boys_no) childern
    left join tbllock_up T_ownership on T_ownership.id=ash_consultings.type_of_ownership
   left join tbllock_up edu_level on edu_level.id=ash_consultings.education_level
    left join tbllock_up income_stat on income_stat.id=ash_consultings.income_status
+left join tbllock_up nat on nat.id=ash_consultings.nationality_id
    left join ash_advisors on ash_advisors.id= ash_consultings.advisor_id where ash_consultings.id=" + Consult_id
             dt2 = DBManager.Getdatatable(query)
             If dt2.Rows.Count <> 0 Then

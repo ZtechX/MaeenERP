@@ -1,0 +1,67 @@
+﻿@font-face {
+    font-family: DroidKufi;
+    src: url(../fonts/DroidKufi-Regular.ttf);
+}
+@font-face {
+    font-family: jazeera;
+    src: url(../font/jazeera.ttf);
+}
+@font-face {
+    font-family: sky;
+    src: url(../font/sky.ttf);
+}
+
+p,span,h1,h2,h3,h4,h5,h6,a,lablel{ font-family:DroidKufi !important;}
+
+fieldset
+{
+margin: 3px auto;
+padding: 5px;
+border: 1px solid #DEDEDE;
+width: 100%;
+box-sizing: border-box;
+}
+    fieldset.inner {
+    padding:3px;
+    /*margin-left:-3px;*/
+    }
+    fieldset.inner legend {
+display: block;
+width: 100%;
+box-sizing:content-box;
+background: #efefef;
+margin: 0 0 2px 0px;
+border-radius: 7px 7px 0 0;
+font-weight: normal;
+margin-left: -4px;
+padding: 4px;
+box-shadow: 0 1px 0px #ddd;
+color:#333;
+}
+fieldset td
+{
+    vertical-align:top;
+    
+}
+fieldset p 
+{
+    margin: 2px 12px 10px 10px;
+}
+
+fieldset.login label, fieldset.register label, fieldset.changePassword label
+{
+    display: block;
+}
+
+fieldset label.inline 
+{
+    display: inline;
+}
+
+legend 
+{
+    font-size: 15px;
+    font-weight: bold;
+    padding: 2px 4px 2px 4px;
+    color:#2877a0 ;
+}

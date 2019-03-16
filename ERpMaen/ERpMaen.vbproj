@@ -15,7 +15,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>ERpMaen</RootNamespace>
     <AssemblyName>ERpMaen</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MyType>Custom</MyType>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -60,6 +60,7 @@
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -261,6 +262,7 @@
     <Content Include="App_Themes\images\error-icon2.png" />
     <Content Include="App_Themes\images\error.png" />
     <Content Include="App_Themes\images\exit-icon.png" />
+    <Content Include="App_Themes\images\FilterClear.png" />
     <Content Include="App_Themes\images\Flag-blue-icon.png" />
     <Content Include="App_Themes\images\grd_alt-hover.png" />
     <Content Include="App_Themes\images\grd_alt.png" />
@@ -398,144 +400,6 @@
     <Content Include="App_Themes\images\tree-view-img-sml.png" />
     <Content Include="App_Themes\images\tree-view-img.png" />
     <Content Include="App_Themes\images\tree-view-li.png" />
-    <Content Include="App_Themes\images\UM_Screens\1.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\10.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\11.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\12.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\13.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\14.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\15.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\16.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\17.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\18.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\19.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\2.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\20.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\21.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\22.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\23.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\24.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\25.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\26.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\27.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\28.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\29.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\3.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\30.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\31.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\32.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\33.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\34.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\35.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\36.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\37.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\38.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\39.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\4.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\40.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\41.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\42.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\43.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\44.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\45.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\46.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\47.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\48.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\49.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\5.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\50.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\51.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\52.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\53.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\54.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\55.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\56.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\57.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\58.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\59.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\6.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\60.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\61.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\62.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\63.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\64.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\65.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\66.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\67.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\68.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\69.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\7.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\70.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\71.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\72.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\73.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\74.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\75.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\76.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\77.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\78.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\79.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\8.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\80.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\81.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\82.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\83.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\84.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\85.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\86.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\87.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\88.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\89.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\9.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\90.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\91.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\92.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\93.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\94.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\95.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\96.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\97.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\accept.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\agent1.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\agent2.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\agent3.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\agent4.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\agent5.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\agent6.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\contact1.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\contact2.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\contact3.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\contact4.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\contact5.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\contact6.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\contact7.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\corspond1.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\corspond2.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\corspond3.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\corspond4.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\corspond5.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\corspond6.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\corspond7.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\delet.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\doc.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\Edit.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\edit01.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\edit1.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\email.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\enquiry1.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\enquiry2.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\enquiry3.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\enquiry4.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\enquiry5.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\publish1.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\publish2.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\publish3.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\publish4.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\publish5.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\publish6.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\publish7.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\refresh.jpg" />
-    <Content Include="App_Themes\images\UM_Screens\icons\xml.jpg" />
     <Content Include="App_Themes\images\up-arrow.png" />
     <Content Include="App_Themes\images\update-2-hover.png" />
     <Content Include="App_Themes\images\update-2.png" />
@@ -857,12 +721,12 @@
     <Content Include="App_Themes\Theme9\IconStyles.css" />
     <Content Include="App_Themes\Theme9\StyleSheet.css" />
     <Content Include="App_Themes\Theme9\ThemeColors.css" />
-    <Content Include="Aslah_Module\DualCalendar.aspx" />
     <Content Include="Aslah_Module\advisors.aspx" />
+    <Content Include="Aslah_Module\Calender.aspx" />
     <Content Include="Aslah_Module\cases.aspx" />
     <Content Include="Aslah_Module\ConsultationDetails.aspx" />
     <Content Include="Aslah_Module\consultings.aspx" />
-    <Content Include="Aslah_Module\Calender.aspx" />
+    <Content Include="Aslah_Module\DualCalendar.aspx" />
     <Content Include="ASMX_WebServices\acadmiy.asmx" />
     <Content Include="ASMX_WebServices\advisor.asmx" />
     <Content Include="ASMX_WebServices\boards.asmx" />
@@ -870,6 +734,8 @@
     <Content Include="ASMX_WebServices\companies.asmx" />
     <Content Include="ASMX_WebServices\ConsultationDetails.asmx" />
     <Content Include="ASMX_WebServices\consulting.asmx" />
+    <Content Include="ASMX_WebServices\contact.asmx" />
+    <Content Include="ASMX_WebServices\contact_group.asmx" />
     <Content Include="ASMX_WebServices\coursat.asmx" />
     <Content Include="ASMX_WebServices\coursatCls.asmx" />
     <Content Include="ASMX_WebServices\courseDetailsCls.asmx" />
@@ -889,7 +755,9 @@
     <Content Include="ASMX_WebServices\sessions.asmx" />
     <Content Include="ASMX_WebServices\Signature_setting.asmx" />
     <Content Include="ASMX_WebServices\group_permissons.asmx" />
+    <Content Include="ASMX_WebServices\sms.asmx" />
     <Content Include="ASMX_WebServices\sms_setting.asmx" />
+    <Content Include="ASMX_WebServices\template_sms.asmx" />
     <Content Include="ASMX_WebServices\User.asmx" />
     <Content Include="ASMX_WebServices\WebService.asmx" />
     <Content Include="assets\css\app.min.css" />
@@ -903,46 +771,6 @@
     <Content Include="assets\css\star-rating.min.css" />
     <Content Include="assets\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="assets\fonts\droid-kufi\fonts-fa.css" />
-    <Content Include="assets\images\101.jpg" />
-    <Content Include="assets\images\102.jpg" />
-    <Content Include="assets\images\103.jpg" />
-    <Content Include="assets\images\104.jpg" />
-    <Content Include="assets\images\105.jpg" />
-    <Content Include="assets\images\20.jpg" />
-    <Content Include="assets\images\201.jpg" />
-    <Content Include="assets\images\202.jpg" />
-    <Content Include="assets\images\203.jpg" />
-    <Content Include="assets\images\204.jpg" />
-    <Content Include="assets\images\205.jpg" />
-    <Content Include="assets\images\206.jpg" />
-    <Content Include="assets\images\207.jpg" />
-    <Content Include="assets\images\208.jpg" />
-    <Content Include="assets\images\209.jpg" />
-    <Content Include="assets\images\210.jpg" />
-    <Content Include="assets\images\211.jpg" />
-    <Content Include="assets\images\212.jpg" />
-    <Content Include="assets\images\213.jpg" />
-    <Content Include="assets\images\214.jpg" />
-    <Content Include="assets\images\215.jpg" />
-    <Content Include="assets\images\216.jpg" />
-    <Content Include="assets\images\217.jpg" />
-    <Content Include="assets\images\218.jpg" />
-    <Content Include="assets\images\219.jpg" />
-    <Content Include="assets\images\220.jpg" />
-    <Content Include="assets\images\221.jpg" />
-    <Content Include="assets\images\AjaxLoader.gif" />
-    <Content Include="assets\images\b1.jpg" />
-    <Content Include="assets\images\b2.png" />
-    <Content Include="assets\images\grabbing.png" />
-    <Content Include="assets\images\logo.png" />
-    <Content Include="assets\images\on-logo.png" />
-    <Content Include="assets\images\orders\edit.png" />
-    <Content Include="assets\images\orders\mobile.jpg" />
-    <Content Include="assets\images\orders\pro-design.png" />
-    <Content Include="assets\images\orders\video.jpg" />
-    <Content Include="assets\images\orders\web.png" />
-    <Content Include="assets\images\spir.png" />
-    <Content Include="assets\images\wiok.jpg" />
     <Content Include="assets\js\app.min.js" />
     <Content Include="assets\js\core.min.js" />
     <Content Include="assets\js\fullcalendar.js" />
@@ -1232,6 +1060,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Hall_Module\Halls.aspx" />
+    <Content Include="images\FilterClear.png" />
     <Content Include="js\adapters\mootools-adapter.js" />
     <Content Include="js\adapters\mootools-adapter.src.js" />
     <Content Include="js\adapters\prototype-adapter.js" />
@@ -1265,7 +1094,6 @@
     <Content Include="js\highcharts.src.js" />
     <Content Include="js\hijri-date.js" />
     <Content Include="js\hijri-date1.js" />
-    <Content Include="js\hijri-date_new.js" />
     <Content Include="js\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="js\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="js\images\ui-bg_flat_10_000000_40x100.png" />
@@ -1503,7 +1331,6 @@
     <Content Include="Login\fonts\fontawesome-webfont.eot" />
     <Content Include="Login\fonts\fontawesome-webfont.ttf" />
     <Content Include="Login\fonts\fontawesome-webfont.woff" />
-    <Content Include="Login\images\logo-login.1png" />
     <Content Include="App_Themes\cp\all.skin" />
     <Content Include="App_Themes\fonts\fontawesome-webfont.eot" />
     <Content Include="App_Themes\fonts\fontawesome-webfont.ttf" />
@@ -1539,6 +1366,10 @@
     <Content Include="css\M42 1200q0 158 41.5 308t116 277t181.5 234t234 181.5t277 116t308 41.5t308 -41.5t277 -116t234 -181.5t105DE7DFA54" />
     <Content Include="css\plugins\images\Sorting icons.psd" />
     <Content Include="js\jsapi" />
+    <Content Include="Login\images\clockface.png" />
+    <Content Include="Login\images\hourhand.png" />
+    <Content Include="Login\images\minhand.png" />
+    <Content Include="Login\images\name.png" />
     <Content Include="Members_Module\boards.aspx" />
     <Content Include="Members_Module\images\Hydrangeas.jpg" />
     <Content Include="Members_Module\images\Jellyfish.jpg" />
@@ -1549,11 +1380,74 @@
     <Content Include="Members_Module\member_abbsent.aspx" />
     <Content Include="Members_Module\payments.aspx" />
     <Content Include="Members_Module\sessions.aspx" />
-    <Content Include="plugins\fullcalendar\css\fullcalendar.min.css" />
-    <Content Include="plugins\fullcalendar\js\fullcalendar.min.js" />
-    <Content Include="plugins\moment\moment.js" />
+    <Content Include="report_Module\Aslah\StudyCaseRep.aspx" />
+    <Content Include="report_Module\Aslah\RegistAggregationRep.aspx" />
+    <Content Include="report_Module\Aslah\consultationRep.aspx" />
+    <Content Include="report_Module\Aslah\ReportRep.aspx" />
+    <Content Include="report_Module\Aslah\ReferralRep.aspx" />
+    <Content Include="report_Module\Aslah\ProceduresRep.aspx" />
+    <Content Include="report_Module\Aslah\ReviewRep.aspx" />
+    <Content Include="report_Module\Aslah\ConciliationRep.aspx" />
+    <Content Include="report_Module\Aslah\DeliveryProceedingRep.aspx" />
+    <Content Include="report_Module\Aslah\ReceiveProceedingRep.aspx" />
+    <Content Include="report_Module\Aslah\Receive_and_deliverRep.aspx" />
+    <Content Include="report_Module\Aslah\AttendanceRegistRep.aspx" />
+    <Content Include="report_Module\Aslah\agreementRep.aspx" />
+    <Content Include="report_Module\Aslah\MeasurementSatisfactionRep.aspx" />
+    <Content Include="report_Module\Aslah\FollowCasesRep.aspx" />
+    <Content Include="report_Module\Aslah\TechRepForMembersRep.aspx" />
+    <Content Include="report_Module\Aslah\StatisticsofcasesRep.aspx" />
+    <Content Include="report_Module\Aslah\caseClassificationRep.aspx" />
+    <Content Include="report_Module\Aslah\CaseReportRep.aspx" />
+    <Content Include="report_Module\Aslah\CaseDetailsRep.aspx" />
+    <Content Include="report_Module\Images\header_ph.png" />
+    <Content Include="report_Module\Images\logo_ph.png" />
+    <Content Include="report_Module\Images\footer_ph.png" />
+    <Content Include="Scripts\nicEdit.js" />
     <Content Include="Settings_Module\email_setting.aspx" />
     <Content Include="Settings_Module\group_permissons.aspx" />
+    <Content Include="Settings_Module\images\5830c455-a990-4691-b3e3-12c4fdf73cb1.jpg" />
+    <Content Include="Settings_Module\images\apiary-1866740_640.jpg" />
+    <Content Include="Settings_Module\images\background-3048816_640.jpg" />
+    <Content Include="Settings_Module\images\canvas %281%29.png" />
+    <Content Include="Settings_Module\images\christmas-2535592_640.png" />
+    <Content Include="Settings_Module\images\Chrysanthemum.jpg" />
+    <Content Include="Settings_Module\images\Desert.jpg" />
+    <Content Include="Settings_Module\images\honey-2222228_1280.jpg" />
+    <Content Include="Settings_Module\images\honey-bees-326337_1280.jpg" />
+    <Content Include="Settings_Module\images\Hydrangeas.jpg" />
+    <Content Include="Settings_Module\images\k.ontime %281%29.png" />
+    <Content Include="Settings_Module\images\Koala.jpg" />
+    <Content Include="Settings_Module\images\Lighthouse.jpg" />
+    <Content Include="Settings_Module\images\money-2724241_640.jpg" />
+    <Content Include="Settings_Module\images\Penguins.jpg" />
+    <Content Include="Settings_Module\images\religious-2262799_1280.jpg" />
+    <Content Include="Settings_Module\images\sa1.png" />
+    <Content Include="Settings_Module\images\team-spirit-2447163_640.jpg" />
+    <Content Include="Settings_Module\images\Tulips.jpg" />
+    <Content Include="Settings_Module\images\vegetables-752153_640.jpg" />
+    <Content Include="Settings_Module\images_company\22.png" />
+    <Content Include="Settings_Module\images_company\account %283%29.png" />
+    <Content Include="Settings_Module\images_company\Chrysanthemum.jpg" />
+    <Content Include="Settings_Module\images_company\Desert.jpg" />
+    <Content Include="Settings_Module\images_company\diagram %283%29.png" />
+    <Content Include="Settings_Module\images_company\hierarchy.png" />
+    <Content Include="Settings_Module\images_company\Hydrangeas.jpg" />
+    <Content Include="Settings_Module\images_company\Jellyfish.jpg" />
+    <Content Include="Settings_Module\images_company\Lighthouse.jpg" />
+    <Content Include="Settings_Module\images_company\network.png" />
+    <Content Include="Settings_Module\images_company\New Bitmap Image.bmp" />
+    <Content Include="Settings_Module\images_company\Penguins.jpg" />
+    <Content Include="Settings_Module\images_company\Picture1.png" />
+    <Content Include="Settings_Module\images_company\transfer.png" />
+    <Content Include="Settings_Module\images_company\Tulips.jpg" />
+    <Content Include="Settings_Module\images_reports\Desert.jpg" />
+    <Content Include="Settings_Module\images_reports\Hydrangeas.jpg" />
+    <Content Include="Settings_Module\images_reports\Jellyfish.jpg" />
+    <Content Include="Settings_Module\images_reports\Koala.jpg" />
+    <Content Include="Settings_Module\images_reports\Lighthouse.jpg" />
+    <Content Include="Settings_Module\images_reports\Penguins.jpg" />
+    <Content Include="Settings_Module\images_reports\Tulips.jpg" />
     <Content Include="Settings_Module\register_companies.aspx" />
     <Content Include="Settings_Module\report_settings.aspx" />
     <Content Include="Settings_Module\Settings.aspx" />
@@ -1562,13 +1456,12 @@
     <Content Include="Settings_Module\companies.aspx" />
     <Content Include="Settings_Module\Users.aspx" />
     <Content Include="shadowbox-3.0.3\shadowbox.css" />
-    <Content Include="Sms_Module\template_sms.aspx" />
-    <Content Include="Sms_Module\contact_group.aspx" />
     <Content Include="Sms_Module\contact.aspx" />
+    <Content Include="Sms_Module\contact_group.aspx" />
     <Content Include="Sms_Module\sms.aspx" />
+    <Content Include="Sms_Module\template_sms.aspx" />
     <Content Include="UserControls\Appraisal.ascx" />
     <Content Include="UserControls\CustomerCalendar.ascx" />
-    <Content Include="UserControls\CustomerCalendar1.ascx" />
     <Content Include="UserControls\DeliveryDate.ascx" />
     <Content Include="UserControls\DeualCalendar1.ascx" />
     <Content Include="UserControls\HijriCalendar.ascx" />
@@ -1582,19 +1475,161 @@
     <Content Include="assets\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <Content Include="assets\fonts\droid-kufi\DroidKufi-Bold.ttf" />
     <Content Include="assets\fonts\droid-kufi\DroidKufi-Regular.ttf" />
-    <Content Include="Report\53ty5wyh3o0oyfvb4rmnaq4z.pdf" />
-    <Content Include="Report\dulmuuuw30c2nezj1yz1hgql.pdf" />
-    <Content Include="Report\f4lnyn5cvuvsdfwbs0lykbia.pdf" />
-    <Content Include="Report\gersv0x2dz5hjpsias5iw02o.pdf" />
-    <Content Include="Report\ghgoxf30s2ubpzeasjylffnq.pdf" />
-    <Content Include="Report\h5an1sqfsy0pbvyimeubx1oh.pdf" />
-    <Content Include="Report\hlhhoerwcgxgrltqrq1nvhse.pdf" />
-    <Content Include="Report\huorgg2i1hundg33f5zsdjhz.pdf" />
-    <Content Include="Report\qfzospn33ikeatnf1z4dg3bw.pdf" />
-    <Content Include="Report\r0prgmzkkm2xqnpx3trr5ibl.pdf" />
-    <Content Include="Report\r43ewp3rb2hm3vrkws3hs00v.pdf" />
-    <Content Include="Report\ukrqofauoarowc0m5xefdo4d.pdf" />
-    <Content Include="Report\ysr0x0ittk25ixmbdj0pmuuh.pdf" />
+    <Content Include="report_Module\Aslah\CaseDetailsDS.xsc">
+      <DependentUpon>CaseDetailsDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\caseClassificationDS.xsc">
+      <DependentUpon>caseClassificationDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\agreementDS.xsc">
+      <DependentUpon>agreementDS.xsd</DependentUpon>
+    </Content>
+    <None Include="My Project\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="report_Module\Aslah\agreementDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>agreementDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\agreementDS.xss">
+      <DependentUpon>agreementDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\AttendanceRegistDS.xsc">
+      <DependentUpon>AttendanceRegistDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\AttendanceRegistDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AttendanceRegistDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\AttendanceRegistDS.xss">
+      <DependentUpon>AttendanceRegistDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\caseClassificationDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>caseClassificationDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\caseClassificationDS.xss">
+      <DependentUpon>caseClassificationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\CaseDetailsDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CaseDetailsDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\CaseDetailsDS.xss">
+      <DependentUpon>CaseDetailsDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\CaseReportDS.xsc">
+      <DependentUpon>CaseReportDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\CaseReportDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CaseReportDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\CaseReportDS.xss">
+      <DependentUpon>CaseReportDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\StatisticsofcasesDS.xsc">
+      <DependentUpon>StatisticsofcasesDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\Receive_and_deliverDS.xsc">
+      <DependentUpon>Receive_and_deliverDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\ConciliationDS.xsc">
+      <DependentUpon>ConciliationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ConciliationDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ConciliationDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\ConciliationDS.xss">
+      <DependentUpon>ConciliationDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\ProceduresDS.xsc">
+      <DependentUpon>ProceduresDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\consultationDS.xsc">
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\consultationDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>consultationDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\consultationDS.xss">
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ProceduresDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProceduresDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\ProceduresDS.xss">
+      <DependentUpon>ProceduresDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\Receive_and_deliverDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Receive_and_deliverDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\Receive_and_deliverDS.xss">
+      <DependentUpon>Receive_and_deliverDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\ReferralDS.xsc">
+      <DependentUpon>ReferralDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ReferralDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReferralDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\ReferralDS.xss">
+      <DependentUpon>ReferralDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\ReportDS.xsc">
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\RegistAggregationDS.xsc">
+      <DependentUpon>RegistAggregationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\RegistAggregationDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RegistAggregationDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\RegistAggregationDS.xss">
+      <DependentUpon>RegistAggregationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ReportDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\ReportDS.xss">
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\StatisticsofcasesDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StatisticsofcasesDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\StatisticsofcasesDS.xss">
+      <DependentUpon>StatisticsofcasesDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\TechRepForMembersDS.xsc">
+      <DependentUpon>TechRepForMembersDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\TechRepForMembersDS.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TechRepForMembersDS.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\TechRepForMembersDS.xss">
+      <DependentUpon>TechRepForMembersDS.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Login\css\animate-custom.css" />
     <Content Include="Login\css\BluebLogin.css" />
@@ -1610,9 +1645,6 @@
     <Content Include="Login\images\bg2.jpg" />
     <Content Include="Login\images\bg3.jpg" />
     <Content Include="Login\images\bg4.jpg" />
-    <Content Include="Login\images\Blueberry_logo1.PNG" />
-    <Content Include="Login\images\logo-login.png" />
-    <Content Include="Login\images\logo.jpg" />
     <Content Include="Login\images\logo.png" />
     <Content Include="Login\images\logo1.png" />
     <Content Include="Login\Login.aspx" />
@@ -1635,7 +1667,6 @@
     <Content Include="Scripts\jquery.layerslider.js" />
     <Content Include="Scripts\jquery.layout-latest.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\nicEdit.js" />
     <Content Include="Scripts\nicEditorIcons.gif" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
@@ -1796,6 +1827,18 @@
     <Content Include="App_Code\ConsultationDetails.vb">
       <SubType>Component</SubType>
     </Content>
+    <Content Include="App_Code\coursatCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\courseDetailsCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\DiplomasCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\Diploma_CoursesCls.vb">
+      <SubType>Component</SubType>
+    </Content>
     <Content Include="App_Code\contact.vb">
       <SubType>Component</SubType>
     </Content>
@@ -1844,18 +1887,18 @@
     <Compile Include="App_Code\clsGenerationCode.vb" />
     <Compile Include="App_Code\CLSImagesHandler.vb" />
     <Compile Include="App_Code\clsMessages.vb" />
-    <Compile Include="Aslah_Module\DualCalendar.aspx.designer.vb">
-      <DependentUpon>DualCalendar.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Aslah_Module\DualCalendar.aspx.vb">
-      <DependentUpon>DualCalendar.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Aslah_Module\advisors.aspx.designer.vb">
       <DependentUpon>advisors.aspx</DependentUpon>
     </Compile>
     <Compile Include="Aslah_Module\advisors.aspx.vb">
       <DependentUpon>advisors.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aslah_Module\Calender.aspx.designer.vb">
+      <DependentUpon>Calender.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aslah_Module\Calender.aspx.vb">
+      <DependentUpon>Calender.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Aslah_Module\cases.aspx.designer.vb">
@@ -1879,12 +1922,12 @@
       <DependentUpon>consultings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Aslah_Module\Calender.aspx.designer.vb">
-      <DependentUpon>Calender.aspx</DependentUpon>
+    <Compile Include="Aslah_Module\DualCalendar.aspx.designer.vb">
+      <DependentUpon>DualCalendar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Aslah_Module\Calender.aspx.vb">
-      <DependentUpon>Calender.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+    <Compile Include="Aslah_Module\DualCalendar.aspx.vb">
+      <DependentUpon>DualCalendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Contact.aspx.designer.vb">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -1995,6 +2038,351 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="PublicFunctions.vb" />
+    <Compile Include="report_Module\Aslah\StudyCaseRep.aspx.designer.vb">
+      <DependentUpon>StudyCaseRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StudyCaseRep.aspx.vb">
+      <DependentUpon>StudyCaseRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StudyCase.vb">
+      <DependentUpon>StudyCase.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\RegistAggregationRep.aspx.designer.vb">
+      <DependentUpon>RegistAggregationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\RegistAggregationRep.aspx.vb">
+      <DependentUpon>RegistAggregationRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationRep.aspx.designer.vb">
+      <DependentUpon>consultationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationRep.aspx.vb">
+      <DependentUpon>consultationRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationDS.vb">
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\RegistAggregationDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistAggregationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReportRep.aspx.designer.vb">
+      <DependentUpon>ReportRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReportRep.aspx.vb">
+      <DependentUpon>ReportRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReferralRep.aspx.designer.vb">
+      <DependentUpon>ReferralRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReferralRep.aspx.vb">
+      <DependentUpon>ReferralRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ProceduresRep.aspx.designer.vb">
+      <DependentUpon>ProceduresRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ProceduresRep.aspx.vb">
+      <DependentUpon>ProceduresRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ProceduresDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProceduresDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReferralDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReferralDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReportDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReviewRep.aspx.designer.vb">
+      <DependentUpon>ReviewRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReviewRep.aspx.vb">
+      <DependentUpon>ReviewRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\RegistAggregation.vb">
+      <DependentUpon>RegistAggregation.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Report.vb">
+      <DependentUpon>Report.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultation.vb">
+      <DependentUpon>consultation.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Referral.vb">
+      <DependentUpon>Referral.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Procedures.vb">
+      <DependentUpon>Procedures.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Review.vb">
+      <DependentUpon>Review.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ConciliationRep.aspx.designer.vb">
+      <DependentUpon>ConciliationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ConciliationRep.aspx.vb">
+      <DependentUpon>ConciliationRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ConciliationDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConciliationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\DeliveryProceeding.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliveryProceeding.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReceiveProceeding.vb">
+      <DependentUpon>ReceiveProceeding.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\MeasurementSatisfaction.vb">
+      <DependentUpon>MeasurementSatisfaction.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\MeasurementSatisfactionRep.aspx.designer.vb">
+      <DependentUpon>MeasurementSatisfactionRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\MeasurementSatisfactionRep.aspx.vb">
+      <DependentUpon>MeasurementSatisfactionRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Conciliation.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Conciliation.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\DeliveryProceedingRep.aspx.designer.vb">
+      <DependentUpon>DeliveryProceedingRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\DeliveryProceedingRep.aspx.vb">
+      <DependentUpon>DeliveryProceedingRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReceiveProceedingRep.aspx.designer.vb">
+      <DependentUpon>ReceiveProceedingRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReceiveProceedingRep.aspx.vb">
+      <DependentUpon>ReceiveProceedingRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\FollowCases.vb">
+      <DependentUpon>FollowCases.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\FollowCasesRep.aspx.designer.vb">
+      <DependentUpon>FollowCasesRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\FollowCasesRep.aspx.vb">
+      <DependentUpon>FollowCasesRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembersDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TechRepForMembersDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembersRep.aspx.designer.vb">
+      <DependentUpon>TechRepForMembersRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembersRep.aspx.vb">
+      <DependentUpon>TechRepForMembersRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembers.vb">
+      <DependentUpon>TechRepForMembers.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\subReceive_and_deliver.vb">
+      <DependentUpon>subReceive_and_deliver.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliverRep.aspx.designer.vb">
+      <DependentUpon>Receive_and_deliverRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliverRep.aspx.vb">
+      <DependentUpon>Receive_and_deliverRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliver.vb">
+      <DependentUpon>Receive_and_deliver.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegistRep.aspx.designer.vb">
+      <DependentUpon>AttendanceRegistRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegistRep.aspx.vb">
+      <DependentUpon>AttendanceRegistRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegist.vb">
+      <DependentUpon>AttendanceRegist.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\agreementDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>agreementDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegistDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttendanceRegistDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassificationDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>caseClassificationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\agreementRep.aspx.designer.vb">
+      <DependentUpon>agreementRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\agreementRep.aspx.vb">
+      <DependentUpon>agreementRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliverDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Receive_and_deliverDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\subReportAttendance.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>subReportAttendance.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StatisticsofcasesRep.aspx.designer.vb">
+      <DependentUpon>StatisticsofcasesRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StatisticsofcasesRep.aspx.vb">
+      <DependentUpon>StatisticsofcasesRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassificationRep.aspx.designer.vb">
+      <DependentUpon>caseClassificationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassificationRep.aspx.vb">
+      <DependentUpon>caseClassificationRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\agreement.vb">
+      <DependentUpon>agreement.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Statisticsofcases.vb">
+      <DependentUpon>Statisticsofcases.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassification.vb">
+      <DependentUpon>caseClassification.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseDetails.vb">
+      <DependentUpon>CaseDetails.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseDetailsDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CaseDetailsDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseReportDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CaseReportDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseReportRep.aspx.designer.vb">
+      <DependentUpon>CaseReportRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseReportRep.aspx.vb">
+      <DependentUpon>CaseReportRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseDetailsRep.aspx.designer.vb">
+      <DependentUpon>CaseDetailsRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseDetailsRep.aspx.vb">
+      <DependentUpon>CaseDetailsRep.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseReport.vb">
+      <DependentUpon>CaseReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StatisticsofcasesDS.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StatisticsofcasesDS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Settings_Module\email_setting.aspx.designer.vb">
       <DependentUpon>email_setting.aspx</DependentUpon>
     </Compile>
@@ -2065,11 +2453,11 @@
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Sms_Module\template_sms.aspx.designer.vb">
-      <DependentUpon>template_sms.aspx</DependentUpon>
+    <Compile Include="Sms_Module\contact.aspx.designer.vb">
+      <DependentUpon>contact.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Sms_Module\template_sms.aspx.vb">
-      <DependentUpon>template_sms.aspx</DependentUpon>
+    <Compile Include="Sms_Module\contact.aspx.vb">
+      <DependentUpon>contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Sms_Module\contact_group.aspx.designer.vb">
@@ -2079,18 +2467,18 @@
       <DependentUpon>contact_group.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Sms_Module\contact.aspx.designer.vb">
-      <DependentUpon>contact.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Sms_Module\contact.aspx.vb">
-      <DependentUpon>contact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Sms_Module\sms.aspx.designer.vb">
       <DependentUpon>sms.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sms_Module\sms.aspx.vb">
       <DependentUpon>sms.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sms_Module\template_sms.aspx.designer.vb">
+      <DependentUpon>template_sms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sms_Module\template_sms.aspx.vb">
+      <DependentUpon>template_sms.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\Appraisal.ascx.designer.vb">
@@ -2105,10 +2493,6 @@
     </Compile>
     <Compile Include="UserControls\CustomerCalendar.ascx.vb">
       <DependentUpon>CustomerCalendar.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\CustomerCalendar1.ascx.vb">
-      <DependentUpon>CustomerCalendar1.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\DeliveryDate.ascx.designer.vb">
@@ -2131,6 +2515,9 @@
     <Compile Include="UserControls\DynamicTable.ascx.vb">
       <DependentUpon>DynamicTable.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\HijriCalendar.ascx.designer.vb">
+      <DependentUpon>HijriCalendar.ascx</DependentUpon>
     </Compile>
     <Compile Include="UserControls\HijriCalendar.ascx.vb">
       <DependentUpon>HijriCalendar.ascx</DependentUpon>
@@ -2217,6 +2604,94 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\StudyCase.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>StudyCase.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\RegistAggregation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RegistAggregation.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Report.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\consultation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>consultation.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Referral.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Referral.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Procedures.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Procedures.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Review.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Review.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\DeliveryProceeding.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DeliveryProceeding.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\ReceiveProceeding.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReceiveProceeding.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\MeasurementSatisfaction.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MeasurementSatisfaction.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Conciliation.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Conciliation.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\FollowCases.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FollowCases.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\TechRepForMembers.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TechRepForMembers.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\subReceive_and_deliver.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>subReceive_and_deliver.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Receive_and_deliver.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Receive_and_deliver.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\AttendanceRegist.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AttendanceRegist.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\agreement.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>agreement.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\subReportAttendance.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>subReportAttendance.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\Statisticsofcases.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Statisticsofcases.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\caseClassification.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>caseClassification.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\CaseDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CaseDetails.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Aslah\CaseReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CaseReport.vb</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
@@ -2246,9 +2721,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Acadmies_module\coursefiles\" />
+    <Folder Include="Acadmies_module\exams\" />
+    <Folder Include="Acadmies_module\homework\" />
     <Folder Include="Acadmies_module\images\" />
     <Folder Include="App_Data\" />
+    <Folder Include="App_Themes\images\UM_Screens\" />
+    <Folder Include="Aslah_Moduleimages\" />
     <Folder Include="Aslah_Module\images\" />
+    <Folder Include="assets\images\" />
     <Folder Include="bin\ar\" />
     <Folder Include="bin\cs\" />
     <Folder Include="bin\de\" />
@@ -2267,10 +2748,8 @@
     <Folder Include="bin\zh-CHS\" />
     <Folder Include="bin\zh-CHT\" />
     <Folder Include="js\LeadList\" />
-    <Folder Include="Settings_Module\images\" />
-    <Folder Include="Settings_Module\images_company\" />
+    <Folder Include="Report\" />
     <Folder Include="Settings_Module\images_register_company\" />
-    <Folder Include="Settings_Module\images_reports\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Typings\autosize\autosize.d.ts" />

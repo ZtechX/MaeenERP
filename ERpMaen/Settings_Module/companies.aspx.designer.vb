@@ -158,15 +158,6 @@ Partial Public Class companies
     Protected WithEvents txtname_ar As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''tele control.
     '''</summary>
     '''<remarks>
@@ -174,15 +165,6 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents tele As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RequiredFieldValidator1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
     '''fax control.
@@ -257,15 +239,6 @@ Partial Public Class companies
     Protected WithEvents comp_AdminName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator14 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator14 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''comp_AdminNum control.
     '''</summary>
     '''<remarks>
@@ -275,13 +248,13 @@ Partial Public Class companies
     Protected WithEvents comp_AdminNum As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator15 control.
+    '''txtindenty control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RequiredFieldValidator15 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents txtindenty As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''comp_Adminemail control.
@@ -293,15 +266,6 @@ Partial Public Class companies
     Protected WithEvents comp_Adminemail As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''comp_Adminuser_name control.
     '''</summary>
     '''<remarks>
@@ -311,15 +275,6 @@ Partial Public Class companies
     Protected WithEvents comp_Adminuser_name As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator5 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''Comp_user_password control.
     '''</summary>
     '''<remarks>
@@ -327,15 +282,6 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Comp_user_password As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RequiredFieldValidator3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
     '''Comp_imgItemURL control.
@@ -374,15 +320,6 @@ Partial Public Class companies
     Protected WithEvents Ac_name As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator7 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator7 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''Ac_AdminID control.
     '''</summary>
     '''<remarks>
@@ -401,15 +338,6 @@ Partial Public Class companies
     Protected WithEvents Ac_AdminName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator_7 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator_7 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''Ac_adminTele control.
     '''</summary>
     '''<remarks>
@@ -417,6 +345,15 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Ac_adminTele As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Text1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Text1 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''AcUser_Email control.
@@ -428,15 +365,6 @@ Partial Public Class companies
     Protected WithEvents AcUser_Email As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator8 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator8 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''Acuser_name control.
     '''</summary>
     '''<remarks>
@@ -446,15 +374,6 @@ Partial Public Class companies
     Protected WithEvents Acuser_name As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator9 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator9 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''Acuser_password control.
     '''</summary>
     '''<remarks>
@@ -462,15 +381,6 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Acuser_password As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RequiredFieldValidator10 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator10 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
     '''Ac_imgItemURL control.
@@ -509,15 +419,6 @@ Partial Public Class companies
     Protected WithEvents Cen_Name As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator6 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator6 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''TextNotes control.
     '''</summary>
     '''<remarks>
@@ -545,15 +446,6 @@ Partial Public Class companies
     Protected WithEvents Cen_AdminName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator11 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator11 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''Cen_AdminNum control.
     '''</summary>
     '''<remarks>
@@ -563,13 +455,13 @@ Partial Public Class companies
     Protected WithEvents Cen_AdminNum As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator12 control.
+    '''Text2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RequiredFieldValidator12 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents Text2 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''cen_Adminemail control.
@@ -581,15 +473,6 @@ Partial Public Class companies
     Protected WithEvents cen_Adminemail As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator13 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator13 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''cen_Adminuser_name control.
     '''</summary>
     '''<remarks>
@@ -599,15 +482,6 @@ Partial Public Class companies
     Protected WithEvents cen_Adminuser_name As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator16 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator16 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''Cen_user_password control.
     '''</summary>
     '''<remarks>
@@ -615,15 +489,6 @@ Partial Public Class companies
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Cen_user_password As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RequiredFieldValidator17 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator17 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
     '''Cen_imgItemURL control.

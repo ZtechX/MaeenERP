@@ -59,10 +59,14 @@
     </script>
     <script>
         $(document).ready(function () {
-
-            // hide all div containers  
-            //$('.collapsible-panels div').hide();
-            // append click event to the a element  
+            $(".card-container ul").each(function () {
+               
+                if ($(this).html().indexOf("<li>")== -1)
+                {
+                    $(this).closest(".card-container").parent().hide();
+                }
+            });
+        
             $('.collapsible-panels h2 a').click(function (e) {
                 // slide down the corresponding div if hidden, or slide up if shown  
                 $(this).parent().next('.collapsible-panels div').slideToggle('slow');
@@ -637,7 +641,7 @@
         </Scripts>
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
-            <asp:ServiceReference Path="~/ASMX_WebServices/Dashboard.asmx" />
+            <%--<asp:ServiceReference Path="~/ASMX_WebServices/Dashboard.asmx" />--%>
             <asp:ServiceReference Path="~/ASMX_WebServices/SMS.asmx" />
         </Services>
     </asp:ScriptManager>

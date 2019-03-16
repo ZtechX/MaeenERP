@@ -358,4 +358,17 @@ Public Class LoginInfo
             Return False
         End Try
     End Function
+    Public Shared Function ConsultationSuperAdmin() As Boolean
+        Try
+            Dim dt As New DataTable
+            dt = DBManager.Getdatatable("select * from tblUsers where User_Type=2 and comp_id=" + LoginInfo.GetComp_id() + " and id=" + LoginInfo.GetUser__Id())
+            If dt.Rows.Count <> 0 Then
+                Return True
+            End If
+            Return False
+
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 End Class

@@ -50,6 +50,15 @@ Partial Public Class consultings
     Protected WithEvents lblFormName As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''loginUser control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents loginUser As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''PnlConfirm control.
     '''</summary>
     '''<remarks>

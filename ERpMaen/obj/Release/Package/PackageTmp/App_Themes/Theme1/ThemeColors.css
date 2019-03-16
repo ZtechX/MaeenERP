@@ -1,0 +1,239 @@
+﻿/*This Style Sheet contaians the classes that need to be made with unique color for each theme*/
+
+.page_title
+{
+/*width:100%;*/
+margin: 0px;
+padding:12px 20px 0px 11px;
+font-size: 18px !important;
+color: #1BB55D  !important;
+display:inline-block;
+float:right;
+}
+
+/*-----------Icons & Buttons------------*/
+a {
+color:#3C96D2;
+text-decoration:none;
+font-size:12px;
+}
+    .btn i, .save i {
+    margin-right:2px;
+    font-size:15px;
+    color:#1BB55D;
+    }
+    .btn:hover, .save:hover
+    {
+color:#1BB55D;
+background:#eee;
+    }
+    .ButtonStyle
+{
+    border: 0px none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 6px 9px;
+    font-weight: 600;
+    font-family: 'Open Sans', Arial, Tahoma;
+    cursor: pointer;
+    outline: none;
+    margin: 0 0 3px 5px;
+    float: right;
+    -webkit-transition: all .5s;
+    -ms-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+    border-radius: 5px;
+    background: #1BB55D;
+    box-shadow: 0 0 100px #1BB55D inset;
+    font-size: 12px !important;
+    font-weight: normal !important;
+}
+.ButtonStyle:hover
+{
+  color:#1BB55D;
+  border-color:#1BB55D;
+  background:#fff;
+  box-shadow:0 0 0 #1BB55D inset;
+}
+ .ButtonStyle3
+{
+border: 0px none;
+color: #fff;
+border:1px solid #fff;
+padding: 6px 32px;
+font-weight: 600;
+font-family: 'Open Sans', Arial, Tahoma;
+cursor: pointer;
+outline: none;
+margin: 0 0 3px 5px;
+float:left;
+-webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:5px;
+background:#1BB55D;
+box-shadow:0 0 100px #1BB55D inset;
+}
+.ButtonStyle3:hover
+{
+  color:#3C96D2;
+  border-color:#3C96D2;
+  background:#fff;
+  box-shadow:0 0 0 #1BB55D inset;
+}
+.uploadBtn {
+    border: 1px solid #1BB55D;
+    color: #FFFFFF;
+    padding: 6px 13px;
+    cursor: pointer;
+    outline: none;
+    margin: 0;
+    float: left;
+    -webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:5px;
+background:#1BB55D;
+box-shadow:0 0 100px #1BB55D inset;
+}
+.uploadBtn:hover
+{
+  color:#1BB55D;
+  border-color:#1BB55D;
+  background:#fff;
+  box-shadow:0 0 0 #1BB55D inset;
+}
+.uploadBtn_plus {
+    border: 1px solid #1BB55D;
+  color: #FFFFFF;
+  padding: 4px 8px;
+  cursor: pointer;
+  outline: none;
+  margin: 0;
+  float: right;
+  -webkit-transition: all .5s;
+  -ms-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+  border-radius: 0px;
+  background: #1BB55D;
+  position: absolute;
+  left: 7px;
+  top: 4px;
+  z-index: 999;
+}
+.uploadBtn_plus:hover
+{
+  color:#1BB55D;
+  border-color:#1BB55D ;
+  background:#fff;
+  box-shadow:0 0 0 #de1920 inset;
+}
+/*-----------LinkButtons Inside GridView-----------*/
+.file-update {
+font-size:0;
+}
+.file-update:before
+{ 
+    font-family: 'FontAwesome';
+    font-size:18px;
+    line-height:20px;
+    content:'\f044';
+    -webkit-transition:all .6s;
+} 
+.file-update:hover:before
+{   
+    cursor:pointer;
+    color:#333;
+    -webkit-transform:rotateY(90deg);
+    -moz-transform:rotateY(90deg);
+    -ms-transform:rotateY(90deg);
+    -o-transform:rotateY(90deg);
+    transform:rotateY(90deg);
+}
+.file-delete
+{   font-size:0;
+}
+.file-delete:before
+{ 
+    font-family: 'FontAwesome';
+    font-size:18px;
+    line-height:20px;
+    content:'\f014';
+    -webkit-transition:all .5s;
+} 
+.file-delete:hover:before
+{   
+    cursor:pointer;
+    color:#333;
+    -webkit-transform:rotateY(130deg);
+    -moz-transform:rotateY(130deg);
+    -ms-transform:rotateY(130deg);
+    -o-transform:rotateY(130deg);
+    transform:rotateY(130deg);
+}
+/*----------Ajax Tabs------------*/
+    .ajax__tab_xp .ajax__tab_header .ajax__tab_active .ajax__tab_tab {
+ box-shadow:0px 3px 0px #1BB55D inset;
+    } 
+/*------CalendarExtender--------*/
+.custom-calendar .ajax__calendar_title
+
+{
+ height:20px;
+ line-height:20px;
+  background-color:#1BB55D;
+  color:#fff;
+}
+.custom-calendar .ajax__calendar_prev,
+.custom-calendar .ajax__calendar_next
+
+{
+ background-color:#1BB55D;
+height:20px;
+ width:20px;
+ margin:0;
+ z-index:10;
+}
+.custom-calendar .ajax__calendar_today
+
+{
+ height:20px;
+ padding-right:0px;
+ line-height:20px;
+ color:#1BB55D;
+ font-weight:bold;
+}
+/*-------AutoCompleteList---------*/
+.acl .li-hover
+{
+    background:#1BB55D;
+    margin:0px;
+    padding:5px 10px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:bold;
+}
+/*------------Focus Styles------------*/
+ .textarea:focus, .textbox:focus, .listbox:focus, .listbox02:focus,
+    .listbox03:focus, .textbox03:focus, .textbox04:focus,
+    .after-select:focus, .range-textbox:focus, .textbox_no_icon:focus,
+    .textarea01:focus {
+    border-color:#1BB55D;
+    }
+.btn-primary {
+    color: #fff !important;
+    background-color: #1BB55D !important;
+    border: none;
+    border-radius: 0px !important;
+}
+    .btn-primary :hover {
+        opacity:0.8;
+    }

@@ -35,6 +35,8 @@ Public Class ConsultDetails
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             If Page.IsPostBack = False Then
+                loginUser.Value = LoginInfo.GetUser__Id()
+
                 Dim clsapprove_stSorc As New clsFillComboByDataSource("select * from tblLock_up where type='Ref' and IsNull(Deleted,0)=0", "Description", "id", "")
                 clsapprove_stSorc.SetComboItems(ddlStatsrce, "", True, "--اختر--", False)
 
@@ -65,6 +67,8 @@ Public Class ConsultDetails
                 clsapprove_incomStat.SetComboItems(ddlincome_status, "", True, "--اختر--", False)
                 Dim clsadvisors As New clsFillComboByDataSource("select * from ash_advisors where isNull(active,0)=1 ", "name", "id", "")
                 clsadvisors.SetComboItems(ddlAdvisors, "", True, "--اختر--", False)
+                Dim clsnationality As New clsFillComboByDataSource("select * from tblLock_up where type='nat' and IsNull(Deleted,0)=0", "Description", "id", "")
+                clsnationality.SetComboItems(ddlnationality, "", True, "--اختر--", False)
             End If
         Catch ex As Exception
             'clsMessages.ShowErrorMessgage(lblResError, ex.Message, Me)

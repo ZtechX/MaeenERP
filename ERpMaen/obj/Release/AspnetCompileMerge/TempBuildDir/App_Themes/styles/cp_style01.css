@@ -1,0 +1,322 @@
+﻿/* =============================================================================
+
+	MAIN.CSS
+	version: 1.7
+	updated: 2009-03-14, 12:44 GMT+1
+
+============================================================================= */
+
+/* =============================================================================
+HTML - styles
+============================================================================= */
+body 
+{
+    font:0.8em/1.5 "arial", sans-serif;
+    padding:0px;
+    margin:0px;
+    background:url('../images/bg-login-top.png') repeat ;
+    
+    }
+
+.clear
+{
+    clear:both;
+}
+.float-l
+{
+    float: left !important;
+}
+.float-r
+{
+    float: right !important;
+}
+td
+{
+    vertical-align: top;
+margin: 0px;
+padding: 0px;
+}
+.main {
+min-width: 980px;
+width: expression(document.body.clientWidth < 980? "980px" : "auto" );
+}
+.cp_wrapper
+{
+width: 100%;
+margin: 0px;
+padding: 0px;
+border-collapse:collapse;
+height:100%;
+}
+.left_col
+{
+width: 235px;
+
+
+}
+.padding_15
+{
+    padding:10px 0px 15px 15px;
+}
+.left_col .menu
+{
+width:264px;
+float:left;
+list-style:none;
+margin:0px;
+padding:0px;
+}
+.left_col .menu li
+{
+float: left;
+margin: 0px;
+padding: 0px;
+width: 83.4%;
+}
+.left_col .menu li a
+{
+width: 100%;
+float: left;
+margin: 0px;
+padding: 10px 12px;
+color: #333;
+text-decoration: none;
+font: 85%/1.2 "arial",sans-serif;
+font-weight: bold;
+border-bottom: 1px solid #ccc;
+line-height: 18px;
+}
+.menu_selected
+{
+width: 100%;
+float: left;
+margin: 0px;
+padding: 10px 12px;
+color:#fff !important;
+text-decoration: none;
+font: 85%/1.2 "arial",sans-serif;
+font-weight: bold;
+border-bottom: 1px solid #ccc;
+line-height: 18px;
+background:#00457c;
+}
+.left_col .menu li a:hover
+{
+    background:#00457c;
+    color:#fff;
+}
+.left_col .menu li a span
+{
+    float:left;
+    width:16px;
+    height:16px;
+    margin: 0px 4px 0px 0px;
+}
+.left_col .menu li a .icon_cp_event
+{
+    background:url(../images/icon_cp_events.png) no-repeat;
+}
+.left_col .menu li a:hover .icon_cp_event, .menu_selected .icon_cp_event
+{
+    background:url(../images/icon_cp_events_hover.png) no-repeat !important;
+}
+.left_col .menu li a .icon_cp_tire 
+{
+    background:url(../images/icon_cp_tire.png) no-repeat;
+}
+.left_col .menu li a:hover .icon_cp_tire, .menu_selected .icon_cp_tire
+{
+    background:url(../images/icon_cp_tire_hover.png) no-repeat !important;
+}
+.left_col .menu li a .icon_cp_serv 
+{
+    background:url(../images/icon_cp_serv.png) no-repeat;
+}
+.left_col .menu li a:hover .icon_cp_serv, .menu_selected .icon_cp_serv
+{
+    background:url(../images/icon_cp_serv_hover.png) no-repeat !important;
+}
+.left_col .menu li a .icon_cp_gallery
+{
+    background:url(../images/icon_cp_gallery.png) no-repeat;
+}
+.left_col .menu li a:hover .icon_cp_gallery, .menu_selected .icon_cp_gallery
+{
+    background:url(../images/icon_cp_gallery_hover.png) no-repeat !important;
+}
+.left_col .menu li a .icon_cp_doctor
+{
+    background:url(../images/icon_cp_doctor.png) no-repeat;
+}
+.left_col .menu li a:hover .icon_cp_doctor, .menu_selected .icon_cp_doctor
+{
+    background:url(../images/icon_cp_doctor_hover.png) no-repeat !important;
+}
+.left_col .menu li a .icon_cp_promo
+{
+    background:url(../images/icon_cp_promo.png) no-repeat;
+}
+.left_col .menu li a:hover .icon_cp_promo, .menu_selected .icon_cp_promo
+{
+    background:url(../images/icon_cp_promo_hover.png) no-repeat !important;
+}
+.cp_logo
+{
+float: left;
+margin: 0px 0px 10px 0px;
+background: #fff;
+width: 214px !important;
+overflow: hidden;
+border: 5px solid #dedede;
+padding: 14px 10px;
+border-radius: 6px;
+box-shadow: 1px 1px 4px #ccc;
+}
+.cp_logo img
+{
+display: block;
+padding: 0px 0px;
+width: 200px !important;
+height:inherit !important;
+}
+.login_box
+{
+padding: 10px 15px;
+font: 85%/1.2 "arial",sans-serif;
+float:right;
+}
+.login_box .common-label
+{
+    float: left;
+    color:#fff;
+    margin:0px 5px 0px 0px;
+}
+.login_box .user
+{
+color: #fff !important;
+font-weight: bold;
+font-size: 12px;
+float:left;
+margin:0px 10px 0px 3px;
+}
+.login_box .user_name
+{
+color: #fff !important;
+font-weight: bold;
+font-size: 12px;
+float: left;
+margin: 0px 5px;
+padding: 0px;
+}
+.login_box .logout
+{
+padding-left: 18px;
+background: url("../design/tray-logout.gif") 0 50% no-repeat;
+text-transform: uppercase;
+float: left;
+color: #fff;
+font-weight: bold;
+}
+.login_box .logout:hover
+{
+background: url("../design/tray-logout_hover.gif") 0 50% no-repeat;
+color: #fff;
+}
+.cp_content
+{
+padding: 0px 0px;
+border: 1px solid #dedede;
+margin: 10px 10px 10px 0px;
+background: #fff url("../design/content.gif") 0px 0 repeat-y;
+border-left: 0px none;
+border-radius: 15px;
+-moz-border-radius: 15px;
+-webkit-border-radius: 15px;
+}
+.cp_margin
+{
+}
+.cp_header
+{
+    margin:0px;
+    padding:0px;
+    float:left;
+    width:100%;
+    height:34px;
+    background:#00457c;
+}
+.cp_heading
+{
+font-weight: bold;
+padding-right: 35px;
+color: #fff;
+font-size: 12px;
+float: left;
+margin: 7px 0px 0px 15px;
+font-family: arial;
+}
+.footer {
+background: url("../design/separator.gif") 0 0 repeat-x;
+font: 11px/1.2 "tahoma",sans-serif;
+color: #707070;
+padding:0px 20px;
+}
+.box {
+min-height: 1px;
+}
+.footer a {
+color: #076db5;
+
+}
+.ajax__html_editor_extender_buttoncontainer {
+background-color: #F0F0F0;
+padding: 2px 2px 2px 2px;
+border: 1px solid #c2c2c2;
+overflow: auto;
+float: left !important;
+}
+.ajax__html_editor_extender_container
+{
+width: 751px !important;
+margin: 5px 0px 30px 0px;
+padding: 0px 0px 0px 0px;
+}
+
+.page_wrapper
+{
+    padding:0px 20px;
+}
+.ls-layer {
+	width: 100%;
+	height: 100%;
+}
+.ls-layer {
+	position: absolute;
+	display: none;
+	background-position: center center;
+	overflow: hidden;
+	z-index: 100!important;
+}
+.slider-shadow-top {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 41px;
+    background: url("../images/shadow-top.png") center center no-repeat;
+    z-index: 99;
+}
+.slider-shadow-bottom {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    height: 32px;
+    background: url("../images/shadow-bottom.png") center center no-repeat;
+    z-index: 99;
+}
+.ls-layer .ls-bg {
+	left: 50%;
+	top: 50%;
+	 
+}

@@ -1,0 +1,203 @@
+﻿/*This Style Sheet contaians the classes that need to be made with unique color for each theme*/
+
+.page_title
+{
+/*width:100%;*/
+margin: 0px;
+padding:12px 20px 0px 11px;
+font-size: 18px !important;
+color: #EFA807  !important;
+display:inline-block;
+}
+fieldset.inner legend {
+color:#F9BD0D !important;
+}
+/*-----------Icons & Buttons------------*/
+a {
+color:#F9BD0D;
+text-decoration:none;
+font-size:12px;
+}
+    .btn i, .save i {
+    margin-right:2px;
+    font-size:15px;
+    color:#F9BD0D;
+    }
+.ui-widget-content .btn-danger {
+    color:#fff;
+}
+.ui-widget-content .btn-danger i {
+    color:#fff;
+}
+    .btn:hover, .save:hover
+    {
+color:#F9BD0D;
+background:#eee;
+    }
+.icon-pane-new ul li a {
+color:#fff !important;
+}
+    .ButtonStyle
+{
+border: 0px none;
+color: #fff;
+border:1px solid #fff;
+padding: 6px 32px;
+font-weight: 600;
+font-family: 'Open Sans', Arial, Tahoma;
+cursor: pointer;
+outline: none;
+margin: 0 0 3px 5px;
+float:right;
+-webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:5px;
+background:#EFA807;
+}
+.ButtonStyle:hover
+{
+  color:#EFA807;
+  border-color:#EFA807;
+  background:#fff;
+  /*box-shadow:0 0 0 #F9BD0D inset;*/
+}
+.uploadBtn {
+    border: 1px solid #F9BD0D;
+    color: #FFFFFF;
+    padding: 6px 13px;
+    cursor: pointer;
+    outline: none;
+    margin: 0;
+    float: left;
+    -webkit-transition:all .5s;
+-ms-transition:all .5s;
+-moz-transition:all .5s;
+-o-transition:all .5s;
+transition:all .5s;
+border-radius:5px;
+background:#F9BD0D;
+box-shadow:0 0 100px #F9BD0D inset;
+}
+.uploadBtn:hover
+{
+  color:#F9BD0D;
+  border-color:#F9BD0D;
+  background:#fff;
+  box-shadow:0 0 0 #F9BD0D inset;
+}
+.uploadBtn_plus {
+    border: 1px solid #EEAA10;
+  color: #FFFFFF;
+  padding: 4px 8px;
+  cursor: pointer;
+  outline: none;
+  margin: 0;
+  float: left;
+  -webkit-transition: all .5s;
+  -ms-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+  border-radius: 0px;
+  background:#EEAA10;
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  z-index: 999;
+}
+.uploadBtn_plus:hover
+{
+  color:#EEAA10;
+  border-color:#EEAA10;
+  background:#fff;
+  box-shadow:0 0 0 #de1920 inset;
+}
+.uploadBtn_plus_full_ht {
+    border: 1px solid #EFA807;
+  color: #FFFFFF;
+  padding: 4px 8px;
+  cursor: pointer;
+  outline: none;
+  margin: 0;
+  float: left;
+  -webkit-transition: all .5s;
+  -ms-transition: all .5s;
+  -moz-transition: all .5s;
+  -o-transition: all .5s;
+  transition: all .5s;
+  border-radius: 0px;
+  background: #EFA807;
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  z-index: 999;
+  height:85%;
+}
+.uploadBtn_plus_full_ht:hover
+{
+  color:#EFA807;
+  border-color:#EFA807;
+  background:#fff;
+  box-shadow:0 0 0 #de1920 inset;
+}
+/*----------Ajax Tabs------------*/
+    .ajax__tab_xp .ajax__tab_header .ajax__tab_active .ajax__tab_tab {
+ box-shadow:0px 3px 0px #F9BD0D inset;
+    } 
+/*------CalendarExtender--------*/
+.custom-calendar .ajax__calendar_title
+
+{
+ height:20px;
+ line-height:20px;
+  background-color:#F9BD0D;
+  color:#fff;
+}
+.custom-calendar .ajax__calendar_prev,
+.custom-calendar .ajax__calendar_next
+
+{
+ background-color:#F9BD0D;
+height:20px;
+ width:20px;
+ margin:0;
+ z-index:10;
+}
+.custom-calendar .ajax__calendar_today
+
+{
+ height:20px;
+ padding-right:0px;
+ line-height:20px;
+ color:#EFA807;
+ font-weight:bold;
+}
+/*-------AutoCompleteList---------*/
+.acl .li-hover
+{
+    background:#F9BD0D;
+    margin:0px;
+    padding:5px 10px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:bold;
+}
+/*------------Focus Styles------------*/
+ .textarea:focus, .textbox:focus, .listbox:focus, .listbox02:focus,
+    .listbox03:focus, .textbox03:focus, .textbox04:focus,
+    .after-select:focus, .range-textbox:focus, .textbox_no_icon:focus,
+    .textarea01:focus {
+    border-color:#F9BD0D;
+    }
+ .btn-primary {
+    color: #fff !important;
+    background-color: #F9BD0D !important;
+    border: none !important;
+    border-radius: 0px !important;
+}
+    .btn-primary :hover {
+        opacity:0.8;
+    }

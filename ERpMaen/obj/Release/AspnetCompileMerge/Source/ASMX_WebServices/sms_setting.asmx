@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="VB" CodeBehind="~/App_Code/sms_setting.vb" Class="sms_setting" %>

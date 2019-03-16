@@ -140,15 +140,6 @@ Partial Public Class Users
     Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''txtContactInfo control.
     '''</summary>
     '''<remarks>
@@ -158,15 +149,6 @@ Partial Public Class Users
     Protected WithEvents txtContactInfo As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''TextBox2 control.
     '''</summary>
     '''<remarks>
@@ -174,6 +156,15 @@ Partial Public Class Users
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TextBox2 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtindenty control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtindenty As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''ddlgroup_id control.
@@ -230,22 +221,13 @@ Partial Public Class Users
     Protected WithEvents txtUserPassword As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator2 control.
+    '''phone control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
-    '''TextBox3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents phone As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''divcomp_id control.
