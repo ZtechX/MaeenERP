@@ -6,6 +6,9 @@
     }
 </style>
 <div class="collapse" id="receiving_delivery_details" dir="rtl">
+          <div id="SavedivLoader" class="loader" style="    position:absolute; padding-top:15%;  text-align: center; z-index:1000;">
+                  <asp:Image ID="img" runat="server" ImageUrl="../App_Themes/images/loader.gif" />
+                </div>
     <div class="row">
       <button class="btn btn-info btn-lg pull-left" onclick="getReceive_and_deliver(); return false;" style="margin-right:10px;">تقرير استلام وتسليم</button>
                <button class="btn btn-info btn-lg pull-left" onclick="getagreement(); return false;">طباعة اتفاق تنفيذ استلام وتسليم</button>
@@ -29,6 +32,8 @@
         <asp:label id="lblcell_id" clientidmode="static" runat="server" style="display: none" dbcolumn=""></asp:label>
         <asp:label id="lbldelivery_date_m" runat="server" dbcolumn="date_m" style="display: none"></asp:label>
         <asp:label id="lbldelivery_date_h" runat="server" dbcolumn="date_h" style="display: none"></asp:label>
+         
+       
         <div class="col-md-12 form-group ">
             <div class="col-md-3 col-sm-12">
                 <label class="label-required">الحالات</label>
@@ -135,7 +140,7 @@
 
             </div>
             <div class="col-md-9 col-sm-12">
-                <asp:DropDownList SkinID="form-control" class="form-control" dbColumn="employee_id" ClientIDMode="Static" ID="ddlemployee_id" runat="server">
+                <asp:DropDownList SkinID="form-control" class="form-control" required dbColumn="employee_id" ClientIDMode="Static" ID="ddlemployee_id" runat="server">
                 </asp:DropDownList>
             </div>
 
@@ -173,7 +178,7 @@
         <div class="col-md-12 form-group ">
             <br />
             <div class="col-md-3 col-sm-12">
-                <label for="Name" class="label-required">ملاحظات </label>
+                <label for="Name" >ملاحظات </label>
 
             </div>
             <div class="col-md-9 col-sm-12">
@@ -187,7 +192,83 @@
             </div>
         <div id="menu5" class="tab-pane fade">
             <div class="row" style="padding:40px">
-      
+                  <div class="col-md-12 ">
+                         <div class="col-md-6 form-group" style="pointer-events: none;" >
+                                            <div class="col-md-1 col-sm-12" >
+
+                                                <label class="switch switch-success">
+                                                    <input  id="deliverer_ready"  runat="server"  type="checkbox" />
+                                                    
+                                                </label>
+                                            </div>
+                                                 <div class="col-md-2 col-sm-12" style="margin-top: 23px;">
+                                                <label>المسلم جاهز</label>
+
+                                            </div>
+                                           
+                                        </div>
+                  <div class="col-md-6 form-group" style="pointer-events: none;" >
+                                            <div class="col-md-1 col-sm-12" >
+
+                                                <label class="switch switch-success">
+                                                    <input  id="deliverer_accept" runat="server"  type="checkbox" />
+                                                    
+                                                </label>
+                                            </div>
+                                                 <div class="col-md-2 col-sm-12" style="margin-top: 23px;">
+                                                <label>المسلم موافق</label>
+
+                                            </div>
+                                           
+                                        </div>
+
+                  </div>
+               
+                  <div class="col-md-12 ">
+                         <div class="col-md-6 form-group" style="pointer-events: none;" >
+                                            <div class="col-md-1 col-sm-12" >
+
+                                                <label class="switch switch-success">
+                                                    <input  id="reciever_ready"  runat="server"  type="checkbox" />
+                                                    
+                                                </label>
+                                            </div>
+                                                 <div class="col-md-2 col-sm-12" style="margin-top: 23px;">
+                                                <label>المستلم جاهز</label>
+
+                                            </div>
+                                           
+                                        </div>
+                  <div class="col-md-6 form-group" style="pointer-events: none;" >
+                                            <div class="col-md-1 col-sm-12" >
+
+                                                <label class="switch switch-success">
+                                                    <input  id="reciever_accept"  runat="server"  type="checkbox" />
+                                                    
+                                                </label>
+                                            </div>
+                                                 <div class="col-md-2 col-sm-12" style="margin-top: 23px;">
+                                                <label>المستلم موافق</label>
+
+                                            </div>
+                                           
+                                        </div>
+
+                  </div>
+                <div class="col-md-12 form-group" style=" margin-right:auto;margin-left:auto;">
+                                            <div class="col-md-1 col-sm-12" >
+
+                                                <label class="switch switch-success">
+                                                    <input id="receiving_delivery_done" runat="server"  type="checkbox" />
+                                                    
+                                                </label>
+                                            </div>
+                                                 <div class="col-md-2 col-sm-12" style="margin-top: 23px;">
+                                                <label>موافقة الادارة</label>
+
+                                            </div>
+                                           
+                                        </div>
             </div>
             </div>
       </div>
@@ -196,11 +277,32 @@
 
       
         <div class="col-md-12 form-group" id="save_delivery_details">
-            <button onclick="" style="font-family: DroidKufi !important;" class="btn btn-success pull-left">حفظ</button>
+            <button onclick="save_delivery_details()" style="font-family: DroidKufi !important;" class="btn btn-success pull-left">حفظ</button>
         </div>
 
         <%--end of group1--%>
     </div>
 
+</div>
+<div class="collapse" id="multi_cases">
+    <div class="row">
+        <button onclick="add_new_date();" class="btn btn-success">اضافة جديد</button>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                <th>#</th>
+                <th>الحالة</th>
+                <th>النوع</th>
+                <th>مشاهدة</th>
+                    </tr>
+                 </thead>
+                <tbody id="cases_dates">
+
+
+                </tbody>
+           
+
+        </table>
+    </div>
 </div>
 <uc1:Person runat="server" ID="Person" />

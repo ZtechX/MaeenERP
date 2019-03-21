@@ -9,7 +9,7 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/User.asmx" />
-            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+      <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
@@ -274,7 +274,7 @@
                                             </div>
 
 
-                                            <div class="form-group row">
+                                            <div class="form-group row" id="Comp_div">
                                                 <div class="col-md-3 col-sm-12">
                                                     <div id="divcomp_id" runat="server">
                                                         <label class="label-required">اسم الجمعية</label>

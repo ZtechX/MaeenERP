@@ -3953,8 +3953,17 @@ Public Class WebService
                     End If
 
                 End If
+            ElseIf Not LoginInfo.isSuperAdmin() Then
+                If formName = "Users" Then
+                    quaryStr = quaryStr + " and comp_id=" + LoginInfo.GetComp_id()
+                ElseIf formName = "Advisors" Then
+                    quaryStr = quaryStr + " where ash_advisors.comp_id=" + LoginInfo.GetComp_id()
 
+                ElseIf formName = "CommonQuest" Or formName = "email_setting" Or formName = "Signature_setting" Then
+                    quaryStr = quaryStr + " where comp_id=" + LoginInfo.GetComp_id()
+                End If
             End If
+
             Dim DataAR As New List(Of String)
             Dim dt As New DataTable
             dt = DBManager.Getdatatable(quaryStr)

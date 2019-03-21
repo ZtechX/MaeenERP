@@ -480,6 +480,11 @@ function applyDatatable(val) {
                     $('td:eq(5)', nRow).html('<a href="targetdetails.aspx?operation=search&Code=' + aData[1] + '">التفاصيل</a>');
                     return nRow;
                 }
+                else if (getFormName() == "CommonQuest") {
+                    $('td:last-child', nRow).html('<div class="hidden-sm hidden-xs action-buttons"><button class="btn btn-xs btn-danger btn-quick" onclick="deleteQuestion(' + aData[0] + '); return false;" > <i class="fa fa-times"></i></button></div>');
+                    // $('td:last-child', nRow).html('<div class="hidden-sm hidden-xs action-buttons"><button class="btn btn-xs btn-danger btn-quick" onclick="deleteQuestion(' + aData[0] + '); return false;" > <i class="fa fa-times"></i></button><button class="btn btn-xs btn-warning btn-quick" onclick="editQuestion(' + aData[0] + '); return false;" > <i class="fa fa-pencil"></i></button ></div>');
+
+                }
                 else if (getFormName() == "ConsultationDetails") {
                     ConsultationDetails.isSuperAdmin(function (val) {
                         if (val) {
@@ -490,7 +495,7 @@ function applyDatatable(val) {
 
                         }
                     });
-                   
+
                 }
             },
         }).columnFilter({

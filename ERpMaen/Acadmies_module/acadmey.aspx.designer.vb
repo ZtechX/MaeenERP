@@ -192,8 +192,16 @@ Partial Public Class acadmey
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblstart_date_hj As Global.System.Web.UI.WebControls.Label
-
-
+    
+    '''<summary>
+    '''HijriCalendar2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar2 As Global.ERpMaen.HijriCalendar
+    
     '''<summary>
     '''TextNotes control.
     '''</summary>

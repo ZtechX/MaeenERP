@@ -42,12 +42,12 @@
 
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/tooltipsy.min.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/script.js")%>"></script>
-    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/scripts/nicEdit.js")%>"></script>
+   <%-- <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/scripts/nicEdit.js")%>"></script>--%>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery.easing.min.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/DynamicTable.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/LookupDdlBinder.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/RowsReorder.js")%>"></script>
-    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/SmartEditor.js")%>"></script>
+   <%-- <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/SmartEditor.js")%>"></script>--%>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/PublicFunctions.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/MultiFileUploader.js")%>"></script>
     <%--  <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Public/barcode.js")%>"></script>
@@ -674,7 +674,7 @@
                                     <asp:AutoCompleteExtender ID="aceSearchMain" runat="server" BehaviorID="aceSearchMain"
                                         FirstRowSelected="false" EnableCaching="false" Enabled="True" MinimumPrefixLength="1"
                                         CompletionListCssClass="acl" CompletionListItemCssClass="li" CompletionListHighlightedItemCssClass="li-hover"
-                                        ServiceMethod="GetForms" ServicePath="~/ASMX_WebServices/WebService.asmx" TargetControlID="txtSearch"
+                                        ServiceMethod="GetForms" ServicePath="~/ASMX_WebServices/Zwebservice.asmx" TargetControlID="txtSearch"
                                         CompletionInterval="500">
                                     </asp:AutoCompleteExtender>
                                     <i class="fa-search fa"></i>

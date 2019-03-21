@@ -65,7 +65,7 @@ Public Class ConsultDetails
                 'مستوي الدخل
                 Dim clsapprove_incomStat As New clsFillComboByDataSource("select * from tblLock_up where type='Linc' and IsNull(Deleted,0)=0", "Description", "id", "")
                 clsapprove_incomStat.SetComboItems(ddlincome_status, "", True, "--اختر--", False)
-                Dim clsadvisors As New clsFillComboByDataSource("select * from ash_advisors where isNull(active,0)=1 ", "name", "id", "")
+                Dim clsadvisors As New clsFillComboByDataSource("select * from ash_advisors where isNull(active,0)=1 and comp_id=" + LoginInfo.GetComp_id(), "name", "id", "")
                 clsadvisors.SetComboItems(ddlAdvisors, "", True, "--اختر--", False)
                 Dim clsnationality As New clsFillComboByDataSource("select * from tblLock_up where type='nat' and IsNull(Deleted,0)=0", "Description", "id", "")
                 clsnationality.SetComboItems(ddlnationality, "", True, "--اختر--", False)

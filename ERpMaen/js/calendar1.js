@@ -200,17 +200,16 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                         }
                         mdate1 = (sdate < 10 ? "0" + sdate : sdate) + '/' + ((getOppsDate().getMonth() + 1) < 10 ? "0" + (getOppsDate().getMonth() + 1) : (getOppsDate().getMonth() + 1)) + '/' + (getOppsDate().getFullYear());
                         var res = comparedate(monthdata, mdate1);
+                        //var arr = [];
+                        //arr.push(res.split("/")[0], res.split("/")[1]);
+                        //console.log(arr);
                         if (res) {
                             var res_id = res.split("/")[0]
                             var res_type = res.split("/")[1]
                             $(grid).prop("id", res_id);
                             $(grid).css("color", "#ffffff");
-                            if (res_type == 1) {
-                                $(grid).css("background-color", "#148083");
-                            } else {
-                                $(grid).css("background-color", "#C09C67");
+                            $(grid).css("background-color", "#C09C67");
 
-                            }
                             $(grid).addClass("w3-round-large");
                         }
                         pde.innerHTML = Calendar.getDigit(pdate); sde.innerHTML = Calendar.getDigit(sdate) + ' ' + smsn; pdate++; $(sde).prop('id', 'dateval'); $(sde).attr('date', (sdate < 10 ? "0" + sdate : sdate) + '/' + ((getOppsDate().getMonth() + 1) < 10 ? "0" + (getOppsDate().getMonth() + 1) : (getOppsDate().getMonth() + 1)) + '/' + (getOppsDate().getFullYear())); $(sde).attr('hdate', ((pdate - 1) < 10 ? "0" + (pdate - 1) : (pdate - 1)) + '/' + ((dispDate.getMonth() + 1) < 10 ? "0" + (dispDate.getMonth() + 1) : (dispDate.getMonth() + 1)) + '/' + (dispDate.getFullYear()));
@@ -506,16 +505,19 @@ Calendar.language['ar'] = {
     hMonthNames: ["المُحَرَّم", "صَفَر ", "رَبيع الاوَّل", "رَبيع الآخِر", "جُمادى الأولى", "جُمادى الآخِرة", "رَجَب", "شَعبان", "رَمَضان", "شَوّال", "ذو القَعدة", "ذو الحِجّة"]
 };
 function getmydate(sender) {
+   
     var id = $(sender).prop('id');
     $("#lbldelivery_date_m").html($(sender).find("#dateval").attr('date'));
     $("#lbldelivery_date_h").html($(sender).find("#dateval").attr('hdate'));
     if ($(sender).hasClass("w3-disabled")) {
     } else {
-        $("#receiving_delivery_details").dialog({
-            width: "800px",
-        });
+  
         if (id != "") {
-            show_all(id, 1);
+         //   show_all(id, 1);
+            $("#multi_cases").dialog({
+                width: "800px",
+            });
+            get_cases($(sender).find("#dateval").attr('hdate'));
         } else {
             resetDivControls("receiving_delivery_details");
             $("#child_info").css("display", "block")
@@ -525,10 +527,52 @@ function getmydate(sender) {
             $("#ddldeliverer_id").html("");
             $("#ddlreciever_id").html("");
             $("#save_delivery_details").css("display", "block");
+            $("#receiving_delivery_details").dialog({
+                width: "800px",
+            });
         }
+      
     }
+   
 
 
+}
+function add_new_date() {
+
+    resetDivControls("receiving_delivery_details");
+    $("#child_info").css("display", "block")
+    $("#money_data").css("display", "none")
+    $("#lbldelivery_details").html("");
+    $('#tab_children').html("");
+    $("#ddldeliverer_id").html("");
+    $("#ddlreciever_id").html("");
+    $("#save_delivery_details").css("display", "block");
+    $("#receiving_delivery_details").dialog({
+        width: "800px",
+    });
+
+
+}
+function get_cases(date_h) {
+    cases.get_cases(date_h, function (val) {
+        if (val[0] != "0") {
+            var data = JSON.parse(val[0]);
+            var result = "";
+            var status = "تسليم واستلام اولاد";
+            for (var x = 0; x < data.length; x++) {
+                if (data[x].type == 2) {
+                    status = "تسليم واستلام نفقة";
+                } 
+                result = result + "<tr><td>" + parseInt(x + 1) + "</td>" +
+                    "<td>حالة#" + data[x].cases + "  " + "مقدمة من : " + data[x].person + " " + "رقم الهوية : " + data[x].num + "  " + "</td>" +
+                    "<td>" + status + "</td>" +
+                    "<td><button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + data[x].id + ",1); return false; '><i class='fa fa-eye'></i></button></td>" +
+                  "</tr>";
+
+            }
+            $("#cases_dates").html(result);
+        }
+    });
 }
 
 function getMonthData(month) {

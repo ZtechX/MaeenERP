@@ -464,33 +464,6 @@ Partial Public Class cases
     Protected WithEvents txtdelivery_period As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''lblfirst_date_received_m control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblfirst_date_received_m As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblfirst_date_received_h control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblfirst_date_received_h As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''HijriCalendar1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents HijriCalendar1 As Global.ERpMaen.CustomerCalendar
-    
-    '''<summary>
     '''ddlday_nam1 control.
     '''</summary>
     '''<remarks>
@@ -732,33 +705,6 @@ Partial Public Class cases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtdelivery_period_expenses As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lbldate_m_expenses_basic control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbldate_m_expenses_basic As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lbldate_h_expenses_basic control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbldate_h_expenses_basic As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''HijriCalendar10 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents HijriCalendar10 As Global.ERpMaen.CustomerCalendar
     
     '''<summary>
     '''Text11 control.

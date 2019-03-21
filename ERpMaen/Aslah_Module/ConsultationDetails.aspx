@@ -9,7 +9,7 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             
-            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+           <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
              <asp:ServiceReference Path="~/ASMX_WebServices/ConsultationDetails.asmx" />
         </Services>
     </asp:ScriptManager>

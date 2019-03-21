@@ -1315,7 +1315,6 @@ function checkRequired(div = 'divForm') {
         if ($(this).prop('required') && value == "") {
             requiredall = 1;
             $(this).addClass('error');
-            alert($(this).prop('id'));
 
         } else {
             notrequiredall = 0;
@@ -1327,7 +1326,19 @@ function checkRequired(div = 'divForm') {
     return requiredall;
 
 }
+function setRequired_Date(div) {
 
+    $("#" + div + " #txtDatem").prop("required", true);
+    $("#" + div + " #txtDateh").prop("required", true);
+    //$("#Text9").prop("required", true);
+}
+
+function setRequired_time(div) {
+    $("#" + div + " input:text").first().prop("required", true);
+    $("#" + div + " input:text").first().prop("required", true);
+    $("#" + div + " input:text").first().attr("dbcolumn", "");
+    //$("#Text9").prop("required", true);
+}
 function GetCurrentDate_m_hj() {
     var arr_date = [];
     var today = new Date();

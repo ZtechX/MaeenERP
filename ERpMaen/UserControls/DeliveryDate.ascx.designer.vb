@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class DeliveryDate
     
     '''<summary>
+    '''img control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
     '''lbldelivery_details control.
     '''</summary>
     '''<remarks>
@@ -129,6 +138,51 @@ Partial Public Class DeliveryDate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TextBox20 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''deliverer_ready control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents deliverer_ready As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
+    
+    '''<summary>
+    '''deliverer_accept control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents deliverer_accept As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
+    
+    '''<summary>
+    '''reciever_ready control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents reciever_ready As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
+    
+    '''<summary>
+    '''reciever_accept control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents reciever_accept As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
+    
+    '''<summary>
+    '''receiving_delivery_done control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents receiving_delivery_done As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
     
     '''<summary>
     '''Person control.

@@ -18,6 +18,7 @@
     <li><a data-toggle="tab" href="#menu2" id="child_info">الاولاد</a></li>
     <li><a data-toggle="tab" href="#menu3" style="display: none" id="money_data"> المبلغ</a></li>
     <li><a data-toggle="tab" href="#menu4"> محضر الاستلام</a></li>
+            <li><a data-toggle="tab" href="#menu5"> جاهزية الاستلام والتسليم</a></li>
   </ul>
 
   <div class="tab-content">
@@ -184,13 +185,18 @@
         </div>
             </div>
             </div>
+        <div id="menu5" class="tab-pane fade">
+            <div class="row" style="padding:40px">
+      
+            </div>
+            </div>
       </div>
      
      
 
       
         <div class="col-md-12 form-group" id="save_delivery_details">
-            <button onclick="save_delivery_details();" style="font-family: DroidKufi !important;" class="btn btn-success pull-left">حفظ</button>
+            <button onclick="" style="font-family: DroidKufi !important;" class="btn btn-success pull-left">حفظ</button>
         </div>
 
         <%--end of group1--%>

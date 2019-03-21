@@ -88,7 +88,7 @@ Public Class ConsultationDetails
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
 
-            If DBManager.ExcuteQuery("update ash_consultings set  advisor_id=" + advisor_id) <> -1 Then
+            If DBManager.ExcuteQuery("update ash_consultings set  advisor_id=" + advisor_id + " where id=" + consulat_id) <> -1 Then
 
                 Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
                 dictBasicDataJson1.Add("RefCode", consulat_id)
@@ -106,21 +106,21 @@ Public Class ConsultationDetails
                     If oldadvisor_id <> "0" Then
                         DBManager.ExcuteQuery("update tblNotifications set  Deleted=1 where RefCode=" + consulat_id + " and AssignedTo=" + getadvisorUser_id(oldadvisor_id) + " and NotTitle='إسناد استشارة'")
                         Dim dictBasicDataJson2 As New Dictionary(Of String, Object)
-                            dictBasicDataJson2.Add("RefCode", consulat_id)
-                            dictBasicDataJson2.Add("NotTitle", "إلغاءإسناد استشارة")
-                            dictBasicDataJson2.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                        dictBasicDataJson2.Add("RefCode", consulat_id)
+                        dictBasicDataJson2.Add("NotTitle", "إلغاءإسناد استشارة")
+                        dictBasicDataJson2.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
                         dictBasicDataJson2.Add("AssignedTo", getadvisorUser_id(oldadvisor_id))
                         dictBasicDataJson2.Add("CreatedBy", LoginInfo.GetUser__Id())
-                            dictBasicDataJson2.Add("Remarks", "استشارة")
-                            dictBasicDataJson2.Add("FormUrl", "Aslah_Module/ConsultationDetails.aspx")
-                            If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson2, "tblNotifications", "", _sqlconn, _sqltrans) Then
-                                _sqltrans.Rollback()
-                                _sqlconn.Close()
-                                Return False
-                            End If
+                        dictBasicDataJson2.Add("Remarks", "استشارة")
+                        dictBasicDataJson2.Add("FormUrl", "Aslah_Module/ConsultationDetails.aspx")
+                        If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson2, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Return False
                         End If
+                    End If
 
-                        _sqltrans.Commit()
+                    _sqltrans.Commit()
                     _sqlconn.Close()
                     Return True
                 End If

@@ -6,27 +6,25 @@ var formAutoCodeControl = "lblmainid";
 
 
 $(function () {
-    $("#pnlConfirm").hide();
-    $("#divData").hide();
-    $("#SavedivLoader").show();
-    
-    GetCourses();
-    drawLecturesTable();
-    drawStudentTable();
-    drawNotes();
-    drawActivity();
-    drawConditionsTable();
-    Studentlistview();
-    drawHomeworks();
-    drawExams();
-    drawCourseFile();
-    drawCourseComments();
-
-  
 
     try {
       
-       
+        $("#pnlConfirm").hide();
+        $("#divData").hide();
+        //$("#SavedivLoader").show();
+
+        GetCourses();
+        drawLecturesTable();
+        drawStudentTable();
+        drawNotes();
+        drawActivity();
+        drawConditionsTable();
+        Studentlistview();
+        drawHomeworks();
+        drawExams();
+        drawCourseFile();
+        drawCourseComments();
+        //$("#SavedivLoader").hide();
 
     } catch (err) {
         alert(err);
@@ -36,7 +34,7 @@ $(function () {
 function saveCourse() {
     
     try {
-        debugger
+      //debugger
 
         if (checkRequired("divformEditCourse")) {
             showErrorMessage("يرجى ادخال البيانات المطلوبة");
@@ -44,12 +42,17 @@ function saveCourse() {
 
         
           
-            else {
-                $("#date_m").val($("#txtDatem").val());
-                $("#date_hj").val($("#txtDateh").val());
-                //end
-                $("#enddate_m").val($("#txtDatem").val());
-                $("#enddate_hj").val($("#txtDateh").val());
+        else {
+
+            $("#SavedivLoader").show();
+
+            $("#strdate_m").val($("#divdate6 #txtDatem").val());
+            $("#strdate_hj").val($("#divdate6 #txtDateh").val());
+
+            $("#enddate_m").val($("#divdate7 #txtDatem").val());
+            $("#enddate_hj").val($("#divdate7 #txtDateh").val());
+
+             
 
                 var basicData = generateJSONFromControls("divformEditCourse");
 
@@ -57,7 +60,9 @@ function saveCourse() {
                 console.log(basicData);
                 courseDetailsCls.SaveCourse(CourseId, basicData, function (val) {
                     if (val == true) {
-                        debugger;
+                        
+                        $("#SavedivLoader").hide();
+                        //debugger;
                         alert("تم الحفظ بنجاح");
                         GetCourses();
                         $("#EditCourseModal").modal('hide');
@@ -96,6 +101,7 @@ function SaveExam() {
 
         }
         else {
+            $("#SavedivLoader").show();
 
             $("#date2_m").val($("#divdateExam #txtDatem").val());
             $("#date2_hj").val($("#divdateExam #txtDateh").val());
@@ -109,7 +115,8 @@ function SaveExam() {
             console.log(basicData);
             courseDetailsCls.SaveExam(ExamID, CourseId, basicData, function (val) {
                 if (val == true) {
-                    debugger;
+                    //debugger;
+                    $("#SavedivLoader").hide();
                     alert("تم الحفظ بنجاح");
                     $("#exams").modal('hide');
                     resetDivControls("divformExams");
@@ -135,6 +142,108 @@ function SaveExam() {
         alert(err);
     }
 }
+function sendMsg() {
+    try {
+
+
+
+        if (checkRequired("divformconTr") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+
+        }
+        else {
+
+            $("#SavedivLoader").show();
+
+          
+
+            var basicData = generateJSONFromControls("divformconTr");
+            var Id = "";
+
+            var CourseId = ($("#Lblcourse_id").html());
+            var today = new Date();
+           // var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+         
+            console.log(basicData);
+            courseDetailsCls.sendMesg(Id, CourseId, Pub_date_m, Pub_date_hj, time, basicData, function (val) {
+                if (val == true) {
+                    //debugger;
+                    $("#SavedivLoader").hide();
+                    alert("تم الحفظ بنجاح");
+                    $("#contact_Trainer").modal('hide');
+                    resetDivControls("divformconTr");
+               
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    }
+    catch (err) {
+        alert(err);
+    }
+
+}
+
+function sendMsgtoAdmin() {
+    try {
+
+
+
+        if (checkRequired("divformconAdmin") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+
+        }
+        else {
+
+            $("#SavedivLoader").show();
+
+
+
+            var basicData = generateJSONFromControls("divformconAdmin");
+            var Id = "";
+
+            var CourseId = ($("#Lblcourse_id").html());
+            var today = new Date();
+            // var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+            console.log(basicData);
+            courseDetailsCls.sendMesgtoAdmin(Id, CourseId, Pub_date_m, Pub_date_hj, time, basicData, function (val) {
+                if (val == true) {
+                    //debugger;
+                    $("#SavedivLoader").hide();
+                    alert("تم الحفظ بنجاح");
+                    $("#contact_admin").modal('hide');
+                    resetDivControls("divformconAdmin");
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    }
+    catch (err) {
+        alert(err);
+    }
+
+}
+
 function SaveHomework() {
 
     try {
@@ -144,6 +253,7 @@ function SaveHomework() {
             alert("يرجى ادخال البيانات المطلوبة");
         }
         else {
+            $("#SavedivLoader").show();
            
             $("#date3_m").val($("#divdateHomework #txtDatem").val());
             $("#date3_hj").val($("#divdateHomework #txtDateh").val());
@@ -159,7 +269,8 @@ function SaveHomework() {
             console.log(basicData);
             courseDetailsCls.SaveHomeWork(HomewID, CourseId, basicData, function (val) {
                 if (val == true) {
-                    debugger;
+                    $("#SavedivLoader").hide();
+                    //debugger;
                     alert("تم الحفظ بنجاح");
                     $("#homeworks").modal('hide');
                     resetDivControls("divformHomework");
@@ -213,11 +324,14 @@ function SaveAbsenceStudent() {
            
             var CourseId = ($("#Lblcourse_id").html());
 
-            debugger
+
+            $("#SavedivLoader").show();
             courseDetailsCls.SaveStudentAbsence(CourseId, $("#LblLecture_id").html(), student_arr, function (val) {
                 if (val == true) {
 
+                    $("#SavedivLoader").hide();
                     alert("تم الحفظ بنجاح");
+                    $("#absenceModal").modal('hide');
                     //drawAbsenceTable();
                     resetAll();
                     prepareAdd();
@@ -244,10 +358,10 @@ function AddStudent() {
     try {
 
 
-        if (checkRequired("courseStudents") == 1) {
-            alert("يرجى ادخال البيانات المطلوبة");
-        }
-        else {
+        if (!checkRequired()) {
+           
+      
+            $("#SavedivLoader").show();
             var student_arr = [];
             $("#courseStudents").find("tr td input:checkbox").each(function () {
                 if ($(this).is(":checked")) {
@@ -262,7 +376,7 @@ function AddStudent() {
             debugger;
             courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
                 if (val == true) {
-                 
+                    $("#SavedivLoader").hide();
                     alert("تم الحفظ بنجاح");
                     $("#addStudentModal").modal('hide');
                     drawStudentTable();
@@ -293,7 +407,7 @@ function SaveLec() {
 
     try {
 
-        debugger
+        
         //var check = checkRequired("divFormTable");
 
         if (checkRequired("divFormTable") == 1) {
@@ -301,6 +415,7 @@ function SaveLec() {
 
         }
         else {
+            $("#SavedivLoader").show();
 
             $("#dateLec_m").val($("#divdate1 #txtDatem").val());
             $("#dateLec_hj").val($("#divdate1 #txtDateh").val());
@@ -315,22 +430,22 @@ function SaveLec() {
 
             ////console.log(basicData);
             courseDetailsCls.Save(lectureID, CourseId, basicData, function (val) {
+             
                 if (val == true) {
-                    //debugger;
+                    $("#SavedivLoader").hide();
                     alert("تم الحفظ بنجاح");
+              
                     $("#order_addLec").modal('hide');
                     resetDivControls("divFormTable");
                     drawLecturesTable();
                     $("#LblLecture_id").html('');
 
-
-
-
                 } else {
+                    $("#SavedivLoader").hide();
                     alert("لم يتم الحفظ");
                 }
 
-
+              
             });
         }
     }
@@ -354,7 +469,7 @@ function SaveEvalution() {
         }
         else {
 
-           
+            $("#SavedivLoader").show();
 
 
             var CourseId = ($("#Lblcourse_id").html());
@@ -368,6 +483,7 @@ function SaveEvalution() {
             console.log(basicData);
             courseDetailsCls.SaveEvalution(id, CourseId,basicData, function (val) {
                 if (val == true) {
+                    $("#SavedivLoader").hide();
                     //debugger;
                     alert("تم الحفظ بنجاح");
                     $("#courseEvalution").modal('hide');
@@ -404,7 +520,7 @@ function addFiles() {
        
         }
         else {
-            
+            $("#SavedivLoader").show();
             var CourseId = ($("#Lblcourse_id").html());
             var lecID= $("#LblLecture_id").html();
             var basicData = generateJSONFromControls("divFormfiles");
@@ -414,7 +530,8 @@ function addFiles() {
             console.log($("#coursefileURL").val());
             courseDetailsCls.Savefiles(Id, lecID ,CourseId, basicData, function (val) {
                 if (val == true) {
-                    debugger;
+                    $("#SavedivLoader").hide();
+                   // debugger;
                     alert("تم الحفظ بنجاح");
                     $("#order_addfiles").modal('hide');
                     drawCourseFile();
@@ -446,7 +563,7 @@ function addCondition() {
 
         }
         else {
-         
+            $("#SavedivLoader").show();
            
             var CourseId = ($("#Lblcourse_id").html());
             var basicData = generateJSONFromControls("divFormcondition");
@@ -457,7 +574,8 @@ function addCondition() {
             console.log( $("#fileURL").val());
             courseDetailsCls.SaveCondition(Id, CourseId, basicData, function (val) {
                 if (val == true) {
-                    debugger;
+                    $("#SavedivLoader").hide();
+                   // debugger;
                     alert("تم الحفظ بنجاح");
                     $("#order_addcondition").modal('hide');
                     drawConditionsTable();
@@ -489,6 +607,7 @@ function AddNote() {
             alert("يرجى ادخال البيانات المطلوبة");
         }
         else {
+            $("#SavedivLoader").show();
             
             $("#dt_m1").val($("#divdate2 #txtDatem").val());
             $("#dt_hj1").val($("#divdate2 #txtDateh").val());
@@ -503,7 +622,8 @@ function AddNote() {
             console.log(basicData);
             courseDetailsCls.Savenote(Id,studentId,CourseId,basicData, function (val) {
                 if (val == true) {
-                    debugger;
+                    $("#SavedivLoader").hide();
+                   // debugger;
                     alert("تم الحفظ بنجاح");
                     $("#addNote").modal('hide');
                     drawNotes();
@@ -531,8 +651,12 @@ function addComment() {
     try {
 
 
-        if (!checkRequired()) {
-            debugger
+        if (checkRequired("newdivcomment") == 1) {
+            alert("اكتب تعليق")
+
+        }
+        else {
+            
 
             var CourseId = ($("#Lblcourse_id").html());
         
@@ -547,7 +671,7 @@ function addComment() {
                     debugger;
                   
                     drawCourseComments();
-                    resetDivControls("commentForm");
+                    resetDivControls("newdivcomment");
                   
                 } else {
                     alert("لم يتم الحفظ");
@@ -576,6 +700,7 @@ function AddActivity() {
             alert("ادخل البيانات المطلوبة")
         }
         else {
+            $("#SavedivLoader").show();
             $("#date_hj1").val($("#txtDatem").val());
             $("#date_m1").val($("#txtDateh").val());
 
@@ -588,13 +713,14 @@ function AddActivity() {
             console.log(basicData);
             courseDetailsCls.SaveActivit(Id, CourseId, basicData, function (val) {
                 if (val == true) {
-                    debugger;
+                    $("#SavedivLoader").hide();
+                   
                     alert("تم الحفظ بنجاح");
                     $("#activity_edit").modal('hide');
                     drawActivity();
                     resetAll();
                     prepareAdd();
-                    //drawCourses();
+                    
 
 
 
@@ -620,7 +746,6 @@ function CourseView() {
             debugger
 
             
-
             var data = JSON.parse(val[1]);
             fillControlsFromJson(data[0]);
             //start
@@ -674,9 +799,20 @@ function viewHomework(HMWID) {
         if (val[0] == "1") {
             var data = JSON.parse(val[1]);
             fillControlsFromJson(data[0]);
+            debugger
+            var filename = "";
+            var path = data[0].image;
+            if (path != "" && path != null) {
+                if (path.indexOf("Acadmies_module/homework/") != -1) {
+                    filename = path.split("Acadmies_module/homework/")[1];
+                }
+            }
             
             $("#divdateHomework #txtDatem").val(data[0].date_m);
             $("#divdateHomework #txtDateh").val(data[0].date_hj);
+            document.getElementById('fileupload').innerHTML = (" اسم الملف المرفق"+ " : " +filename);
+
+      
 
             
 
@@ -696,7 +832,15 @@ function viewExam(examID) {
         if (val[0] == "1") {
             var data = JSON.parse(val[1]);
             fillControlsFromJson(data[0]);
-         
+            var filename = "";
+            var path = data[0].image;
+            if (path != "" && path != null) {
+                if (path.indexOf("Acadmies_module/exams/") != -1) {
+                    filename = path.split("Acadmies_module/exams/")[1];
+                }
+            }
+            document.getElementById('examfile').innerHTML = (" اسم الملف المرفق" + " : " + filename);
+
 
             $("#divdateExam #txtDatem").val(data[0].date_m);
             $("#divdateExam #txtDateh").val(data[0].date_hj);
@@ -1028,7 +1172,7 @@ function drawCourseComments() {
     try {
         var CourseId = ($("#Lblcourse_id").html());
         courseDetailsCls.get_courseComments(CourseId, function (val) {
-            debugger
+            //debugger
 
             var data = "";
             console.log(val);
@@ -1109,9 +1253,27 @@ function drawConditionsTable() {
                                                         <span>${file_nm}</span>
                                                     </li>
 
-</td>
+                                                     </td>
+                                                       <td>
+
+                                                          <div class="btn-group pull-left" style="position:absolute">
+                                                        <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                                   <i class="fa fa-cogs"></i>
+
+                                                                </button>
+                                                                <ul  class="dropdown-menu">
+
+                                                                 <li>
+                                                                                            <a   onclick="DeleteCondition(${element.id});">
+                                                                                                حذف
+                                                                                            </a>
+                                                                                                    </li>
                                                   
-                                                      
+                                                      </ul>
+                                                     </div>
+                                                           </td>
+
                                                    
 
                                                                             </tr>
@@ -1162,14 +1324,32 @@ function drawCourseFile() {
                                                         <span>${file_nm}</span>
                                                     </li>
 
-</td>
+                                                        </td>
                                                   
                                                       
+                                                         <td>
+
+                                                          <div class="btn-group pull-left" style="position:absolute">
+                                                        <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                                   <i class="fa fa-cogs"></i>
+
+                                                                </button>
+                                                                <ul  class="dropdown-menu">
+
+                                                                 <li>
+                                                                                            <a   onclick="DeleteFile(${element.id});">
+                                                                                                حذف
+                                                                                            </a>
+                                                                                                    </li>
+                                                  
+                                                      </ul>
+                                                     </div>
+                                                           </td>
+
                                                    
 
                                                                             </tr>
-                 
-                                                                               
                                                                       
 `;
                 });
@@ -1478,8 +1658,12 @@ function SaveDegree() {
     try {
 
 
-        if (!checkRequired()) {
-            debugger
+        if (checkRequired("divFormDegrees") == 1) {
+            alert("ادخل البيانات المطلوبة")
+        }
+
+        else {
+            $("#SavedivLoader").show();
         
             var StudentId = $("#lblStudentID").html();
             var CourseId = ($("#Lblcourse_id").html());
@@ -1491,11 +1675,13 @@ function SaveDegree() {
             console.log(basicData);
             courseDetailsCls.SaveDegree(Id, StudentId,CourseId, basicData, function (val) {
                 if (val == true) {
-                    debugger;
+                    $("#SavedivLoader").hide();
                     alert("تم الحفظ بنجاح");
+                    $("#studentDegrees").modal('hide');
+                    resetDivControls("divFormDegrees");
                     resetAll();
                     prepareAdd();
-                    //drawCourses();
+                 
 
 
 
@@ -1529,6 +1715,7 @@ function Studentlistview() {
                 data = data + `
                                 <tr >
                                     <td><label> ${element.StudentName}</label> </td>
+                                                        
                                     <td>  <input type="checkbox" student="${element.id}" style="width: 50px; height:20px;"  /></td>
 
 
@@ -1671,29 +1858,88 @@ function clearContents(sender) {
 function DeleteLec(LecID) {
     var f = confirm("هل  تريد الحذف");
     if (f == true) {
+        $("#SavedivLoader").show();
         courseDetailsCls.Delete_Lecture(LecID, function (val) {
-            if (val == true) {
-                showSuccessMessage("تم الحذف بنجاح");
+          
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                //debugger
+                
+                alert("تم الحذف بنجاح");
+
                 drawLecturesTable();
+              
 
             } else {
-                showErrorMessage('لم يتم الحفظ');
+                showErrorMessage('لا يمكن الحذف');
             }
 
         });
     }
 
 }
+
 function DeleteStudent(Studentid) {
+
     var f = confirm("هل  تريد الحذف");
     if (f == true) {
-        courseDetailsCls.Delete_Student(Studentid, function (val) {
-            if (val == true) {
-                showSuccessMessage("تم الحذف بنجاح");
-                drawLecturesTable();
+        
+        $("#SavedivLoader").show();
+        var CourseId = ($("#Lblcourse_id").html());
+        courseDetailsCls.Delete_Student(Studentid, CourseId, function (val) {
+
+            debugger
+            if (val[0]==1) {
+
+                $("#SavedivLoader").hide();
+
+                alert("تم الحذف بنجاح");
+                drawStudentTable();
 
             } else {
-                showErrorMessage('لم يتم الحفظ');
+                showErrorMessage('لم يتم الحذف');
+            }
+
+        });
+    }
+
+}
+
+function DeleteCondition(condID) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+       // debugger
+        courseDetailsCls.Delete_condition(condID, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                drawConditionsTable();
+               
+            } else {
+                alert('لم يتم الحذف');
+            }
+
+        });
+    }
+
+}
+
+function DeleteFile(fileID) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+       // debugger
+        courseDetailsCls.Delete_File(fileID, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                drawCourseFile();
+
+             
+
+            } else {
+                alert('لم يتم الحذف');
             }
 
         });
@@ -1704,14 +1950,19 @@ function DeleteStudent(Studentid) {
 function DeleteHomework(HWID) {
     var f = confirm("هل  تريد الحذف");
     if (f == true) {
+        $("#SavedivLoader").show();
         courseDetailsCls.Delete_Homework(HWID, function (val) {
-            if (val == true) {
-                showSuccessMessage("تم الحذف بنجاح");
+            if (val[0] == 1) {
+                debugger
+                $("#SavedivLoader").hide();
                 drawHomeworks();
+                alert("تم الحذف بنجاح");
+               // drawHomeworks();
+            
                
 
             } else {
-                showErrorMessage('لم يتم الحذف');
+                alert('لم يتم الحذف');
             }
 
         });
@@ -1722,14 +1973,17 @@ function DeleteHomework(HWID) {
 function DeleteExam(ExamID) {
     var f = confirm("هل  تريد الحذف");
     if (f == true) {
+        $("#SavedivLoader").show();
         courseDetailsCls.Delete_Exam(ExamID, function (val) {
-            if (val == true) {
-                //showSuccessMessage("تم الحذف بنجاح");
+            debugger
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
                 drawExams();
 
 
             } else {
-                showErrorMessage('لم يتم الحذف');
+                alert('لم يتم الحذف');
             }
 
         });
@@ -1738,23 +1992,28 @@ function DeleteExam(ExamID) {
 }
 function deleteCourse() {
 
+    var CourseId = ($("#Lblcourse_id").html());
     var f = confirm("هل  تريد الحذف");
     if (f == true) {
-        courseDetailsCls.Delete_course(courseID, function (val) {
-            if (val == true) {
-                //showSuccessMessage("تم الحذف بنجاح");
-                drawExams();
+        courseDetailsCls.Delete_course(CourseId, function (val) {
+            debugger
+            if (val[0]==1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                window.location.replace("coursat.aspx");
+               
+               
 
 
             } else {
-                showErrorMessage('لم يتم الحذف');
+                alert('لم يتم الحذف');
             }
 
         });
     }
 }
 
-//
+
 function add() {
     try {
         prepareAdd();

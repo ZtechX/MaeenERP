@@ -10,7 +10,7 @@
     <asp:ScriptManager  ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/group_permissons.asmx" />
-            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+         <asp:ServiceReference Path="~/ASMX_WebServices/Testwebservice.asmx" />
              <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>

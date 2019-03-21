@@ -21,7 +21,6 @@ ul#clock li{
 }
 
 #sec {
-    background: url(../images/sechand.png);
     z-index: 3;
     overflow: hidden;
 }

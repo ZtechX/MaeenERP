@@ -6,7 +6,7 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services> 
             <asp:ServiceReference Path="~/ASMX_WebServices/coursatCls.asmx" />
-            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+       <asp:ServiceReference Path="~/ASMX_WebServices/Testwebservice.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
@@ -87,17 +87,8 @@
             margin: 0px !important;
             width: auto;
         }
-        /*popup edit*/
-        /*.modal-dialog {
-           
-    position: absolute;
-    width: 600px; height: 400px;
-    left: 50%; top: 30%;
-    margin: -155px 0 0 -300px;
-    border: solid 2px #cccccc;
-    background-color: #ffffff;
+       
    
-        }*/
          .modal-dialog {
             
     position: absolute;
@@ -195,11 +186,11 @@
                                          </label>
                                      </div>
 
-                                     <div class="col-md-9 col-sm-12">
+                                     <div class="col-md-9 col-sm-12" >
 
-                                         <div class="fancy-form" id="divdate1">
-                                             <input dbcolumn="start_dt_hj" type="hidden" id="date_hj" />
-                                             <input dbcolumn="start_dt_m" type="hidden" id="date_m" />
+                                         <div class="fancy-form" id="divdate1" style="float:right" >
+                                             <input dbcolumn="start_dt_m" type="hidden" id="start_date_m" />
+                                             <input dbcolumn="start_dt_hj" type="hidden" id="start_date_hj" />
                                              <uc1:hijricalendar runat="server" id="HijriCalendar" />
                                          </div>
 
@@ -214,9 +205,9 @@
 
                                      <div class="col-md-9 col-sm-12">
 
-                                         <div class="fancy-form" required id="divdate2">
-                                             <asp:Label runat="server" ClientIDMode="static" Sstyle="display: none" dbColumn="end_dt_m" ID="Label1"></asp:Label>
-                                             <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="end_dt_hj" ID="Label2"></asp:Label>
+                                         <div class="fancy-form" id="divdate2">
+                                             <input dbcolumn="end_dt_m" type="hidden" id="end_datem" />
+                                             <input dbcolumn="end_dt_hj" type="hidden" id="end_datehj" />
                                              <uc1:hijricalendar runat="server" id="HijriCalendar1" />
                                          </div>
                                          <br />
@@ -224,11 +215,11 @@
                                  </div>
                                  <div class=" row form-group">
                                      <div class="col-md-3 col-sm-12">
-                                         <label>السعر     </label>
+                                         <label class="label-required">السعر     </label>
                                      </div>
 
                                      <div class="col-md-9 col-sm-12">
-                                         <input onkeypress="return isNumber(event);" dbcolumn="price" type="text" id="price"
+                                         <input onkeypress="return isNumber(event);" required dbcolumn="price" type="text" id="price"
                                              class="form-control" runat="server" clientidmode="Static" />
 
                                          <br />
@@ -252,22 +243,22 @@
                            
                             <div class="row  form-group ">
                                 <div class="col-md-3 col-sm-12">
-                                    <label>القسم </label>
+                                    <label class="label-required">القسم </label>
                                 </div>
 
                                 <div class="col-md-9 col-sm-12">
-                                    <asp:DropDownList dbcolumn="category_id" class="form-control" ClientIDMode="Static" ID="ddlcategory" runat="server">
+                                    <asp:DropDownList dbcolumn="category_id" class="form-control" required ClientIDMode="Static" ID="ddlcategory" runat="server">
                                     </asp:DropDownList>
                                    
                                 </div>
                             </div>
                               <div class=" row form-group">
                                  <div class="col-md-3 col-sm-12">
-                                        <label > عدد الطلاب    </label>
+                                        <label class="label-required" > عدد الطلاب    </label>
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);" dbcolumn="student_number" type="text" id="studentnum"
+                                            <input onkeypress="return isNumber(event);"  required dbcolumn="student_number" type="text" id="studentnum"
                                                 class="form-control" runat="server" clientidmode="Static" />
                                           
                                   
@@ -276,11 +267,11 @@
                           
                             <div class="row form-group">
                                  <div class="col-md-3 col-sm-12">
-                                        <label > الدرجة النهائية   </label>
+                                        <label class="label-required"> الدرجة النهائية   </label>
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);" dbcolumn="total_degree" type="text" id="totalDegree"
+                                            <input onkeypress="return isNumber(event);"  required dbcolumn="total_degree" type="text" id="totalDegree"
                                                 class="form-control" runat="server" clientidmode="Static" />
                                           
                                    
@@ -293,7 +284,7 @@
 
                                 </div>
                                 <div class="col-md-9 col-sm-12">
-                                    <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="description" ClientIDMode="Static" ID="description" runat="server">
+                                    <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="description" ClientIDMode="Static" ID="description" runat="server">
                                     </asp:TextBox>
 
 

@@ -7,7 +7,7 @@
 // onload, draw notifications and set refresh interval for reDrawing
 $(document).ready(function () {
     drawNotifications();
-    WebService.GetRefreshInterval(function (interval) {
+    Zwebservice.GetRefreshInterval(function (interval) {
         setInterval(drawNotifications, interval);
     });
 });
@@ -23,7 +23,7 @@ $(document).ready(function () {
 function updateNotificationIsSeen(sender) {
     try {
         var NotID_SeenValue = sender.type + "|" + $(sender).parent().parent().find('#lblSeen').html() + "|" + $('#lblUserId').html();
-        WebService.UpdateNotificationIsSeen(NotID_SeenValue, function (res) {
+        Zwebservice.UpdateNotificationIsSeen(NotID_SeenValue, function (res) {
             if (res != -1) {
                 if ($(sender).parent().parent().find('#lblSeen').html() == 'True' || $(sender).parent().parent().find('#lblSeen').html() == 'true') {
                     $(sender).removeClass();
@@ -51,7 +51,7 @@ function drawNotifications() {
     try {
         showNotificationPart(false);
         getNotificationsCount();
-        WebService.GetNotifications($('#lblUserId').html(), function (notifications) {
+        Zwebservice.GetNotifications($('#lblUserId').html(), function (notifications) {
             $('#ulNotifications').empty();
             if (notifications != "") {
                 var notificationsJSON = JSON.parse(notifications);
@@ -75,7 +75,7 @@ function drawNotifications() {
 // get notifications count
 function getNotificationsCount() {
     try {
-        WebService.GetNotificationsCount($('#lblUserId').html(), function (NotCount) {
+        Zwebservice.GetNotificationsCount($('#lblUserId').html(), function (NotCount) {
             $('#lblNotCount').html(NotCount);
         });
     }
@@ -134,7 +134,7 @@ function getLiHtmlString(notificationJSON) {
 function openForm(sender) {
     try {
         var NotID_SeenValue = $(sender).parent().find('#lblNotID').html() + "|" + $(sender).parent().find('#lblSeen').html() + "|" + $('#lblUserId').html();
-        WebService.UpdateNotificationIsSeen(NotID_SeenValue, function (res) {
+        Zwebservice.UpdateNotificationIsSeen(NotID_SeenValue, function (res) {
             if (res != -1) {
                 window.location = '/' + "../Work_Module/" +
                     $(sender).parent().find('#lblRefType').html() + ".aspx?Code=" +

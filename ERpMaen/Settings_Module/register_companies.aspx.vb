@@ -37,7 +37,7 @@ Public Class register_companies
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
 
-                Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='TC'", "description", "id", "")
+                Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='TC' and comp_id=" + LoginInfo.GetComp_id, "description", "id", "")
                 clsddltype5.SetComboItems(ddlcategory_id2, "", True, "--اختر--", False)
                 '  LoginInfo.CheckPermisionsNew(cmdAdd, cmdUpdate, cmdDelete, Me.Page, UserId, lblFormName, DynamicTable)
 

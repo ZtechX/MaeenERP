@@ -17,7 +17,7 @@ Imports ERpMaen
 ' To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line.
 ' <System.Web.Script.Services.ScriptService()> _
 <WebService(Namespace:="http://tempuri.org/")> _
-<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _
+<WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)>
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 <System.Web.Script.Services.ScriptService()>
 Public Class cases
@@ -181,15 +181,15 @@ Public Class cases
             dictBasicDataJson.Add("court_details", dictstatus("court_details"))
             dictBasicDataJson.Add("details", dictstatus("details"))
             dictBasicDataJson.Add("user_id", login_user)
-            If id = "" Then
-                If dictchildren("child_custody").ToString = dictperson_owner("name").ToString Then
+
+            If dictchildren("child_custody").ToString = dictperson_owner("name").ToString Then
                     dictBasicDataJson.Add("child_custody", dictBasicDataJson("person1_id"))
                 ElseIf dictchildren("child_custody").ToString = dictperson_against("name").ToString Then
                     dictBasicDataJson.Add("child_custody", dictBasicDataJson("person2_id"))
                 End If
-            End If
 
-            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_cases", id, _sqlconn, _sqltrans) Then
+
+                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_cases", id, _sqlconn, _sqltrans) Then
                 Dim case_id = ""
                 If id <> "" Then
                     case_id = id
@@ -384,30 +384,67 @@ Public Class cases
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            Dim dt_date As New DataTable
+            If id = "" Then
+                dt_date = DBManager.Getdatatable("select * from ash_case_receiving_delivery_details where case_id=" + case_id.ToString + " and type=" + dictBasicDataJson("type").ToString + " and date_h='" + dictBasicDataJson("date_h").ToString + "'")
+                If dt_date.Rows.Count <> 0 Then
+                    _sqltrans.Commit()
+                    _sqlconn.Close()
+                    Return "-100"
+                End If
+            End If
 
             'dictBasicDataJson.Add("case_id", case_id)
             dictBasicDataJson.Add("user_id", LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
             'dictBasicDataJson("date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("date_m"))
             'dictBasicDataJson("new_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("new_date_m"))
+
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_case_receiving_delivery_details", id, _sqlconn, _sqltrans) Then
-                Dim details_id = 0
+                Dim details_id As String = ""
                 If id <> "" Then
                     details_id = id
                 Else
                     details_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
                 End If
+                Dim SaveNot As Boolean = True
+
+                Dim dictNot As New Dictionary(Of String, Object)
+                dictNot.Add("RefCode", details_id)
+                dictNot.Add("NotTitle", "تذكير استلام وتسليم")
+                dictNot.Add("Date", dictBasicDataJson("date_m").ToString)
+                dictNot.Add("AssignedTo", dictBasicDataJson("deliverer_id"))
+                dictNot.Add("CreatedBy", LoginInfo.GetUser__Id())
+                dictNot.Add("Remarks", "ستلام وتسليم")
+                dictNot.Add("FormUrl", "Aslah_Module/Calender.aspx?id=" + details_id)
+                If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                    SaveNot = False
+                End If
+                dictNot("AssignedTo") = dictBasicDataJson("reciever_id")
+                If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                    SaveNot = False
+                End If
+
+                dictNot("Date") = (DateTime.ParseExact(dictNot("Date"), "dd/MM/yyyy", Nothing)).AddDays(-1)
+                If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                    SaveNot = False
+                End If
+                dictNot("AssignedTo") = dictBasicDataJson("deliverer_id")
+                If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                    SaveNot = False
+                End If
                 DBManager.ExcuteQuery("delete  from ash_case_children_receiving_details  where details_id=" + details_id.ToString)
                 For Each children As Object In childrens
-                    id = 0
-                    Dim dict_children As Dictionary(Of String, Object) = children
-                    dict_children.Add("details_id", details_id)
-                    PublicFunctions.TransUpdateInsert(dict_children, "ash_case_children_receiving_details", id, _sqlconn, _sqltrans)
-                Next
-                _sqltrans.Commit()
-                _sqlconn.Close()
-                Return details_id.ToString + "|" + dictBasicDataJson("type").ToString
-            Else
-                _sqltrans.Rollback()
+                        id = 0
+                        Dim dict_children As Dictionary(Of String, Object) = children
+                        dict_children.Add("details_id", details_id)
+                        PublicFunctions.TransUpdateInsert(dict_children, "ash_case_children_receiving_details", id, _sqlconn, _sqltrans)
+                    Next
+                    _sqltrans.Commit()
+                    _sqlconn.Close()
+                    Return details_id.ToString + "|" + dictBasicDataJson("type").ToString
+
+                Else
+                    _sqltrans.Rollback()
                 _sqlconn.Close()
                 Return 0
             End If
@@ -631,7 +668,7 @@ Public Class cases
                                                                                                                                                                                   <System.Web.Script.Services.ScriptMethod()>
     Public Function getSerial() As Integer
         Dim dtm As New DataTable
-        dtm = DBManager.Getdatatable("Select isNull(max(code)+1,1) FROM ash_cases where comp_id=" + LoginInfo.GetComp_id())
+        dtm = DBManager.Getdatatable("Select isNull(max(code) + 1,1) FROM ash_cases where comp_id=" + LoginInfo.GetComp_id())
         If dtm.Rows.Count <> 0 Then
             Return dtm.Rows(0)(0)
         End If
@@ -865,12 +902,46 @@ Public Class cases
 
 #End Region
 
+#Region "get_cases"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_cases(ByVal date_h As String) As String()
+        Dim Names As New List(Of String)(10)
+        Dim str = ""
+        Dim str1 = ""
+        Try
+            Dim dt As New DataTable
+            Dim dt1 As New DataTable
+            ' TblInvoice.TblInvoiceFields.SAccount_cd
+            Dim query As String = "SELECT ash_case_receiving_delivery_details.id as id,ash_cases.code as cases,ash_case_persons.indenty as num,ash_case_persons.name as person,ash_case_receiving_delivery_details.type as type FROM  ash_case_receiving_delivery_details join ash_cases on ash_case_receiving_delivery_details.case_id= ash_cases.id  join ash_case_persons on ash_cases.person1_id=ash_case_persons.id  where ash_case_receiving_delivery_details.date_h = '" + date_h.ToString + "' And ash_case_receiving_delivery_details.case_id In (Select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")"
+
+
+            dt = DBManager.Getdatatable(query)
+            If dt.Rows.Count <> 0 Then
+                str = PublicFunctions.ConvertDataTabletoString(dt)
+                Names.Add(str)
+            Else
+                Names.Add("0")
+                Return Names.ToArray
+            End If
+        Catch ex As Exception
+            Names.Add("")
+            Return Names.ToArray
+        End Try
+        Return Names.ToArray
+    End Function
+
+#End Region
+
 
 #Region "get_option_cases"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-                                                                                                                                                                                                                                                                                          <WebMethod(True)>
+    <WebMethod(True)>
                                                                                                                                                                                                                                                                                               <System.Web.Script.Services.ScriptMethod()>
     Public Function get_option_cases() As String()
         Dim Names As New List(Of String)(10)
@@ -880,7 +951,7 @@ Public Class cases
             Dim dt As New DataTable
             Dim dt1 As New DataTable
             ' TblInvoice.TblInvoiceFields.SAccount_cd
-            Dim query As String = "select ash_cases.id as case_id,ash_cases.code as cases,ash_case_persons.indenty as num,ash_case_persons.name as person from ash_cases join ash_case_persons on ash_cases.person1_id=ash_case_persons.id where ash_cases.comp_id=" + LoginInfo.GetComp_id()
+            Dim query As String = "Select ash_cases.id As case_id,ash_cases.code As cases,ash_case_persons.indenty As num,ash_case_persons.name As person from ash_cases join ash_case_persons On ash_cases.person1_id=ash_case_persons.id where ash_cases.comp_id=" + LoginInfo.GetComp_id()
 
             dt = DBManager.Getdatatable(query)
             If dt.Rows.Count <> 0 Then
@@ -922,18 +993,18 @@ Public Class cases
             Dim dt_expenses_details As New DataTable
 
 
-            dt_cases = DBManager.Getdatatable("SELECT * from ash_cases  where  ash_cases.id = " + printItemId)
-            dt_person_owner = DBManager.Getdatatable("select ash_case_persons.name as name,ash_case_persons.indenty as indenty,ash_case_persons.relationship_id as relationship_id,ash_case_persons.authorization_no as authorization_no,ash_case_persons.phone as phone from ash_cases join ash_case_persons on ash_cases.person1_id=ash_case_persons.id where ash_cases.id=" + printItemId)
-            dt_person_against = DBManager.Getdatatable("select ash_case_persons.name as name,ash_case_persons.indenty as indenty,ash_case_persons.relationship_id as relationship_id,ash_case_persons.authorization_no as authorization_no,ash_case_persons.phone as phone from ash_cases join ash_case_persons on ash_cases.person2_id=ash_case_persons.id where ash_cases.id=" + printItemId)
-            dt_children = DBManager.Getdatatable("SELECT * from ash_case_childrens where  ash_case_childrens.case_id = " + printItemId)
-            dt_receiving_delivery_basic = DBManager.Getdatatable("SELECT * from ash_case_receiving_delivery_basic where  ash_case_receiving_delivery_basic.case_id = " + printItemId)
-            dt_receiving_delivery_details = DBManager.Getdatatable("SELECT * from ash_case_receiving_delivery_details where  id = " + printItemId)
-            dt_conciliation = DBManager.Getdatatable("SELECT * from ash_case_conciliation where  case_id = " + printItemId)
-            dt_correspondences = DBManager.Getdatatable("SELECT  * from ash_case_correspondences where  case_id = " + printItemId)
-            dt_sessions = DBManager.Getdatatable("SELECT  * from ash_case_sessions where  case_id = " + printItemId)
-            dt_expenses = DBManager.Getdatatable("SELECT  * from ash_case_expense_basic where  case_id = " + printItemId)
-            dt_expenses_details = DBManager.Getdatatable("SELECT  * from ash_case_expenses_details where  case_id = " + printItemId)
-            '           dt_finance = DBManager.Getdatatable("SELECT tblproject_finance.id as 'finance_id', * from tblproject_finance left join  tbllock_up on tblproject_finance.payment_id=tbllock_up.id  where  project_id = " + printItemId)
+            dt_cases = DBManager.Getdatatable("Select * from ash_cases  where  ash_cases.id = " + printItemId)
+            dt_person_owner = DBManager.Getdatatable("Select ash_case_persons.id As id, ash_case_persons.name As name,ash_case_persons.indenty As indenty,ash_case_persons.relationship_id As relationship_id,ash_case_persons.authorization_no As authorization_no,ash_case_persons.phone As phone from ash_cases join ash_case_persons On ash_cases.person1_id=ash_case_persons.id where ash_cases.id=" + printItemId)
+            dt_person_against = DBManager.Getdatatable("Select ash_case_persons.id As id, ash_case_persons.name As name,ash_case_persons.indenty As indenty,ash_case_persons.relationship_id As relationship_id,ash_case_persons.authorization_no As authorization_no,ash_case_persons.phone As phone from ash_cases join ash_case_persons On ash_cases.person2_id=ash_case_persons.id where ash_cases.id=" + printItemId)
+            dt_children = DBManager.Getdatatable("Select * from ash_case_childrens where  ash_case_childrens.case_id = " + printItemId)
+            dt_receiving_delivery_basic = DBManager.Getdatatable("Select * from ash_case_receiving_delivery_basic where  ash_case_receiving_delivery_basic.case_id = " + printItemId)
+            dt_receiving_delivery_details = DBManager.Getdatatable("Select * from ash_case_receiving_delivery_details where  id = " + printItemId)
+            dt_conciliation = DBManager.Getdatatable("Select * from ash_case_conciliation where  case_id = " + printItemId)
+            dt_correspondences = DBManager.Getdatatable("Select  * from ash_case_correspondences where  case_id = " + printItemId)
+            dt_sessions = DBManager.Getdatatable("Select  * from ash_case_sessions where  case_id = " + printItemId)
+            dt_expenses = DBManager.Getdatatable("Select  * from ash_case_expense_basic where  case_id = " + printItemId)
+            dt_expenses_details = DBManager.Getdatatable("Select  * from ash_case_expenses_details where  case_id = " + printItemId)
+            '           dt_finance = DBManager.Getdatatable("Select tblproject_finance.id As 'finance_id', * from tblproject_finance left join  tbllock_up on tblproject_finance.payment_id=tbllock_up.id  where  project_id = " + printItemId)
             '           dt_prposal = DBManager.Getdatatable("SELECT tblproject_proposals.id as 'propsal_id', * from tblproject_proposals join  tbllock_up on tblproject_proposals.send_type=tbllock_up.id  where type='ST' and  project_id = " + printItemId)
             '           dt_info = DBManager.Getdatatable("SELECT isNull(servicePrice,0) servicePrice,tblproject_info.id,project_id,description as info_name" +
             '    " ,info_details,alarm,alarm_date,alarm_date_hj,user_id ,entry_date ,entry_date_h,image" +

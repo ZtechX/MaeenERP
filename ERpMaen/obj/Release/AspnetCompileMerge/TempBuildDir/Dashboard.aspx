@@ -640,8 +640,8 @@
            <%-- <asp:ScriptReference Path="~/JS_Code/Dashboard.js" />--%>
         </Scripts>
         <Services>
-            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
-            <asp:ServiceReference Path="~/ASMX_WebServices/Dashboard.asmx" />
+            <asp:ServiceReference Path="~/ASMX_WebServices/Testwebservice.asmx" />
+            <%--<asp:ServiceReference Path="~/ASMX_WebServices/Dashboard.asmx" />--%>
             <asp:ServiceReference Path="~/ASMX_WebServices/SMS.asmx" />
         </Services>
     </asp:ScriptManager>

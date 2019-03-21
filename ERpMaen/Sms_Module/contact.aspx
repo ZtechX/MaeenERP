@@ -9,7 +9,7 @@
     <asp:ScriptManager  ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/contact.asmx" />
-            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+          <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
         </Services>
     </asp:ScriptManager>
     <asp:UpdatePanel ID="up" runat="server">

@@ -31,7 +31,7 @@ function loadDynamicTable(frmName, autoCode, tableColumnDefs, tableFilteringColu
         
         $.ajax({
             type: "POST",
-            url: "../ASMX_WebServices/WebService.asmx/GetFormQuaryString",
+            url: "../ASMX_WebServices/Testwebservice.asmx/GetFormQuaryString",
             data: "{'formName': '" + formName + "|" + Archived + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -54,7 +54,7 @@ function generateDynamicTable(quaryStr) {
     try {
         $.ajax({
             type: "POST",
-            url: "../ASMX_WebServices/WebService.asmx/GetListData",
+            url: "../ASMX_WebServices/Testwebservice.asmx/GetListData",
             data: "{'formName':'" + formName +"'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",

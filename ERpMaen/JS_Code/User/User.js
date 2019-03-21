@@ -45,9 +45,11 @@ function drawDynamicTable() {
         ];
         var initialSortingColumn = 0;
         if (superAdmin) {
+            $("#Comp_div").show();
             $("#ddlcomp_id").prop("required",false);
             loadDynamicTable('Users', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
         } else {
+            $("#Comp_div").hide();
             CustloadDynamicTable('Users', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
         }
     } catch (err) {

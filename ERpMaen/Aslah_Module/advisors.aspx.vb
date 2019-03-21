@@ -40,7 +40,6 @@ Public Class advisors
 
                 Dim clsapprove_type As New clsFillComboByDataSource("select * from tblLock_up where type='spec' and IsNull(Deleted,0)=0", "Description", "id", "")
                 clsapprove_type.SetComboItems(ddlspecial_id, "", True, "--اختر--", False)
-
                 'LoginInfo.CheckPermisionsNew(cmdAdd, cmdUpdate, cmdDelete, Me.Page, UserId, lblFormName, DynamicTable)
 
 

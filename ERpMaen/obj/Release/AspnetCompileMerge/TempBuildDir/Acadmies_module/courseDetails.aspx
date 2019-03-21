@@ -9,7 +9,6 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/courseDetailsCls.asmx" />
-            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
@@ -160,6 +159,9 @@
                        <label style="display:none" id="LblExam_id" ></label>
                     <label style="display:none" id="LblAbsence_id" ></label>
                     <label style="display:none" id="lblStudentID" runat="server" ></label>
+                    <div id="SavedivLoader" class="loader" style="display: none; text-align: center;">
+                        <asp:Image ID="img" runat="server" ImageUrl="../App_Themes/images/loader.gif" />
+                    </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 pull-right">
                         <div class="p-md clearfix widget-orders widget-def widget-panels widget-users widget-financial widget-request">
                             <div class="widget-header">
@@ -335,6 +337,7 @@
                         <tr>
                             <th>الشرط </th>
                             <th>الملف</th>
+                            <th>الاجراء</th>
                             
 
                         </tr>
@@ -385,6 +388,7 @@
                         <tr>
                             <th>الملاحظة </th>
                             <th>الملف</th>
+                            <th>الاجراء</th>
                             
 
                         </tr>
@@ -426,7 +430,7 @@
                                                     <i class="zmdi zmdi-headset-mic"></i>
                                                        حذف الدورة</button>
                                                 </button>
-                                                <button type="button" class="btn btn_com btn-primary" data-toggle="modal" data-target="#order_com">
+                                                <button type="button" class="btn btn_com btn-primary" data-toggle="modal" data-target="#contact_admin">
                                                     <i class="zmdi zmdi-headset-mic"></i> تواصل مع الادراة
                                                 </button>
 
@@ -453,7 +457,7 @@
                                                         <div class="form-group">
                                                             <label for="comment_ad">اكتب تعليقك</label>
                                  <div id="newdivcomment">
-                                                <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="comment" ClientIDMode="Static" ID="userComments" runat="server">
+                                                <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="comment" ClientIDMode="Static" ID="userComments" runat="server">
                                                 </asp:TextBox>
                                      </div>
                                                         </div>
@@ -704,8 +708,8 @@
                                             <div class="col-md-9 col-sm-12">
 
                                                 <div class="fancy-form" id="divdate6">
-                                                    <input dbcolumn="start_dt_hj" type="hidden" id="date_hj" />
-                                                    <input dbcolumn="start_dt_m" type="hidden" id="date_m" />
+                                                    <input dbcolumn="start_dt_m" type="hidden" id="strdate_m" />
+                                                    <input dbcolumn="start_dt_hj" type="hidden" id="strdate_hj" />
                                                     <uc1:HijriCalendar runat="server" ID="HijriCalendar2" />
                                                 </div>
 
@@ -722,8 +726,8 @@
                                             <div class="col-md-9 col-sm-12">
 
                                                 <div class="fancy-form" id="divdate7">
+                                                    <input dbcolumn="end_dt_m" type="hidden" id="enddate_m" />
                                                     <input dbcolumn="end_dt_hj" type="hidden" id="enddate_hj" />
-                                                    <input dbcolumn="end_dt_hj" type="hidden" id="enddate_m" />
                                                     <uc1:HijriCalendar runat="server" ID="HijriCalendar6" />
                                                 </div>
 
@@ -810,12 +814,11 @@
                                         <label class="label-required">محتوى النشاط       </label>
                                     </div>
 
-                                    <div class="col-md-9 col-sm-12">
-                                        <input dbcolumn="activity" required  type="text" id="activity"
-                                            class="form-control" runat="server" clientidmode="Static" />
+                                   <div class="col-md-9 col-sm-12">
+                                                <asp:TextBox SkinID="form-control"  TextMode="multiline" class="form-control " required  dbColumn="activity" ClientIDMode="Static" ID="TextBox4" runat="server">
+                                                </asp:TextBox>
 
-
-                                    </div>
+                                                </div>
                                 </div>
 
                                 <div class=" row form-group">
@@ -948,7 +951,8 @@
                                <thead>
                                 <tr>
                                     <th>الاسم </th>
-                                    <th>اضافة</th>
+                                    <th>الصورة</th>
+                                     <th>اضافة</th>
                                   
                                 </tr>
                                  </thead>
@@ -1079,9 +1083,11 @@
 
 
                                 </tr>
+                                   
                                 <tbody id="absenscetable">
-                                  
+                                 
                                 </tbody>
+                                         
 
 
                             </table>
@@ -1089,7 +1095,7 @@
 
 
                         <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-primary" onclick="SaveAbsenceStudent();">حفظ </button>
+                            <button type="button"  class="btn btn-primary" onclick="SaveAbsenceStudent();">حفظ </button>
                         </div>
                     </div>
                 </div>
@@ -1146,6 +1152,7 @@
                                     <div class="form-group row">
 
                                     <div>
+                                          <label id="examfile">  </label>
                                         <input id="fileURL3" required type="hidden" dbcolumn="image" runat="server" />
                                         <input id="FName3" type="text" readonly="readonly" runat="server" />
 
@@ -1245,7 +1252,8 @@
                                     </div>
                                     <div class="form-group row">
 
-                                        <div>
+                                        <div id="divfileupload">
+                                             <label id="fileupload">  </label>
                                             <input id="fileURL4" required type="hidden" dbcolumn="image" runat="server" />
                                             <input id="FName4" type="text" readonly="readonly" runat="server" />
 
@@ -1307,7 +1315,7 @@
                                             </div>
 
                                             <div class="col-md-9 col-sm-12">
-                                                <input onkeypress="return isNumber(event);" dbcolumn="activity_degree" type="text" id="activityDegree"
+                                                <input onkeypress="return isNumber(event);" dbcolumn="activity_degree" required type="text" id="activityDegree"
                                                     class="form-control" runat="server" clientidmode="Static" />
 
 
@@ -1321,7 +1329,7 @@
                                             </div>
 
                                             <div class="col-md-9 col-sm-12">
-                                                <input onkeypress="return isNumber(event);" dbcolumn="final_degree" type="text" id="finaldegree"
+                                                <input onkeypress="return isNumber(event);" dbcolumn="final_degree" required type="text" id="finaldegree"
                                                     class="form-control" runat="server" clientidmode="Static" />
 
 
@@ -1329,7 +1337,7 @@
                                         </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-primary" onclick="SaveDegree();">حفظ </button>
+                            <button type="button"  class="btn btn-primary" onclick="SaveDegree();">حفظ </button>
                         </div>
                     </div>
                 </div>
@@ -1349,12 +1357,13 @@
                                         <label>محتوى الملاحظة      </label>
                                     </div>
 
-                                    <div class="col-md-9 col-sm-12">
-                                        <input dbcolumn="comment" required type="text" id="comment"
-                                            class="form-control" runat="server" clientidmode="Static" />
+                        
+                                            <div class="col-md-9 col-sm-12">
+                                                <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control " required dbColumn="comment" ClientIDMode="Static" ID="txtnote" runat="server">
+                                                </asp:TextBox>
 
-
-                                    </div>
+                                                </div>
+                                            </div>
                                 </div>
                                 <div class=" row form-group">
                                     <div class="col-md-3 col-sm-12">
@@ -1448,11 +1457,9 @@
                                     </div>
 
                                     <div class="col-md-9 col-sm-12">
-                                        <input dbcolumn="comment" required type="text" id="Text2"
-                                            class="form-control" runat="server" clientidmode="Static" />
-
-
-                                    </div>
+                                            <asp:TextBox SkinID="form-control" TextMode="multiline"  required class="form-control" dbColumn="message" ClientIDMode="Static" ID="conmsg" runat="server">
+                                            </asp:TextBox>
+                                        </div>
                                 </div>
                                 
 
@@ -1462,6 +1469,38 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button"  class="btn btn-primary" onclick="sendMsg();">ارسال </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           <div class="modal fade" id="contact_admin" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">تواصل مع الادارة  </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divformconAdmin">
+                                <div class=" row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label> الرسالة      </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                            <asp:TextBox SkinID="form-control" TextMode="multiline"  required class="form-control" dbColumn="message" ClientIDMode="Static" ID="message" runat="server">
+                                            </asp:TextBox>
+                                        </div>
+                                </div>
+                                
+
+
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="sendMsgtoAdmin();">ارسال </button>
                         </div>
                     </div>
                 </div>

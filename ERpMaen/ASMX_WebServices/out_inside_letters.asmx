@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="VB" CodeBehind="~/App_Code/out_inside_letters.vb" Class="out_inside_letters" %>

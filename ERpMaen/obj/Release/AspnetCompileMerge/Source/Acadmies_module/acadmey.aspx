@@ -11,7 +11,7 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/acadmiy.asmx" />
-            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+           <asp:ServiceReference Path="~/ASMX_WebServices/Testwebservice.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
@@ -115,7 +115,7 @@
                                         <div class="fancy-form" id="divdate3">
                                             <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="start_date" ID="lblstart_date"></asp:Label>
                                             <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="start_date_hj" ID="lblstart_date_hj"></asp:Label>
-                                          <%--  <uc1:HijriCalendar runat="server" ID="HijriCalendar2" />--%>
+                                            <uc1:HijriCalendar runat="server" ID="HijriCalendar2" />
                                         </div>
                                         <br />
                                     </div>

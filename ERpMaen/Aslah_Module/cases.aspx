@@ -14,7 +14,7 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/cases.asmx" />
-            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+           <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
@@ -41,18 +41,20 @@
 
 <script type="text/javascript">
     ng.ready(function () {
+      
         var tp = new ng.TimePicker({
             input: 'txtreceiving_time', // the input field id
             start: '12:00 am',  // what's the first available hour
             end: '11:00 pm',  // what's the last avaliable hour
             top_hour: 12,  // what's the top hour (in the clock face, 0 = midnight)
             name: 'txtreceiving_time',
+            
         });
           var tp1 = new ng.TimePicker({
             input: 'txtdelivery_time',  // the input field id
             start: '12:00 am',  // what's the first available hour
             end: '11:00 pm',  // what's the last avaliable hour
-            top_hour: 12  // what's the top hour (in the clock face, 0 = midnight)
+              top_hour: 12,  // what's the top hour (in the clock face, 0 = midnight)
         });
             var tp2 = new ng.TimePicker({
             input: 'txtentry_time',  // the input field id
@@ -337,7 +339,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="indenty" type="text" id="txtindenty"
+                                                                        <input placeholder="رقم الهوية يتكون من 10 رقم"  onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="indenty" type="text" id="txtindenty"
                                                                             class="form-control" runat="server" clientidmode="Static" />
 
                                                                         <br />
@@ -350,7 +352,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="phone" type="text" id="tel"
+                                                                        <input placeholder="رقم الجوال يتكون من 10 رقم"  onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="phone" type="text" id="tel"
                                                                             class="form-control" runat="server" clientidmode="Static" />
 
                                                                         <br />
@@ -430,7 +432,7 @@
                                                                         </div>
 
                                                                         <div class="col-md-9 col-sm-12">
-                                                                            <input onkeypress="return cust_chkNumber(event,this,10);" required  dbcolumn="indenty" type="text" id="txtindenty2"
+                                                                            <input placeholder="رقم الهوية يتكون من 10 رقم" onkeypress="return cust_chkNumber(event,this,10);" required  dbcolumn="indenty" type="text" id="txtindenty2"
                                                                                 class="form-control" runat="server" clientidmode="Static" />
 
                                                                             <br />
@@ -443,7 +445,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="phone" type="text" id="tel1"
+                                                                        <input placeholder="رقم الجوال يتكون من 10 رقم" onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="phone" type="text" id="tel1"
                                                                             class="form-control" runat="server" clientidmode="Static" />
 
                                                                         <br />
@@ -756,7 +758,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="details" ClientIDMode="Static" ID="txtdetails_child" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" required TextMode="multiline" class="form-control" dbColumn="details" ClientIDMode="Static" ID="txtdetails_child" runat="server">
                                                                         </asp:TextBox>
 
 
@@ -818,11 +820,11 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" required onkeypress="return isNumber(event);" class="form-control" dbColumn="delivery_period" ClientIDMode="Static" ID="txtdelivery_period" runat="server">
+                                                                        <asp:TextBox SkinID="form-control"  required onkeypress="return isNumber(event);" class="form-control" dbColumn="delivery_period" ClientIDMode="Static" ID="txtdelivery_period" runat="server">
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-12 form-group ">
+                                                   <%--             <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
                                                                         تاريخ اول تسليم    </lable>
@@ -837,7 +839,7 @@
                                                                         </div>
 
                                                                     </div>
-                                                                </div>
+                                                                </div>--%>
 
 
                                                                 <div class="col-md-12 form-group ">
@@ -846,7 +848,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList SkinID="form-control"  class="form-control" dbColumn="day_nam" ClientIDMode="Static" ID="ddlday_nam1" runat="server">
+                                                                        <asp:DropDownList SkinID="form-control" required class="form-control" dbColumn="day_nam" ClientIDMode="Static" ID="ddlday_nam1" runat="server">
                                                                         </asp:DropDownList>
                                                                     </div>
                                                                 </div>
@@ -858,8 +860,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" dbcolumn="receiving_time" type="time" id="txtreceiving_time"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <input onkeypress="return isNumber(event);" required dbcolumn="receiving_time" type="time" id="txtreceiving_time"
+                                                                            class="form-control" runat="server" readonly clientidmode="Static" />
         
                                                                         <br />
                                                                     </div>
@@ -867,7 +869,7 @@
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
-                                                                        وقت الجلسة </lable>
+                                                                        مدة الجلسة بالساعة </lable>
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
@@ -884,7 +886,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12" id="time_delivery_time">
-                                                                        <input onkeypress="return isNumber(event);" dbcolumn="delivery_time" type="time" id="txtdelivery_time"
+                                                                        <input onkeypress="return isNumber(event);" required dbcolumn="delivery_time" readonly type="time" id="txtdelivery_time"
                                                                             class="form-control" runat="server" clientidmode="Static" />
 
                                                                         <br />
@@ -993,7 +995,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" class="form-control" dbColumn="place" ClientIDMode="Static" ID="txtplace" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" required class="form-control" dbColumn="place" ClientIDMode="Static" ID="txtplace" runat="server">
                                                                         </asp:TextBox>
 
                                                                     </div>
@@ -1021,7 +1023,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12" id="time_entry_time">
-                                                                        <input onkeypress="return isNumber(event);" dbcolumn="entry_time" type="time" id="txtentry_time"
+                                                                        <input onkeypress="return isNumber(event);" readonly dbcolumn="entry_time" type="time" id="txtentry_time"
                                                                             class="form-control" runat="server" clientidmode="Static" />
 
                                                                         <br />
@@ -1035,7 +1037,7 @@
 
                                                                     <div class="col-md-9 col-sm-12" id="time_exite_time">
                                                                         <input onkeypress="return isNumber(event);" dbcolumn="exite_time" type="time" id="txtexite_time"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                            class="form-control" runat="server" readonly clientidmode="Static" />
 
                                                                         <br />
                                                                     </div>
@@ -1075,7 +1077,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" class="form-control" dbColumn="result" ClientIDMode="Static" ID="txtresult" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" required class="form-control" dbColumn="result" ClientIDMode="Static" ID="txtresult" runat="server">
                                                                         </asp:TextBox>
 
                                                                     </div>
@@ -1223,7 +1225,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="notes" ClientIDMode="Static" ID="txtnotes" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" required TextMode="multiline" class="form-control" dbColumn="notes" ClientIDMode="Static" ID="txtnotes" runat="server">
                                                                         </asp:TextBox>
 
 
@@ -1282,7 +1284,7 @@
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-12 form-group ">
+                                                             <%--   <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
                                                                         تاريخ اول تسليم  </lable>
@@ -1297,7 +1299,7 @@
                                                                         </div>
 
                                                                     </div>
-                                                                </div>
+                                                                </div>--%>
 
                                                                 <div class=" col-md-12 form-group ">
 
@@ -1396,7 +1398,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="type" SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddltype" runat="server">
+                                                                        <asp:DropDownList dbcolumn="type" SkinID="form-control" required class="form-control" ClientIDMode="Static" ID="ddltype" runat="server">
                                                                         </asp:DropDownList>
 
                                                                     </div>
@@ -1408,7 +1410,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox14" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox14" runat="server">
                                                                         </asp:TextBox>
 
 
