@@ -43,7 +43,6 @@ Public Class User
 
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
             dictBasicDataJson.Add("User_Image", image)
-            dictBasicDataJson.Add("User_Type", 13)
             Researcher = dictBasicDataJson("Researcher")
             Dim dtcheckemailphone As DataTable
             If UserId = "" Then
@@ -55,7 +54,6 @@ Public Class User
 
             If dtcheckemailphone.Rows.Count = 0 Then
 
-                dictBasicDataJson("group_id") = LoginInfo.Getgroup_id()
                 If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblUsers", UserId, _sqlconn, _sqltrans) Then
                     success = True
                 Else
@@ -215,9 +213,7 @@ Public Class User
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
-            dt = DBManager.Getdatatable("SELECT  id,full_name ,User_Name,User_Password,User_Email,group_id" +
-             ",User_PhoneNumber,Active,User_Type,User_Image,Deleted,related_id" +
-             ",managment_id,comp_id,jop_id,isNull(Researcher,0) Researcher,superAdmin from TblUsers where id  =" + UserId)
+            dt = DBManager.Getdatatable("SELECT * from TblUsers where id  =" + UserId)
             If dt.Rows.Count <> 0 Then
                 Researcher = dt.Rows(0).Item("Researcher")
                 Dim str As String = PublicFunctions.ConvertDataTabletoString(dt)

@@ -10,7 +10,7 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/email_setting.asmx" />
-         <asp:ServiceReference Path="~/ASMX_WebServices/Testwebservice.asmx" />
+         <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
@@ -172,7 +172,7 @@
                                     </div>
 
 
-                                    <div class="row">
+                                    <div class="row" id="Comp_div">
                                         <br />
                                         <div class="col-md-3 col-sm-12">
                                             <label for="ddlType">أسم الجمعية</label>

@@ -3,9 +3,9 @@
 <div class="">
     <div id="calendar-converter" class="divCalendar" style="z-index: 20052;">
         <label>الميلادى</label>
-       <input type="text" class="txtDatem form-control " id="txtDatem" onclick="showHideCalendar(this);" />
+       <input type="text" class="txtDatem form-control " dbcolumn="" readonly id="txtDatem" onclick="showHideCalendar(this);" />
        <label>الهجرى</label>
-         <input type="text" id="txtDateh" class="txtDateh form-control" onclick="showHideCalendar(this);" />
+         <input type="text" id="txtDateh" class="txtDateh form-control" dbcolumn="" readonly onclick="showHideCalendar(this);" />
     </div>
 </div>
 <script type="text/javascript">

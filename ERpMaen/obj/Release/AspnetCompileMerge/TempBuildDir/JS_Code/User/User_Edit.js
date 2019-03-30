@@ -23,6 +23,7 @@ function setformforupdate() {
 // called after update function success
 function edit(val) {
     try {
+        debugger
         var data = JSON.parse(val[1]);
         cancel();
         resetAll();

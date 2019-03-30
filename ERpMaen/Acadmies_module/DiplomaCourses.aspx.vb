@@ -39,18 +39,17 @@ Public Class DiplomaCourses
                 Dim deploma_id = Request.QueryString("deploma_id")
                 Lbldeploma_id.InnerHtml = deploma_id
 
-                'Dim clsapprove_type As New clsFillComboByDataSource("select * from tblLock_up where type='is' and IsNull(Deleted,0)=0", "Description", "id", "")
-                'clsapprove_type.SetComboItems(ddlspecial_id, "", True, "--اختر--", False)
 
 
 
-                Dim clsapprove_tainer As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='4' ", "full_name", "id", "")
+
+                Dim clsapprove_tainer As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='4'and comp_id=" + LoginInfo.GetComp_id(), "full_name", "id", "")
                 clsapprove_tainer.SetComboItems(ddltrainer, "", True, "--اختر--", False)
 
-                Dim clsapprove_semster As New clsFillComboByDataSource("select * from tblLock_up where type='semster' and IsNull(Deleted,0)=0", "Description", "id", "")
+                Dim clsapprove_semster As New clsFillComboByDataSource("select * from tblLock_up where type='semster' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_semster.SetComboItems(ddlsemster, "", True, "--اختر--", False)
 
-                Dim clsapprove_course As New clsFillComboByDataSource("select * from tblLock_up where type='subj' and IsNull(Deleted,0)=0", "Description", "id", "")
+                Dim clsapprove_course As New clsFillComboByDataSource("select * from tblLock_up where type='subj' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_course.SetComboItems(ddlcourse, "", True, "--اختر--", False)
 
 

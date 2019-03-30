@@ -15,7 +15,7 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/companies.asmx" />
-         <asp:ServiceReference Path="~/ASMX_WebServices/Testwebservice.asmx" />
+         <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
@@ -255,7 +255,18 @@
 
                                                 </div>
                                         </div>
-                            
+                              <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label>عن الجهة</label>
+
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <asp:TextBox  TextMode="multiline" class="form-control" dbColumn="about_Comp" ClientIDMode="Static" runat="server" >
+                                                                        </asp:TextBox>
+
+
+                                                                    </div>
+                                                                </div>
 
                                            <div class="col-md-3 col-sm-12">
 

@@ -41,8 +41,11 @@ function getSerial_sessions() {
     });
 }
 
-function get_persons(id,delivery_data) {
-    cases.get_persons(id,function (val) {
+function get_persons(id, delivery_data="",session_data="",correspond_data="") {
+    //alert(id);
+    //alert(delivery_data);
+    cases.get_persons(id, function (val) {
+        console.log(val);
         if (val[0] != "0") {
             var data = JSON.parse(val[0])
             var result_person1 = "";
@@ -71,8 +74,16 @@ function get_persons(id,delivery_data) {
             $('#persons_sessions').html(div_data);
             console.log(delivery_data);
             if (delivery_data != "") {
-                $("#ddlreciever_id").val(delivery_data.reciever_id)
-                $("#ddldeliverer_id").val(delivery_data.deliverer_id)
+                $("#ddlreciever_id").val(delivery_data.reciever_id);
+                $("#ddldeliverer_id").val(delivery_data.deliverer_id);
+            }
+            if (session_data != "") {
+                $("#ddldeliverer_id").val(session_data.owner_id);
+                $("#ddlreciever_id").val(session_data.second_party_id);
+            }
+
+            if (correspond_data != "") {
+                $("#ddlperson_id").val(correspond_date.person_id);
             }
         } 
     });
@@ -93,7 +104,7 @@ function get_option_cases() {
                 div_data = div_data + "<option value=" + data[x].case_id + ">حالة#" + data[x].cases + "  " + "مقدمة من : " + data[x].person+" "+  "رقم الهوية : " + data[x].num + "  " + " </option> ";
             }
             $('#combobox').html(div_data);
-            $('#ddlcase_id').html(div_data);
+            $('#ddlcase_id').append(div_data);
            
         }
 
@@ -133,7 +144,8 @@ function resetAll() {
 function save() {
 
     try {
-        
+        setRequired_Date("divdate3");
+        setRequired_Date("instrum_date");
         $(".error").removeClass('error');
        
         $("#lblstart_date").html($("#divdate3 #txtDatem").val());
@@ -142,20 +154,6 @@ function save() {
         $("#txtinstrument_date_m").html($("#instrum_date #txtDatem").val());
         $("#txtinstrument_date_h").html($("#instrum_date #txtDateh").val());
 
-        if ($("#lblstart_date").html() == "" || $("#lblstart_date_hj").html()=="") {
-            $("#divdate3 #txtDatem").addClass("error");
-            $("#divdate3 #txtDateh").addClass("error");
-            alert("يرجى ادخال البيانات المطلوبه");
-            return false;
-        }
-
-        if ($("#txtinstrument_date_m").html() == "" || $("#txtinstrument_date_h").html()=="") {
-            $("#instrum_date #txtDatem").addClass("error");
-            $("#instrum_date #txtDateh").addClass("error");
-            alert("يرجى ادخال البيانات المطلوبه");
-            return false;
-        }
-        
         if (!checkRequired("cases_info") && !checkRequired("person_owner") && !checkRequired("person_against") && !checkRequired("get_children") && !checkRequired("get_status")  ) {
             var tabs = getTabsJson();
             if (tabs.length == 0) {
@@ -220,6 +218,7 @@ function save() {
 // save_children
 function save_children() {
     var children = generateJSONFromControls("children_info");
+   
     if (!checkRequired("children_info")) {
     var case_id = $("#lblcase_id").html();
     var PosId = $("#lblchild").html();
@@ -249,10 +248,11 @@ function save_children() {
 ////////////////////////////////////////////
 // save_children_receive
 function save_children_receive() {
-
+    setRequired_time("time_receiving_time");
+    setRequired_time("time_delivery_time");
     if (!checkRequired("children_receive")) {
-    $("#lblfirst_date_received_m").html($("#divdate_received #txtDatem").val());
-    $("#lblfirst_date_received_h").html($("#divdate_received #txtDateh").val());
+    //$("#lblfirst_date_received_m").html($("#divdate_received #txtDatem").val());
+    //$("#lblfirst_date_received_h").html($("#divdate_received #txtDateh").val());
     var children_receive = generateJSONFromControls("children_receive");
     var case_id = $("#lblcase_id").html();
     var PosId = $("#lblchild_recive_id").html();
@@ -278,55 +278,56 @@ function save_children_receive() {
 // save_delivery_details
 function save_delivery_details() {
 
-    if (!checkRequired("receiving_delivery_details")) {
+    //if (!checkRequired("receiving_delivery_details")) {
     //$("#lbldate_m").html($("#divdate_delivery #txtDatem").val());
     //$("#lbldate_h").html($("#divdate_delivery #txtDateh").val());
 
     //$("#lblnew_date_m").html($("#div_new_date #txtDatem").val());
     //$("#lblnew_date_h").html($("#div_new_date #txtDateh").val());
     var children_delivery_details = generateJSONFromControls("receiving_delivery_details");
-       var case_id = $("#ddlcase_id").val();
-        var ddltype = $("#ddltype").val();
-        var PosId = $("#lbldelivery_details").html();
-        var new_date = $("#lbldelivery_date_h").html();
-        var new_date_m = $("#lbldelivery_date_m").html();
-        var res = new_date.substring(3, 10);
-        var children_gson = getChildrenJson();
-        if (ddltype == 1) {
-            if (children_gson == "") {
-                alert("يجب ان تختار الاولاد");
-                return;
-            }
+    //children_delivery_details["receiving_delivery_done"] = $("#receiving_delivery_done").prop('checked');
+    var case_id = $("#ddlcase_id").val();
+    var ddltype = $("#ddltype").val();
+    var PosId = $("#lbldelivery_details").html();
+    var new_date = $("#lbldelivery_date_h").html();
+    var new_date_m = $("#lbldelivery_date_m").html();
+    var res = new_date.substring(3, 10);
+    var children_gson = getChildrenJson();
+    if (ddltype == 1) {
+        if (children_gson == "") {
+            alert("يجب ان تختار الاولاد");
+            return;
         }
-        cases.save_delivery_details(PosId, case_id, children_delivery_details, children_gson, res, function (val) {
-            if (val) {
-                $("#Appraisal").dialog({
-                    width: "800px",
-                });
-                var res_id = val.split("|")[0]
-                var res_type = val.split("|")[1]
-                $("#lbltype").html(res_type)
-                $("#lbldetail_id").html(res_id)
-                $("#lblcase_apprisal_id").html(case_id)
-                $("#lblapprisal_date_m").html(new_date_m)
-                $("#lblapprisal_date_h").html(new_date)
-                if (res_type == 1) {
-                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(20, 128, 131)");
-                } else {
-                    $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(192, 156, 103)");
-                }
-                $("#dateval[date*='" + new_date_m + "']").parent().css("color", "#ffffff");
-                $("#dateval[date*='" + new_date_m + "']").parent().prop('id', res_id);
+    }
+    $("#SavedivLoader").show();
+    cases.save_delivery_details(PosId, case_id, children_delivery_details, children_gson, res, function (val) {
+        if (val != "-100") {
+            $("#Appraisal").dialog({
+                width: "800px",
+            });
+            var res_id = val.split("|")[0]
+            var res_type = val.split("|")[1]
+            $("#lbltype").html(res_type)
+            $("#lbldetail_id").html(res_id)
+            $("#lblcase_apprisal_id").html(case_id)
+            $("#lblapprisal_date_m").html(new_date_m)
+            $("#lblapprisal_date_h").html(new_date)
+            $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(192, 156, 103)");
+
+            $("#dateval[date*='" + new_date_m + "']").parent().css("color", "#ffffff");
+            $("#dateval[date*='" + new_date_m + "']").parent().prop('id', res_id);
             resetDivControls("receiving_delivery_details");
             $('#receiving_delivery_details').dialog("close");
             showSuccessMessage("تم الحفظ بنجاح");
         } else {
-            showErrorMessage(val.split("|")[1]);
+            alert("عفوا هذا النوع تم ادخاله من قبل لهذه الحالة")
         }
+        $("#SavedivLoader").hide();
     });
-} else {
-    alert("يرجى ادخال البيانات المطلوبه");
-}
+//}
+//} else {
+//    alert("يرجى ادخال البيانات المطلوبه");
+//}
 
 
 }
@@ -335,7 +336,7 @@ function save_delivery_details() {
 // save_conciliation
 function save_conciliation() {
 
-
+    setRequired_Date("Date_reconciliation");
     if (!checkRequired("case_conciliation")) {
     $("#lblconciliation_date_m").html($("#Date_reconciliation #txtDatem").val());
     $("#lblconciliation_date_h").html($("#Date_reconciliation #txtDateh").val());
@@ -365,23 +366,36 @@ function save_conciliation() {
 ////////////////////////
 // save_correspondences
 function save_correspondences() {
+    var new_date = $("#lbldelivery_date_h2").html();
+    var new_date_m = $("#lbldelivery_date_m2").html();
 
-
+    setRequired_Date("divdate_correspondences");
     if (!checkRequired("case_correspondences")) {
-    $("#lblcorrespondences_date_m").html($("#divdate_correspondences #txtDatem").val());
-    $("#lblcorrespondences_date_h").html($("#divdate_correspondences #txtDateh").val());
     var case_correspondences = generateJSONFromControls("case_correspondences");
-    var case_id = $("#lblcase_id").html();
-    var PosId = $("#lblcorrespondences_id").html();
-    cases.save_correspondences(PosId, case_id, case_correspondences, function (val) {
-        if (val) {
+        var case_id = $("#ddlcase_id").val();
+        var PosId = $("#lblcorrespondences_id").html();
+        $("#SavedivLoader").show();
+        cases.save_correspondences(PosId, case_id, case_correspondences, function (val) {
+        if (val != "-100") {
+            $("#Appraisal").dialog({
+                width: "800px",
+            });
+            var res_id = val;
+            $("#lbldetail_id").html(res_id)
+            $("#lblcase_apprisal_id").html(case_id)
+            $("#lblapprisal_date_m").html(new_date_m)
+            $("#lblapprisal_date_h").html(new_date)
+            $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(192, 156, 103)");
+
+            $("#dateval[date*='" + new_date_m + "']").parent().css("color", "#ffffff");
+            $("#dateval[date*='" + new_date_m + "']").parent().prop('id', res_id);
             resetDivControls("case_correspondences");
-            getSerial_correspondencesn();
-            show_all(case_id,1);
+            $('#receiving_delivery_details').dialog("close");
             showSuccessMessage("تم الحفظ بنجاح");
         } else {
-            showErrorMessage(val.split("|")[1]);
+            alert("عفوا هذا النوع تم ادخاله من قبل لهذه الحالة")
         }
+        $("#SavedivLoader").hide();
         });
     } else {
         alert("يرجى ادخال البيانات المطلوبه");
@@ -394,34 +408,43 @@ function save_correspondences() {
 /////////////////////
 // save_sessions
 function save_sessions() {
-
+    setRequired_Date("divdate_sessions");
+    setRequired_time("time_entry_time");
+    setRequired_time("time_exite_time");
+    var new_date = $("#lbldelivery_date_h3").html();
+    var new_date_m = $("#lbldelivery_date_m").html();
     if (!checkRequired("case_sessions")) {
     $("#lbldate_m_sessions").html($("#divdate_sessions #txtDatem").val());
     $("#lbldate_h_sessions").html($("#divdate_sessions #txtDateh").val());
     var sessions = generateJSONFromControls("case_sessions");
-    var case_id = $("#lblcase_id").html();
+        var owner_id = $("#ddldeliverer_id").val();
+        var second_party_id = $("#ddlreciever_id").val();
+        var case_id = $("#ddlcase_id").val();
     var PosId = $("#lbl_sessions_id").html();
-    var children_gson = getChildren_sessionsJson();
-    var persons_gson = getPersons_sessionsJson();
+        var children_gson = getChildrenJson();
+        var persons_gson = getPersons_sessionsJson();
+        $("#SavedivLoader").show();
+        cases.save_sessions(PosId, case_id, sessions, children_gson, persons_gson, owner_id, second_party_id, function (val) {
+            if (val != "-100") {
+                $("#Appraisal").dialog({
+                    width: "800px",
+                });
+                var res_id = val;
+                $("#lbldetail_id").html(res_id)
+                $("#lblcase_apprisal_id").html(case_id)
+                $("#lblapprisal_date_m").html(new_date_m)
+                $("#lblapprisal_date_h").html(new_date)
+                $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(192, 156, 103)");
 
- 
-
-    cases.save_sessions(PosId, case_id, sessions, children_gson, persons_gson, function (val) {
-        if (val) {
-            $("#Appraisal").dialog({
-                width: "800px",
-            });
-            $("#lbltype").html(3)
-            $("#lbldetail_id").html(val)
-            $("#lblcase_apprisal_id").html(case_id)
-            $("#lblapprisal_date_m").html($("#divdate_sessions #txtDatem").val())
-            $("#lblapprisal_date_h").html($("#divdate_sessions #txtDateh").val())
-            resetDivControls("case_sessions");
-            getSerial_sessions()
-            show_all(case_id,1);
-        } else {
-            showErrorMessage(val.split("|")[1]);
-        }
+                $("#dateval[date*='" + new_date_m + "']").parent().css("color", "#ffffff");
+                $("#dateval[date*='" + new_date_m + "']").parent().prop('id', res_id);
+                resetDivControls("case_sessions");
+                $('#receiving_delivery_details').dialog("close");
+                showSuccessMessage("تم الحفظ بنجاح");
+            } else {
+                alert("عفوا هذا النوع تم ادخاله من قبل لهذه الحالة")
+            }
+            $("#SavedivLoader").hide();
     });
 } else {
     alert("يرجى ادخال البيانات المطلوبه");
@@ -436,8 +459,8 @@ function save_sessions() {
 function save_expense_basic() {
 
     if (!checkRequired("expense_basic")) {
-    $("#lbldate_m_expenses_basic").html($("#date_expenses_basic #txtDatem").val());
-    $("#lbldate_h_expenses_basic").html($("#date_expenses_basic #txtDateh").val());
+    //$("#lbldate_m_expenses_basic").html($("#date_expenses_basic #txtDatem").val());
+    //$("#lbldate_h_expenses_basic").html($("#date_expenses_basic #txtDateh").val());
     var expense_basic = generateJSONFromControls("expense_basic");
     var case_id = $("#lblcase_id").html();
     var PosId = $("#lblexpense_basic").html();
@@ -544,6 +567,7 @@ function save_apprisal() {
     cases.save_apprisal(PosId,apprisal_gson, function (val) {
         if (val) {
             $('#Appraisal').dialog("close");
+            $('#multi_cases').dialog("close");
         }
     });
 
@@ -677,7 +701,6 @@ function get_name() {
     if (name != "") {
         result += "<option id=" + name + ">" + name + "</option>";
     }
-    var result = "";
     if (name2 != "") {
         result +=  "<option id=" + name2 + ">" + name2 + "</option>";
     }
@@ -697,7 +720,6 @@ function calc_total() {
 }
 
 function get_tabs() {
-    debugger
     cases.get_tabs(function (val) {
         var div_data = "";
         if (val[0] != "") {
@@ -836,12 +858,21 @@ function get_receiving() {
         }
 
 }
-function show_all(id, flag) {
+function show_all(id, flag, type = "0") {
+    $("#case_0").show();
+    var case_id = id;
+
     if (flag == 1) {
-        var case_id = id
-            get_persons(case_id);
+        $("#receiving_delivery_details").dialog({
+            width: "800px",
+        });
+        case_id = id;
+        get_persons(case_id);
+        $(".tab-pane").removeClass("active");
+        $("#menu0").addClass("in active");
+       
     } else {
-        var case_id = $("#ddlcase_id").val();
+         case_id = $("#ddlcase_id").val();
     }
     $("#caseReportDive").show();
     $("lblcase_id").html(case_id);
@@ -850,7 +881,7 @@ function show_all(id, flag) {
     get_checked_tab(case_id);
     //get_persons(case_id);
     $("#SavedivLoader").show();
-    cases.show_all(case_id, function (val) {
+    cases.show_all(case_id,type, function (val) {
 
         if (val[0] != "0") {
             var data = JSON.parse(val[0])
@@ -866,6 +897,19 @@ function show_all(id, flag) {
             fillControlsFromJson(data_against[0], "person_against")
             fillControlsFromJson(data[0], "get_children")
             fillControlsFromJson(data[0], "get_status")
+            var result_child_custody = "";
+            var selected = "selected";
+            if (data[0].child_custody == data_owner[0].id) {
+                result_child_custody += "<option " + selected + " id=" + data_owner[0].name + ">" + data_owner[0].name + "</option>";
+                result_child_custody += "<option  id=" + data_against[0].name + ">" + data_against[0].name + "</option>";
+            } else if (data[0].child_custody == data_against[0].id) {
+                result_child_custody += "<option  id=" + data_owner[0].name + ">" + data_owner[0].name + "</option>";
+                result_child_custody += "<option " + selected + " id=" + data_against[0].name + ">" + data_against[0].name + "</option>";
+            }
+   
+        
+        $("#ddlchild_custody").html(result_child_custody);
+  
         }
             if (val[3] != 0) {
                 var children = JSON.parse(val[3]);
@@ -915,22 +959,16 @@ function show_all(id, flag) {
         if (val[5] != 0) {
             var receiving_delivery_details = JSON.parse(val[5]);
             get_date_children(receiving_delivery_details[0].case_id);
-            get_persons(receiving_delivery_details[0].case_id, receiving_delivery_details[0])
-              fillControlsFromJson(receiving_delivery_details[0], "receiving_delivery_details");
+            get_persons(receiving_delivery_details[0].case_id, receiving_delivery_details[0]);
+            fillControlsFromJson(receiving_delivery_details[0], "receiving_delivery_details");
+            $("#receiving_delivery_done").prop('checked', receiving_delivery_details[0].receiving_delivery_done);
+            $("#deliverer_ready").prop('checked', receiving_delivery_details[0].deliverer_ready);
+            $("#deliverer_accept").prop('checked', receiving_delivery_details[0].deliverer_accept);
+            $("#reciever_ready").prop('checked', receiving_delivery_details[0].reciever_ready);
+            $("#reciever_accept").prop('checked', receiving_delivery_details[0].reciever_accept);
             show_cases_details(receiving_delivery_details[0].id, 2);
-           
-            if (receiving_delivery_details[0].type == 1) {
-                $("#child_info").css("display", "block");
-                $("#money_data").css("display", "none");
-            } else {
-                $("#child_info").css("display", "none");
-                $("#money_data").css("display", "block");
-            }
-            } else {
-                $("#delivery_details").html("");
-                $("#delivery_details_archive").html("");
-
-            }
+            define_type(receiving_delivery_details[0].type,2)
+            } 
             if (val[6] != 0) {
                 var conciliation= JSON.parse(val[6]);
                 $("#Date_reconciliation #txtDatem").val(conciliation[0].date_m);
@@ -940,33 +978,32 @@ function show_all(id, flag) {
 
             if (val[7] != 0) {
                 var correspondences = JSON.parse(val[7]);
-                var result_correspondences= "";
-                for (var y = 0; y < correspondences.length; y++) {
-                    result_correspondences = result_correspondences + '<tr>' + '<td>' + correspondences[y].code + '</td>' +
-                        '<td>' + correspondences[y].date_h + '</td>' +
-                        '<td><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + correspondences[y].id + ',3); return false; "><i class="fa fa-eye"></i></button><button class="btn btn-xs btn-danger btn-quick" title = "Delete" onclick = "delete_details(' + correspondences[y].id + ',3); return false;" > <i class="fa fa-times"></i></button ></td>' +
-                        '</tr >';
-                }
-                $("#correspondences").html(result_correspondences);
+                fillControlsFromJson(correspondences[0], "case_correspondences");
+                get_persons(correspondences[0].case_id,"","", correspondences[0]);
+                $("#txtcorrespondence_done").prop('checked', correspondences[0].correspondence_done);
+                $("#ddltype").val(4);
+                define_type(4,2);
+                $("#ddlcase_id").val(correspondences[0].case_id);
+                //$("#save_correspondences").css("display", "block");
+                //$("#save_sessions").css("display", "none");
+                //$("#save_delivery_details").css("display", "none");
 
-            } else {
-                $("#correspondences").html("");
-            }
+            } 
 
-            if (val[8] != 0) {
+        if (val[8] != 0) {
                 var sessions = JSON.parse(val[8]);
-                var result_sessions = "";
-                for (var y = 0; y < sessions.length; y++) {
-                    result_sessions = result_sessions + '<tr>' + '<td>' + sessions[y].code + '</td>' +
-                        '<td>' + sessions[y].date_h + '</td>' +
-                        '<td><button class="btn btn-xs btn-primary btn-quick" title="Print Session" onclick="getAttendanceRegist(' + sessions[y].id + '); return false; "><i class="fa fa-print"></i></button><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + sessions[y].id + ',4); return false; "><i class="fa fa-eye"></i></button><button class="btn btn-xs btn-danger btn-quick" title = "Delete" onclick = "delete_details(' + sessions[y].id + ',4); return false;" > <i class="fa fa-times"></i></button ></td>' +
-                        '</tr >';
-                }
-                $("#sessions").html(result_sessions);
-
-            } else {
-                $("#sessions").html("");
-            }
+                fillControlsFromJson(sessions[0], "case_sessions");
+                $("#time_entry_time input").val(sessions[0].entry_time);
+                $("#time_exite_time input").val(sessions[0].exite_time);
+                get_date_children(sessions[0].case_id);
+                get_persons(sessions[0].case_id,"", sessions[0]);
+                $("#txtsession_done").prop('checked', sessions[0].session_done);
+                show_cases_details(sessions[0].id, 4);
+                $("#ddltype").val(3);
+               define_type(3, 2);
+            $("#ddlcase_id").val(sessions[0].case_id);
+            } 
+       // console.log(val[9]);
             if (val[9] != 0) {
                 var expenses_basic = JSON.parse(val[9]);
                 $("#date_expenses_basic #txtDatem").val(expenses_basic[0].date_m);
@@ -1002,9 +1039,9 @@ function show_all(id, flag) {
 }
 function show_calender_details() {
     var case_id = $("#ddlcase_id").val();
-    get_date_children(case_id)
-    get_persons(case_id,"")
-    $("#save_delivery_details").css("display", "block");
+    get_date_children(case_id);
+    get_persons(case_id, "");
+    //$("#save_delivery_details").css("display", "block");
 }
 
 function show_cases_details(flag1,flag3) {
@@ -1040,19 +1077,14 @@ function show_cases_details(flag1,flag3) {
             fillControlsFromJson(case_correspondences[0], "case_correspondences")
         } else if (flag3 == 4) {
             var sessions = JSON.parse(val[0]);
-
-            $("#divdate_sessions #txtDatem").val(sessions[0].date_m);
-            $("#divdate_sessions #txtDateh").val(sessions[0].date_h);
-            fillControlsFromJson(sessions[0], "case_sessions");
-            $("#time_entry_time input").val(sessions[0].entry_time);
-            $("#time_exite_time input").val(sessions[0].exite_time);
             if (val[1] != 0) {
                 var childrens = JSON.parse(val[1]);
+
                 for (var y = 0; y < childrens.length; y++) {
-                    $("#children_sessions_checked" + childrens[y].children_id + "").prop("checked", "checcked");
+                    $("#children_checked" + childrens[y].children_id + "").prop("checked", "checcked");
                 }
             } else {
-                $('#children_sessions tr input:checkbox').prop("checked", false);
+                $('#tab_children tr input:checkbox').prop("checked", false);
             }
             if (val[2] != 0) {
                 var persons = JSON.parse(val[2]);
@@ -1145,14 +1177,80 @@ function mark_all(event,table_id) {
         $('#' + table_id +'  tr').css("background", "transparent");
     }
 }
-function define_type() {
+function search_type() {
+    var ddlsearch_type = $("#ddlsearch_type").val();
+    $("#cases_dates tr").each(function () {
+
+        var status_case = $(this).find("#status_case").text();
+
+        if (status_case.toLowerCase().indexOf(ddlsearch_type) == -1) {
+
+            $(this).hide();
+        }
+        else {
+
+            $(this).show();
+        }
+
+    });
+
+}
+
+function search_by_case() {
+    var case_name = $("#case_name").val();
+    $("#cases_dates tr").each(function () {
+
+        var case_name_search = $(this).find("#case_name_search").text();
+
+        if (case_name_search.toLowerCase().indexOf(case_name) == -1) {
+
+            $(this).hide();
+        }
+        else {
+
+            $(this).show();
+        }
+
+    });
+
+}
+function define_type(flag,flag2) {
+    $("#person_data").css("display", "none");
+    $("#session_data").css("display", "none");
+    $("#money_data").css("display", "none");
+    $("#corresponde_data").css("display", "none");
+    $("#save_sessions").css("display","none")
+    $("#save_correspondences").css("display", "none");
+    $("#ready_case").css("display", "block");
+    $("#record_case").css("display", "block");
+    $("#receiv_deliver").css("display", "block");
     var type = $("#ddltype").val();
+    if (flag2 == "2") {
+        type == flag;
+    }
     if (type == 1) {
-        $("#child_info").css("display","block")
-        $("#money_data").css("display","none")
+        $("#child_info").css("display", "block");
+        $("#save_delivery_details").css("display", "block");
+    } else if (type == 2) {
+        $("#child_info").css("display", "none");
+        $("#money_data").css("display", "block");
+        $("#save_delivery_details").css("display", "block");
+    } else if (type == 3) {
+        $("#child_info").css("display", "block");
+        $("#person_data").css("display", "block");
+        $("#session_data").css("display", "block");
+        $("#save_sessions").css("display", "block")
+        $("#save_delivery_details").css("display", "none");
+        $("#ready_case").css("display", "none");
+        $("#record_case").css("display", "none");
     } else {
-        $("#child_info").css("display", "none")
-        $("#money_data").css("display", "block")
+        $("#corresponde_data").css("display", "block")
+        $("#save_correspondences").css("display", "block");
+        $("#receiv_deliver").css("display", "none");
+        $("#save_delivery_details").css("display", "none");
+        $("#child_info").css("display", "none");
+        $("#ready_case").css("display", "none");
+        $("#record_case").css("display", "none");
     }
 }
 function gmod(n, m) {
@@ -1166,7 +1264,6 @@ function kuwaiticalendar(today) {
     //    todaymili = today.getTime() + adjustmili;
     //    today = new Date(todaymili);
     //}
-    debugger;;
     day = today.getDate();
     month = today.getMonth();
     year = today.getFullYear();
@@ -1275,4 +1372,20 @@ function getReview(type) {
 }
 function getProcedure() {
     window.open("../report_Module/Aslah/ProceduresRep?Case_id=" + $("#combobox").val() , "_blank");
+}
+function getTimeline(val) {
+    window.open("../Aslah_Module/Timeline?case_id=" + $("#combobox").val() + "&done=" + val +"&start_dt=''&end_dt=''", "_blank");
+}
+function getTimelinePeriod() {
+    var start_dt = $("#divdate_start").find("#txtDatem").val();
+    var end_dt = $("#divdate_end").find("#txtDatem").val();
+    if (start_dt == "") {
+        showErrorMessage("حدد بداية الفترة");
+        return;
+    }
+    if (end_dt == "") {
+        showErrorMessage("حدد نهاية الفترة");
+        return;
+    }
+    window.open("../Aslah_Module/Timeline?case_id=" + $("#combobox").val() + "&done=" + $("#ddldone").val() + "&start_dt=" + start_dt + "&end_dt=" + end_dt, "_blank");
 }

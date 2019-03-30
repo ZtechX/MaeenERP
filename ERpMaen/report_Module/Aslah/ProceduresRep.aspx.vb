@@ -27,7 +27,7 @@ Public Class ProceduresRep
             Dim dt2 As New DataTable
 
             Dim query = "SELECT Description,date_h
-  FROM ash_case_correspondences left join tbllock_up on tbllock_up.id=ash_case_correspondences.type 
+  FROM ash_case_correspondences left join tbllock_up on tbllock_up.id=ash_case_correspondences.type_correspondences 
   where case_id=" + Case_id + " order by date_h"
             dt2 = DBManager.Getdatatable(query)
             If dt2.Rows.Count <> 0 Then

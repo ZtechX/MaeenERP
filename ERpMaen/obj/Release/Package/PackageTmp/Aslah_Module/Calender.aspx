@@ -12,7 +12,7 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/cases.asmx" />
-           <asp:ServiceReference Path="~/ASMX_WebServices/Testwebservice.asmx" />
+           <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
@@ -35,6 +35,7 @@
 	</div>
     <uc1:DeliveryDate runat="server" ID="DeliveryDate1" />
     <uc1:Appraisal runat="server" ID="Appraisal1" />
+       
 	<div id="calendar"     class="w3-container w3-margin-top"></div>
 
   

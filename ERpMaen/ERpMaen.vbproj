@@ -15,7 +15,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>ERpMaen</RootNamespace>
     <AssemblyName>ERpMaen</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MyType>Custom</MyType>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -158,6 +158,24 @@
     <Content Include="Acadmies_module\courseDetailsTrainer.aspx" />
     <Content Include="Acadmies_module\DiplomaCourses.aspx" />
     <Content Include="Acadmies_module\Diplomas.aspx" />
+    <Content Include="Acadmies_module\DiplomaSubjectDetails.aspx" />
+    <Content Include="Acadmies_module\exams\49110304_317144542231304_3760180426686070784_n.jpg" />
+    <Content Include="Acadmies_module\exams\Koala.jpg" />
+    <Content Include="Acadmies_module\exams\Lighthouse.jpg" />
+    <Content Include="Acadmies_module\homework\53548622_639858956471705_8243088327553581056_n.jpg" />
+    <Content Include="Acadmies_module\homework\Jellyfish.jpg" />
+    <Content Include="Acadmies_module\images\49110304_317144542231304_3760180426686070784_n.jpg" />
+    <Content Include="Acadmies_module\images\Chrysanthemum.jpg" />
+    <Content Include="Acadmies_module\images\Desert.jpg" />
+    <Content Include="Acadmies_module\images\empty_star.png" />
+    <Content Include="Acadmies_module\images\fill_star.png" />
+    <Content Include="Acadmies_module\images\Jellyfish.jpg" />
+    <Content Include="Acadmies_module\images\Koala.jpg" />
+    <Content Include="Acadmies_module\images\Lighthouse.jpg" />
+    <Content Include="Acadmies_module\images\Penguins.jpg" />
+    <Content Include="Acadmies_module\images\Tulips.jpg" />
+    <Content Include="Acadmies_module\Students.aspx" />
+    <Content Include="Acadmies_module\trainers.aspx" />
     <Content Include="Acadmies_module\training_centers.aspx" />
     <Content Include="App_Themes\alt_raw_bg.png" />
     <Content Include="App_Themes\cp\StyleSheet.css" />
@@ -720,6 +738,7 @@
     <Content Include="App_Themes\Theme9\IconStyles.css" />
     <Content Include="App_Themes\Theme9\StyleSheet.css" />
     <Content Include="App_Themes\Theme9\ThemeColors.css" />
+    <Content Include="Aslah_Module\orders.aspx" />
     <Content Include="Aslah_Module\Timeline.aspx" />
     <Content Include="Aslah_Module\advisors.aspx" />
     <Content Include="Aslah_Module\Calender.aspx" />
@@ -727,7 +746,11 @@
     <Content Include="Aslah_Module\ConsultationDetails.aspx" />
     <Content Include="Aslah_Module\consultings.aspx" />
     <Content Include="Aslah_Module\DualCalendar.aspx" />
+    <Content Include="ASMX_WebServices\orders.asmx" />
+    <Content Include="ASMX_WebServices\DiplomaSubjectDetailsCls.asmx" />
+    <Content Include="ASMX_WebServices\studentCls.asmx" />
     <Content Include="ASMX_WebServices\Timeline.asmx" />
+    <Content Include="ASMX_WebServices\trainersCls.asmx" />
     <Content Include="ASMX_WebServices\WebService.asmx" />
     <Content Include="ASMX_WebServices\xxx.asmx" />
     <Content Include="ASMX_WebServices\Zwebservice.asmx" />
@@ -1053,6 +1076,7 @@
     <Content Include="css\style.css" />
     <Content Include="css\StyleSheet.css" />
     <Content Include="css\themes.css" />
+    <Content Include="css\Timeline\Timeline.css" />
     <Content Include="css\uploadify.css" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
@@ -1091,6 +1115,7 @@
     <Content Include="js\colResizable-1.5.min.js" />
     <Content Include="js\css3clock.js" />
     <Content Include="js\demonstration.min.js" />
+    <Content Include="js\dom-to-image.min.js" />
     <Content Include="js\dropdown.js" />
     <Content Include="js\eakroko.js" />
     <Content Include="js\eakroko.min.js" />
@@ -1135,6 +1160,10 @@
     <Content Include="js\jquery.min.js" />
     <Content Include="js\jquery.tabSlideOut.v1.3.js" />
     <Content Include="js\jsapi.js" />
+    <Content Include="js\JSpdf\canvas2image.js" />
+    <Content Include="js\JSpdf\dom-to-image.min.js" />
+    <Content Include="js\JSpdf\html2canvas.min.js" />
+    <Content Include="js\JSpdf\jspdf.min.js" />
     <Content Include="js\jszip.min.js" />
     <Content Include="js\loadchat.js" />
     <Content Include="js\modules\canvas-tools.js" />
@@ -1237,7 +1266,12 @@
     <Content Include="JS_Code\acadmies\Course_Details.js" />
     <Content Include="JS_Code\acadmies\diplomaCourses.js" />
     <Content Include="JS_Code\acadmies\Diplomas.js" />
+    <Content Include="JS_Code\acadmies\DiplomaSubjectDetails.js" />
+    <Content Include="JS_Code\acadmies\student.js" />
+    <Content Include="JS_Code\acadmies\trainers.js" />
     <Content Include="JS_Code\acadmies\training_centers.js" />
+    <Content Include="JS_Code\userPorfile\userPorfile.js" />
+    <Content Include="JS_Code\orders\orders.js" />
     <Content Include="JS_Code\advisors\advisor.js" />
     <Content Include="JS_Code\archive_files\archive_files.js" />
     <Content Include="JS_Code\archive_files\archive_files_Upload.js" />
@@ -1269,6 +1303,7 @@
     <Content Include="JS_Code\halls\halls_Upload.js" />
     <Content Include="JS_Code\Invoice.js" />
     <Content Include="JS_Code\jquery.pajinate.js" />
+    <Content Include="JS_Code\jsPDF\dom-to-image.min.js" />
     <Content Include="JS_Code\jsPDF\FileSaver.js" />
     <Content Include="JS_Code\jsPDF\jspdf.js" />
     <Content Include="JS_Code\jsPDF\jspdf.plugin.from_html.js" />
@@ -1401,6 +1436,7 @@
     <Content Include="Login\images\hourhand.png" />
     <Content Include="Login\images\minhand.png" />
     <Content Include="Login\images\name.png" />
+    <Content Include="Login\userPorfile.aspx" />
     <Content Include="Members_Module\boards.aspx" />
     <Content Include="Members_Module\images\Hydrangeas.jpg" />
     <Content Include="Members_Module\images\Jellyfish.jpg" />
@@ -1411,6 +1447,29 @@
     <Content Include="Members_Module\member_abbsent.aspx" />
     <Content Include="Members_Module\payments.aspx" />
     <Content Include="Members_Module\sessions.aspx" />
+    <Content Include="report_Module\Aslah\agreementRep.aspx" />
+    <Content Include="report_Module\Aslah\AttendanceRegistRep.aspx" />
+    <Content Include="report_Module\Aslah\caseClassificationRep.aspx" />
+    <Content Include="report_Module\Aslah\CaseDetailsRep.aspx" />
+    <Content Include="report_Module\Aslah\CaseReportRep.aspx" />
+    <Content Include="report_Module\Aslah\ConciliationRep.aspx" />
+    <Content Include="report_Module\Aslah\consultationRep.aspx" />
+    <Content Include="report_Module\Aslah\DeliveryProceedingRep.aspx" />
+    <Content Include="report_Module\Aslah\FollowCasesRep.aspx" />
+    <Content Include="report_Module\Aslah\MeasurementSatisfactionRep.aspx" />
+    <Content Include="report_Module\Aslah\ProceduresRep.aspx" />
+    <Content Include="report_Module\Aslah\ReceiveProceedingRep.aspx" />
+    <Content Include="report_Module\Aslah\Receive_and_deliverRep.aspx" />
+    <Content Include="report_Module\Aslah\ReferralRep.aspx" />
+    <Content Include="report_Module\Aslah\RegistAggregationRep.aspx" />
+    <Content Include="report_Module\Aslah\ReportRep.aspx" />
+    <Content Include="report_Module\Aslah\ReviewRep.aspx" />
+    <Content Include="report_Module\Aslah\StatisticsofcasesRep.aspx" />
+    <Content Include="report_Module\Aslah\StudyCaseRep.aspx" />
+    <Content Include="report_Module\Aslah\TechRepForMembersRep.aspx" />
+    <Content Include="report_Module\Images\footer_ph.png" />
+    <Content Include="report_Module\Images\header_ph.png" />
+    <Content Include="report_Module\Images\logo_ph.png" />
     <Content Include="Scripts\nicEdit.js" />
     <Content Include="Settings_Module\CommonQuest.aspx" />
     <Content Include="Settings_Module\email_setting.aspx" />
@@ -1486,8 +1545,136 @@
     <Content Include="assets\fonts\droid-kufi\DroidKufi-Regular.ttf" />
     <Content Include="Letter_Module\Images\34181663Copy_تفاصيل بوابات الإرسال API.pdf" />
     <Content Include="Letter_Module\Images\تفاصيل بوابات الإرسال API.pdf" />
+    <Content Include="Acadmies_module\images\ee.pdf" />
+    <Content Include="Acadmies_module\images\www.pdf" />
+    <Content Include="Acadmies_module\homework\ee.pdf" />
+    <Content Include="Acadmies_module\homework\www.pdf" />
+    <Content Include="Acadmies_module\exams\ee.pdf" />
+    <Content Include="Acadmies_module\exams\www.pdf" />
+    <Content Include="Acadmies_module\coursefiles\ee.pdf" />
+    <Content Include="Acadmies_module\coursefiles\www.pdf" />
     <None Include="My Project\PublishProfiles\FolderProfile.pubxml" />
     <None Include="My Project\PublishProfiles\FolderProfile1.pubxml" />
+    <Content Include="report_Module\Aslah\agreement.rpt" />
+    <Content Include="report_Module\Aslah\agreementDS.xsc">
+      <DependentUpon>agreementDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\agreementDS.xsd" />
+    <Content Include="report_Module\Aslah\agreementDS.xss">
+      <DependentUpon>agreementDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\AttendanceRegist.rpt" />
+    <Content Include="report_Module\Aslah\AttendanceRegistDS.xsc">
+      <DependentUpon>AttendanceRegistDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\AttendanceRegistDS.xsd" />
+    <Content Include="report_Module\Aslah\AttendanceRegistDS.xss">
+      <DependentUpon>AttendanceRegistDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\caseClassification.rpt" />
+    <Content Include="report_Module\Aslah\caseClassificationDS.xsc">
+      <DependentUpon>caseClassificationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\caseClassificationDS.xsd" />
+    <Content Include="report_Module\Aslah\caseClassificationDS.xss">
+      <DependentUpon>caseClassificationDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\CaseDetails.rpt" />
+    <Content Include="report_Module\Aslah\CaseDetailsDS.xsc">
+      <DependentUpon>CaseDetailsDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\CaseDetailsDS.xsd" />
+    <Content Include="report_Module\Aslah\CaseDetailsDS.xss">
+      <DependentUpon>CaseDetailsDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\CaseReport.rpt" />
+    <Content Include="report_Module\Aslah\CaseReportDS.xsc">
+      <DependentUpon>CaseReportDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\CaseReportDS.xsd" />
+    <Content Include="report_Module\Aslah\CaseReportDS.xss">
+      <DependentUpon>CaseReportDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\Conciliation.rpt" />
+    <Content Include="report_Module\Aslah\ConciliationDS.xsc">
+      <DependentUpon>ConciliationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ConciliationDS.xsd" />
+    <Content Include="report_Module\Aslah\ConciliationDS.xss">
+      <DependentUpon>ConciliationDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\consultation.rpt" />
+    <Content Include="report_Module\Aslah\consultationDS.xsc">
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\consultationDS.xsd" />
+    <Content Include="report_Module\Aslah\consultationDS.xss">
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\DeliveryProceeding.rpt" />
+    <Content Include="report_Module\Aslah\FollowCases.rpt" />
+    <Content Include="report_Module\Aslah\MeasurementSatisfaction.rpt" />
+    <Content Include="report_Module\Aslah\Procedures.rpt" />
+    <Content Include="report_Module\Aslah\ProceduresDS.xsc">
+      <DependentUpon>ProceduresDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ProceduresDS.xsd" />
+    <Content Include="report_Module\Aslah\ProceduresDS.xss">
+      <DependentUpon>ProceduresDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\ReceiveProceeding.rpt" />
+    <Content Include="report_Module\Aslah\Receive_and_deliver.rpt" />
+    <Content Include="report_Module\Aslah\Receive_and_deliverDS.xsc">
+      <DependentUpon>Receive_and_deliverDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\Receive_and_deliverDS.xsd" />
+    <Content Include="report_Module\Aslah\Receive_and_deliverDS.xss">
+      <DependentUpon>Receive_and_deliverDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\Referral.rpt" />
+    <Content Include="report_Module\Aslah\ReferralDS.xsc">
+      <DependentUpon>ReferralDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ReferralDS.xsd" />
+    <Content Include="report_Module\Aslah\ReferralDS.xss">
+      <DependentUpon>ReferralDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\RegistAggregation.rpt" />
+    <Content Include="report_Module\Aslah\RegistAggregationDS.xsc">
+      <DependentUpon>RegistAggregationDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\RegistAggregationDS.xsd" />
+    <Content Include="report_Module\Aslah\RegistAggregationDS.xss">
+      <DependentUpon>RegistAggregationDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\Report.rpt" />
+    <Content Include="report_Module\Aslah\ReportDS.xsc">
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\ReportDS.xsd" />
+    <Content Include="report_Module\Aslah\ReportDS.xss">
+      <DependentUpon>ReportDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\Review.rpt" />
+    <Content Include="report_Module\Aslah\Statisticsofcases.rpt" />
+    <Content Include="report_Module\Aslah\StatisticsofcasesDS.xsc">
+      <DependentUpon>StatisticsofcasesDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\StatisticsofcasesDS.xsd" />
+    <Content Include="report_Module\Aslah\StatisticsofcasesDS.xss">
+      <DependentUpon>StatisticsofcasesDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Aslah\StudyCase.rpt" />
+    <Content Include="report_Module\Aslah\subReceive_and_deliver.rpt" />
+    <Content Include="report_Module\Aslah\subReportAttendance.rpt" />
+    <Content Include="report_Module\Aslah\TechRepForMembers.rpt" />
+    <Content Include="report_Module\Aslah\TechRepForMembersDS.xsc">
+      <DependentUpon>TechRepForMembersDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\TechRepForMembersDS.xsd" />
+    <Content Include="report_Module\Aslah\TechRepForMembersDS.xss">
+      <DependentUpon>TechRepForMembersDS.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Login\css\animate-custom.css" />
     <Content Include="Login\css\BluebLogin.css" />
@@ -1665,6 +1852,27 @@
       <DependentUpon>Diplomas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Acadmies_module\DiplomaSubjectDetails.aspx.designer.vb">
+      <DependentUpon>DiplomaSubjectDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\DiplomaSubjectDetails.aspx.vb">
+      <DependentUpon>DiplomaSubjectDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\Students.aspx.designer.vb">
+      <DependentUpon>Students.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\Students.aspx.vb">
+      <DependentUpon>Students.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\trainers.aspx.designer.vb">
+      <DependentUpon>trainers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\trainers.aspx.vb">
+      <DependentUpon>trainers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Acadmies_module\training_centers.aspx.designer.vb">
       <DependentUpon>training_centers.aspx</DependentUpon>
     </Compile>
@@ -1705,6 +1913,12 @@
     <Content Include="App_Code\CommonQuest.vb">
       <SubType>Component</SubType>
     </Content>
+    <Content Include="App_Code\DiplomaSubjectDetailsCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\orders.vb">
+      <SubType>Component</SubType>
+    </Content>
     <Compile Include="App_Code\members.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -1738,6 +1952,18 @@
     <Content Include="App_Code\WebService.vb">
       <SubType>Component</SubType>
     </Content>
+    <Content Include="App_Code\Timeline.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\studentCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\trainersCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\userPorfile.vb">
+      <SubType>Component</SubType>
+    </Content>
     <Compile Include="App_Start\BundleConfig.vb" />
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="About.aspx.designer.vb">
@@ -1756,6 +1982,13 @@
     <Compile Include="App_Code\clsGenerationCode.vb" />
     <Compile Include="App_Code\CLSImagesHandler.vb" />
     <Compile Include="App_Code\clsMessages.vb" />
+    <Compile Include="Aslah_Module\orders.aspx.designer.vb">
+      <DependentUpon>orders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Aslah_Module\orders.aspx.vb">
+      <DependentUpon>orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Aslah_Module\Timeline.aspx.designer.vb">
       <DependentUpon>Timeline.aspx</DependentUpon>
     </Compile>
@@ -1873,6 +2106,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Login\userPorfile.aspx.designer.vb">
+      <DependentUpon>userPorfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login\userPorfile.aspx.vb">
+      <DependentUpon>userPorfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="main.aspx.designer.vb">
       <DependentUpon>main.aspx</DependentUpon>
     </Compile>
@@ -1942,6 +2182,231 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="PublicFunctions.vb" />
+    <Compile Include="report_Module\Aslah\agreement.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\agreementDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\agreementRep.aspx.designer.vb">
+      <DependentUpon>agreementRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\agreementRep.aspx.vb">
+      <DependentUpon>agreementRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegist.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegistDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\AttendanceRegistRep.aspx.designer.vb">
+      <DependentUpon>AttendanceRegistRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\AttendanceRegistRep.aspx.vb">
+      <DependentUpon>AttendanceRegistRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassification.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassificationDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\caseClassificationRep.aspx.designer.vb">
+      <DependentUpon>caseClassificationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\caseClassificationRep.aspx.vb">
+      <DependentUpon>caseClassificationRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseDetails.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseDetailsDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\CaseDetailsRep.aspx.designer.vb">
+      <DependentUpon>CaseDetailsRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseDetailsRep.aspx.vb">
+      <DependentUpon>CaseDetailsRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseReport.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseReportDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\CaseReportRep.aspx.designer.vb">
+      <DependentUpon>CaseReportRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\CaseReportRep.aspx.vb">
+      <DependentUpon>CaseReportRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Conciliation.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ConciliationDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\ConciliationRep.aspx.designer.vb">
+      <DependentUpon>ConciliationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ConciliationRep.aspx.vb">
+      <DependentUpon>ConciliationRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultation.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationDS.Designer.vb">
+      <DependentUpon>consultationDS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationDS.vb">
+      <DependentUpon>consultationDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationRep.aspx.designer.vb">
+      <DependentUpon>consultationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\consultationRep.aspx.vb">
+      <DependentUpon>consultationRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\DeliveryProceeding.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\DeliveryProceedingRep.aspx.designer.vb">
+      <DependentUpon>DeliveryProceedingRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\DeliveryProceedingRep.aspx.vb">
+      <DependentUpon>DeliveryProceedingRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\FollowCases.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\FollowCasesRep.aspx.designer.vb">
+      <DependentUpon>FollowCasesRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\FollowCasesRep.aspx.vb">
+      <DependentUpon>FollowCasesRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\MeasurementSatisfaction.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\MeasurementSatisfactionRep.aspx.designer.vb">
+      <DependentUpon>MeasurementSatisfactionRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\MeasurementSatisfactionRep.aspx.vb">
+      <DependentUpon>MeasurementSatisfactionRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Procedures.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ProceduresDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\ProceduresRep.aspx.designer.vb">
+      <DependentUpon>ProceduresRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ProceduresRep.aspx.vb">
+      <DependentUpon>ProceduresRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReceiveProceeding.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReceiveProceedingRep.aspx.designer.vb">
+      <DependentUpon>ReceiveProceedingRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReceiveProceedingRep.aspx.vb">
+      <DependentUpon>ReceiveProceedingRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliver.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliverDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\Receive_and_deliverRep.aspx.designer.vb">
+      <DependentUpon>Receive_and_deliverRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Receive_and_deliverRep.aspx.vb">
+      <DependentUpon>Receive_and_deliverRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Referral.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReferralDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\ReferralRep.aspx.designer.vb">
+      <DependentUpon>ReferralRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReferralRep.aspx.vb">
+      <DependentUpon>ReferralRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\RegistAggregation.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\RegistAggregationDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\RegistAggregationRep.aspx.designer.vb">
+      <DependentUpon>RegistAggregationRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\RegistAggregationRep.aspx.vb">
+      <DependentUpon>RegistAggregationRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Report.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReportDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\ReportRep.aspx.designer.vb">
+      <DependentUpon>ReportRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReportRep.aspx.vb">
+      <DependentUpon>ReportRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Review.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReviewRep.aspx.designer.vb">
+      <DependentUpon>ReviewRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\ReviewRep.aspx.vb">
+      <DependentUpon>ReviewRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\Statisticsofcases.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StatisticsofcasesDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\StatisticsofcasesRep.aspx.designer.vb">
+      <DependentUpon>StatisticsofcasesRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StatisticsofcasesRep.aspx.vb">
+      <DependentUpon>StatisticsofcasesRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StudyCase.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StudyCaseRep.aspx.designer.vb">
+      <DependentUpon>StudyCaseRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\StudyCaseRep.aspx.vb">
+      <DependentUpon>StudyCaseRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\subReceive_and_deliver.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\subReportAttendance.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembers.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembersDS.Designer.vb" />
+    <Compile Include="report_Module\Aslah\TechRepForMembersRep.aspx.designer.vb">
+      <DependentUpon>TechRepForMembersRep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Aslah\TechRepForMembersRep.aspx.vb">
+      <DependentUpon>TechRepForMembersRep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Settings_Module\CommonQuest.aspx.designer.vb">
       <DependentUpon>CommonQuest.aspx</DependentUpon>
     </Compile>
@@ -2180,14 +2645,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Acadmies_module\coursefiles\" />
-    <Folder Include="Acadmies_module\exams\" />
-    <Folder Include="Acadmies_module\homework\" />
-    <Folder Include="Acadmies_module\images\" />
     <Folder Include="App_Data\" />
     <Folder Include="App_Themes\images\UM_Screens\" />
     <Folder Include="Aslah_Moduleimages\" />
     <Folder Include="Aslah_Module\images\" />
+    <Folder Include="Aslah_Module\pdf_Files\" />
     <Folder Include="assets\images\" />
     <Folder Include="bin\ar\" />
     <Folder Include="bin\cs\" />
@@ -2218,6 +2680,9 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

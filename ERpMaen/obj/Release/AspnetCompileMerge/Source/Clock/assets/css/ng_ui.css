@@ -586,15 +586,15 @@
 	
 /* components input and button */
 .ng-input-button-container {white-space:nowrap;}
-.ng-input-button-container .ng-button {padding:0px 2px;
+.ng-input-button-container .ng-button {padding:5px 5px;
 	margin:0px;
-	-webkit-border-top-left-radius: 0px;
-	-webkit-border-bottom-left-radius: 0px;
-	-moz-border-radius-topleft: 0px;
-	-moz-border-radius-bottomleft: 0px;
-	border-top-left-radius: 0px;
-	border-bottom-left-radius: 0px;
-	border-left-width:0px;
+	-webkit-border-top-right-radius: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	-moz-border-radius-topright: 0px;
+	-moz-border-radius-bottomright: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-right-width:0px;
 	vertical-align:top;
 	font-size:medium;}
 	
@@ -615,8 +615,13 @@
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
 	border-left-width:1px;}
-	
-.ng-input-button-container input {margin:0px;}
+
+    .ng-input-button-container input {
+        margin: 0px;
+        width: 85%;
+        display: inline;
+        float: right;
+    }
 	
 /* components style */
 .ng-comp-main-div {border:solid #b6bccc 1px;

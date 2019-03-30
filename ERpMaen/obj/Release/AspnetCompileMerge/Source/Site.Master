@@ -674,7 +674,7 @@
                                     <asp:AutoCompleteExtender ID="aceSearchMain" runat="server" BehaviorID="aceSearchMain"
                                         FirstRowSelected="false" EnableCaching="false" Enabled="True" MinimumPrefixLength="1"
                                         CompletionListCssClass="acl" CompletionListItemCssClass="li" CompletionListHighlightedItemCssClass="li-hover"
-                                        ServiceMethod="GetForms" ServicePath="~/ASMX_WebServices/Zwebservice.asmx" TargetControlID="txtSearch"
+                                        ServiceMethod="GetForms" ServicePath="~/ASMX_WebServices/WebService.asmx" TargetControlID="txtSearch"
                                         CompletionInterval="500">
                                     </asp:AutoCompleteExtender>
                                     <i class="fa-search fa"></i>

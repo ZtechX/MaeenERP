@@ -15,6 +15,7 @@ $(function () {
     try {
 
         drawCourses();
+       // getcousreCode();
     } catch (err) {
         alert(err);
     }
@@ -31,6 +32,13 @@ function resetAll() {
 }
 
 
+//get course code
+//function getcousreCode() {
+//    coursatCls.getcourseCode(function (val) {
+//        debugger
+//        $("#code").val(Number(val) + 1);
+//    });
+//}
 
 
 function saveCourse() {
@@ -38,6 +46,8 @@ function saveCourse() {
 
     try {
 
+        setRequired_Date("divdate1");
+        setRequired_Date("divdate2");
 
         if (checkRequired("divForm") == 1) {
 
@@ -45,7 +55,7 @@ function saveCourse() {
         } else {
 
 
-            //debugger
+            debugger
 
             $("#end_datem").val($("#divdate2 #txtDatem").val());
             $("#end_datehj").val($("#divdate2 #txtDateh").val());
@@ -58,15 +68,16 @@ function saveCourse() {
             var basicData = generateJSONFromControls("divForm");
 
             var Id = "";
-            console.log(basicData);
+            $("#SavedivLoader").show();
             coursatCls.Save(Id, basicData, function (val) {
-                if (val == true) {
-                    debugger;
-                    alert("تم الحفظ بنجاح");
+                if (val === true) {
+                   
                     $("#addCourse").modal('hide');
                     resetDivControls("divForm");
                     drawCourses();
-
+                    $("#SavedivLoader").hide();
+                    alert("تم الحفظ بنجاح");
+                    getcousreCode();
 
                 } else {
                     alert("لم يتم الحفظ");
@@ -126,13 +137,13 @@ function changePage(page) {
         data = data + `<div class="col-md-4 col-sm-12" >
 <div class="block">
                         <div class="block-title">
-                            <h5><a href="courseDetails.aspx?course_id=${element.id}">${element.name}</a></h5>
+                            <h5><a href="courseDetails.aspx?code=${element.code}">${element.name}</a></h5>
                         </div>
                         <div class="block-desc">
                             <p class="desc">${element.description}</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
-                                    <img class="avatar" src="../assets/images/101.jpg" />
+                                    <img class="avatar" src="${element.trImage}" />
                                     <span>${element.full_name}</span>
                                 </div>
                                 <div class="block-date pull-left">

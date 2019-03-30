@@ -93,13 +93,61 @@ Public Class Diploma_CoursesCls
     End Function
 #End Region
 
-    'Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-    '    Timer1.Start()
-    'End Sub
+    '
 
-    'Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
-    '    Label12.Text = TimeOfDay.ToString("h:mm:ss tt")
-    'End Sub
+#Region "Save"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function addsubject(ByVal id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+
+
+            Dim comp_id = LoginInfo.GetComp_id()
+            'Dim dt_subject As DataTable
+
+            'dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+            'Dim comp_id = dt_user.Rows(0).Item("comp_id").ToString
+
+
+
+            dictBasicDataJson.Add("type", "subj")
+            dictBasicDataJson.Add("comp_id", comp_id)
+
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tbllock_up", id, _sqlconn, _sqltrans) Then
+                If Not PublicFunctions.TransUsers_logs("4203", "tbllock_up", "ادخال", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
 
 
 #Region "get_data"
@@ -119,7 +167,7 @@ Public Class Diploma_CoursesCls
             If name <> "" Then
                 condation = " where name LIKE '%" + name + "%'"
             End If
-            dt = DBManager.Getdatatable("select  acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , acd_diplome_subjects.subject_goal , acd_diplome_subjects.trainer_id,tblUsers.full_name ,tbllock_up.Description as 'subjectName' , lockup2.Description  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join tbllock_up as lockup2 on acd_diplome_subjects.semster_id=lockup2.id where diplome_id=" + diploma_id + condation)
+            dt = DBManager.Getdatatable("select  acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , acd_diplome_subjects.subject_goal , acd_diplome_subjects.trainer_id,tblUsers.full_name,tblUsers.User_Image as 'trainerImage' ,tbllock_up.Description as 'subjectName' , lockup2.Description  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join tbllock_up as lockup2 on acd_diplome_subjects.semster_id=lockup2.id where diplome_id=" + diploma_id + condation)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -202,10 +250,22 @@ Public Class Diploma_CoursesCls
     ''' </summary>
     <WebMethod()>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function Delete(ByVal deleteItem As String) As String()
+    Public Function Delete_deploma(ByVal deleteItem As String) As String()
         Dim Names As New List(Of String)(10)
         Try
-            If PublicFunctions.DeleteFromTable(deleteItem, "acd_courses") Then
+            If PublicFunctions.DeleteFromTable(deleteItem, "acd_diplomes") Then
+                DBManager.ExcuteQuery("DELETE FROM acd_diplome_subjects where diplome_id=" + deleteItem)
+                If Not PublicFunctions.TransUsers_logs("4203", "acd_diplomes", "حذف", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
                 Names.Add("1")
                 Names.Add("تم الحذف بنجاح!")
             Else
@@ -220,5 +280,6 @@ Public Class Diploma_CoursesCls
         End Try
     End Function
 #End Region
+
 
 End Class

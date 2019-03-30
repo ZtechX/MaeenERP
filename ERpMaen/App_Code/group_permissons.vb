@@ -172,18 +172,9 @@ Public Class group_permissons
         Dim Researcher = False
         Dim Names As New List(Of String)(10)
         Try
-            'Dim dt As New DataTable
-            'dt = DBManager.Getdatatable("SELECT  id,full_name ,User_Name,User_Password,User_Email" +
-            ' ",User_PhoneNumber,Active,User_Type,User_Image,Deleted,related_id" +
-            ' ",managment_id,comp_id,jop_id,isNull(Researcher,0) Researcher,superAdmin from TblUsers where id  =" + UserId)
-            'If dt.Rows.Count <> 0 Then
-            'Researcher = dt.Rows(0).Item("Researcher")
-            '    Dim str As String = PublicFunctions.ConvertDataTabletoString(dt)
-            '    Names.Add("1")
-            '    Names.Add(str)
             Dim dtPerm = DBManager.Getdatatable("Select id as'ID',form_id as 'formid',f_access as 'paccess',f_add as 'padd',f_update as 'PEdite',f_delete as 'pdelete' from tblgroup_permissons where group_id=" + editItemId.ToString)
             If dtPerm.Rows.Count <> 0 Then
-                    Dim s1 = PublicFunctions.ConvertDataTabletoString(dtPerm)
+                Dim s1 = PublicFunctions.ConvertDataTabletoString(dtPerm)
                 Names.Add("1")
                 Names.Add(s1)
             Else
@@ -191,13 +182,13 @@ Public Class group_permissons
 
             End If
 
-                Dim dtmenu = DBManager.Getdatatable("Select Id from tblMenus ")
-                If dtmenu.Rows.Count <> 0 Then
-                    Dim s2 = PublicFunctions.ConvertDataTabletoString(dtmenu)
-                    Names.Add(s2)
-                Else
-                    Names.Add("0")
-                End If
+            Dim dtmenu = DBManager.Getdatatable("Select Id from tblMenus ")
+            If dtmenu.Rows.Count <> 0 Then
+                Dim s2 = PublicFunctions.ConvertDataTabletoString(dtmenu)
+                Names.Add(s2)
+            Else
+                Names.Add("0")
+            End If
             'If Researcher Then
             '    dt = DBManager.Getdatatable("select * from tblusers_area where user_id =" + UserId)
             '    If dt.Rows.Count <> 0 Then

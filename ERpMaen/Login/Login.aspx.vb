@@ -12,7 +12,7 @@ Public Class Login
             '#####################################Remember me Start   ############################################
             If cklogin.Checked = True Then
                 Dim dt As New DataTable
-                dt = DBManager.Getdatatable("select * from tblUsers where (User_PhoneNumber ='" + txtUserName.Text + "' or user_indenty='" + txtUserName.Text + "')  and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
+                dt = DBManager.Getdatatable("select * from tblUsers where (User_PhoneNumber ='" + txtUserName.Value + "' or user_indenty='" + txtUserName.Value + "')  and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
                 If dt.Rows.Count > 0 Then
                     If dt.Rows(0).Item("active") = False Then
                         lblFail.Visible = True
@@ -22,7 +22,7 @@ Public Class Login
                     End If
                     Dim userCookie As New HttpCookie("UserInfo")
                     userCookie.Expires = DateTime.Now.AddDays(30)
-                    userCookie("User") = txtUserName.Text
+                    userCookie("User") = txtUserName.Value
                     userCookie("UserId") = dt.Rows(0).Item("id")
                     userCookie("User_Type") = dt.Rows(0).Item("User_Type").ToString
                     userCookie("comp_id") = dt.Rows(0).Item("comp_id").ToString
@@ -47,7 +47,7 @@ Public Class Login
                 '############################################## Remember Me  end   #######################################
             Else
                 Dim dt As New DataTable
-                dt = DBManager.Getdatatable("select * from tblUsers where (User_PhoneNumber ='" + txtUserName.Text + "' or user_indenty='" + txtUserName.Text + "')  and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
+                dt = DBManager.Getdatatable("select * from tblUsers where (User_PhoneNumber ='" + txtUserName.Value + "' or user_indenty='" + txtUserName.Value + "')  and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
                 If dt.Rows.Count > 0 Then
                     If dt.Rows(0).Item("active") = False Then
                         lblFail.Visible = True
@@ -61,7 +61,7 @@ Public Class Login
                     Session("comp_id") = dt.Rows(0).Item("comp_id").ToString
                     Session("group_id") = dt.Rows(0).Item("group_id").ToString
                     Dim userCookie As New HttpCookie("UserInfo")
-                    userCookie("User") = txtUserName.Text
+                    userCookie("User") = txtUserName.Value
                     userCookie("UserId") = dt.Rows(0).Item("id")
                     Response.Cookies.Add(userCookie)
                     userCookie("UserType") = dt.Rows(0).Item("User_Type").ToString

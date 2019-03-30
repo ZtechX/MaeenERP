@@ -39,4 +39,49 @@ Partial Public Class Timeline
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents case_id As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''start_dt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents start_dt As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''end_dt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents end_dt As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''done control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents done As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''img control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''divContainer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divContainer As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class

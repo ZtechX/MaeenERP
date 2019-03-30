@@ -392,6 +392,33 @@ Partial Public Class cases
     Protected WithEvents txtUploadedFiles As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''HijriCalendar3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar3 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''HijriCalendar1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar1 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''ddldone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddldone As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''lblchild control.
     '''</summary>
     '''<remarks>
@@ -500,114 +527,6 @@ Partial Public Class cases
     Protected WithEvents txtdelivery_time As Global.System.Web.UI.HtmlControls.HtmlInputGenericControl
     
     '''<summary>
-    '''lbl_sessions_id control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_sessions_id As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''txtcode_sessions control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtcode_sessions As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''ddlowner_id_sessions control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlowner_id_sessions As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''ddlsecond_party_id_sessions control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlsecond_party_id_sessions As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtplace control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtplace As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lbldate_m_sessions control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbldate_m_sessions As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lbldate_h_sessions control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbldate_h_sessions As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''HijriCalendar9 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents HijriCalendar9 As Global.ERpMaen.CustomerCalendar
-    
-    '''<summary>
-    '''txtentry_time control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtentry_time As Global.System.Web.UI.HtmlControls.HtmlInputGenericControl
-    
-    '''<summary>
-    '''txtexite_time control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtexite_time As Global.System.Web.UI.HtmlControls.HtmlInputGenericControl
-    
-    '''<summary>
-    '''ddlemployee_id2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlemployee_id2 As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtresult control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtresult As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''lblconciliation_id control.
     '''</summary>
     '''<remarks>
@@ -714,78 +633,6 @@ Partial Public Class cases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Text11 As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''lblcorrespondences_id control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblcorrespondences_id As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''txtcode_correspondences control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtcode_correspondences As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''lblcorrespondences_date_m control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblcorrespondences_date_m As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblcorrespondences_date_h control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblcorrespondences_date_h As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''HijriCalendar7 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents HijriCalendar7 As Global.ERpMaen.CustomerCalendar
-    
-    '''<summary>
-    '''ddlperson_id control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlperson_id As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''ddltype control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddltype As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''TextBox14 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox14 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''ImageSlider control.

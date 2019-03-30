@@ -3955,10 +3955,14 @@ Public Class WebService
                 End If
             ElseIf Not LoginInfo.isSuperAdmin() Then
                 If formName = "Users" Then
-                    quaryStr = quaryStr + " and comp_id=" + LoginInfo.GetComp_id()
+                    quaryStr = "Select tblUsers.id As 'AutoCodeHide', full_name as 'الاسم بالكامل', isNull(name, '') as 'دور المستخدم', user_indenty as 'رقم الهوية', User_PhoneNumber as 'رقم الجوال'," +
+               " Description as 'الصلاحية' from tblUsers Left Join tblUser_Type on tblUser_Type.id = User_Type Left Join tbllock_up on tbllock_up.id = group_id " +
+               " where isNull(superAdmin, 0) = 0 And TblUsers.comp_id =" + LoginInfo.GetComp_id()
                 ElseIf formName = "Advisors" Then
                     quaryStr = quaryStr + " where ash_advisors.comp_id=" + LoginInfo.GetComp_id()
 
+                ElseIf formName = "orders" Then
+                    quaryStr = quaryStr + " where ash_orders.comp_id=" + LoginInfo.GetComp_id()
                 ElseIf formName = "CommonQuest" Or formName = "email_setting" Or formName = "Signature_setting" Then
                     quaryStr = quaryStr + " where comp_id=" + LoginInfo.GetComp_id()
                 End If

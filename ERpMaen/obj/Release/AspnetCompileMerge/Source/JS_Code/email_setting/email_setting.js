@@ -19,8 +19,9 @@ $(function () {
                 $("#SavedivLoader").hide();
                 $("#comp_id").css("display", "");
                 $("#Dyntabel").css("display", "");
+                $("#Comp_div").show();
             } else if (val != "0") {
-                
+                $("#Comp_div").hide();
                 email_setting.get_data(val, function (val1) {
                     edit(val1);
                     $("#ddlComps").val(val);

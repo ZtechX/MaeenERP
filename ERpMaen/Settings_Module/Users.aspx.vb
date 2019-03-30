@@ -39,13 +39,14 @@ Public Class Users
             comp_id = LoginInfo.GetComp_id()
 
             If Page.IsPostBack = False Then
-                Dim clsddltypes As New clsFillComboByDataSource("  select * from tbllock_up where ISNUll(deleted,0)=0 and type='MG'", "description", "id", "")
+                Dim clsddltypes As New clsFillComboByDataSource("  select * from tbllock_up where ISNUll(deleted,0)=0 and type='MG' and Comp_id=" + comp_id.ToString, "description", "id", "")
                 clsddltypes.SetComboItems(ddlmanagment_id, "", True, "--اختر--", False)
                 Dim clsddlcomps As New clsFillComboByDataSource("  select * from tblcompanies where ISNUll(deleted,0)=0 ", "name_ar", "id", "")
                 clsddlcomps.SetComboItems(ddlcomp_id, "", True, "--اختر--", False)
                 Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='PG' and Comp_id=" + comp_id.ToString, "description", "id", "")
                 clsddltype5.SetComboItems(ddlgroup_id, "", True, "--اختر--", False)
-
+                Dim clsddlusertype As New clsFillComboByDataSource("select * from tblUser_Type where ISNUll(deleted,0)=0", "name", "id", "")
+                clsddlusertype.SetComboItems(ddlUser_Type, "", True, "--اختر--", False)
             End If
             If isSuperAdmin() Then
                 divcomp_id.Attributes.Remove("style")

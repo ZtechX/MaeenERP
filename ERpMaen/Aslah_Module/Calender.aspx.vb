@@ -4,6 +4,8 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Page.IsPostBack = False Then
             Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
+            Login_userType.InnerText = LoginInfo.getUserType()
+
 
 
             'End dropdown instrument

@@ -132,12 +132,23 @@
                         <div class="col-md-2">
 
                             <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addCourse">اضافة مادة <i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addsubject">اضافة مادة <i class="fa fa-plus"></i></button>
 
                             </div>
                         </div>
                     </div>
                 </div>
+
+                 <div class="col-md-12 col-sm-12 col-xs-12 ">
+                        <div class="col-md-4">
+
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-danger " onclick="deleteDiplome();"> حذف الدبلومه  <i class="fa fa-trash"></i></button>
+
+                            </div>
+                        </div>
+
+                     </div>
             </div>
         </section>
         <section>
@@ -150,23 +161,19 @@
         </section>
         <div class="widget-navigation">
             <ul class="pagination">
-                <li class="paginate_button previous"><a href="#">السابق</a></li>
-                <li class="paginate_button active"><a href="#">1</a></li>
-                <li class="paginate_button"><a href="#">2</a></li>
-                <li class="paginate_button"><a href="#">3</a></li>
-                <li class="paginate_button"><a href="#">4</a></li>
-                <li class="paginate_button"><a href="#">5</a></li>
-                <li class="paginate_button"><a href="#">6</a></li>
-                <li class="paginate_button next" id="default-datatable_next"><a href="#">التالي</a></li>
+                <li class="paginate_button previous"><a>السابق</a></li>
+                <li class="paginate_button next" id="default-datatable_next"><a>التالي</a></li>
             </ul>
         </div>
 
-        <div class="modal" id="addCourse" tabindex="-1" role="dialog">
+        <div class="modal" id="addsubject" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">اضافة مادة</h4>
+
+                          
                     </div>
                     <div class="modal-body">
                         <div class="col-md-12" id="divForm">
@@ -183,7 +190,7 @@
                                    
                                 </div>
                             </div>
-                                     <div class="row form-group">
+                             <div class="row form-group">
                                  <div class="col-md-3 col-sm-12">
                                         <label > مدة المحاضره      </label>
                                             </div>
@@ -209,7 +216,7 @@
                             </div>
                                     <div class="row form-group">
                                  <div class="col-md-3 col-sm-12">
-                                        <label >  درجات الامتحان      </label>
+                                        <label >   الدرجة النهائية      </label>
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
@@ -219,41 +226,11 @@
                                     <br />
                                         </div>
                             </div>
-                                                <div class="row form-group">
+
+
+                                   <div class="row form-group">
                                  <div class="col-md-3 col-sm-12">
-                                        <label > درجات النشاط    </label>
-                                            </div>
-
-                                      <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);" dbcolumn="activity_degrees" type="text" id="Text1"
-                                                class="form-control" runat="server" clientidmode="Static" />
-                                          
-                                   
-                                        </div>
-                            </div>
-                                 </div>
-                             <div class="col-md-6">
-                                  <div class=" row form-group">
-                                <div class="col-md-3 col-sm-12">
-                                    <label class="label-required">
-                                     التاريخ   </label>
-                                </div>
-
-                                <div class="col-md-9 col-sm-12">
-
-                                    <div class="fancy-form"   id="divdate1">
-                                        <input dbColumn="created_at_hj"  type="hidden" id="date_hj" />
-                                        <input dbColumn="created_at_m"  type="hidden" id="date_m" />
-                                     <uc1:hijricalendar runat="server" id="HijriCalendar" />
-                                    </div>
-                                  
-                                </div>
-                            </div>
-
-
-                                    <div class="row form-group">
-                                 <div class="col-md-3 col-sm-12">
-                                        <label > درجات النشاط    </label>
+                                        <label > درجة نصف العام  </label>
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
@@ -262,33 +239,61 @@
                                  
                                         </div>
                             </div>
-
+                                               
+                            </div>
                                 
-                               <%--second col--%>
-                            <div class=" row form-group ">
-                                <div class="col-md-3 col-sm-12">
-                                    <label  class="label-required">  المدرب</label>
-                                </div>
+                             <div class="col-md-6">
+                                 <div class="row form-group">
+                                 <div class="btn-group pull-left">
+                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#newsubject"> new subject <i class="fa fa-plus"></i></button>
 
-                                <div class="col-md-9 col-sm-12">
-                                    <asp:DropDownList dbcolumn="trainer_id" required class="form-control" ClientIDMode="Static" ID="ddltrainer" runat="server">
-                                    </asp:DropDownList>
-                                    
-                                </div>
                             </div>
-                           
-                            <div class=" row form-group">
-                                <div class="col-md-3 col-sm-12">
-                                    <label for="Name" >هدف  المادة </label>
-
-                                </div>
-                                <div class="col-md-9 col-sm-12">
-                                    <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="subject_goal" ClientIDMode="Static" ID="description" runat="server">
-                                    </asp:TextBox>
+                                     </div>
 
 
-                                </div>
-                            </div>
+                                 <div class=" row form-group">
+                                     <div class="col-md-3 col-sm-12">
+                                         <label class="label-required">
+                                             التاريخ  
+                                         </label>
+                                     </div>
+
+                                     <div class="col-md-9 col-sm-12">
+
+                                         <div class="fancy-form" id="divdate1">
+                                             <input dbcolumn="created_at_hj" type="hidden" id="date_hj" />
+                                             <input dbcolumn="created_at_m" type="hidden" id="date_m" />
+                                             <uc1:HijriCalendar runat="server" ID="HijriCalendar" />
+                                         </div>
+
+                                     </div>
+                                 </div>
+
+
+                                 <div class=" row form-group ">
+                                     <div class="col-md-3 col-sm-12">
+                                         <label class="label-required">المدرب</label>
+                                     </div>
+
+                                     <div class="col-md-9 col-sm-12">
+                                         <asp:DropDownList dbcolumn="trainer_id" required class="form-control" ClientIDMode="Static" ID="ddltrainer" runat="server">
+                                         </asp:DropDownList>
+
+                                     </div>
+                                 </div>
+
+                                 <div class=" row form-group">
+                                     <div class="col-md-3 col-sm-12">
+                                         <label for="Name">هدف  المادة </label>
+
+                                     </div>
+                                     <div class="col-md-9 col-sm-12">
+                                         <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="subject_goal" ClientIDMode="Static" ID="description" runat="server">
+                                         </asp:TextBox>
+
+
+                                     </div>
+                                 </div>
                                   </div>
                           
                                  </div>
@@ -299,6 +304,46 @@
                   
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary"  onclick="saveCourse();">حفظ </button>
+
+                    </div>
+                      </div>
+                </div>
+            </div>
+
+        <div class="modal" id="newsubject" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> مادة جديدة</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12" id="divFormnewsub">
+                          
+                          
+                            <div class="row form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label>المادة  </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                            <input dbcolumn="Description" type="text" id="subject"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    <br />
+                                        </div>
+                            </div>
+
+                                     
+                          
+                                 </div>
+
+
+
+                        </div>
+                  
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary"  onclick="addsubject();">حفظ </button>
 
                     </div>
                       </div>

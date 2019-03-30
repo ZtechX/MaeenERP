@@ -23,6 +23,15 @@ Partial Public Class coursat
     Protected WithEvents ToolkitScriptManager1 As Global.System.Web.UI.ScriptManager
     
     '''<summary>
+    '''img control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents img As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
     '''courseTitle control.
     '''</summary>
     '''<remarks>
@@ -39,6 +48,15 @@ Partial Public Class coursat
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''description control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents description As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''HijriCalendar control.
@@ -104,11 +122,11 @@ Partial Public Class coursat
     Protected WithEvents totalDegree As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
-    '''description control.
+    '''Text1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents description As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents Text1 As Global.System.Web.UI.HtmlControls.HtmlInputText
 End Class

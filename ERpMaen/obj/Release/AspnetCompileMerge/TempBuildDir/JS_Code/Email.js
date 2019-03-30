@@ -9,7 +9,7 @@ $(document).ready(function () {
 });
 function LoadEmails(UserId,type) {
     $("#MailType").html(type);
-    Zwebservice.GetEmails(UserId,type, OnSuccess);
+    WebService.GetEmails(UserId,type, OnSuccess);
 }// i deleted all data in email table and connected to new mail  ok?  Thats okay letme check 
 function OnSuccess(res) {
     var tableDiv = document.getElementById("tableDiv");

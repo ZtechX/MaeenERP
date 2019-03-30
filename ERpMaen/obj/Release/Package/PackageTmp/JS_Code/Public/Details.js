@@ -9,7 +9,7 @@
 function getContactDetails(sender, colName) {
     try {
         var condition = {"ColName": colName, "Value": getControlValue(sender) };
-        Zwebservice.GetContactDetails(condition, function (contactDetails) {
+        WebService.GetContactDetails(condition, function (contactDetails) {
             if (contactDetails != "") {
                 var detailsJson = JSON.parse(contactDetails);
                 $('#lblContactId').html(detailsJson[0].id);
@@ -31,7 +31,7 @@ function getContactDetails(sender, colName) {
 function getcompanyDetails(sender, colName) {
     try {
         var condition = { "ColName": colName, "Value": getControlValue(sender) };
-        Zwebservice.GetcompanyDetails(condition, function (companyDetails) {
+        WebService.GetcompanyDetails(condition, function (companyDetails) {
             if (companyDetails != "") {
                 var detailsJson = JSON.parse(companyDetails);
                 $('#lblcompanyId').html(detailsJson[0].id);

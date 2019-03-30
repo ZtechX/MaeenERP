@@ -8,12 +8,11 @@
     <div class="card card-body">
         <%-- start group 1--%>
         <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#menu8">التقييم</a></li>
+    <li class="active"><a data-toggle="tab" href="#">التقييم</a></li>
   </ul>
 
-  <div class="tab-content">
-    <div id="menu8" class="tab-pane fade in active">
-        <div class="row" style="padding:40px">
+  <div  class="tab-content">
+      <div class="row" style="padding:40px">
         <asp:Label ID="lblitem_id" runat="server" Style="display: none" dbcolumn="id"></asp:Label>
         <asp:label id="lblcase_apprisal_id" clientidmode="static" runat="server" style="display: none" dbcolumn="case_id"></asp:label>
         <asp:label id="lbldetail_id" clientidmode="static" runat="server" style="display: none" dbcolumn="detail_id"></asp:label>
@@ -23,7 +22,7 @@
 
         <div class="col-md-12 form-group ">
             <div class="col-md-3 col-sm-12">
-                <label class="label-required">التقييم</label>
+                <label class="label-required">المستوى</label>
             </div>
 
             <div class="col-md-9 col-sm-12">
@@ -34,7 +33,7 @@
               <div class="col-md-12 form-group ">
             <br />
             <div class="col-md-3 col-sm-12">
-                <label for="Name" class="label-required">ملاحظات </label>
+                <label for="Name" >تعليق </label>
 
             </div>
             <div class="col-md-9 col-sm-12">
@@ -45,7 +44,7 @@
             </div>
         </div>
     </div>
-        </div>
+        
 
       </div>
      

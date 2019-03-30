@@ -3,10 +3,11 @@
 // global variable used in row_click and update functions
 //var editWebServiceMethod = "coursatCls.asmx/Edit";
 var formAutoCodeControl = "lblmainid";
-var CoursesList = [];
+var diplomasList = [];
 var records_per_page = 2;
 var numPages = 0;
 var current_page = 1;
+
 $(function () {
     $("#pnlConfirm").hide();
     $("#divData").hide();
@@ -49,8 +50,9 @@ function saveCourse() {
                 if (val == true) {
                     debugger;
                     alert("تم الحفظ بنجاح");
-                    resetAll();
-                    prepareAdd();
+                    $("#addCourse").modal('hide');
+                    resetDivControls("divForm");
+                  
                     drawCourses();
                     
                  
@@ -83,6 +85,7 @@ function edit(val) {
         $("#divData").show();
         $("#SavedivLoader").hide();
 }
+
 function nextPage() {
     debugger
     if (current_page < numPages) {
@@ -98,7 +101,7 @@ function prevPage() {
     }
 }
 function changePage(page) {
-    debugger
+   
     current_page = page;
     if (page < 1) {
         page = 1;
@@ -110,8 +113,8 @@ function changePage(page) {
     $("#li_" + page).addClass("active");
     $("#diplomas-list").html("");
     var data = "";
-    for (var i = (page - 1) * records_per_page; i < (page * records_per_page) && i < CoursesList.length; i++) {
-        var element = CoursesList[i];
+    for (var i = (page - 1) * records_per_page; i < (page * records_per_page) && i < diplomasList.length; i++) {
+        var element = diplomasList[i];
         data = data + `<div class="col-md-4 col-sm-12">
                     <div class="block"  >
                         <div class="block-title">
@@ -121,8 +124,10 @@ function changePage(page) {
                             <p class="desc">${element.description}</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
-                                    <img class="avatar" src="../assets/images/101.jpg" />
-                                    <span>${element.add_by}</span>
+                                  
+                                    <img  class="avatar" src="${element.userImage}" />
+                                 
+                                      <span>${element.username}</span>
                                 </div>
                                
                                      <div class="block-date pull-left">
@@ -133,11 +138,13 @@ function changePage(page) {
                         </div>
                     </div>
                 </div>`;
+
     }
     $("#diplomas-list").html(data);
 
 
 }
+
 function drawCourses(){
     try {
         DiplomasCls.get_deplomas( "",function (val) {
@@ -146,8 +153,8 @@ function drawCourses(){
             var data = "";
             console.log(val);
             var arr1 = JSON.parse(val[1]);
-            CoursesList = arr1;
-            numPages = Math.ceil(CoursesList.length / records_per_page);
+            diplomasList = arr1;
+            numPages = Math.ceil(diplomasList.length / records_per_page);
 
             var str = "";
             for (var i = 0; i < (numPages + 2); i++) {
@@ -171,12 +178,12 @@ function drawCourses(){
         alert(err);
     }
 }
-function searchCourses() {
+function searchDiploma() {
     try {
         
             
-            var courseName = $("#txt_Search").val();
-        DiplomasCls.get_Courses(courseName, function (val) {
+            var diplomaName = $("#txt_Search").val();
+        DiplomasCls.get_deplomas(diplomaName, function (val) {
                 debugger
 
                 var data = "";
@@ -185,18 +192,21 @@ function searchCourses() {
                     var arr1 = JSON.parse(val[1]);
 
                     arr1.forEach(function (element) {
-                       debugger
+
+
                         data = data + `<div class="col-md-4 col-sm-12">
-                    <div class="block">
+                    <div class="block"  >
                         <div class="block-title">
-                            <h5><a href="courseDetails.aspx?course_id=${element.id}">${element.name}</a></h5>
+                            <h5><a href="DiplomaCourses.aspx?deploma_id=${element.id}">${element.name}</a></h5>
                         </div>
                         <div class="block-desc">
                             <p class="desc">${element.description}</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
-                                    <img class="avatar" src="../assets/images/101.jpg" />
-                                    <span>${element.add_by}</span>
+                                  
+                                    <img  class="avatar" src="${element.userImage}" />
+                                 
+                                      <span>${element.username}</span>
                                 </div>
                                
                                      <div class="block-date pull-left">
@@ -207,14 +217,13 @@ function searchCourses() {
                         </div>
                     </div>
                 </div>`;
-                        
-
                     });
+                   
+                       $("#diplomas-list").html(data);
 
-
-                    $("#diplomas-list").html(data);
                 } else {
-                    showErrorMessage("Not Found");
+                   
+                    $("#diplomas-list").html("لا يوجد دبلومة بهذا الاسم");
                 }
 
             });

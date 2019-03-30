@@ -8,7 +8,8 @@
                 Dim cls_employee As New clsFillComboByDataSource("select * from tblUsers where IsNull(Deleted,0)=0 and User_Type=4", "User_Name", "id", "")
                 'cls_employee.SetComboItems(ddlemployee_id, "", True, "--اختر--", False)
                 cls_employee.SetComboItems(ddlemployee_id, "", True, "--اختر--", False)
-
+                Dim clstype As New clsFillComboByDataSource("select * from tbllock_up where type='CT' and IsNull(Deleted,0)=0", "Description", "id", "")
+                clstype.SetComboItems(ddltype2, "", True, "--اختر--", False)
 
 
                 'End dropdown  service ddlAdvisor 

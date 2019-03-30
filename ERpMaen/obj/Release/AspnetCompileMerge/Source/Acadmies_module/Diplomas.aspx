@@ -6,7 +6,7 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services> 
             <asp:ServiceReference Path="~/ASMX_WebServices/DiplomasCls.asmx" />
-            <asp:ServiceReference Path="~/ASMX_WebServices/Testwebservice.asmx" />
+            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
@@ -48,6 +48,7 @@
            box-shadow: 0 7px 3px 0 rgba(0, 0, 0, 0.2), 0 6px 9px 0 rgba(0, 0, 0, 0.19);
            margin-bottom:25px;
            border-radius:7px;
+
         }
 
         .block-title a {
@@ -140,7 +141,7 @@
                             </h3>
                         </div>
                         <div class="col-md-6" >
-                            <input  id="txt_Search" onkeypress="searchCourses();" type="text" class="form-control" placeholder="بحث عن دبلومه" />
+                            <input  id="txt_Search" onkeyup="searchDiploma();" type="text" class="form-control" placeholder="بحث عن دبلومه" />
                         </div>
                         <div class="col-md-2">
 

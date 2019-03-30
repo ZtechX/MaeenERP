@@ -51,9 +51,13 @@ Public Class coursatCls
             If dt_tr.Rows.Count <> 0 Then
                 tr_id = dt_tr.Rows(0).Item("id").ToString
             End If
+            Dim rnd As New Random
+            Dim code = "CRS" & rnd.Next(10000000, 99999999).ToString
+            dictBasicDataJson.Add("code", code)
 
+            dictBasicDataJson.Add("status", "0")
 
-            dictBasicDataJson.Add("status", "60")
+            dictBasicDataJson.Add("comp_id", LoginInfo.GetComp_id())
             dictBasicDataJson.Add("training_center_id", tr_id)
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses", id, _sqlconn, _sqltrans) Then
                 If Not PublicFunctions.TransUsers_logs("3177", "acd_courses", "ادخال", _sqlconn, _sqltrans) Then
@@ -94,7 +98,7 @@ Public Class coursatCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_Courses(ByVal name As String) As String()
+    Public Function get_Courses(ByVal filter As String, ByVal name As String) As String()
         Dim dt_user As DataTable
         dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
         Dim comp_id = dt_user.Rows(0).Item("comp_id").ToString
@@ -103,9 +107,19 @@ Public Class coursatCls
             Dim dt As New DataTable
             Dim condation = ""
             If name <> "" Then
-                condation = " where name LIKE '%" + name + "%'"
+                condation = " AND name LIKE '%" + name + "%'"
             End If
-            dt = DBManager.Getdatatable("select  acd_courses.id , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id " + condation)
+            If filter = "" Then
+                dt = DBManager.Getdatatable("select  acd_courses.id,acd_courses.status,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage' from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id where acd_courses.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_courses.id DESC")
+
+
+            ElseIf filter <> "" And filter <> 4 Then
+                dt = DBManager.Getdatatable("select  acd_courses.id, acd_courses.status ,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage' from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id where acd_courses.comp_id=" + LoginInfo.GetComp_id() + " and acd_courses.status=" + filter + condation + "ORDER BY acd_courses.id DESC")
+            Else
+                dt = DBManager.Getdatatable("select acd_courses_students.course_id, acd_courses.status,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage'  from acd_courses_students join acd_courses  on acd_courses_students.course_id=acd_courses.id join tblUsers on acd_courses.trainer_id=tblUsers.id where acd_courses_students.student_id=" + LoginInfo.GetUser__Id() + condation + "ORDER BY acd_courses.id DESC")
+
+
+            End If
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -155,6 +169,28 @@ Public Class coursatCls
             Return ""
         End Try
         Return ""
+    End Function
+
+#End Region
+
+#Region "get course Code"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function getcourseCode() As String
+
+        Try
+            Dim dt As New DataTable
+            dt = DBManager.Getdatatable("select isNull(Max(code),0) as 'code' from  acd_courses ")
+            If dt.Rows.Count <> 0 Then
+                Return dt.Rows(0)(0).ToString
+            End If
+            Return ""
+        Catch ex As Exception
+            Return ""
+        End Try
     End Function
 
 #End Region

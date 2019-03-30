@@ -68,13 +68,13 @@ Partial Public Class DiplomaCourses
     Protected WithEvents Text2 As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
-    '''Text1 control.
+    '''Text3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text1 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents Text3 As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''HijriCalendar control.
@@ -84,15 +84,6 @@ Partial Public Class DiplomaCourses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents HijriCalendar As Global.ERpMaen.CustomerCalendar
-    
-    '''<summary>
-    '''Text3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Text3 As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''ddltrainer control.
@@ -111,4 +102,13 @@ Partial Public Class DiplomaCourses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents description As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''subject control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents subject As Global.System.Web.UI.HtmlControls.HtmlInputText
 End Class

@@ -32,7 +32,7 @@ function resetAll() {
 function viewConslute(id) {
     
     ConsultationDetails.Edit(id, function (val) {
-        
+        debugger
         prepareAdd();
         resetAll();
         if (val[0] == "1") {

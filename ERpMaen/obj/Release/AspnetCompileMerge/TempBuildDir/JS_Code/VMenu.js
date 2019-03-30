@@ -81,7 +81,7 @@ $(document).ready(function () {
 });
 
 function changeForm(sender) {
-    Zwebservice.GetFormUrl(sender.value, function (val) {
+    WebService.GetFormUrl(sender.value, function (val) {
         if (val != "") {
             setFrame(val);
         }

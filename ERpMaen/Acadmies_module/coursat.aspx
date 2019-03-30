@@ -12,6 +12,8 @@
     </asp:ScriptManager>
 
     <style>
+         /*.form-control { direction:rtl;
+                    }*/
         .wrap {
             margin-top: 50px;
             direction: rtl;
@@ -19,7 +21,8 @@
         .btn {
             float:left;
         }
-
+     
+        
         .widget-navigation {
             text-align: center;
         }
@@ -112,7 +115,8 @@
     <div class="wrap">
          <div>
                     <script src="../JS_Code/acadmies/coursat.js"></script>
-
+            
+         
                 </div>
 
         <section>
@@ -125,18 +129,39 @@
                                 <span>الدورات التدريبية</span>
                             </h3>
                         </div>
+
                         <div class="col-md-6" >
-                            <input  id="txt_Search" onkeypress="searchCourses();" type="text" class="form-control" placeholder="بحث عن دورة" />
+                            <input  id="txt_Search" onkeyup="searchCourses();" type="text" class="form-control" placeholder="بحث عن دورة" />
                         </div>
                         <div class="col-md-2">
 
                             <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addCourse">اضافة دورة <i class="fa fa-plus"></i></button>
-
+                                      <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addCourse" >اضافة دورة <i class="fa fa-plus"></i></button>
+                                <% End If %>
                             </div>
                         </div>
                     </div>
+
+                    
+
                 </div>
+            </div>
+            <div class="row">
+                	<div class="col-md-12" style="text-align: center; ">
+							<div class="btn-group">
+								<button type="button" class="btn btn-secondary" style="width:100px; float: right;" onclick="drawAllCourses();">الكل</button>
+								<button type="button" class="btn btn-success"  style="width:100px; float: right;" onclick="drawCourses(0);">جديدة</button>
+								<button type="button" class="btn btn-primary"  style="width:100px; float: right;" onclick=" drawCourses(1);">حالية</button>
+								<button type="button" class="btn btn-dark"  style="width:100px; float: right;" onclick=" drawCourses(2);">مكتملة</button>
+                                 <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+                                <button type="button" class="btn btn-info"  style="width:100px; float: right;" onclick=" drawCourses(4)">دوراتى</button>
+                                 <% End If%>
+ <br />
+                                <br />
+                                <br />
+							</div>
+						</div>
             </div>
         </section>
         <section>
@@ -153,7 +178,11 @@
             </ul>
         </div>
         </div>
-        <div class="modal" id="addCourse" tabindex="-1" role="dialog">
+        <div class="modal" id="addCourse" tabindex="-1" role="dialog" dir="rtl">
+                 <div id="SavedivLoader" class="loader" style="display: none;  text-align: center;">
+                                                                                    <asp:Image ID="img" runat="server" ImageUrl="../App_Themes/images/loader.gif" />
+
+                                                        </div>
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -161,22 +190,40 @@
                         <h4 class="modal-title">اضافة دورة</h4>
                     </div>
                     <div class="modal-body">
+                                                   
+
                         <div id="divForm">
-                             <div class="col-md-6"> 
-                                 <div class=" row form-group ">
+                            <div class="col-md-12">
+                                      <div class=" row form-group ">
                                      <div class="col-md-3 col-sm-12">
                                          <label for="Name" class="label-required">عنوان الدورة </label>
-
                                      </div>
                                      <div class="col-md-9 col-sm-12">
                                          <asp:TextBox SkinID="form-control" required class="form-control" dbColumn="name" ClientIDMode="Static" ID="courseTitle" runat="server">
                                          </asp:TextBox>
-
                                          <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="courseTitle"
                                              ErrorMessage="من فضلك أدخل عنوان الدورة  " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
 
                                      </div>
                                  </div>
+
+                                 <div class="row form-group">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="Name" >تفاصيل الدورة </label>
+
+                                </div>
+                                <div class="col-md-9 col-sm-12">
+                                    <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="description" ClientIDMode="Static" ID="description" runat="server">
+                                    </asp:TextBox>
+
+
+                                </div>
+                            </div>
+                            </div>
+                             <div class="col-md-6"> 
+                           
+                                 
+                            
 
 
                                  <div class=" row form-group">
@@ -213,21 +260,21 @@
                                          <br />
                                      </div>
                                  </div>
-                                 <div class=" row form-group">
-                                     <div class="col-md-3 col-sm-12">
-                                         <label class="label-required">السعر     </label>
-                                     </div>
-
-                                     <div class="col-md-9 col-sm-12">
-                                         <input onkeypress="return isNumber(event);" required dbcolumn="price" type="text" id="price"
-                                             class="form-control" runat="server" clientidmode="Static" />
-
-                                         <br />
-                                     </div>
-                                 </div>
+                                 
 
                                  </div>
                               <div class="col-md-6"> 
+                                  <div class=" row form-group">
+                                     <div class="col-md-3 col-sm-12">
+                                         <label class="">السعر     </label>
+                                     </div>
+
+                                     <div class="col-md-9 col-sm-12">
+                                         <input onkeypress="return isNumber(event);"  dbcolumn="price" type="text" id="price"
+                                             class="form-control" runat="server" clientidmode="Static" />
+                                     </div>
+                                 </div>
+
                             <div class=" row form-group ">
                                 <div class="col-md-3 col-sm-12">
                                     <label  class="label-required">مدرب الدورة</label>
@@ -236,7 +283,6 @@
                                 <div class="col-md-9 col-sm-12">
                                     <asp:DropDownList dbcolumn="trainer_id"   required class="form-control" ClientIDMode="Static" ID="ddltrainer" runat="server">
                                     </asp:DropDownList>
-                                    <br />
                                 </div>
                             </div>
                                  
@@ -267,7 +313,7 @@
                           
                             <div class="row form-group">
                                  <div class="col-md-3 col-sm-12">
-                                        <label class="label-required"> الدرجة النهائية   </label>
+                                        <label class="label-required"> الدرجة الكلية   </label>
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
@@ -278,18 +324,20 @@
                                         </div>
                             </div>
 
-                            <div class="row form-group">
-                                <div class="col-md-3 col-sm-12">
-                                    <label for="Name" >تفاصيل الدورة </label>
+                                 <div class="row form-group">
+                                 <div class="col-md-3 col-sm-12">
+                                        <label class="label-required">  مدة المحاضرة   </label>
+                                            </div>
 
-                                </div>
-                                <div class="col-md-9 col-sm-12">
-                                    <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="description" ClientIDMode="Static" ID="description" runat="server">
-                                    </asp:TextBox>
-
-
-                                </div>
+                                      <div class="col-md-9 col-sm-12">
+                                            <input onkeypress="return isNumber(event);"  placeholder="مدة المحاضرة بالدقيقة" required dbcolumn="lect_duration" type="text" id="Text1"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                   
+                                        </div>
                             </div>
+
+                           
                             <div class="row">
                                 <br />
                                 <div class="col-md-3 col-sm-12">

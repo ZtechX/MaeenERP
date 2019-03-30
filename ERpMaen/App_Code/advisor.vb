@@ -59,7 +59,7 @@ Public Class advisor
 
                 Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
                 dictBasicDataJson1.Add("full_name", dictBasicDataJson("name"))
-                dictBasicDataJson1.Add("User_Name", dictBasicDataJson("user_nm"))
+                'dictBasicDataJson1.Add("User_Name", dictBasicDataJson("user_nm"))
                 dictBasicDataJson1.Add("User_Email", dictBasicDataJson("email"))
                 dictBasicDataJson1.Add("Active", dictBasicDataJson("active"))
                 dictBasicDataJson1.Add("User_Password", dictBasicDataJson("password"))
@@ -183,7 +183,7 @@ Public Class advisor
 
         Dim Names As New List(Of String)(10)
         Try
-            Return PublicFunctions.ConvertDataTabletoString(DBManager.Getdatatable("SELECT User_Name as 'user_nm',User_Password as 'password',ash_advisors.id,ash_advisors.comp_id ,code ,name ,specialty ,tel ,email ,ash_advisors.active,advisor_identiy  FROM ash_advisors left join tblUsers on ash_advisors.id=tblUsers.related_id where ash_advisors.id=" + editItemId))
+            Return PublicFunctions.ConvertDataTabletoString(DBManager.Getdatatable("SELECT User_Password as 'password',ash_advisors.id,ash_advisors.comp_id ,code ,name ,specialty ,tel ,email ,ash_advisors.active,advisor_identiy  FROM ash_advisors left join tblUsers on ash_advisors.id=tblUsers.related_id where ash_advisors.id=" + editItemId))
         Catch ex As Exception
             Return ""
         End Try

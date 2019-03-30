@@ -28,23 +28,25 @@ $(function () {
     }
 });
 function setDate() {
- 
     Date_m =  Pub_date_m;
     Date_hj = Pub_date_hj;
 }
 function get_admin() {
 
     companies.get_admin(function (val) {
+        
         if (val[0] == "admin") {
-            $("#Li2").css("display", "block");
-            $("#Li1").css("display", "block");
             $("#clearBtn").css("display", "inline-block");
-            $("#acPanal").hide();
-            $("#CenPanal").hide();
-            // form_load();
+            $("#ac_cen_Panal").hide();
+            
             drawDynamicTable();
         } else {
-        if (val[1] != "0") {
+            $("#liStep2").hide();
+            $("#liStep3").hide();
+            $("#liStep4").hide();
+            $("#activate-step-2").hide();
+            $("#Save").show();
+        if (val[1] != "") {
             var comp = JSON.parse(val[1]);
             var comp_admin = JSON.parse(val[0]);
 
@@ -52,10 +54,7 @@ function get_admin() {
             fillControlsFromJson(comp_admin[0], "divAdminComp");
             $("#compLogo").prop("src", comp[0].image_path);
             $("#Comp_imgItemURL").prop("src", comp_admin[0].User_Image);
-
-            //fillControlsFromJson(comp[0],"divForm");
-            //$("#imgItemURL").attr("src", comp[0].image_path);
-            $("#user_name").val(comp_admin[0].User_Name);
+            
             $("#user_password").val(comp_admin[0].User_Password);
             $("#Li2").css("display", "none");
             $("#Li1").css("display", "none");
@@ -78,27 +77,18 @@ function get_admin() {
             $("#lblgroup_id").html(comp_admin[0].group_id);
             get_form_for_permtion_for_edit(comp[0].id, comp_admin[0].group_id)
            
-            if (val[2] != "0") {
-                debugger
-                var Ac_admin = JSON.parse(val[2]);
-                var Acadyme = JSON.parse(val[3]);
-                fillControlsFromJson(Ac_admin[0], "Ac_adminDiv");
+            if (val[2] != "") {
+                var Acadyme = JSON.parse(val[2]);
                 fillControlsFromJson(Acadyme[0], "AcadmeyDiv");
                 Date_m = Acadyme[0].date_m;
                 Date_hj = Acadyme[0].date_hj;
-
-                $("#Ac_imgItemURL").prop("src", Ac_admin[0].User_Image);
-
             }
-            if (val[4] != "0") {
-                var Cen_admin = JSON.parse(val[4]);
-                var center = JSON.parse(val[5]);
-                fillControlsFromJson(Cen_admin[0], "Cen_adminDiv");
+            if (val[3] != "") {
+                var center = JSON.parse(val[3]);
                 fillControlsFromJson(center[0], "CenterDiv");
                 Date_m = center[0].date_m;
                 Date_hj = center[0].date_hj;
-
-                $("#Cen_imgItemURL").prop("src", Cen_admin[0].User_Image);
+                
             }
         }
     }
@@ -107,14 +97,12 @@ function get_admin() {
 
 }
 
-
 function edit(val) {
-   
-    
     resetAll();
     if (val[0] == "1") {
         
         var data = JSON.parse(val[1]);
+        $("#lblmainid").html(data[0].id);
         $("#divdate2 #txtDatem").val(data[0].deal_start_date_m);
         $("#divdate2 #txtDateh").val(data[0].deal_start_date_hj);
         $("#divdate3 #txtDatem").val(data[0].deal_end_date_m);
@@ -191,9 +179,24 @@ function resetAll() {
 function save_companies() {
     try {
         var arr_json = [];
+        $("#SavedivLoader").show();
         if ($("#loginUser").val() == "1") {
-            if (1) {
-                $("#SavedivLoader").show();
+
+            if ($("#txtindenty").val().length != 10) {
+                $("#txtindenty").addClass("error");
+                showErrorMessage("رقم الهوية يجب أن يكون 10 ارقام");
+                return;
+            }
+            if ($("#tele").val().length != 10) {
+                $("#tele").addClass("error");
+                showErrorMessage("رقم الجوال يجب أن يكون 10 ارقام");
+                return;
+            }
+            if ($("#comp_AdminNum").val().length != 10) {
+                $("#comp_AdminNum").addClass("error");
+                showErrorMessage("رقم الجوال يجب أن يكون 10 ارقام");
+                return;
+            }
                 var FormId = $("#lblmainid").html();
                 ///////////////basic
                 var basicData_divComp = generateJSONFromControls("divComp");
@@ -239,25 +242,35 @@ function save_companies() {
                         showErrorMessage(val[0]);
                     }
                 });
-            } else {
-                showErrorMessage("يرجى ادخال البيانات المطلوبه");
-            }
-        } else {
-            if (Page_ClientValidate("vgroup") && Page_ClientValidate("vgroup1")) {
-
+        }
+        else {
+            if (!checkRequired("divForm") && !checkRequired("Acadmey_CenterDataDiv")) { 
+                if ($("#txtindenty").val().length != 10) {
+                    $("#txtindenty").addClass("error");
+                    showErrorMessage("رقم الهوية يجب أن يكون 10 ارقام");
+                    return;
+                }
+                if ($("#tele").val().length != 10) {
+                    $("#tele").addClass("error");
+                    showErrorMessage("رقم الجوال يجب أن يكون 10 ارقام");
+                    return;
+                }
+                if ($("#comp_AdminNum").val().length != 10) {
+                    $("#comp_AdminNum").addClass("error");
+                    showErrorMessage("رقم الجوال يجب أن يكون 10 ارقام");
+                    return;
+                }
+                var FormId = $("#lblmainid").html();
                 var basicData_divComp = generateJSONFromControls("divComp");
                 basicData_divComp["image_path"] = $("#compLogo").prop("src");
                 var basicData_divAdminComp = generateJSONFromControls("divAdminComp");
                 basicData_divAdminComp["User_Image"] = $("#Comp_imgItemURL").prop("src");
                 var basicData_AcadmeyDiv = generateJSONFromControls("AcadmeyDiv");
-                var basicData_Ac_adminDiv = generateJSONFromControls("Ac_adminDiv");
-                basicData_Ac_adminDiv["User_Image"] = $("#Ac_imgItemURL").prop("src");
                 var basicData_CenDiv = generateJSONFromControls("CenterDiv");
-                var basicData_Cen_adminDiv = generateJSONFromControls("Cen_adminDiv");
-                basicData_Cen_adminDiv["User_Image"] = $("#Cen_imgItemURL").prop("src");
-                 arr_json = [basicData_divComp, basicData_divAdminComp, basicData_AcadmeyDiv, basicData_Ac_adminDiv, basicData_CenDiv, basicData_Cen_adminDiv];
-                companies.save_companies(arr_json, Date_m, Date_hj, function (val) {
+               arr_json = [basicData_divComp, basicData_divAdminComp, basicData_AcadmeyDiv, basicData_CenDiv];
 
+                companies.save_companies(FormId,arr_json, Date_m, Date_hj, function (val) {
+                    $("#SavedivLoader").hide();
                     if (val[0] == '1') {
                         showSuccessMessage('تم تسجيل البيانات بنجاح');
                         cancel2();
@@ -269,6 +282,7 @@ function save_companies() {
                 });
             }
             else {
+                $("#SavedivLoader").hide();
                 showErrorMessage("يرجى ادخال البيانات المطلوبه");
             }
         }
@@ -294,9 +308,6 @@ function get_form_for_permtion() {
             }
                $('#tablePrint').html("</tbody>"+div_show);
 
-            //} else {
-            //    showErrorMessage("No data found !!");
-            //}
         });
     } catch (err) {
         alert(err);
@@ -341,22 +352,19 @@ function get_form_for_permtion_for_edit(comp_id,group_id) {
             }
             $('#tablePrint').html("</tbody>" + div_show);
 
-            //} else {
-            //    showErrorMessage("No data found !!");
-            //}
         });
     } catch (err) {
         alert(err);
     }
 }
 
-
 function check_row(e, id) {
     if ($(e).is(':checked')) {
-
         $('#tr_' + id).css("background", "#afcce6");
     }
-    else { $('#tr_' + id).css("background", "transparent"); }
+    else {
+        $('#tr_' + id).css("background", "transparent");
+    }
 
 }
 function get_maintance() {
@@ -403,7 +411,6 @@ function fillImages(data) {
         if (data != "") {
             var files = JSON.parse(data);
             if (files.length > 0) {
-                //  $('#tblUploadedFiles').remove();
                createTblUploadedFiles(["Index", "File", "Name", "Delete"]);
                 for (i = 0; i < files.length; i++) {
                     appendFileTR(files[i], i);
@@ -424,8 +431,6 @@ function cancel2() {
 
     $("#compLogo").prop("src","../App_Themes/images/add-icon.jpg");
     $("#Comp_imgItemURL").prop("src","../App_Themes/images/add-icon.jpg");
-    $("#Ac_imgItemURL").prop("src","../App_Themes/images/add-icon.jpg");
-    $("#Cen_imgItemURL").prop("src", "../App_Themes/images/add-icon.jpg");
     $('#perm_table input:checkbox').prop("checked", false);
     $('#perm_table tr').css("background", "transparent");
     $("#divdate2 #txtDatem").val("");

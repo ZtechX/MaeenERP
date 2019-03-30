@@ -144,7 +144,7 @@ function SetFrame(val) {
 }
 
 function ChangeForm(sender) {
-    Zwebservice.GetFormUrl(sender.value, function (val) {
+    WebService.GetFormUrl(sender.value, function (val) {
         if (val != "") {
             window.location.href = val;
         }
@@ -158,7 +158,7 @@ function SwapMenu(sender) {
             $("#pnlVMenu").hide();
             $("#pnlVMenu2").hide();
             $("#pnlHMenu").show();
-            Zwebservice.SetMenuType("HMenu", OnUpdatedMenu);
+            WebService.SetMenuType("HMenu", OnUpdatedMenu);
             document.getElementById('right_cont').style.width = '100%';
             document.getElementById('navTopMenu').style.width = '100%';
             document.getElementById('cssmenu').className = '';
@@ -171,7 +171,7 @@ function SwapMenu(sender) {
             $("#pnlVMenu").show();
             $("#pnlVMenu2").show();
             $("#pnlHMenu").hide();
-            Zwebservice.SetMenuType("VMenu", OnUpdatedMenu);
+            WebService.SetMenuType("VMenu", OnUpdatedMenu);
             document.getElementById('right_cont').style.width = '88%';
             document.getElementById('navTopMenu').style.width = '88%';
         }

@@ -29,7 +29,7 @@ Partial Public Class Login
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtUserName As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtUserName As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''txtPassword control.

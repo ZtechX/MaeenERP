@@ -170,9 +170,17 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
             }
             var new_date_h = month + "/" + year;
             var monthdata = "";
+            var monthdata1 = "";
+            var monthdata2 = "";
             cases.get_dates(new_date_h, function (val) {
                 if (val[0] != "0") {
                      monthdata = JSON.parse(val[0]);
+                }
+                if (val[1] != "0") {
+                    monthdata1 = JSON.parse(val[1]);
+                }
+                if (val[2] != "0") {
+                    monthdata2 = JSON.parse(val[2]);
                 }
                     for (let i = 1; i <= ppdr + pcdr + pndr; i++) {
                         if (gridCtr == 0) { var row = createElm('div', 'w3-cell-row w3-center'); gridsElm.appendChild(row) }
@@ -200,18 +208,43 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                         }
                         mdate1 = (sdate < 10 ? "0" + sdate : sdate) + '/' + ((getOppsDate().getMonth() + 1) < 10 ? "0" + (getOppsDate().getMonth() + 1) : (getOppsDate().getMonth() + 1)) + '/' + (getOppsDate().getFullYear());
                         var res = comparedate(monthdata, mdate1);
-                        if (res) {
-                            var res_id = res.split("/")[0]
-                            var res_type = res.split("/")[1]
-                            $(grid).prop("id", res_id);
-                            $(grid).css("color", "#ffffff");
-                            if (res_type == 1) {
-                                $(grid).css("background-color", "#148083");
-                            } else {
+                        var res1 = comparedate(monthdata1, mdate1);
+                        var res2 = comparedate(monthdata2, mdate1);
+                        //var arr = [];
+                        //arr.push(res.split("/")[0], res.split("/")[1]);
+                        //console.log(arr);
+                        if (monthdata != "") {
+                            if (res) {
+                                var res_id = res.split("/")[0]
+                                var res_type = res.split("/")[1]
+                                $(grid).prop("id", res_id);
+                                $(grid).css("color", "#ffffff");
                                 $(grid).css("background-color", "#C09C67");
 
+                                $(grid).addClass("w3-round-large");
                             }
-                            $(grid).addClass("w3-round-large");
+                        }
+                        if (monthdata1 != "") {
+                            if (res1) {
+                                var res_id = res1.split("/")[0]
+                                var res_type = res1.split("/")[1]
+                                $(grid).prop("id", res_id);
+                                $(grid).css("color", "#ffffff");
+                                $(grid).css("background-color", "#C09C67");
+
+                                $(grid).addClass("w3-round-large");
+                            }
+                        }
+                        if (monthdata2 != "") {
+                            if (res2) {
+                                var res_id = res2.split("/")[0]
+                                var res_type = res2.split("/")[1]
+                                $(grid).prop("id", res_id);
+                                $(grid).css("color", "#ffffff");
+                                $(grid).css("background-color", "#C09C67");
+
+                                $(grid).addClass("w3-round-large");
+                            }
                         }
                         pde.innerHTML = Calendar.getDigit(pdate); sde.innerHTML = Calendar.getDigit(sdate) + ' ' + smsn; pdate++; $(sde).prop('id', 'dateval'); $(sde).attr('date', (sdate < 10 ? "0" + sdate : sdate) + '/' + ((getOppsDate().getMonth() + 1) < 10 ? "0" + (getOppsDate().getMonth() + 1) : (getOppsDate().getMonth() + 1)) + '/' + (getOppsDate().getFullYear())); $(sde).attr('hdate', ((pdate - 1) < 10 ? "0" + (pdate - 1) : (pdate - 1)) + '/' + ((dispDate.getMonth() + 1) < 10 ? "0" + (dispDate.getMonth() + 1) : (dispDate.getMonth() + 1)) + '/' + (dispDate.getFullYear()));
                         if (pdate > pdim) { pdate = 1; dispDate.setMonth(dispDate.getMonth() + 1); pdim = dispDate.getDayCountInMonth() }
@@ -506,18 +539,28 @@ Calendar.language['ar'] = {
     hMonthNames: ["المُحَرَّم", "صَفَر ", "رَبيع الاوَّل", "رَبيع الآخِر", "جُمادى الأولى", "جُمادى الآخِرة", "رَجَب", "شَعبان", "رَمَضان", "شَوّال", "ذو القَعدة", "ذو الحِجّة"]
 };
 function getmydate(sender) {
+   
     var id = $(sender).prop('id');
     $("#lbldelivery_date_m").html($(sender).find("#dateval").attr('date'));
     $("#lbldelivery_date_h").html($(sender).find("#dateval").attr('hdate'));
+    $("#lbldelivery_date_m1").html($(sender).find("#dateval").attr('date'));
+    $("#lbldelivery_date_h1").html($(sender).find("#dateval").attr('hdate'));
+    $("#lbldelivery_date_m2").html($(sender).find("#dateval").attr('date'));
+    $("#lbldelivery_date_h2").html($(sender).find("#dateval").attr('hdate'));
     if ($(sender).hasClass("w3-disabled")) {
     } else {
-        $("#receiving_delivery_details").dialog({
-            width: "800px",
-        });
+  
         if (id != "") {
-            show_all(id, 1);
+         //   show_all(id, 1);
+            $("#multi_cases").dialog({
+                width: "800px",
+            });
+            get_cases($(sender).find("#dateval").attr('hdate'));
         } else {
             resetDivControls("receiving_delivery_details");
+            getSerial_correspondencesn()
+            getSerial_sessions()
+            define_type(2,2)
             $("#child_info").css("display", "block")
             $("#money_data").css("display", "none")
             $("#lbldelivery_details").html("");
@@ -525,10 +568,99 @@ function getmydate(sender) {
             $("#ddldeliverer_id").html("");
             $("#ddlreciever_id").html("");
             $("#save_delivery_details").css("display", "block");
+            $("#receiving_delivery_details").dialog({
+                width: "800px",
+            });
         }
+      
     }
+   
 
 
+}
+function add_new_date() {
+
+    //resetDivControls("receiving_delivery_details");
+    $("#child_info").css("display", "block")
+    $("#money_data").css("display", "none")
+    $("#lbldelivery_details").html("");
+    $('#tab_children').html("");
+    $("#ddldeliverer_id").html("");
+    $("#ddlreciever_id").html("");
+    $("#save_delivery_details").css("display", "block");
+    $("#receiving_delivery_details").dialog({
+        width: "800px",
+    });
+    $("#ddlcase_id").val(0);
+    $("#ddltype").val(1);
+    $("#save_sessions").css("display", "none");
+    $("#save_correspondences").css("display", "none");
+    define_type(1, 2);
+
+
+}
+function get_cases(date_h) {
+    var h = 1;
+    cases.get_cases(date_h, function (val) {
+        if (val[0] != "0" || val[1] != "0" || val[2] != "0") {
+            if (val[0] != "0") {
+            var data = JSON.parse(val[0]);
+            var result = "";
+                var status = "تسليم واستلام الاولاد";
+            for (var x = 0; x < data.length; x++) {
+                if (data[x].type == 2) {
+                    status = "تسليم واستلام النفقة";
+                }
+                result = result + "<tr><td>" + parseInt(h) + "</td>" +
+                    "<td id='case_name_search'>حالة#" + data[x].cases + "  " + "مقدمة من : " + data[x].person + " " + "رقم الهوية : " + data[x].num + "  " + "</td>" +
+                    "<td id='status_case'>" + status + "</td>" +
+                    "<td><button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + data[x].id + ",1,1); return false; '><i class='fa fa-eye'></i></button></td>" +
+                    "</tr>";
+                h++;
+            }
+            $("#cases_dates").html(result);
+            } else {
+                $("#cases_dates").html("");
+            }
+
+            if (val[1] != "0") {
+                var data = JSON.parse(val[1]);
+                var result = "";
+                var status = "جلسات التهيئة والتدرج";
+                for (var x = 0; x < data.length; x++) {
+                    result = result + "<tr><td>" + parseInt(h) + "</td>" +
+                        "<td id='case_name_search'>حالة#" + data[x].cases + "  " + "مقدمة من : " + data[x].person + " " + "رقم الهوية : " + data[x].num + "  " + "</td>" +
+                        "<td id='status_case'>" + status + "</td>" +
+                        "<td><button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + data[x].id + ",1,3); return false; '><i class='fa fa-eye'></i></button></td>" +
+                        "</tr>";
+                    h++;
+                }
+                $("#cases_dates").append(result);
+            } else {
+                $("#cases_dates").append("");
+            }
+
+            if (val[2] != "0") {
+           
+            var data = JSON.parse(val[2]);
+            var result = "";
+            var status = "اجرائات العضو المباشر للحالة";
+            for (var x = 0; x < data.length; x++) {
+                result = result + "<tr><td>" + parseInt(h) + "</td>" +
+                    "<td id='case_name_search'>حالة#" + data[x].cases + "  " + "مقدمة من : " + data[x].person + " " + "رقم الهوية : " + data[x].num + "  " + "</td>" +
+                    "<td id='status_case'>" + status + "</td>" +
+                    "<td><button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + data[x].id + ",1,4); return false; '><i class='fa fa-eye'></i></button></td>" +
+                    "</tr>";
+                h++;
+            }
+            $("#cases_dates").append(result);
+            } else {
+            $("#cases_dates").append("");
+        }
+    }else {
+            $("#cases_dates").html("");
+        }
+    });
 }
 
 function getMonthData(month) {

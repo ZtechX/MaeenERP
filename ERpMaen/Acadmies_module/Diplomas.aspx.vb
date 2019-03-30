@@ -41,12 +41,10 @@ Public Class Diplomas
 
 
 
-                'Dim clsapprove_tainer As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='4' ", "full_name", "id", "")
-                'clsapprove_tainer.SetComboItems(ddltrainer, "", True, "--اختر--", False)
 
 
 
-                Dim clsapprove_category As New clsFillComboByDataSource("select * from tblLock_up where type='CD' and IsNull(Deleted,0)=0", "Description", "id", "")
+                Dim clsapprove_category As New clsFillComboByDataSource("select * from tblLock_up where type='CD' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_category.SetComboItems(ddlcategory, "", True, "--اختر--", False)
 
 

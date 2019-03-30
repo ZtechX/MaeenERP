@@ -14,7 +14,8 @@ $(function () {
 
     try {
 
-        drawCourses();
+        drawAllCourses();
+       // getcousreCode();
     } catch (err) {
         alert(err);
     }
@@ -33,11 +34,14 @@ function resetAll() {
 
 
 
+
 function saveCourse() {
 
 
     try {
 
+        setRequired_Date("divdate1");
+        setRequired_Date("divdate2");
 
         if (checkRequired("divForm") == 1) {
 
@@ -45,34 +49,46 @@ function saveCourse() {
         } else {
 
 
-            //debugger
-
+          
             $("#end_datem").val($("#divdate2 #txtDatem").val());
             $("#end_datehj").val($("#divdate2 #txtDateh").val());
-
-
-
+          
             $("#start_date_m").val($("#divdate1 #txtDatem").val());
             $("#start_date_hj").val($("#divdate1 #txtDateh").val());
 
-            var basicData = generateJSONFromControls("divForm");
+            var enddate_m = document.getElementById("end_datem").value;
+           
+            var startdate_m = document.getElementById("start_date_m").value;
 
-            var Id = "";
-            console.log(basicData);
-            coursatCls.Save(Id, basicData, function (val) {
-                if (val == true) {
-                    debugger;
-                    alert("تم الحفظ بنجاح");
-                    $("#addCourse").modal('hide');
-                    resetDivControls("divForm");
-                    drawCourses();
+           // console.log(enddate_m + "     " + startdate_m);
 
 
-                } else {
-                    alert("لم يتم الحفظ");
-                }
+            if (enddate_m > startdate_m)
+            {
+                var basicData = generateJSONFromControls("divForm");
 
-            });
+                var Id = "";
+                $("#SavedivLoader").show();
+                coursatCls.Save(Id, basicData, function (val) {
+                    if (val === true) {
+
+                        $("#addCourse").modal('hide');
+                        resetDivControls("divForm");
+                        drawAllCourses();
+                        $("#SavedivLoader").hide();
+                        alert("تم الحفظ بنجاح");
+                        getcousreCode();
+
+                    } else {
+                        alert("لم يتم الحفظ");
+                    }
+
+                });
+            }
+            else {
+                alert("تاريخ البداية اكبر من تاريخ النهاية")
+            }
+
         }
 
 
@@ -121,18 +137,21 @@ function changePage(page) {
     $("#li_" + page).addClass("active");
     $("#courses-list").html("");
     var data = "";
-    for (var i = (page - 1) * records_per_page; i < (page * records_per_page) && i < CoursesList.length; i++) {
-        var element = CoursesList[i];
-        data = data + `<div class="col-md-4 col-sm-12" >
+    var colors = ["#5cb85c", "#d9534f", "#DDDDDD"];
+    
+
+        for (var i = (page - 1) * records_per_page; i < (page * records_per_page) && i < CoursesList.length; i++) {
+            var element = CoursesList[i];
+            data = data + `<div class="col-md-4 col-sm-12" >
 <div class="block">
-                        <div class="block-title">
-                            <h5><a href="courseDetails.aspx?course_id=${element.id}">${element.name}</a></h5>
+                        <div class="block-title" style="background:${colors[element.status]}">
+                            <h5><a href="courseDetails.aspx?code=${element.code}">${element.name}</a></h5>
                         </div>
                         <div class="block-desc">
                             <p class="desc">${element.description}</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
-                                    <img class="avatar" src="../assets/images/101.jpg" />
+                                    <img class="avatar" src="${element.trImage}" />
                                     <span>${element.full_name}</span>
                                 </div>
                                 <div class="block-date pull-left">
@@ -143,36 +162,85 @@ function changePage(page) {
 </div>
                     </div>
                 </div>`;
+        }
+        $("#courses-list").html(data);
+     
     }
-    $("#courses-list").html(data);
 
-    
-}
-
-function drawCourses(){
+ 
+function drawAllCourses() {
     try {
-        coursatCls.get_Courses( "",function (val) {
+     
+
+        coursatCls.get_Courses("", "", function (val) {
+            //debugger
             var data = "";
             var arr1 = JSON.parse(val[1]);
             CoursesList = arr1;
-             numPages = Math.ceil(CoursesList.length / records_per_page);
-           
+            numPages = Math.ceil(CoursesList.length / records_per_page);
+
             var str = "";
-            for (var i = 0; i < (numPages+2);i++) {
-                
+            for (var i = 0; i < (numPages + 2); i++) {
+
                 if (i == 0) {
                     str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
                 }
-                else if (i == (numPages+1)) {
+                else if (i == (numPages + 1)) {
                     str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
-                   
+
                 } else {
-                    str += '<li id="li_'+i+'" class="paginate_button"><a onclick="changePage('+i+');">'+i+'</a></li>';
-                    
+                    str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
+
                 }
             }
             $(".pagination").html(str);
             changePage(1);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
+function drawCourses(filter){
+    try {
+       
+        
+        coursatCls.get_Courses(filter, "", function (val) {
+            //debugger
+            var data = "";
+            if (val[0] == "0") {
+                
+                     $("#courses-list").html("لا يوجد كورسات تم التسجيل بها ");
+                  
+           
+            }
+            else {
+                var arr1 = JSON.parse(val[1]);
+                CoursesList = arr1;
+
+               // debugger
+                numPages = Math.ceil(CoursesList.length / records_per_page);
+
+                var str = "";
+                for (var i = 0; i < (numPages + 2); i++) {
+
+                    if (i == 0) {
+                        str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
+                    }
+                    else if (i == (numPages + 1)) {
+                        str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
+
+                    } else {
+                        str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
+
+                    }
+                }
+                $(".pagination").html(str);
+                changePage(1);
+
+            }
+           
+           
         });
            } catch (err) {
         alert(err);
@@ -181,57 +249,38 @@ function drawCourses(){
 
 function searchCourses() {
     try {
-        
-            
-            var courseName = $("#txt_Search").val();
-            coursatCls.get_Courses(courseName, function (val) {
-                debugger
-
-                var data = "";
-                //console.log(val);
-                if (val[0] == "1") {
-                    var arr1 = JSON.parse(val[1]);
-                  
-                    arr1.forEach(function (element) {
-                       debugger
-                        data = data + `<div class="col-md-4 col-sm-12">
-                    <div class="block">
-                        <div class="block-title">
-                            <h5><a href="courseDetails.aspx?course_id=${element.id}">${element.name}</a></h5>
-                        </div>
-                        <div class="block-desc">
-                            <p class="desc">${element.description}</p>
-                            <div class="row desc-inner">
-                                <div class="bock-trainee pull-right">
-                                    <img class="avatar" src="../assets/images/101.jpg" />
-                                    <span>${element.full_name} </span>
-                                </div>
-                                <div class="block-date pull-left">
-                                    <i class="fa fa-calendar-check-o"></i>
-                                    <span>${element.end_date_m}   </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-                        
-
-                    });
 
 
-                    $("#courses-list").html(data);
-                } else {
-                    showErrorMessage("Not Found");
+        var courseName = $("#txt_Search").val();
+        coursatCls.get_Courses("", courseName, function (val) {
+            var data = "";
+            var arr1 = JSON.parse(val[1]);
+            CoursesList = arr1;
+            numPages = Math.ceil(CoursesList.length / records_per_page);
+
+            var str = "";
+            for (var i = 0; i < (numPages + 2); i++) {
+
+                if (i == 0) {
+                    str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
                 }
+                else if (i == (numPages + 1)) {
+                    str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
 
-            });
-       
-    
+                } else {
+                    str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
+
+                }
+            }
+            $(".pagination").html(str);
+            changePage(1);
+        });
+
+
     } catch (err) {
         alert(err);
     }
 }
-
 
 
 

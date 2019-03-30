@@ -140,15 +140,6 @@ Partial Public Class Users
     Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtContactInfo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtContactInfo As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''TextBox2 control.
     '''</summary>
     '''<remarks>
@@ -165,6 +156,15 @@ Partial Public Class Users
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtindenty As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''ddlUser_Type control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlUser_Type As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''ddlgroup_id control.

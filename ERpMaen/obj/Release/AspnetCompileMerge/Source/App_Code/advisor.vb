@@ -39,8 +39,22 @@ Public Class advisor
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
-            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-
+            Dim group_id = ""
+            Dim user_id = ""
+            Dim dt As New DataTable
+            If id = "" Then
+                dt = DBManager.Getdatatable("select id from tbllock_up where RelatedId=2 and Type='PG' and Comp_id=" + LoginInfo.GetComp_id())
+                If dt.Rows.Count <> 0 Then
+                    group_id = dt.Rows(0)(0).ToString
+                End If
+            Else
+                dt = DBManager.Getdatatable("select id from tblUsers where related_id=" + id)
+                If dt.Rows.Count <> 0 Then
+                    user_id = dt.Rows(0)(0).ToString
+                End If
+            End If
+                Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            dictBasicDataJson.Add("comp_id", LoginInfo.GetComp_id())
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_advisors", id, _sqlconn, _sqltrans) Then
 
                 Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
@@ -53,13 +67,20 @@ Public Class advisor
                 dictBasicDataJson1.Add("user_indenty", dictBasicDataJson("advisor_identiy"))
                 dictBasicDataJson1.Add("comp_id", LoginInfo.GetComp_id())
                 dictBasicDataJson1.Add("User_Type", 6)
-                dictBasicDataJson1.Add("related_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
-                dictBasicDataJson1.Add("group_id", 115)
-
+                If id = "" Then
+                    dictBasicDataJson1.Add("related_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                    dictBasicDataJson1.Add("group_id", group_id)
+                Else
+                    dictBasicDataJson1.Add("related_id", id)
+                End If
                 Dim dtcheckemailphone As New DataTable
-                dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where user_indenty='" + dictBasicDataJson1("user_indenty") + "' or User_PhoneNumber='" + dictBasicDataJson1("User_PhoneNumber") + "'")
+                If id = "" Then
+                    dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where user_indenty='" + dictBasicDataJson1("user_indenty") + "' or User_PhoneNumber='" + dictBasicDataJson1("User_PhoneNumber") + "'")
+                Else
+                    dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where ( user_indenty='" + dictBasicDataJson1("user_indenty") + "' or User_PhoneNumber='" + dictBasicDataJson1("User_PhoneNumber") + "')  and  Id!='" + user_id + "'")
+                End If
                 If dtcheckemailphone.Rows.Count = 0 Then
-                    If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson1, "tblUsers", "", _sqlconn, _sqltrans) Then
+                    If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson1, "tblUsers", user_id, _sqlconn, _sqltrans) Then
                         _sqltrans.Rollback()
                         _sqlconn.Close()
                         Return "False|لم يتم الحفظ"
@@ -133,13 +154,13 @@ Public Class advisor
         Try
             Dim dt As New DataTable
             Dim UserId As String = HttpContext.Current.Request.Cookies("UserInfo")("UserId")
-            dt = DBManager.Getdatatable("select isNull(comp_id,'0') comp_id,User_Type  from tblUsers where id=" + UserId)
+            dt = DBManager.Getdatatable("select isNull(related_id,'0') related_id,User_Type  from tblUsers where id=" + UserId)
             If dt.Rows.Count <> 0 Then
-
-                If dt.Rows(0)("User_Type").ToString = "13" Then
+                Dim user_type = dt.Rows(0)("User_Type").ToString
+                If user_type = "1" Or user_type = "2" Then
                     Return "Superadmin"
                 End If
-                Return dt.Rows(0)("comp_id").ToString
+                Return dt.Rows(0)("related_id").ToString
             End If
 
         Catch ex As Exception
@@ -158,18 +179,13 @@ Public Class advisor
     ''' </summary>
     <WebMethod()>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function Edit(ByVal editItemId As String) As String()
+    Public Function Edit(ByVal editItemId As String) As String
 
         Dim Names As New List(Of String)(10)
         Try
-            Dim str As String = PublicFunctions.GetDataForUpdate("ash_advisors", editItemId)
-            Names.Add("1")
-            Names.Add(str)
-            Return Names.ToArray
+            Return PublicFunctions.ConvertDataTabletoString(DBManager.Getdatatable("SELECT User_Name as 'user_nm',User_Password as 'password',ash_advisors.id,ash_advisors.comp_id ,code ,name ,specialty ,tel ,email ,ash_advisors.active,advisor_identiy  FROM ash_advisors left join tblUsers on ash_advisors.id=tblUsers.related_id where ash_advisors.id=" + editItemId))
         Catch ex As Exception
-            Names.Add("0")
-            Names.Add(" No Results were Found!")
-            Return Names.ToArray
+            Return ""
         End Try
     End Function
 

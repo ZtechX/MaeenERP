@@ -49,7 +49,14 @@
     border: 1px solid gainsboro;
 }
         #divAreaList1{    max-height: 200px; overflow: auto;}
-       .card .btn-link{width:100%;}
+       .card .btn-link{
+          width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 0px;
+    border-top: 1px solid #adadad;
+    padding: 7px;
+    margin-bottom: 10px;
+       }
     </style>
 
                 <div>
@@ -100,7 +107,7 @@
                         <uc1:PnlConfirm runat="server" ID="PnlConfirm" />
                     </div>
                     <uc1:Result runat="server" ID="Result" />
-                    <div id="divForm" class="newformstyle form_continer">
+                    <div id="divForm" class="newformstyle form_continer" style="direction:rtl;">
                         <div class="clear"></div>
                         <asp:ValidationSummary ID="ValidationSummary2" runat="server" ValidationGroup="vgroup" />
                       <asp:Label ID="lblmainid" ClientIDMode="Static" Style="display: none" runat="server" dbColumn="id"></asp:Label>
@@ -110,13 +117,8 @@
                         <div class="cp_margin pad10">
                             <div class="clear"></div>
                             <asp:Panel ID="pnlForm" runat="server">
-                                <div class="col-md-6">
-                                <div class="row">
-                                      <button onclick="addNewGroup(); return false;" class="btn btn-info btn-lg pull-right"  >إنشاء مجموعة</button>
-       
-                                </div>
-                                        
-                                            <div class="row">
+                             <div class="col-md-9">
+                                                <div  class="col-md-6">
                                                   <div class="col-md-3 col-sm-12">
                                                  <label for="Name" class="label-required">المجموعة </label>
 
@@ -129,17 +131,19 @@
                                                     ErrorMessage="من فضلك أدخل اختر المجموعة " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
                                          
                                                   </div>
+                                                </div>
+                                                           <div class="col-md-3">
+                                      <button onclick="addNewGroup(); return false;" class="btn btn-info btn-lg"  >إنشاء مجموعة جديدة</button>
+       
+                                </div>
                                                   </div>
                                            
-                                              
-                                   
-                                                       </div>
                                
                                 <div class="clearfix"></div>
                             </asp:Panel>
                         </div>
                         <div class="row">
-                           <div id="tablePrint">
+                           <div id="tablePrint" style="margin-top: 20px;">
                                 </div>
 
                         </div>

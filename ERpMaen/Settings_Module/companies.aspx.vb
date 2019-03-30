@@ -36,9 +36,12 @@ Public Class companies
         Try
             If Page.IsPostBack = False Then
                 loginUser.Value = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
-
-
                 Dim comp_id = LoginInfo.GetComp_id()
+                Dim cls_Acadmin As New clsFillComboByDataSource("select * from tblUsers where User_Type !=2 and comp_id=" + comp_id, "full_name", "id", "")
+                cls_Acadmin.SetComboItems(ddl_Acadmin, "", True, "--اختر--", False)
+                Dim cls_Cenadmin As New clsFillComboByDataSource("select * from tblUsers where User_Type !=2 and comp_id=" + comp_id, "full_name", "id", "")
+                cls_Acadmin.SetComboItems(ddl_Cenadmin, "", True, "--اختر--", False)
+
 
 
 
@@ -63,11 +66,6 @@ Public Class companies
                     fu = compLogo_fuPhoto1
                 Case "comp_fuPhoto1"
                     fu = comp_fuPhoto1
-                Case "Ac_fuPhoto1"
-                    fu = Ac_fuPhoto1
-                Case "cen_fuPhoto1"
-                    fu = cen_fuPhoto1
-
             End Select
             Path = "Settings_Module/images_company/"
             Prepare_Sheet(fu)

@@ -59,13 +59,22 @@ Partial Public Class Person
     Protected WithEvents ddlrealtion As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''Text1 control.
+    '''txt_phone control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text1 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txt_phone As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''txt_indenty control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_indenty As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''Text2 control.

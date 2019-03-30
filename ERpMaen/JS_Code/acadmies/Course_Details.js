@@ -8,11 +8,12 @@ var formAutoCodeControl = "lblmainid";
 $(function () {
 
     try {
-      
         $("#pnlConfirm").hide();
         $("#divData").hide();
-        //$("#SavedivLoader").show();
+      //  $("#SavedivLoader").show();
 
+
+        getlectureCode();
         GetCourses();
         drawLecturesTable();
         drawStudentTable();
@@ -24,7 +25,10 @@ $(function () {
         drawExams();
         drawCourseFile();
         drawCourseComments();
-        //$("#SavedivLoader").hide();
+        drawstudentHomeworkTable();
+        drawstudentExamsTable();
+       
+    
 
     } catch (err) {
         alert(err);
@@ -57,7 +61,7 @@ function saveCourse() {
                 var basicData = generateJSONFromControls("divformEditCourse");
 
                 var CourseId = ($("#Lblcourse_id").html());
-                console.log(basicData);
+               // console.log(basicData);
                 courseDetailsCls.SaveCourse(CourseId, basicData, function (val) {
                     if (val == true) {
                         
@@ -90,13 +94,12 @@ catch (err) {
 }
 
 
-
 function SaveExam() {
 
     try {
-
-
-        if (checkRequired("divformExams")==1) {
+        setRequired_Date("divdateExam");
+        // debugger
+        if (checkRequired("divformExams") == 1) {
             alert("يرجى ادخال البيانات المطلوبة");
 
         }
@@ -108,12 +111,13 @@ function SaveExam() {
 
             var basicData = generateJSONFromControls("divformExams");
 
-
+          //  var degreeID = $("#LblDegree_id").html();
             var CourseId = ($("#Lblcourse_id").html());
             var ExamID = $("#LblExam_id").html();
             console.log($("#fileURL3").val());
             console.log(basicData);
-            courseDetailsCls.SaveExam(ExamID, CourseId, basicData, function (val) {
+            console.log($("#LblLecture_id").html());
+            courseDetailsCls.SaveExam(ExamID, $("#LblLecture_id").html(), CourseId, basicData, function (val) {
                 if (val == true) {
                     //debugger;
                     $("#SavedivLoader").hide();
@@ -122,6 +126,7 @@ function SaveExam() {
                     resetDivControls("divformExams");
                     drawExams();
                     $("#LblExam_id").html("");
+                    $("#LblLecture_id").html("")
 
 
 
@@ -136,12 +141,16 @@ function SaveExam() {
             });
         }
 
-    
+
     }
     catch (err) {
         alert(err);
     }
 }
+
+
+
+
 function sendMsg() {
     try {
 
@@ -244,30 +253,34 @@ function sendMsgtoAdmin() {
 
 }
 
+
 function SaveHomework() {
 
     try {
+        setRequired_Date("divdateHomework");
 
-
-        if (checkRequired("divformHomework")==1) {
+        if (checkRequired("divformHomework") == 1) {
             alert("يرجى ادخال البيانات المطلوبة");
         }
         else {
             $("#SavedivLoader").show();
-           
+
             $("#date3_m").val($("#divdateHomework #txtDatem").val());
             $("#date3_hj").val($("#divdateHomework #txtDateh").val());
 
-         
+
 
             var basicData = generateJSONFromControls("divformHomework");
 
 
             var CourseId = ($("#Lblcourse_id").html());
+            var lectureID = $("#LblLecture_id").html();
+
+
             var HomewID = $("#LblHomework_id").html();
-        
+
             console.log(basicData);
-            courseDetailsCls.SaveHomeWork(HomewID, CourseId, basicData, function (val) {
+            courseDetailsCls.SaveHomeWork(HomewID, lectureID, CourseId, basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     //debugger;
@@ -276,6 +289,7 @@ function SaveHomework() {
                     resetDivControls("divformHomework");
                     drawHomeworks();
                     $("#LblHomework_id").html("");
+                    $("#LblLecture_id").html("");
 
 
                 }
@@ -294,6 +308,112 @@ function SaveHomework() {
     }
 }
 
+
+
+function addStudentdegree() {
+
+    try {
+
+       
+        if (!checkRequired()) {
+          
+
+            var students_degree = [];
+            $("#pblcstudentdegrees tr").each(function () {
+                var obj = {};
+                obj["id"] = $(this).find("label").attr("id");
+                obj["fdegree"] = $(this).find("#finaldegee").val();
+                obj["Acdegree"] = $(this).find("#activitydegee").val();
+                students_degree.push(obj);
+
+            });
+
+            console.log(students_degree);
+            var CourseId = ($("#Lblcourse_id").html());
+            // $("#SavedivLoader").show();
+
+            courseDetailsCls.addStudentdegree(CourseId, students_degree, function (val) {
+                if (val == true) {
+
+                    $("#SavedivLoader").hide();
+                    alert("  تم الحفظ  ");
+                    $("#publicStudentDegree").modal('hide');
+
+                    resetAll();
+                    prepareAdd();
+
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+
+
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
+function saveHomeworkDegree() {
+
+    try {
+
+
+        if (!checkRequired()) {
+
+
+            var students_degree = [];
+            $("#studentHWAnswers tr").each(function () {
+                debugger
+                var obj = {};
+                obj["id"] = $(this).find("label").attr("id");
+                obj["hwmstuddegree"] = $(this).find("#Homeworkdegee").val();
+                obj["file"] = $(this).find("#homeworkfile").attr("href");
+                students_degree.push(obj);
+
+            });
+
+            console.log(students_degree);
+           // var CourseId = ($("#Lblcourse_id").html());
+            var homeworkID = ($("#LblHomework_id").html());
+            // $("#SavedivLoader").show();
+
+            courseDetailsCls.savehomeworkDegree(homeworkID ,students_degree, function (val) {
+                if (val == true) {
+
+                    $("#SavedivLoader").hide();
+                    alert("  تم الحفظ  ");
+                    $("#StudenthomeworkAnswers").modal('hide');
+
+                    resetAll();
+                    prepareAdd();
+
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+
+
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
 
 function resetAll() {
     try {
@@ -321,30 +441,34 @@ function SaveAbsenceStudent() {
                     student_arr.push(value)
                 }
             });
-           
+            
             var CourseId = ($("#Lblcourse_id").html());
-
-
             $("#SavedivLoader").show();
-            courseDetailsCls.SaveStudentAbsence(CourseId, $("#LblLecture_id").html(), student_arr, function (val) {
-                if (val == true) {
+           // var x= student_arr.length;
+           
+                courseDetailsCls.SaveStudentAbsence(CourseId, $("#LblLecture_id").html(), student_arr, function (val) {
+                    if (val == true) {
 
-                    $("#SavedivLoader").hide();
-                    alert("تم الحفظ بنجاح");
-                    $("#absenceModal").modal('hide');
-                    //drawAbsenceTable();
-                    resetAll();
-                    prepareAdd();
-                   
-
-
-
-                } else {
-                    alert("لم يتم الحفظ");
-                }
+                        $("#SavedivLoader").hide();
+                        alert("تم اخذ الغياب ");
+                        $("#absenceModal").modal('hide');
+                        //drawAbsenceTable();
+                        resetAll();
+                        prepareAdd();
 
 
-            });
+
+
+
+                    } else {
+                        alert("لم يتم الحفظ");
+                    }
+
+
+                });
+          
+           
+                
         }
 
 
@@ -359,8 +483,7 @@ function AddStudent() {
 
 
         if (!checkRequired()) {
-           
-      
+
             $("#SavedivLoader").show();
             var student_arr = [];
             $("#courseStudents").find("tr td input:checkbox").each(function () {
@@ -371,26 +494,35 @@ function AddStudent() {
             });
             console.log(student_arr);
             var CourseId = ($("#Lblcourse_id").html());
-           
-            //console.log(basicData);
-            debugger;
-            courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
-                if (val == true) {
-                    $("#SavedivLoader").hide();
-                    alert("تم الحفظ بنجاح");
-                    $("#addStudentModal").modal('hide');
-                    drawStudentTable();
-                    drawAbsenceTable();
+
+
                    
+            var x = student_arr.length;
+            if (x != 0) {
+                debugger
+                courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
+                    if (val == true) {
+                      //  $("#SavedivLoader").hide();
+                        alert("تم الحفظ بنجاح");
+                        $("#addStudentModal").modal('hide');
+                        drawStudentTable();
+                        drawAbsenceTable();
 
 
 
-                } else {
-                    alert("لم يتم الحفظ");
-                }
+
+                    } else {
+                        alert("لم يتم الحفظ");
+                    }
 
 
-            });
+                });
+            }
+            else {
+                $("#addStudentModal").modal('hide');
+                $("#SavedivLoader").hide();
+
+            }
         }
 
 
@@ -399,7 +531,129 @@ function AddStudent() {
     }
 }
 
+//draw_public_student degree
 
+function drawpublicDegreeTable() {
+    try {
+        var CourseId = ($("#Lblcourse_id").html());
+        
+
+        courseDetailsCls.get_pub_StudentsDegree(CourseId, function (val) {
+
+            console.log(val);
+            var data = "";
+            if (val[0] == 1) {
+                var arrstudent = JSON.parse(val[1]);
+
+                arrstudent.forEach(function (element) {
+
+
+                    data = data + `   <tr>
+                                    <td>
+                                        <label id=" ${element.student_id}"> ${element.studentname}</label>
+                                    </td>
+                                    <td>
+               <input id="finaldegee" type="text" value=" ${element.final}"   />
+                                   
+                                    </td>
+                                    <td>
+               <input id="activitydegee" type="text" value=" ${element.activityDegree}" />
+                                    
+                                    </td>
+                                </tr> `
+
+
+                });
+            }
+
+            $("#pblcstudentdegrees").html(data);
+            $("#pblcstudentdegrees").modal();
+
+
+
+        });
+
+    }
+
+
+
+    catch (err) {
+        alert(err);
+    }
+}
+
+//draw_student-homework - answers-degrees- hasnaa
+
+function drawstudenthomeworkanswers(homeworkId) {
+    try {
+        //debugger
+       // var CourseId = ($("#Lblcourse_id").html());
+        ($("#LblHomework_id").html(homeworkId));
+
+
+        courseDetailsCls.get_StudentsHomeworkAnswers(homeworkId, function (val) {
+
+            console.log(val);
+            var data = "";
+            if (val[0] == 1) {
+                debugger
+                var arrstudent = JSON.parse(val[1]);
+
+                arrstudent.forEach(function (element) {
+                    debugger
+
+                    var filename = "";
+                    var path = element.homeworkanswer;
+                    if (path != "" && path != null) {
+                        debugger
+                        if (path.indexOf("Acadmies_module/coursefiles/") != -1) {
+                            filename = path.split("Acadmies_module/coursefiles/")[1];
+                        }
+                    }
+
+                    data = data + `   <tr>
+                                    <td>
+                                        <label id=" ${element.student_id}"> ${element.studentname}</label>
+
+                                    </td>
+                                  
+                                                <td>
+                                                       <li>
+                                                        <a id="homeworkfile" href="../${element.homeworkanswer}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${filename}</span>
+                                      
+                                                    </li>
+
+                                                     </td>
+
+                                           <td>
+                         <input id="Homeworkdegee" type="text" value=" ${element.HMWDegree}" />
+                                    
+                                    </td>
+                                </tr> `
+
+
+                });
+            }
+
+            $("#studentHWAnswers").html(data);
+            $("#studentHWAnswers").modal();
+
+
+
+        });
+
+    }
+
+
+
+    catch (err) {
+        alert(err);
+    }
+}
 
 
 
@@ -407,7 +661,8 @@ function SaveLec() {
 
     try {
 
-        
+        setRequired_time("divstartTime");
+        setRequired_Date("divdate1");
         //var check = checkRequired("divFormTable");
 
         if (checkRequired("divFormTable") == 1) {
@@ -415,25 +670,27 @@ function SaveLec() {
 
         }
         else {
-            $("#SavedivLoader").show();
+          // $("#SavedivLoader").show();
 
             $("#dateLec_m").val($("#divdate1 #txtDatem").val());
             $("#dateLec_hj").val($("#divdate1 #txtDateh").val());
 
 
-            var CourseId = ($("#Lblcourse_id").html());
-            var lectureID = $("#LblLecture_id").html()
+            var CourseId =$("#Lblcourse_id").html();
+            var lectureID = $("#LblLecture_id").html();
             //var id = "";
 
             var basicData = generateJSONFromControls("order_addLec");
 
-
             ////console.log(basicData);
             courseDetailsCls.Save(lectureID, CourseId, basicData, function (val) {
-             
+
+
+                $("#SavedivLoader").hide();
                 if (val == true) {
-                    $("#SavedivLoader").hide();
+                   
                     alert("تم الحفظ بنجاح");
+                    getlectureCode();
               
                     $("#order_addLec").modal('hide');
                     resetDivControls("divFormTable");
@@ -441,7 +698,7 @@ function SaveLec() {
                     $("#LblLecture_id").html('');
 
                 } else {
-                    $("#SavedivLoader").hide();
+                    //$("#SavedivLoader").hide();
                     alert("لم يتم الحفظ");
                 }
 
@@ -460,7 +717,7 @@ function SaveEvalution() {
 
     try {
 
-        debugger
+       
         //var check = checkRequired("divFormTable");
 
         if (checkRequired("divformCourseEvalution") == 1) {
@@ -510,6 +767,92 @@ function SaveEvalution() {
 }
 //addFiles
 
+
+function saveHWanswer() {
+
+    try {
+
+        debugger
+        if (checkRequired("divFormuploadHMfiles") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+
+        }
+        else {
+            $("#SavedivLoader").show();
+            var HomeWorkId = ($("#LblHomework_id").html());
+           
+            var basicData = generateJSONFromControls("divFormuploadHMfiles");
+
+            var Id = "";
+          
+            courseDetailsCls.saveHWanswer(Id, HomeWorkId, basicData, function (val) {
+                if (val == true) {
+                    $("#SavedivLoader").hide();
+                    // debugger;
+                    alert("تم الحفظ بنجاح");
+                    $("#file_upload_hw_answers").modal('hide');
+                  
+                    resetDivControls("divFormuploadHMfiles");
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
+
+function saveExamanswer() {
+
+    try {
+
+        debugger
+        if (checkRequired("divFormuploadexamfiles") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+
+        }
+        else {
+            $("#SavedivLoader").show();
+            var examID = ($("#LblExam_id").html());
+
+            var basicData = generateJSONFromControls("divFormuploadexamfiles");
+
+            var Id = "";
+
+            courseDetailsCls.saveExamanswer(Id, examID, basicData, function (val) {
+                if (val == true) {
+                    $("#SavedivLoader").hide();
+                    // debugger;
+                    alert("تم الحفظ بنجاح");
+                    $("#file_upload_exam_answers").modal('hide');
+
+                    resetDivControls("divFormuploadexamfiles");
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
 function addFiles() {
 
     try {
@@ -552,6 +895,52 @@ function addFiles() {
         alert(err);
     }
 }
+
+
+
+function addfinancial() {
+    //add financial
+
+    try {
+        debugger
+
+        if (checkRequired("divformstudentFinanc") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+
+        }
+        else {
+            $("#SavedivLoader").show();
+            var CourseId = ($("#Lblcourse_id").html());
+           
+            var basicData = generateJSONFromControls("divformstudentFinanc");
+
+            var Id = "";
+           
+            courseDetailsCls.Savefinanc(Id, CourseId, Pub_date_m, Pub_date_hj, basicData, function (val) {
+                if (val == true) {
+                    $("#SavedivLoader").hide();
+                    // debugger;
+                    alert("تم الحفظ بنجاح");
+                    $("#add_Financial").modal('hide');
+                    drawCourseFile();
+                    resetDivControls("divformstudentFinanc");
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
 
 function addCondition() {
 
@@ -601,6 +990,7 @@ function addCondition() {
 function AddNote() {
 
     try {
+      
       
 
         if (checkRequired("addNote") == 1) {
@@ -668,7 +1058,7 @@ function addComment() {
             console.log(basicData);
             courseDetailsCls.SaveComment(Id, CourseId, Pub_date_m, Pub_date_hj, basicData, function (val) {
                 if (val == true) {
-                    debugger;
+                   
                   
                     drawCourseComments();
                     resetDivControls("newdivcomment");
@@ -743,7 +1133,7 @@ function CourseView() {
     var CourseId = ($("#Lblcourse_id").html());
     courseDetailsCls.Edit(CourseId, function (val) {
         if (val[0] == "1") {
-            debugger
+            
 
             
             var data = JSON.parse(val[1]);
@@ -770,7 +1160,7 @@ function CourseView() {
 function LectureView(LecID) {
 
     setLectId(LecID);
-    debugger
+    
     
     courseDetailsCls.EditLec(LecID, function (val) {
         if (val[0] == "1") {
@@ -779,7 +1169,7 @@ function LectureView(LecID) {
          
             $("#divdate1 #txtDatem").val(data[0].date_m);
             $("#divdate1 #txtDateh").val(data[0].date_hj);
-          
+            $("#divstartTime input").val(data[0].start_time);
            //$("#order_addLec").modal();
 
         }
@@ -787,6 +1177,32 @@ function LectureView(LecID) {
 
     });
 
+}
+//get lecture code
+function getlectureCode() {
+    courseDetailsCls.getlectureCode(function (val) {
+        
+        $("#lecture_code").val(Number(val) + 1);
+    });
+}
+
+
+function viewstudDegrees(studentID) {
+  
+    var CourseId = $("#Lblcourse_id").html(); 
+
+    courseDetailsCls.EditstudDegree(CourseId, studentID, function (val) {
+        if (val[0] == "1") {
+            var data = JSON.parse(val[1]);
+            fillControlsFromJson(data[0]);
+
+
+            //$("#order_addLec").modal();
+
+        }
+
+
+    });
 }
 
 function viewHomework(HMWID) {
@@ -799,7 +1215,7 @@ function viewHomework(HMWID) {
         if (val[0] == "1") {
             var data = JSON.parse(val[1]);
             fillControlsFromJson(data[0]);
-            debugger
+           
             var filename = "";
             var path = data[0].image;
             if (path != "" && path != null) {
@@ -826,7 +1242,7 @@ function viewHomework(HMWID) {
 function viewExam(examID) {
 
     setExamtId(examID);
-    debugger
+   
 
     courseDetailsCls.EditExam(examID, function (val) {
         if (val[0] == "1") {
@@ -861,29 +1277,24 @@ function studentSearch() {
 
         var CourseId = ($("#Lblcourse_id").html()); 
         var StudentName = $("#txt_Search").val();
-        courseDetailsCls.get_student(StudentName, CourseId,function (val) {
-            debugger
-
+        courseDetailsCls.get_student(StudentName, CourseId, function (val) {
+           
             var data = "";
             //console.log(val);
             if (val[0] == "1") {
                 var arr1 = JSON.parse(val[1]);
-
+                
                 arr1.forEach(function (element) {
                     
                     data = data + `
                                    <table id="student">
 
                                                     <tr>
-                                                        <td>
-
-                                                            <img src="../assets/images/210.jpg" />
-
-                                                        </td>
+                                                        <td><img src="${element.srImage}"/></td>
 
                                                         <td>
 
-                                                            <label>${element.studentName}  </label>
+                                                            <label>${element.studentName}</label>
                                                                           
 
 
@@ -904,12 +1315,12 @@ function studentSearch() {
                                                                                             </a>
                                                                                                     </li>
                                                                                                 <li>
-                                                                                            <a   data-toggle="modal" href="#studentDegrees"  onclick="Setstudentid(${element.student_id});">
+                                                                                            <a   data-toggle="modal" href="#studentDegrees" onclick= "Setstudentid(${element.student_id});">
                                                                                                 الدرجات 
                                                                                             </a>
                                                                                                     </li>
                                                                                                 <li>
-                                                                                            <a   data-toggle="modal" href="#addNote" onclick="Setstudentid(${element.student_id});">
+                                                                                            <a   data-toggle="modal" href="#addNote" onclick="viewstudDegrees(${element.student_id});Setstudentid(${element.student_id});">
                                                                                                 اضافة ملاحظة
                                                                                             </a>
                                                                                                     </li>
@@ -947,12 +1358,12 @@ function searchAbsence() {
     try {
 
         var lec_id = ($("#LblLecture_id").html());
-        debugger
+       
         var CourseId = ($("#Lblcourse_id").html());
         var StudentName = ($("#txtAbsen_Search").val());
         courseDetailsCls.get_srchstudentABS(StudentName, lec_id,CourseId, function (val) {
 
-            debugger
+         
 
             //console.log(val);
             var data = "";
@@ -998,6 +1409,17 @@ function searchAbsence() {
 function setLectId(lecutreId) {
    $("#LblLecture_id").html(lecutreId);
 }
+
+function setHomWID(hwID) {
+    $("#LblHomework_id").html(hwID);
+}
+
+//
+
+function setExamID(examID) {
+    $("#LblExam_id").html(examID);
+}
+
 function setFLectId(lecID) {
     $("#LblLecture_id").html(lecID);
 }
@@ -1014,7 +1436,7 @@ function setExamtId(examId) {
 }
 
 function edit(val) {
-    debugger
+   
     resetAll();
  
         if (val[0] == "1") {
@@ -1029,29 +1451,34 @@ function edit(val) {
 
 function GetCourses(){
     try {
-
-        var CourseId = ($("#Lblcourse_id").html()); 
+        $("#SavedivLoader").show();
+        var status = ["جديدة","حالية","مكتملة","معلقة"];
+        var badges = ["badge-success", "badge-info", "badge-dark","badge-warning"];
+        var CourseId = $("#Lblcourse_id").html(); 
         //alert(CourseId);
         courseDetailsCls.get_course(CourseId, function (val) {
 
-             //alert(val);
-        
-            //var data = "";
-            console.log(val);
+         //   console.log(val);
             
             var arr1 = JSON.parse(val[1]);
             $("#course_title").html(arr1[0].name);
             $("#course_details").html(arr1[0].description);
             $("#course_date").html(arr1[0].start_dt_hj);
-            $("#course_price").html(arr1[0].price);
-            //$("#course_duration").html(arr1[0].course_name);
+            if (arr1[0].price > 0) {
+                $("#course_price").parent().css("display", "block");
+                $("#course_price").html(arr1[0].price);
+            }
+            else { $("#course_price").parent().css("display", "none");}
+            $("#lect_time").html(arr1[0].lect_duration);
             $("#course_category").html(arr1[0].course_category);
-            $("#course_stat").html(arr1[0].StatusCourse);
+            $("#course_stat").html(status[arr1[0].StatusCourse]);
+            $("#course_stat").attr("class",badges[arr1[0].StatusCourse]);
+
             $("#course_trainer").html(arr1[0].trainer_name);
             $("#course_duration").html(arr1[0].duration);
-
-            
-
+            $("#tr_Image").attr('src', arr1[0].trainerImage);
+            $("#SavedivLoader").hide();
+   
         });
     }
     catch (err) {
@@ -1062,7 +1489,7 @@ function drawAbsenceTable(CoursLecID) {
     try {
         var CourseId = ($("#Lblcourse_id").html());
         $("#LblLecture_id").html(CoursLecID);
-       
+        $("#SavedivLoader").show();
         courseDetailsCls.get_CourseStudents(CoursLecID,CourseId, function (val) {
 
             console.log(val);
@@ -1094,16 +1521,140 @@ function drawAbsenceTable(CoursLecID) {
             }
             $("#absenscetable").html(data);
             $("#absenscetable").modal();
+            $("#SavedivLoader").hide();
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+Number.prototype.padDigit = function () {
+    return (this < 10) ? '0' + this : this;
+}
+function count_endtime(start_time) {
+    
+    var lect_time = $("#lect_time").html();
+    var t1 = start_time.split(":");
+    console.log(t1);
+    var t2 = t1[1].split(" ");
+    console.log(t2);
+    mins = Number(t2[0]) + Number(lect_time);
+    minhrs = Math.floor(parseInt(mins / 60));
+    hrs = Number(t1[0]) + minhrs;
+    mins = mins % 60;
+    console.log(lect_time);
+    console.log(mins);
+    console.log(minhrs);
+    console.log(hrs);
+    var tm = t2[1];
+    if (hrs > 12) {
+        hrs = hrs - 12;
+        if (t2[1] == "am")
+            tm = "pm";
+        else
+            tm = "am";
+    }
+    return ( hrs.padDigit() + ':' + mins.padDigit() + " " + tm);
+}
+function drawLecturesTable() {
+    try {
+       // $("#SavedivLoader").show();
+        var CourseId = $("#Lblcourse_id").html();
+        courseDetailsCls.get_LectureTable(CourseId, function (val) {
+          
+            var data = "";
+            console.log(val);
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+                    var end_time = count_endtime(element.start_time);
+                 
+                    data = data + `<tr>
+                                                      <td>${element.lecture_code} </td>
+                                                     <td>${element.date_hj}  </td>
+                                                    <td>${element.start_time} الى  ${end_time}   </td>
+                                                       <td> ${element.hallNum} </td> `;
+                    action = ` <td>
+
+                        <div class="btn-group pull-left" style="position:absolute">
+                            <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <i class="fa fa-cogs"></i>
+
+                            </button>
+                            <ul class="dropdown-menu">
+
+                                <li><a data-toggle="modal" href="#order_addLec" onclick="LectureView(${element.id});">
+                                    تعديل
+                                                                       </a></li>
+                                <li><a onclick="DeleteLec(${element.id});">
+                                    حذف
+                                                                       </a></li>
+                                <li>
+                                    <li>
+                                        <a data-toggle="modal" href="#absenceModal" onclick="drawAbsenceTable(${element.id});">
+                                            الغياب
+                                                                           </a>
+                                    </li>
+                                    <li>
+                                        <a data-toggle="modal" href="#order_addfiles" onclick="setFLectId(${element.id});">
+                                            اضافة ملف
+                                                                           </a>
+                                    </li>
+
+                                                                            <li>
+                                                                            <a data-toggle="modal" href="#exams"  onclick="setLectId(${element.id});">
+                                                                                اضافة اختبار
+                                                                               </a>
+                                                                                     </li>
+                                                                                    <li>
+                                                                            <a data-toggle="modal" href="#homeworks"  onclick="setLectId(${element.id});">
+                                                                                اضافة واجب
+                                                                               </a>
+                                                                                     </li>
+                                                                       </ul>
+                                                                                           
+                                                                         </div>
+                                                                                           
+                                                                          </td>`;
+                    if (typeof element.absence === 'undefined') {
+                        data = data + action + '</tr>';
+                    }
+                    else {
+                        switch (element.absence ) {
+                            default:
+                                text = "--";
+                                break;
+                            case true:
+                                text = "<i class=' success fa fa-check'><i/>";
+                                break;
+                            case false:
+                                text = "<i class='danger fa fa-times'><i/>";
+                        }
+                        data = data + '<td align="center">' + text +'</td> </tr>';
+                    }
+                   
+                });
+
+              
+            }
+            $("#lectures-table").html(data);
+            $("#SavedivLoader").hide();
         });
     } catch (err) {
         alert(err);
     }
 }
 
-function drawLecturesTable() {
+
+
+function drawstudentHomeworkTable() {
+    // draw homework table for student
     try {
-        var CourseId = ($("#Lblcourse_id").html());
-        courseDetailsCls.get_LectureTable(CourseId, function (val) {
+        //debugger
+        // $("#SavedivLoader").show();
+        var CourseId = $("#Lblcourse_id").html();
+        courseDetailsCls.get_homeworkTable(CourseId, function (val) {
 
             var data = "";
             console.log(val);
@@ -1111,68 +1662,126 @@ function drawLecturesTable() {
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
+                    var degree = element.degree;
+                    if (degree == 0) {
+                        degree = "--";
+                    }
+                    var file_nm = "";
+                    var path = element.image;
+                    if (path != "" && path != null) {
+                        if (path.indexOf("Acadmies_module/homework/") != -1) {
+                            file_nm = path.split("Acadmies_module/homework/")[1];
+                        }
+                    }
                    
-                
+                    data = data + `
+                                                    <tr>
+                                                                                <td> ${element.title}  </td>
+                                                                                <td>${element.details}   </td>
+                                                                                <td>
+                                                    <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>  ${file_nm}
 
-                    data = data + `<tr>
-                                                      <td>${element.lecture_code} </td>
-                                                     <td>${element.date_hj}  </td>
-                                                    <td>${element.start_time}   </td>
-                                                       <td> ${element.hallNum} </td>
-                                                           <td>
-                                                                                  
-                                                          <div class="btn-group pull-left" style="position:absolute">
-                                                        <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                          
-                                                   <i class="fa fa-cogs"></i>
-      
-                                                                </button>
-                                                                <ul  class="dropdown-menu">
-                                                                                            
-                                                              <li><a  data-toggle="modal" href="#order_addLec"  onclick="LectureView(${element.id});">
-                                                                      تعديل 
-                                                                       </a></li>
-                                                                             <li><a   onclick="DeleteLec(${element.id});">
-                                                                      حذف      
-                                                                       </a></li>
-                                                                            <li>
-                                                                                  <li>
-                                                                        <a data-toggle="modal" href="#absenceModal"  onclick="drawAbsenceTable(${element.id});">
-                                                                            الغياب
-                                                                           </a>
-                                                                                 </li>
-                                                                               <li>
-                                                                        <a data-toggle="modal" href="#order_addfiles"  onclick="setFLectId(${element.id});">
-                                                                            اضافة ملف
-                                                                           </a>
-                                                                                 </li>
-                                                                       </ul>
-                                                                                           
-                                                                         </div>
-                                                                                           
-                                                                          </td>
+                                                        </a>
+                                                       
+                                                       </td>
+                                                                                <td>
+                                   <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#file_upload_hw_answers" onclick="setHomWID(${element.id});">
+                                                                إرفاق الحل
+                                                           
+                                                            </button>
+                                                       </td>
+                                                                                 <td> ${degree} </td>
+                                                                     
 
                                                                             </tr>
-                 
-                                                                               
-                                                                      
-`;
+                                                        `;
+                   
+
                 });
 
-              
+
             }
-            $("#lectures-table").html(data);
+            $("#studenthomeworktable").html(data);
+            $("#SavedivLoader").hide();
         });
     } catch (err) {
         alert(err);
     }
 }
 
+function drawstudentExamsTable() {
+   
+    try {
+        
+        var CourseId = $("#Lblcourse_id").html();
+        courseDetailsCls.get_ExamsTable(CourseId, function (val) {
+
+            var data = "";
+            console.log(val);
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+                    //  debugger
+                    var dgr = element.degree;
+                    if (dgr == 0) {
+                        dgr = "--";
+                    }
+                    else {
+                        dgr = element.degree;
+                    }
+                    var file_nm = "";
+                    var path = element.image;
+                    if (path != "" && path != null) {
+                        if (path.indexOf("Acadmies_module/exams/") != -1) {
+                            file_nm = path.split("Acadmies_module/exams/")[1];
+                        }
+                    }
+
+                    data = data + `
+                                                    <tr>
+                                                                                <td> ${element.title}  </td>
+                                                                                <td>${element.details}   </td>
+                                                                                <td>
+                                                        <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>  ${file_nm}
+
+                                                        </a>
+                                                       
+                                                       </td>
+                                                                                <td>
+                                   <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#file_upload_exam_answers" onclick="setExamID(${element.id})">
+                                                                إرفاق الحل
+                                                           
+                                                            </button>
+                                                       </td>
+                                                                                 <td> ${dgr}</td>
+                                                                     
+
+                                                                            </tr>
+                                                        `;
+
+
+                });
+
+
+            }
+            $("#studentExamstable").html(data);
+            $("#SavedivLoader").hide();
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
 function drawCourseComments() {
     try {
+        $("#SavedivLoader").show();
         var CourseId = ($("#Lblcourse_id").html());
         courseDetailsCls.get_courseComments(CourseId, function (val) {
-            //debugger
+         
 
             var data = "";
             console.log(val);
@@ -1211,13 +1820,66 @@ function drawCourseComments() {
 
             }
             $("#divformComments").html(data);
+            $("#SavedivLoader").hide();
         });
     } catch (err) {
         alert(err);
     }
 }
 
+//serchstudent in student degrees
 
+function SearchStudent() {
+
+    try {
+
+        var CourseId = ($("#Lblcourse_id").html());
+        var StudentName = ($("#txtstud_Search").val());
+        courseDetailsCls.search_pub_Students(StudentName, CourseId, function (val) {
+            var data = "";
+            console.log(val);
+
+            if (val[0] == 1) {
+                var arrstudent = JSON.parse(val[1]);
+
+                arrstudent.forEach(function (element) {
+
+
+                    data = data + `   <tr>
+                                    <td>
+                                        <label id=" ${element.student_id}"> ${element.studentname}</label>
+                                    </td>
+                                    <td>
+               <input id="finaldegee" type="text" value=" ${element.final}"   />
+                                   
+                                    </td>
+                                    <td>
+               <input id="activitydegee" type="text" value=" ${element.activityDegree}" />
+                                    
+                                    </td>
+                                </tr> `
+
+
+                });
+
+                $("#pblcstudentdegrees").html(data);
+                $("#pblcstudentdegrees").modal();
+            }
+
+
+
+
+            else {
+                $("#pblcstudentdegrees").html("لا يوجد طالب بهذا الاسم");
+            }
+
+        });
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
 
 
 
@@ -1372,23 +2034,20 @@ function drawStudentTable() {
             var data = "";
 
             console.log(val);
-            var arr1 = JSON.parse(val[1]);
+          
+            if (val[0] === "1") {
+                var arr1 = JSON.parse(val[1]);
+                arr1.forEach(function (element) {
 
-            arr1.forEach(function (element) {
-
-                data = data + `<table id="student">
+                    data = data + `<table id="student">
 
                                                     <tr>
-                                                        <td>
-
-                                                            <img src="../assets/images/210.jpg" />
-
-                                                        </td>
+ 
+                                                <td><img src="${element.studImag}"> </td>
 
                                                         <td>
 
                                                             <label>${element.studentName}  </label>
-                                                                          
 
 
                                                         </td>
@@ -1408,7 +2067,7 @@ function drawStudentTable() {
                                                                                             </a>
                                                                                                     </li>
                                                                                                 <li>
-                                                                                            <a   data-toggle="modal" href="#studentDegrees"  onclick="Setstudentid(${element.student_id});">
+                                                                                            <a   data-toggle="modal" href="#studentDegrees"  onclick=" viewstudDegrees(${element.student_id});Setstudentid(${element.student_id});">
                                                                                                 الدرجات 
                                                                                             </a>
                                                                                                     </li>
@@ -1431,9 +2090,8 @@ function drawStudentTable() {
                                                                                
                                                                       
 `;
-            });
-            //data += "</table></div></div ></div >";
-            //console.log(data);
+                });
+            }
             $("#StudentTable").html(data);
         });
     } catch (err) {
@@ -1449,12 +2107,13 @@ function drawHomeworks() {
 
             var data = "";
 
-            console.log(val);
-            var arr1 = JSON.parse(val[1]);
+            if (val[0] === "1") {
 
-            arr1.forEach(function (element) {
+                var arr1 = JSON.parse(val[1]);
 
-                data = data + `<table id="student">
+                arr1.forEach(function (element) {
+
+                    data = data + `<table id="student">
 
                                                     <tr>
                                                       
@@ -1497,6 +2156,11 @@ function drawHomeworks() {
                                                                                               تعديل 
                                                                                             </a>
                                                                                                     </li>
+                                                                                                 <li>
+                                                                                            <a   data-toggle="modal" href="#StudenthomeworkAnswers"  onclick="drawstudenthomeworkanswers(${element.id}) ">
+                                                                                              حلول الواجب  
+                                                                                            </a>
+                                                                                                    </li>
                                                                                              
                                                                                                 </ul>
                                                                                            
@@ -1512,8 +2176,8 @@ function drawHomeworks() {
                                                                                
                                                                       
 `;
-            });
-            
+                });
+            }
             $("#homework").html(data);
         });
     } catch (err) {
@@ -1529,11 +2193,13 @@ function drawExams() {
             var data = "";
 
             console.log(val);
-            var arr1 = JSON.parse(val[1]);
+            if (val[0] === "1") {
 
-            arr1.forEach(function (element) {
+                var arr1 = JSON.parse(val[1]);
 
-                data = data + `<table id="student">
+                arr1.forEach(function (element) {
+
+                    data = data + `<table id="student">
 
                                                     <tr>
                                                       
@@ -1590,8 +2256,8 @@ function drawExams() {
                                                                                
                                                                       
 `;
-            });
-
+                });
+            }
             $("#courseExams").html(data);
         });
     } catch (err) {
@@ -1609,16 +2275,17 @@ function drawNotes() {
 
             var data = "";
 
-            console.log(val);
-            var arr1 = JSON.parse(val[1]);
+           //console.log(val);
+            if (val[0] ==="1") {
+                var arr1 = JSON.parse(val[1]);
 
-            arr1.forEach(function (element) {
+                arr1.forEach(function (element) {
 
-                data = data + `<p>${element.comment}</p>
+                    data = data + `<p>${element.comment}</p>
                                                                            
 `;
-            });
-            
+                });
+            }
             $("#StudentNote").html(data);
         });
     } catch (err) {
@@ -1634,16 +2301,18 @@ function drawActivity() {
 
             var data = "";
 
-            console.log(val);
-            var arr1 = JSON.parse(val[1]);
+            //console.log(val);
+            if (val[0] === "1") {
 
-            arr1.forEach(function (element) {
+                var arr1 = JSON.parse(val[1]);
 
-                data = data + `<p>${element.activity}</p>
+                arr1.forEach(function (element) {
+
+                    data = data + `<p>${element.activity}</p>
                                                                            
 `;
-            });
-
+                });
+            }
             $("#studentActivity").html(data);
         });
     } catch (err) {
@@ -1656,7 +2325,7 @@ function drawActivity() {
 function SaveDegree() {
 
     try {
-
+       
 
         if (checkRequired("divFormDegrees") == 1) {
             alert("ادخل البيانات المطلوبة")
@@ -1701,6 +2370,7 @@ function SaveDegree() {
 
 function Studentlistview() {
     try {
+        
        var CourseId = ($("#Lblcourse_id").html());
         courseDetailsCls.get_StudentList( CourseId,function (val) {
 
@@ -1714,12 +2384,9 @@ function Studentlistview() {
 
                 data = data + `
                                 <tr >
-                                    <td><label> ${element.StudentName}</label> </td>
-                                                        
-                                    <td>  <input type="checkbox" student="${element.id}" style="width: 50px; height:20px;"  /></td>
-
-
-
+                                    <td><label> ${element.studentName}</label> </td>
+                                      <td><img src="${element.studImag}"> </td>
+                                    <td><input type="checkbox" student="${element.student_id}" style="width: 50px; height:20px;" /></td>
                                 </tr>
 
                                                                      
@@ -1848,6 +2515,99 @@ function UploadComplete5(sender, args) {
     clearContents(sender);
 }
 
+
+function UploadComplete6(sender, args) {
+
+    var fileLength = args.get_length();
+    var fileType = args.get_contentType();
+    //alert(sender);
+    $('#hwansfileurl').val('Acadmies_module/coursefiles/' + args.get_fileName());
+    $("#fnamehwans").val(args.get_fileName());
+
+
+
+    //var img = document.getElementById('imgLoader');
+    //img.style.display = 'none';
+    switch (true) {
+        case (fileLength > 1000000):
+
+            fileLength = fileLength / 1000000 + 'MB';
+            break;
+
+        case (fileLength < 1000000):
+
+            fileLength = fileLength / 1000000 + 'KB';
+            break;
+
+        default:
+            fileLength = '1 MB';
+            break;
+    }
+    clearContents(sender);
+}
+
+
+function UploadComplete7(sender, args) {
+
+    var fileLength = args.get_length();
+    var fileType = args.get_contentType();
+    //alert(sender);
+    $('#examansfileurl').val('Acadmies_module/coursefiles/' + args.get_fileName());
+    $("#fnameExamans").val(args.get_fileName());
+
+
+
+    //var img = document.getElementById('imgLoader');
+    //img.style.display = 'none';
+    switch (true) {
+        case (fileLength > 1000000):
+
+            fileLength = fileLength / 1000000 + 'MB';
+            break;
+
+        case (fileLength < 1000000):
+
+            fileLength = fileLength / 1000000 + 'KB';
+            break;
+
+        default:
+            fileLength = '1 MB';
+            break;
+    }
+    clearContents(sender);
+}
+
+function UploadComplete8(sender, args) {
+
+    var fileLength = args.get_length();
+    var fileType = args.get_contentType();
+    //alert(sender);
+    $('#fileurlfinanc').val('Acadmies_module/coursefiles/' + args.get_fileName());
+    $("#FnameFinanc").val(args.get_fileName());
+
+
+
+    //var img = document.getElementById('imgLoader');
+    //img.style.display = 'none';
+    switch (true) {
+        case (fileLength > 1000000):
+
+            fileLength = fileLength / 1000000 + 'MB';
+            break;
+
+        case (fileLength < 1000000):
+
+            fileLength = fileLength / 1000000 + 'KB';
+            break;
+
+        default:
+            fileLength = '1 MB';
+            break;
+    }
+    clearContents(sender);
+}
+
+
 function ClearMe(sender) {
     sender.value = '';
 }
@@ -1888,7 +2648,7 @@ function DeleteStudent(Studentid) {
         var CourseId = ($("#Lblcourse_id").html());
         courseDetailsCls.Delete_Student(Studentid, CourseId, function (val) {
 
-            debugger
+            
             if (val[0]==1) {
 
                 $("#SavedivLoader").hide();
@@ -1953,7 +2713,7 @@ function DeleteHomework(HWID) {
         $("#SavedivLoader").show();
         courseDetailsCls.Delete_Homework(HWID, function (val) {
             if (val[0] == 1) {
-                debugger
+                
                 $("#SavedivLoader").hide();
                 drawHomeworks();
                 alert("تم الحذف بنجاح");
@@ -1975,7 +2735,7 @@ function DeleteExam(ExamID) {
     if (f == true) {
         $("#SavedivLoader").show();
         courseDetailsCls.Delete_Exam(ExamID, function (val) {
-            debugger
+            
             if (val[0] == 1) {
                 $("#SavedivLoader").hide();
                 alert("تم الحذف بنجاح");
@@ -1996,7 +2756,7 @@ function deleteCourse() {
     var f = confirm("هل  تريد الحذف");
     if (f == true) {
         courseDetailsCls.Delete_course(CourseId, function (val) {
-            debugger
+            
             if (val[0]==1) {
                 $("#SavedivLoader").hide();
                 alert("تم الحذف بنجاح");

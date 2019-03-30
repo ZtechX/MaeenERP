@@ -147,10 +147,11 @@ Public Class companies
                     Dim comp_group_permission_id = 0
                     If formId = "" Then
                         '//////////////////////////////////////////////////
+
                         'insert new group for comp
                         Dim comp_permission_name As String = "صلاحيات" + "  " + dictCompDataJson("name_ar")
 
-                        If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id) values('" + comp_permission_name.ToString + "','PG'," + Comp_id + ")", _sqlconn, _sqltrans) = -1 Then
+                        If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id,RelatedId) values('" + comp_permission_name.ToString + "','PG'," + Comp_id + ",1)", _sqlconn, _sqltrans) = -1 Then
                             success = False
                             _sqltrans.Rollback()
                             _sqlconn.Close()
@@ -158,6 +159,136 @@ Public Class companies
                         Else
                             comp_group_permission_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString
                         End If
+                        'insert new group for advisors
+                        Dim advisor_permission_name As String = "صلاحيات المستشارين"
+
+                        If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id,RelatedId) values('" + advisor_permission_name.ToString + "','PG'," + Comp_id + ",2)", _sqlconn, _sqltrans) = -1 Then
+                            success = False
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Names.Add("لم يتم الحفظ")
+                        Else
+                            Dim dic_advisor_permission As New Dictionary(Of String, Object)
+                            dic_advisor_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
+                            dic_advisor_permission.Add("form_id", 2156)
+                            dic_advisor_permission.Add("f_add", 1)
+                            dic_advisor_permission.Add("f_update", 1)
+                            dic_advisor_permission.Add("f_access", 1)
+                            dic_advisor_permission.Add("f_delete", 1)
+
+                            If Not PublicFunctions.TransUpdateInsert(dic_advisor_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                success = False
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Names.Add("لم يتم الحفظ")
+                            Else
+                                dic_advisor_permission("form_id") = 3179
+                                If Not PublicFunctions.TransUpdateInsert(dic_advisor_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                    success = False
+                                    _sqltrans.Rollback()
+                                    _sqlconn.Close()
+                                    Names.Add("لم يتم الحفظ")
+                                End If
+                            End If
+                        End If
+                        'insert new group for Beneficiaries
+                        Dim Beneficiaries_permission_name As String = "صلاحيات المستفدين"
+
+                        If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id,RelatedId) values('" + Beneficiaries_permission_name.ToString + "','PG'," + Comp_id + ",3)", _sqlconn, _sqltrans) = -1 Then
+                            success = False
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Names.Add("لم يتم الحفظ")
+                        Else
+                            Dim dic_Beneficiaries_permission As New Dictionary(Of String, Object)
+                            dic_Beneficiaries_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
+                            dic_Beneficiaries_permission.Add("form_id", 3184)
+                            dic_Beneficiaries_permission.Add("f_add", 1)
+                            dic_Beneficiaries_permission.Add("f_update", 1)
+                            dic_Beneficiaries_permission.Add("f_access", 1)
+                            dic_Beneficiaries_permission.Add("f_delete", 1)
+
+                            If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                success = False
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Names.Add("لم يتم الحفظ")
+                            Else
+                                dic_Beneficiaries_permission("form_id") = 2156
+                                If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                    success = False
+                                    _sqltrans.Rollback()
+                                    _sqlconn.Close()
+                                    Names.Add("لم يتم الحفظ")
+                                End If
+                            End If
+                        End If
+
+                        'insert new group for Students
+                        Dim Student_permission_name As String = "صلاحيات الطلاب"
+
+                        If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id,RelatedId) values('" + Student_permission_name.ToString + "','PG'," + Comp_id + ",4)", _sqlconn, _sqltrans) = -1 Then
+                            success = False
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Names.Add("لم يتم الحفظ")
+                        Else
+                            Dim dic_Beneficiaries_permission As New Dictionary(Of String, Object)
+                            dic_Beneficiaries_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
+                            dic_Beneficiaries_permission.Add("form_id", 3177)
+                            dic_Beneficiaries_permission.Add("f_add", 1)
+                            dic_Beneficiaries_permission.Add("f_update", 1)
+                            dic_Beneficiaries_permission.Add("f_access", 1)
+                            dic_Beneficiaries_permission.Add("f_delete", 1)
+
+                            If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                success = False
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Names.Add("لم يتم الحفظ")
+                            Else
+                                dic_Beneficiaries_permission("form_id") = 3181
+                                If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                    success = False
+                                    _sqltrans.Rollback()
+                                    _sqlconn.Close()
+                                    Names.Add("لم يتم الحفظ")
+                                End If
+                            End If
+                        End If
+                        'insert new group for Students
+                        Dim Trainner_permission_name As String = "صلاحيات المدرب"
+
+                        If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id,RelatedId) values('" + Trainner_permission_name.ToString + "','PG'," + Comp_id + ",5)", _sqlconn, _sqltrans) = -1 Then
+                            success = False
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Names.Add("لم يتم الحفظ")
+                        Else
+                            Dim dic_Beneficiaries_permission As New Dictionary(Of String, Object)
+                            dic_Beneficiaries_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
+                            dic_Beneficiaries_permission.Add("form_id", 3177)
+                            dic_Beneficiaries_permission.Add("f_add", 1)
+                            dic_Beneficiaries_permission.Add("f_update", 1)
+                            dic_Beneficiaries_permission.Add("f_access", 1)
+                            dic_Beneficiaries_permission.Add("f_delete", 1)
+
+                            If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                success = False
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Names.Add("لم يتم الحفظ")
+                            Else
+                                dic_Beneficiaries_permission("form_id") = 3181
+                                If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                    success = False
+                                    _sqltrans.Rollback()
+                                    _sqlconn.Close()
+                                    Names.Add("لم يتم الحفظ")
+                                End If
+                            End If
+                        End If
+
                     Else
                         Dim dt As New DataTable
                         dt = DBManager.Getdatatable("select group_id from tblUsers where User_Type=2 and comp_id=" + formId)
@@ -167,58 +298,57 @@ Public Class companies
                         DBManager.ExcuteQueryTransaction("delete  from tblgroup_permissons where group_id=" + comp_group_permission_id.ToString, _sqlconn, _sqltrans)
 
                     End If
-
                     ' insert  comp modules 
 
                     For Each ModulesJSON As Dictionary(Of String, Object) In arrDataJson(2)
-                        Dim dictBasicDataJson As Dictionary(Of String, Object) = ModulesJSON
-                        Dim id = 0
-                        dictBasicDataJson.Add("comp_id", Comp_id.ToString)
-                        dictBasicDataJson.Add("group_id", comp_group_permission_id.ToString)
-                        If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblcomp_modules", id, _sqlconn, _sqltrans) Then
-                            success = False
-                            _sqltrans.Rollback()
-                            _sqlconn.Close()
-                            Names.Add("لم يتم الحفظ")
-                        End If
+                                Dim dictBasicDataJson As Dictionary(Of String, Object) = ModulesJSON
+                                Dim id = 0
+                                dictBasicDataJson.Add("comp_id", Comp_id.ToString)
+                                dictBasicDataJson.Add("group_id", comp_group_permission_id.ToString)
+                                If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblcomp_modules", id, _sqlconn, _sqltrans) Then
+                                    success = False
+                                    _sqltrans.Rollback()
+                                    _sqlconn.Close()
+                                    Names.Add("لم يتم الحفظ")
+                                End If
 
-                        'add module forms permissions
-                        Dim dt2 As DataTable = DBManager.Getdatatable("Select * from tblForms where type=1 And MenueId=" + dictBasicDataJson("module_id").ToString)
-                        For Each row2 As DataRow In dt2.Rows
-                            Dim dict = New Dictionary(Of String, Object)
-                            dict.Add("group_id", comp_group_permission_id.ToString)
-                            dict.Add("form_id", row2.Item("Id").ToString)
-                            dict.Add("f_add", 1)
-                            dict.Add("f_update", 1)
-                            dict.Add("f_access", 1)
-                            dict.Add("f_delete", 1)
+                                'add module forms permissions
+                                Dim dt2 As DataTable = DBManager.Getdatatable("Select * from tblForms where type=1 And MenueId=" + dictBasicDataJson("module_id").ToString)
+                                For Each row2 As DataRow In dt2.Rows
+                                    Dim dict = New Dictionary(Of String, Object)
+                                    dict.Add("group_id", comp_group_permission_id.ToString)
+                                    dict.Add("form_id", row2.Item("Id").ToString)
+                                    dict.Add("f_add", 1)
+                                    dict.Add("f_update", 1)
+                                    dict.Add("f_access", 1)
+                                    dict.Add("f_delete", 1)
 
-                            PublicFunctions.TransUpdateInsert(dict, "tblgroup_permissons", id, _sqlconn, _sqltrans)
-                        Next
+                                    PublicFunctions.TransUpdateInsert(dict, "tblgroup_permissons", id, _sqlconn, _sqltrans)
+                                Next
 
 
-                    Next
+                            Next
 
-                    '///////////////////////////////////////////////////////////////////////////////////////////
-                    ' save comp admin
-                    dictCompAdminDataJson.Add("User_Type", 2)
-                    dictCompAdminDataJson.Add("group_id", comp_group_permission_id)
-                    dictCompAdminDataJson.Add("Active", dictCompDataJson("active"))
-                    dictCompAdminDataJson.Add("comp_id", Comp_id)
+                            '///////////////////////////////////////////////////////////////////////////////////////////
+                            ' save comp admin
+                            dictCompAdminDataJson.Add("User_Type", 2)
+                            dictCompAdminDataJson.Add("group_id", comp_group_permission_id)
+                            dictCompAdminDataJson.Add("Active", dictCompDataJson("active"))
+                            dictCompAdminDataJson.Add("comp_id", Comp_id)
 
-                    If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
-                        success = True
+                            If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
+                                success = True
 
-                    Else
-                        success = False
-                        _sqltrans.Rollback()
-                        _sqlconn.Close()
-                        Names.Add("لم يتم الحفظ")
-                    End If
+                            Else
+                                success = False
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Names.Add("لم يتم الحفظ")
+                            End If
 
-                Else
+                        Else
 
-                    Dim dictAcaAdminDataJson As Dictionary(Of String, Object) = arrDataJson(3)
+                            Dim dictAcaAdminDataJson As Dictionary(Of String, Object) = arrDataJson(3)
                     Dim AcAdmin_id = dictAcaAdminDataJson("id")
                     Dim AcAdmin_indenty = dictAcaAdminDataJson("user_indenty")
                     Dim AcAdmin_Phone = dictAcaAdminDataJson("User_PhoneNumber")

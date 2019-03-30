@@ -116,7 +116,7 @@
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
                                             <label class="label-required">
-                                             اسم الاستشارة  </lable>
+                                             عنوان الاستشارة  </lable>
                                         </div>
 
                                         <div class="col-md-9 col-sm-12">

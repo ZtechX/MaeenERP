@@ -122,15 +122,6 @@ Partial Public Class advisors
     Protected WithEvents Result As Global.ERpMaen.Result
     
     '''<summary>
-    '''ValidationSummary2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ValidationSummary2 As Global.System.Web.UI.WebControls.ValidationSummary
-    
-    '''<summary>
     '''lblmainid control.
     '''</summary>
     '''<remarks>
@@ -176,13 +167,13 @@ Partial Public Class advisors
     Protected WithEvents txttel As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
-    '''txtNumber control.
+    '''TextBox3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtNumber As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''ddlspecial_id control.
@@ -203,58 +194,13 @@ Partial Public Class advisors
     Protected WithEvents TextEmail As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''TextBox1 control.
+    '''txtNumber control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''TextBox3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''cmdPOP control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cmdPOP As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''txtUploadedFiles control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtUploadedFiles As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''ImageSlider control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ImageSlider As Global.ERpMaen.ImageSlider
-    
-    '''<summary>
-    '''MultiPhotoUpload control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents MultiPhotoUpload As Global.ERpMaen.MultiPhotoUpload
+    Protected WithEvents txtNumber As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''DynamicTable control.

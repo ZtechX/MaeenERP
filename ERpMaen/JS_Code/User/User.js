@@ -7,6 +7,10 @@ var superAdmin = false;
 
 // load function set defualt values
 $(function () {
+    $("input").attr("class","");
+    $("select").attr("class", "");
+    $("input").addClass("form-control");
+    $("select").addClass("form-control");
     $("#pnlConfirm").hide();
     $("#divData").hide();
     $("#SavedivLoader").show();
@@ -33,56 +37,36 @@ $(function () {
 // draw dynamic table for existing POS
 function drawDynamicTable() {
     try {
-        var tableSortingColumns = [
-                { orderable: false }, null, null, null, null, 
-        ];
-        var tableFilteringColumns = [
-            { type: "null" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" },
-        ];
-
         var tableColumnDefs = [
 
         ];
         var initialSortingColumn = 0;
         if (superAdmin) {
+            var tableSortingColumns = [
+                { orderable: false }, null, null, null, null,null,null
+            ];
+            var tableFilteringColumns = [
+                { type: "null" }, { type: "text" }, { type: "text" }, { type: "text" },{ type: "text" }, { type: "text" }, { type: "text" },
+            ];
             $("#Comp_div").show();
             $("#ddlcomp_id").prop("required",false);
             loadDynamicTable('Users', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
         } else {
+            var tableSortingColumns = [
+                { orderable: false }, null, null, null, null,null
+            ];
+            var tableFilteringColumns = [
+                { type: "null" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }
+            ];
             $("#Comp_div").hide();
-            CustloadDynamicTable('Users', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
+            loadDynamicTable('Users', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
         }
     } catch (err) {
         alert(err);
     }
 }
 
-function CustloadDynamicTable(frmName, autoCode, tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, frmorReport) {
-    try {
-        
-        $("#divLoader").show();
-        formName = frmName;
-        formAutoCode = autoCode;
 
-        columns = tableSortingColumns;
-        initialColumn = initialSortingColumn;
-        filterColumns = tableFilteringColumns;
-        vColumnDefs = tableColumnDefs;
-        formOrReport = frmorReport;
-        WebService.GetFormQuaryString(formName + "|" + Archived, function (quaryStr) {
-            var quary = quaryStr + " and isNull(superAdmin,0) =0 and tblUsers.comp_id = " + $("#ddlcomp_id").val();
-          
-            WebService.GetFormKeys(formName, function (formKeys) {
-                if (formKeys != "") {
-                    keys = JSON.parse(formKeys);
-                }
-                generateDynamicTable(quary);
-            });
-        });
-    } catch (err) {
-        alert(err);
-    }
-}
 // empty pnlform and show it and hide function panel
 function add() {
     try {

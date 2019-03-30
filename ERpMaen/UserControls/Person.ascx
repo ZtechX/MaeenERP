@@ -12,31 +12,31 @@
 
                 </div>
                 <div class="col-md-9 col-sm-12">
-                    <asp:TextBox SkinID="form-control" class="form-control" dbColumn="name" ClientIDMode="Static" ID="person_name" runat="server">
+                    <asp:TextBox required SkinID="form-control" class="form-control" dbColumn="name" ClientIDMode="Static" ID="person_name" runat="server">
                     </asp:TextBox>
 
                 </div>
             </div>
             <div class="col-md-12 form-group ">
                 <div class="col-md-3 col-sm-12">
-                    <label>صلة القرابة للمنفذ ضده</label>
+                    <label class="label-required">صلة القرابة</label>
                 </div>
 
                 <div class="col-md-9 col-sm-12">
-                    <asp:DropDownList dbcolumn="relationship_id" SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlrealtion" runat="server">
+                    <asp:DropDownList required dbcolumn="relationship_id" SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlrealtion" runat="server">
                     </asp:DropDownList>
 
                 </div>
             </div>
-            <div class="col-md-12 form-group ">
+              <div class="col-md-12 form-group ">
                 <div class="col-md-3 col-sm-12">
                     <label class="label-required">
-                    رقم هوية المنفذ  </label>
+                    رقم الجوال   </label>
                 </div>
 
                 <div class="col-md-9 col-sm-12">
-                    <input onkeypress="return isNumber(event);" dbcolumn="indenty" type="text" id="Text1"
-                        class="form-control" runat="server" clientidmode="Static" />
+                    <input onkeypress="return cust_chkNumber(event,this,10);" dbcolumn="phone" type="text" id="txt_phone"
+                        class="form-control" runat="server" clientidmode="Static" required/>
 
                     <br />
                 </div>
@@ -44,6 +44,19 @@
             <div class="col-md-12 form-group ">
                 <div class="col-md-3 col-sm-12">
                     <label class="label-required">
+                    رقم الهوية  </label>
+                </div>
+
+                <div class="col-md-9 col-sm-12">
+                    <input required onkeypress="return cust_chkNumber(event,this,10);" dbcolumn="indenty" type="text" id="txt_indenty"
+                        class="form-control" runat="server" clientidmode="Static" />
+
+                    <br />
+                </div>
+            </div>
+            <div class="col-md-12 form-group ">
+                <div class="col-md-3 col-sm-12">
+                    <label >
                     رقم الوكالة  </label>
                 </div>
 

@@ -37,24 +37,43 @@ Public Class CourseDetails
         Try
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
-                Dim course_id = Request.QueryString("course_id")
-                Lblcourse_id.InnerHtml = course_id
+                Dim code = Request.QueryString("code")
+                Dim dt = DBManager.Getdatatable(" select  acd_courses.id from acd_courses where acd_courses.code='" + code.ToString  + "'")
+                If dt.Rows.Count <> 0 Then
+                    Dim course_id = dt.Rows(0)(0).ToString
+                    Lblcourse_id.InnerHtml = course_id
+                    If ERpMaen.LoginInfo.getUserType = 8 Then
+
+                        Dim dtc = DBManager.Getdatatable("select course_id from acd_courses_students where student_id=" + LoginInfo.GetUser__Id() + " and approved=1 and course_id=" + course_id)
+                        If dtc.Rows.Count = 0 Then
+                            'condition page 
+                            Page.Response.Redirect("course_register.aspx?code=" + code)
+
+                        End If
+                    End If
+                Else
+                    Page.Response.Redirect("AccessDenied.aspx")
+
+                End If
 
                 'Dim clsapprove_type As New clsFillComboByDataSource("select * from tblLock_up where type='is' and IsNull(Deleted,0)=0", "Description", "id", "")
                 'clsapprove_type.SetComboItems(ddlspecial_id, "", True, "--اختر--", False)
 
 
-                Dim clsapprove_tainer As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='4' ", "full_name", "id", "")
-                clsapprove_tainer.SetComboItems(ddltrainer, "", True, "--اختر--", False)
+                Dim clsapprove_tainer As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='4'  and comp_id=" + LoginInfo.GetComp_id, "full_name", "id", "")
+                    clsapprove_tainer.SetComboItems(ddltrainer, "", True, "--اختر--", False)
 
-                Dim clsapprove_halls As New clsFillComboByDataSource("select * from tblLock_up where type='HallNum' and IsNull(Deleted,0)=0", "Description", "id", "")
-                clsapprove_halls.SetComboItems(ddlhallNum, "", True, "--اختر--", False)
+                    Dim clsapprove_halls As New clsFillComboByDataSource("select * from tblLock_up where type='HallNum' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id, "Description", "id", "")
+                    clsapprove_halls.SetComboItems(ddlhallNum, "", True, "--اختر--", False)
+
+                    Dim clsapprove_paymentType As New clsFillComboByDataSource("select * from tblLock_up where type='Pay_TP' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id, "Description", "id", "")
+                    clsapprove_paymentType.SetComboItems(ddlpayment_type, "", True, "--اختر--", False)
 
 
-                Dim clsapprove_category As New clsFillComboByDataSource("select * from tblLock_up where type='CD' and IsNull(Deleted,0)=0", "Description", "id", "")
-                clsapprove_category.SetComboItems(ddlcategory, "", True, "--اختر--", False)
+                    Dim clsapprove_category As New clsFillComboByDataSource("select * from tblLock_up where type='CD' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id, "Description", "id", "")
+                    clsapprove_category.SetComboItems(ddlcategory, "", True, "--اختر--", False)
 
-            End If
+                End If
         Catch ex As Exception
             'clsMessages.ShowErrorMessgage(lblResError, ex.Message, Me)
         End Try
@@ -101,6 +120,29 @@ Public Class CourseDetails
                     Prepare_Sheet(fu)
                     CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
 
+
+                Case "fuFile5"
+                    fu = fuFile5
+
+                    Path = "Acadmies_module/coursefiles/"
+                    Prepare_Sheet(fu)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+
+
+                Case "fuFile6"
+                    fu = fuFile6
+
+                    Path = "Acadmies_module/coursefiles/"
+                    Prepare_Sheet(fu)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+
+
+                Case "fuFile7"
+                    fu = fufile7
+
+                    Path = "Acadmies_module/coursefiles/"
+                    Prepare_Sheet(fu)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
             End Select
             ClearContents(sender)
             '    ScriptManager.RegisterClientScriptBlock(Me, Me.[GetType](), "newfile", "document.getElementById('imgEmployee').src = '" & url & "';", True)

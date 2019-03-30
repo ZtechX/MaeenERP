@@ -52,7 +52,9 @@ Public Class DiplomasCls
                 academy_id = dt_academy.Rows(0).Item("id").ToString
             End If
 
-
+            Dim userId = LoginInfo.GetUser__Id()
+            dictBasicDataJson.Add("add_by", userId)
+            dictBasicDataJson.Add("comp_id", LoginInfo.GetComp_id())
             dictBasicDataJson.Add("status", "60")
             dictBasicDataJson.Add("acd_acadmies", academy_id)
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_diplomes", id, _sqlconn, _sqltrans) Then
@@ -104,10 +106,11 @@ Public Class DiplomasCls
             Dim condation1 = ""
 
             If name <> "" Then
-                condation1 = " where name LIKE '%" + name + "%'"
+                condation1 = " where acd_diplomes.comp_id=" + LoginInfo.GetComp_id() + "and name LIKE '%" + name + "%'"
+                dt = DBManager.Getdatatable(" select  acd_diplomes.id,acd_diplomes.add_by ,tblUsers.full_name as 'username', tblUsers.User_Image as'userImage',acd_diplomes.name , acd_diplomes.description , acd_diplomes.price from acd_diplomes join tblUsers on acd_diplomes.add_by=tblUsers.id " + condation1)
+            Else
+                dt = DBManager.Getdatatable(" select  acd_diplomes.id,acd_diplomes.add_by ,tblUsers.full_name as 'username', tblUsers.User_Image as'userImage',acd_diplomes.name , acd_diplomes.description , acd_diplomes.price from acd_diplomes  join tblUsers on acd_diplomes.add_by=tblUsers.id where acd_diplomes.comp_id=" + LoginInfo.GetComp_id())
             End If
-            dt = DBManager.Getdatatable("select  acd_diplomes.id , acd_diplomes.name , acd_diplomes.description , acd_diplomes.price  from acd_diplomes  " + condation1)
-
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
                     Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
@@ -161,51 +164,51 @@ Public Class DiplomasCls
 #End Region
 
 
-#Region "Edit"
-    ''' <summary>
-    ''' get  Type data from db when update
-    ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function Edit(ByVal editItemId As String) As String()
+    '#Region "Edit"
+    '    ''' <summary>
+    '    ''' get  Type data from db when update
+    '    ''' </summary>
+    '    <WebMethod()>
+    '    <System.Web.Script.Services.ScriptMethod()>
+    '    Public Function Edit(ByVal editItemId As String) As String()
 
-        Dim Names As New List(Of String)(10)
-        Try
-            Dim str As String = PublicFunctions.GetDataForUpdate("acd_courses", editItemId)
-            Names.Add("1")
-            Names.Add(str)
-            Return Names.ToArray
-        Catch ex As Exception
-            Names.Add("0")
-            Names.Add(" No Results were Found!")
-            Return Names.ToArray
-        End Try
-    End Function
+    '        Dim Names As New List(Of String)(10)
+    '        Try
+    '            Dim str As String = PublicFunctions.GetDataForUpdate("acd_courses", editItemId)
+    '            Names.Add("1")
+    '            Names.Add(str)
+    '            Return Names.ToArray
+    '        Catch ex As Exception
+    '            Names.Add("0")
+    '            Names.Add(" No Results were Found!")
+    '            Return Names.ToArray
+    '        End Try
+    '    End Function
 
-#End Region
+    '#End Region
 
-#Region "Delete"
-    ''' <summary>
-    ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function Delete(ByVal deleteItem As String) As String()
-        Dim Names As New List(Of String)(10)
-        Try
-            If PublicFunctions.DeleteFromTable(deleteItem, "acd_courses") Then
-                Names.Add("1")
-                Names.Add("تم الحذف بنجاح!")
-            Else
-                Names.Add("2")
-                Names.Add("لا يمكن الحذف!")
-            End If
-            Return Names.ToArray
-        Catch
-            Names.Add("2")
-            Names.Add("لا يمكن الحذف!")
-            Return Names.ToArray
-        End Try
-    End Function
-#End Region
+    '#Region "Delete"
+    '    ''' <summary>
+    '    ''' </summary>
+    '    <WebMethod()>
+    '    <System.Web.Script.Services.ScriptMethod()>
+    '    Public Function Delete(ByVal deleteItem As String) As String()
+    '        Dim Names As New List(Of String)(10)
+    '        Try
+    '            If PublicFunctions.DeleteFromTable(deleteItem, "acd_courses") Then
+    '                Names.Add("1")
+    '                Names.Add("تم الحذف بنجاح!")
+    '            Else
+    '                Names.Add("2")
+    '                Names.Add("لا يمكن الحذف!")
+    '            End If
+    '            Return Names.ToArray
+    '        Catch
+    '            Names.Add("2")
+    '            Names.Add("لا يمكن الحذف!")
+    '            Return Names.ToArray
+    '        End Try
+    '    End Function
+    '#End Region
 
 End Class

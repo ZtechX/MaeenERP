@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Users.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.Users" Theme="Theme5" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/DynamicTable.ascx" TagPrefix="uc1" TagName="DynamicTable" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="result" %>
@@ -9,7 +8,7 @@
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/User.asmx" />
-      <asp:ServiceReference Path="~/ASMX_WebServices/Testwebservice.asmx" />
+      <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
@@ -158,18 +157,7 @@
                                                     
                                                 </div>
                                             </div>
-                                            <div class="form-group row ">
-                                                <div class="col-md-3 col-sm-12">
-                                                    <label class="label-required">اسم المستخدم</label>
-                                                </div>
-                                                <div class="col-md-9 col-sm-12">
-                                                    <asp:TextBox   required class="form-control" dbColumn="User_Name" ClientIDMode="Static" ID="txtContactInfo" runat="server">
-                                                    </asp:TextBox>
-                                                 
-                                         
-                                                </div>
-
-                                            </div>
+                                           
                                             <div class="form-group row">
                                                  
                                                 <div class="col-md-3 col-sm-12">
@@ -195,7 +183,15 @@
                                                                         <br />
                                                                     </div>
                                                                 </div>
+                                              <div class="form-group row">
+                                                  <div class="col-md-3 col-sm-12">
+                                                 <label for="Name" class="label-required">نوع المستخدم </label>
 
+                                                  </div>
+                                                 <div class="col-md-9 col-sm-12">
+                                                   <asp:DropDownList dbcolumn="User_Type" required class="form-control" ClientIDMode="Static" ID="ddlUser_Type" runat="server"> </asp:DropDownList>
+                                                  </div>
+                                                  </div>
                                             <div class="form-group row">
                                                   <div class="col-md-3 col-sm-12">
                                                  <label for="Name" class="label-required">المجموعة </label>
@@ -237,10 +233,10 @@
                                         <div class="col-md-6">
                                             <div class="form-group row">
                                                 <div class="col-md-3 col-sm-12">
-                                                    <label class="label-required">الإدارة</label>
+                                                    <label >الإدارة</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                    <asp:DropDownList dbcolumn="managment_id" required  class="form-control" ClientIDMode="Static" ID="ddlmanagment_id" runat="server">
+                                                    <asp:DropDownList dbcolumn="managment_id"   class="form-control" ClientIDMode="Static" ID="ddlmanagment_id" runat="server">
                                                     </asp:DropDownList>
                                                     <i class="fancy-arrow"></i>
                                                 </div>
@@ -274,7 +270,7 @@
                                             </div>
 
 
-                                            <div class="form-group row">
+                                            <div class="form-group row" id="Comp_div">
                                                 <div class="col-md-3 col-sm-12">
                                                     <div id="divcomp_id" runat="server">
                                                         <label class="label-required">اسم الجمعية</label>

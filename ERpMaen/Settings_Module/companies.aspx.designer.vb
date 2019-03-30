@@ -266,15 +266,6 @@ Partial Public Class companies
     Protected WithEvents comp_Adminemail As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''comp_Adminuser_name control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents comp_Adminuser_name As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''Comp_user_password control.
     '''</summary>
     '''<remarks>
@@ -320,85 +311,13 @@ Partial Public Class companies
     Protected WithEvents Ac_name As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''Ac_AdminID control.
+    '''ddl_Acadmin control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Ac_AdminID As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''Ac_AdminName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Ac_AdminName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Ac_adminTele control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Ac_adminTele As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Text1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Text1 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''AcUser_Email control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents AcUser_Email As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Acuser_name control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Acuser_name As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Acuser_password control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Acuser_password As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Ac_imgItemURL control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Ac_imgItemURL As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
-    '''Ac_fuPhoto1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Ac_fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
+    Protected WithEvents ddl_Acadmin As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''cen_id control.
@@ -428,85 +347,13 @@ Partial Public Class companies
     Protected WithEvents TextNotes As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''CenAdminID control.
+    '''ddl_Cenadmin control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents CenAdminID As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''Cen_AdminName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Cen_AdminName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Cen_AdminNum control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Cen_AdminNum As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Text2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Text2 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''cen_Adminemail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cen_Adminemail As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''cen_Adminuser_name control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cen_Adminuser_name As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Cen_user_password control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Cen_user_password As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''Cen_imgItemURL control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Cen_imgItemURL As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
-    '''cen_fuPhoto1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cen_fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
+    Protected WithEvents ddl_Cenadmin As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''lblprposal_id control.

@@ -110,11 +110,12 @@ function get_admin() {
 
 function edit(val) {
    
-    
+    debugger
     resetAll();
     if (val[0] == "1") {
         
         var data = JSON.parse(val[1]);
+        $("#lblmainid").html(data[0].id);
         $("#divdate2 #txtDatem").val(data[0].deal_start_date_m);
         $("#divdate2 #txtDateh").val(data[0].deal_start_date_hj);
         $("#divdate3 #txtDatem").val(data[0].deal_end_date_m);
@@ -193,6 +194,7 @@ function save_companies() {
         var arr_json = [];
         if ($("#loginUser").val() == "1") {
             if (1) {
+                debugger
                 $("#SavedivLoader").show();
                 var FormId = $("#lblmainid").html();
                 ///////////////basic
