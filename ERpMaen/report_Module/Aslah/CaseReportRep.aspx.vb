@@ -8,8 +8,8 @@ Public Class CaseReportRep
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
-        Dim Case_id = Request.QueryString("Case_id")
-
+        'Dim Case_id = Request.QueryString("Case_id")
+        Dim Case_id = 62
         If String.IsNullOrWhiteSpace(Case_id) Then
             Dim script As String = "<script type='text/javascript' defer='defer'> alert('لا يوجد بيانات متاحة للعرض');</script>"
             ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)
@@ -28,10 +28,10 @@ Public Class CaseReportRep
             'dt1 = DBManager.Getdatatable("SELECT img_header,img_footer FROM tbl_company_info")
             Dim dt2 As New DataTable
 
-            Dim query = "SELECT ash_cases.code,ash_cases.date_h as 'case_dt',ash_courts.name as 'from'
+            Dim query = "SELECT ash_cases.code,ash_cases.date_h as 'case_dt',courts.Description as 'from'
       ,persons1.name as 'person_from',persons1.indenty as 'FPerson_num'
       ,persons2.name as 'person_against',persons2.indenty as 'AgPerson_num'     
-  FROM ash_cases left join ash_courts on ash_cases.court_id= ash_courts.id
+  FROM ash_cases left join tbllock_up courts on ash_cases.court_id= courts.id
   left join ash_case_persons persons1 on ash_cases.person1_id=persons1.id 
   left join ash_case_persons persons2 on ash_cases.person2_id=persons2.id  where ash_cases.id=" + Case_id
             dt2 = DBManager.Getdatatable(query)
@@ -51,16 +51,16 @@ Public Class CaseReportRep
                 ' rdoc.SetParameterValue("img_header_URL", dt1.Rows(0)("img_header").ToString)
                 ' rdoc.SetParameterValue("img_footer_URL", dt1.Rows(0)("img_footer").ToString)
                 CrystalReportViewer1.ReportSource = rdoc
-                Dim connectInfo As ConnectionInfo = New ConnectionInfo()
-                connectInfo.ServerName = "172.107.166.215\sa, 1985"
-                connectInfo.DatabaseName = "ERPDB"
-                connectInfo.UserID = "sa"
-                connectInfo.Password = "ZTechX@admin.com"
-                rdoc.SetDatabaseLogon("sa", "ZTechX@admin.com")
-                For Each tbl As CrystalDecisions.CrystalReports.Engine.Table In rdoc.Database.Tables
-                    tbl.LogOnInfo.ConnectionInfo = connectInfo
-                    tbl.ApplyLogOnInfo(tbl.LogOnInfo)
-                Next
+                'Dim connectInfo As ConnectionInfo = New ConnectionInfo()
+                'connectInfo.ServerName = "172.107.166.215\sa, 1985"
+                'connectInfo.DatabaseName = "ERPDB"
+                'connectInfo.UserID = "sa"
+                'connectInfo.Password = "ZTechX@admin.com"
+                'rdoc.SetDatabaseLogon("sa", "ZTechX@admin.com")
+                'For Each tbl As CrystalDecisions.CrystalReports.Engine.Table In rdoc.Database.Tables
+                '    tbl.LogOnInfo.ConnectionInfo = connectInfo
+                '    tbl.ApplyLogOnInfo(tbl.LogOnInfo)
+                'Next
                 CrystalReportViewer1.DataBind()
                 Try
                     Dim objDS As New DataSet

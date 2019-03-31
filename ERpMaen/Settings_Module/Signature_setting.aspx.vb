@@ -41,7 +41,7 @@ Public Class Signature_setting
                 Dim clsddltype1 As New clsFillComboByDataSource("  select * from tblcompanies where ISNUll(active,0)=1 ", "name_ar", "id", "")
                 clsddltype1.SetComboItems(ddlComps, "", True, "--اختر--", False)
 
-                LoginInfo.CheckPermisionsNew(cmdAdd, cmdUpdate, cmdDelete, Me.Page, UserId, lblFormName, DynamicTable)
+
 
 
             End If

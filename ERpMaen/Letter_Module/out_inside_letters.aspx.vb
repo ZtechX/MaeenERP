@@ -51,7 +51,7 @@ Public Class out_inside_letters
                 Dim clsddltype6 As New clsFillComboByDataSource("  select * from tbl_letter_Continue", "name", "id", "")
                 clsddltype6.SetComboItems(ddlContinue, "", False, "--اختر--", False)
 
-                Dim cls_courts As New clsFillComboByDataSource("select * from ash_courts where IsNull(Deleted,0)=0", "name", "id", "")
+                Dim cls_courts As New clsFillComboByDataSource("select * from tbllock_up where  type='court' and IsNull(Deleted,0)=0 and Comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 cls_courts.SetComboItems(ddlto_dep, "", True, "--اختر--", False)
                 cls_courts.SetComboItems(ddlfrom_dep, "", False, "--اختر--", False)
                 'Dim clsddltype3 As New clsFillComboByDataSource("  select * from tbltypes where ISNUll(deleted,0)=0", "name_ar", "id", "")

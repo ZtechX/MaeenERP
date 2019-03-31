@@ -40,7 +40,6 @@ Public Class report_settings
                 Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='RS' and comp_id=" + LoginInfo.GetComp_id(), "description", "id", "")
                 clsddltype5.SetComboItems(ddltype_id, "", True, "--اختر--", False)
 
-                LoginInfo.CheckPermisionsNew(cmdAdd, cmdUpdate, cmdDelete, Me.Page, UserId, lblFormName, DynamicTable)
 
 
             End If

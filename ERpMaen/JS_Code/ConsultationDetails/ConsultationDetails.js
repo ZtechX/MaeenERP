@@ -165,6 +165,7 @@ function add() {
           prepareAdd();
         resetAll();
         getConsultNum();
+       
         $("#divCollapse2").show();
         $("#divCollapse3").show();
         $("#gander").hide();

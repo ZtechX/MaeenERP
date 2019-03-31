@@ -751,6 +751,7 @@
     <Content Include="ASMX_WebServices\studentCls.asmx" />
     <Content Include="ASMX_WebServices\Timeline.asmx" />
     <Content Include="ASMX_WebServices\trainersCls.asmx" />
+    <Content Include="ASMX_WebServices\userPorfile.asmx" />
     <Content Include="ASMX_WebServices\WebService.asmx" />
     <Content Include="ASMX_WebServices\xxx.asmx" />
     <Content Include="ASMX_WebServices\Zwebservice.asmx" />

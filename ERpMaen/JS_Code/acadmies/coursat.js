@@ -137,7 +137,7 @@ function changePage(page) {
     $("#li_" + page).addClass("active");
     $("#courses-list").html("");
     var data = "";
-    var colors = ["#5cb85c", "#d9534f", "#DDDDDD"];
+    var colors = ["#5cb85c", "#428bca", "#000"];
     
 
         for (var i = (page - 1) * records_per_page; i < (page * records_per_page) && i < CoursesList.length; i++) {

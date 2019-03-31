@@ -633,7 +633,6 @@ E:\DotNet\MaeenERP\ERpMaen\bin\Microsoft.AspNet.FriendlyUrls.xml
 E:\DotNet\MaeenERP\ERpMaen\bin\System.Diagnostics.DiagnosticSource.xml
 E:\DotNet\MaeenERP\ERpMaen\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 E:\DotNet\MaeenERP\ERpMaen\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\DotNet\MaeenERP\ERpMaen\obj\Debug\ERpMaen.vbprojAssemblyReference.cache
 E:\DotNet\MaeenERP\ERpMaen\obj\Debug\ERpMaen.Resources.resources
 E:\DotNet\MaeenERP\ERpMaen\obj\Debug\ERpMaen.vbproj.GenerateResource.cache
 E:\DotNet\MaeenERP\ERpMaen\obj\Debug\ERpMaen.vbproj.CoreCompileInputs.cache

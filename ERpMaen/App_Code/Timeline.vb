@@ -66,13 +66,13 @@ Public Class Timeline
             Dim dt_sessionCompanions As New DataTable
             Dim dt_caseChildren As New DataTable
 
-            dt_case = DBManager.Getdatatable("SELECT ash_cases.code, C_depart.Description As 'depart',date_m,date_h,C_court_id.name as 'C_from'" +
+            dt_case = DBManager.Getdatatable("SELECT ash_cases.code, C_depart.Description As 'depart',date_m,date_h,C_court_id.Description as 'C_from'" +
             " ,instrument_no,instrument__date_m,instrument_date_h,Powner.name as 'P_from',Pagainst.name as 'P_against'" +
             " ,custody.name as 'child_custody',C_status.Description as 'status',ash_advisors.name as 'advisor_nm'," +
             " isNull(court_details,'') as 'court_details',isNull(ash_cases.details,'') as 'details'" +
             " FROM ash_cases" +
             " left join tbllock_up C_depart on C_depart.id=depart" +
-            " left join ash_courts C_court_id on C_court_id.id=court_id" +
+            " left join tbllock_up C_court_id on C_court_id.id=court_id" +
             " Left Join  ash_case_persons Powner on Powner.id=person1_id" +
             " Left Join  ash_case_persons Pagainst on Pagainst.id=person2_id" +
             " Left Join  ash_case_persons custody on custody.id=child_custody" +

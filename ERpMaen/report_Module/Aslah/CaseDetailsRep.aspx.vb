@@ -28,11 +28,11 @@ Public Class CaseDetailsRep
             'dt1 = DBManager.Getdatatable("SELECT img_header,img_footer FROM tbl_company_info")
             Dim dt2 As New DataTable
 
-            Dim query = "SELECT ash_cases.code,ash_cases.date_h as 'case_dt',ash_courts.name as 'from'
+            Dim query = "SELECT ash_cases.code,ash_cases.date_h as 'case_dt',courts.Description as 'from'
       ,instrument_no,instrument_date_h as 'instrument_dt',persons1.name as 'person_from'
       ,persons2.name as 'person_against',tbllock_up.Description as 'service_type'
       ,childrens_no ,boys_no ,girls_no ,court_details,ash_cases.details as 'case_desc'     
-  FROM ash_cases left join ash_courts on ash_cases.court_id= ash_courts.id
+  FROM ash_cases left join tbllock_up courts on ash_cases.court_id= courts.id
   left join ash_case_persons persons1 on ash_cases.person1_id=persons1.id 
   left join ash_case_persons persons2 on ash_cases.person2_id=persons2.id 
   left join tbllock_up on tbllock_up.id=ash_cases.depart where ash_cases.id=" + Case_id

@@ -313,7 +313,7 @@ function SaveHomework() {
 function addStudentdegree() {
 
     try {
-
+        //درجات الطلاب
        
         if (!checkRequired()) {
           
@@ -477,36 +477,99 @@ function SaveAbsenceStudent() {
     }
 }
 
+
+//function AddStudent() {
+
+
+//    try {
+//        debugger
+
+//        if (!checkRequired()) {
+
+//           // $("#SavedivLoader").show();
+//            var student_arr = [];
+//            $("#courseStudents").find("tr td input:checkbox").each(function () {
+//                if ($(this).is(":checked")) {
+//                    var value = $(this).attr("student");
+//                    student_arr.push(value)
+//                }
+//            });
+//        //    console.log(student_arr);
+//            var CourseId = ($("#Lblcourse_id").html());
+
+      
+//            var x = student_arr.length;
+//            if (x != 0) {
+//                debugger
+//                courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
+//                    if (val[0] == 1) {
+//                      //  $("#SavedivLoader").hide();
+//                        alert("تم الحفظ بنجاح");
+//                        $("#addStudentModal").modal('hide');
+//                        drawStudentTable();
+//                        window.location.reload();
+//                       // drawAbsenceTable();
+
+
+
+
+//                    } else {
+//                        alert("لم يتم الحفظ");
+//                    }
+
+
+//                });
+//            }
+//            else {
+//                $("#addStudentModal").modal('hide');
+//                //$("#SavedivLoader").hide();
+
+//            }
+//        }
+
+
+//    } catch (err) {
+//        alert(err);
+//    }
+//}
+
+//draw_public_student degree
+
+
+
 function AddStudent() {
+    //قبول الطلاب 
 
     try {
-
+        
 
         if (!checkRequired()) {
 
-            $("#SavedivLoader").show();
+            debugger
             var student_arr = [];
-            $("#courseStudents").find("tr td input:checkbox").each(function () {
-                if ($(this).is(":checked")) {
-                    var value = $(this).attr("student");
-                    student_arr.push(value)
-                }
+            $("#action_courseStudents tr").each(function () {
+                var obj = {};
+                obj["id"] = $(this).find("label").attr("id");
+                obj["std_notes"] = $(this).find("#notes_student").text();
+                //obj["file"] = $(this).find("#registerFiles").attr("href");
+                obj["action_Student"] = $(this).find("#action").val();
+                student_arr.push(obj);
+
             });
-            console.log(student_arr);
+
             var CourseId = ($("#Lblcourse_id").html());
-
-
-                   
-            var x = student_arr.length;
-            if (x != 0) {
+            
+            //var x = student_arr.length;
+            //if (x != 0) {
                 debugger
-                courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
-                    if (val == true) {
-                      //  $("#SavedivLoader").hide();
+            courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
+                if (val == true) {
+                        //  $("#SavedivLoader").hide();
                         alert("تم الحفظ بنجاح");
                         $("#addStudentModal").modal('hide');
                         drawStudentTable();
-                        drawAbsenceTable();
+                        window.location.reload();
+                        // drawAbsenceTable();
 
 
 
@@ -517,12 +580,8 @@ function AddStudent() {
 
 
                 });
-            }
-            else {
-                $("#addStudentModal").modal('hide');
-                $("#SavedivLoader").hide();
-
-            }
+            
+           
         }
 
 
@@ -531,7 +590,6 @@ function AddStudent() {
     }
 }
 
-//draw_public_student degree
 
 function drawpublicDegreeTable() {
     try {
@@ -2381,19 +2439,47 @@ function Studentlistview() {
             var arr1 = JSON.parse(val[1]);
 
             arr1.forEach(function (element) {
+                //طلبات الطلاب
+
+                var file_nm = "";
+                var path = element.registerFiles;
+                if (path != "" && path != null) {
+                    if (path.indexOf("Acadmies_module/images/") != -1) {
+                        file_nm = path.split("Acadmies_module/images/")[1];
+                    }
+                }
 
                 data = data + `
                                 <tr >
-                                    <td><label> ${element.studentName}</label> </td>
-                                      <td><img src="${element.studImag}"> </td>
-                                    <td><input type="checkbox" student="${element.student_id}" style="width: 50px; height:20px;" /></td>
+                                    <td><label id="${element.student_id}" > ${element.studentName}</label> </td>
+                                    <td><label id="notes_student"> ${element.notes}</label> </td>
+                                       <td>
+                                                   <li>
+                                                        <a id="registerFiles" href="../${element.registerFiles}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li> </td>
+                                                            <td>
+                                               
+                                                  <select  style="width:100px;" id="action" >
+                                                    <option value="0">رفض</option>
+                                                    <option value="1">قبول</option>
+                                                      </select>
+                                                     
+                                                            </td>
+                                 
                                 </tr>
 
                                                                      
 `;
             });
             
-            $("#courseStudents").html(data);
+            $("#action_courseStudents").html(data);
+            //var xx = document.getElementById("action").value;
+            //console.log(xx);
+            
         });
     } catch (err) {
         alert(err);
@@ -2655,6 +2741,7 @@ function DeleteStudent(Studentid) {
 
                 alert("تم الحذف بنجاح");
                 drawStudentTable();
+                Studentlistview();
 
             } else {
                 showErrorMessage('لم يتم الحذف');

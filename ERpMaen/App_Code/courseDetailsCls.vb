@@ -547,27 +547,139 @@ Public Class courseDetailsCls
         End Try
     End Function
 #End Region
-#Region "Save"
+    '#Region "Save"
+    '    ''' <summary>
+
+    '    ''' Save  Type
+    '    ''' </summary> تعديل
+    '    <WebMethod(True)>
+    '    <System.Web.Script.Services.ScriptMethod()>
+    '    Public Function SaveStudent(ByVal CourseId As String, ByVal students As Integer()) As Boolean
+    '        Try
+
+    '            _sqlconn.Open()
+    '            _sqltrans = _sqlconn.BeginTransaction
+    '            Dim dt_user As DataTable
+
+    '            Dim id = ""
+    '            Dim success_st As Boolean = True
+
+
+    '            For Each item As String In students
+    '                DBManager.ExcuteQuery("DELETE FROM acd_courses_students where student_id=" + item + " and course_id=" + CourseId)
+    '                Dim dictBasicDataJson As New Dictionary(Of String, Object)
+    '                dictBasicDataJson.Add("course_id", CourseId)
+    '                dictBasicDataJson.Add("type", 1)
+    '                dictBasicDataJson.Add("approved", True)
+    '                dictBasicDataJson.Add("student_id", item)
+
+    '                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
+    '                    If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "ادخال", _sqlconn, _sqltrans) Then
+    '                        success = False
+    '                    Else
+    '                        success = True
+    '                    End If
+    '                    success = True
+    '                Else
+    '                    success = False
+
+    '                End If
+    '                If success Then
+    '                    success_st = True
+    '                Else
+    '                    success_st = False
+    '                End If
+    '            Next
+    '            If success_st Then
+
+    '                _sqltrans.Commit()
+    '                _sqlconn.Close()
+    '                Return True
+    '            Else
+    '                _sqltrans.Rollback()
+    '                _sqlconn.Close()
+    '                Return False
+    '            End If
+    '            ' dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+    '            'dictBasicDataJson.Add("userID", (Context.Request.Cookies("UserInfo").ToString()))
+
+
+
+    '        Catch ex As Exception
+    '            _sqltrans.Rollback()
+    '            _sqlconn.Close()
+    '            Return False
+    '        End Try
+    '    End Function
+    '#End Region
+
+
+    '#Region "edit- save"
+    '    ''' <summary>
+    '    ''' </summary>
+    '    <WebMethod()>
+    '    <System.Web.Script.Services.ScriptMethod()>
+    '    Public Function SaveStudent(ByVal courseID As String, ByVal students As Integer()) As String()
+    '        Dim Names As New List(Of String)(10)
+    '        Try
+    '            For Each item As String In students
+    '                If DBManager.ExcuteQuery("UPDATE  acd_courses_students  set  approved=1 where student_id=" + item + " and course_id=" + courseID) <> -1 Then
+    '                    If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "تعديل", _sqlconn, _sqltrans) Then
+    '                        success = False
+    '                    Else
+    '                        success = True
+    '                    End If
+    '                    success = True
+    '                Else
+    '                    success = False
+
+    '                End If
+    '            Next
+
+    '            If success Then
+    '                Names.Add("1")
+    '                'Names.Add("تمت الاضافة بنجاح")
+    '            Else
+    '                Names.Add("2")
+    '                'Names.Add("لا يمكن الاضافة!")
+
+    '            End If
+    '            Return Names.ToArray
+    '        Catch
+    '            Names.Add("2")
+    '            Names.Add("لا يمكن الحذف!")
+    '            Return Names.ToArray
+    '        End Try
+    '    End Function
+    '#End Region
+
+
+#Region "addStudents_to_course"
     ''' <summary>
-    ''' Save  Type
+    ''' Save  Type قبول الطلاب فى الكورس
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveStudent(ByVal CourseId As String, ByVal students As Integer()) As Boolean
+    Public Function SaveStudent(ByVal courseid As String, ByVal students_action As Object) As Boolean
         Try
 
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
-            Dim dt_user As DataTable
+            Dim dt As DataTable
+            dt = DBManager.Getdatatable("delete from acd_courses_students where type=1 and course_id=" + courseid)
 
             Dim id = ""
-            Dim success_st As Boolean = True
-            For Each item As String In students
+            Dim success2 As Boolean = True
+            For Each item As Object In students_action
                 Dim dictBasicDataJson As New Dictionary(Of String, Object)
-                dictBasicDataJson.Add("course_id", CourseId)
-                dictBasicDataJson.Add("type", 1)
-                dictBasicDataJson.Add("approved", True)
-                dictBasicDataJson.Add("student_id", item)
+                dictBasicDataJson.Add("course_id", courseid)
+
+                dictBasicDataJson.Add("student_id", item("id"))
+                dictBasicDataJson.Add("notes", item("std_notes"))
+
+                dictBasicDataJson.Add("type", "1")
+                dictBasicDataJson.Add("approved", item("action_Student"))
 
                 If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
                     If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "ادخال", _sqlconn, _sqltrans) Then
@@ -581,12 +693,13 @@ Public Class courseDetailsCls
 
                 End If
                 If success Then
-                    success_st = True
+
+                    success2 = True
                 Else
-                    success_st = False
+                    success2 = False
                 End If
             Next
-            If success_st Then
+            If success2 Then
 
                 _sqltrans.Commit()
                 _sqlconn.Close()
@@ -596,11 +709,6 @@ Public Class courseDetailsCls
                 _sqlconn.Close()
                 Return False
             End If
-            ' dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
-
-            'dictBasicDataJson.Add("userID", (Context.Request.Cookies("UserInfo").ToString()))
-
-
 
         Catch ex As Exception
             _sqltrans.Rollback()
@@ -609,6 +717,8 @@ Public Class courseDetailsCls
         End Try
     End Function
 #End Region
+
+
 
 #Region "Save"
     ''' <summary>
@@ -1249,7 +1359,7 @@ Public Class courseDetailsCls
             Dim dt As New DataTable
 
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentname',COALESCE( stdg.final_degree ,0) as 'final',COALESCE (stdg.activity_degree,0) as 'activityDegree' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id left  JOIN acd_student_degrees stdg on  acd_courses_students.student_id=stdg.student_id AND stdg.type=1 where acd_courses_students.type=1  and acd_courses_students.course_id=" + subjectid)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentname',COALESCE( stdg.final_degree ,0) as 'final',COALESCE (stdg.activity_degree,0) as 'activityDegree' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id left  JOIN acd_student_degrees stdg on  acd_courses_students.student_id=stdg.student_id AND stdg.type=1 where acd_courses_students.approved=1 and acd_courses_students.type=1  and acd_courses_students.course_id=" + subjectid)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1474,7 +1584,7 @@ Public Class courseDetailsCls
             Dim dt As New DataTable
             Dim dt2 As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id , tblUsers.full_name as 'CourseStudents' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where acd_courses_students.course_id=" + CourseID)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id , tblUsers.full_name as 'CourseStudents' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where acd_courses_students.approved=1 and acd_courses_students.course_id=" + CourseID)
             dt2 = DBManager.Getdatatable("select student_id from acd_absence where lecture_id=" + lecture_id)
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1854,7 +1964,7 @@ Public Class courseDetailsCls
             Dim dt As New DataTable
             'DBManager.ExcuteQuery("DELETE FROM acd_courses_students where approved=1 and course_id=" + course_id)
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id where acd_courses_students.approved=0 and acd_courses_students.course_id=" + course_id)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes, tblImages.Image_path as 'registerFiles',tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id join tblImages on tblImages.Source_id=acd_courses_students.student_id and tblImages.related_id= acd_courses_students.course_id where acd_courses_students.approved=0 and acd_courses_students.course_id=" + course_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -2321,7 +2431,7 @@ Public Class courseDetailsCls
         Dim Names As New List(Of String)(10)
         Try
 
-            If DBManager.ExcuteQuery("DELETE FROM acd_courses_students where student_id=" + studentId + " and course_id=" + courseID) <> -1 Then
+            If DBManager.ExcuteQuery("UPDATE  acd_courses_students  set  approved=0 where student_id=" + studentId + " and course_id=" + courseID) <> -1 Then
                 If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "حذف", _sqlconn, _sqltrans) Then
                     success = False
                 Else

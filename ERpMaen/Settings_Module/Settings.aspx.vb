@@ -270,11 +270,9 @@ Public Class Settings
             LookupId.Text = ""
             lblRes.Visible = False
             lblType.Text = TypeEng
-            lblTypesName.Text = ""
+            lblTypesName.Text = Sender.CommandName.ToString
             Dim dt As DataTable = DBManager.Getdatatable("Select * from tbllock_up inner join tbllockup_settinges on tbllock_up.Type Collate DATABASE_DEFAULT= tbllockup_settinges.Type Collate DATABASE_DEFAULT  where tbllock_up.Type='" + TypeEng + "'" + condition + " order by orderNo,Name ")
-            If dt.Rows.Count > 0 Then
-                lblTypesName.Text = dt.Rows(0).Item("name").ToString
-            End If
+
             Dim dtRType = DBManager.Getdatatable("Select * from tbllockup_settinges where Type='" + lblType.Text + "' and RelatedType is not null")
             If dtRType.Rows.Count > 0 Then
                 pnlTypes.Visible = True
@@ -428,7 +426,12 @@ Public Class Settings
             Try
                 dtLookup.Comp_id = compId
                 dtLookup.Description = txtDescription.Value.Replace("'", " ")
-                dtLookup.OrderNo = txtOrderNo.Text
+                Dim order As Integer
+                If Integer.TryParse(txtOrderNo.Text, order) Then
+                    dtLookup.OrderNo = order
+                End If
+
+                'dtLookup.OrderNo = txtOrderNo.Text
                 '   dtLookup.ADescription = txtDescriptionA.Text.Replace("'", " ")
                 dtLookup.Type = lblType.Text
                 If pnlRType.Visible = True Then
@@ -495,7 +498,11 @@ Public Class Settings
                         dtLookup.Id = Id
                         dtLookup.Color = Color
                         dtLookup.ICON = Photo
-                        dtLookup.OrderNo = txtOrderNo.Text
+                        ' dtLookup.OrderNo = txtOrderNo.Text
+
+                        If Integer.TryParse(txtOrderNo.Text, order) Then
+                            dtLookup.OrderNo = order
+                        End If
                         daLookup.Update(dtLookup)
                         pf.ClearAll(pnlNewType)
                         clsMessages.ShowSuccessMessgage(lblRes, "Record has been updated successfully!", Me)

@@ -44,7 +44,7 @@ function save() {
                 var data = { "area_id": $(this).attr("id") };
                 researchArea_arrData.push(data);
             });
-            User.SaveUser(UserId, basicData, researchArea_arrData, mainImag, function (val) {
+        userPorfile.SaveUser(UserId, basicData, researchArea_arrData, mainImag, function (val) {
                 $("#SavedivLoader").hide();
                 if (val.split("|")[0] == "True") {
                     showSuccessMessage("تم الحفظ بنجاح");
@@ -63,10 +63,11 @@ function save() {
 
 function edit(val) {
     try {
+        debugger
         cancel();
         resetAll();
         if (val[0] != "") {
-            var data = JSON.parse(val[1]);
+            var data = JSON.parse(val[0]);
             fillControlsFromJson(data[0]);
             
             changeResearcher(function () {
@@ -106,20 +107,6 @@ function edit(val) {
     } catch (err) {
         alert(err);
     }
-}
-
-
-function edit(val) {
-    cancel();
-    resetAll();
-        if (val != "") {
-            var data = JSON.parse(val);
-            fillControlsFromJson(data[0],"divForm");
-        }
-        $("#pnlConfirm").hide();
-        $("#divData").show();
-    $("#SavedivLoader").hide();
-    $("#cmdUpdate").removeAttr("disabled");
 }
 
 

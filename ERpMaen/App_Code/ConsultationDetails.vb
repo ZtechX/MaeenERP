@@ -47,7 +47,7 @@ Public Class ConsultationDetails
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_consultings", id, _sqlconn, _sqltrans) Then
                 Dim admin_id = ""
                 Dim dt As DataTable
-                dt = DBManager.Getdatatable("select id from tblUsers where superAdmin=1 and comp_id=" + LoginInfo.GetComp_id())
+                dt = DBManager.Getdatatable("select id from tblUsers where User_Type=2 and comp_id=" + LoginInfo.GetComp_id())
                 If dt.Rows.Count <> 0 Then
                     admin_id = dt.Rows(0)(0).ToString
                 End If

@@ -20,9 +20,9 @@ Public Class caseClassificationRep
             'dt1 = DBManager.Getdatatable("SELECT img_header,img_footer FROM tbl_company_info")
             Dim dt2 As New DataTable
 
-            Dim query = "SELECT ash_cases.code,ash_courts.name as 'from',
+            Dim query = "SELECT ash_cases.code,courts.Description as 'from',
 tbllock_up.Description as 'service_type',court_details   
-  FROM ash_cases left join ash_courts on ash_cases.court_id= ash_courts.id
+  FROM ash_cases left join tbllock_up courts on ash_cases.court_id= courts.id
    left join tbllock_up on tbllock_up.id=ash_cases.depart  where ash_cases.comp_id is not null"
             dt2 = DBManager.Getdatatable(query)
             Dim index = 0

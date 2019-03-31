@@ -119,9 +119,9 @@ Public Class userPorfile
 
 #End Region
 
-    <WebMethod(True)> _
-  <System.Web.Script.Services.ScriptMethod()>
-    Public Function GetPlaces() As String()
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function GeltPaces() As String()
         Dim comp_id = LoginInfo.GetComp_id()
         Dim Names As New List(Of String)(10)
         Dim dt As New DataTable

@@ -20,10 +20,10 @@ Public Class StatisticsofcasesRep
             'dt1 = DBManager.Getdatatable("SELECT img_header,img_footer FROM tbl_company_info")
             Dim dt2 As New DataTable
 
-            Dim query = "SELECT ash_cases.code,ash_cases.date_h as 'case_dt',ash_courts.name as 'from', court_details
+            Dim query = "SELECT ash_cases.code,ash_cases.date_h as 'case_dt',courts.Description as 'from', court_details
 ,persons1.name as 'person_from' ,isNull((select count(ash_case_sessions.id) from ash_case_sessions where ash_case_sessions.case_id=ash_cases.id) ,0) as 'sessions_num',
 isNull((select count(ash_case_persons.id) from ash_case_persons where ash_case_persons.case_id=ash_cases.id) ,0)+isNull(ash_cases.childrens_no,0)  as 'beneficiaries_num'
-  FROM ash_cases left join ash_courts on ash_cases.court_id= ash_courts.id
+  FROM ash_cases left join tbllock_up courts on ash_cases.court_id= courts.id
    left join tbllock_up on tbllock_up.id=ash_cases.depart  
   left join ash_case_persons persons1 on ash_cases.person1_id=persons1.id  where ash_cases.comp_id is not null"
             dt2 = DBManager.Getdatatable(query)

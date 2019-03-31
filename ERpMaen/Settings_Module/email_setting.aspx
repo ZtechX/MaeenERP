@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="email_setting.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.email_setting" Theme="Theme5" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
 <%@ Register Src="~/UserControls/MultiPhotoUpload.ascx" TagPrefix="uc1" TagName="MultiPhotoUpload" %>
@@ -47,7 +46,7 @@
                 </div>
                 <div>
                     <div class="main-title">
-                        <asp:Label ID="lblFormName" class="form_lbl_name" runat="server" Text="Type" SkinID="page_title"></asp:Label>
+                        <asp:Label ID="lblFormName" class="form_lbl_name" runat="server" Text="إعدادات البريد الإلكترونى" SkinID="page_title"></asp:Label>
                     </div>
                     <div class="strip_menu">
                         <asp:Panel ID="pnlOps" runat="server" Style="text-align: right">

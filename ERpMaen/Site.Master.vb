@@ -351,4 +351,14 @@ Public Class SiteMaster
         Response.Redirect("~/login/Login.aspx")
     End Sub
 #End Region
+#Region "UserPorfile"
+    ''' <summary>
+    ''' Handel log out button by deleting the cookies and redirect to the login page.
+    ''' </summary>
+    Protected Sub UserPorfile(ByVal Sender As LinkButton, ByVal e As System.EventArgs)
+        Response.Redirect("~/Login/userPorfile.aspx")
+    End Sub
+#End Region
+
+
 End Class

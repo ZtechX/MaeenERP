@@ -46,6 +46,7 @@ Public Class course_registerCls
             dictBasicDataJson.Add("course_id", course_id)
             dictBasicDataJson.Add("type", "1")
             dictBasicDataJson.Add("approved", 0)
+
             dictBasicDataJson.Add("student_id", LoginInfo.GetUser__Id())
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then

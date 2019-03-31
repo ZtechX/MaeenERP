@@ -59,6 +59,15 @@ Partial Public Class ConsultDetails
     Protected WithEvents loginUser As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
+    '''loginUser_type control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents loginUser_type As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''cmdAdd control.
     '''</summary>
     '''<remarks>

@@ -36,7 +36,7 @@ Public Class ConsultDetails
         Try
             If Page.IsPostBack = False Then
                 loginUser.Value = LoginInfo.GetUser__Id()
-
+                loginUser_type.Value = LoginInfo.getUserType()
                 Dim clsapprove_stSorc As New clsFillComboByDataSource("select * from tblLock_up where type='Ref' and IsNull(Deleted,0)=0", "Description", "id", "")
                 clsapprove_stSorc.SetComboItems(ddlStatsrce, "", True, "--اختر--", False)
 

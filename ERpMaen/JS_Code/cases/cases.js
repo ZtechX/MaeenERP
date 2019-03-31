@@ -343,8 +343,8 @@ function save_conciliation() {
     var case_conciliation = generateJSONFromControls("case_conciliation");
     var case_id = $("#lblcase_id").html();
     var PosId = $("#lblconciliation_id").html();
-    var new_date_m = cal_days();
-    var children_gson = getChildrenJson();
+    //var new_date_m = cal_days();
+    //var children_gson = getChildrenJson();
     cases.save_conciliation(PosId, case_id, case_conciliation, function (val) {
         if (val) {
             resetDivControls("case_conciliation");

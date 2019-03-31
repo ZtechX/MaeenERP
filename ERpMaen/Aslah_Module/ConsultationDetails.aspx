@@ -41,6 +41,7 @@
                       
                     </div>
                     <input id="loginUser"  style="display: none" runat="server" />
+                     <input id="loginUser_type"  style="display: none" runat="server" />
                      <div class="col-md-12" >
                                  <asp:LinkButton OnClientClick="add(); return false;" ID="cmdAdd" runat="server"
                                                 SkinID="btn-top" CausesValidation="false">

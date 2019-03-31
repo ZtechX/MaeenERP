@@ -31,7 +31,7 @@ Public Class ConciliationRep
 
             Dim query = "SELECT  code,persons1.name  as 'Pfrom' ,
 persons2.name as 'PAgainst',date_h,notes,
-(select ash_courts.name FROM ash_cases left join ash_courts on ash_cases.court_id= ash_courts.id
+(select courts.Description FROM ash_cases left join tbllock_up courts on ash_cases.court_id= courts.id
  where ash_cases.id=ash_case_conciliation.case_id) as 'from'
  FROM ash_case_conciliation 
   left join ash_case_persons persons1 on ash_case_conciliation.owner_id=persons1.id 

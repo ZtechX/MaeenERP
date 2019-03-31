@@ -178,7 +178,7 @@
             </ul>
         </div>
         </div>
-        <div class="modal" id="addCourse" tabindex="-1" role="dialog" dir="rtl">
+        <div class="modal" id="addCourse" tabindex="-1" role="dialog" data-easein="perspectiveRightIn"  aria-labelledby="modalLabel" aria-hidden="true" dir="rtl">
                  <div id="SavedivLoader" class="loader" style="display: none;  text-align: center;">
                                                                                     <asp:Image ID="img" runat="server" ImageUrl="../App_Themes/images/loader.gif" />
 
@@ -361,6 +361,7 @@
             </div>
         </div>
     </div>
+   
 
     <%-- end form--%>
 </asp:Content>

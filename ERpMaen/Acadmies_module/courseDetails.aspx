@@ -75,6 +75,7 @@
             opacity: 1;
         }
 
+
         .pull-right .dropdown-menu {
             right: auto;
             left: 0;
@@ -1194,20 +1195,21 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">الطلاب   </h4>
+                            <h4 class="modal-title">تقديمات الطلاب   </h4>
                         </div>
                         <%--  جدول الطلاب--%>
                         <div class="table-responsive" id="allStudentlist">
                             <table class="table table-bordered table-hover"  id="newitem">
                                <thead>
                                 <tr>
-                                    <th>الاسم </th>
-                                    <th>الصورة</th>
-                                     <th>اضافة</th>
+                                    <th>الطالب </th>
+                                    <th>الطلب</th>
+                                     <th>الملف</th>
+                                     <th>الاجراء</th>
                                   
                                 </tr>
                                  </thead>
-                                <tbody  id="courseStudents">
+                                <tbody  id="action_courseStudents">
                                          
                                 </tbody>
                                     
@@ -1223,7 +1225,7 @@
                 </div>
             </div>
 
-            <div class="modal" id="order_addcondition" tabindex="-1" role="dialog">
+            <div class="modal" id="order_addcondition" data-easein="perspectiveRightIn" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
