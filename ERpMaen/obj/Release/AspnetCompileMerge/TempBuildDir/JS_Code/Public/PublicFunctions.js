@@ -1019,6 +1019,7 @@ function FilterTableAndExport() {
     }
 }
 function cust_chkNumber(evt, element, len) {
+    debugger
     if ($(element).val().length >= len) {
         return false;
     } else {

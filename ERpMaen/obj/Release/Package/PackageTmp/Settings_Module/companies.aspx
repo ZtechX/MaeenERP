@@ -44,11 +44,7 @@
                                 document.getElementById('compLogo').src = 'images_company/' + args.get_fileName();
                             } else if (Sender_id == "comp_fuPhoto1") {
                                 document.getElementById('Comp_imgItemURL').src = 'images_company/' + args.get_fileName();
-                            } else if (Sender_id == "Ac_fuPhoto1") {
-                                document.getElementById('Ac_imgItemURL').src = 'images_company/' + args.get_fileName();
-                            } else if (Sender_id == "cen_fuPhoto1") {
-                                document.getElementById('Cen_imgItemURL').src = 'images_company/' + args.get_fileName();
-                            }
+                            } 
                            
                             
                             switch (true) {
@@ -179,7 +175,7 @@
                                 <div class="fancy-form" id="CurrentDate" style="display:none;"> 
                                 <uc1:HijriCalendar runat="server" ID="HijriCalendar1" />  
                                     </div>
-                                <div class="panel panel-default" style="width:100%; margin-left: auto;margin-right: auto;margin: 0px;">
+                                <div class="panel panel-default" style="width:100%; margin-left: auto;margin-right: auto;">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
                                                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">بيانات الجهة</a>
@@ -357,18 +353,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label class="label-required">اسم المستخدم</label>
-
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox   dbcolumn="User_Name" required type="text" id="comp_Adminuser_name"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-
-                                               
-                                                </div>
-                                        </div>
 
                                         <div class="row form-group">
                                             <div class="col-md-3 col-sm-12">
@@ -397,6 +381,7 @@
 
                                     </div>
                                 </div>
+                                            </label>
                                             </fieldset>
                                     </div>
                                 
@@ -406,16 +391,16 @@
                                                         </div>
                                                     </div>
 
-                                        <div id="acPanal" class="panel panel-default" style="width: 95%; margin-left: auto;margin-right: auto;">
+                                        <div id="ac_cen_Panal" class="panel panel-default" style="margin-left: auto;margin-right: auto;">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">بيانات الاكاديمية</a>
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">بيانات الاكاديمية و مركز التدريب</a>
                                                             </h4>
                                                         </div>
                                                         <div id="collapse2" class="panel-collapse collapse">
                                                             <div class="panel-body" style="direction:rtl;">
                                                                 <%-- start group3--%>
-                                              <div id="AcadmeyDataDiv">
+                                              <div id="Acadmey_CenterDataDiv">
                                                    <div class="col-md-6 form-group" id="AcadmeyDiv">
                                                          <input id="Aca_id"  style="display: none" runat="server" dbcolumn="id"/>
                                 
@@ -444,126 +429,20 @@
 
                                                                     </div>
                                                                </div>
-                                                           </fieldset>
+                                                         <div class="form-group">
+                                        <div class="col-md-3 col-sm-12">
+                                        <label class="label-required">مدير الاكاديمية</label>
+                                            </div>
+
+                                        <div class="col-md-9 col-sm-12">
+                                            <asp:DropDownList required dbcolumn="admin" class="form-control" ClientIDMode="Static" ID="ddl_Acadmin" runat="server">
+                                            </asp:DropDownList>
+
+                                        </div>
+                                    </div>
+                                                           <%--</fieldset>--%>
                                                         </div>        
-
-                                <div class="col-md-6" id="Ac_adminDiv">
-                                      <input id="Ac_AdminID" type="text" style="display: none" runat="server" dbcolumn="id"/>
-                                
-                                        <fieldset style="border:none;"><legend >بيانات مدير الاكاديمية</legend>
-                                        <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label class="label-required">اسم المدير</label>
-
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                              
-                                                <asp:TextBox  required dbcolumn="full_name" type="text" id="Ac_AdminName"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-                                              
-
-                                            </div>
-                                        </div>
-            <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label class="label-required">رقم الجوال</label>
-
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                              
-                                                <asp:TextBox onkeypress="return cust_chkNumber(event,this,10);" required dbcolumn="User_PhoneNumber" type="text" id="Ac_adminTele"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-                                            </div>
-                                        </div>
-                                                 <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">
-                                                                        رقم الهوية   </lable>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="user_indenty" type="text" id="Text1"
-                                                                            class="form-control" runat="server" clientidmode="Static" ></asp:TextBox>
-
-                                                                        <br />
-                                                                    </div>
-                                                                </div>
-
-                                        <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label >البريد الالكترونى</label>
-
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                         
-                                                <asp:TextBox   dbcolumn="User_Email"   type="email" id="AcUser_Email"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-
-                                             
-                                            </div>
-                                        </div>
-
-                                        <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label class="label-required">اسم المستخدم</label>
-
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                              
-                                                <asp:TextBox  required dbcolumn="User_Name"   type="text"   id="Acuser_name"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-
-                                               
-                                                </div>
-                                        </div>
-
-                                        <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label class="label-required">كلمة المرور</label>
-
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox  required dbcolumn="User_Password"   type="password" id="Acuser_password"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-
-                                                
-                                            </div>
-                                        </div>
-
-                           
-                                                           <div class="form-group row">
-
-                                    <div >
-                                        <asp:Image ID="Ac_imgItemURL" ClientIDMode="Static" runat="server" Width="114px" ImageUrl="~/App_Themes/images/add-icon.jpg" />
-                                        
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                    <div class="photo-upload-box">
-                                        <span>تحميل صورة</span>
-                                        <asp:AsyncFileUpload ID="Ac_fuPhoto1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
-                                            OnClientUploadComplete="UploadComplete2" />
-                                        </div>
-                                </div>
-                                            </fieldset>
-                                    </div>
-                                        
-                                              </div>
-                                                                    <%--end group3--%>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                        <div id="CenPanal" class="panel panel-default" style="width: 95%; margin-left: auto;margin-right: auto;">
-                                                        <div class="panel-heading">
-                                                            <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">بيانات مركز التدريب</a>
-                                                            </h4>
-                                                        </div>
-                                                        <div id="collapse3" class="panel-collapse collapse">
-                                                            <div class="panel-body"  style="direction:rtl;">
-                                                                <%-- start group3--%>
-                                       
-                                                                       <div id="CenterDataDiv">
+                                                    <div id="CenterDataDiv">
                                                       <div class="col-md-6 form-group " id="CenterDiv">
                                                             <input id="cen_id" type="text"  style="display: none" runat="server" dbcolumn="id"/>
                                 
@@ -592,119 +471,30 @@
                                                                         </div>
                                          
                                                                     </div>
+                                                                          <div class="form-group">
+                                        <div class="col-md-3 col-sm-12">
+                                        <label class="label-required">مدير المركز</label>
+                                            </div>
 
+                                        <div class="col-md-9 col-sm-12">
+                                            <asp:DropDownList required dbcolumn="admin" class="form-control" ClientIDMode="Static" ID="ddl_Cenadmin" runat="server">
+                                            </asp:DropDownList>
+
+                                        </div>
+                                    </div>
                                                                 </fieldset>
                                 </div>
-                                
-                                        
-                                                       
-                                                                              <div class="col-md-6" id="Cen_adminDiv">
-                                                                                    <input id="CenAdminID" style="display: none" runat="server" dbcolumn="id"/>
-                                
-                                        <fieldset style="border:none;"><legend >بيانات مدير المركز</legend>
-                                          <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label class="label-required">اسم المدير</label>
-
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox  required dbcolumn="full_name" type="text" id="Cen_AdminName"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-                                                 
-
-                                            </div>
-                                        </div>
-            <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label class="label-required">رقم الجوال</label>
-
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox onkeypress="return cust_chkNumber(event,this,10);" required  dbcolumn="User_PhoneNumber" type="text" id="Cen_AdminNum"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-                                                
-                                            </div>
-                                        </div>
-   <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">
-                                                                        رقم الهوية   </lable>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="user_indenty" type="text" id="Text2"
-                                                                            class="form-control" runat="server" clientidmode="Static" ></asp:TextBox>
-
-                                                                        <br />
-                                                                    </div>
-                                                                </div>
-
-                                        <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label >البريد الالكترونى</label>
-
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                         
-                                                <asp:TextBox   dbcolumn="User_Email"   type="email" id="cen_Adminemail"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-
-                                           
-                                            </div>
-                                        </div>
-
-                                        <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label class="label-required">اسم المستخدم</label>
-
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox  required dbcolumn="User_Name" type="text" id="cen_Adminuser_name"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-
-                                            
-                                                </div>
-                                        </div>
-
-                                        <div class="row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label class="label-required">كلمة المرور</label>
-                                            </div>
-                                            <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox  required dbcolumn="User_Password"   type="password" id="Cen_user_password"   class="form-control"  ClientIDMode="Static" runat="server">
-                                                </asp:TextBox>
-
-                                                
-                                            </div>
-                                        </div>
-
-                                                           <div class="form-group row">
-
-                                    <div >
-                                        <asp:Image ID="Cen_imgItemURL" ClientIDMode="Static" runat="server" Width="114px" ImageUrl="~/App_Themes/images/add-icon.jpg" />
-                                       
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                    <div class="photo-upload-box">
-                                        <span>تحميل صورة</span>
-                                        <asp:AsyncFileUpload ID="cen_fuPhoto1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
-                                            OnClientUploadComplete="UploadComplete2"  />
-
-                                    </div>
-                                </div>
-                                            </fieldset>
-                                    </div>
-                                    <%--</div>--%>
-
-                                                                      
+                                                     
                                 </div>
 
+                                              </div>
                                                                     <%--end group3--%>
                                                             </div>
                                                         </div>
                                                     </div>
+                                      
                 <button id="activate-step-2" type="button" class="btn btn-primary btn-lg">التالى</button>
+                  <button id="Save" type="button" class="btn btn-primary btn-lg" onclick="save_companies();" style="display:none;">حفظ</button>
             </div>
         </div>
     </div>

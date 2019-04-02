@@ -16,7 +16,7 @@
     <script src="../js/jquery-1.2.6.min.js"></script>
 
     <%-- Slider --%>
-
+    <script src="../JS_Code/Public/PublicFunctions.js"></script>
 
     <script type="text/javascript">
 
@@ -114,9 +114,9 @@ box-sizing:border-box;
                         <div class="row">
                             <div class="col-xs-12">                                
 <div class="txt_wrap">
-    <i class="fa fa-user icon"></i>
-<asp:TextBox ID="txtUserName" placeholder="رقم الهوية أو رقم الجوال" required="required" 
-                                        runat="server" CssClass="textbox" AutoCompleteType="Email"></asp:TextBox>
+    <i class="fa fa-phone icon"></i>
+<input class="textbox" id="txtUserName" type="text"  placeholder="رقم الهوية أو رقم الجوال" required="required" onkeypress="return cust_chkNumber(event,this,10);"
+                                        runat="server"  />
                             
 </div>
                        <div class="txt_wrap">
@@ -131,7 +131,7 @@ box-sizing:border-box;
                             </div>
    <div>
                                     <asp:CheckBox ID="cklogin" runat="server" Text="تذكرنى " />
-           <asp:Label ID="lblFail" runat="server" Visible="False" ></asp:Label>
+           <asp:Label ID="lblFail" runat="server" Visible="False" style="color:red;font-weight: bolder;font-size: 16px;"></asp:Label>
 
                                 </div>
                         </div>

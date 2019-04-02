@@ -2617,7 +2617,7 @@ cursor: not-allowed;
   /* background: -o-linear-gradient(180deg, #fff 70%, #eee); /* For Opera 11.1 to 12.0 */
   /* background: -moz-linear-gradient(180deg, #fff 70%, #eee); /* For Firefox 3.6 to 15 */
    /*background: linear-gradient(180deg, #fff 70%, #eee); /* Standard syntax */
-  z-index:999;
+
   padding-right:10px;
 }
 .strip_menu:hover

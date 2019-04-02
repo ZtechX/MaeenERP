@@ -7,6 +7,10 @@ var superAdmin = false;
 
 // load function set defualt values
 $(function () {
+    $("input").attr("class","");
+    $("select").attr("class", "");
+    $("input").addClass("form-control");
+    $("select").addClass("form-control");
     $("#pnlConfirm").hide();
     $("#divData").hide();
     $("#SavedivLoader").show();

@@ -496,6 +496,18 @@ function applyDatatable(val) {
                         }
                     });
 
+                } else if (getFormName() == "orders") {
+                    if ($('td:last-child', nRow).html() == "1") {
+                        var style = "font-size: 15px;border-radius: 10px;border:1px solid #cccccc;padding: 0px 5px;"
+                        $('td:last-child', nRow).html('<div class="hidden-sm hidden-xs action-buttons"><a onclick="ChangeOrderStatus(' + aData[0] + ',1); return 0;"  style="color:green;margin-left:25px;' + style + '"><i class=" fa fa-check fa-md" style="padding: 0px 2px;"></i></a><a onclick="ChangeOrderStatus(' + aData[0] + ',0); return 0;"  style="color:red;' + style +'"><i class="fa fa-close fa-md" style="padding: 0px 3px;"></i></a></div>');
+
+                    } else if ($('td:last-child', nRow).html() == "2"){
+
+                        $('td:last-child', nRow).html("تمت الموافقة");
+                    } else if ($('td:last-child', nRow).html() == "3") {
+
+                        $('td:last-child', nRow).html("تم الرفض");
+                    }
                 }
             },
         }).columnFilter({

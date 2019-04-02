@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="report_settings.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.report_settings" Theme="Theme5" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
 <%@ Register Src="~/UserControls/DynamicTable.ascx" TagPrefix="uc1" TagName="DynamicTable" %>
@@ -116,7 +115,7 @@
                 </div>
                 <div>
                     <div class="main-title">
-                        <asp:Label ID="lblFormName" runat="server" Text="Type" SkinID="page_title"></asp:Label>
+                        <asp:Label ID="lblFormName" runat="server" Text="اعدادات التقارير" SkinID="page_title"></asp:Label>
                     </div>
                     <div class="strip_menu">
                         <asp:Panel ID="pnlOps" runat="server" Style="text-align: right">

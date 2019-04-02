@@ -59,7 +59,7 @@ Public Class advisor
 
                 Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
                 dictBasicDataJson1.Add("full_name", dictBasicDataJson("name"))
-                dictBasicDataJson1.Add("User_Name", dictBasicDataJson("user_nm"))
+                'dictBasicDataJson1.Add("User_Name", dictBasicDataJson("user_nm"))
                 dictBasicDataJson1.Add("User_Email", dictBasicDataJson("email"))
                 dictBasicDataJson1.Add("Active", dictBasicDataJson("active"))
                 dictBasicDataJson1.Add("User_Password", dictBasicDataJson("password"))
@@ -152,16 +152,20 @@ Public Class advisor
     Public Function checkUser() As String
 
         Try
-            Dim dt As New DataTable
-            Dim UserId As String = HttpContext.Current.Request.Cookies("UserInfo")("UserId")
-            dt = DBManager.Getdatatable("select isNull(related_id,'0') related_id,User_Type  from tblUsers where id=" + UserId)
-            If dt.Rows.Count <> 0 Then
-                Dim user_type = dt.Rows(0)("User_Type").ToString
-                If user_type = "1" Or user_type = "2" Then
-                    Return "Superadmin"
+            Dim user_type = LoginInfo.getUserType()
+
+            If user_type = "1" Or user_type = "2" Or user_type = "7" Then
+                Return "Superadmin"
+            Else
+                Dim dt As New DataTable
+                Dim UserId As String = LoginInfo.GetUser__Id()
+                dt = DBManager.Getdatatable("select isNull(related_id,'0') related_id  from tblUsers where id=" + UserId)
+                If dt.Rows.Count <> 0 Then
+
+                    Return dt.Rows(0)("related_id").ToString
                 End If
-                Return dt.Rows(0)("related_id").ToString
             End If
+
 
         Catch ex As Exception
 
@@ -183,7 +187,7 @@ Public Class advisor
 
         Dim Names As New List(Of String)(10)
         Try
-            Return PublicFunctions.ConvertDataTabletoString(DBManager.Getdatatable("SELECT User_Name as 'user_nm',User_Password as 'password',ash_advisors.id,ash_advisors.comp_id ,code ,name ,specialty ,tel ,email ,ash_advisors.active,advisor_identiy  FROM ash_advisors left join tblUsers on ash_advisors.id=tblUsers.related_id where ash_advisors.id=" + editItemId))
+            Return PublicFunctions.ConvertDataTabletoString(DBManager.Getdatatable("SELECT User_Password as 'password',ash_advisors.id,ash_advisors.comp_id ,code ,name ,specialty ,tel ,email ,ash_advisors.active,advisor_identiy  FROM ash_advisors left join tblUsers on ash_advisors.id=tblUsers.related_id where ash_advisors.id=" + editItemId))
         Catch ex As Exception
             Return ""
         End Try

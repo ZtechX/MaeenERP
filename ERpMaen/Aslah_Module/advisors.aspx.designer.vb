@@ -140,15 +140,6 @@ Partial Public Class advisors
     Protected WithEvents pnlForm As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''code control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents code As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
     '''Name control.
     '''</summary>
     '''<remarks>
@@ -173,7 +164,7 @@ Partial Public Class advisors
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents TextBox3 As Global.System.Web.UI.HtmlControls.HtmlInputPassword
     
     '''<summary>
     '''ddlspecial_id control.

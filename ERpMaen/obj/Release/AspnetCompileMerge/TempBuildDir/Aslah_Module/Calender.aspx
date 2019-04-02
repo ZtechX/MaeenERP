@@ -4,6 +4,7 @@
 <%--<%@ Register Src="~/UserControls/Person.ascx" TagPrefix="uc1" TagName="Person" %>--%>
 <%@ Register Src="~/UserControls/DeliveryDate.ascx" TagPrefix="uc1" TagName="DeliveryDate" %>
 <%@ Register Src="~/UserControls/Appraisal.ascx" TagPrefix="uc1" TagName="Appraisal" %>
+<%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
     
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
@@ -26,7 +27,7 @@
                 </asp:UpdateProgress>
             </div>
   
-
+            <label runat="server" id="Login_userType" style="display:none;" />
 <div class="w3-main" style="margin-top:60px">
 	<div class="w3-container w3-padding w3-teal">
 		<button class="w3-button w3-ripple w3-xlarge w3-hide-large w3-left" style="margin:6px 8px 0px -16px" onclick="openSidebar()">
@@ -38,8 +39,8 @@
        
 	<div id="calendar"     class="w3-container w3-margin-top"></div>
 
-  
-             <script src="../js/hijri-date1.js"></script>
+  <uc1:Result  runat ="server"
+/>             <script src="../js/hijri-date1.js"></script>
              <script src="../js/calendar1.js"></script>
          <script src="../js_code/cases/cases.js"></script>
     <script type="text/javascript">

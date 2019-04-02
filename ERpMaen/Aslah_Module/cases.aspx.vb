@@ -35,7 +35,9 @@ Public Class cases
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             If Page.IsPostBack = False Then
-                Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
+                Dim UserId = LoginInfo.GetUser__Id()
+                userLoginType.Value = LoginInfo.getUserType()
+
                 Dim cls_courts As New clsFillComboByDataSource("select * from tbllock_up where  type='court' and IsNull(Deleted,0)=0 and Comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 cls_courts.SetComboItems(ddlcourt_id, "", True, "--اختر--", False)
                 Dim cls_employee As New clsFillComboByDataSource("select * from tblUsers where IsNull(Deleted,0)=0 and User_Type=4", "User_Name", "id", "")

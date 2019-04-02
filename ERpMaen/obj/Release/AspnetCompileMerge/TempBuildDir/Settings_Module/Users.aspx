@@ -39,7 +39,7 @@
                             padding: 6px 12px;
                         }
 
-                      .form-group{ margin-bottom:20px;direction: rtl;}
+                      .form-group{ direction: rtl;}
                       .thead-dark {     background: beige;text-align:right;}
                       .thead-dark tr th{     background: beige;text-align:right;}
                    

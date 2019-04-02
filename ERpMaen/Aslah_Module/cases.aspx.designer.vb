@@ -104,6 +104,15 @@ Partial Public Class cases
     Protected WithEvents Result As Global.ERpMaen.Result
     
     '''<summary>
+    ''' userLoginType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents  userLoginType As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''lblcase_id control.
     '''</summary>
     '''<remarks>

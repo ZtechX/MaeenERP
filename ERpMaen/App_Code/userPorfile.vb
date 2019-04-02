@@ -101,7 +101,9 @@ Public Class userPorfile
         Names.Add("")
         Try
             Dim dt As New DataTable
-            dt = DBManager.Getdatatable("SELECT * from TblUsers where id  =" + UserId)
+            dt = DBManager.Getdatatable("SELECT tblUsers.id,full_name ,User_Email,Active ,Researcher,User_Password,User_PhoneNumber,User_Image," +
+ " User_Type,user_indenty,isNull(name,'') as userType" +
+ " FROM tblUsers left join tblUser_Type on tblUser_Type.id=User_Type where tblUsers.id  =" + UserId)
             If dt.Rows.Count <> 0 Then
                 Names(0) = PublicFunctions.ConvertDataTabletoString(dt)
                 If Convert.ToBoolean(dt.Rows(0).Item("Researcher")) Then

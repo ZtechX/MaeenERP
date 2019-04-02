@@ -3962,9 +3962,19 @@ Public Class WebService
                     quaryStr = quaryStr + " where ash_advisors.comp_id=" + LoginInfo.GetComp_id()
 
                 ElseIf formName = "orders" Then
-                    quaryStr = quaryStr + " where ash_orders.comp_id=" + LoginInfo.GetComp_id()
+                    Dim userType = LoginInfo.getUserType()
+
+                    If userType = "2" Or userType = "7" Then
+                        quaryStr = quaryStr + " where ash_orders.comp_id=" + LoginInfo.GetComp_id()
+                    ElseIf userType = "6" Then
+                        quaryStr = quaryStr + "  where ash_orders.case_id in(select id from ash_cases where advisor_id = " + LoginInfo.getrelatedId() + ")"
+                    ElseIf userType = "9" Then
+                        quaryStr = quaryStr + "  where ash_orders.case_id in(select id from ash_cases where person1_id = " + LoginInfo.getrelatedId() + " or person2_id =" + LoginInfo.getrelatedId() + ")"
+
+                    End If
+
                 ElseIf formName = "CommonQuest" Or formName = "email_setting" Or formName = "Signature_setting" Then
-                    quaryStr = quaryStr + " where comp_id=" + LoginInfo.GetComp_id()
+                        quaryStr = quaryStr + " where comp_id=" + LoginInfo.GetComp_id()
                 End If
             End If
 

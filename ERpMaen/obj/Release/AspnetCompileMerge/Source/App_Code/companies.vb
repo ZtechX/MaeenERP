@@ -170,7 +170,7 @@ Public Class companies
                         Else
                             Dim dic_advisor_permission As New Dictionary(Of String, Object)
                             dic_advisor_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
-                            dic_advisor_permission.Add("form_id", 2156)
+                            dic_advisor_permission.Add("form_id", 3184)
                             dic_advisor_permission.Add("f_add", 1)
                             dic_advisor_permission.Add("f_update", 1)
                             dic_advisor_permission.Add("f_access", 1)
@@ -202,7 +202,7 @@ Public Class companies
                         Else
                             Dim dic_Beneficiaries_permission As New Dictionary(Of String, Object)
                             dic_Beneficiaries_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
-                            dic_Beneficiaries_permission.Add("form_id", 3184)
+                            dic_Beneficiaries_permission.Add("form_id", 3179)
                             dic_Beneficiaries_permission.Add("f_add", 1)
                             dic_Beneficiaries_permission.Add("f_update", 1)
                             dic_Beneficiaries_permission.Add("f_access", 1)
@@ -214,7 +214,7 @@ Public Class companies
                                 _sqlconn.Close()
                                 Names.Add("لم يتم الحفظ")
                             Else
-                                dic_Beneficiaries_permission("form_id") = 2156
+                                dic_Beneficiaries_permission("form_id") = 3187
                                 If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
                                     success = False
                                     _sqltrans.Rollback()
@@ -336,103 +336,63 @@ Public Class companies
                             dictCompAdminDataJson.Add("Active", dictCompDataJson("active"))
                             dictCompAdminDataJson.Add("comp_id", Comp_id)
 
-                            If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
-                                success = True
-
-                            Else
-                                success = False
-                                _sqltrans.Rollback()
-                                _sqlconn.Close()
-                                Names.Add("لم يتم الحفظ")
-                            End If
-
-                        Else
-
-                            Dim dictAcaAdminDataJson As Dictionary(Of String, Object) = arrDataJson(3)
-                    Dim AcAdmin_id = dictAcaAdminDataJson("id")
-                    Dim AcAdmin_indenty = dictAcaAdminDataJson("user_indenty")
-                    Dim AcAdmin_Phone = dictAcaAdminDataJson("User_PhoneNumber")
-                    If check_userData(AcAdmin_id, AcAdmin_indenty, AcAdmin_Phone) And AcAdmin_indenty <> CompAdmin_indenty And AcAdmin_Phone <> CompAdmin_Phone Then
-                        Dim dictCenAdminDataJson As Dictionary(Of String, Object) = arrDataJson(5)
-                        Dim CenAdmin_id = dictCenAdminDataJson("id")
-                        Dim CenAdmin_indenty = dictCenAdminDataJson("user_indenty")
-                        Dim CenAdmin_Phone = dictCenAdminDataJson("User_PhoneNumber")
-                        If check_userData(CenAdmin_id, CenAdmin_indenty, CenAdmin_Phone) And CenAdmin_indenty <> AcAdmin_indenty And CenAdmin_indenty <> CompAdmin_indenty And CenAdmin_Phone <> AcAdmin_Phone And CenAdmin_Phone <> CompAdmin_Phone Then
-                            Dim dictCompDataJson As Dictionary(Of String, Object) = arrDataJson(0)
-                            dictCompDataJson.Add("person", dictCompAdminDataJson("full_name"))
+                    If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
+                        success = True
+                    Else
+                        success = False
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Names.Add("لم يتم الحفظ")
+                    End If
+                Else
+                    Dim dictCompDataJson As Dictionary(Of String, Object) = arrDataJson(0)
+                    dictCompDataJson.Add("person", dictCompAdminDataJson("full_name"))
                             dictCompDataJson.Add("email", dictCompAdminDataJson("User_Email"))
                             Dim Comp_id = dictCompDataJson("id")
-                            If PublicFunctions.TransUpdateInsert(dictCompDataJson, "tblcompanies", Comp_id, _sqlconn, _sqltrans) Then
-                                Dim addboard As Boolean = True
-                                If Comp_id = "" Then
-                                    Comp_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
-                                Else
-                                    addboard = False
-                                End If
-                                dictCompAdminDataJson.Add("User_Type", 2)
-                                dictCompAdminDataJson.Add("group_id", 120)
-                                dictCompAdminDataJson.Add("Active", dictCompDataJson("active"))
-                                dictCompAdminDataJson.Add("comp_id", Comp_id)
+                    If PublicFunctions.TransUpdateInsert(dictCompDataJson, "tblcompanies", Comp_id, _sqlconn, _sqltrans) Then
+                        Dim addboard As Boolean = True
+                        If Comp_id = "" Then
+                            Comp_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                        Else
+                            addboard = False
+                        End If
+                        dictCompAdminDataJson.Add("User_Type", 2)
+                        dictCompAdminDataJson.Add("group_id", 120)
+                        dictCompAdminDataJson.Add("Active", dictCompDataJson("active"))
+                        dictCompAdminDataJson.Add("comp_id", Comp_id)
 
-                                If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
-
-                                    dictAcaAdminDataJson.Add("User_Type", 7)
-                                    dictAcaAdminDataJson.Add("group_id", 122)
-                                    dictAcaAdminDataJson.Add("comp_id", Comp_id)
-                                    If PublicFunctions.TransUpdateInsert(dictAcaAdminDataJson, "tblUsers", AcAdmin_id, _sqlconn, _sqltrans) Then
-                                        If AcAdmin_id = "" Then
-                                            AcAdmin_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                        If PublicFunctions.TransUpdateInsert(dictCompAdminDataJson, "tblUsers", CompAdmin_id, _sqlconn, _sqltrans) Then
+                            Dim dictAcaDataJson As Dictionary(Of String, Object) = arrDataJson(2)
+                            Dim Ac_id = dictAcaDataJson("id")
+                            dictAcaDataJson.Add("date_m", date_m)
+                            dictAcaDataJson.Add("date_hj", data_hj)
+                            dictAcaDataJson.Add("comp_id", Comp_id)
+                            dictAcaDataJson.Add("add_by", login_user)
+                            If PublicFunctions.TransUpdateInsert(dictAcaDataJson, "acd_acadmies", Ac_id, _sqlconn, _sqltrans) Then
+                                Dim dictCenDataJson As Dictionary(Of String, Object) = arrDataJson(3)
+                                Dim Cen_id = dictCenDataJson("id")
+                                dictCenDataJson.Add("date_m", date_m)
+                                dictCenDataJson.Add("date_hj", data_hj)
+                                dictCenDataJson.Add("comp_id", Comp_id)
+                                dictCenDataJson.Add("add_by", login_user)
+                                If PublicFunctions.TransUpdateInsert(dictCenDataJson, "acd_training_centers", Cen_id, _sqlconn, _sqltrans) Then
+                                    If addboard Then
+                                        Dim dict = New Dictionary(Of String, Object)
+                                        dict.Add("name", "جمعية عمومية")
+                                        dict.Add("members_number", "200")
+                                        dict.Add("comp_id", Comp_id)
+                                        dict.Add("active", 1)
+                                        dict.Add("type", 1)
+                                        If PublicFunctions.TransUpdateInsert(dict, "tblboards", "", _sqlconn, _sqltrans) Then
+                                            success = True
                                         End If
-                                        Dim dictAcaDataJson As Dictionary(Of String, Object) = arrDataJson(2)
-                                        Dim Ac_id = dictAcaDataJson("id")
-                                        dictAcaDataJson.Add("date_m", date_m)
-                                        dictAcaDataJson.Add("date_hj", data_hj)
-                                        dictAcaDataJson.Add("admin", AcAdmin_id)
-                                        dictAcaDataJson.Add("comp_id", Comp_id)
-                                        dictAcaDataJson.Add("add_by", login_user)
-                                        If PublicFunctions.TransUpdateInsert(dictAcaDataJson, "acd_acadmies", Ac_id, _sqlconn, _sqltrans) Then
-                                            dictCenAdminDataJson.Add("User_Type", 7)
-                                            dictCenAdminDataJson.Add("group_id", 121)
-                                            dictCenAdminDataJson.Add("comp_id", Comp_id)
-                                            If PublicFunctions.TransUpdateInsert(dictCenAdminDataJson, "tblUsers", CenAdmin_id, _sqlconn, _sqltrans) Then
-                                                If CenAdmin_id = "" Then
-                                                    CenAdmin_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
-                                                End If
-                                                Dim dictCenDataJson As Dictionary(Of String, Object) = arrDataJson(4)
-                                                Dim Cen_id = dictCenDataJson("id")
-
-                                                dictCenDataJson.Add("date_m", date_m)
-                                                dictCenDataJson.Add("date_hj", data_hj)
-                                                dictCenDataJson.Add("admin", CenAdmin_id)
-                                                dictCenDataJson.Add("comp_id", Comp_id)
-                                                dictCenDataJson.Add("add_by", login_user)
-                                                If PublicFunctions.TransUpdateInsert(dictCenDataJson, "acd_training_centers", Cen_id, _sqlconn, _sqltrans) Then
-                                                    If addboard Then
-                                                        Dim dict = New Dictionary(Of String, Object)
-                                                        dict.Add("name", "جمعية عمومية")
-                                                        dict.Add("members_number", "200")
-                                                        dict.Add("comp_id", Comp_id)
-                                                        dict.Add("active", 1)
-                                                        dict.Add("type", 1)
-                                                        If PublicFunctions.TransUpdateInsert(dict, "tblboards", "", _sqlconn, _sqltrans) Then
-                                                            success = True
-                                                        End If
-                                                    Else
-                                                        success = True
-                                                    End If
-
-                                                End If
-
-                                            End If
-                                        End If
+                                    Else
+                                        success = True
                                     End If
+
                                 End If
                             End If
-                        Else
-                            Names.Add("رقم الهوية او التلفون لمدير مركز التدريب مُستخدم")
                         End If
-                    Else
-                        Names.Add("رقم الهوية او التلفون لمدير الاكاديمية مُستخدم")
                     End If
                 End If
             Else
@@ -565,70 +525,61 @@ Public Class companies
         Dim dt_center As DataTable
         Dim dt_acadyme As DataTable
         Dim dt_compAdmin As DataTable
-        Dim dt_cenAdmin As DataTable
-        Dim dt_acAdmin As DataTable
         Dim Names As New List(Of String)(10)
         Dim condation = ""
 
-        Dim compAdmin_id = LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString()
 
-        If compAdmin_id <> 1 Then
+        Names.Add("")
+        Names.Add("")
+        Names.Add("")
+        Names.Add("")
+        If Not LoginInfo.isSuperAdmin() Then
             condation = " and User_Type = 2"
             Try
-                dt_compAdmin = DBManager.Getdatatable("select * from tblUsers where  id=" + compAdmin_id + condation)
+                dt_compAdmin = DBManager.Getdatatable("select * from tblUsers where  id=" + LoginInfo.GetUser__Id() + condation)
                 If dt_compAdmin.Rows.Count <> 0 Then
-                    Dim str3 = PublicFunctions.ConvertDataTabletoString(dt_compAdmin)
-                    Names.Add(str3)
+                    Dim str = PublicFunctions.ConvertDataTabletoString(dt_compAdmin)
+                    Names(0) = str
 
                     dt_company = DBManager.Getdatatable("SELECT * from tblcompanies  where  id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
                     If dt_company.Rows.Count <> 0 Then
-                        Dim str2 = PublicFunctions.ConvertDataTabletoString(dt_company)
-                        Names.Add(str2)
-                        dt_acAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=122 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                        If dt_acAdmin.Rows.Count <> 0 Then
-                            Dim str4 = PublicFunctions.ConvertDataTabletoString(dt_acAdmin)
-                            Names.Add(str4)
-                            dt_acadyme = DBManager.Getdatatable("SELECT * from acd_acadmies  where admin=" + dt_acAdmin.Rows(0).Item("id").ToString() + " and  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                            If dt_acadyme.Rows.Count <> 0 Then
-                                Dim str5 = PublicFunctions.ConvertDataTabletoString(dt_acadyme)
-                                Names.Add(str5)
-                            Else
-                                Names.Add("0")
-                            End If
-                        Else
-                            Names.Add("0")
-                            Names.Add("0")
+                        Dim str1 = PublicFunctions.ConvertDataTabletoString(dt_company)
+                        Names(1) = str1
+                        ' dt_acAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=122 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                        'If dt_acAdmin.Rows.Count <> 0 Then
+                        'Dim str4 = PublicFunctions.ConvertDataTabletoString(dt_acAdmin)
+                        'Names.Add(str4)
+                        dt_acadyme = DBManager.Getdatatable("SELECT * from acd_acadmies  where  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                        If dt_acadyme.Rows.Count <> 0 Then
+                            Dim str2 = PublicFunctions.ConvertDataTabletoString(dt_acadyme)
+                            Names(2) = str2
                         End If
-                        dt_cenAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=121 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                        If dt_cenAdmin.Rows.Count <> 0 Then
-                            Dim str6 = PublicFunctions.ConvertDataTabletoString(dt_cenAdmin)
-                            Names.Add(str6)
-                            dt_center = DBManager.Getdatatable("SELECT * from acd_training_centers  where admin=" + dt_cenAdmin.Rows(0).Item("id").ToString() + " and  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                            If dt_center.Rows.Count <> 0 Then
-                                Dim str7 = PublicFunctions.ConvertDataTabletoString(dt_center)
-                                Names.Add(str7)
-                            Else
-                                Names.Add("0")
-                            End If
-                        Else
-                            Names.Add("0")
-                            Names.Add("0")
+                        'Else
+                        '    Names.Add("0")
+                        '    Names.Add("0")
+                        'End If
+                        '    dt_cenAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=121 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                        'If dt_cenAdmin.Rows.Count <> 0 Then
+                        '    Dim str6 = PublicFunctions.ConvertDataTabletoString(dt_cenAdmin)
+                        '    Names.Add(str6)
+                        dt_center = DBManager.Getdatatable("SELECT * from acd_training_centers  where  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                        If dt_center.Rows.Count <> 0 Then
+                            Dim str3 = PublicFunctions.ConvertDataTabletoString(dt_center)
+                            Names(3) = str3
                         End If
-                    Else
-                        Names.Add("0")
+                        'Else
+                        '    Names.Add("0")
+                        '    Names.Add("0")
+                        'End If
+
                     End If
-                Else
-                    Names.Add("0")
-                    Names.Add("0")
                 End If
 
-
             Catch ex As Exception
-                Names.Add("0")
                 Return Names.ToArray
             End Try
         Else
-            Names.Add("admin")
+            Names(0) = "admin"
         End If
         Return Names.ToArray
     End Function

@@ -637,6 +637,14 @@
                                                 </button>
                                                 <% End If %>
 
+                                                 <% if ERpMaen.LoginInfo.getUserType = 2 Then   %>
+                                                   <button type="button" class="btn btn_rec btn-dark" onclick="archiveCourse();">
+                                                    <i class="zmdi zmdi-headset-mic"></i>
+                                                        اضافة الى الارشيف</button>
+                                                </button>
+                                                <% End If %>
+
+
 
                                             </div>
                                         
@@ -1961,6 +1969,60 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="modal fade" id="StudentExamskAnswers" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">حلول الاختبارات   </h4>
+                            <div class="col-md-6" >
+                            <input  id="txtstudExam_Search" onkeyup="SearchStudent();" type="text" class="form-control" placeholder="بحث عن طالب" />
+                        </div>
+                        </div>
+                        <%--  جدول الغياب--%>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="publicDeg">
+                                <tr>
+                                    <th>الاسم </th>
+                                    <th> الحل</th>
+                                     <th> الدرجة  </th>
+
+
+
+                                </tr>
+                                   
+                                <tbody id="studentExamAnswers">
+                                 
+                              
+                               <%-- <tr>
+                                    <td>
+                                        <label> ahmed mohamed</label>
+                                    </td>
+                                    <td>
+               <input id="finaldegee" type="text"   />
+                                        55
+                                    </td>
+                                    <td>
+               <input id="activitydegee" type="text"  />
+                                        66
+                                    </td>
+                                </tr>--%>
+                                         </tbody>  
+
+
+                            </table>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="saveExamkDegree();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
              <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
 

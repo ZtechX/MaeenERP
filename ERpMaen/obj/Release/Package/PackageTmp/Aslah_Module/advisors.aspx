@@ -1,9 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="advisors.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.advisors" Theme="Theme5"%>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
-<%@ Register Src="~/UserControls/MultiPhotoUpload.ascx" TagPrefix="uc1" TagName="MultiPhotoUpload" %>
 <%@ Register Src="~/UserControls/DynamicTable.ascx" TagPrefix="uc1" TagName="DynamicTable" %>
-<%@ Register Src="~/UserControls/ImageSlider.ascx" TagPrefix="uc1" TagName="ImageSlider" %>
 <%@ Register Src="~/UserControls/PnlConfirm.ascx" TagPrefix="uc1" TagName="PnlConfirm" %>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
@@ -66,10 +64,9 @@
                         <uc1:PnlConfirm runat="server" ID="PnlConfirm" />
                     </div>
                     <uc1:Result runat="server" ID="Result" />
-                    <div id="divForm" class="newformstyle form_continer">
+                    <div id="divForm" class="newformstyle form_continer" style="direction:rtl;">
                         <div class="clear"></div>
-                        <asp:ValidationSummary ID="ValidationSummary2" runat="server" ValidationGroup="vgroup" />
-                        <asp:Label ID="lblmainid" ClientIDMode="Static" Style="display: none" runat="server" dbColumn="id"></asp:Label>
+                       <asp:Label ID="lblmainid" ClientIDMode="Static" Style="display: none" runat="server" dbColumn="id"></asp:Label>
                         <div class="cp_margin pad10">
                             <div class="clear"></div>
                             <asp:Panel ID="pnlForm" runat="server">
@@ -103,7 +100,7 @@
 
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
-                                        <label  class="label-required">رقم الهاتف</label>
+                                        <label  class="label-required">رقم الجوال</label>
 
                                         </div>
 
@@ -112,21 +109,24 @@
                                            
                                         </div>
                                     </div>
-                                      <div class="form-group">
+                                          <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
-                                        <label class="label-required"> رقم الهوية  </lable>
-                                            </div>
+                                            <label class="label-required">كلمة المرور </label>
 
-                                      <div class="col-md-9 col-sm-12">
-                                            <input required onkeypress="return cust_chkNumber(event,this,10);" dbcolumn="advisor_identiy" type="text" id="txtNumber"
-                                                class="form-control" runat="server" clientidmode="Static" />
-                                          
-                                    <br />
                                         </div>
-                                    </div>
-                                    
+                                        <div class="col-md-9 col-sm-12">
+                                            <asp:TextBox required class="form-control" dbColumn="password" ClientIDMode="Static" ID="TextBox3" runat="server">
+                                            </asp:TextBox>
+                                            <br />
+                                        </div>
 
-                                   <div class="form-group">
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-6">
+
+                                      <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
                                         <label class="label-required">التخصص</label>
                                             </div>
@@ -137,12 +137,6 @@
 
                                         </div>
                                     </div>
-
-
-                                </div>
-                                <div class="col-md-6">
-
-
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
                                             <label for="TextBox1">البريد الالكتروني</label>
@@ -154,34 +148,22 @@
                                             <br />
                                         </div>
                                     </div>
-
-                                <div class="form-group">
+                                       <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label class="label-required">اسم المستخدم </label>
+                                        <label class="label-required"> رقم الهوية  </lable>
+                                            </div>
 
+                                      <div class="col-md-9 col-sm-12">
+                                            <input required onkeypress="return cust_chkNumber(event,this,10);" dbcolumn="advisor_identiy" type="text" id="txtNumber"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    <br />
                                         </div>
-                                        <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox required class="form-control" dbColumn="user_nm" ClientIDMode="Static" ID="TextBox1" runat="server">
-                                            </asp:TextBox>
-                                            <br />
-                                        </div>
-
                                     </div>
+                     
 
-                                    <div class="form-group">
-                                        <div class="col-md-3 col-sm-12">
-                                            <labelclass="label-required">كلمة المرور </label>
-
-                                        </div>
-                                        <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox required class="form-control" dbColumn="password" ClientIDMode="Static" ID="TextBox3" runat="server">
-                                            </asp:TextBox>
-                                            <br />
-                                        </div>
-
-                                    </div>
-                          
-                                    <div class="row">
+                                
+                            <div class="row">
                                         <br />
                                         <div class="col-md-3 col-sm-12">
                                             <label for="email">نشط </label>
@@ -191,14 +173,9 @@
 
                                         </div>
                                     </div>
+                                
 
 
-                                    <div class="col-md-12 col-sm-12" style="display: none">
-                                        <asp:Button ID="cmdPOP" runat="server" SkinID="uploadBtn_plus" Text="+" CausesValidation="False" />
-                                        <asp:TextBox SkinID="txt80percentage" ID="txtUploadedFiles" ReadOnly="true" onclick="showUploadedFilesTable(this);" runat="server" MaxLength="20"
-                                            ClientIDMode="Static"></asp:TextBox>
-                                        <label for="txtUploadedFiles">الملفات</label>
-                                    </div>
 
 
                                 </div>
@@ -209,8 +186,7 @@
                         </div>
 
                     </div>
-                    <uc1:ImageSlider runat="server" ID="ImageSlider" />
-                    <uc1:MultiPhotoUpload runat="server" ID="MultiPhotoUpload" />
+                   
                     <uc1:DynamicTable runat="server" ID="DynamicTable" />
                     <asp:Label ID="lblRes" runat="server" Visible="false"></asp:Label>
                     <asp:HiddenField ID="tblH" runat="server" />

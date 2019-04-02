@@ -52,7 +52,7 @@ Public Class ConsultationDetails
                     admin_id = dt.Rows(0)(0).ToString
                 End If
                 Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
-                Dim Con_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                Dim Con_id As String = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
                 dictBasicDataJson1.Add("RefCode", Con_id)
                 dictBasicDataJson1.Add("NotTitle", "إنشاء استشارة")
                 dictBasicDataJson1.Add("Date", dictBasicDataJson("start_date").ToString)
@@ -94,7 +94,7 @@ Public Class ConsultationDetails
                 dictBasicDataJson1.Add("RefCode", consulat_id)
                 dictBasicDataJson1.Add("NotTitle", "إسناد استشارة")
                 dictBasicDataJson1.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
-                dictBasicDataJson1.Add("AssignedTo", getadvisorUser_id(advisor_id))
+                dictBasicDataJson1.Add("AssignedTo", LoginInfo.getadvisorUser_id(advisor_id))
                 dictBasicDataJson1.Add("CreatedBy", LoginInfo.GetUser__Id())
                 dictBasicDataJson1.Add("Remarks", "استشارة")
                 dictBasicDataJson1.Add("FormUrl", "Aslah_Module/ConsultationDetails.aspx")
@@ -104,12 +104,12 @@ Public Class ConsultationDetails
                     _sqlconn.Open()
                     _sqltrans = _sqlconn.BeginTransaction
                     If oldadvisor_id <> "0" Then
-                        DBManager.ExcuteQuery("update tblNotifications set  Deleted=1 where RefCode=" + consulat_id + " and AssignedTo=" + getadvisorUser_id(oldadvisor_id) + " and NotTitle='إسناد استشارة'")
+                        DBManager.ExcuteQuery("update tblNotifications set  Deleted=1 where RefCode=" + consulat_id + " and AssignedTo=" + LoginInfo.getadvisorUser_id(oldadvisor_id) + " and NotTitle='إسناد استشارة'")
                         Dim dictBasicDataJson2 As New Dictionary(Of String, Object)
                         dictBasicDataJson2.Add("RefCode", consulat_id)
                         dictBasicDataJson2.Add("NotTitle", "إلغاءإسناد استشارة")
                         dictBasicDataJson2.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
-                        dictBasicDataJson2.Add("AssignedTo", getadvisorUser_id(oldadvisor_id))
+                        dictBasicDataJson2.Add("AssignedTo", LoginInfo.getadvisorUser_id(oldadvisor_id))
                         dictBasicDataJson2.Add("CreatedBy", LoginInfo.GetUser__Id())
                         dictBasicDataJson2.Add("Remarks", "استشارة")
                         dictBasicDataJson2.Add("FormUrl", "Aslah_Module/ConsultationDetails.aspx")
@@ -135,23 +135,7 @@ Public Class ConsultationDetails
         End Try
     End Function
 #End Region
-#Region "get advisor User_id"
-    ''' <summary>
-    ''' Save  Type
-    ''' </summary>
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function getadvisorUser_id(ByVal id As String) As String
-        Dim dt As New DataTable
-        dt = DBManager.Getdatatable("select id from tblUsers where User_Type=6 and related_id=" + id)
-        Dim str = ""
-        If dt.Rows.Count <> 0 Then
-            str = dt.Rows(0)(0).ToString
-        End If
-        Return str
-    End Function
 
-#End Region
 #Region "Check user is SuperAdmin"
     ''' <summary>
     ''' Save  Type

@@ -27,6 +27,7 @@ $(function () {
         drawCourseComments();
         drawstudentHomeworkTable();
         drawstudentExamsTable();
+       
     
 
     } catch (err) {
@@ -312,7 +313,7 @@ function SaveHomework() {
 function addStudentdegree() {
 
     try {
-
+        //درجات الطلاب
        
         if (!checkRequired()) {
           
@@ -337,6 +338,60 @@ function addStudentdegree() {
                     $("#SavedivLoader").hide();
                     alert("  تم الحفظ  ");
                     $("#publicStudentDegree").modal('hide');
+
+                    resetAll();
+                    prepareAdd();
+
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+
+
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
+function saveHomeworkDegree() {
+
+    try {
+
+
+        if (!checkRequired()) {
+
+
+            var students_degree = [];
+            $("#studentHWAnswers tr").each(function () {
+                debugger
+                var obj = {};
+                obj["id"] = $(this).find("label").attr("id");
+                obj["hwmstuddegree"] = $(this).find("#Homeworkdegee").val();
+                obj["file"] = $(this).find("#homeworkfile").attr("href");
+                students_degree.push(obj);
+
+            });
+
+            console.log(students_degree);
+           // var CourseId = ($("#Lblcourse_id").html());
+            var homeworkID = ($("#LblHomework_id").html());
+            // $("#SavedivLoader").show();
+
+            courseDetailsCls.savehomeworkDegree(homeworkID ,students_degree, function (val) {
+                if (val == true) {
+
+                    $("#SavedivLoader").hide();
+                    alert("  تم الحفظ  ");
+                    $("#StudenthomeworkAnswers").modal('hide');
 
                     resetAll();
                     prepareAdd();
@@ -422,35 +477,99 @@ function SaveAbsenceStudent() {
     }
 }
 
+
+//function AddStudent() {
+
+
+//    try {
+//        debugger
+
+//        if (!checkRequired()) {
+
+//           // $("#SavedivLoader").show();
+//            var student_arr = [];
+//            $("#courseStudents").find("tr td input:checkbox").each(function () {
+//                if ($(this).is(":checked")) {
+//                    var value = $(this).attr("student");
+//                    student_arr.push(value)
+//                }
+//            });
+//        //    console.log(student_arr);
+//            var CourseId = ($("#Lblcourse_id").html());
+
+      
+//            var x = student_arr.length;
+//            if (x != 0) {
+//                debugger
+//                courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
+//                    if (val[0] == 1) {
+//                      //  $("#SavedivLoader").hide();
+//                        alert("تم الحفظ بنجاح");
+//                        $("#addStudentModal").modal('hide');
+//                        drawStudentTable();
+//                        window.location.reload();
+//                       // drawAbsenceTable();
+
+
+
+
+//                    } else {
+//                        alert("لم يتم الحفظ");
+//                    }
+
+
+//                });
+//            }
+//            else {
+//                $("#addStudentModal").modal('hide');
+//                //$("#SavedivLoader").hide();
+
+//            }
+//        }
+
+
+//    } catch (err) {
+//        alert(err);
+//    }
+//}
+
+//draw_public_student degree
+
+
+
 function AddStudent() {
+    //قبول الطلاب 
 
     try {
-
+        
 
         if (!checkRequired()) {
 
-            $("#SavedivLoader").show();
+            debugger
             var student_arr = [];
-            $("#courseStudents").find("tr td input:checkbox").each(function () {
-                if ($(this).is(":checked")) {
-                    var value = $(this).attr("student");
-                    student_arr.push(value)
-                }
+            $("#action_courseStudents tr").each(function () {
+                var obj = {};
+                obj["id"] = $(this).find("label").attr("id");
+                obj["std_notes"] = $(this).find("#notes_student").text();
+                //obj["file"] = $(this).find("#registerFiles").attr("href");
+                obj["action_Student"] = $(this).find("#action").val();
+                student_arr.push(obj);
+
             });
-            console.log(student_arr);
+
             var CourseId = ($("#Lblcourse_id").html());
-
-
-                   
-            var x = student_arr.length;
-            if (x != 0) {
-                courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
-                    if (val == true) {
-                        $("#SavedivLoader").hide();
+            
+            //var x = student_arr.length;
+            //if (x != 0) {
+                debugger
+            courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
+                if (val == true) {
+                        //  $("#SavedivLoader").hide();
                         alert("تم الحفظ بنجاح");
                         $("#addStudentModal").modal('hide');
                         drawStudentTable();
-                        drawAbsenceTable();
+                        window.location.reload();
+                        // drawAbsenceTable();
 
 
 
@@ -461,12 +580,8 @@ function AddStudent() {
 
 
                 });
-            }
-            else {
-                $("#addStudentModal").modal('hide');
-                $("#SavedivLoader").hide();
-
-            }
+            
+           
         }
 
 
@@ -475,7 +590,6 @@ function AddStudent() {
     }
 }
 
-//draw_public_student degree
 
 function drawpublicDegreeTable() {
     try {
@@ -512,6 +626,79 @@ function drawpublicDegreeTable() {
 
             $("#pblcstudentdegrees").html(data);
             $("#pblcstudentdegrees").modal();
+
+
+
+        });
+
+    }
+
+
+
+    catch (err) {
+        alert(err);
+    }
+}
+
+//draw_student-homework - answers-degrees- hasnaa
+
+function drawstudenthomeworkanswers(homeworkId) {
+    try {
+        //debugger
+       // var CourseId = ($("#Lblcourse_id").html());
+        ($("#LblHomework_id").html(homeworkId));
+
+
+        courseDetailsCls.get_StudentsHomeworkAnswers(homeworkId, function (val) {
+
+            console.log(val);
+            var data = "";
+            if (val[0] == 1) {
+                debugger
+                var arrstudent = JSON.parse(val[1]);
+
+                arrstudent.forEach(function (element) {
+                    debugger
+
+                    var filename = "";
+                    var path = element.homeworkanswer;
+                    if (path != "" && path != null) {
+                        debugger
+                        if (path.indexOf("Acadmies_module/coursefiles/") != -1) {
+                            filename = path.split("Acadmies_module/coursefiles/")[1];
+                        }
+                    }
+
+                    data = data + `   <tr>
+                                    <td>
+                                        <label id=" ${element.student_id}"> ${element.studentname}</label>
+
+                                    </td>
+                                  
+                                                <td>
+                                                       <li>
+                                                        <a id="homeworkfile" href="../${element.homeworkanswer}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${filename}</span>
+                                      
+                                                    </li>
+
+                                                     </td>
+
+                                           <td>
+                         <input id="Homeworkdegee" type="text" value=" ${element.HMWDegree}" />
+                                    
+                                    </td>
+                                </tr> `
+
+
+                });
+            }
+
+            $("#studentHWAnswers").html(data);
+            $("#studentHWAnswers").modal();
 
 
 
@@ -766,6 +953,52 @@ function addFiles() {
         alert(err);
     }
 }
+
+
+
+function addfinancial() {
+    //add financial
+
+    try {
+        debugger
+
+        if (checkRequired("divformstudentFinanc") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+
+        }
+        else {
+            $("#SavedivLoader").show();
+            var CourseId = ($("#Lblcourse_id").html());
+           
+            var basicData = generateJSONFromControls("divformstudentFinanc");
+
+            var Id = "";
+           
+            courseDetailsCls.Savefinanc(Id, CourseId, Pub_date_m, Pub_date_hj, basicData, function (val) {
+                if (val == true) {
+                    $("#SavedivLoader").hide();
+                    // debugger;
+                    alert("تم الحفظ بنجاح");
+                    $("#add_Financial").modal('hide');
+                    drawCourseFile();
+                    resetDivControls("divformstudentFinanc");
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
 
 function addCondition() {
 
@@ -1476,7 +1709,7 @@ function drawLecturesTable() {
 function drawstudentHomeworkTable() {
     // draw homework table for student
     try {
-       // debugger
+        //debugger
         // $("#SavedivLoader").show();
         var CourseId = $("#Lblcourse_id").html();
         courseDetailsCls.get_homeworkTable(CourseId, function (val) {
@@ -1487,6 +1720,10 @@ function drawstudentHomeworkTable() {
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
+                    var degree = element.degree;
+                    if (degree == 0) {
+                        degree = "--";
+                    }
                     var file_nm = "";
                     var path = element.image;
                     if (path != "" && path != null) {
@@ -1512,7 +1749,7 @@ function drawstudentHomeworkTable() {
                                                            
                                                             </button>
                                                        </td>
-                                                                                 <td> 5 </td>
+                                                                                 <td> ${degree} </td>
                                                                      
 
                                                                             </tr>
@@ -1544,7 +1781,14 @@ function drawstudentExamsTable() {
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
-                  //  debugger
+                    //  debugger
+                    var dgr = element.degree;
+                    if (dgr == 0) {
+                        dgr = "--";
+                    }
+                    else {
+                        dgr = element.degree;
+                    }
                     var file_nm = "";
                     var path = element.image;
                     if (path != "" && path != null) {
@@ -1570,7 +1814,7 @@ function drawstudentExamsTable() {
                                                            
                                                             </button>
                                                        </td>
-                                                                                 <td> 20</td>
+                                                                                 <td> ${dgr}</td>
                                                                      
 
                                                                             </tr>
@@ -1970,6 +2214,11 @@ function drawHomeworks() {
                                                                                               تعديل 
                                                                                             </a>
                                                                                                     </li>
+                                                                                                 <li>
+                                                                                            <a   data-toggle="modal" href="#StudenthomeworkAnswers"  onclick="drawstudenthomeworkanswers(${element.id}) ">
+                                                                                              حلول الواجب  
+                                                                                            </a>
+                                                                                                    </li>
                                                                                              
                                                                                                 </ul>
                                                                                            
@@ -2190,19 +2439,47 @@ function Studentlistview() {
             var arr1 = JSON.parse(val[1]);
 
             arr1.forEach(function (element) {
+                //طلبات الطلاب
+
+                var file_nm = "";
+                var path = element.registerFiles;
+                if (path != "" && path != null) {
+                    if (path.indexOf("Acadmies_module/images/") != -1) {
+                        file_nm = path.split("Acadmies_module/images/")[1];
+                    }
+                }
 
                 data = data + `
                                 <tr >
-                                    <td><label> ${element.StudentName}</label> </td>
-                                      <td><img src="${element.User_Image}"> </td>
-                                    <td><input type="checkbox" student="${element.id}" style="width: 50px; height:20px;" /></td>
+                                    <td><label id="${element.student_id}" > ${element.studentName}</label> </td>
+                                    <td><label id="notes_student"> ${element.notes}</label> </td>
+                                       <td>
+                                                   <li>
+                                                        <a id="registerFiles" href="../${element.registerFiles}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li> </td>
+                                                            <td>
+                                               
+                                                  <select  style="width:100px;" id="action" >
+                                                    <option value="0">رفض</option>
+                                                    <option value="1">قبول</option>
+                                                      </select>
+                                                     
+                                                            </td>
+                                 
                                 </tr>
 
                                                                      
 `;
             });
             
-            $("#courseStudents").html(data);
+            $("#action_courseStudents").html(data);
+            //var xx = document.getElementById("action").value;
+            //console.log(xx);
+            
         });
     } catch (err) {
         alert(err);
@@ -2386,6 +2663,37 @@ function UploadComplete7(sender, args) {
     clearContents(sender);
 }
 
+function UploadComplete8(sender, args) {
+
+    var fileLength = args.get_length();
+    var fileType = args.get_contentType();
+    //alert(sender);
+    $('#fileurlfinanc').val('Acadmies_module/coursefiles/' + args.get_fileName());
+    $("#FnameFinanc").val(args.get_fileName());
+
+
+
+    //var img = document.getElementById('imgLoader');
+    //img.style.display = 'none';
+    switch (true) {
+        case (fileLength > 1000000):
+
+            fileLength = fileLength / 1000000 + 'MB';
+            break;
+
+        case (fileLength < 1000000):
+
+            fileLength = fileLength / 1000000 + 'KB';
+            break;
+
+        default:
+            fileLength = '1 MB';
+            break;
+    }
+    clearContents(sender);
+}
+
+
 function ClearMe(sender) {
     sender.value = '';
 }
@@ -2433,6 +2741,7 @@ function DeleteStudent(Studentid) {
 
                 alert("تم الحذف بنجاح");
                 drawStudentTable();
+                Studentlistview();
 
             } else {
                 showErrorMessage('لم يتم الحذف');

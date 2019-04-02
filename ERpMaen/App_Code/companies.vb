@@ -170,7 +170,7 @@ Public Class companies
                         Else
                             Dim dic_advisor_permission As New Dictionary(Of String, Object)
                             dic_advisor_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
-                            dic_advisor_permission.Add("form_id", 2156)
+                            dic_advisor_permission.Add("form_id", 3184)
                             dic_advisor_permission.Add("f_add", 1)
                             dic_advisor_permission.Add("f_update", 1)
                             dic_advisor_permission.Add("f_access", 1)

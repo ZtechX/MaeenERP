@@ -6,6 +6,11 @@ var clean = true;
 
 $(function () {
     try {
+        debugger
+        if ($("#userLoginType").val() == "6") {
+            $("#li1").remove();
+            $("#ddlAdvisor").prop("disabled", true);
+        }
         get_tabs();
         get_option_cases();
      // show_all(21);
@@ -96,8 +101,8 @@ $(document).on("change", "#combobox", function () {
 function get_option_cases() {
 
     cases.get_option_cases(function (val) {
-        if (val[0] != "") {
-            var data = JSON.parse(val[0]);
+        if (val != "") {
+            var data = JSON.parse(val);
             console.log(data);
             var div_data = "";
             for (var x = 0; x < data.length; x++) {
@@ -110,11 +115,12 @@ function get_option_cases() {
 
 
     });
-
+    
 }
 
 function add() {
     try {
+        $("#lblmainid").html("");
         resetDivControls("divForm");
         getSerial(); 
         getSerial_conciliation()
@@ -144,6 +150,7 @@ function resetAll() {
 function save() {
 
     try {
+        debugger
         setRequired_Date("divdate3");
         setRequired_Date("instrum_date");
         $(".error").removeClass('error');
@@ -343,8 +350,8 @@ function save_conciliation() {
     var case_conciliation = generateJSONFromControls("case_conciliation");
     var case_id = $("#lblcase_id").html();
     var PosId = $("#lblconciliation_id").html();
-    var new_date_m = cal_days();
-    var children_gson = getChildrenJson();
+    //var new_date_m = cal_days();
+    //var children_gson = getChildrenJson();
     cases.save_conciliation(PosId, case_id, case_conciliation, function (val) {
         if (val) {
             resetDivControls("case_conciliation");
@@ -524,13 +531,27 @@ function find_persons(flag,flag2) {
         width: "600px",
     });
 }
-function save_new_person(flag) {
+function save_new_person() {
+    debugger
     if (!checkRequired("collapseExample")) {
+        if ($("#collapseExample").find("#txt_phone").val().length != 10) {
+            showErrorMessage("رقم الجوال يجب أن يكون 10 ارقام");
+            return;
+        }
+        if ($("#collapseExample").find("#txt_indenty").val().length != 10) {
+            showErrorMessage("رقم الهوية يجب أن يكون 10 ارقام");
+            return;
+        }
+        var case_id = $("#combobox").val();
+        if (case_id == "0") {
+            showErrorMessage("إختار الحالة اولا");
+            return;
+        }
     var id = $("#lbldiv_person").html();
   var type_draw=  $("#lbldiv_type").html();
     var children_gson = generateJSONFromControls("collapseExample");
         var person = $("#person_name").val();
-            var case_id = $("#lblcase_id").html();
+       
       
 
     var PosId = 0;
@@ -858,7 +879,46 @@ function get_receiving() {
         }
 
 }
+
 function show_all(id, flag, type = "0") {
+    debugger
+    if ($("#Login_userType").html() == "9") {
+        var done_Action = false;
+        try {
+            cases.getPreviousBenef_Action(id, function (val) {
+                debugger
+                if (val[0] == "1") {
+                    $("#ddl_orderType").val("3");
+                    done_Action = true;
+                }
+                else if (val[0] == "2") {
+                    done_Action = true;
+                    if (val[1] != "") {
+                        var data = JSON.parse(val[1]);
+                        fillControlsFromJson(data[0],"Benef_ActionDiv");
+                    } else {
+                        clearBenef_ActionDiv();
+                    }
+                } else {
+                    clearBenef_ActionDiv();
+                }
+                $("#event_id").val(id);
+                if (done_Action) {
+                    $("#btn_saveAction").hide();
+                } else {
+                    $("#btn_saveAction").show();
+                }
+                $("#Benef_Action").dialog({
+                    width: "800px",
+                });
+            });
+            return;
+        } catch (ex) {
+            showErrorMessage("Error : " + ex);
+            return;
+        }
+    }
+
     $("#case_0").show();
     var case_id = id;
 
@@ -915,9 +975,9 @@ function show_all(id, flag, type = "0") {
                 var children = JSON.parse(val[3]);
                 var result_children = ""
                 for (var y = 0; y < children.length; y++) {
-                    result_children = result_children + '<tr>' + '<td>' + children[y].name + '</td>' +
+                    result_children = result_children + '<tr id="tr_child_' + children[y].id+'">' + '<td>' + children[y].name + '</td>' +
                         '<td>' + children[y].age + '</td>' +
-                        '<td><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + children[y].id + ',1); return false; "><i class="fa fa-eye"></i></button><button class="btn btn-xs btn-danger btn-quick" title = "Delete" onclick = "delete_details(' + children[y].id + ',1); return false;" > <i class="fa fa-times"></i></button ></td>' +
+                        '<td><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + children[y].id + ',1); return false; "><i class="fa fa-eye"></i></button><button class="btn btn-xs btn-danger btn-quick" title = "Delete" onclick = "delete_children(' + children[y].id + ','+case_id+'); return false;" > <i class="fa fa-times"></i></button ></td>' +
                         '</tr >';
                 }
                 $("#children").html(result_children);
@@ -1112,7 +1172,21 @@ function show_cases_details(flag1,flag3) {
     });
 
 }
+function delete_children(child_id, case_id) {
+    cases.delete_children(child_id, case_id, function (val) {
+        if (val) {
+            showSuccessMessage("تم الحذف بنجاح");
+            $("#tr_child_" + child_id).remove();
 
+        } else {
+            showErrorMessage("لم يتم الحذف");
+
+        }
+
+
+
+    });
+}
 function delete_details(flag1, flag2, flag3) {
     var r = confirm("هل بالفعل تريد الحذف");
     if (r == true) {
@@ -1388,4 +1462,32 @@ function getTimelinePeriod() {
         return;
     }
     window.open("../Aslah_Module/Timeline?case_id=" + $("#combobox").val() + "&done=" + $("#ddldone").val() + "&start_dt=" + start_dt + "&end_dt=" + end_dt, "_blank");
+}
+
+function saveBenef_Action() {
+    if (!checkRequired("Benef_ActionDiv")) {
+        $("#SavedivLoader").show();
+        var basicJson = generateJSONFromControls("Benef_ActionDiv");
+        basicJson["date_m"] = Pub_date_m
+        basicJson["date_h"] = Pub_date_hj
+        cases.saveBenef_Action(basicJson, function (val) {
+            $("#SavedivLoader").hide();
+            $('#Benef_Action').dialog('close');
+            if (val) {
+                showSuccessMessage("تم الحفظ بنجاح");
+                clearBenef_ActionDiv();
+            } else {
+                showErrorMessage("لم يتم الحفظ");
+            }
+        });
+    } else {
+        $("#SavedivLoader").hide();
+        showErrorMessage("يرجى إدخال  البيانات المطلوبة");
+    }
+}
+function clearBenef_ActionDiv()
+{
+    $("#ddl_orderType").val("0");
+$("#orderNote").val("");
+    $("#order_id").val("");
 }

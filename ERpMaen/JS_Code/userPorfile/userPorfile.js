@@ -9,6 +9,7 @@
         $("#SavedivLoader").show();
         $("#cmdAdd").closest("li").remove();
         $("#cmdDelete").closest("li").remove();
+
         userPorfile.GetUserData( function (val) {
             edit(val);
          });
@@ -69,7 +70,7 @@ function edit(val) {
         if (val[0] != "") {
             var data = JSON.parse(val[0]);
             fillControlsFromJson(data[0]);
-            
+            $("#userType").html(data[0].userType);
             changeResearcher(function () {
 
                 if (val[1] != "") {
@@ -102,6 +103,7 @@ function edit(val) {
             $("#SavedivLoader").hide();
 
         } else {
+            $("#userType").html("");
             showErrorMessage("No data found !!");
         }
     } catch (err) {

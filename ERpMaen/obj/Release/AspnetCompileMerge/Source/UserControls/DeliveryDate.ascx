@@ -485,6 +485,7 @@
 </div>
 <div class="collapse" id="multi_cases">
     <div class="row" style="max-height: 300px;">
+       <div id="header_Div">
         <button onclick="add_new_date();" class="btn btn-success">اضافة جديد</button>
             <div class="col-md-4 col-sm-12" dir="rtl">
                 <asp:DropDownList onchange="search_type()" SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlsearch_type" runat="server">
@@ -498,14 +499,14 @@
         <div class="col-md-4" dir="rtl">
             <input type="text" id="case_name" onkeyup="search_by_case();" placeholder="بحث بالحالة" class="form-control" />
         </div>
-
+        </div>
         <table class="table table-bordered">
             <thead>
                 <tr>
                 <th>#</th>
                 <th>الحالة</th>
                 <th>النوع</th>
-                <th>مشاهدة</th>
+                <th >الإجراء</th>
                     </tr>
                  </thead>
                 <tbody id="cases_dates">
@@ -515,6 +516,38 @@
            
 
         </table>
+    </div>
+</div>
+<div class="collapse" id="Benef_Action">
+    <div class="row" id="Benef_ActionDiv" style="direction :rtl;">
+        <div class="col-md-12 form-group">
+            <div class="col-md-2 col-sm-12">
+                <label class="label-required">الإستجابة</label>
+            </div>
+            <input id="order_id" dbcolumn="id" style="display:none;" />
+            <input id="event_id" dbcolumn="event_id" style="display:none;" />
+            <input  dbcolumn="status" value="1" style="display:none;" />
+            <div class="col-md-6 col-sm-12">
+                <asp:DropDownList required dbcolumn="type" class="form-control" ClientIDMode="Static" ID="ddl_orderType" runat="server">
+                <asp:ListItem Value="0" Text="----اختر----"></asp:ListItem>
+                     <asp:ListItem   Text="تاجيل" Value="1"></asp:ListItem>
+                     <asp:ListItem   Text="إلغاء" Value="2"></asp:ListItem>
+                    <asp:ListItem  Text="موافق" Value="3"></asp:ListItem>
+                </asp:DropDownList>
+
+            </div>
+        </div>
+      
+        <div class="col-md-12 form-group" >
+            <div class="col-md-2 col-sm-12">
+                <label for="Name">ملاحظات </label>
+            </div>
+            <div class="col-md-9 col-sm-12">
+                <asp:TextBox ID="orderNote" TextMode="multiline" class="form-control" dbColumn="notes" ClientIDMode="Static" runat="server"></asp:TextBox>
+            </div>
+        </div>
+        <button id="btn_saveAction" onclick="saveBenef_Action();" class="btn btn-success btn-lg" style ="float :left;margin-left:20px;">حفظ</button>
+
     </div>
 </div>
 <uc1:Person runat="server" ID="Person" />

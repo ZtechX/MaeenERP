@@ -39,7 +39,8 @@
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery-ui.min.js")%>"></script>
      <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery-1.9.1.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery-ui.js")%>"></script>
-
+       <script src='<%# Page.ResolveClientUrl("~/js/velocity.min.js")%>'></script>
+<script src='<%# Page.ResolveClientUrl("~/js/velocity.ui.min.js")%>'></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/tooltipsy.min.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/script.js")%>"></script>
    <%-- <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/scripts/nicEdit.js")%>"></script>--%>
@@ -713,12 +714,15 @@
                                 <a class="access_btn_User">
                                     <asp:Image ID="imgUser" runat="server" CssClass="user_photo_menu" />
                                     <span id="lbUsername" runat="server" class="user_text"></span><i class="fa fa-caret-down"></i></a>
-                                <div class="toggle_box_User popover bottom dropdown-menu">
+                                <div class="toggle_box_User popover bottom dropdown-menu" style="z-index: -1">
                                     <div class="arrow"></div>
                                     <ul>
-                                    <li class="signout">
+                                          <li style="padding:7px 0px;">
+                                         <asp:LinkButton  ID="LinkButton1" runat="server" OnClick="UserPorfile"><i class="fa-user fa"></i><span> الصفحة الشخصية </span></asp:LinkButton>
+                                    </li>
+                                    <li  style="padding:7px 0px;">
                                             <asp:LinkButton  ID="lbLogout" runat="server" OnClick="LogOut"><i class="fa-sign-out fa"></i><span>خروج</span></asp:LinkButton></li>
-                                    
+                                  
                                     </ul>
                                 </div>
                             </div>
@@ -776,5 +780,11 @@
 	</span>
 </div>
     </form>
+    <script >$(".modal").each(function(l){$(this).on("show.bs.modal",function(l){var o=$(this).attr("data-easein");"shake"==o?$(".modal-dialog").velocity("callout."+o):"pulse"==o?$(".modal-dialog").velocity("callout."+o):"tada"==o?$(".modal-dialog").velocity("callout."+o):"flash"==o?$(".modal-dialog").velocity("callout."+o):"bounce"==o?$(".modal-dialog").velocity("callout."+o):"swing"==o?$(".modal-dialog").velocity("callout."+o):$(".modal-dialog").velocity("transition."+o)})});
+ 
+     $('.modal-dialog').draggable({
+    	"handle":".modal-header"
+      });
+</script>
 </body>
 </html>

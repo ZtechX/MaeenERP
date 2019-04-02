@@ -41,7 +41,7 @@ Public Class cases
             If related_id = "" Then
                 dt = DBManager.Getdatatable("Select * from TblUsers where user_indenty='" + user_indenty + "' or User_PhoneNumber='" + User_PhoneNumber + "'")
             Else
-                dt = DBManager.Getdatatable("Select * from TblUsers where ( user_indenty='" + user_indenty + "' OR  User_PhoneNumber='" + User_PhoneNumber + "')  and  related_id !='" + related_id + "'")
+                dt = DBManager.Getdatatable("Select * from TblUsers where ( user_indenty='" + user_indenty + "' OR  User_PhoneNumber='" + User_PhoneNumber + "')  and User_Type != 9 and related_id !='" + related_id + "'")
             End If
 
             If dt.Rows.Count = 0 Then
@@ -55,6 +55,7 @@ Public Class cases
     End Function
 
 #End Region
+
 #Region "Save"
     ''' <summary>
     ''' Save  Type
@@ -63,12 +64,13 @@ Public Class cases
     <System.Web.Script.Services.ScriptMethod()>
     Public Function Save(ByVal id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal persons_owner As Dictionary(Of String, Object), ByVal person_against As Dictionary(Of String, Object), ByVal children As Dictionary(Of String, Object), ByVal status As Dictionary(Of String, Object), ByVal tabs As List(Of Object), ByVal attch_file_DataJsonList As List(Of Object)) As String
         Try
-            Dim group_id = 0
+            Dim group_id As String = "0"
             Dim group_id_dt As New DataTable
             group_id_dt = DBManager.Getdatatable("select id from tbllock_up where RelatedId=3 and Type='PG' and Comp_id=" + LoginInfo.GetComp_id())
             If group_id_dt.Rows.Count <> 0 Then
                 group_id = group_id_dt.Rows(0)(0).ToString
             End If
+
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
@@ -77,22 +79,34 @@ Public Class cases
             Dim dictperson_owner As Dictionary(Of String, Object) = persons_owner
             Dim dictperson_against As Dictionary(Of String, Object) = person_against
             Dim dt_person_cases As DataTable
-            Dim result = 0
-            Dim person1_id = ""
-            Dim person2_id = ""
+
+            Dim person1_id As String = ""
+            Dim person2_id As String = ""
             If (dictperson_owner("indenty").ToString = dictperson_against("indenty").ToString) Or (dictperson_owner("phone").ToString = dictperson_against("phone").ToString) Then
                 _sqltrans.Rollback()
                 _sqlconn.Close()
                 Return "false|رقم الهوية أو رقم الجوال للمنفذ والمنفذ ضدده متشابهان"
             End If
-
+            Dim old_advisor As String = "0"
+            Dim new_advisor As String = LoginInfo.getadvisorUser_id(dictstatus("advisor_id").ToString())
+            Dim oldNotification As String = ""
             If id <> "" Then
-                'DBManager.ExcuteQuery("delete from ash_cases where case_id=" + id.ToString)
-                dt_person_cases = DBManager.Getdatatable("Select * from ash_cases where id=" + id.ToString())
+                DBManager.ExcuteQuery("delete from ash_case_tabs where case_id=" + id)
+                dt_person_cases = DBManager.Getdatatable("Select person1_id,person2_id,isNull(tblUsers.id,'0') as 'advisor_id' from ash_cases  left join tblUsers" +
+                                                         " on tblUsers.related_id=ash_cases.advisor_id and tblUsers.User_Type = 6  where ash_cases.id=" + id.ToString())
                 person1_id = dt_person_cases.Rows(0).Item("person1_id")
                 person2_id = dt_person_cases.Rows(0).Item("person2_id")
+                old_advisor = dt_person_cases.Rows(0).Item("advisor_id")
+                If old_advisor <> "0" And new_advisor <> old_advisor Then
+                    Dim dt_not As New DataTable
+                    dt_not = DBManager.Getdatatable("select id from  tblNotifications  where Deleted !=1 and RefCode=" + id + " and AssignedTo=" + old_advisor + " and NotTitle='إسناد حالة'")
+                    If dt_not.Rows.Count <> 0 Then
+                        oldNotification = dt_not.Rows(0)(0).ToString()
+                    End If
+                End If
             End If
-            If Not check_userData(person1_id, dictperson_owner("indenty").ToString, dictperson_owner("phone").ToString) Then
+
+                If Not check_userData(person1_id, dictperson_owner("indenty").ToString, dictperson_owner("phone").ToString) Then
                 _sqltrans.Rollback()
                 _sqlconn.Close()
                 Return "false|رقم الهوية أو رقم الجوال للمنفذ مُستخدم"
@@ -102,8 +116,8 @@ Public Class cases
                 _sqlconn.Close()
                 Return "false|رقم الهوية أو رقم جوال للمنفذ ضده مُستخدم"
             End If
-            Dim user_person1_id = ""
-            Dim user_person2_id = ""
+            Dim user_person1_id As String = ""
+            Dim user_person2_id As String = ""
             If person1_id <> "" Then
                 Dim dt As New DataTable
                 dt = DBManager.Getdatatable("select * from tblUsers where related_id=" + person1_id)
@@ -118,7 +132,7 @@ Public Class cases
                     user_person2_id = dt.Rows(0).Item("id").ToString
                 End If
             End If
-            Dim login_user = LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString()
+            Dim login_user As String = LoginInfo.GetUser__Id()
             persons_owner.Add("user_id", login_user)
             persons_owner.Add("case_id", id)
             If Not PublicFunctions.TransUpdateInsert(persons_owner, "ash_case_persons", person1_id, _sqlconn, _sqltrans) Then
@@ -129,7 +143,7 @@ Public Class cases
                 If person1_id = "" Then
                     person1_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
                 End If
-                Dim dict = New Dictionary(Of String, Object)
+                Dim dict As New Dictionary(Of String, Object)
                 dict.Add("User_Password", persons_owner("phone").ToString)
                 dict.Add("User_PhoneNumber", persons_owner("phone").ToString)
                 dict.Add("full_name", persons_owner("name").ToString)
@@ -160,7 +174,7 @@ Public Class cases
                 If person2_id = "" Then
                     person2_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
                 End If
-                Dim dict = New Dictionary(Of String, Object)
+                Dim dict As New Dictionary(Of String, Object)
                 dict.Add("User_Password", person_against("phone").ToString)
                 dict.Add("User_PhoneNumber", person_against("phone").ToString)
                 dict.Add("full_name", person_against("name").ToString)
@@ -169,7 +183,7 @@ Public Class cases
                 dict.Add("User_Type", "9")
                 dict.Add("Active", 1)
                 dict.Add("group_id", group_id)
-
+                dict.Add("comp_id", LoginInfo.GetComp_id())
                 If Not PublicFunctions.TransUpdateInsert(dict, "tblUsers", user_person2_id, _sqlconn, _sqltrans) Then
                     _sqltrans.Rollback()
                     _sqlconn.Close()
@@ -202,35 +216,88 @@ Public Class cases
 
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_cases", id, _sqlconn, _sqltrans) Then
-                Dim case_id = ""
+                Dim case_id As String = ""
                 If id <> "" Then
                     case_id = id
+                    Dim dictNotification As New Dictionary(Of String, Object)
+                    If old_advisor <> new_advisor Then
+                        dictNotification.Add("RefCode", id)
+                        dictNotification.Add("NotTitle", "إسناد حالة")
+                        dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                        dictNotification.Add("AssignedTo", new_advisor)
+                        dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                        dictNotification.Add("Remarks", "حالة")
+                        dictNotification.Add("FormUrl", "Aslah_Module/cases.aspx?id=" + id)
+                        If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Return "False|لم يتم الحفظ"
+                        End If
+                        If old_advisor <> "0" Then
+                            ' DBManager.ExcuteQuery("update tblNotifications set  Deleted=1 where RefCode=" + id + " and AssignedTo=" + old_advisor + " and NotTitle='إسناد حالة'")
+                            dictNotification("NotTitle") = "إلغاءإسناد حالة"
+                            dictNotification("AssignedTo") = old_advisor
+                            dictNotification("FormUrl") = "Aslah_Module/cases.aspx"
+                            If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Return "False|لم يتم الحفظ"
+                            End If
+                            Dim dict_deleteNot As New Dictionary(Of String, Object)
+                            dict_deleteNot.Add("Deleted", 1)
+                            If Not PublicFunctions.TransUpdateInsert(dict_deleteNot, "tblNotifications", oldNotification, _sqlconn, _sqltrans) Then
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Return "False|لم يتم الحفظ"
+                            End If
+
+                        End If
+                    End If
                 Else
                     case_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
                 End If
-                _sqltrans.Commit()
-                _sqlconn.Close()
+
                 If id = "" Then
-                    DBManager.ExcuteQuery("update ash_case_persons set case_id=" + case_id + " where id=" + person1_id)
-                    DBManager.ExcuteQuery("update ash_case_persons set case_id=" + case_id + " where id=" + person2_id)
+                    Dim dictNotification As New Dictionary(Of String, Object)
+                    If old_advisor <> new_advisor Then
+                        dictNotification.Add("RefCode", case_id)
+                        dictNotification.Add("NotTitle", "إسناد حالة")
+                        dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                        dictNotification.Add("AssignedTo", new_advisor)
+                        dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                        dictNotification.Add("Remarks", "حالة")
+                        dictNotification.Add("FormUrl", "Aslah_Module/cases.aspx?id=" + case_id)
+                        If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Return "False|لم يتم الحفظ"
+                        End If
+
+                    End If
+
+                    Dim dictPerson As New Dictionary(Of String, Object)
+                    dictPerson.Add("case_id", case_id)
+
+                    If Not PublicFunctions.TransUpdateInsert(dictPerson, "ash_case_persons", person1_id, _sqlconn, _sqltrans) Then
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Return "False|لم يتم الحفظ"
+                    End If
+                    If Not PublicFunctions.TransUpdateInsert(dictPerson, "ash_case_persons", person2_id, _sqlconn, _sqltrans) Then
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Return "False|لم يتم الحفظ"
+                    End If
+
                 End If
-                DBManager.ExcuteQuery("delete from ash_case_tabs where case_id=" + case_id.ToString)
-                _sqlconn.Open()
-                _sqltrans = _sqlconn.BeginTransaction
+
                 For Each tab As Object In tabs
                     Dim dict_tabs As Dictionary(Of String, Object) = tab
                     dict_tabs.Add("case_id", case_id)
                     If Not PublicFunctions.TransUpdateInsert(dict_tabs, "ash_case_tabs", "", _sqlconn, _sqltrans) Then
                         _sqltrans.Rollback()
                         _sqlconn.Close()
-                        If id = "" Then
-                            DBManager.ExcuteQuery("delete from ash_case_persons where id=" + person1_id)
-                            DBManager.ExcuteQuery("delete from tblUsers where id=" + user_person1_id)
-                            DBManager.ExcuteQuery("delete from ash_case_persons where id=" + person2_id)
-                            DBManager.ExcuteQuery("delete from tblUsers where id=" + user_person2_id)
-                            DBManager.ExcuteQuery("delete from tblUsers where id=" + user_person2_id)
-                            DBManager.ExcuteQuery("delete from ash_cases where id=" + case_id)
-                        End If
+                        Return "False|لم يتم الحفظ"
 
                     End If
                 Next
@@ -265,14 +332,14 @@ Public Class cases
                 _sqlconn.Close()
                 Return 0
             End If
-            Dim person_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+            Dim person_id As String = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
             If Not check_userData("", dictBasicDataJson("indenty").ToString, dictBasicDataJson("phone").ToString) Then
                 _sqltrans.Rollback()
                 _sqlconn.Close()
                 Return 0
             End If
 
-            Dim dict = New Dictionary(Of String, Object)
+            Dim dict As New Dictionary(Of String, Object)
 
             dict.Add("full_name", dictBasicDataJson("name").ToString)
             dict.Add("User_Password", dictBasicDataJson("phone").ToString)
@@ -309,30 +376,34 @@ Public Class cases
             _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
             Dim dt_cases As New DataTable
-            Dim dt_cases_girls As New DataTable
-            Dim dt_childrens As New DataTable
             Dim boys = 0
             Dim girls = 0
             Dim children = 1
             Dim gender = dictBasicDataJson("gender").ToString
             dt_cases = DBManager.Getdatatable("Select * from ash_cases where  id=" + case_id.ToString())
-            dt_childrens = DBManager.Getdatatable(" Select (Select count(id) As boy from ash_case_childrens where gender=1 And case_id=" + case_id.ToString() + " ) As boy,(Select count(id) As girl from ash_case_childrens where gender= 2 And case_id = " + case_id.ToString() + ") As girl from ash_case_childrens")
-            If dt_childrens.Rows.Count <> 0 Then
-                boys = dt_childrens.Rows(0).Item("boy").ToString
-                girls = dt_childrens.Rows(0).Item("girl").ToString
+            If id = "" Then
+                Dim dt_childrens As New DataTable
+                dt_childrens = DBManager.Getdatatable(" Select isNull((Select count(id) from ash_case_childrens where gender=1 And case_id=" + case_id.ToString() + " ),0) As boy,isNull((Select count(id) from ash_case_childrens where gender= 2 And case_id = " + case_id.ToString() + "),0) As girl from ash_case_childrens")
+                If dt_childrens.Rows.Count <> 0 Then
+                    boys = dt_childrens.Rows(0).Item("boy").ToString
+                    girls = dt_childrens.Rows(0).Item("girl").ToString
+                End If
+                If gender = 1 Then
+                    If boys = dt_cases.Rows(0).Item("boys_no").ToString Then
+                        children = -1
+                    Else
+                    End If
+                ElseIf gender = 2 Then
+                    If girls = dt_cases.Rows(0).Item("girls_no").ToString Then
+                        children = -2
+                    End If
+                End If
             End If
+
+
             dictBasicDataJson.Add("case_id", case_id)
-            dictBasicDataJson.Add("user_id", LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
-            If gender = 1 Then
-                If boys = dt_cases.Rows(0).Item("boys_no").ToString Then
-                    children = -1
-                Else
-                End If
-            ElseIf gender = 2 Then
-                If girls = dt_cases.Rows(0).Item("girls_no").ToString Then
-                    children = -2
-                End If
-            End If
+            dictBasicDataJson.Add("user_id", LoginInfo.GetUser__Id())
+
             If children <> -1 And children <> -2 Then
 
                 If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_case_childrens", id, _sqlconn, _sqltrans) Then
@@ -480,7 +551,8 @@ Public Class cases
             _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
             dictBasicDataJson.Add("case_id", case_id)
-            dictBasicDataJson.Add("user_id", LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+            dictBasicDataJson.Add("comp_id", LoginInfo.GetComp_id())
+            dictBasicDataJson.Add("user_id", LoginInfo.GetUser__Id())
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_case_conciliation", id, _sqlconn, _sqltrans) Then
                 _sqltrans.Commit()
                 _sqlconn.Close()
@@ -720,7 +792,7 @@ Public Class cases
                                                                                                                                                                                               <System.Web.Script.Services.ScriptMethod()>
     Public Function getSerial_conciliation() As Integer
         Dim dtm As New DataTable
-        dtm = DBManager.Getdatatable("Select isNull(max(code)+1,1) FROM ash_case_conciliation")
+        dtm = DBManager.Getdatatable("Select isNull(max(code)+1,1) FROM ash_case_conciliation where comp_id=" + LoginInfo.GetComp_id)
         If dtm.Rows.Count <> 0 Then
             Return dtm.Rows(0)(0)
         End If
@@ -920,18 +992,19 @@ Public Class cases
             Names.Add("0")
             Names.Add("0")
             Names.Add("0")
-            Dim related_id = LoginInfo.getrelatedId()
+            Dim related_id As String = LoginInfo.getrelatedId()
 
 
             Dim dt As New DataTable
             Dim dt1 As New DataTable
             Dim dt2 As New DataTable
             ' TblInvoice.TblInvoiceFields.SAccount_cd
-            Dim condation = ""
+            Dim condation As String = ""
+
             If LoginInfo.getUserType = "9" Then
                 condation = " and (person1_id = " + related_id + " or person2_id= " + related_id + " )"
             End If
-            Dim query As String = "SELECT * FROM   ash_case_receiving_delivery_details  where date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + condation + ")"
+            Dim query As String = "SELECT  * FROM   ash_case_receiving_delivery_details  where date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + condation + ") order by date_m"
             dt = DBManager.Getdatatable(query)
             If dt.Rows.Count <> 0 Then
                 Names(0) = PublicFunctions.ConvertDataTabletoString(dt)
@@ -976,13 +1049,13 @@ Public Class cases
             Dim dt1 As New DataTable
             Dim dt2 As New DataTable
             ' TblInvoice.TblInvoiceFields.SAccount_cd
-            Dim related_id = LoginInfo.getrelatedId()
-            Dim condation = ""
+            Dim related_id As String = LoginInfo.getrelatedId()
+            Dim condation As String = ""
             If LoginInfo.getUserType = "9" Then
                 condation = " and (person1_id = " + related_id + " or person2_id= " + related_id + " )"
             End If
 
-            Dim query As String = "SELECT ash_case_receiving_delivery_details.id as id,ash_cases.code as cases,ash_case_persons.indenty as num,ash_case_persons.name as person,ash_case_receiving_delivery_details.type as type FROM  ash_case_receiving_delivery_details join ash_cases on ash_case_receiving_delivery_details.case_id= ash_cases.id  join ash_case_persons on ash_cases.person1_id=ash_case_persons.id  where ash_case_receiving_delivery_details.date_h = '" + date_h.ToString + "' And ash_case_receiving_delivery_details.case_id In (Select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + condation + ")"
+            Dim query As String = "SELECT ash_case_receiving_delivery_details.date_m as 'selected_d', ash_case_receiving_delivery_details.id as id,ash_cases.code as cases,ash_case_persons.indenty as num,ash_case_persons.name as person,ash_case_receiving_delivery_details.type as type FROM  ash_case_receiving_delivery_details join ash_cases on ash_case_receiving_delivery_details.case_id= ash_cases.id  join ash_case_persons on ash_cases.person1_id=ash_case_persons.id  where ash_case_receiving_delivery_details.date_h = '" + date_h.ToString + "' And ash_case_receiving_delivery_details.case_id In (Select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + condation + ")"
             dt = DBManager.Getdatatable(query)
             If dt.Rows.Count <> 0 Then
                 Names(0) = PublicFunctions.ConvertDataTabletoString(dt)
@@ -1021,30 +1094,26 @@ Public Class cases
     ''' Save  Type
     ''' </summary>
     <WebMethod(True)>
-                                                                                                                                                                                                                                                                                              <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_option_cases() As String()
-        Dim Names As New List(Of String)(10)
-        Dim str = ""
-        Dim str1 = ""
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_option_cases() As String
+
         Try
             Dim dt As New DataTable
-            Dim dt1 As New DataTable
+            Dim condation As String = ""
+            If LoginInfo.getUserType = "6" Then
+                condation = " and ash_cases.advisor_id =" + LoginInfo.getrelatedId()
+            End If
             ' TblInvoice.TblInvoiceFields.SAccount_cd
-            Dim query As String = "Select ash_cases.id As case_id,ash_cases.code As cases,ash_case_persons.indenty As num,ash_case_persons.name As person from ash_cases join ash_case_persons On ash_cases.person1_id=ash_case_persons.id where ash_cases.comp_id=" + LoginInfo.GetComp_id()
+            Dim query As String = "Select ash_cases.id As case_id,ash_cases.code As cases,ash_case_persons.indenty As num,ash_case_persons.name As person from ash_cases join ash_case_persons On ash_cases.person1_id=ash_case_persons.id where ash_cases.comp_id=" + LoginInfo.GetComp_id() + condation
 
             dt = DBManager.Getdatatable(query)
             If dt.Rows.Count <> 0 Then
-                str = PublicFunctions.ConvertDataTabletoString(dt)
-                Names.Add(str)
-            Else
-                Names.Add("")
-                Return Names.ToArray
+                Return PublicFunctions.ConvertDataTabletoString(dt)
             End If
+            Return ""
         Catch ex As Exception
-            Names.Add("")
-            Return Names.ToArray
+            Return ""
         End Try
-        Return Names.ToArray
     End Function
 
 #End Region
@@ -1053,7 +1122,7 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-                                                                                                                                                                                                                                                                                                      <WebMethod()>
+    <WebMethod()>
     <System.Web.Script.Services.ScriptMethod()>
     Public Function show_all(ByVal printItemId As String, ByVal type As String) As String()
 
@@ -1280,50 +1349,25 @@ Public Class cases
 
 #End Region
 
-#Region "delete_details"
+#Region "delete_children"
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-                                                                                                                                                                                                                                                                                                                                                                                                  <WebMethod()>
-                                                                                                                                                                                                                                                                                                                                                                                                      <System.Web.Script.Services.ScriptMethod()>
-    Public Function delete_details(ByVal printItemId As String, ByVal project_id As String, ByVal type As String) As Boolean
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function delete_children(ByVal printItemId As String, ByVal case_id As String) As Boolean
 
         Dim Names As New List(Of String)(10)
         Try
             Dim dt_details As New DataTable
-            Dim dt_finance As New DataTable
-            Dim dt_prposal As New DataTable
-            Dim result = 0
-            If type = 1 Then
-                If DBManager.ExcuteQueryTransaction("delete from tblproject_workers  where tblproject_workers.worker_id=" + printItemId.ToString + " and  tblproject_workers.project_id=" + project_id.ToString, _sqlconn, _sqltrans) = -1 Then
+
+
+            If DBManager.ExcuteQueryTransaction("delete from ash_case_childrens  where id=" + printItemId.ToString + " and  case_id=" + case_id, _sqlconn, _sqltrans) = -1 Then
                     _sqltrans.Rollback()
                     _sqlconn.Close()
                     Return False
                 End If
-                If DBManager.ExcuteQueryTransaction("delete from tblproject_worker_finance  where project_worker_id=" + printItemId.ToString + " and  project_id=" + project_id.ToString, _sqlconn, _sqltrans) = -1 Then
-                    _sqltrans.Rollback()
-                    _sqlconn.Close()
-                    Return False
-                End If
-            ElseIf type = 2 Then
-                If DBManager.ExcuteQueryTransaction("delete from tblproject_proposals  where  project_id = " + project_id + " and id=" + printItemId.ToString, _sqlconn, _sqltrans) = -1 Then
-                    _sqltrans.Rollback()
-                    _sqlconn.Close()
-                    Return False
-                End If
-            ElseIf type = 3 Then
-                If DBManager.ExcuteQueryTransaction("delete from tblproject_info  where  project_id = " + project_id + " and id=" + printItemId.ToString, _sqlconn, _sqltrans) = -1 Then
-                    _sqltrans.Rollback()
-                    _sqlconn.Close()
-                    Return False
-                End If
-            ElseIf type = 4 Then
-                If DBManager.ExcuteQueryTransaction("delete from tblProject_archive  where  project_id = " + project_id + " and id=" + printItemId.ToString, _sqlconn, _sqltrans) = -1 Then
-                    _sqltrans.Rollback()
-                    _sqlconn.Close()
-                    Return False
-                End If
-            End If
+
             Return True
         Catch ex As Exception
             _sqltrans.Rollback()
@@ -1338,7 +1382,7 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-                                                                                                                                                                                                                                                                                                                                                                                                          <WebMethod()>
+    <WebMethod()>
                                                                                                                                                                                                                                                                                                                                                                                                               <System.Web.Script.Services.ScriptMethod()>
     Public Function get_date_delivery(ByVal case_id As String) As String()
 
@@ -1454,11 +1498,15 @@ Public Class cases
         Dim Names As New List(Of String)(10)
         Names.Add("")
         Names.Add("")
-        Dim related_id = LoginInfo.getrelatedId()
+        Dim related_id As String = LoginInfo.getrelatedId()
         Try
             Dim dt As New DataTable
             dt = DBManager.Getdatatable("select * from ash_case_receiving_delivery_details where id=" + id)
+
             If dt.Rows.Count <> 0 Then
+                'Dim curr_dt As Integer = PublicFunctions.ConvertDatetoNumber(DateTime.Now.ToString("dd/MM/yyyy"))
+                'Dim select_dt As Integer = Convert.ToInt32(dt.Rows(0).Item("date_m"))
+
                 If dt.Rows(0).Item("deliverer_id").ToString = related_id Then
                     If Convert.ToBoolean(dt.Rows(0).Item("deliverer_accept")) Then
                         Names(0) = "1"
@@ -1497,8 +1545,8 @@ Public Class cases
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-            Dim id = dictBasicDataJson("id").ToString()
-            Dim event_id = dictBasicDataJson("event_id").ToString()
+            Dim id As String = dictBasicDataJson("id").ToString()
+            Dim event_id As String = dictBasicDataJson("event_id").ToString()
             'If id <> "" Then
             '    If Not PublicFunctions.DeleteFromTable(id, "ash_orders") Then
             '        _sqltrans.Rollback()
@@ -1507,11 +1555,11 @@ Public Class cases
             '    End If
 
             'End If
-            Dim related_id = LoginInfo.getrelatedId()
+            Dim related_id As String = LoginInfo.getrelatedId()
             Dim dt As New DataTable
             dt = DBManager.Getdatatable("select * from ash_case_receiving_delivery_details where id=" + event_id)
             If dt.Rows.Count <> 0 Then
-                Dim column_nm = ""
+                Dim column_nm As String = ""
                 If dt.Rows(0).Item("deliverer_id").ToString = related_id Then
                     column_nm = "deliverer_accept"
                 ElseIf dt.Rows(0).Item("reciever_id").ToString = related_id Then
@@ -1564,4 +1612,28 @@ Public Class cases
 
 #End Region
 
+#Region "get_case_expense_basic"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_case_expense_basic(ByVal case_id As String) As String
+
+        Try
+            Dim dt As New DataTable
+
+            Dim query As String = "SELECT isNull(amount,'') FROM ash_case_expense_basic where case_id=" + case_id
+
+            dt = DBManager.Getdatatable(query)
+            If dt.Rows.Count <> 0 Then
+                Return dt.Rows(0)(0).ToString()
+            End If
+            Return ""
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
+#End Region
 End Class

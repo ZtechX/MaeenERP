@@ -35,6 +35,7 @@ Public Class orders
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             If Page.IsPostBack = False Then
+                userloginType.InnerText = LoginInfo.getUserType()
 
             End If
         Catch ex As Exception

@@ -8,8 +8,8 @@ Public Class ReferralRep
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
-        ' Dim Case_id = Request.QueryString("Case_id")
-        Dim Case_id = "36"
+        Dim Case_id = Request.QueryString("Case_id")
+
         If String.IsNullOrWhiteSpace(Case_id) Then
             Dim script As String = "<script type='text/javascript' defer='defer'> alert('لا يوجد بيانات متاحة للعرض');</script>"
             ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)
@@ -50,16 +50,7 @@ Public Class ReferralRep
                 ' rdoc.SetParameterValue("img_header_URL", dt1.Rows(0)("img_header").ToString)
                 ' rdoc.SetParameterValue("img_footer_URL", dt1.Rows(0)("img_footer").ToString)
                 CrystalReportViewer1.ReportSource = rdoc
-                Dim connectInfo As ConnectionInfo = New ConnectionInfo()
-                connectInfo.ServerName = "172.107.166.215\sa, 1985"
-                connectInfo.DatabaseName = "ERPDB"
-                connectInfo.UserID = "sa"
-                connectInfo.Password = "ZTechX@admin.com"
-                rdoc.SetDatabaseLogon("sa", "ZTechX@admin.com")
-                For Each tbl As CrystalDecisions.CrystalReports.Engine.Table In rdoc.Database.Tables
-                    tbl.LogOnInfo.ConnectionInfo = connectInfo
-                    tbl.ApplyLogOnInfo(tbl.LogOnInfo)
-                Next
+
                 CrystalReportViewer1.DataBind()
                 Try
                     Dim objDS As New DataSet

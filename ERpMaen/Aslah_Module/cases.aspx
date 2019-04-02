@@ -113,7 +113,7 @@
                             <asp:Panel ID="pnlFunctions" runat="server" CssClass="row" Enabled="true">
                                 <div class="col-md-9 col-sm-12">
                                     <ul>
-                                        <li>
+                                        <li id="li1">
                                             <asp:LinkButton OnClientClick="add(); return false;" ID="cmdAdd" runat="server"
                                                 SkinID="btn-top" CausesValidation="false">
                                      <i class="fa fa-plus"></i>
@@ -141,7 +141,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <input type ="text"  style="display:none;" id="userLoginType" runat="server"/>
                     <div id="divForm" class="newformstyle form_continer">
                         <div class="container">
 
@@ -488,7 +488,7 @@
                                                                     <legend>الاطفال</legend>
                                                                     <div class="col-md-12 form-group ">
                                                                         <div class="col-md-3 col-sm-12">
-                                                                            <label>حضانة الاطفال</label>
+                                                                            <label class="label-required">حضانة الاطفال</label>
                                                                         </div>
 
                                                                         <div class="col-md-9 col-sm-12">
@@ -819,11 +819,11 @@
                                                                     </div>--%>
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
-                                                                        <label for="Name" class="label-required">ملاحظات المشرف</label>
+                                                                        <label for="Name" >ملاحظات المشرف</label>
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" required TextMode="multiline" class="form-control" dbColumn="details" ClientIDMode="Static" ID="txtdetails_child" runat="server">
+                                                                        <asp:TextBox SkinID="form-control"  TextMode="multiline" class="form-control" dbColumn="details" ClientIDMode="Static" ID="txtdetails_child" runat="server">
                                                                         </asp:TextBox>
 
 

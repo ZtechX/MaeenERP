@@ -616,14 +616,24 @@ function get_cases(date_h) {
             var data = JSON.parse(val[0]);
             var result = "";
                 var status = "تسليم واستلام الاولاد";
+                var _id = "";
             for (var x = 0; x < data.length; x++) {
                 if (data[x].type == 2) {
                     status = "تسليم واستلام النفقة";
                 }
+                debugger
+                _id = data[x].id;
+                if ($("#Login_userType").html() == "9") {
+                    
+                    if (data[x].selected_d != selected) {
+                        _id = "";
+                        }
+                    
+                }
                 result = result + "<tr><td>" + parseInt(h) + "</td>" +
                     "<td id='case_name_search'>حالة#" + data[x].cases + "  " + "مقدمة من : " + data[x].person + " " + "رقم الهوية : " + data[x].num + "  " + "</td>" +
                     "<td id='status_case'>" + status + "</td>" +
-                    "<td><button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + data[x].id + ",1,1); return false; '><i class='fa fa-eye'></i></button></td>" +
+                    "<td><button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + _id+ ",1,1); return false; '><i class='fa fa-eye'></i></button></td>" +
                     "</tr>";
                 h++;
             }
@@ -672,6 +682,16 @@ function get_cases(date_h) {
     });
 }
 
+function isAvailableToAccess(_date) {
+    debugger
+    var arr_d = Pub_date_m.split("/");
+    var num_d = arr_d[2] + arr_d[1] + arr_d[0];
+    if (_date >= num_d) {
+        return true;
+    }
+    return false;
+}
+
 function getMonthData(month) {
     if (month < 10) {
         month = "0" + month;
@@ -688,11 +708,23 @@ function getMonthData(month) {
 
     });
 }
+var checkValue = true;
+var selected = "";
 function comparedate(monthdate, date) {
+
     for (var x = 0; x < monthdate.length; x++) {
         if (monthdate[x].date_m == date) {
             return monthdate[x].id + "/" + monthdate[x].type;
         }
+        if (checkValue) {
+            var arr_d = monthdate[x].date_m.split("/");
+            var selected_d = arr_d[2] + arr_d[1] + arr_d[0];
+            
+            if (isAvailableToAccess(selected_d)) {
+                checkValue = false;
+                selected = selected_d;
+            } 
+        } 
     }
 
 }

@@ -134,28 +134,6 @@ function fillPerm(){
     }
 }
 
-//function drawDynamicTable() {
-//    try {
-//        var tableSortingColumns = [
-//                { orderable: false }, null, null, null, null, null,null,null
-//        ];
-//        var tableFilteringColumns = [
-//            { type: "null" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" },
-//        ];
-
-//        var tableColumnDefs = [
-
-//        ];
-//        var initialSortingColumn = 0;
-//      //  loadDynamicTable('group_permissons', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
-//    } catch (err) {
-//        alert(err);
-//    }
-//}
-
-
-
-
 function add() {
     try {
         prepareAdd();
@@ -183,14 +161,14 @@ function get_form_for_permtion() {
             if (val[0] != "0") {
                 for (var x = 0; x < data.length; x++) {
 
-                    div_show += " <div class='card'> <div class='card-header' id ='headingOne' ><h5 class='mb-0'><button type='button' class='btn btn-link collapsed' data-toggle='collapse' data-target='#collapseThree" + data[x].Id + "' aria-expanded='false' aria-controls='collapseThree" + data[x].Id + "'>" + data[x].ArMenuName +"</button></h5></div> \
+                    div_show += " <div class='card'> <div class='card-header' id ='headingOne' ><h5 class='mb-0'><a class='btn btn-link collapsed' data-toggle='collapse' data-target='#collapseThree" + data[x].Id + "' aria-expanded='false' aria-controls='collapseThree" + data[x].Id + "'><i class='fa fa-caret-down'></i> " + data[x].ArMenuName +"</a></h5></div> \
                                         <div id='collapseThree" + data[x].Id + "' class='collapse' aria-labelledby='headingTwo' data-parent='#accordion'> <div class='card-body'>\
                                             <table class='table table-bordered ' id='perm_table" + data[x].Id + "'><tbody>" +
                         "<tr><td>الصفحة</td><td>الكل</td>" +
-                        " <td>  <input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='2' class='ace input-lg' /> دخول  </td>" +
-                        " <td>  <input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='3' class='ace input-lg' />اضافة  </td>" +
-                        " <td>  <input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='4' class='ace input-lg' />    تعديل</td>" +
-                        " <td>  <input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='5' class='ace input-lg' />   حذف</td>" +
+                        " <td>  <input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='2' class='ace input-lg' style='margin-left: 12px' /> دخول  </td>" +
+                        " <td>  <input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='3' class='ace input-lg' style='margin-left: 12px'/>اضافة  </td>" +
+                        " <td>  <input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='4' class='ace input-lg' style='margin-left: 12px'/>    تعديل</td>" +
+                        " <td>  <input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='5' class='ace input-lg' style='margin-left: 12px'/>   حذف</td>" +
 
                         "</tr>";
                     for (var y = 0; y < data2.length; y++) {
@@ -282,104 +260,3 @@ function savegroup() {
     }
 
 }
-//function get_form_for_permtion() {
-//    try {
-//        group_permissons.get_main_menu(function (val) {
-//            var data = JSON.parse(val[1]);
-//            var data2 = JSON.parse(val[2]);
-//            var div_show = "<div class='accordion panel-group' id='accordion'>";
-//            if (val[0] != "0") {
-//                for (var x = 0; x < data.length; x++) {
-
-//                    div_show += "<div class='panel panel-default'>\
-//                                        <div class='panel-heading'> \
-//                                            <h4 class='panel-title'> \
-//                                                <a data-toggle='collapse' data-parent='#accordion-test' href='#collapseThree" + data[x].Id + "' class='collapsed' aria-expanded='false'><i class='fa fa-check'></i>" + data[x].ArMenuName
-//                        + "</a> \
-//                                            </h4> \
-//                                           </div>\
-//                                        <div id='collapseThree" + data[x].Id + "' class='panel-collapse collapse' aria-expanded='false' style='height: 0px;'>\
-//                                            <div class='panel-body'> <table class='table table-bordered table-vertical-middle nomargin' id='perm_table" + data[x].Id + "'><tbody>" +
-//                        "<tr><td></td><td></td>" +
-//                        " <td>  <label class='checkbox' style='margin-bottom: 30px;padding-right: 10px;'><input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='2' class='ace input-lg' /><i style='width:25px;height:25px;'></i></label></td>" +
-//                        " <td>  <label class='checkbox' style='margin-bottom: 30px;padding-right: 10px;'><input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='3' class='ace input-lg' /><i style='width:25px;height:25px;'></i></label></td>" +
-//                        " <td>  <label class='checkbox' style='margin-bottom: 30px;padding-right: 10px;'><input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='4' class='ace input-lg' /><i style='width:25px;height:25px;'></i></label></td>" +
-//                        " <td>  <label class='checkbox' style='margin-bottom: 30px;padding-right: 10px;'><input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='5' class='ace input-lg' /><i style='width:25px;height:25px;'></i></label></td>" +
-
-//                        "</tr>";
-//                    for (var y = 0; y < data2.length; y++) {
-
-//                        if (data[x].Id == data2[y].MenueId) {
-//                            // alert(data[x].Id + "       " + data2[y].MenueId + "                 " + data[x].ArMenuName + "           " + data2[y].ArFormTitle);
-//                            div_show += " <tr id='" + data2[y].Id + "' permid=''  formid='" + data2[y].Id + "' ><ul class='list-group'>\
-//                                                  <td>   <li class='list-group-item'>"+ data2[y].ArFormTitle +
-//                                "</td><td>  <label class='checkbox' style='margin-bottom: 30px;'><input name='form-field-checkbox' type='checkbox'  onclick='select_unselectAll(this)' value='0' class='ace input-lg' /><i style='width:25px;height:25px;'></i></label></td><td> \
-//                                                  <div class='[ form-group ]' style='margin-bottom: 0px;'> \
-//           <input type='checkbox' id='" + data2[y].Id + "PAccess' name='fancy-checkbox-primary' autocomplete='off' onclick='checkBoxChange(this,this.checked)' /> \
-//            <div class='[ btn-group ]'> \
-//                <label for='" + data2[y].Id + "PAccess' class='[ btn btn-primary ]'> \
-//                    <span class='[ glyphicon glyphicon-ok ]'></span> \
-//                    <span> </span> \
-//                </label> \
-//                <label for='" + data2[y].Id + "PAccess' class='[ btn btn-default active ]'>\
-//                    دخول\
-//                </label>\
-//            </div>\
-//        </div>\
-//                                                               </td>\
-//                                                               <td>   <div class='[ form-group ]' style='margin-bottom: 0px;'> \
-//           <input type='checkbox' id='" + data2[y].Id + "PAdd' name='fancy-checkbox-success' id='fancy-checkbox-success' autocomplete='off' onclick='checkBoxChange(this,this.checked)'/> \
-//            <div class='[ btn-group ]'> \
-//                <label for='" + data2[y].Id + "PAdd' class='[ btn btn-success ]'> \
-//                    <span class='[ glyphicon glyphicon-ok ]'></span> \
-//                    <span> </span> \
-//                </label> \
-//                <label for='" + data2[y].Id + "PAdd' class='[ btn btn-default active ]'>\
-//                    اضافة\
-//                </label>\
-//            </div>\
-//        </div>\</td>\
-//                                                                   <td>   <div class='[ form-group ]' style='margin-bottom: 0px;'> \
-//           <input type='checkbox' id='" + data2[y].Id + "PEdite' name='fancy-checkbox-info'  autocomplete='off' onclick='checkBoxChange(this,this.checked)'/> \
-//            <div class='[ btn-group ]'> \
-//                <label for='" + data2[y].Id + "PEdite' class='[ btn btn-info ]'> \
-//                    <span class='[ glyphicon glyphicon-ok ]'></span> \
-//                    <span> </span> \
-//                </label> \
-//                <label for='" + data2[y].Id + "PEdite' class='[ btn btn-default active ]'>\
-//                    تعديل\
-//                </label>\
-//            </div>\
-//        </div>\</td>\
-//                                                                <td>  <div class='[ form-group ]' style='margin-bottom: 0px;'> \
-//           <input type='checkbox' id='" + data2[y].Id + "PDelete' name='fancy-checkbox-danger' id='fancy-checkbox-danger' autocomplete='off' onclick='checkBoxChange(this,this.checked)'/> \
-//            <div class='[ btn-group ]'> \
-//                <label for='" + data2[y].Id + "PDelete' class='[ btn btn-danger ]'> \
-//                    <span class='[ glyphicon glyphicon-ok ]'></span> \
-//                    <span> </span> \
-//                </label> \
-//                <label for='" + data2[y].Id + "PDelete' class='[ btn btn-default active ]'>\
-//                    حذف\
-//                </label>\
-//            </div>\
-//        </div>\ </td>\
-//                                                </ul> </tr>";
-//                        }
-//                    }
-//                    div_show += "</body></table> </div>\
-//                                                 </div> \
-//                                     </div> \
-//                              ";
-
-//                }
-//                div_show += "</div>";
-//                document.getElementById('tablePrint').innerHTML = div_show;
-
-//            } else {
-//                showErrorMessage("No data found !!");
-//            }
-//        });
-//    } catch (err) {
-//        alert(err);
-//    }
-//}

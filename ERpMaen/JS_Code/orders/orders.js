@@ -17,19 +17,24 @@ $(function () {
 function ChangeOrderStatus(id,Set_val) {
 
     try {
+        if (Set_val && $("#userloginType").html() == "6") {
+
+        }
         $("#SavedivLoader").show();
         orders.Save(id, Set_val, function (val) {
             debugger
-                if (val) {
-                    if (Set_val) {
-                        showSuccessMessage("تمت الموافقة على الطلب");
-                    } else {
-                        showSuccessMessage("تم رفض الطلب");
-                    }
-                        drawDynamicTable();
+            if (val =="True") {
+                drawDynamicTable();
+                if (Set_val) {
+                    showSuccessMessage("تمت الموافقة على الطلب");
+
                 } else {
-                    showErrorMessage("حدث خطا ولم يتم تسجيل الاستجابة");
+                    showSuccessMessage("تم رفض الطلب");
                 }
+            } else {
+                showErrorMessage(val.split("|")[1]);
+            }
+                      
                 $("#SavedivLoader").hide();
             });
         
@@ -41,10 +46,10 @@ function ChangeOrderStatus(id,Set_val) {
 function drawDynamicTable() {
     try {
         var tableSortingColumns = [
-            { orderable: false }, null, null, null, null, null, null
+            { orderable: false }, null, null, null, null, null, null, null
         ];
         var tableFilteringColumns = [
-            { type: "null" }, { type: "text" },{ type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }
+            { type: "null" }, { type: "text" }, { type: "text" },{ type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" }
         ];
 
         var tableColumnDefs = [

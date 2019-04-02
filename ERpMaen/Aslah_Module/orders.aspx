@@ -28,6 +28,7 @@
                     <div class="main-title">
                         <asp:Label ID="lblFormName" runat="server" Text="طلبات التاجيل والإلغاء" SkinID="page_title"></asp:Label>
                     </div>
+                    <label id="userloginType" runat ="server" style="display:none;" />
                    <uc1:Result runat="server" />
                     <uc1:DynamicTable runat="server" ID="DynamicTable" />
                     <asp:HiddenField ID="tblH" runat="server" />

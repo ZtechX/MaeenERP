@@ -41,6 +41,7 @@
                       
                     </div>
                     <input id="loginUser"  style="display: none" runat="server" />
+                     <input id="loginUser_type"  style="display: none" runat="server" />
                      <div class="col-md-12" >
                                  <asp:LinkButton OnClientClick="add(); return false;" ID="cmdAdd" runat="server"
                                                 SkinID="btn-top" CausesValidation="false">
@@ -116,7 +117,7 @@
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
                                             <label class="label-required">
-                                             اسم الاستشارة  </lable>
+                                             عنوان الاستشارة  </lable>
                                         </div>
 
                                         <div class="col-md-9 col-sm-12">

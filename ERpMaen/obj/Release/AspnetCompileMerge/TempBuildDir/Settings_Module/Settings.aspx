@@ -94,7 +94,7 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="تعديل">
                                         <ItemTemplate>
-                                            <asp:LinkButton SkinID="file-update"  ID="lbShow" runat="server" CommandArgument='<%# Eval("Type")%>' OnClick="ShowType" ToolTip="Edit"></asp:LinkButton>
+                                            <asp:LinkButton SkinID="file-update" CommandName='<%# Eval("Name")%>'  ID="lbShow" runat="server" CommandArgument='<%# Eval("Type")%>' OnClick="ShowType" ToolTip="Edit"></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -103,7 +103,7 @@
                         <div class="pad-left-right20 col-md-9 col-sm-12">
 
                             <div class="clear"></div>
-                            <asp:Panel runat="server" ID="pnlValue" Visible="false">
+                            <asp:Panel runat="server" ID="pnlValue" Visible="false" >
                                 <asp:Label ID="LookupId" runat="server" Visible="false"></asp:Label>
                                 <asp:Label ID="lblType" runat="server" Visible="false"></asp:Label>
                                 <div class="col-md-8">
@@ -125,7 +125,11 @@
                                         <asp:DropDownList ID="ddlTypes" runat="server" AppendDataBoundItems="true" AutoPostBack="true">
                                         </asp:DropDownList>
                                     </div>
-
+                                    <style>
+                                        #gvValues a {
+                                            float:right !important;
+                                        }
+                                    </style>
                                     <div class="clear"></div>
                                     <asp:GridView ID="gvValues" runat="server" AutoGenerateColumns="False" SkinID="gv_light_blue"
                                         AllowSorting="true" OnSorting="gvValues_Sorting" AllowPaging ="true" PageSize ="10" OnPageIndexChanging ="GVValues_PageIndexChanging">

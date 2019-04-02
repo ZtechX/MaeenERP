@@ -27,7 +27,19 @@ Public Class advisor
     Dim _sqlconn As New SqlConnection(DBManager.GetConnectionString)
     Dim _sqltrans As SqlTransaction
 #End Region
-
+    Private Function GetRandom() As String
+        Dim Random As New Random()
+        Dim rNum As String = Random.Next()
+        Dim len As Integer = rNum.Length
+        If len < 4 Then
+            For i As Integer = len To 3
+                rNum = rNum + "0"
+            Next
+        ElseIf len > 4 Then
+            rNum = rNum.Substring(0, 4)
+        End If
+        Return rNum
+    End Function
 #Region "Save"
     ''' <summary>
     ''' Save  Type
@@ -39,21 +51,24 @@ Public Class advisor
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
-            Dim group_id = ""
-            Dim user_id = ""
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            Dim group_id As String = ""
+            Dim user_id As String = ""
             Dim dt As New DataTable
             If id = "" Then
+
+                dictBasicDataJson.Add("code", GetRandom())
                 dt = DBManager.Getdatatable("select id from tbllock_up where RelatedId=2 and Type='PG' and Comp_id=" + LoginInfo.GetComp_id())
                 If dt.Rows.Count <> 0 Then
                     group_id = dt.Rows(0)(0).ToString
                 End If
             Else
-                dt = DBManager.Getdatatable("select id from tblUsers where related_id=" + id)
+                dt = DBManager.Getdatatable("select id from tblUsers where User_Type=6 and related_id=" + id)
                 If dt.Rows.Count <> 0 Then
                     user_id = dt.Rows(0)(0).ToString
                 End If
             End If
-                Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+
             dictBasicDataJson.Add("comp_id", LoginInfo.GetComp_id())
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_advisors", id, _sqlconn, _sqltrans) Then
 
@@ -152,16 +167,20 @@ Public Class advisor
     Public Function checkUser() As String
 
         Try
-            Dim dt As New DataTable
-            Dim UserId As String = HttpContext.Current.Request.Cookies("UserInfo")("UserId")
-            dt = DBManager.Getdatatable("select isNull(related_id,'0') related_id,User_Type  from tblUsers where id=" + UserId)
-            If dt.Rows.Count <> 0 Then
-                Dim user_type = dt.Rows(0)("User_Type").ToString
-                If user_type = "1" Or user_type = "2" Then
-                    Return "Superadmin"
+            Dim user_type As String = LoginInfo.getUserType()
+
+            If user_type = "1" Or user_type = "2" Or user_type = "7" Then
+                Return "Superadmin"
+            Else
+                Dim dt As New DataTable
+                Dim UserId As String = LoginInfo.GetUser__Id()
+                dt = DBManager.Getdatatable("select isNull(related_id,'0') related_id  from tblUsers where id=" + UserId)
+                If dt.Rows.Count <> 0 Then
+
+                    Return dt.Rows(0)("related_id").ToString
                 End If
-                Return dt.Rows(0)("related_id").ToString
             End If
+
 
         Catch ex As Exception
 
@@ -217,26 +236,5 @@ Public Class advisor
 
 
 
-#Region "get Advisor Code"
-    ''' <summary>
-    ''' Save  Type
-    ''' </summary>
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function getAdvisorCode() As String
-
-        Try
-            Dim dt As New DataTable
-            dt = DBManager.Getdatatable("select isNull(Max(code),0) from ash_advisors")
-            If dt.Rows.Count <> 0 Then
-                Return dt.Rows(0)(0).ToString
-            End If
-            Return ""
-        Catch ex As Exception
-            Return ""
-        End Try
-    End Function
-
-#End Region
 
 End Class

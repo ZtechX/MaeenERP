@@ -12,6 +12,8 @@
     </asp:ScriptManager>
 
     <style>
+         /*.form-control { direction:rtl;
+                    }*/
         .wrap {
             margin-top: 50px;
             direction: rtl;
@@ -19,7 +21,8 @@
         .btn {
             float:left;
         }
-
+     
+        
         .widget-navigation {
             text-align: center;
         }
@@ -112,7 +115,8 @@
     <div class="wrap">
          <div>
                     <script src="../JS_Code/acadmies/coursat.js"></script>
-
+            
+         
                 </div>
 
         <section>
@@ -125,8 +129,9 @@
                                 <span>الدورات التدريبية</span>
                             </h3>
                         </div>
+
                         <div class="col-md-6" >
-                            <input  id="txt_Search" onkeypress="searchCourses();" type="text" class="form-control" placeholder="بحث عن دورة" />
+                            <input  id="txt_Search" onkeyup="searchCourses();" type="text" class="form-control" placeholder="بحث عن دورة" />
                         </div>
                         <div class="col-md-2">
 
@@ -137,9 +142,27 @@
                             </div>
                         </div>
                     </div>
+
+                    
+
                 </div>
             </div>
-
+            <div class="row">
+                	<div class="col-md-12" style="text-align: center; ">
+							<div class="btn-group">
+								<button type="button" class="btn btn-secondary" style="width:100px; float: right;" onclick="drawAllCourses();">الكل</button>
+								<button type="button" class="btn btn-success"  style="width:100px; float: right;" onclick="drawCourses(0);">جديدة</button>
+								<button type="button" class="btn btn-primary"  style="width:100px; float: right;" onclick=" drawCourses(1);">حالية</button>
+								<button type="button" class="btn btn-dark"  style="width:100px; float: right;" onclick=" drawCourses(2);">مكتملة</button>
+                                 <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+                                <button type="button" class="btn btn-info"  style="width:100px; float: right;" onclick=" drawCourses(4)">دوراتى</button>
+                                 <% End If%>
+ <br />
+                                <br />
+                                <br />
+							</div>
+						</div>
+            </div>
         </section>
         <section>
             <div class="row" style="margin-left:5px;margin-right:10px;">
@@ -155,7 +178,7 @@
             </ul>
         </div>
         </div>
-        <div class="modal" id="addCourse" tabindex="-1" role="dialog" dir="rtl">
+        <div class="modal" id="addCourse" tabindex="-1" role="dialog" data-easein="perspectiveRightIn"  aria-labelledby="modalLabel" aria-hidden="true" dir="rtl">
                  <div id="SavedivLoader" class="loader" style="display: none;  text-align: center;">
                                                                                     <asp:Image ID="img" runat="server" ImageUrl="../App_Themes/images/loader.gif" />
 
@@ -200,18 +223,7 @@
                              <div class="col-md-6"> 
                            
                                  
-                                <%--<div class=" row form-group">
-                                    <div class="col-md-3 col-sm-12">
-                                        <label class="label-required">كود الدورة       </label>
-                                    </div>
-
-                                    <div class="col-md-9 col-sm-12">
-                                        <input onkeypress="return isNumber(event);"   readonly="readonly"   dbcolumn="code" type="text" id="code"
-                                            class="form-control" runat="server" clientidmode="Static" />
-
-                                        <br />
-                                    </div>
-                                </div>--%>
+                            
 
 
                                  <div class=" row form-group">
@@ -349,6 +361,7 @@
             </div>
         </div>
     </div>
+   
 
     <%-- end form--%>
 </asp:Content>

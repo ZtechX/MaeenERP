@@ -278,6 +278,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.archived_courses._ToolkitScriptManager1">
+<summary>
+ToolkitScriptManager1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.coursat._ToolkitScriptManager1">
 <summary>
 ToolkitScriptManager1 control.
@@ -1091,6 +1100,132 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.courseDetailsTrainer._ToolkitScriptManager1">
 <summary>
 ToolkitScriptManager1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.courseDetails_archived._ToolkitScriptManager1">
+<summary>
+ToolkitScriptManager1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.courseDetails_archived._Lblcourse_id">
+<summary>
+Lblcourse_id control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.courseDetails_archived._lblStudentID">
+<summary>
+lblStudentID control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.courseDetails_archived._img">
+<summary>
+img control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.courseDetails_archived._activityDegree">
+<summary>
+activityDegree control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.courseDetails_archived._finaldegree">
+<summary>
+finaldegree control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.course_register._ToolkitScriptManager1">
+<summary>
+ToolkitScriptManager1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.course_register._Lblcourse_id">
+<summary>
+Lblcourse_id control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.course_register._lblStudentID">
+<summary>
+lblStudentID control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.course_register._img">
+<summary>
+img control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.course_register._notes2">
+<summary>
+notes2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.course_register._fileURL4">
+<summary>
+fileURL4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.course_register._FName4">
+<summary>
+FName4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.course_register._fuFile3">
+<summary>
+fuFile3 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2616,6 +2751,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.orders._userloginType">
+<summary>
+userloginType control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.orders._DynamicTable">
 <summary>
 DynamicTable control.
@@ -2826,15 +2970,6 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.advisors._pnlForm">
 <summary>
 pnlForm control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.advisors._code">
-<summary>
-code control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -3060,6 +3195,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.cases._Result">
 <summary>
 Result control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.cases._userLoginType">
+<summary>
+ userLoginType control.
 </summary>
 <remarks>
 Auto-generated field.

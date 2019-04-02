@@ -372,6 +372,59 @@ function saveHomeworkDegree() {
 
             var students_degree = [];
             $("#studentHWAnswers tr").each(function () {
+               
+                var obj = {};
+                obj["id"] = $(this).find("label").attr("id");
+                obj["hwmstuddegree"] = $(this).find("#Homeworkdegee").val();
+                obj["file"] = $(this).find("#homeworkfile").attr("href");
+                students_degree.push(obj);
+
+            });
+
+            console.log(students_degree);
+           var CourseId = ($("#Lblcourse_id").html());
+            var homeworkID = ($("#LblHomework_id").html());
+            // $("#SavedivLoader").show();
+
+            courseDetailsCls.savehomeworkDegree(homeworkID, CourseId ,students_degree, function (val) {
+                if (val == true) {
+
+                    $("#SavedivLoader").hide();
+                    alert("  تم الحفظ  ");
+                    $("#StudenthomeworkAnswers").modal('hide');
+
+                    resetAll();
+                    prepareAdd();
+
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+
+
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
+function saveExamkDegree() {
+
+    try {
+
+
+        if (!checkRequired()) {
+
+
+            var students_degree = [];
+            $("#studentExamAnswers tr").each(function () {
                 debugger
                 var obj = {};
                 obj["id"] = $(this).find("label").attr("id");
@@ -382,16 +435,16 @@ function saveHomeworkDegree() {
             });
 
             console.log(students_degree);
-           // var CourseId = ($("#Lblcourse_id").html());
-            var homeworkID = ($("#LblHomework_id").html());
+             var CourseId = ($("#Lblcourse_id").html());
+            var ExamId = ($("#LblExam_id").html());
             // $("#SavedivLoader").show();
 
-            courseDetailsCls.savehomeworkDegree(homeworkID ,students_degree, function (val) {
+            courseDetailsCls.saveExamDegree(ExamId, CourseId, students_degree, function (val) {
                 if (val == true) {
 
                     $("#SavedivLoader").hide();
                     alert("  تم الحفظ  ");
-                    $("#StudenthomeworkAnswers").modal('hide');
+                    $("#StudentExamskAnswers").modal('hide');
 
                     resetAll();
                     prepareAdd();
@@ -645,25 +698,25 @@ function drawpublicDegreeTable() {
 function drawstudenthomeworkanswers(homeworkId) {
     try {
         //debugger
-       // var CourseId = ($("#Lblcourse_id").html());
+        var CourseId = ($("#Lblcourse_id").html());
         ($("#LblHomework_id").html(homeworkId));
 
 
-        courseDetailsCls.get_StudentsHomeworkAnswers(homeworkId, function (val) {
+        courseDetailsCls.get_StudentsHomeworkAnswers(homeworkId, CourseId , function (val) {
 
             console.log(val);
             var data = "";
             if (val[0] == 1) {
-                debugger
+              //  debugger
                 var arrstudent = JSON.parse(val[1]);
 
                 arrstudent.forEach(function (element) {
-                    debugger
+                //    debugger
 
                     var filename = "";
                     var path = element.homeworkanswer;
                     if (path != "" && path != null) {
-                        debugger
+                       // debugger
                         if (path.indexOf("Acadmies_module/coursefiles/") != -1) {
                             filename = path.split("Acadmies_module/coursefiles/")[1];
                         }
@@ -713,6 +766,77 @@ function drawstudenthomeworkanswers(homeworkId) {
     }
 }
 
+
+function drawstudentExamsanswers(ExamId) {
+    try {
+        //debugger
+        var CourseId = ($("#Lblcourse_id").html());
+        ($("#LblExam_id").html(ExamId));
+
+
+        courseDetailsCls.get_StudentsExamsAnswers(ExamId, CourseId, function (val) {
+
+            console.log(val);
+            var data = "";
+            if (val[0] == 1) {
+                debugger
+                var arrstudent = JSON.parse(val[1]);
+
+                arrstudent.forEach(function (element) {
+                    debugger
+
+                    var filename = "";
+                    var path = element.homeworkanswer;
+                    if (path != "" && path != null) {
+                        debugger
+                        if (path.indexOf("Acadmies_module/coursefiles/") != -1) {
+                            filename = path.split("Acadmies_module/coursefiles/")[1];
+                        }
+                    }
+
+                    data = data + `   <tr>
+                                    <td>
+                                        <label id=" ${element.student_id}"> ${element.studentname}</label>
+
+                                    </td>
+                                  
+                                                <td>
+                                                       <li>
+                                                        <a id="homeworkfile" href="../${element.homeworkanswer}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${filename}</span>
+                                      
+                                                    </li>
+
+                                                     </td>
+
+                                           <td>
+                         <input id="Homeworkdegee" type="text" value=" ${element.HMWDegree}" />
+                                    
+                                    </td>
+                                </tr> `
+
+
+                });
+            }
+
+            $("#studentExamAnswers").html(data);
+            $("#StudentExamskAnswers").modal();
+
+
+
+        });
+
+    }
+
+
+
+    catch (err) {
+        alert(err);
+    }
+}
 
 
 function SaveLec() {
@@ -838,12 +962,13 @@ function saveHWanswer() {
         else {
             $("#SavedivLoader").show();
             var HomeWorkId = ($("#LblHomework_id").html());
+            var CourseId = ($("#Lblcourse_id").html());
            
             var basicData = generateJSONFromControls("divFormuploadHMfiles");
 
             var Id = "";
           
-            courseDetailsCls.saveHWanswer(Id, HomeWorkId, basicData, function (val) {
+            courseDetailsCls.saveHWanswer(Id, HomeWorkId, CourseId ,basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     // debugger;
@@ -882,12 +1007,13 @@ function saveExamanswer() {
         else {
             $("#SavedivLoader").show();
             var examID = ($("#LblExam_id").html());
+            var CourseId = ($("#Lblcourse_id").html());
 
             var basicData = generateJSONFromControls("divFormuploadexamfiles");
 
             var Id = "";
 
-            courseDetailsCls.saveExamanswer(Id, examID, basicData, function (val) {
+            courseDetailsCls.saveExamanswer(Id, examID, CourseId,basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     // debugger;
@@ -2299,6 +2425,11 @@ function drawExams() {
                                                                                               تعديل 
                                                                                             </a>
                                                                                                     </li>
+                                                                                                     <li>
+                                                                                            <a   data-toggle="modal" href="#StudentExamskAnswers"  onclick="drawstudentExamsanswers(${element.id}) ">
+                                                                                              حلول الاختبارات  
+                                                                                            </a>
+                                                                                                    </li>
                                                                                              
                                                                                                 </ul>
                                                                                            
@@ -2859,6 +2990,34 @@ function deleteCourse() {
         });
     }
 }
+
+
+
+function archiveCourse() {
+
+    var f = confirm("هل  تريد ارشفة الدورة");
+    if (f == true) {
+
+        var CourseId = ($("#Lblcourse_id").html());
+
+        courseDetailsCls.Archive_course(CourseId, function (val) {
+
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تمت الارشفه بنجاح  ");
+                window.location.replace("coursat.aspx");
+
+            } else {
+                alert('لم يتم الارشيف');
+            }
+
+        });
+
+    }
+    
+}
+
+
 
 
 function add() {

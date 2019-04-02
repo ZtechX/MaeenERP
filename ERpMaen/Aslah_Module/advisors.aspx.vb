@@ -38,7 +38,7 @@ Public Class advisors
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
                 '  
 
-                Dim clsapprove_type As New clsFillComboByDataSource("select * from tblLock_up where type='spec' and IsNull(Deleted,0)=0", "Description", "id", "")
+                Dim clsapprove_type As New clsFillComboByDataSource("select * from tblLock_up where type='spec' and IsNull(Deleted,0)=0 and Comp_id =" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_type.SetComboItems(ddlspecial_id, "", True, "--اختر--", False)
                 'LoginInfo.CheckPermisionsNew(cmdAdd, cmdUpdate, cmdDelete, Me.Page, UserId, lblFormName, DynamicTable)
 

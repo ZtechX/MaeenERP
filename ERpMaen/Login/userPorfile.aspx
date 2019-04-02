@@ -128,7 +128,23 @@
                 <div id="content" class="padding-20 newformstyle form_continer">
                     <!--     -------tabs start-------->
               
-                     
+                     <style>
+                         #userType {
+                             display:block;
+                             margin-bottom:40px;
+                             margin-top:0px;
+                             margin-left:auto;
+                             margin-right:auto;
+                             text-align:center;
+                             font-size:18px;
+                             color:#148083;
+                             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19);
+                             border-radius: 0px;
+                             border-top: 1px solid #adadad;
+                             padding: 7px;
+                             width :25%;
+                         }
+                     </style>
                                 <div class="row">
                                  
                                     <asp:Label ID="lblmainid" ClientIDMode="Static" Style="display: none" runat="server" dbColumn="id"></asp:Label>
@@ -141,7 +157,7 @@
                                         <div id="SavedivLoader" class="loader" style="display: none; text-align: center;">
                                             <asp:Image ID="img" runat="server" ImageUrl="../images/loader.gif" />
                                         </div>
-
+                                        <label  id="userType"></label>
                                         <div class="col-md-6">
                                             <div class="form-group row">
                                                 <div class="col-md-3 col-sm-12">

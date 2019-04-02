@@ -152,10 +152,13 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Acadmies_module\acadmey.aspx" />
+    <Content Include="Acadmies_module\archived_courses.aspx" />
     <Content Include="Acadmies_module\coursat.aspx" />
     <Content Include="Acadmies_module\courseDetails.aspx" />
     <Content Include="Acadmies_module\courseDetailsManage.aspx" />
     <Content Include="Acadmies_module\courseDetailsTrainer.aspx" />
+    <Content Include="Acadmies_module\courseDetails_archived.aspx" />
+    <Content Include="Acadmies_module\course_register.aspx" />
     <Content Include="Acadmies_module\DiplomaCourses.aspx" />
     <Content Include="Acadmies_module\Diplomas.aspx" />
     <Content Include="Acadmies_module\DiplomaSubjectDetails.aspx" />
@@ -746,6 +749,8 @@
     <Content Include="Aslah_Module\ConsultationDetails.aspx" />
     <Content Include="Aslah_Module\consultings.aspx" />
     <Content Include="Aslah_Module\DualCalendar.aspx" />
+    <Content Include="ASMX_WebServices\archived_coursesCls.asmx" />
+    <Content Include="ASMX_WebServices\course_registerCls.asmx" />
     <Content Include="ASMX_WebServices\orders.asmx" />
     <Content Include="ASMX_WebServices\DiplomaSubjectDetailsCls.asmx" />
     <Content Include="ASMX_WebServices\studentCls.asmx" />
@@ -753,7 +758,6 @@
     <Content Include="ASMX_WebServices\trainersCls.asmx" />
     <Content Include="ASMX_WebServices\userPorfile.asmx" />
     <Content Include="ASMX_WebServices\WebService.asmx" />
-    <Content Include="ASMX_WebServices\xxx.asmx" />
     <Content Include="ASMX_WebServices\Zwebservice.asmx" />
     <Content Include="ASMX_WebServices\CommonQuest.asmx" />
     <Content Include="ASMX_WebServices\archive_files.asmx" />
@@ -1260,11 +1264,16 @@
     <Content Include="js\themes\skies.js" />
     <Content Include="js\tooltipsy.min.js" />
     <Content Include="js\transition.js" />
+    <Content Include="js\velocity.min.js" />
+    <Content Include="js\velocity.ui.min.js" />
     <Content Include="js\vfs_fonts.js" />
     <Content Include="js\vmenuModule.js" />
     <Content Include="JS_Code\acadmies\acadmiy.js" />
+    <Content Include="JS_Code\acadmies\archived_courses.js" />
     <Content Include="JS_Code\acadmies\coursat.js" />
+    <Content Include="JS_Code\acadmies\courseDetails_archived.js" />
     <Content Include="JS_Code\acadmies\Course_Details.js" />
+    <Content Include="JS_Code\acadmies\course_register.js" />
     <Content Include="JS_Code\acadmies\diplomaCourses.js" />
     <Content Include="JS_Code\acadmies\Diplomas.js" />
     <Content Include="JS_Code\acadmies\DiplomaSubjectDetails.js" />
@@ -1811,6 +1820,13 @@
       <DependentUpon>acadmey.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Acadmies_module\archived_courses.aspx.designer.vb">
+      <DependentUpon>archived_courses.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\archived_courses.aspx.vb">
+      <DependentUpon>archived_courses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Acadmies_module\coursat.aspx.designer.vb">
       <DependentUpon>coursat.aspx</DependentUpon>
     </Compile>
@@ -1837,6 +1853,20 @@
     </Compile>
     <Compile Include="Acadmies_module\courseDetailsTrainer.aspx.vb">
       <DependentUpon>courseDetailsTrainer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\courseDetails_archived.aspx.designer.vb">
+      <DependentUpon>courseDetails_archived.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\courseDetails_archived.aspx.vb">
+      <DependentUpon>courseDetails_archived.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Acadmies_module\course_register.aspx.designer.vb">
+      <DependentUpon>course_register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\course_register.aspx.vb">
+      <DependentUpon>course_register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Acadmies_module\DiplomaCourses.aspx.designer.vb">
@@ -1918,6 +1948,15 @@
       <SubType>Component</SubType>
     </Content>
     <Content Include="App_Code\orders.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\archived_coursesCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\course_registerCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\courseDetails_archivedCls.vb">
       <SubType>Component</SubType>
     </Content>
     <Compile Include="App_Code\members.vb">

@@ -77,16 +77,7 @@ on ash_case_childrens.id=ash_case_children_receiving_details.children_id where d
                 ' rdoc.SetParameterValue("img_header_URL", dt1.Rows(0)("img_header").ToString)
                 ' rdoc.SetParameterValue("img_footer_URL", dt1.Rows(0)("img_footer").ToString)
                 CrystalReportViewer1.ReportSource = rdoc
-                Dim connectInfo As ConnectionInfo = New ConnectionInfo()
-                connectInfo.ServerName = "172.107.166.215\sa, 1985"
-                connectInfo.DatabaseName = "ERPDB"
-                connectInfo.UserID = "sa"
-                connectInfo.Password = "ZTechX@admin.com"
-                rdoc.SetDatabaseLogon("sa", "ZTechX@admin.com")
-                For Each tbl As CrystalDecisions.CrystalReports.Engine.Table In rdoc.Database.Tables
-                    tbl.LogOnInfo.ConnectionInfo = connectInfo
-                    tbl.ApplyLogOnInfo(tbl.LogOnInfo)
-                Next
+
                 CrystalReportViewer1.DataBind()
                 Try
                     Dim objDS As New DataSet

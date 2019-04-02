@@ -54,7 +54,7 @@ function HijriDate(year, month, date, hour, minute, second, millisecond) {
     };
     this.getDateStringHigri = function () {
         return addZero(this.getDate()) + '/' +
-          addZero(this.getMonth()) + '/' +
+          addZero(this.getMonth()+1) + '/' +
           this.getFullYear();
     };
 
@@ -261,13 +261,20 @@ HijriDate.parseInt = function(num, def) {
     return isNaN(res) ? def : res;
 }
 
-Date.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+//Date.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-Date.monthShortNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+//Date.monthShortNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-Date.weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
+//Date.weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ];
 
-Date.weekdayShortNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+//Date.weekdayShortNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+Date.monthNames = ['يناير', 'فبراير', 'مارس', 'إبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+
+Date.monthShortNames = ['ينا', 'فبر', 'مار', 'إبري', 'ماي', 'يون', 'يول', 'أغس', 'سبت', 'أكت', 'نوف', 'ديس'];
+
+Date.weekdayNames = ["السبت", "الاحد", "الاثنين", "الثلاثاء", "الاربعاء", "الخميس", "الجمعة"];
+
+Date.weekdayShortNames = ['سبت', 'احد', 'اثن', 'ثلا', 'ارب', 'خمي', 'جمع'];
 
 Date.javaWeekdayNames = ['Legi', 'Pahing', 'Pon', 'Wage', 'Kliwon'];
 
@@ -316,7 +323,7 @@ Date.prototype.getFullYearString = function() {
 
 Date.prototype.getDateString = function() {
     return addZero(this.getDate()) + '/' +
-addZero(this.getMonth()) + '/' +
+addZero(this.getMonth()+1) + '/' +
 this.getFullYear();
 };
 Date.prototype.getDateStringHigri = function () {

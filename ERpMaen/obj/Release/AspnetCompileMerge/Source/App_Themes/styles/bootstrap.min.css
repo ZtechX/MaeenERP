@@ -3151,11 +3151,11 @@ textarea.input-lg, select[multiple].input-lg {
         background-color: #333;
     }
 
-/*.btn-primary {
+.btn-primary {
     color: #fff !important;
     background-color: #428bca !important;
     border-color: #357ebd;
-}*/
+}
 
     .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
         color: #fff;
@@ -3259,6 +3259,11 @@ textarea.input-lg, select[multiple].input-lg {
     color: #fff;
     background-color: #d9534f;
     border-color: #d43f3a;
+}
+.btn-dark {
+    color: #fff;
+    background-color: black;
+    border-color: black;
 }
 
     .btn-danger:hover, .btn-danger:focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger {

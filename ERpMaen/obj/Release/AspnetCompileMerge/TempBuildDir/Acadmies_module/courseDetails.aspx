@@ -75,6 +75,7 @@
             opacity: 1;
         }
 
+
         .pull-right .dropdown-menu {
             right: auto;
             left: 0;
@@ -973,18 +974,7 @@
                                    
                                         </div>
                             </div>
-                                                  <div class=" row form-group">
-                                            <div class="col-md-3 col-sm-12">
-                                                <label class="">السعر     </label>
-                                            </div>
-
-                                            <div class="col-md-9 col-sm-12">
-                                                <input onkeypress="return isNumber(event);"    dbcolumn="price" type="text" id="price"
-                                                    class="form-control " runat="server" clientidmode="Static" />
-
-
-                                            </div>
-                                        </div>
+                                                 
                                         
                                     </div>
                                     <div class="col-md-6">
@@ -1033,7 +1023,18 @@
 
                                             </div>
                                         </div>
-                                    
+                                     <div class=" row form-group">
+                                            <div class="col-md-3 col-sm-12">
+                                                <label class="">السعر     </label>
+                                            </div>
+
+                                            <div class="col-md-9 col-sm-12">
+                                                <input onkeypress="return isNumber(event);"    dbcolumn="price" type="text" id="price"
+                                                    class="form-control " runat="server" clientidmode="Static" />
+
+
+                                            </div>
+                                        </div>
                                      
                                     </div>
 
@@ -1194,20 +1195,21 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">الطلاب   </h4>
+                            <h4 class="modal-title">تقديمات الطلاب   </h4>
                         </div>
                         <%--  جدول الطلاب--%>
                         <div class="table-responsive" id="allStudentlist">
                             <table class="table table-bordered table-hover"  id="newitem">
                                <thead>
                                 <tr>
-                                    <th>الاسم </th>
-                                    <th>الصورة</th>
-                                     <th>اضافة</th>
+                                    <th>الطالب </th>
+                                    <th>الطلب</th>
+                                     <th>الملف</th>
+                                     <th>الاجراء</th>
                                   
                                 </tr>
                                  </thead>
-                                <tbody  id="courseStudents">
+                                <tbody  id="action_courseStudents">
                                          
                                 </tbody>
                                     
@@ -1223,7 +1225,7 @@
                 </div>
             </div>
 
-            <div class="modal" id="order_addcondition" tabindex="-1" role="dialog">
+            <div class="modal" id="order_addcondition" data-easein="perspectiveRightIn" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -1856,7 +1858,7 @@
                 </div>
             </div>
 
-                    <div class="modal fade" id="publicStudentDegree" tabindex="-1" role="dialog">
+            <div class="modal fade" id="publicStudentDegree" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -1907,6 +1909,133 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="StudenthomeworkAnswers" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">حلول الواجبات   </h4>
+                            <div class="col-md-6" >
+                            <input  id="txtstudhw_Search" onkeyup="SearchStudent();" type="text" class="form-control" placeholder="بحث عن طالب" />
+                        </div>
+                        </div>
+                        <%--  جدول الغياب--%>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="publicDeg">
+                                <tr>
+                                    <th>الاسم </th>
+                                    <th> الحل</th>
+                                     <th> الدرجة  </th>
+
+
+
+                                </tr>
+                                   
+                                <tbody id="studentHWAnswers">
+                                 
+                              
+                               <%-- <tr>
+                                    <td>
+                                        <label> ahmed mohamed</label>
+                                    </td>
+                                    <td>
+               <input id="finaldegee" type="text"   />
+                                        55
+                                    </td>
+                                    <td>
+               <input id="activitydegee" type="text"  />
+                                        66
+                                    </td>
+                                </tr>--%>
+                                         </tbody>  
+
+
+                            </table>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="saveHomeworkDegree();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+
+            <div class="modal fade" id="add_Financial" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"> مالية الطلاب   </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divformstudentFinanc">
+
+                                <div class="row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label class="label-required"> المبلغ   </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <input onkeypress="return isNumber(event);" placeholder="  قيمة المبلغ بالريال" required dbcolumn="amount" type="text" id="amount"
+                                            class="form-control" runat="server" clientidmode="Static" />
+
+
+                                    </div>
+                                </div>
+
+                                <div class=" row form-group ">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label class="label-required">طريقة الدفع </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <asp:DropDownList dbcolumn="payment_type" required class="form-control" ClientIDMode="Static" ID="ddlpayment_type" runat="server">
+                                        </asp:DropDownList>
+
+                                    </div>
+                                </div>
+
+                                <div class=" row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label>ملاحظات      </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox8" runat="server">
+                                        </asp:TextBox>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+
+                                    <div>
+                                        <input id="fileurlfinanc" type="hidden" dbcolumn="image" runat="server" />
+                                        <input id="FnameFinanc" type="text" required readonly="readonly" runat="server" />
+
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                    <asp:AsyncFileUpload ID="fufile7" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
+                                        OnClientUploadComplete="UploadComplete8" />
+                                </div>
+                                
+
+
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="addfinancial();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <% End If %>
 
 
        

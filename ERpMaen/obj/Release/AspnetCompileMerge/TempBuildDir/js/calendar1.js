@@ -539,7 +539,6 @@ Calendar.language['ar'] = {
     hMonthNames: ["المُحَرَّم", "صَفَر ", "رَبيع الاوَّل", "رَبيع الآخِر", "جُمادى الأولى", "جُمادى الآخِرة", "رَجَب", "شَعبان", "رَمَضان", "شَوّال", "ذو القَعدة", "ذو الحِجّة"]
 };
 function getmydate(sender) {
-   
     var id = $(sender).prop('id');
     $("#lbldelivery_date_m").html($(sender).find("#dateval").attr('date'));
     $("#lbldelivery_date_h").html($(sender).find("#dateval").attr('hdate'));
@@ -552,11 +551,21 @@ function getmydate(sender) {
   
         if (id != "") {
          //   show_all(id, 1);
-            $("#multi_cases").dialog({
-                width: "800px",
-            });
-            get_cases($(sender).find("#dateval").attr('hdate'));
+           
+                if ($("#Login_userType").html() == "9") {
+                    $("#header_Div").hide();
+                }
+
+                $("#multi_cases").dialog({
+                    width: "800px",
+                });
+                get_cases($(sender).find("#dateval").attr('hdate'));
+         
+           
         } else {
+            if ($("#Login_userType").html() == "9") {
+                return;
+            }
             resetDivControls("receiving_delivery_details");
             getSerial_correspondencesn()
             getSerial_sessions()
