@@ -116,7 +116,7 @@ Public Class courseDetails_archivedCls
             Dim dt As New DataTable
 
 
-            dt = DBManager.Getdatatable("select acd_homework_delivery.homework_id, acd_homework_delivery.student_id,acd_homework_delivery.image as 'homeworkanswer' ,tblUsers.full_name as 'studentname',COALESCE (acd_homework_delivery.degree,0) as 'HMWDegree' from acd_homework_delivery join tblUsers on tblUsers.id=acd_homework_delivery.student_id where acd_homework_delivery.type=1 and acd_homework_delivery.homework_id=" + homeworkId + " and course_id=" + courseId)
+            dt = DBManager.Getdatatable("select acd_homework_delivery.homework_id, acd_homework_delivery.student_id,acd_homework_delivery.image as 'homeworkanswer' ,tblUsers.full_name as 'studentname',COALESCE (acd_homework_delivery.degree,0) as 'HMWDegree' from acd_homework_delivery join tblUsers on tblUsers.id=acd_homework_delivery.student_id where  acd_homework_delivery.dvtype=1 and acd_homework_delivery.type=1 and acd_homework_delivery.homework_id=" + homeworkId + " and course_id=" + courseId)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1042,7 +1042,7 @@ Public Class courseDetails_archivedCls
             Dim dt As New DataTable
 
 
-            dt = DBManager.Getdatatable("select acd_homework_delivery.homework_id, acd_homework_delivery.student_id,acd_homework_delivery.image as 'homeworkanswer' ,tblUsers.full_name as 'studentname',COALESCE (acd_homework_delivery.degree,0) as 'HMWDegree' from acd_homework_delivery join tblUsers on tblUsers.id=acd_homework_delivery.student_id where acd_homework_delivery.type=2 and acd_homework_delivery.homework_id=" + examid + " and course_id=" + courseId)
+            dt = DBManager.Getdatatable("select acd_homework_delivery.homework_id, acd_homework_delivery.student_id,acd_homework_delivery.image as 'homeworkanswer' ,tblUsers.full_name as 'studentname',COALESCE (acd_homework_delivery.degree,0) as 'HMWDegree' from acd_homework_delivery join tblUsers on tblUsers.id=acd_homework_delivery.student_id where  acd_homework_delivery.dvtype=2 and acd_homework_delivery.type=1 and acd_homework_delivery.homework_id=" + examid + " and course_id=" + courseId)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then

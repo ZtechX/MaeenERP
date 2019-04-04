@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="VB" CodeBehind="~/App_Code/diplome_registerCls.vb" Class="diplome_registerCls" %>

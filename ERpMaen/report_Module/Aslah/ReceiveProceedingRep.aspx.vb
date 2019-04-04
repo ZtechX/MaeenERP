@@ -50,11 +50,11 @@ on ash_case_childrens.id=ash_case_children_receiving_details.children_id where d
             If dt3.Rows.Count <> 0 Then
                 query = "SELECT delivery.name as 'deliver_nm',delivery.indenty as 'deliver_num',receive.name as 'Receive_nm'
   ,receive.indenty as 'Receive_num',date_h as 'receive_dt',delivery_time,receiving_time
-  FROM ash_case_receiving_delivery_details left join ash_case_receiving_delivery_basic 
-  on ash_case_receiving_delivery_basic.case_id=ash_case_receiving_delivery_details.case_id
-  left join ash_case_persons delivery on ash_case_receiving_delivery_details.deliverer_id=delivery.id
-  left join ash_case_persons receive on  ash_case_receiving_delivery_details.reciever_id=receive.id
-  where ash_case_receiving_delivery_details.id=" + details_id
+  FROM ash_case_receiving_delivery_details details left join ash_case_receiving_delivery_basic 
+  on ash_case_receiving_delivery_basic.case_id=details.case_id
+  left join ash_case_persons delivery on details.deliverer_id=delivery.id
+  left join ash_case_persons receive on  details.reciever_id=receive.id
+  where details.deleted !=1 and details.id=" + details_id
                 dt4 = DBManager.Getdatatable(query)
                 Dim rowsCount = dt3.Rows.Count - 1
                 For index As Integer = 0 To rowsCount Step 1

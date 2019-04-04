@@ -104,13 +104,13 @@ Partial Public Class cases
     Protected WithEvents Result As Global.ERpMaen.Result
     
     '''<summary>
-    ''' userLoginType control.
+    '''userLoginType control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents  userLoginType As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents userLoginType As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''lblcase_id control.
@@ -500,13 +500,40 @@ Partial Public Class cases
     Protected WithEvents txtdelivery_period As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''ddlday_nam1 control.
+    '''lblfirst_date_received_m control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddlday_nam1 As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lblfirst_date_received_m As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblfirst_date_received_h control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblfirst_date_received_h As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''HijriCalendar12 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar12 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''num_months control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents num_months As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''txtreceiving_time control.
@@ -516,15 +543,6 @@ Partial Public Class cases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtreceiving_time As Global.System.Web.UI.HtmlControls.HtmlInputGenericControl
-    
-    '''<summary>
-    '''txtsession_time control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtsession_time As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''txtdelivery_time control.
@@ -678,4 +696,22 @@ Partial Public Class cases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Appraisal1 As Global.ERpMaen.Appraisal
+    
+    '''<summary>
+    '''delivery_period control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents delivery_period As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''month_number control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents month_number As Global.System.Web.UI.HtmlControls.HtmlInputText
 End Class

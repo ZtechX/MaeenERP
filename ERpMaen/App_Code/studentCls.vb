@@ -210,26 +210,6 @@ Public Class studentCls
 
 
 
-#Region "get student Code"
-    ''' <summary>
-    ''' Save  Type
-    ''' </summary>
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function getStudentCode() As String
 
-        Try
-            Dim dt As New DataTable
-            dt = DBManager.Getdatatable("select isNull(Max(code),0) from  acd_Students")
-            If dt.Rows.Count <> 0 Then
-                Return dt.Rows(0)(0).ToString
-            End If
-            Return ""
-        Catch ex As Exception
-            Return ""
-        End Try
-    End Function
-
-#End Region
 
 End Class

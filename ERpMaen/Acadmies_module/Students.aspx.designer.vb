@@ -149,15 +149,6 @@ Partial Public Class Students
     Protected WithEvents pnlForm As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''code control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents code As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
     '''Name control.
     '''</summary>
     '''<remarks>

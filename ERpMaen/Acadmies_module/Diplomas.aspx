@@ -149,10 +149,30 @@
                                 <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addCourse">اضافة دبلومه <i class="fa fa-plus"></i></button>
 
                             </div>
+
+
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                	<div class="col-md-12" style="text-align: center; ">
+							<div class="btn-group">
+								<button type="button" class="btn btn-secondary" style="width:100px; float: right;" onclick="drawAllCourses();">الكل</button>
+								<button type="button" class="btn btn-success"  style="width:100px; float: right;" onclick="drawCourses(0);">جديدة</button>
+								<button type="button" class="btn btn-primary"  style="width:100px; float: right;" onclick=" drawCourses(1);">حالية</button>
+								<button type="button" class="btn btn-dark"  style="width:100px; float: right;" onclick=" drawCourses(2);">مكتملة</button>
+                                 <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+                                <button type="button" class="btn btn-info"  style="width:100px; float: right;" onclick=" drawCourses(4)">دوراتى</button>
+                                 <% End If%>
+ <br />
+                                <br />
+                                <br />
+							</div>
+						</div>
+            </div>
+
+
         </section>
         <section>
             <div class="row" style="margin-left:5px;margin-right:10px;">

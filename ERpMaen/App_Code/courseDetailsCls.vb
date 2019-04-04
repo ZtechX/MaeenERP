@@ -217,7 +217,7 @@ Public Class courseDetailsCls
             Dim success2 As Boolean = True
             For Each item As Object In studentDegrees
 
-                If DBManager.ExcuteQuery("UPDATE  acd_homework_delivery  set  type=1 , degree=" + item("hwmstuddegree").ToString + "where student_id=" + item("id").ToString + " And course_id=" + courseId + " And homework_id=" + homeworkID) <> -1 Then
+                If DBManager.ExcuteQuery("UPDATE  acd_homework_delivery  set  degree=" + item("hwmstuddegree").ToString + "where dvtype=1 and student_id=" + item("id").ToString + " And course_id=" + courseId + " And homework_id=" + homeworkID) <> -1 Then
 
 
                     If Not PublicFunctions.TransUsers_logs("3193", "acd_homework_delivery", "تعديل", _sqlconn, _sqltrans) Then
@@ -596,112 +596,7 @@ Public Class courseDetailsCls
         End Try
     End Function
 #End Region
-    '#Region "Save"
-    '    ''' <summary>
 
-    '    ''' Save  Type
-    '    ''' </summary> تعديل
-    '    <WebMethod(True)>
-    '    <System.Web.Script.Services.ScriptMethod()>
-    '    Public Function SaveStudent(ByVal CourseId As String, ByVal students As Integer()) As Boolean
-    '        Try
-
-    '            _sqlconn.Open()
-    '            _sqltrans = _sqlconn.BeginTransaction
-    '            Dim dt_user As DataTable
-
-    '            Dim id = ""
-    '            Dim success_st As Boolean = True
-
-
-    '            For Each item As String In students
-    '                DBManager.ExcuteQuery("DELETE FROM acd_courses_students where student_id=" + item + " And course_id=" + CourseId)
-    '                Dim dictBasicDataJson As New Dictionary(Of String, Object)
-    '                dictBasicDataJson.Add("course_id", CourseId)
-    '                dictBasicDataJson.Add("type", 1)
-    '                dictBasicDataJson.Add("approved", True)
-    '                dictBasicDataJson.Add("student_id", item)
-
-    '                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
-    '                    If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "ادخال", _sqlconn, _sqltrans) Then
-    '                        success = False
-    '                    Else
-    '                        success = True
-    '                    End If
-    '                    success = True
-    '                Else
-    '                    success = False
-
-    '                End If
-    '                If success Then
-    '                    success_st = True
-    '                Else
-    '                    success_st = False
-    '                End If
-    '            Next
-    '            If success_st Then
-
-    '                _sqltrans.Commit()
-    '                _sqlconn.Close()
-    '                Return True
-    '            Else
-    '                _sqltrans.Rollback()
-    '                _sqlconn.Close()
-    '                Return False
-    '            End If
-    '            ' dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
-
-    '            'dictBasicDataJson.Add("userID", (Context.Request.Cookies("UserInfo").ToString()))
-
-
-
-    '        Catch ex As Exception
-    '            _sqltrans.Rollback()
-    '            _sqlconn.Close()
-    '            Return False
-    '        End Try
-    '    End Function
-    '#End Region
-
-
-    '#Region "edit- save"
-    '    ''' <summary>
-    '    ''' </summary>
-    '    <WebMethod()>
-    '    <System.Web.Script.Services.ScriptMethod()>
-    '    Public Function SaveStudent(ByVal courseID As String, ByVal students As Integer()) As String()
-    '        Dim Names As New List(Of String)(10)
-    '        Try
-    '            For Each item As String In students
-    '                If DBManager.ExcuteQuery("UPDATE  acd_courses_students  Set  approved=1 where student_id=" + item + " And course_id=" + courseID) <> -1 Then
-    '                    If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "تعديل", _sqlconn, _sqltrans) Then
-    '                        success = False
-    '                    Else
-    '                        success = True
-    '                    End If
-    '                    success = True
-    '                Else
-    '                    success = False
-
-    '                End If
-    '            Next
-
-    '            If success Then
-    '                Names.Add("1")
-    '                'Names.Add("تمت الاضافة بنجاح")
-    '            Else
-    '                Names.Add("2")
-    '                'Names.Add("لا يمكن الاضافة!")
-
-    '            End If
-    '            Return Names.ToArray
-    '        Catch
-    '            Names.Add("2")
-    '            Names.Add("لا يمكن الحذف!")
-    '            Return Names.ToArray
-    '        End Try
-    '    End Function
-    '#End Region
 
 
 #Region "addStudents_to_course"
@@ -1020,6 +915,7 @@ Public Class courseDetailsCls
             'dictBasicDataJson.Add("userID", (Context.Request.Cookies("UserInfo").ToString()))
 
             dictBasicDataJson.Add("course_id", CourseId)
+            dictBasicDataJson.Add("type", "1")
 
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_course_conditions", id, _sqlconn, _sqltrans) Then
@@ -1176,7 +1072,7 @@ Public Class courseDetailsCls
             dictBasicDataJson.Add("dvtype", "1")
             dictBasicDataJson.Add("student_id", LoginInfo.GetUser__Id())
 
-            'امتحان او واجب 
+
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_homework_delivery", id, _sqlconn, _sqltrans) Then
                 If Not PublicFunctions.TransUsers_logs("3193", "acd_homework_delivery", "ادخال", _sqlconn, _sqltrans) Then
@@ -1227,7 +1123,8 @@ Public Class courseDetailsCls
 
             dictBasicDataJson.Add("homework_id", examId)
             dictBasicDataJson.Add("course_id", courseId)
-            dictBasicDataJson.Add("type", "2")
+            dictBasicDataJson.Add("type", "1")
+            dictBasicDataJson.Add("dvtype", "2")
             dictBasicDataJson.Add("student_id", LoginInfo.GetUser__Id())
 
 
@@ -1379,11 +1276,11 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function getlectureCode() As String
+    Public Function getlectureCode(ByVal course_id As String) As String
 
         Try
             Dim dt As New DataTable
-            dt = DBManager.Getdatatable("Select isNull(Max(lecture_code) Then,0) As 'code' from  acd_lectures where type=1")
+            dt = DBManager.Getdatatable("Select isNull(Max(lecture_code),0) As 'code' from  acd_lectures where type=1 and course_id=" + course_id)
             If dt.Rows.Count <> 0 Then
                 Return dt.Rows(0)(0).ToString
             End If
@@ -1457,7 +1354,7 @@ Public Class courseDetailsCls
             Dim dt As New DataTable
 
 
-            dt = DBManager.Getdatatable("select acd_homework_delivery.homework_id, acd_homework_delivery.student_id,acd_homework_delivery.image as 'homeworkanswer' ,tblUsers.full_name as 'studentname',COALESCE (acd_homework_delivery.degree,0) as 'HMWDegree' from acd_homework_delivery join tblUsers on tblUsers.id=acd_homework_delivery.student_id where acd_homework_delivery.type=1 and acd_homework_delivery.homework_id=" + homeworkId + " and course_id=" + courseId)
+            dt = DBManager.Getdatatable("select acd_homework_delivery.homework_id, acd_homework_delivery.student_id,acd_homework_delivery.image as 'homeworkanswer' ,tblUsers.full_name as 'studentname',COALESCE (acd_homework_delivery.degree,0) as 'HMWDegree' from acd_homework_delivery join tblUsers on tblUsers.id=acd_homework_delivery.student_id where  acd_homework_delivery.dvtype=1 and acd_homework_delivery.type=1 and acd_homework_delivery.homework_id=" + homeworkId + " and course_id=" + courseId)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1503,7 +1400,7 @@ Public Class courseDetailsCls
             Dim dt As New DataTable
 
 
-            dt = DBManager.Getdatatable("select acd_homework_delivery.homework_id, acd_homework_delivery.student_id,acd_homework_delivery.image as 'homeworkanswer' ,tblUsers.full_name as 'studentname',COALESCE (acd_homework_delivery.degree,0) as 'HMWDegree' from acd_homework_delivery join tblUsers on tblUsers.id=acd_homework_delivery.student_id where acd_homework_delivery.type=2 and acd_homework_delivery.homework_id=" + examid + " and course_id=" + courseId)
+            dt = DBManager.Getdatatable("select acd_homework_delivery.homework_id, acd_homework_delivery.student_id,acd_homework_delivery.image as 'homeworkanswer' ,tblUsers.full_name as 'studentname',COALESCE (acd_homework_delivery.degree,0) as 'HMWDegree' from acd_homework_delivery join tblUsers on tblUsers.id=acd_homework_delivery.student_id where  acd_homework_delivery.dvtype=2 and acd_homework_delivery.type=1 and acd_homework_delivery.homework_id=" + examid + " and course_id=" + courseId)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then

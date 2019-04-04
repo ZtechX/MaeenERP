@@ -478,7 +478,7 @@ function resetAll() {
     }
 }
 
-//AddStudent
+
 
 function SaveAbsenceStudent() {
 
@@ -531,62 +531,7 @@ function SaveAbsenceStudent() {
 }
 
 
-//function AddStudent() {
 
-
-//    try {
-//        debugger
-
-//        if (!checkRequired()) {
-
-//           // $("#SavedivLoader").show();
-//            var student_arr = [];
-//            $("#courseStudents").find("tr td input:checkbox").each(function () {
-//                if ($(this).is(":checked")) {
-//                    var value = $(this).attr("student");
-//                    student_arr.push(value)
-//                }
-//            });
-//        //    console.log(student_arr);
-//            var CourseId = ($("#Lblcourse_id").html());
-
-      
-//            var x = student_arr.length;
-//            if (x != 0) {
-//                debugger
-//                courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
-//                    if (val[0] == 1) {
-//                      //  $("#SavedivLoader").hide();
-//                        alert("تم الحفظ بنجاح");
-//                        $("#addStudentModal").modal('hide');
-//                        drawStudentTable();
-//                        window.location.reload();
-//                       // drawAbsenceTable();
-
-
-
-
-//                    } else {
-//                        alert("لم يتم الحفظ");
-//                    }
-
-
-//                });
-//            }
-//            else {
-//                $("#addStudentModal").modal('hide');
-//                //$("#SavedivLoader").hide();
-
-//            }
-//        }
-
-
-//    } catch (err) {
-//        alert(err);
-//    }
-//}
-
-//draw_public_student degree
 
 
 
@@ -1364,7 +1309,9 @@ function LectureView(LecID) {
 }
 //get lecture code
 function getlectureCode() {
-    courseDetailsCls.getlectureCode(function (val) {
+    debugger
+    var CourseId = $("#Lblcourse_id").html(); 
+    courseDetailsCls.getlectureCode(CourseId,function (val) {
         
         $("#lecture_code").val(Number(val) + 1);
     });
@@ -1669,6 +1616,7 @@ function GetCourses(){
         alert(err);
     }
 }
+
 function drawAbsenceTable(CoursLecID) {
     try {
         var CourseId = ($("#Lblcourse_id").html());

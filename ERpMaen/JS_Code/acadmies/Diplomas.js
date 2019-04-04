@@ -12,7 +12,7 @@ $(function () {
     $("#pnlConfirm").hide();
     $("#divData").hide();
     $("#SavedivLoader").show();
-    drawCourses();
+    drawAllCourses();
 
     try {
       
@@ -113,12 +113,13 @@ function changePage(page) {
     $("#li_" + page).addClass("active");
     $("#diplomas-list").html("");
     var data = "";
+    var colors = ["#5cb85c", "#428bca", "#000"];
     for (var i = (page - 1) * records_per_page; i < (page * records_per_page) && i < diplomasList.length; i++) {
         var element = diplomasList[i];
         data = data + `<div class="col-md-4 col-sm-12">
                     <div class="block"  >
-                        <div class="block-title">
-                            <h5><a href="DiplomaCourses.aspx?deploma_id=${element.id}">${element.name}</a></h5>
+                        <div class="block-title" style="background:${colors[element.status]}">
+                            <h5><a href="DiplomaCourses.aspx?code=${element.code}">${element.name}</a></h5>
                         </div>
                         <div class="block-desc">
                             <p class="desc">${element.description}</p>
@@ -145,9 +146,9 @@ function changePage(page) {
 
 }
 
-function drawCourses(){
+function drawAllCourses(){
     try {
-        DiplomasCls.get_deplomas( "",function (val) {
+        DiplomasCls.get_deplomas("", "",function (val) {
 
         
             var data = "";
@@ -178,6 +179,51 @@ function drawCourses(){
         alert(err);
     }
 }
+
+
+function drawCourses(filter) {
+    try {
+        DiplomasCls.get_deplomas(filter, "", function (val) {
+            debugger
+
+            //var data = "";
+            //console.log(val);
+            if (val[0] == "0") {
+
+                $("#diplomas-list").html("لا يوجد كورسات تم التسجيل بها ");
+
+
+            }
+            else {
+                var arr1 = JSON.parse(val[1]);
+                diplomasList = arr1;
+                numPages = Math.ceil(diplomasList.length / records_per_page);
+
+                var str = "";
+                for (var i = 0; i < (numPages + 2); i++) {
+
+                    if (i == 0) {
+                        str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
+                    }
+                    else if (i == (numPages + 1)) {
+                        str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
+
+                    } else {
+                        str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
+
+                    }
+                }
+                $(".pagination").html(str);
+                changePage(1);
+            }
+
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
 function searchDiploma() {
     try {
         

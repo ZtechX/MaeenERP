@@ -419,15 +419,6 @@ Partial Public Class CourseDetails
     Protected WithEvents details As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''notes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents notes As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''Result2 control.
     '''</summary>
     '''<remarks>
@@ -498,15 +489,6 @@ Partial Public Class CourseDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''notes2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents notes2 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''activityDegree control.

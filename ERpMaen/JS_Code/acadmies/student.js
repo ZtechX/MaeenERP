@@ -11,7 +11,7 @@ $(function () {
     try {
        form_load();
       //  drawDynamicTable();
-        getStudentCode();
+        //getStudentCode();
     } catch (err) {
        // alert(err);
     }
@@ -72,7 +72,7 @@ function save() {
                     showSuccessMessage("تم الحفظ بنجاح");
                     drawDynamicTable();
                     cancel();
-                    getStudentCode();
+                    //getStudentCode();
                 } else {
                     showErrorMessage(val.split("|")[1]);
                     $("#pnlConfirm").show();
@@ -132,7 +132,7 @@ function add() {
     try {
         prepareAdd();
         resetAll();
-        getStudentCode();
+        //getStudentCode();
     } catch (err) {
         alert(err);
     }
@@ -146,10 +146,10 @@ function setformforupdate() {
     }
 }
 
-function getStudentCode() {
-    studentCls.getStudentCode(function (val) {
-        //debugger
-        $("#code").val(Number(val) + 1);
-    });
-}
+//function getStudentCode() {
+//    studentCls.getStudentCode(function (val) {
+//        //debugger
+//        $("#code").val(Number(val) + 1);
+//    });
+//}
 

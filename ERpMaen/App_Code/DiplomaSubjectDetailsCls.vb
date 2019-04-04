@@ -1130,11 +1130,11 @@ Public Class DiplomaSubjectDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function getlectureCode() As String
+    Public Function getlectureCode(ByVal subjectId As String) As String
 
         Try
             Dim dt As New DataTable
-            dt = DBManager.Getdatatable("select isNull(Max(lecture_code),0) from  acd_lectures where type=2")
+            dt = DBManager.Getdatatable("select isNull(Max(lecture_code),0) from  acd_lectures where type=2 and course_id=" + subjectId)
             If dt.Rows.Count <> 0 Then
                 Return dt.Rows(0)(0).ToString
             End If

@@ -1278,7 +1278,8 @@ function SearchStudent() {
 
 
 function getlectureCode() {
-    DiplomaSubjectDetailsCls.getlectureCode(function (val) {
+    var subjectId = ($("#Lblsubject_id").html());
+    DiplomaSubjectDetailsCls.getlectureCode(subjectId,function (val) {
         debugger
         $("#lecture_code").val(Number(val) + 1);
     });

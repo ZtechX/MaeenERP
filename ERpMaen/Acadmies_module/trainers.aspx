@@ -22,6 +22,11 @@
             </div>
             <div class="wraper">
 
+
+                 <style>
+                    .form-control { direction:rtl;
+                    }
+                </style>
                 <div>
                     <script src="../JS_Code/acadmies/trainers.js"></script>
                      <script type="text/javascript">
@@ -163,7 +168,7 @@
 
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label class="label-required" for="TextBox1">البريد الالكتروني</label>
+                                            <label  for="TextBox1">البريد الالكتروني</label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">

@@ -114,7 +114,7 @@
                             <asp:Panel ID="pnlForm" runat="server">
                                 <div class="col-md-6">
 
-                                     <div class="form-group">
+                                    <%-- <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
                                             <label class="label-required">
                                             كود الطالب  </lable>
@@ -126,7 +126,7 @@
 
                                             <br />
                                         </div>
-                                    </div>
+                                    </div>--%>
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
                                             <label for="Name" class="label-required">اسم الطالب</label>
@@ -178,7 +178,7 @@
 
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label class="label-required" for="TextBox1">البريد الالكتروني</label>
+                                            <label  for="TextBox1">البريد الالكتروني</label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">

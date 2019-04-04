@@ -1180,7 +1180,7 @@
                                 
                                         <div class="row form-group">
                                             <div class="col-md-3 col-sm-12">
-                                                <label for="Name" class="label-required">الملاحظات </label>
+                                                <label for="Name" >الملاحظات </label>
 
                                             </div>
                                             <div class="col-md-9 col-sm-12">
@@ -1518,7 +1518,7 @@
 
                                     <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name">تفاصيل الاختبار </label>
+                                            <label for="Name" class="label-required">تفاصيل الاختبار </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
@@ -1527,16 +1527,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row form-group">
-                                        <div class="col-md-3 col-sm-12">
-                                            <label for="Name">الملاحظات </label>
-
-                                        </div>
-                                        <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" required  TextMode="multiline" class="form-control" dbColumn="notes" ClientIDMode="Static" ID="notes" runat="server">
-                                            </asp:TextBox>
-                                        </div>
-                                    </div>
+                                   
 
                                     
                           
@@ -1619,7 +1610,7 @@
 
                                     <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name">تفاصيل الواجب </label>
+                                            <label for="Name" class="label-required">تفاصيل الواجب </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
@@ -1628,16 +1619,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row form-group">
-                                        <div class="col-md-3 col-sm-12">
-                                            <label for="Name">الملاحظات </label>
-
-                                        </div>
-                                        <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" TextMode="multiline"  required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="notes2" runat="server">
-                                            </asp:TextBox>
-                                        </div>
-                                    </div>
+                                    
                                     
                                 </div>
 

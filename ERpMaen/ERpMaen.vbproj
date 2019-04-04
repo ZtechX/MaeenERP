@@ -162,6 +162,7 @@
     <Content Include="Acadmies_module\DiplomaCourses.aspx" />
     <Content Include="Acadmies_module\Diplomas.aspx" />
     <Content Include="Acadmies_module\DiplomaSubjectDetails.aspx" />
+    <Content Include="Acadmies_module\diplome_register.aspx" />
     <Content Include="Acadmies_module\exams\49110304_317144542231304_3760180426686070784_n.jpg" />
     <Content Include="Acadmies_module\exams\Koala.jpg" />
     <Content Include="Acadmies_module\exams\Lighthouse.jpg" />
@@ -750,7 +751,9 @@
     <Content Include="Aslah_Module\consultings.aspx" />
     <Content Include="Aslah_Module\DualCalendar.aspx" />
     <Content Include="ASMX_WebServices\archived_coursesCls.asmx" />
+    <Content Include="ASMX_WebServices\courseDetails_archivedCls.asmx" />
     <Content Include="ASMX_WebServices\course_registerCls.asmx" />
+    <Content Include="ASMX_WebServices\diplome_registerCls.asmx" />
     <Content Include="ASMX_WebServices\orders.asmx" />
     <Content Include="ASMX_WebServices\DiplomaSubjectDetailsCls.asmx" />
     <Content Include="ASMX_WebServices\studentCls.asmx" />
@@ -1277,6 +1280,7 @@
     <Content Include="JS_Code\acadmies\diplomaCourses.js" />
     <Content Include="JS_Code\acadmies\Diplomas.js" />
     <Content Include="JS_Code\acadmies\DiplomaSubjectDetails.js" />
+    <Content Include="JS_Code\acadmies\diplome_register.js" />
     <Content Include="JS_Code\acadmies\student.js" />
     <Content Include="JS_Code\acadmies\trainers.js" />
     <Content Include="JS_Code\acadmies\training_centers.js" />
@@ -1457,6 +1461,7 @@
     <Content Include="Members_Module\member_abbsent.aspx" />
     <Content Include="Members_Module\payments.aspx" />
     <Content Include="Members_Module\sessions.aspx" />
+    <Content Include="Notification.aspx" />
     <Content Include="report_Module\Aslah\agreementRep.aspx" />
     <Content Include="report_Module\Aslah\AttendanceRegistRep.aspx" />
     <Content Include="report_Module\Aslah\caseClassificationRep.aspx" />
@@ -1890,6 +1895,13 @@
       <DependentUpon>DiplomaSubjectDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Acadmies_module\diplome_register.aspx.designer.vb">
+      <DependentUpon>diplome_register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\diplome_register.aspx.vb">
+      <DependentUpon>diplome_register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Acadmies_module\Students.aspx.designer.vb">
       <DependentUpon>Students.aspx</DependentUpon>
     </Compile>
@@ -1957,6 +1969,9 @@
       <SubType>Component</SubType>
     </Content>
     <Content Include="App_Code\courseDetails_archivedCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\diplome_registerCls.vb">
       <SubType>Component</SubType>
     </Content>
     <Compile Include="App_Code\members.vb">
@@ -2220,6 +2235,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Notification.aspx.designer.vb">
+      <DependentUpon>Notification.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Notification.aspx.vb">
+      <DependentUpon>Notification.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PublicFunctions.vb" />
     <Compile Include="report_Module\Aslah\agreement.vb">

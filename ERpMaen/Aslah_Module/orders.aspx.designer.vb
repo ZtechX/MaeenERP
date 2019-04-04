@@ -59,6 +59,15 @@ Partial Public Class orders
     Protected WithEvents userloginType As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''res1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents res1 As Global.ERpMaen.Result
+    
+    '''<summary>
     '''DynamicTable control.
     '''</summary>
     '''<remarks>
@@ -75,4 +84,13 @@ Partial Public Class orders
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents tblH As Global.System.Web.UI.WebControls.HiddenField
+    
+    '''<summary>
+    '''HijriCalendar2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar2 As Global.ERpMaen.CustomerCalendar
 End Class

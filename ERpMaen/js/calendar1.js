@@ -559,7 +559,7 @@ function getmydate(sender) {
                 $("#multi_cases").dialog({
                     width: "800px",
                 });
-                get_cases($(sender).find("#dateval").attr('hdate'));
+            get_cases($(sender).find("#dateval").attr('date'));
          
            
         } else {
@@ -608,9 +608,11 @@ function add_new_date() {
 
 
 }
-function get_cases(date_h) {
+function get_cases(date_m) {
     var h = 1;
-    cases.get_cases(date_h, function (val) {
+    
+    cases.get_cases(date_m, function (val) {
+        debugger
         if (val[0] != "0" || val[1] != "0" || val[2] != "0") {
             if (val[0] != "0") {
             var data = JSON.parse(val[0]);

@@ -93,6 +93,61 @@ Public Class Diploma_CoursesCls
     End Function
 #End Region
 
+
+
+
+
+
+#Region "Save"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function SaveDiplome(ByVal diplomeId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            Dim dt_user As DataTable
+
+            dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+
+
+            'dictBasicDataJson.Add("course_id", CourseId)
+
+
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_diplomes", diplomeId, _sqlconn, _sqltrans) Then
+                If Not PublicFunctions.TransUsers_logs("4209", "acd_courses", "تعديل", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
     '
 
 #Region "Save"
@@ -149,6 +204,97 @@ Public Class Diploma_CoursesCls
     End Function
 #End Region
 
+
+
+
+#Region "update archive"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function Archive_Diplome(ByVal diplomeId As String) As String()
+        Dim Names As New List(Of String)(10)
+        Try
+            If DBManager.ExcuteQuery("update acd_diplomes set archive=1 where id=" + diplomeId) <> -1 Then
+                If Not PublicFunctions.TransUsers_logs("4209", "acd_diplomes", "ارشيف", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+                Names.Add("1")
+
+            Else
+                Names.Add("2")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+
+            Return Names.ToArray
+        End Try
+    End Function
+#End Region
+
+
+#Region "Save"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function SaveCondition(ByVal id As String, ByVal diplomeID As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            Dim dt_user As DataTable
+
+            dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+            'dictBasicDataJson.Add("userID", (Context.Request.Cookies("UserInfo").ToString()))
+
+            dictBasicDataJson.Add("course_id", diplomeID)
+
+            dictBasicDataJson.Add("type", "2")
+
+
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_course_conditions", id, _sqlconn, _sqltrans) Then
+                If Not PublicFunctions.TransUsers_logs("4209", "acd_course_conditions", "ادخال", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
 
 #Region "get_data"
     ''' <summary>
@@ -222,6 +368,113 @@ Public Class Diploma_CoursesCls
 #End Region
 
 
+#Region "get_data"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_StudentList(ByVal diplomeID As String) As String()
+        Dim dt_user As DataTable
+        dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+            'DBManager.ExcuteQuery("DELETE FROM acd_courses_students where approved=1 and course_id=" + course_id)
+
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes, tblImages.Image_path as 'registerFiles',tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id join tblImages on tblImages.Source_id=acd_courses_students.student_id and tblImages.related_id= acd_courses_students.course_id where acd_courses_students.type=2 and  acd_courses_students.approved=0 and acd_courses_students.course_id=" + diplomeID)
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+
+
+#End Region
+
+
+#Region "addStudents_to_diplome"
+    ''' <summary>
+    ''' Save  Type قبول الطلاب فى الدبلوم
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function SaveStudent(ByVal diplomeID As String, ByVal students_action As Object) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dt As DataTable
+            dt = DBManager.Getdatatable("delete from acd_courses_students where type=2 And course_id=" + diplomeID)
+
+            Dim id = ""
+            Dim success2 As Boolean = True
+            For Each item As Object In students_action
+                Dim dictBasicDataJson As New Dictionary(Of String, Object)
+                dictBasicDataJson.Add("course_id", diplomeID)
+
+                dictBasicDataJson.Add("student_id", item("id"))
+                dictBasicDataJson.Add("notes", item("std_notes"))
+
+                dictBasicDataJson.Add("type", "2")
+                dictBasicDataJson.Add("approved", item("action_Student"))
+
+                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
+                    If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "ادخال", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
+                    success = True
+                Else
+                    success = False
+
+                End If
+                If success Then
+
+                    success2 = True
+                Else
+                    success2 = False
+                End If
+            Next
+            If success2 Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
+
 #Region "Edit"
     ''' <summary>
     ''' get  Type data from db when update
@@ -232,7 +485,7 @@ Public Class Diploma_CoursesCls
 
         Dim Names As New List(Of String)(10)
         Try
-            Dim str As String = PublicFunctions.GetDataForUpdate("acd_courses", editItemId)
+            Dim str As String = PublicFunctions.GetDataForUpdate("acd_diplomes", editItemId)
             Names.Add("1")
             Names.Add(str)
             Return Names.ToArray

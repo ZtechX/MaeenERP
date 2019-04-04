@@ -31,7 +31,7 @@ Public Class ReviewRep
             Dim dt2 As New DataTable
 
             Dim query = "SELECT persons.name
-                FROM ash_case_receiving_delivery_details left join ash_case_persons persons on ash_case_receiving_delivery_details." + type + "=persons.id where ash_case_receiving_delivery_details.id=" + details_id
+                FROM ash_case_receiving_delivery_details details left join ash_case_persons persons on details." + type + "=persons.id where details.deleted !=1 and details.id=" + details_id
             dt2 = DBManager.Getdatatable(query)
             If dt2.Rows.Count <> 0 Then
 

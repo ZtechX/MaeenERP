@@ -214,39 +214,39 @@ function getGroup(str_date) {
         var arr_data = str_date.split("/");
         var month = arr_data[1];
         var res = "";
-        if (month == "00") {
+        if (month == "01") {
             res = "يناير";
-        } else if (month == "01") {
+        } else if (month == "02") {
             res = "فبراير";
         }
-        else if (month == "02") {
+        else if (month == "03") {
             res = "مارس";
         }
-        else if (month == "03") {
+        else if (month == "04") {
             res = "إبريل";
         }
-        else if (month == "04") {
+        else if (month == "05") {
             res = "مايو";
         }
-        else if (month == "05") {
+        else if (month == "06") {
             res = "يونيو";
         }
-        else if (month == "06") {
+        else if (month == "07") {
             res = "يوليو";
         }
-        else if (month == "07") {
+        else if (month == "08") {
             res = "إغسطس";
         }
-        else if (month == "08") {
+        else if (month == "09") {
             res = "سبتمبر";
         }
-        else if (month == "09") {
+        else if (month == "10") {
             res = "أكتوبر";
         }
-        else if (month == "10") {
+        else if (month == "11") {
             res = "نوفمبر";
         }
-        else if (month == "07") {
+        else if (month == "12") {
             res = "ديسمبر";
         }
         return res + " " + arr_data[2];

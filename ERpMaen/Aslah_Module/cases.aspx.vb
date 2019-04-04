@@ -56,9 +56,6 @@ Public Class cases
                 Dim clsapprove_CurrState As New clsFillComboByDataSource("select * from tbllock_up where type='C_S' and IsNull(Deleted,0)=0", "Description", "id", "")
                 clsapprove_CurrState.SetComboItems(ddlstatus, "", True, "--اختر--", False)
 
-                Dim cls_DAY As New clsFillComboByDataSource("select * from tbllock_up where type='DY' and IsNull(Deleted,0)=0", "Description", "id", "")
-                cls_DAY.SetComboItems(ddlday_nam1, "", True, "--اختر--", False)
-
                 'End dropdown current state ddlservice
 
                 'DropDownList Load for service الخدمة المقدمة

@@ -90,11 +90,11 @@ Public Class Timeline
             " where isNull(session_done,0) " + condation_done + " and ash_case_sessions.case_id=" + case_id + condation + " )" +
             " UNION " +
             " (SELECT 'recieve_delivery',date_m ,date_h,'','',isNull(Pdeliver.name,'') as 'deliver',isNull(Precieve.name,'') as 'recieve','','','','',''," +
-            " case Type When 1 Then 'تسليم واستلام اولاد'else 'تسليم واستلام نفقة' end  ,ash_case_receiving_delivery_details.id," +
-            " amount from ash_case_receiving_delivery_details " +
-            " left join  ash_case_persons Pdeliver on Pdeliver.id=ash_case_receiving_delivery_details.deliverer_id" +
-            " Left Join  ash_case_persons Precieve on Precieve.id=ash_case_receiving_delivery_details.reciever_id" +
-            " where isNull(receiving_delivery_done,0)  " + condation_done + "  and ash_case_receiving_delivery_details.case_id=" + case_id + condation + ") " +
+            " case Type When 1 Then 'تسليم واستلام اولاد'else 'تسليم واستلام نفقة' end  ,details.id," +
+            " amount from ash_case_receiving_delivery_details details " +
+            " left join  ash_case_persons Pdeliver on Pdeliver.id=details.deliverer_id" +
+            " Left Join  ash_case_persons Precieve on Precieve.id=details.reciever_id" +
+            " where details.deleted !=1 and isNull(receiving_delivery_done,0)  " + condation_done + "  and details.case_id=" + case_id + condation + ") " +
             " union" +
             " (SELECT 'Conciliation', date_m ,date_h,isNull(Pagainst.name,'') as 'agains',isNull(Powner.name,'') as 'owner'," +
             " '','','','','' ,'',isNull(notes,''),'' ,code,'' from ash_case_conciliation " +
@@ -113,8 +113,8 @@ Public Class Timeline
             End If
             dt_recieveChildren = DBManager.Getdatatable("SELECT name,details_id , date_m FROM ash_case_children_receiving_details" +
             " left join ash_case_childrens on ash_case_childrens.id=children_id" +
-            " left join ash_case_receiving_delivery_details on ash_case_receiving_delivery_details.id=details_id" +
-            " where details_id in(select id from ash_case_receiving_delivery_details where  case_id=" + case_id + condation + " ) order  by  date_m DESC")
+            " left join ash_case_receiving_delivery_details  details on details.id=details_id" +
+            " where details_id in(select id from ash_case_receiving_delivery_details details where details.deleted !=1 and case_id=" + case_id + condation + " ) order  by  date_m DESC")
             If dt_recieveChildren.Rows.Count <> 0 Then
                 Names(2) = PublicFunctions.ConvertDataTabletoString(dt_recieveChildren)
             End If
