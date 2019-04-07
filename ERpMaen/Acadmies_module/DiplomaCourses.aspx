@@ -159,12 +159,18 @@
                                     </a></li>
                                     <li><a data-toggle="modal" href="#addStudentModal" > الطلاب
                                     </a></li>
-                                     <li><a   onclick=" archiveDiplome();"  > اضافة الى الارشيف
+                                     <li><a   onclick=" Archive();"  > الارشيف
                                     </a></li>
-
+                                   
                                 </ul>
                                 <% End If %>
                             </div>
+                            <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+                            <div class="btn-group pull-left">
+                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#add_Financial"> اضافة مالية <i class="fa fa-plus"></i></button>
+
+                            </div>
+                            <% End if  %>
 
                         </div>
                     </div>
@@ -184,7 +190,8 @@
         </section>
         <section>
             <div class="row">
-                <label id="Lbldeploma_id" runat="server" ></label>
+                <label  style="display:none" id="Lbldeploma_id" runat="server" ></label>
+                  <label style="display:none" id="lbldiplomeCode" runat="server" ></label>
                 <div class="col-md-12 col-sm-12 col-xs-12 " id="courses-list">
 
                 </div>
@@ -536,6 +543,80 @@
             </div>
         </div>
 
+            <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+
+            <div class="modal fade" id="add_Financial" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"> مالية الطلاب   </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divformstudentFinanc">
+
+                                <div class="row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label class="label-required"> المبلغ   </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <input onkeypress="return isNumber(event);" placeholder="  قيمة المبلغ بالريال" required dbcolumn="amount" type="text" id="amount"
+                                            class="form-control" runat="server" clientidmode="Static" />
+
+
+                                    </div>
+                                </div>
+
+                                <div class=" row form-group ">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label class="label-required">طريقة الدفع </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <asp:DropDownList dbcolumn="payment_type" required class="form-control" ClientIDMode="Static" ID="ddlpayment_type" runat="server">
+                                        </asp:DropDownList>
+
+                                    </div>
+                                </div>
+
+                                <div class=" row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label>ملاحظات      </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox8" runat="server">
+                                        </asp:TextBox>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+
+                                    <div>
+                                        <input id="fileurlfinanc" type="hidden" dbcolumn="image" runat="server" />
+                                        <input id="FnameFinanc" type="text" required readonly="readonly" runat="server" />
+
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                    <asp:AsyncFileUpload ID="fufile7" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
+                                        OnClientUploadComplete="UploadComplete8" />
+                                </div>
+                                
+
+
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="addfinancial();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <% End If %>
 
              <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog">

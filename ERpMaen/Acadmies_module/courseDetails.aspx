@@ -272,6 +272,16 @@
                                                 </li>
                                                 <li>
                                                     <span id="">
+                                                         <i class="fa fa-clock-o"></i>
+                                                        <b>مدة المحاضرة</b>
+                                                       <b id="lectureDuration"></b>
+                                                           <b>دقيقة </b>
+                                                     
+                                                     
+                                                </span>
+                                              </li>
+                                                <li>
+                                                    <span id="">
                                                         <i class="fa fa-clock-o"></i>
                                                      
                                                        <b id="course_duration"></b>
@@ -569,7 +579,16 @@
                                                      اضاقة ملف   <i class="fa fa-plus"></i>
                                                     
                                                 </button>
+                                                    
                                                       <% End If %>
+                                                      <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                                                    <input type="hidden" id="checkuser"  value="1"/>
+                                                   
+                                                    <% Else  %>
+                                                     <input type="hidden" id="checkuser"  value="2"/>
+                                                    <% End If %>
+                                                    
+
                                                    </div>
                                               
                                             </div>
@@ -586,7 +605,9 @@
                         <tr>
                             <th>الملاحظة </th>
                             <th>الملف</th>
+                              <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
                             <th>الاجراء</th>
+                             <% End If %>
                             
 
                         </tr>
@@ -641,7 +662,7 @@
                                                    <button type="button" class="btn btn_rec btn-dark" onclick="archiveCourse();">
                                                     <i class="zmdi zmdi-headset-mic"></i>
                                                         اضافة الى الارشيف</button>
-                                                </button>
+                                               
                                                 <% End If %>
 
 
@@ -765,7 +786,6 @@
                                         </div>
                                      
                              
-
                                     <div class="inner">
                                         <div class="add-hint">
                                             <div class="hint-head side_head">
@@ -851,7 +871,7 @@
                                         </div>
                                     </div>
                                        <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
-                                              <div class="inner" id="finance_div">
+                                              <div class="inner" id="finance_div" runat="server">
                                         <div class="add-hint">
                                             <div class="hint-head side_head">
                                                 <h3>
@@ -976,7 +996,7 @@
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);"  placeholder="مدة المحاضرة بالدقيقة" required dbcolumn="lect_duration" type="text" id="Text2"
+                                            <input onkeypress="return isNumber(event);"  placeholder="مدة المحاضرة بالدقيقة" required dbcolumn="lect_duration" type="text" id="lecture_duration"
                                                 class="form-control" runat="server" clientidmode="Static" />
                                           
                                    

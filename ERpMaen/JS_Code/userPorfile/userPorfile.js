@@ -64,13 +64,14 @@ function save() {
 
 function edit(val) {
     try {
-        debugger
+        
         cancel();
         resetAll();
         if (val[0] != "") {
             var data = JSON.parse(val[0]);
             fillControlsFromJson(data[0]);
             $("#userType").html(data[0].userType);
+
             changeResearcher(function () {
 
                 if (val[1] != "") {
@@ -101,7 +102,9 @@ function edit(val) {
             $("#pnlConfirm").hide();
             $("#divData").show();
             $("#SavedivLoader").hide();
-
+            if (data[0].User_Type == 9 && !(data[0].password_changed)) {
+                alert("يرجى تغيير الباسورد الأفتراضية");
+            }
         } else {
             $("#userType").html("");
             showErrorMessage("No data found !!");

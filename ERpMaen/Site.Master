@@ -714,7 +714,7 @@
                                 <a class="access_btn_User">
                                     <asp:Image ID="imgUser" runat="server" CssClass="user_photo_menu" />
                                     <span id="lbUsername" runat="server" class="user_text"></span><i class="fa fa-caret-down"></i></a>
-                                <div class="toggle_box_User popover bottom dropdown-menu" style="z-index: -1">
+                                <div class="toggle_box_User popover bottom dropdown-menu" style="z-index: -1;top:auto; ">
                                     <div class="arrow"></div>
                                     <ul>
                                           <li style="padding:7px 0px;">

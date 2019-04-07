@@ -3,7 +3,6 @@ var editWebServiceMethod = "cases.asmx/Edit";
 var formAutoCodeControl = "lblmainid";
 var index_i =1;
 var clean = true;
-
 $(function () {
     try {
         if ($("#userLoginType").val() == "6") {
@@ -119,6 +118,7 @@ function get_option_cases() {
 
 function add() {
     try {
+      
         $("#lblmainid").html("");
         resetDivControls("divForm");
         getSerial(); 
@@ -279,7 +279,10 @@ function save_children_receive() {
         var start_dt_h = $("#divdate_received #txtDateh").val();
         $("#lblfirst_date_received_m").html(start_dt_m);
         $("#lblfirst_date_received_h").html(start_dt_h);
-       
+
+        var children_receive = generateJSONFromControls("children_receive");
+var PosId = $("#lblchild_recive_id").html();
+
         var reciveJson = [];
         reciveJson.push({ "date_m": start_dt_m, "date_h": start_dt_h, "type": 1, "case_id": case_id});
 
@@ -294,45 +297,19 @@ function save_children_receive() {
         while (dateObject <= end_dt) {
             var str_dt = getDate_m_hj(dateObject).split("|");
             reciveJson.push({ "date_m": str_dt[0], "date_h": str_dt[1], "type": 1, "case_id": case_id });
+            children_receive["endPeriod_date_m"] = str_dt[0];
             dateObject.setDate(dateObject.getDate() + days_num);
-          }
-       
-        var children_receive = generateJSONFromControls("children_receive"); 
-        dateObject.setDate(dateObject.getDate() - days_num);
-        children_receive["endPeriod_date_m"] = getDate_m_hj(dateObject).split("|")[0];
-        var PosId = $("#lblchild_recive_id").html();
-        var old_ids=[];
-        if (PosId != "") {
-            cases.getPreviouse_ids(PosId, case_id, function (ids) {
-                if (ids != "") {
-                    var data = JSON.parse(ids);
-                            for (var i = 0; i < data.length; i++) {
-                                old_ids.push(data[i].id);
-                            }
-                        }
-                cases.save_children_receive(PosId, case_id, children_receive, reciveJson, old_ids, function (val) {
-                    $("#SavedivLoader").hide();
-                            if (val) {
-                                show_all(case_id, 1);
-                                showSuccessMessage("تم الحفظ بنجاح");
+        }
 
-                            } else {
-                                showErrorMessage(val.split("|")[1]);
-                            }
-                        });
-                    });
-        } else {
-            cases.save_children_receive(PosId, case_id, children_receive, reciveJson, old_ids, function (val) {
-                $("#SavedivLoader").hide();
+        cases.save_children_receive(PosId, case_id, children_receive, reciveJson, function (val) {
+            $("#SavedivLoader").hide();
                 if (val) {
                     show_all(case_id, 1);
                     showSuccessMessage("تم الحفظ بنجاح");
-
                 } else {
                     showErrorMessage(val.split("|")[1]);
                 }
             });
-        }
 } else {
         alert("يرجى ادخال البيانات المطلوبه");
         $("#SavedivLoader").hide();
@@ -340,21 +317,27 @@ function save_children_receive() {
 
 
 }
+
 // end save_children_receive
 //////////////////////////////
 // save_delivery_details
 function save_delivery_details() {
-
+    var ddltype = $("#ddltype").val();
     //if (!checkRequired("receiving_delivery_details")) {
     //$("#lbldate_m").html($("#divdate_delivery #txtDatem").val());
     //$("#lbldate_h").html($("#divdate_delivery #txtDateh").val());
 
     //$("#lblnew_date_m").html($("#div_new_date #txtDatem").val());
     //$("#lblnew_date_h").html($("#div_new_date #txtDateh").val());
+    debugger
+    var day_num = $("#ddl_day_nm").val();
+    var _dt_m = "";
+  
+    
     var children_delivery_details = generateJSONFromControls("receiving_delivery_details");
     //children_delivery_details["receiving_delivery_done"] = $("#receiving_delivery_done").prop('checked');
     var case_id = $("#ddlcase_id").val();
-    var ddltype = $("#ddltype").val();
+    
     var PosId = $("#lbldelivery_details").html();
     var new_date = $("#lbldelivery_date_h").html();
     var new_date_m = $("#lbldelivery_date_m").html();
@@ -365,10 +348,14 @@ function save_delivery_details() {
             alert("يجب ان تختار الاولاد");
             return;
         }
+        if (day_num != 0) {
+            _dt_m = $(currend_Sender).find("#dateval").attr('date') + "|" + day_num;
+        } 
     }
     $("#SavedivLoader").show();
-    cases.save_delivery_details(PosId, case_id, children_delivery_details, children_gson, res, function (val) {
+    cases.save_delivery_details(PosId, case_id, children_delivery_details, children_gson, res, _dt_m, function (val) {
         if (val != "-100") {
+            $('#receiving_delivery_details').dialog("close");
             $("#Appraisal").dialog({
                 width: "800px",
             });
@@ -380,16 +367,17 @@ function save_delivery_details() {
             $("#lblapprisal_date_m").html(new_date_m)
             $("#lblapprisal_date_h").html(new_date)
             $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(192, 156, 103)");
-
+            $("#dateval[date*='" + new_date_m + "']").parent().addClass("w3-round-large");
+            $("#dateval[date*='" + new_date_m + "']").parent().removeClass("w3-text-teal");
             $("#dateval[date*='" + new_date_m + "']").parent().css("color", "#ffffff");
             $("#dateval[date*='" + new_date_m + "']").parent().prop('id', res_id);
             resetDivControls("receiving_delivery_details");
-            $('#receiving_delivery_details').dialog("close");
             showSuccessMessage("تم الحفظ بنجاح");
         } else {
             alert("عفوا هذا النوع تم ادخاله من قبل لهذه الحالة")
         }
         $("#SavedivLoader").hide();
+        currend_Sender.click();
     });
 //}
 //} else {
@@ -443,7 +431,9 @@ function save_correspondences() {
         var PosId = $("#lblcorrespondences_id").html();
         $("#SavedivLoader").show();
         cases.save_correspondences(PosId, case_id, case_correspondences, function (val) {
-        if (val != "-100") {
+            debugger
+            if (val != "-100") {
+                $('#receiving_delivery_details').dialog("close");
             $("#Appraisal").dialog({
                 width: "800px",
             });
@@ -453,16 +443,18 @@ function save_correspondences() {
             $("#lblapprisal_date_m").html(new_date_m)
             $("#lblapprisal_date_h").html(new_date)
             $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(192, 156, 103)");
-
+                $("#dateval[date*='" + new_date_m + "']").parent().addClass("w3-round-large");
+                $("#dateval[date*='" + new_date_m + "']").parent().removeClass("w3-text-teal");
             $("#dateval[date*='" + new_date_m + "']").parent().css("color", "#ffffff");
             $("#dateval[date*='" + new_date_m + "']").parent().prop('id', res_id);
-            resetDivControls("case_correspondences");
-            $('#receiving_delivery_details').dialog("close");
+           resetDivControls("case_correspondences");
             showSuccessMessage("تم الحفظ بنجاح");
         } else {
             alert("عفوا هذا النوع تم ادخاله من قبل لهذه الحالة")
         }
-        $("#SavedivLoader").hide();
+            $("#SavedivLoader").hide();
+            currend_Sender.click();
+           
         });
     } else {
         alert("يرجى ادخال البيانات المطلوبه");
@@ -493,6 +485,7 @@ function save_sessions() {
         $("#SavedivLoader").show();
         cases.save_sessions(PosId, case_id, sessions, children_gson, persons_gson, owner_id, second_party_id, function (val) {
             if (val != "-100") {
+                $('#receiving_delivery_details').dialog("close");
                 $("#Appraisal").dialog({
                     width: "800px",
                 });
@@ -502,16 +495,18 @@ function save_sessions() {
                 $("#lblapprisal_date_m").html(new_date_m)
                 $("#lblapprisal_date_h").html(new_date)
                 $("#dateval[date*='" + new_date_m + "']").parent().css("background-color", "rgb(192, 156, 103)");
-
+                $("#dateval[date*='" + new_date_m + "']").parent().addClass("w3-round-large");
+                $("#dateval[date*='" + new_date_m + "']").parent().removeClass("w3-text-teal");
                 $("#dateval[date*='" + new_date_m + "']").parent().css("color", "#ffffff");
                 $("#dateval[date*='" + new_date_m + "']").parent().prop('id', res_id);
                 resetDivControls("case_sessions");
-                $('#receiving_delivery_details').dialog("close");
+               
                 showSuccessMessage("تم الحفظ بنجاح");
             } else {
                 alert("عفوا هذا النوع تم ادخاله من قبل لهذه الحالة")
             }
             $("#SavedivLoader").hide();
+            currend_Sender.click();
     });
 } else {
     alert("يرجى ادخال البيانات المطلوبه");
@@ -647,8 +642,10 @@ function save_apprisal() {
     var PosId = 0;
     cases.save_apprisal(PosId,apprisal_gson, function (val) {
         if (val) {
+            //location.reload();
             $('#Appraisal').dialog("close");
-            $('#multi_cases').dialog("close");
+           // $('#multi_cases').dialog("close");
+            
         }
     });
 
@@ -992,7 +989,7 @@ function show_all(id, flag, type = "0") {
         get_persons(case_id);
         $(".tab-pane").removeClass("active");
         $("#menu0").addClass("in active");
-       
+        $("#Divback_dt").hide();
     } else {
          case_id = $("#ddlcase_id").val();
     }
@@ -1008,7 +1005,8 @@ function show_all(id, flag, type = "0") {
         getSerial_conciliation();
     }
     cases.show_all(case_id, type, function (val) {
-        debugger
+        fill_tb_other_period(case_id);
+        $("#SavedivLoader").hide();
         if (val[0] != "0") {
             var data = JSON.parse(val[0])
             var data_owner = JSON.parse(val[1])
@@ -1072,16 +1070,24 @@ function show_all(id, flag, type = "0") {
                
             }
 
-            if (val[4] != 0) {
-                var receiving_delivery_basic = JSON.parse(val[4]);
-                $("#divdate_received #txtDatem").val(receiving_delivery_basic[0].first_date_m);
-                $("#divdate_received #txtDateh").val(receiving_delivery_basic[0].first_date_h);
-                fillControlsFromJson(receiving_delivery_basic[0], "children_receive");
-                $("#time_receiving_time input").val(receiving_delivery_basic[0].receiving_time);
-                $("#time_delivery_time input").val(receiving_delivery_basic[0].delivery_time);
-             //   alert($("#txtdelivery_time").parent().prop("id"));
-
+        if (val[4] != 0) {
+            
+            var receiving_delivery_basic = JSON.parse(val[4]);
+            $("#divdate_received #txtDatem").val(receiving_delivery_basic[0].first_date_m);
+            $("#divdate_received #txtDateh").val(receiving_delivery_basic[0].first_date_h);
+            fillControlsFromJson(receiving_delivery_basic[0], "children_receive");
+            $("#time_receiving_time input").val(receiving_delivery_basic[0].receiving_time);
+            $("#time_delivery_time input").val(receiving_delivery_basic[0].delivery_time);
+            //   alert($("#txtdelivery_time").parent().prop("id"));
+            if ($("#divdate_received #txtDatem").val() != "") {
+                $("#addAnother_receive").show();
+            } else {
+                $("#addAnother_receive").hide();
             }
+
+        } else {
+            $("#addAnother_receive").hide();
+        }
         if (val[5] != 0) {
             var receiving_delivery_details = JSON.parse(val[5]);
             get_date_children(receiving_delivery_details[0].case_id);
@@ -1159,7 +1165,7 @@ function show_all(id, flag, type = "0") {
                 $("#expense_details_archive").html("");
 
             }
-        $("#SavedivLoader").hide();
+      
     });
 
 }
@@ -1372,12 +1378,17 @@ function define_type(flag,flag2) {
     if (type == 1) {
         $("#child_info").css("display", "block");
         $("#save_delivery_details").css("display", "block");
+        $("#Divback_dt").show();
+        $("#Div_recieve_time").show();
     } else if (type == 2) {
         $("#child_info").css("display", "none");
         $("#money_data").css("display", "block");
         $("#save_delivery_details").css("display", "block");
+        $("#Divback_dt").hide();
         get_case_expense_basic();
+        $("#Div_recieve_time").show();
     } else if (type == 3) {
+        $("#Divback_dt").hide();
         $("#child_info").css("display", "block");
         $("#person_data").css("display", "block");
         $("#session_data").css("display", "block");
@@ -1385,6 +1396,7 @@ function define_type(flag,flag2) {
         $("#save_delivery_details").css("display", "none");
         $("#ready_case").css("display", "none");
         $("#record_case").css("display", "none");
+        $("#Div_recieve_time").hide();
     } else {
         $("#corresponde_data").css("display", "block")
         $("#save_correspondences").css("display", "block");
@@ -1393,6 +1405,7 @@ function define_type(flag,flag2) {
         $("#child_info").css("display", "none");
         $("#ready_case").css("display", "none");
         $("#record_case").css("display", "none");
+        $("#Div_recieve_time").hide();
     }
 }
 function gmod(n, m) {
@@ -1569,42 +1582,54 @@ function get_case_expense_basic() {
 }
 function addAnother_children_receive () {
     $("#anotherPeriod").dialog({
-        width: "800px",
+        width: "500px",
     });
 }
 function save_anotherPeriod() {
     var case_id = $("#lblcase_id").html();
-    
+    $("#SavedivLoader").show();
     if (!checkRequired("anotherPeriod")) {
         cases.getLast_recieve(case_id, function (val) {
+            $("#SavedivLoader").hide();
             if (val != "") {
                 
                 var start_dt_m = val ;
-
                 var reciveJson = [];
-
+                var children_recieve = {};
+                children_recieve["case_id"] = case_id;
                 var days_num = Number($("#delivery_period").val());
                 var arr_dt = start_dt_m.split("/");
                 var dateString = arr_dt[1] + "/" + arr_dt[0] + "/" + arr_dt[2];
                 var dateObject = new Date(dateString);
                 var end_dt = new Date(dateString);
+                
                 dateObject.setDate(dateObject.getDate() + days_num);
                 end_dt.setDate(end_dt.getDate() + (Number($("#month_number").val()) * 30));
-
+                children_recieve["delivery_period"] = days_num;
+                children_recieve["month_number"] = $("#month_number").val();
+                var first = 0;
                 while (dateObject <= end_dt) {
                     var str_dt = getDate_m_hj(dateObject).split("|");
+                    if (first == 0) {
+                        children_recieve["first_date_m"] = str_dt[0];
+                        children_recieve["first_date_h"] = str_dt[1];
+                    }
+                    first = 1;
+                    children_recieve["endPeriod_date_m"] = str_dt[0];
+
                     reciveJson.push({ "date_m": str_dt[0], "date_h": str_dt[1], "type": 1, "case_id": case_id });
                     dateObject.setDate(dateObject.getDate() + days_num);
                 }
 
-
-                cases.save_anotherPeriod(reciveJson, function (val1) {
+                debugger
+                cases.save_anotherPeriod(children_recieve,reciveJson, function (val1) {
                     if (val1) {
+                        $("#anotherPeriod").dialog("close");
                         resetDivControls("anotherPeriod");
                         showSuccessMessage("تم الحفظ بنجاح");
-
+                        fill_tb_other_period(case_id);
                     } else {
-                        showErrorMessage(val.split("|")[1]);
+                        showErrorMessage("لم يتم الحفظ");
                     }
                 });
             } else {
@@ -1613,7 +1638,52 @@ function save_anotherPeriod() {
         });
        
     } else {
+        $("#SavedivLoader").hide();
         alert("يرجى ادخال البيانات المطلوبه");
     }
 
+}
+
+function delete_Time(id, tabel_nm) {
+    $("#SavedivLoader").show();
+    cases.delete_Time(id, tabel_nm, function (val) {
+        $("#SavedivLoader").hide();
+        if (val) {
+            showSuccessMessage("تم الحذف بنجاح");
+            currend_Sender.click();
+        } else {
+            showErrorMessage("لم يتم الحذف"); 
+        }
+    });
+
+}
+function fill_tb_other_period(case_id) {
+    $("#tb_other_period").html("");
+    var str = "";
+    cases.get_other_periods(case_id,function (val) {
+        if (val != "") {
+            var data = JSON.parse(val);
+            for (var i = 0; i < data.length; i++) {
+                str += `<tr>
+<td> ${i+1}</td>
+<td>${data[i].first_date_m} &nbsp;&nbsp;&nbsp;&nbsp;ـــ &nbsp;&nbsp;&nbsp;&nbsp;${data[i].first_date_h}</td>
+<td>${data[i].delivery_period}</td>
+<td>${data[i].month_number}</td>
+<td><button class='btn btn-xs btn-danger btn-quick' title='delete' onclick='delete_Period(${data[i].id},${case_id}); return false; '><i class='fa fa-close'></i></button></td>
+</tr>`;
+            }
+        }
+        $("#tb_other_period").html(str);
+    });
+}
+
+function delete_Period(id, case_id) {
+    cases.delete_Period(id, function (val) {
+        if (val) {
+            showSuccessMessage("تم الحذف بنجاح");
+            fill_tb_other_period(case_id);
+        } else {
+            showErrorMessage("لم يتم الحذف");
+        }
+    });
 }

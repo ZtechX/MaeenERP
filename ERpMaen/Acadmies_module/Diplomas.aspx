@@ -144,11 +144,13 @@
                             <input  id="txt_Search" onkeyup="searchDiploma();" type="text" class="form-control" placeholder="بحث عن دبلومه" />
                         </div>
                         <div class="col-md-2">
-
+                              <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
                             <div class="btn-group pull-left">
                                 <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addCourse">اضافة دبلومه <i class="fa fa-plus"></i></button>
 
                             </div>
+                              <% End If  %>
+
 
 
                         </div>

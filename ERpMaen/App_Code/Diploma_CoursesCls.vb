@@ -60,6 +60,10 @@ Public Class Diploma_CoursesCls
             '    subject_id = dt_subject.Rows(0).Item("id").ToString
             'End If
 
+            Dim rnd As New Random
+            Dim code = "CRS" & rnd.Next(10000000, 99999999).ToString
+            dictBasicDataJson.Add("code", code)
+
             dictBasicDataJson.Add("status", "60")
             dictBasicDataJson.Add("training_center_id", tr_id)
             dictBasicDataJson.Add("diplome_id", diploma_id)
@@ -95,6 +99,60 @@ Public Class Diploma_CoursesCls
 
 
 
+#Region "Save financial"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function Savefinanc(ByVal id As String, ByVal diplomeId As String, ByVal fin_date_m As String, ByVal fin_date_hj As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            Dim dt_user As DataTable
+
+            dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+
+
+            dictBasicDataJson.Add("course_id", diplomeId)
+            dictBasicDataJson.Add("student_id", LoginInfo.GetUser__Id())
+            dictBasicDataJson.Add("date_m", fin_date_m)
+            dictBasicDataJson.Add("date_hj", fin_date_hj)
+            dictBasicDataJson.Add("type", "2")
+            If LoginInfo.getUserType = 8 Then
+
+                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_payments", id, _sqlconn, _sqltrans) Then
+                    If Not PublicFunctions.TransUsers_logs("4209", "acd_payments", "ادخال", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
+                    success = True
+                Else
+                    success = False
+
+                End If
+                If success Then
+
+                    _sqltrans.Commit()
+                    _sqlconn.Close()
+                    Return True
+                Else
+                    _sqltrans.Rollback()
+                    _sqlconn.Close()
+                    Return False
+                End If
+            End If
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
 
 
 
@@ -207,40 +265,40 @@ Public Class Diploma_CoursesCls
 
 
 
-#Region "update archive"
-    ''' <summary>
-    ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function Archive_Diplome(ByVal diplomeId As String) As String()
-        Dim Names As New List(Of String)(10)
-        Try
-            If DBManager.ExcuteQuery("update acd_diplomes set archive=1 where id=" + diplomeId) <> -1 Then
-                If Not PublicFunctions.TransUsers_logs("4209", "acd_diplomes", "ارشيف", _sqlconn, _sqltrans) Then
-                    success = False
-                Else
-                    success = True
-                End If
-                success = True
-            Else
-                success = False
+    '#Region "update archive"
+    '    ''' <summary>
+    '    ''' </summary>
+    '    <WebMethod()>
+    '    <System.Web.Script.Services.ScriptMethod()>
+    '    Public Function Archive_Diplome(ByVal diplomeId As String) As String()
+    '        Dim Names As New List(Of String)(10)
+    '        Try
+    '            If DBManager.ExcuteQuery("update acd_diplomes set archive=1 where id=" + diplomeId) <> -1 Then
+    '                If Not PublicFunctions.TransUsers_logs("4209", "acd_diplomes", "ارشيف", _sqlconn, _sqltrans) Then
+    '                    success = False
+    '                Else
+    '                    success = True
+    '                End If
+    '                success = True
+    '            Else
+    '                success = False
 
-            End If
-            If success Then
-                Names.Add("1")
+    '            End If
+    '            If success Then
+    '                Names.Add("1")
 
-            Else
-                Names.Add("2")
+    '            Else
+    '                Names.Add("2")
 
-            End If
-            Return Names.ToArray
-        Catch
-            Names.Add("2")
+    '            End If
+    '            Return Names.ToArray
+    '        Catch
+    '            Names.Add("2")
 
-            Return Names.ToArray
-        End Try
-    End Function
-#End Region
+    '            Return Names.ToArray
+    '        End Try
+    '    End Function
+    '#End Region
 
 
 #Region "Save"
@@ -313,7 +371,7 @@ Public Class Diploma_CoursesCls
             If name <> "" Then
                 condation = " where name LIKE '%" + name + "%'"
             End If
-            dt = DBManager.Getdatatable("select  acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , acd_diplome_subjects.subject_goal , acd_diplome_subjects.trainer_id,tblUsers.full_name,tblUsers.User_Image as 'trainerImage' ,tbllock_up.Description as 'subjectName' , lockup2.Description  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join tbllock_up as lockup2 on acd_diplome_subjects.semster_id=lockup2.id where diplome_id=" + diploma_id + condation)
+            dt = DBManager.Getdatatable("select  acd_diplome_subjects.code , acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , acd_diplome_subjects.subject_goal , acd_diplome_subjects.trainer_id,tblUsers.full_name,tblUsers.User_Image as 'trainerImage' ,tbllock_up.Description as 'subjectName' , lockup2.Description  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join tbllock_up as lockup2 on acd_diplome_subjects.semster_id=lockup2.id where acd_diplome_subjects.archive=0 and  diplome_id=" + diploma_id + condation)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then

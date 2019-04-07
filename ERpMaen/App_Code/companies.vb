@@ -188,6 +188,22 @@ Public Class companies
                                     _sqltrans.Rollback()
                                     _sqlconn.Close()
                                     Names.Add("لم يتم الحفظ")
+                                Else
+                                    dic_advisor_permission("form_id") = 3187
+                                    If Not PublicFunctions.TransUpdateInsert(dic_advisor_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                        success = False
+                                        _sqltrans.Rollback()
+                                        _sqlconn.Close()
+                                        Names.Add("لم يتم الحفظ")
+                                    Else
+                                        dic_advisor_permission("form_id") = 4207
+                                        If Not PublicFunctions.TransUpdateInsert(dic_advisor_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                            success = False
+                                            _sqltrans.Rollback()
+                                            _sqlconn.Close()
+                                            Names.Add("لم يتم الحفظ")
+                                        End If
+                                    End If
                                 End If
                             End If
                         End If
@@ -220,6 +236,14 @@ Public Class companies
                                     _sqltrans.Rollback()
                                     _sqlconn.Close()
                                     Names.Add("لم يتم الحفظ")
+                                Else
+                                    dic_Beneficiaries_permission("form_id") = 4207
+                                    If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                        success = False
+                                        _sqltrans.Rollback()
+                                        _sqlconn.Close()
+                                        Names.Add("لم يتم الحفظ")
+                                    End If
                                 End If
                             End If
                         End If

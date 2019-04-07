@@ -133,7 +133,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" class="form-control" dbColumn="name" ClientIDMode="Static" ID="Name" runat="server">
+                                            <asp:TextBox SkinID="form-control" class="form-control" dbColumn="full_name" ClientIDMode="Static" ID="Name" runat="server">
                                             </asp:TextBox>
 
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="Name"
@@ -149,7 +149,7 @@
                                         </div>
 
                                          <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isMobilePhoneFax(event);" dbcolumn="tel" runat="server" type="text" id="txttel" class="form-control" />
+                                            <input onkeypress="return isMobilePhoneFax(event);" dbcolumn="User_PhoneNumber" runat="server" type="text" id="txttel" class="form-control" />
                                             <asp:RequiredFieldValidator CssClass="validator" ID="RequiredFieldValidator1" runat="server" ControlToValidate="txttel"
                                                 ErrorMessage="من فضلك ادخل رقم الهاتف " ValidationGroup="vgroup" ForeColor="red"></asp:RequiredFieldValidator>
 
@@ -161,7 +161,7 @@
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);" dbcolumn="stud_identiy" type="text" id="txtNumber"
+                                            <input onkeypress="return isNumber(event);" dbcolumn="user_indenty" type="text" id="txtNumber"
                                                 class="form-control" runat="server" clientidmode="Static" />
                                           
                                     <br />
@@ -182,7 +182,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" class="form-control" dbColumn="email" ClientIDMode="Static" ID="TextEmail" runat="server">
+                                            <asp:TextBox SkinID="form-control" class="form-control" dbColumn="User_Email" ClientIDMode="Static" ID="TextEmail" runat="server">
                                             </asp:TextBox>
                                             <br />
                                         </div>
@@ -196,7 +196,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" class="form-control" dbColumn="password" ClientIDMode="Static" ID="TextBox3" runat="server">
+                                            <asp:TextBox SkinID="form-control" class="form-control" dbColumn="User_Password" ClientIDMode="Static" ID="TextBox3" runat="server">
                                             </asp:TextBox>
                                             <br />
                                         </div>
@@ -210,7 +210,7 @@
                                             <label for="email">نشط </label>
                                         </div>
                                         <div class="col-md-3 col-sm-12">
-                                            <input dbcolumn="active" type="checkbox" id="active" style="width: 40px;" class="form-control" />
+                                            <input dbcolumn="Active" type="checkbox" id="active" style="width: 40px;" class="form-control" />
 
                                         </div>
                                     </div>

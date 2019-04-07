@@ -39,11 +39,14 @@ Public Class DiplomaCourses
 
 
 
+
                 Dim code = Request.QueryString("code")
+                lbldiplomeCode.InnerHtml = code
                 Dim dt = DBManager.Getdatatable(" select  acd_diplomes.id from acd_diplomes where acd_diplomes.code='" + code.ToString + "'")
                 If dt.Rows.Count <> 0 Then
                     Dim deploma_id = dt.Rows(0)(0).ToString
                     Lbldeploma_id.InnerHtml = deploma_id
+
                     If ERpMaen.LoginInfo.getUserType = 8 Then
 
                         Dim dtc = DBManager.Getdatatable("select course_id from acd_courses_students where type=2 and student_id=" + LoginInfo.GetUser__Id() + " and approved=1 and course_id=" + deploma_id)
@@ -75,7 +78,8 @@ Public Class DiplomaCourses
                 Dim clsapprove_course As New clsFillComboByDataSource("select * from tblLock_up where type='subj' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_course.SetComboItems(ddlcourse, "", True, "--اختر--", False)
 
-
+                Dim clsapprove_paymentType As New clsFillComboByDataSource("select * from tblLock_up where type='Pay_TP' and IsNull(Deleted,0)=0", "Description", "id", "")
+                clsapprove_paymentType.SetComboItems(ddlpayment_type, "", True, "--اختر--", False)
 
                 Dim clsapprove_category As New clsFillComboByDataSource("select * from tblLock_up where type='CD' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_category.SetComboItems(ddlcategory, "", True, "--اختر--", False)

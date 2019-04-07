@@ -28,66 +28,133 @@ Public Class studentCls
     Dim _sqltrans As SqlTransaction
 #End Region
 
+    '#Region "Save"
+    '    ''' <summary>
+    '    ''' Save  Type
+    '    ''' </summary>
+    '    <WebMethod(True)>
+    '    <System.Web.Script.Services.ScriptMethod()>
+    '    Public Function Save(ByVal id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As String
+
+    '        Try
+    '            _sqlconn.Open()
+    '            _sqltrans = _sqlconn.BeginTransaction
+    '            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+    '            dictBasicDataJson.Add("comp_id", LoginInfo.GetComp_id())
+
+    '            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_Students", id, _sqlconn, _sqltrans) Then
+
+    '                Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
+    '                dictBasicDataJson1.Add("full_name", dictBasicDataJson("name"))
+
+    '                dictBasicDataJson1.Add("User_Image", dictBasicDataJson("Stud_Image"))
+    '                dictBasicDataJson1.Add("User_Email", dictBasicDataJson("email"))
+    '                dictBasicDataJson1.Add("Active", dictBasicDataJson("active"))
+    '                dictBasicDataJson1.Add("User_Password", dictBasicDataJson("password"))
+    '                dictBasicDataJson1.Add("User_PhoneNumber", dictBasicDataJson("tel"))
+    '                dictBasicDataJson1.Add("comp_id", LoginInfo.GetComp_id())
+    '                dictBasicDataJson1.Add("User_Type", 8)
+    '                dictBasicDataJson1.Add("related_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+
+
+    '                Dim dt = DBManager.Getdatatable("select id from tbllock_up where RelatedId=4 and comp_id=" + LoginInfo.GetComp_id())
+    '                If dt.Rows.Count <> 0 Then
+    '                    Dim group_id = dt.Rows(0)(0).ToString
+    '                    dictBasicDataJson1.Add("group_id", group_id)
+    '                End If
+
+    '                Dim dtcheckemailphone As New DataTable
+    '                dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where  User_Email='" + dictBasicDataJson1("User_Email") + "' or User_PhoneNumber='" + dictBasicDataJson1("User_PhoneNumber") + "'")
+    '                If dtcheckemailphone.Rows.Count = 0 Then
+    '                    If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson1, "tblUsers", "", _sqlconn, _sqltrans) Then
+    '                        _sqltrans.Rollback()
+    '                        _sqlconn.Close()
+    '                        Return "False|لم يتم الحفظ"
+    '                    End If
+    '                Else
+    '                    _sqltrans.Rollback()
+    '                    _sqlconn.Close()
+    '                    Return "False|اسم المستخدم او البريد الالكترونى او التلفون مستخدم"
+    '                End If
+
+    '                _sqltrans.Commit()
+    '                _sqlconn.Close()
+    '                    Return "True"
+
+
+    '                Else
+    '                _sqltrans.Rollback()
+    '                _sqlconn.Close()
+    '                Return "False|لم يتم الحفظ"
+    '            End If
+
+    '        Catch ex As Exception
+    '            _sqltrans.Rollback()
+    '            _sqlconn.Close()
+    '            Return "False|لم يتم الحفظ"
+    '        End Try
+    '    End Function
+    '#End Region
+
 #Region "Save"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function Save(ByVal id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As String
-
+    Public Function Save(ByVal UserId As String, ByVal basicDataJson As Object) As String
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
+            Dim success As Boolean = False
+
+
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+
+            dictBasicDataJson.Add("User_Type", 8)
             dictBasicDataJson.Add("comp_id", LoginInfo.GetComp_id())
+            Dim dt = DBManager.Getdatatable("select id from tbllock_up where RelatedId=4 and comp_id=" + LoginInfo.GetComp_id())
+            If dt.Rows.Count <> 0 Then
+                Dim group_id = dt.Rows(0)(0).ToString
+                dictBasicDataJson.Add("group_id", group_id)
 
-            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_Students", id, _sqlconn, _sqltrans) Then
-
-                Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
-                dictBasicDataJson1.Add("full_name", dictBasicDataJson("name"))
-
-                dictBasicDataJson1.Add("User_Image", dictBasicDataJson("Stud_Image"))
-                dictBasicDataJson1.Add("User_Email", dictBasicDataJson("email"))
-                dictBasicDataJson1.Add("Active", dictBasicDataJson("active"))
-                dictBasicDataJson1.Add("User_Password", dictBasicDataJson("password"))
-                dictBasicDataJson1.Add("User_PhoneNumber", dictBasicDataJson("tel"))
-                dictBasicDataJson1.Add("comp_id", LoginInfo.GetComp_id())
-                dictBasicDataJson1.Add("User_Type", 8)
-                dictBasicDataJson1.Add("related_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
-
-
-                Dim dt = DBManager.Getdatatable("select id from tbllock_up where RelatedId=4 and comp_id=" + LoginInfo.GetComp_id())
-                If dt.Rows.Count <> 0 Then
-                    Dim group_id = dt.Rows(0)(0).ToString
-                    dictBasicDataJson1.Add("group_id", group_id)
+                Dim dtcheckemailphone As DataTable
+                If UserId = "" Then
+                    dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where  user_indenty='" + dictBasicDataJson("user_indenty") + "' or User_PhoneNumber='" + dictBasicDataJson("User_PhoneNumber") + "'")
+                Else
+                    dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where ( user_indenty='" + dictBasicDataJson("user_indenty") + "' or User_PhoneNumber='" + dictBasicDataJson("User_PhoneNumber") + "')  and  Id!='" + UserId.ToString + "'")
                 End If
 
-                Dim dtcheckemailphone As New DataTable
-                dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where  User_Email='" + dictBasicDataJson1("User_Email") + "' or User_PhoneNumber='" + dictBasicDataJson1("User_PhoneNumber") + "'")
+
                 If dtcheckemailphone.Rows.Count = 0 Then
-                    If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson1, "tblUsers", "", _sqlconn, _sqltrans) Then
-                        _sqltrans.Rollback()
-                        _sqlconn.Close()
-                        Return "False|لم يتم الحفظ"
+
+                    dictBasicDataJson("group_id") = LoginInfo.Getgroup_id()
+                    If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblUsers", UserId, _sqlconn, _sqltrans) Then
+                        success = True
+                    Else
+                        success = False
                     End If
                 Else
-                    _sqltrans.Rollback()
-                    _sqlconn.Close()
-                    Return "False|اسم المستخدم او البريد الالكترونى او التلفون مستخدم"
+                    Return "False|رقم الهوية او التلفون مُستخدم"
                 End If
 
-                _sqltrans.Commit()
-                _sqlconn.Close()
-                    Return "True"
+                If UserId = "" And success Then
+                    Dim Id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+
+                ElseIf UserId <> "" And success Then
 
 
-                Else
+                End If
+                If success Then
+                    _sqltrans.Commit()
+                    _sqlconn.Close()
+                    Return "True|تم الحفظ بنجاح"
+                End If
+            Else
                 _sqltrans.Rollback()
                 _sqlconn.Close()
                 Return "False|لم يتم الحفظ"
             End If
-
         Catch ex As Exception
             _sqltrans.Rollback()
             _sqlconn.Close()
@@ -108,7 +175,7 @@ Public Class studentCls
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
-            dt = DBManager.Getdatatable("select * from acd_Students where comp_id=" + comp_id)
+            dt = DBManager.Getdatatable("select * from tblUsers where comp_id=" + comp_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -171,7 +238,7 @@ Public Class studentCls
 
         Dim Names As New List(Of String)(10)
         Try
-            Dim str As String = PublicFunctions.GetDataForUpdate("acd_Students", editItemId)
+            Dim str As String = PublicFunctions.GetDataForUpdate("tblUsers", editItemId)
             Names.Add("1")
             Names.Add(str)
             Return Names.ToArray
@@ -192,7 +259,7 @@ Public Class studentCls
     Public Function Delete(ByVal deleteItem As String) As String()
         Dim Names As New List(Of String)(10)
         Try
-            If PublicFunctions.DeleteFromTable(deleteItem, "acd_Students") Then
+            If PublicFunctions.DeleteFromTable(deleteItem, "tblUsers") Then
                 Names.Add("1")
                 Names.Add("تم الحذف بنجاح!")
             Else

@@ -49,7 +49,7 @@ Public Class PublicFunctions
                     If col.ColumnName.ToString.Contains("date") Then
 
 
-                        If col.ColumnName.ToString.Contains("h") Then
+                        If col.ColumnName.ToString.Contains("h") Or dr(col).ToString = "" Then
 
 
                             row.Add(col.ColumnName, dr(col))

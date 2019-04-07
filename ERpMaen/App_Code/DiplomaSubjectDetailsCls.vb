@@ -603,6 +603,50 @@ Public Class DiplomaSubjectDetailsCls
 #End Region
 
 
+#Region "get_exams table"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_ExamsTable(ByVal course_id As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            If LoginInfo.getUserType = 8 Then
+                dt = DBManager.Getdatatable("select acd_exams.id ,acd_exams.title, isNull(acd_homework_delivery.degree,'0') as 'degree',acd_exams.details,acd_exams.image from acd_exams left join acd_homework_delivery on acd_homework_delivery.homework_id=acd_exams.id where acd_exams.course_id=" + course_id)
+
+            End If
+
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+    'get_SyudentTable
+    'get_Exams
+
+#End Region
 
 #Region "addStudentdegree"
     ''' <summary>
@@ -724,6 +768,248 @@ Public Class DiplomaSubjectDetailsCls
 
 
 
+#Region "savehomeworkDegree"
+    ''' <summary>
+    ''' Save  Type  درجات الواجبات للطلاب  
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function savehomeworkDegree(ByVal homeworkID As String, ByVal subjectId As String, ByVal studentDegrees As Object) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+
+
+            Dim success2 As Boolean = True
+            For Each item As Object In studentDegrees
+
+                If DBManager.ExcuteQuery("UPDATE  acd_homework_delivery  set  degree=" + item("hwmstuddegree").ToString + "where type=2 and dvtype=1 and student_id=" + item("id").ToString + " And course_id=" + subjectId + " And homework_id=" + homeworkID) <> -1 Then
+
+
+                    If Not PublicFunctions.TransUsers_logs("4203", "acd_homework_delivery", "تعديل", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
+                    success = True
+                Else
+                    success = False
+
+                End If
+                If success Then
+
+                    success2 = True
+                Else
+                    success2 = False
+                End If
+            Next
+            If success2 Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
+
+#Region "savehomeworkDegree"
+    ''' <summary>
+    ''' Save  Type  درجات الاختبارات للطلاب  
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function saveExamDegree(ByVal ExamId As String, ByVal subjectId As String, ByVal studentDegrees As Object) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+
+
+            Dim success2 As Boolean = True
+            For Each item As Object In studentDegrees
+
+                If DBManager.ExcuteQuery("UPDATE  acd_homework_delivery  set  degree=" + item("hwmstuddegree").ToString + "where  dvtype=2 and type=2 and student_id=" + item("id").ToString + " And course_id=" + subjectId + " And homework_id=" + ExamId) <> -1 Then
+
+
+                    If Not PublicFunctions.TransUsers_logs("4203", "acd_homework_delivery", "تعديل", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
+                    success = True
+                Else
+                    success = False
+
+                End If
+                If success Then
+
+                    success2 = True
+                Else
+                    success2 = False
+                End If
+            Next
+            If success2 Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
+
+#Region "get_data"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_StudentsHomeworkAnswers(ByVal homeworkId As String, ByVal subjectId As String) As String()
+        Dim dt_user As DataTable
+        dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+
+            dt = DBManager.Getdatatable("select acd_homework_delivery.homework_id, acd_homework_delivery.student_id,acd_homework_delivery.image as 'homeworkanswer' ,tblUsers.full_name as 'studentname',COALESCE (acd_homework_delivery.degree,0) as 'HMWDegree' from acd_homework_delivery join tblUsers on tblUsers.id=acd_homework_delivery.student_id where  acd_homework_delivery.dvtype=1 and acd_homework_delivery.type=2  and acd_homework_delivery.dvtype=1 and acd_homework_delivery.homework_id=" + homeworkId + " and course_id=" + subjectId)
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+
+                    Names.Add("1")
+
+                    Names.Add(Str)
+
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+#End Region
+
+#Region "get_data"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_StudentsExamsAnswers(ByVal examid As String, ByVal subjectId As String) As String()
+        Dim dt_user As DataTable
+        dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+
+            dt = DBManager.Getdatatable("select acd_homework_delivery.homework_id, acd_homework_delivery.student_id,acd_homework_delivery.image as 'homeworkanswer' ,tblUsers.full_name as 'studentname',COALESCE (acd_homework_delivery.degree,0) as 'HMWDegree' from acd_homework_delivery join tblUsers on tblUsers.id=acd_homework_delivery.student_id where  acd_homework_delivery.dvtype=2 and acd_homework_delivery.type=2 and acd_homework_delivery.homework_id=" + examid + " and course_id=" + subjectId)
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+
+                    Names.Add("1")
+
+                    Names.Add(Str)
+
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+#End Region
+
+#Region "get_homework table"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_homeworkTable(ByVal subjectId As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            If LoginInfo.getUserType = 8 Then
+                dt = DBManager.Getdatatable("select acd_homeworks.id,acd_homeworks.title,isNull( acd_homework_delivery.degree,'0') as 'degree' ,acd_homeworks.details,acd_homeworks.image from acd_homeworks left join acd_homework_delivery on acd_homework_delivery.homework_id=acd_homeworks.id and acd_homework_delivery.type=2 and acd_homework_delivery.dvtype=1  where  acd_homeworks.type=2 and acd_homeworks.course_id=" + subjectId)
+
+            End If
+
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+    'get_SyudentTable
+    'get_Exams
+
+#End Region
 
 #Region "Save"
     ''' <summary>
@@ -1097,7 +1383,7 @@ Public Class DiplomaSubjectDetailsCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_diplome_subjects.id, tbllock_up.Description as 'subjectName', tbllock_up2.Description as'semster',acd_diplome_subjects.subject_id,acd_diplome_subjects.semster_id,acd_diplome_subjects.diplome_id,acd_diplome_subjects.created_at_hj,acd_diplome_subjects.trainer_id,tblUsers.full_name as 'trainerName', tblUsers.User_Image as 'trainerImage',acd_diplome_subjects.subject_goal from acd_diplome_subjects join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join tbllock_up as tbllock_up2 on acd_diplome_subjects.semster_id=tbllock_up2.id join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id where acd_diplome_subjects.id=" + subject_id)
+            dt = DBManager.Getdatatable("select acd_diplome_subjects.id, acd_diplome_subjects.lecture_time ,tbllock_up.Description as 'subjectName', tbllock_up2.Description as'semster',acd_diplome_subjects.subject_id,acd_diplome_subjects.semster_id,acd_diplome_subjects.diplome_id,acd_diplome_subjects.created_at_hj,acd_diplome_subjects.trainer_id,tblUsers.full_name as 'trainerName', tblUsers.User_Image as 'trainerImage',acd_diplome_subjects.subject_goal from acd_diplome_subjects join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join tbllock_up as tbllock_up2 on acd_diplome_subjects.semster_id=tbllock_up2.id join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id where acd_diplome_subjects.id=" + subject_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1124,6 +1410,41 @@ Public Class DiplomaSubjectDetailsCls
 #End Region
 
 
+#Region "update archive"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function Archive_course(ByVal subjectId As String) As String()
+        Dim Names As New List(Of String)(10)
+        Try
+            If DBManager.ExcuteQuery("update acd_diplome_subjects set archive=1 where id=" + subjectId) <> -1 Then
+                If Not PublicFunctions.TransUsers_logs("4203", "acd_diplome_subjects", "ارشيف", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+                Names.Add("1")
+
+            Else
+                Names.Add("2")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+            Names.Add("لا يمكن الحذف!")
+            Return Names.ToArray
+        End Try
+    End Function
+#End Region
+
 #Region "get lecture Code"
     ''' <summary>
     ''' Save  Type
@@ -1147,13 +1468,122 @@ Public Class DiplomaSubjectDetailsCls
 #End Region
 
 
+#Region "save HW answer"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function saveHWanswer(ByVal id As String, ByVal homeworkId As String, ByVal subjectId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            Dim dt_user As DataTable
+
+            dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+            dictBasicDataJson.Add("homework_id", homeworkId)
+            dictBasicDataJson.Add("course_id", subjectId)
+            dictBasicDataJson.Add("type", "2")
+            dictBasicDataJson.Add("dvtype", "1")
+            dictBasicDataJson.Add("student_id", LoginInfo.GetUser__Id())
+
+
+
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_homework_delivery", id, _sqlconn, _sqltrans) Then
+                If Not PublicFunctions.TransUsers_logs("4203", "acd_homework_delivery", "ادخال", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
+
+
+#Region "save exam answer"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function saveExamanswer(ByVal id As String, ByVal examId As String, ByVal subjectId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            Dim dt_user As DataTable
+
+            dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+            dictBasicDataJson.Add("homework_id", examId)
+            dictBasicDataJson.Add("course_id", subjectId)
+            dictBasicDataJson.Add("type", "2")
+            dictBasicDataJson.Add("dvtype", "2")
+            dictBasicDataJson.Add("student_id", LoginInfo.GetUser__Id())
+
+
+
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_homework_delivery", id, _sqlconn, _sqltrans) Then
+                If Not PublicFunctions.TransUsers_logs("4203", "acd_homework_delivery", "ادخال", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
+
 #Region "get_data"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_srchstudentABS(ByVal name As String, ByVal lecture_id As String, ByVal subjectId As String) As String()
+    Public Function get_srchstudentABS(ByVal name As String, ByVal lecture_id As String, ByVal diplomeId As String) As String()
         Dim dt_user As DataTable
         dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
@@ -1163,10 +1593,10 @@ Public Class DiplomaSubjectDetailsCls
             Dim dt2 As New DataTable
             If name <> "" Then
 
-                dt = DBManager.Getdatatable("select acd_courses_students.student_id , tblUsers.full_name as 'CourseStudents' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where type=2 and acd_courses_students.course_id=" + subjectId + " and tblUsers.full_name like '%" + name + "%'")
+                dt = DBManager.Getdatatable("select acd_courses_students.student_id , tblUsers.full_name as 'CourseStudents' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where type=2 and acd_courses_students.course_id=" + diplomeId + " and tblUsers.full_name like '%" + name + "%'")
                 dt2 = DBManager.Getdatatable("select student_id from acd_absence where  type=2 and lecture_id=" + lecture_id)
             Else
-                dt = DBManager.Getdatatable("select acd_courses_students.student_id , tblUsers.full_name as 'CourseStudents' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where type=2 and acd_courses_students.course_id=" + subjectId)
+                dt = DBManager.Getdatatable("select acd_courses_students.student_id , tblUsers.full_name as 'CourseStudents' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where type=2 and acd_courses_students.course_id=" + diplomeId)
                 dt2 = DBManager.Getdatatable("select student_id from acd_absence where  type=2 and lecture_id=" + lecture_id)
             End If
             If dt IsNot Nothing Then
@@ -1205,7 +1635,7 @@ Public Class DiplomaSubjectDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_CourseStudents(ByVal lecture_id As String, ByVal subjectid As String) As String()
+    Public Function get_CourseStudents(ByVal lecture_id As String, ByVal subjectid As String, ByVal diplomeid As String) As String()
         Dim dt_user As DataTable
         dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
@@ -1214,7 +1644,7 @@ Public Class DiplomaSubjectDetailsCls
             Dim dt As New DataTable
             Dim dt2 As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id , tblUsers.full_name as 'CourseStudents' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where type=2 and acd_courses_students.course_id=" + subjectid)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id , tblUsers.full_name as 'CourseStudents' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where  acd_courses_students.approved=1 and type=2 and acd_courses_students.course_id=" + diplomeid)
             dt2 = DBManager.Getdatatable("select student_id from acd_absence where type=2 and lecture_id=" + lecture_id)
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1250,7 +1680,7 @@ Public Class DiplomaSubjectDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_student(ByVal name As String, ByVal subjectID As String) As String()
+    Public Function get_student(ByVal name As String, ByVal diplomeId As String) As String()
         Dim dt_user As DataTable
 
         dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
@@ -1260,11 +1690,11 @@ Public Class DiplomaSubjectDetailsCls
             Dim dt As New DataTable
             Dim condition = ""
             If name <> "" Then
-                condition = " where type=2 and tblUsers.full_name LIKE '%" + name + "%' And course_id=" + subjectID
-                dt = DBManager.Getdatatable("Select  acd_courses_students.student_id,tblUsers.full_name As 'studentName',tblUsers.User_Image as 'srImage' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id" + condition)
+                condition = "  and tblUsers.full_name LIKE '%" + name + "%'"
+                dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id where  acd_courses_students.type =2 and  acd_courses_students.approved=1 and acd_courses_students.course_id=" + diplomeId + condition)
             Else
 
-                dt = DBManager.Getdatatable("Select  acd_courses_students.student_id,tblUsers.full_name As 'studentName' ,tblUsers.User_Image as 'srImage' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where type=2 and  course_id=" + subjectID)
+                dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id where  acd_courses_students.type =2 and  acd_courses_students.approved=1 and acd_courses_students.course_id=" + diplomeId)
             End If
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1308,7 +1738,7 @@ Public Class DiplomaSubjectDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_pub_StudentsDegree(ByVal subjectid As String) As String()
+    Public Function get_pub_StudentsDegree(ByVal diplomeID As String, ByVal subjectId As String) As String()
         Dim dt_user As DataTable
         dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
@@ -1317,7 +1747,7 @@ Public Class DiplomaSubjectDetailsCls
             Dim dt As New DataTable
 
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentname',COALESCE( stdg.final_degree ,0) as 'final',COALESCE (stdg.activity_degree,0) as 'activityDegree' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id left  JOIN acd_student_degrees stdg on  acd_courses_students.student_id=stdg.student_id AND stdg.type=2 where acd_courses_students.type=2  and acd_courses_students.course_id=" + subjectid)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentname',COALESCE( stdg.final_degree ,0) as 'final',COALESCE (stdg.activity_degree,0) as 'activityDegree' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id left  JOIN acd_student_degrees stdg on  acd_courses_students.student_id=stdg.student_id AND stdg.type=2 and stdg.course_id=" + subjectId + " where acd_courses_students.type=2  and acd_courses_students.course_id=" + diplomeID)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1355,7 +1785,7 @@ Public Class DiplomaSubjectDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function search_pub_Students(ByVal studentName As String, ByVal subjectid As String) As String()
+    Public Function search_pub_Students(ByVal studentName As String, ByVal diplomeid As String) As String()
         Dim dt_user As DataTable
         dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
@@ -1365,15 +1795,12 @@ Public Class DiplomaSubjectDetailsCls
             Dim condition = ""
 
             If studentName <> "" Then
-                condition = " where acd_courses_students.type=2 and tblUsers.full_name LIKE '%" + studentName + "%' And acd_courses_students.course_id=" + subjectid
-
-
-
+                condition = " where acd_courses_students.type=2 and tblUsers.full_name LIKE '%" + studentName + "%' And acd_courses_students.course_id=" + diplomeid
 
 
                 dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentname',COALESCE( stdg.final_degree ,0) as 'final',COALESCE (stdg.activity_degree,0) as 'activityDegree' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id left  JOIN acd_student_degrees stdg on  acd_courses_students.student_id=stdg.student_id AND stdg.type=2 " + condition)
             Else
-                dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentname',COALESCE( stdg.final_degree ,0) as 'final',COALESCE (stdg.activity_degree,0) as 'activityDegree' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id left  JOIN acd_student_degrees stdg on  acd_courses_students.student_id=stdg.student_id AND stdg.type=2 where acd_courses_students.type=2  and acd_courses_students.course_id=" + subjectid)
+                dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentname',COALESCE( stdg.final_degree ,0) as 'final',COALESCE (stdg.activity_degree,0) as 'activityDegree' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id left  JOIN acd_student_degrees stdg on  acd_courses_students.student_id=stdg.student_id AND stdg.type=2 where acd_courses_students.type=2  and acd_courses_students.course_id=" + diplomeid)
             End If
 
             If dt IsNot Nothing Then
@@ -1404,6 +1831,50 @@ Public Class DiplomaSubjectDetailsCls
 #End Region
 
 
+    '#Region "get_data"
+    '    ''' <summary>
+    '    ''' Save  Type
+    '    ''' </summary>
+    '    <WebMethod(True)>
+    '    <System.Web.Script.Services.ScriptMethod()>
+    '    Public Function get_LectureTable(ByVal subjectId As String) As String()
+    '        Dim dt_user As DataTable
+    '        dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+    '        Dim Names As New List(Of String)(10)
+    '        Try
+    '            Dim dt As New DataTable
+
+    '            dt = DBManager.Getdatatable("Select acd_lectures.id , acd_lectures.lecture_code, acd_lectures.date_hj, acd_lectures.start_time, acd_lectures.hall_id , tbllock_up.Description As 'hallNum' from acd_lectures join tbllock_up on tbllock_up.id=acd_lectures.hall_id  where acd_lectures.type=2 and acd_lectures.course_id=" + subjectId)
+
+    '            If dt IsNot Nothing Then
+    '                If dt.Rows.Count <> 0 Then
+    '                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+    '                    Names.Add("1")
+    '                    Names.Add(Str)
+    '                    Return Names.ToArray
+    '                End If
+
+    '            End If
+    '            Names.Add("0")
+    '            Names.Add(" No Results were Found!")
+    '            Return Names.ToArray
+    '        Catch ex As Exception
+    '            Names.Add("0")
+    '            Names.Add(" No Results were Found!")
+    '            Return Names.ToArray
+    '        End Try
+    '        Names.Add("0")
+    '        Names.Add(" No Results were Found!")
+    '        Return Names.ToArray
+    '    End Function
+
+    '    'get_SyudentTable
+    '    'get_Exams
+
+    '#End Region
+
+
 #Region "get_data"
     ''' <summary>
     ''' Save  Type
@@ -1411,14 +1882,20 @@ Public Class DiplomaSubjectDetailsCls
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
     Public Function get_LectureTable(ByVal subjectId As String) As String()
-        Dim dt_user As DataTable
-        dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("Select acd_lectures.id , acd_lectures.lecture_code, acd_lectures.date_hj, acd_lectures.start_time, acd_lectures.hall_id , tbllock_up.Description As 'hallNum' from acd_lectures join tbllock_up on tbllock_up.id=acd_lectures.hall_id  where acd_lectures.type=2 and acd_lectures.course_id=" + subjectId)
+            If LoginInfo.getUserType = 8 Then
+                dt = DBManager.Getdatatable("Select acd_lectures.id , acd_lectures.lecture_code, acd_lectures.date_hj, acd_lectures.start_time, acd_lectures.hall_id , tbllock_up.Description as 'hallNum',acd_absence.absence from acd_lectures join tbllock_up on tbllock_up.id=acd_lectures.hall_id left join acd_absence on acd_lectures.id =acd_absence.lecture_id and acd_absence.student_id=" + LoginInfo.GetUser__Id().ToString + "  where acd_lectures.course_id=" + subjectId)
+
+            Else
+
+                dt = DBManager.Getdatatable("Select acd_lectures.id , acd_lectures.lecture_code, acd_lectures.date_hj, acd_lectures.start_time, acd_lectures.hall_id , tbllock_up.Description as 'hallNum' from acd_lectures join tbllock_up on tbllock_up.id=acd_lectures.hall_id  where acd_lectures.course_id=" + subjectId)
+
+            End If
+
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1446,15 +1923,13 @@ Public Class DiplomaSubjectDetailsCls
     'get_Exams
 
 #End Region
-
-
 #Region "get_data"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_StudentTable(ByVal subjectID As String) As String()
+    Public Function get_StudentTable(ByVal diplome_id As String) As String()
         Dim dt_user As DataTable
         dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
@@ -1462,7 +1937,7 @@ Public Class DiplomaSubjectDetailsCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("Select acd_courses_students.student_id, tblUsers.full_name as 'studentName' ,tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where type=2 and acd_courses_students.course_id=" + subjectID)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id where  acd_courses_students.type =2 and  acd_courses_students.approved=1 and acd_courses_students.course_id=" + diplome_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then

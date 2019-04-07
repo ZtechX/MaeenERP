@@ -10,8 +10,8 @@ $(function () {
 
     try {
        form_load();
-      //  drawDynamicTable();
-        //getStudentCode();
+        //drawDynamicTable();
+        
     } catch (err) {
        // alert(err);
     }
@@ -21,8 +21,8 @@ function resetAll() {
     try {
         resetFormControls();
         $("#lblmainid").html("");
-      
-      
+
+
     } catch (err) {
         alert(err);
     }
@@ -31,7 +31,7 @@ function resetAll() {
 function save() {
 
     try {
-        
+        debugger
         
         $("input").removeClass('error');
         $("select").removeClass('error');
@@ -63,22 +63,23 @@ function save() {
             $("#SavedivLoader").show();
             var basicData = generateJSONFromControls("divForm");
             
-            basicData["Stud_Image"] = $("#imgItemURL").prop("src");
+            basicData["User_Image"] = $("#imgItemURL").prop("src");
 
             var PosId = $("#lblmainid").html();
             studentCls.Save(PosId, basicData, function (val) {
                 debugger
-                if (val == "True") {
-                    showSuccessMessage("تم الحفظ بنجاح");
+                $("#SavedivLoader").hide();
+                if (val.split("|")[0] == "True") {
                     drawDynamicTable();
                     cancel();
-                    //getStudentCode();
+                    showSuccessMessage("تم الحفظ بنجاح");
+
+
                 } else {
                     showErrorMessage(val.split("|")[1]);
                     $("#pnlConfirm").show();
+                    $("#SavedivLoader").hide();
                 }
-               
-                $("#SavedivLoader").hide();
             });
         
            
@@ -91,28 +92,51 @@ function save() {
 function edit(val) {
     //debugger
     resetAll();
- 
-        if (val[0] == "1") {
-            var data = JSON.parse(val[1]);
-            fillControlsFromJson(data[0]);
-            $("#imgItemURL").prop("src", data[0].Stud_Image);
-            $("#cmdSave").prop("CommandArgument", "Update");
-            $("#cmdUpdate").removeAttr('disabled');
-            $("#cmdDelete").removeAttr('disabled');
-        }
-        $("#pnlConfirm").hide();
-        $("#divData").show();
-        $("#SavedivLoader").hide();
+
+    if (val[0] == "1") {
+        var data = JSON.parse(val[1]);
+        fillControlsFromJson(data[0]);
+        $("#imgItemURL").prop("src", data[0].User_Image);
+        $("#cmdSave").prop("CommandArgument", "Update");
+        $("#cmdUpdate").removeAttr('disabled');
+        $("#cmdDelete").removeAttr('disabled');
+
+    }
+    $("#pnlConfirm").hide();
+    $("#divData").show();
+    $("#SavedivLoader").hide();
 }
+
+//function drawDynamicTable() {
+//    try {
+//        debugger
+        
+//        var tableSortingColumns = [
+//            { orderable: false }, null, null, 
+//        ];
+//        var tableFilteringColumns = [
+//            { type: "null" }, { type: "text" }, { type: "text" },
+//        ];
+
+//        var tableColumnDefs = [
+
+//        ];
+//        var initialSortingColumn = 0;
+//        loadDynamicTable('Students', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
+//    } catch (err) {
+//        //alert(err);
+//    }
+//}
+
 
 function drawDynamicTable() {
     try {
-        
+        //debugger
         var tableSortingColumns = [
-            { orderable: false }, null, null, 
+            { orderable: false }, null, null, null,
         ];
         var tableFilteringColumns = [
-            { type: "null" }, { type: "text" }, { type: "text" },
+            { type: "null" }, { type: "text" }, { type: "text" }, { type: "text" },
         ];
 
         var tableColumnDefs = [
@@ -126,13 +150,11 @@ function drawDynamicTable() {
 }
 
 
-
-
 function add() {
     try {
         prepareAdd();
         resetAll();
-        //getStudentCode();
+
     } catch (err) {
         alert(err);
     }
@@ -146,10 +168,5 @@ function setformforupdate() {
     }
 }
 
-//function getStudentCode() {
-//    studentCls.getStudentCode(function (val) {
-//        //debugger
-//        $("#code").val(Number(val) + 1);
-//    });
-//}
+
 

@@ -32,6 +32,15 @@ Partial Public Class DiplomaCourses
     Protected WithEvents Lbldeploma_id As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''lbldiplomeCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbldiplomeCode As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''ddlcourse control.
     '''</summary>
     '''<remarks>
@@ -201,4 +210,58 @@ Partial Public Class DiplomaCourses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''amount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents amount As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''ddlpayment_type control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlpayment_type As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''TextBox8 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox8 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''fileurlfinanc control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fileurlfinanc As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
+    '''FnameFinanc control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FnameFinanc As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''fufile7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fufile7 As Global.AjaxControlToolkit.AsyncFileUpload
 End Class

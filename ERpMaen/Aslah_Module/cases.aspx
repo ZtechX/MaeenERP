@@ -228,7 +228,7 @@
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
-                                                                        التاريخ   </lable>
+                                                                        التاريخ   </label>
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
@@ -869,7 +869,7 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">تسليم واستلام الاولاد </a>
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">تسليم واستلام الاولاد (الفترة الاساسية) </a>
                                                             </h4>
                                                         </div>
                                                         <div id="collapse7" class="panel-collapse collapse in">
@@ -946,9 +946,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group">
-                                                                    <button onclick="save_children_receive(); return false" class="btn btn-success">حفظ</button>
-                                                                     <button onclick="addAnother_children_receive(); return false" class="btn btn-success">إضافة مدة آخرى</button>
-                                                               
+                                                               <button onclick="save_children_receive(); return false" class="btn btn-success">حفظ</button>
+                                                                    
                                                                 </div>
 
 
@@ -959,6 +958,40 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-12">
+                                                <div class="panel-group" id="">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">بيانات الفترات الاضافية </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapse8" class="panel-collapse collapse in">
+                                                            <div class="panel-body" >
+                                                                <%-- start group 1--%>
+                                                                       <button id="addAnother_receive" onclick="addAnother_children_receive(); return false" class="btn btn-success">إضافة مدة آخرى</button>
+                                                              
+<table class="table table-bordered">
+    <thead>
+       <tr>
+            <th >#</th>
+            <th >تاريخ بداية الفترة</th>
+            <th >مدة التسليم كل (يوم)</th>
+            <th >لمدة (شهر)</th>
+           <th >حذف الفترة ومواعيدها</th>
+        </tr>
+    </thead>
+    <tbody id="tb_other_period">
+        
+    </tbody>
+</table>
+
+                                                                <%--end of group1--%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </div>
 

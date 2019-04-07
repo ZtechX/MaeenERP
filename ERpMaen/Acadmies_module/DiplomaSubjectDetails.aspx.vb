@@ -37,8 +37,30 @@ Public Class DiplomaSubjectDetails
         Try
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
-                Dim subject_id = Request.QueryString("subject_id")
-                Lblsubject_id.InnerHtml = subject_id
+                'Dim subject_id = Request.QueryString("subject_id")
+                'Lblsubject_id.InnerHtml = subject_id
+
+                Dim code = Request.QueryString("code")
+
+                Dim dt = DBManager.Getdatatable(" select acd_diplome_subjects.id from acd_diplome_subjects where acd_diplome_subjects.code='" + code.ToString + "'")
+                If dt.Rows.Count <> 0 Then
+                    Dim subject_id = dt.Rows(0)(0).ToString
+                    Lblsubject_id.InnerHtml = subject_id
+
+                End If
+                Dim dt2 = DBManager.Getdatatable(" select acd_diplome_subjects.diplome_id from acd_diplome_subjects where acd_diplome_subjects.code='" + code.ToString + "'")
+                If dt2.Rows.Count <> 0 Then
+                    Dim diplomeID = dt2.Rows(0)(0).ToString
+                    LblDiplome_id.InnerHtml = diplomeID
+                    Dim dt3 = DBManager.Getdatatable(" select code from acd_diplomes where id=" + diplomeID)
+                    If dt3.Rows.Count <> 0 Then
+                        Dim diplomeCode = dt3.Rows(0)(0).ToString
+                        lbldiplomeCode.InnerHtml = diplomeCode
+
+                    End If
+                End If
+
+
 
                 Dim clsapprove_tainer As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='4' and comp_id=" + LoginInfo.GetComp_id(), "full_name", "id", "")
                 clsapprove_tainer.SetComboItems(ddlsubTrainer, "", True, "--اختر--", False)
@@ -87,6 +109,13 @@ Public Class DiplomaSubjectDetails
                     Prepare_Sheet(fu)
                     CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
 
+                Case "fuFile6"
+                    fu = fuFile6
+
+                    Path = "Acadmies_module/coursefiles/"
+                    Prepare_Sheet(fu)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+
                     'Case "fuFile3"
                     '    fu = fuFile3
 
@@ -94,6 +123,13 @@ Public Class DiplomaSubjectDetails
                     '    Prepare_Sheet(fu)
                     'CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
 
+
+                Case "fuFile5"
+                    fu = fuFile5
+
+                    Path = "Acadmies_module/coursefiles/"
+                    Prepare_Sheet(fu)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
                     'Case "fuFile4"
                     '    fu = fuFile4
 

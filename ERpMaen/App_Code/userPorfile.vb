@@ -45,7 +45,9 @@ Public Class userPorfile
             dictBasicDataJson.Add("User_Image", image)
             Researcher = dictBasicDataJson("Researcher")
             Dim dtcheckemailphone As DataTable
-
+            If LoginInfo.getUserType() = "9" Then
+                dictBasicDataJson.Add("password_changed", 1)
+            End If
             dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where ( user_indenty='" + dictBasicDataJson("user_indenty") + "' or User_PhoneNumber='" + dictBasicDataJson("User_PhoneNumber") + "')  and  Id!='" + UserId.ToString + "'")
             If dtcheckemailphone.Rows.Count = 0 Then
                 If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblUsers", UserId, _sqlconn, _sqltrans) Then
@@ -102,7 +104,7 @@ Public Class userPorfile
         Try
             Dim dt As New DataTable
             dt = DBManager.Getdatatable("SELECT tblUsers.id,full_name ,User_Email,Active ,Researcher,User_Password,User_PhoneNumber,User_Image," +
- " User_Type,user_indenty,isNull(name,'') as userType" +
+ " User_Type,user_indenty,isNull(name,'') as userType, isNull(password_changed,0) as 'password_changed' " +
  " FROM tblUsers left join tblUser_Type on tblUser_Type.id=User_Type where tblUsers.id  =" + UserId)
             If dt.Rows.Count <> 0 Then
                 Names(0) = PublicFunctions.ConvertDataTabletoString(dt)

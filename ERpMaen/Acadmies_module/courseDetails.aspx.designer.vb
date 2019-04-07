@@ -59,6 +59,15 @@ Partial Public Class CourseDetails
     Protected WithEvents userComments As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''finance_div control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents finance_div As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''res1 control.
     '''</summary>
     '''<remarks>
@@ -104,13 +113,13 @@ Partial Public Class CourseDetails
     Protected WithEvents HijriCalendar2 As Global.ERpMaen.CustomerCalendar
     
     '''<summary>
-    '''Text2 control.
+    '''lecture_duration control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text2 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents lecture_duration As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''ddltrainer control.

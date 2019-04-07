@@ -7,7 +7,9 @@
 // show default success message
 function showSuccessMessage(message) {
     try {
+        debugger
         showMessage(message, "divRes", "lblRes", "green");
+        $("#lblResError").hide();
     } catch (err) {
         alert(err);
     }
@@ -61,9 +63,9 @@ function showMessage(message, divId, lblResId, color) {
     try {
         $("#" + divId).show();
         $("#" + divId).css("background-color", color);
+        $("#" + lblResId).html(message);
         $("#" + divId).fadeIn(3000);
         $("#" + divId).fadeOut(3000);
-        $("#" + lblResId).html(message);
         $("#" + lblResId).show();
     } catch (err) {
         alert(err);

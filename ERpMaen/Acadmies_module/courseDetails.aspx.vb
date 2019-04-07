@@ -37,6 +37,7 @@ Public Class CourseDetails
         Try
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
+                finance_div.Visible = False
                 Dim code = Request.QueryString("code")
                 Dim dt = DBManager.Getdatatable(" select  acd_courses.id from acd_courses where acd_courses.code='" + code.ToString  + "'")
                 If dt.Rows.Count <> 0 Then

@@ -64,7 +64,7 @@ Public Class members
                     dict_user.Add("User_Name", dictBasicDataJson("User_Name"))
                     dict_user.Add("User_Password", dictBasicDataJson("User_Password"))
                     If id <> "" Then
-                        dt = DBManager.Getdatatable("Select * from tblUsers where related_id=" + id.ToString)
+                        dt = DBManager.Getdatatable("Select * from tblUsers where User_Type=3 and related_id=" + id.ToString)
                         If dt.Rows.Count <> 0 Then
                             id = dt.Rows(0).Item("id")
                         Else

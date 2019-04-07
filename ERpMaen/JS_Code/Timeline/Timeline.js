@@ -45,7 +45,8 @@
                 divGroup = "";
                 header = "";
                 paragraph = "";
-                date = "";
+            date = "";
+            time = "";
                 div_alternative = "";
             if (data[i].Tabel == "Session") {
                 var session_date_m = data[i].date_m;
@@ -139,7 +140,7 @@
                 var str = divGroup + `<li ${div_alternative}> <div class="tl-circ ${add_class}" ></div >
                 <div class="timeline-panel" ${panel_style}>
                 <div class="tl-heading"> <h4 ${headerBackground}>${header}</h4>
-          <p><small class="text-muted"><i class="fa fa-calendar fa-md" style="color:red;"></i>${date}</small></p>
+          <p><small class="text-muted"><i class="fa fa-calendar fa-md" style="color:red;"></i>${date}</small> <small style="float:left;" class="text-muted"><i class="fa fa-clock-o fa-md" style="color:red;"></i> ${data[i].entry_time}</small></p>
         </div>
         <div class="tl-body">
           <p>${paragraph}</p>

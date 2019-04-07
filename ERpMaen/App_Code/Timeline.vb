@@ -89,7 +89,7 @@ Public Class Timeline
             " left join  ash_case_persons Pagainst on Pagainst.id=ash_case_sessions.second_party_id" +
             " where isNull(session_done,0) " + condation_done + " and ash_case_sessions.case_id=" + case_id + condation + " )" +
             " UNION " +
-            " (SELECT 'recieve_delivery',date_m ,date_h,'','',isNull(Pdeliver.name,'') as 'deliver',isNull(Precieve.name,'') as 'recieve','','','','',''," +
+            " (SELECT 'recieve_delivery',date_m ,date_h,'','',isNull(Pdeliver.name,'') as 'deliver',isNull(Precieve.name,'') as 'recieve','','',isNull(recieveTime,''),'',''," +
             " case Type When 1 Then 'تسليم واستلام اولاد'else 'تسليم واستلام نفقة' end  ,details.id," +
             " amount from ash_case_receiving_delivery_details details " +
             " left join  ash_case_persons Pdeliver on Pdeliver.id=details.deliverer_id" +
@@ -97,13 +97,13 @@ Public Class Timeline
             " where details.deleted !=1 and isNull(receiving_delivery_done,0)  " + condation_done + "  and details.case_id=" + case_id + condation + ") " +
             " union" +
             " (SELECT 'Conciliation', date_m ,date_h,isNull(Pagainst.name,'') as 'agains',isNull(Powner.name,'') as 'owner'," +
-            " '','','','','' ,'',isNull(notes,''),'' ,code,'' from ash_case_conciliation " +
+            " '','','','',isNull(conciliation_Time,'') ,'',isNull(notes,''),'' ,code,'' from ash_case_conciliation " +
             " Left Join  ash_case_persons Powner on Powner.id=ash_case_conciliation.owner_id" +
             " left join  ash_case_persons Pagainst on Pagainst.id=ash_case_conciliation.second_party_id" +
             " where ash_case_conciliation.case_id=" + case_id + condation + " ) " +
             " union" +
             " (SELECT 'Correspondence' as 'Tabel', date_m ,date_h,'',isNull(Powner.name,'') as 'owner', " +
-            " '' ,'','','','', '',isNull(notes,''),Description,ash_case_correspondences.code,'' from ash_case_correspondences " +
+            " '' ,'','','',isNull(correspondences_time,''), '',isNull(notes,''),Description,ash_case_correspondences.code,'' from ash_case_correspondences " +
             " Left Join  ash_case_persons Powner on Powner.id=ash_case_correspondences.person_id" +
             " Left Join  tbllock_up on tbllock_up.id=ash_case_correspondences.type_correspondences" +
             " where isNull(correspondence_done,0)  " + condation_done + "   and ash_case_correspondences.case_id=" + case_id + condation + ") " +

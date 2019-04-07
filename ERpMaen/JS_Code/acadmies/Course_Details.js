@@ -982,6 +982,7 @@ function saveExamanswer() {
         alert(err);
     }
 }
+
 function addFiles() {
 
     try {
@@ -1309,34 +1310,16 @@ function LectureView(LecID) {
 }
 //get lecture code
 function getlectureCode() {
-    debugger
+      debugger
     var CourseId = $("#Lblcourse_id").html(); 
     courseDetailsCls.getlectureCode(CourseId,function (val) {
         
         $("#lecture_code").val(Number(val) + 1);
     });
-}
+}                                                                                                                                                                                                                 
+                                                                                                                                             
 
-
-function viewstudDegrees(studentID) {
-  
-    var CourseId = $("#Lblcourse_id").html(); 
-
-    courseDetailsCls.EditstudDegree(CourseId, studentID, function (val) {
-        if (val[0] == "1") {
-            var data = JSON.parse(val[1]);
-            fillControlsFromJson(data[0]);
-
-
-            //$("#order_addLec").modal();
-
-        }
-
-
-    });
-}
-
-function viewHomework(HMWID) {
+      function viewHomework(HMWID) {
 
     setHomewId(HMWID);
 
@@ -1368,7 +1351,7 @@ function viewHomework(HMWID) {
 
     });
 
-}
+}                                                              
 
 function viewExam(examID) {
 
@@ -1593,6 +1576,7 @@ function GetCourses(){
             
             var arr1 = JSON.parse(val[1]);
             $("#course_title").html(arr1[0].name);
+            $("#lectureDuration").html(arr1[0].lect_duration);
             $("#course_details").html(arr1[0].description);
             $("#course_date").html(arr1[0].start_dt_hj);
             if (arr1[0].price > 0) {
@@ -1662,31 +1646,32 @@ function drawAbsenceTable(CoursLecID) {
 Number.prototype.padDigit = function () {
     return (this < 10) ? '0' + this : this;
 }
-function count_endtime(start_time) {
+//function count_endtime(start_time) {
     
-    var lect_time = $("#lect_time").html();
-    var t1 = start_time.split(":");
-    console.log(t1);
-    var t2 = t1[1].split(" ");
-    console.log(t2);
-    mins = Number(t2[0]) + Number(lect_time);
-    minhrs = Math.floor(parseInt(mins / 60));
-    hrs = Number(t1[0]) + minhrs;
-    mins = mins % 60;
-    console.log(lect_time);
-    console.log(mins);
-    console.log(minhrs);
-    console.log(hrs);
-    var tm = t2[1];
-    if (hrs > 12) {
-        hrs = hrs - 12;
-        if (t2[1] == "am")
-            tm = "pm";
-        else
-            tm = "am";
-    }
-    return ( hrs.padDigit() + ':' + mins.padDigit() + " " + tm);
-}
+//    var lect_time = $("#lect_time").html();
+   
+//    var t1 = start_time.split(":");
+//    console.log(t1);
+//    var t2 = t1[1].split(" ");
+//    console.log(t2);
+//    mins = Number(t2[0]) + Number(lect_time);
+//    minhrs = Math.floor(parseInt(mins / 60));
+//    hrs = Number(t1[0]) + minhrs;
+//    mins = mins % 60;
+//    console.log(lect_time);
+//    console.log(mins);
+//    console.log(minhrs);
+//    console.log(hrs);
+//    var tm = t2[1];
+//    if (hrs > 12) {
+//        hrs = hrs - 12;
+//        if (t2[1] == "am")
+//            tm = "pm";
+//        else
+//            tm = "am";
+//    }
+//    return ( hrs.padDigit() + ':' + mins.padDigit() + " " + tm);
+//}
 function drawLecturesTable() {
     try {
        // $("#SavedivLoader").show();
@@ -1699,12 +1684,12 @@ function drawLecturesTable() {
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
-                    var end_time = count_endtime(element.start_time);
+                    //var end_time = count_endtime(element.start_time);
                  
                     data = data + `<tr>
                                                       <td>${element.lecture_code} </td>
                                                      <td>${element.date_hj}  </td>
-                                                    <td>${element.start_time} الى  ${end_time}   </td>
+                                                    <td>${element.start_time}</td>
                                                        <td> ${element.hallNum} </td> `;
                     action = ` <td>
 
@@ -2087,13 +2072,18 @@ function drawConditionsTable() {
 }
 function drawCourseFile() {
     try {
+
+       // debugger
         var CourseId = ($("#Lblcourse_id").html());
         //var LecID= $("#LblLecture_id").html();
         
         courseDetailsCls.get_CourseFiles(CourseId, function (val) {
             var data = "";
-            console.log(val);
+            var condition_check = "";
+          // console.log(val);
             if (val[0] == 1) {
+                debugger
+             
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
@@ -2105,9 +2095,9 @@ function drawCourseFile() {
                             file_nm = path.split("Acadmies_module/coursefiles/")[1];
                         }
                     }
+                    if (document.getElementById("checkuser").value ==1) {
 
-                    data = data + `
-                                                     <tr>
+                        data = data + `<tr>
                                                       <td>${element.notes} </td>
                                                      <td>
                                                        <li>
@@ -2118,10 +2108,8 @@ function drawCourseFile() {
                                                         <span>${file_nm}</span>
                                                     </li>
 
-                                                        </td>
-                                                  
-                                                      
-                                                         <td>
+                                                        </td> 
+                                                        <td>
 
                                                           <div class="btn-group pull-left" style="position:absolute">
                                                         <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -2139,13 +2127,30 @@ function drawCourseFile() {
                                                   
                                                       </ul>
                                                      </div>
-                                                           </td>
+                                                           </td> 
+</tr>`;
+                    }
 
-                                                   
+                    else {
 
-                                                                            </tr>
-                                                                      
-`;
+
+                        data = data + `<tr>
+                                                      <td>${element.notes} </td>
+                                                     <td>
+                                                       <li>
+                                                        <a href="../${element.image}" download>
+                                                            <i class="zmdi zmdi-cloud-download"></i>تحميل ملف  
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li>
+
+                                                        </td> 
+                                                       
+</tr>`;
+
+                    }
+                   
                 });
 
 

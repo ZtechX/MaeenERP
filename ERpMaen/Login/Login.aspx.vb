@@ -12,7 +12,7 @@ Public Class Login
             '#####################################Remember me Start   ############################################
             If cklogin.Checked = True Then
                 Dim dt As New DataTable
-                dt = DBManager.Getdatatable("select * from tblUsers where (User_PhoneNumber ='" + txtUserName.Value + "' or user_indenty='" + txtUserName.Value + "')  and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
+                dt = DBManager.Getdatatable("select * ,isNull(password_changed,0) as 'pass_changed' from tblUsers where (User_PhoneNumber ='" + txtUserName.Value + "' or user_indenty='" + txtUserName.Value + "')  and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
                 If dt.Rows.Count > 0 Then
                     If dt.Rows(0).Item("active") = False Then
                         lblFail.Visible = True
@@ -32,13 +32,16 @@ Public Class Login
                     Session("comp_id") = dt.Rows(0).Item("comp_id").ToString
                     Session("group_id") = dt.Rows(0).Item("group_id").ToString
                     Response.Cookies.Add(userCookie)
-                    ' If dt.Rows(0).Item("User_Type").ToString = 2 Then
-
-                    '  Response.Redirect("~/partnerDashboard.aspx")
-                    '  Else
-                    Response.Redirect("~/main.aspx")
-                        ' End If
+                    If dt.Rows(0).Item("User_Type").ToString = "9" Then
+                        If Convert.ToBoolean(dt.Rows(0).Item("pass_changed")) Then
+                            Response.Redirect("~/main.aspx")
                         Else
+                            Response.Redirect("userPorfile.aspx")
+                        End If
+                    Else
+                        Response.Redirect("~/main.aspx")
+                    End If
+                Else
                     lblFail.Visible = True
                     lblFail.Text = "Login failed, Please try again"
                     lblFail.ForeColor = Drawing.Color.Yellow
@@ -47,7 +50,7 @@ Public Class Login
                 '############################################## Remember Me  end   #######################################
             Else
                 Dim dt As New DataTable
-                dt = DBManager.Getdatatable("select * from tblUsers where (User_PhoneNumber ='" + txtUserName.Value + "' or user_indenty='" + txtUserName.Value + "')  and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
+                dt = DBManager.Getdatatable("select * ,isNull(password_changed,0) as 'pass_changed' from tblUsers where (User_PhoneNumber ='" + txtUserName.Value + "' or user_indenty='" + txtUserName.Value + "')  and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
                 If dt.Rows.Count > 0 Then
                     If dt.Rows(0).Item("active") = False Then
                         lblFail.Visible = True
@@ -67,13 +70,15 @@ Public Class Login
                     userCookie("UserType") = dt.Rows(0).Item("User_Type").ToString
                     userCookie("comp_id") = dt.Rows(0).Item("comp_id").ToString
                     userCookie("group_id") = dt.Rows(0).Item("group_id").ToString
-                    ' If dt.Rows(0).Item("User_Type").ToString = 2 Then
-
-                    '  Response.Redirect("~/partnerDashboard.aspx")
-
-                    ' Else
-                    Response.Redirect("~/main.aspx")
-                    '  End If
+                    If dt.Rows(0).Item("User_Type").ToString = "9" Then
+                        If Convert.ToBoolean(dt.Rows(0).Item("pass_changed")) Then
+                            Response.Redirect("~/main.aspx")
+                        Else
+                            Response.Redirect("userPorfile.aspx")
+                        End If
+                    Else
+                        Response.Redirect("~/main.aspx")
+                    End If
                 Else
                     lblFail.Visible = True
                     lblFail.Text = "Login failed, please try again"

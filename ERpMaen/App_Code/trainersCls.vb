@@ -108,7 +108,7 @@ Public Class trainersCls
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
-            dt = DBManager.Getdatatable("select * from acd_Students where comp_id=" + comp_id)
+            dt = DBManager.Getdatatable("select * from tblUsers where comp_id=" + comp_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then

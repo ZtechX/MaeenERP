@@ -142,8 +142,8 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
             replaceClass(el, 'w3-button w3-ripple', 'w3-transparent'); el.disabled = true;
             for (let i = firstDay; i < 7 + firstDay; i++) {
                 let day = createElm('div', 'w3-cell unbreakable', isSmallScreen ? dispDate.getWeekdayShortName(i) : dispDate.getWeekdayName(i));
-                if (i % 7 == 5) day.className += ' w3-text-teal';
-                if (i % 7 == 0) day.className += ' w3-text-red';
+                //if (i % 7 == 5) day.className += ' w3-text-teal';
+                //if (i % 7 == 0) day.className += ' w3-text-red';
                 day.style.width = '14.2857%'; wdayTitleElm.appendChild(day)
             }
         },
@@ -192,9 +192,9 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                         grid.appendChild(pde); grid.appendChild(sde); row.appendChild(grid);
                         isToday = getCurTime() == ttc;
                         if (isToday) grid.className += ' w3-round-large';
-                        if (i % 7 == isFri) grid.className += isToday ? ' w3-teal' : ' w3-text-teal';
-                        else if (i % 7 == isSun) grid.className += isToday ? ' w3-red' : ' w3-text-red';
-                        else if (isToday) grid.className += ' w3-dark-grey';
+                        //if (i % 7 == isFri) grid.className += isToday ? ' w3-teal' : ' w3-text-teal';
+                        //else if (i % 7 == isSun) grid.className += isToday ? ' w3-red' : ' w3-text-red';
+                        if (isToday) grid.className += ' w3-dark-grey';
                         if (i <= ppdr || ppdr + pcdr < i) { grid.className += ' w3-disabled'; grid.style.cursor = 'default' }
                         else if (isToday) {
                             isDispToday = true;
@@ -219,6 +219,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                                 var res_type = res.split("/")[1]
                                 $(grid).prop("id", res_id);
                                 $(grid).css("color", "#ffffff");
+                                $(grid).removeClass("w3-dark-grey");
                                 $(grid).css("background-color", "#C09C67");
 
                                 $(grid).addClass("w3-round-large");
@@ -538,7 +539,10 @@ Calendar.language['ar'] = {
     weekdayNames: ["الأحَد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"],
     hMonthNames: ["المُحَرَّم", "صَفَر ", "رَبيع الاوَّل", "رَبيع الآخِر", "جُمادى الأولى", "جُمادى الآخِرة", "رَجَب", "شَعبان", "رَمَضان", "شَوّال", "ذو القَعدة", "ذو الحِجّة"]
 };
+var currend_Sender;
 function getmydate(sender) {
+    currend_Sender = sender;
+    
     var id = $(sender).prop('id');
     $("#lbldelivery_date_m").html($(sender).find("#dateval").attr('date'));
     $("#lbldelivery_date_h").html($(sender).find("#dateval").attr('hdate'));
@@ -566,30 +570,19 @@ function getmydate(sender) {
             if ($("#Login_userType").html() == "9") {
                 return;
             }
-            resetDivControls("receiving_delivery_details");
-            getSerial_correspondencesn()
-            getSerial_sessions()
-            define_type(2,2)
-            $("#child_info").css("display", "block")
-            $("#money_data").css("display", "none")
-            $("#lbldelivery_details").html("");
-            $('#tab_children').html("");
-            $("#ddldeliverer_id").html("");
-            $("#ddlreciever_id").html("");
-            $("#save_delivery_details").css("display", "block");
-            $("#receiving_delivery_details").dialog({
-                width: "800px",
-            });
+            
+            add_new_date();
         }
       
     }
    
 
-
 }
 function add_new_date() {
 
-    //resetDivControls("receiving_delivery_details");
+    resetDivControls("receiving_delivery_details");
+    getSerial_correspondencesn();
+    getSerial_sessions();
     $("#child_info").css("display", "block")
     $("#money_data").css("display", "none")
     $("#lbldelivery_details").html("");
@@ -600,42 +593,45 @@ function add_new_date() {
     $("#receiving_delivery_details").dialog({
         width: "800px",
     });
+    
     $("#ddlcase_id").val(0);
     $("#ddltype").val(1);
     $("#save_sessions").css("display", "none");
     $("#save_correspondences").css("display", "none");
     define_type(1, 2);
-
+    $("#receiving_delivery_details").find("#li_tabs a")[0].click();
 
 }
 function get_cases(date_m) {
     var h = 1;
     
     cases.get_cases(date_m, function (val) {
-        debugger
+        
         if (val[0] != "0" || val[1] != "0" || val[2] != "0") {
             if (val[0] != "0") {
             var data = JSON.parse(val[0]);
             var result = "";
                 var status = "تسليم واستلام الاولاد";
-                var _id = "";
-            for (var x = 0; x < data.length; x++) {
+                
+                for (var x = 0; x < data.length; x++) {
+                    var btn_show = "<button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + data[x].id + ",1,1); return false; '><i class='fa fa-eye'></i></button>";
+                    var btn_delete = "<button class='btn btn-xs btn-danger btn-quick' title='delete' onclick='delete_Time(" + data[x].id + ","+'"ash_case_receiving_delivery_details"'+"); return false; '><i class='fa fa-close'></i></button>";
+
                 if (data[x].type == 2) {
                     status = "تسليم واستلام النفقة";
                 }
-                debugger
-                _id = data[x].id;
+                
                 if ($("#Login_userType").html() == "9") {
-                    
+                    btn_delete = "";
                     if (data[x].selected_d != selected) {
-                        _id = "";
+                        btn_show = "";
                         }
                     
                 }
-                result = result + "<tr><td>" + parseInt(h) + "</td>" +
+               result = result + "<tr><td>" + parseInt(h) + "</td>" +
                     "<td id='case_name_search'>حالة#" + data[x].cases + "  " + "مقدمة من : " + data[x].person + " " + "رقم الهوية : " + data[x].num + "  " + "</td>" +
                     "<td id='status_case'>" + status + "</td>" +
-                    "<td><button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + _id+ ",1,1); return false; '><i class='fa fa-eye'></i></button></td>" +
+                   "<td>" + btn_show + btn_delete+"</td>" +
                     "</tr>";
                 h++;
             }
@@ -648,11 +644,15 @@ function get_cases(date_m) {
                 var data = JSON.parse(val[1]);
                 var result = "";
                 var status = "جلسات التهيئة والتدرج";
+               
                 for (var x = 0; x < data.length; x++) {
+                    var btn_show = "<button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + data[x].id + ",1,3); return false; '><i class='fa fa-eye'></i></button>";
+                    var btn_delete = "<button class='btn btn-xs btn-danger btn-quick' title='delete' onclick='delete_Time(" + data[x].id + ","+'"ash_case_sessions"'+"); return false; '><i class='fa fa-close'></i></button>";
+
                     result = result + "<tr><td>" + parseInt(h) + "</td>" +
                         "<td id='case_name_search'>حالة#" + data[x].cases + "  " + "مقدمة من : " + data[x].person + " " + "رقم الهوية : " + data[x].num + "  " + "</td>" +
                         "<td id='status_case'>" + status + "</td>" +
-                        "<td><button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + data[x].id + ",1,3); return false; '><i class='fa fa-eye'></i></button></td>" +
+                        "<td>" + btn_show + btn_delete+"</td>" +
                         "</tr>";
                     h++;
                 }
@@ -665,12 +665,16 @@ function get_cases(date_m) {
            
             var data = JSON.parse(val[2]);
             var result = "";
-            var status = "اجرائات العضو المباشر للحالة";
-            for (var x = 0; x < data.length; x++) {
+                var status = "اجرائات العضو المباشر للحالة";
+              
+                for (var x = 0; x < data.length; x++) {
+                    var btn_show = "<button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + data[x].id + ",1,4); return false; '><i class='fa fa-eye'></i></button>";
+                    var btn_delete = "<button class='btn btn-xs btn-danger btn-quick' title='delete' onclick='delete_Time(" + data[x].id + ","+'"ash_case_correspondences"'+"); return false; '><i class='fa fa-close'></i></button>";
+
                 result = result + "<tr><td>" + parseInt(h) + "</td>" +
                     "<td id='case_name_search'>حالة#" + data[x].cases + "  " + "مقدمة من : " + data[x].person + " " + "رقم الهوية : " + data[x].num + "  " + "</td>" +
                     "<td id='status_case'>" + status + "</td>" +
-                    "<td><button class='btn btn-xs btn-primary btn-quick' title='view Row' onclick='show_all(" + data[x].id + ",1,4); return false; '><i class='fa fa-eye'></i></button></td>" +
+                    "<td>" + btn_show + btn_delete +"</td>" +
                     "</tr>";
                 h++;
             }
@@ -680,12 +684,16 @@ function get_cases(date_m) {
         }
     }else {
             $("#cases_dates").html("");
+            $("#dateval[date*='" + date_m + "']").parent().css("background-color", "");
+            $("#dateval[date*='" + date_m + "']").parent().css("color", "");
+            $("#dateval[date*='" + date_m + "']").parent().removeProp('id');
+            $('#multi_cases').dialog("close");
         }
     });
 }
 
 function isAvailableToAccess(_date) {
-    debugger
+    
     var arr_d = Pub_date_m.split("/");
     var num_d = arr_d[2] + arr_d[1] + arr_d[0];
     if (_date >= num_d) {

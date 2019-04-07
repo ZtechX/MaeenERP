@@ -272,7 +272,7 @@ Public Class courseDetailsCls
             Dim success2 As Boolean = True
             For Each item As Object In studentDegrees
 
-                If DBManager.ExcuteQuery("UPDATE  acd_homework_delivery  set  type=2 , degree=" + item("hwmstuddegree").ToString + "where student_id=" + item("id").ToString + " And course_id=" + courseId + " And homework_id=" + ExamId) <> -1 Then
+                If DBManager.ExcuteQuery("UPDATE  acd_homework_delivery  set  type=2 , degree=" + item("hwmstuddegree").ToString + "where  dvtype=2 and type=1 and student_id=" + item("id").ToString + " And course_id=" + courseId + " And homework_id=" + ExamId) <> -1 Then
 
 
                     If Not PublicFunctions.TransUsers_logs("3193", "acd_homework_delivery", "تعديل", _sqlconn, _sqltrans) Then
@@ -1482,7 +1482,7 @@ Public Class courseDetailsCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select  acd_courses.id , acd_courses.name , acd_courses.description ,acd_courses.start_dt_hj ,acd_courses.category_id, tbllock_up.Description as 'course_category', acd_courses.status as 'StatusCourse', acd_courses.trainer_id ,tblUsers.full_name as'trainer_name',tblUsers.User_Image as 'trainerImage' ,acd_courses.price , DATEDIFF(Day,CONVERT(DATE,acd_courses.start_dt_hj, 103),CONVERT(DATE,acd_courses.end_dt_hj, 103)) as 'duration',lect_duration as 'lect_duration'  from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id join tbllock_up on tbllock_up.id=acd_courses.category_id   where acd_courses.id=" + course_id)
+            dt = DBManager.Getdatatable("select  acd_courses.id , acd_courses.lect_duration, acd_courses.name , acd_courses.description ,acd_courses.start_dt_hj ,acd_courses.category_id, tbllock_up.Description as 'course_category', acd_courses.status as 'StatusCourse', acd_courses.trainer_id ,tblUsers.full_name as'trainer_name',tblUsers.User_Image as 'trainerImage' ,acd_courses.price , DATEDIFF(Day,CONVERT(DATE,acd_courses.start_dt_hj, 103),CONVERT(DATE,acd_courses.end_dt_hj, 103)) as 'duration',lect_duration as 'lect_duration'  from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id join tbllock_up on tbllock_up.id=acd_courses.category_id   where acd_courses.id=" + course_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then

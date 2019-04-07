@@ -30,6 +30,18 @@
             end: '11:00 pm',  // what's the last avaliable hour
             top_hour: 12  // what's the top hour (in the clock face, 0 = midnight)
         });
+         var tp_correspondences= new ng.TimePicker({
+            input: 'txtcorrespondences_time',  // the input field id
+            start: '12:00 am',  // what's the first available hour
+            end: '11:00 pm',  // what's the last avaliable hour
+            top_hour: 12  // what's the top hour (in the clock face, 0 = midnight)
+        });
+        var tp_recieve= new ng.TimePicker({
+            input: 'txtrecieve_time',  // the input field id
+            start: '12:00 am',  // what's the first available hour
+            end: '11:00 pm',  // what's the last avaliable hour
+            top_hour: 12  // what's the top hour (in the clock face, 0 = midnight)
+        });
         
     });
 </script>
@@ -41,9 +53,9 @@
       <button class="btn btn-info btn-lg pull-left" onclick="getReceive_and_deliver(); return false;" style="margin-right:10px;">تقرير استلام وتسليم</button>
                <button class="btn btn-info btn-lg pull-left" onclick="getagreement(); return false;">طباعة اتفاق تنفيذ استلام وتسليم</button>
           </div>                                
-    <div class="card card-body">
+    <div class="card card-body" >
         <%-- start group 1--%>
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" id="li_tabs">
     <li class="active"><a data-toggle="tab" href="#menu0">اختر الحالة</a></li>
     <li><a data-toggle="tab" id="receiv_deliver" href="#menu1">المسلم و المستلم</a></li>
     <li><a data-toggle="tab" href="#menu2" id="child_info">الاولاد</a></li>
@@ -110,8 +122,6 @@
            
             </div>
         </div>
-
-
         <%--end of group1--%>
         <div class="col-md-12 form-group ">
             <div class="col-md-3 col-sm-12">
@@ -126,6 +136,41 @@
            <button class="btn btn-primary pull-left"" type="button" onclick="getReview('reciever_id')">طباعة إفادة مراجعة </button>
                 </div>
         </div>
+               
+<div class="col-md-12 form-group " id="Divback_dt">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        
+                                                                        <label>يوم إعادة التسليم</label>
+                                                                    </div>
+
+                                                                    <div class="col-md-9 col-sm-12">
+ <asp:DropDownList runat="server" class="form-control" ClientIDMode="Static" ID="ddl_day_nm" dbcolumn="back_day_nm">
+                                                                               <asp:ListItem Text="أختر" Value="0" Selected="True" ></asp:ListItem>
+                                                                               <asp:ListItem Text="السبت" Value="Saturday" ></asp:ListItem>
+                                                                               <asp:ListItem Text="الاحد" Value="Sunday" ></asp:ListItem>
+                                                                               <asp:ListItem Text="الاتنين" Value="Monday" ></asp:ListItem>
+                                                                               <asp:ListItem Text="الثلاثاء" Value="Tuesday" ></asp:ListItem>
+                                                                               <asp:ListItem Text="الاربعاء" Value="Wednesday" ></asp:ListItem>
+                                                                               <asp:ListItem Text="الخميس" Value="Thursday" ></asp:ListItem>
+                                                                               <asp:ListItem Text="الجمعة" Value="Friday" ></asp:ListItem>
+                                                                           </asp:DropDownList>
+                                                                      
+
+                                                                    </div>
+                                                                </div>
+                <div class="col-md-12 form-group" id="Div_recieve_time">
+                  <div class="col-md-3 col-sm-12">
+                      <label>
+                      وقت الاستلام والتسليم </label>
+                  </div>
+
+                  <div class="col-md-9 col-sm-12" id="recieve_time">
+                      <input  onkeypress="return isNumber(event);" readonly dbcolumn="recieveTime" type="time" id="txtrecieve_time"
+                          class="form-control" runat="server" clientidmode="Static" />
+
+                      <br />
+                  </div>
+              </div>
           </div>
           </div>
       <div id="menu2" class="tab-pane fade">
@@ -370,11 +415,11 @@
               <div class="col-md-12 form-group ">
                   <div class="col-md-3 col-sm-12">
                       <label class="label-required">
-                      وقت الدخول </lable>
+                      وقت الدخول </label>
                   </div>
 
                   <div class="col-md-9 col-sm-12" id="time_entry_time">
-                      <input onkeypress="return isNumber(event);" readonly dbcolumn="entry_time" type="time" id="txtentry_time"
+                      <input required onkeypress="return isNumber(event);" readonly dbcolumn="entry_time" type="time" id="txtentry_time"
                           class="form-control" runat="server" clientidmode="Static" />
 
                       <br />
@@ -383,11 +428,11 @@
               <div class="col-md-12 form-group ">
                   <div class="col-md-3 col-sm-12">
                       <label class="label-required">
-                      وقت الخروج </lable>
+                      وقت الخروج </label>
                   </div>
 
                   <div class="col-md-9 col-sm-12" id="time_exite_time">
-                      <input onkeypress="return isNumber(event);" dbcolumn="exite_time" type="time" id="txtexite_time"
+                      <input required onkeypress="return isNumber(event);" dbcolumn="exite_time" type="time" id="txtexite_time"
                           class="form-control" runat="server" readonly clientidmode="Static" />
 
                       <br />
@@ -448,7 +493,19 @@
 
                   </div>
               </div>
+              <div class="col-md-12 form-group ">
+                  <div class="col-md-3 col-sm-12">
+                      <label class="label-required">
+                      وقت الاجراء </label>
+                  </div>
 
+                  <div class="col-md-9 col-sm-12" id="correspondences_entry_time">
+                      <input required onkeypress="return isNumber(event);" readonly dbcolumn="correspondences_time" type="time" id="txtcorrespondences_time"
+                          class="form-control" runat="server" clientidmode="Static" />
+
+                      <br />
+                  </div>
+              </div>
                  <div class="col-sm-12 form-group">
 
             <div class="col-md-3 col-sm-12">

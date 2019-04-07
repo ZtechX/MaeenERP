@@ -3970,7 +3970,10 @@ Public Class WebService
                         quaryStr = quaryStr + "  where ash_orders.case_id in(select id from ash_cases where advisor_id = " + LoginInfo.getrelatedId() + ")"
                     ElseIf userType = "9" Then
                         quaryStr = quaryStr + "  where ash_orders.case_id in(select id from ash_cases where person1_id = " + LoginInfo.getrelatedId() + " or person2_id =" + LoginInfo.getrelatedId() + ")"
-
+                    ElseIf formName = "Students" Then
+                        quaryStr = quaryStr + " and tblUsers.comp_id=" + LoginInfo.GetComp_id()
+                    ElseIf formName = "Trainers" Then
+                        quaryStr = quaryStr + " and tblUsers.comp_id=" + LoginInfo.GetComp_id()
                     End If
 
                 ElseIf formName = "CommonQuest" Or formName = "email_setting" Or formName = "Signature_setting" Then
@@ -4577,4 +4580,23 @@ Public Class WebService
     Public Sub SetUserDetailsToGlobalVar(ByVal UserDetails As String)
         clsGeneralVariables.userDetails = UserDetails
     End Sub
+
+    ''' <summary>
+    ''' get form keys based on form name
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function resetPassword(ByVal userName As String) As String
+        Try
+            Dim dt As New DataTable
+            dt = DBManager.Getdatatable("select User_Password from tblUsers where isNull(deleted,0) != 1 and (User_PhoneNumber ='" + userName + "' or user_indenty='" + userName + "')")
+            If dt.Rows.Count <> 0 Then
+                Return dt.Rows(0)(0).ToString()
+            End If
+            Return ""
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
+
 End Class

@@ -6,7 +6,7 @@ var formAutoCodeControl = "lblmainid";
 
 
 var subjectList = [];
-var records_per_page = 1;
+var records_per_page = 4;
 var numPages = 0;
 var current_page = 1;
 
@@ -37,6 +37,50 @@ function resetAll() {
 }
 
 
+
+function addfinancial() {
+    //add financial
+
+    try {
+        debugger
+
+        if (checkRequired("divformstudentFinanc") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+
+        }
+        else {
+            $("#SavedivLoader").show();
+         
+            var diplomeID = ($("#Lbldeploma_id").html());
+
+            var basicData = generateJSONFromControls("divformstudentFinanc");
+
+            var Id = "";
+
+            Diploma_CoursesCls.Savefinanc(Id, diplomeID, Pub_date_m, Pub_date_hj, basicData, function (val) {
+                if (val == true) {
+                    $("#SavedivLoader").hide();
+                    // debugger;
+                    alert("تم الحفظ بنجاح");
+                    $("#add_Financial").modal('hide');
+                  
+                    resetDivControls("divformstudentFinanc");
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
 
 function savediplome() {
 
@@ -156,7 +200,7 @@ function changePage(page) {
         data = data + `<div class="col-md-4 col-sm-12">
                     <div class="block">
                         <div class="block-title">
-                            <h5><a href="DiplomaSubjectDetails.aspx?subject_id=${element.id}">${element.subjectName}</a></h5>
+                            <h5><a href="DiplomaSubjectDetails.aspx?code=${element.code}">${element.subjectName}</a></h5>
                         </div>
                         <div class="block-desc">
                             <p class="desc">${element.subject_goal}</p>
@@ -246,27 +290,11 @@ function Studentlistview() {
 }
 
 
-function archiveDiplome() {
-
-    var f = confirm("هل  تريد ارشفة الدورة");
-    if (f == true) {
-
-        var diplomeID = ($("#Lbldeploma_id").html());
-
-        Diploma_CoursesCls.Archive_Diplome(diplomeID, function (val) {
-
-            if (val[0] == 1) {
-                $("#SavedivLoader").hide();
-                alert("تمت الارشفه بنجاح  ");
-                window.location.replace("Diplomas.aspx");
-
-            } else {
-                alert('لم يتم الارشيف');
-            }
-
-        });
-
-    }
+function Archive() {
+    debugger
+    
+    var diplomecode = ($("#lbldiplomeCode").html());
+    window.location.replace("Archived_DiplomaCourses?code=" + diplomecode)
 
 }
 
@@ -490,10 +518,10 @@ function edit(val) {
 
 function drawCourses(){
     try {
-        debugger
+        //debugger
         var diplomeID = ($("#Lbldeploma_id").html());
         Diploma_CoursesCls.get_Courses(diplomeID,"",function (val) {
-            debugger
+           
           //  var data = "";
             console.log(val);
             var arr1 = JSON.parse(val[1]);

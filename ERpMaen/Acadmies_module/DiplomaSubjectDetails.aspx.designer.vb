@@ -32,6 +32,33 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents Lblsubject_id As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''LblDiplome_id control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LblDiplome_id As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''subject_code control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents subject_code As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''lbldiplomeCode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbldiplomeCode As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''lblStudentID control.
     '''</summary>
     '''<remarks>
@@ -68,13 +95,13 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents ddlsubject As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''Text4 control.
+    '''lecture_time control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text4 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents lecture_time As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''ddlsemster control.
@@ -275,6 +302,78 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents hall As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
+    '''TextBox6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox6 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''hwansfileurl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hwansfileurl As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
+    '''fnamehwans control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fnamehwans As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''fuFile5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fuFile5 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
+    '''TextBox7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox7 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''examansfileurl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents examansfileurl As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
+    '''fnameExamans control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fnameExamans As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''fuFile6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fuFile6 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
     '''Result1 control.
     '''</summary>
     '''<remarks>
@@ -347,15 +446,6 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents details As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''notes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents notes As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''Result2 control.
     '''</summary>
     '''<remarks>
@@ -426,15 +516,6 @@ Partial Public Class DiplomaSubjectDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''notes2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents notes2 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''activityDegree control.
