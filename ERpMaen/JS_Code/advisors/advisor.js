@@ -15,7 +15,7 @@ $(function () {
 
     try {
         advisor.checkUser(function (val) {
-            debugger
+            
             if (val == "Superadmin") {
                 form_load();
                 //getAdvisorCode();

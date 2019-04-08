@@ -68,33 +68,6 @@ Partial Public Class report_settings
     Protected WithEvents pnlFunctions As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''cmdAdd control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cmdAdd As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''cmdDelete control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cmdDelete As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''pnlDelete control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlDelete As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
     '''cmdUpdate control.
     '''</summary>
     '''<remarks>
@@ -149,67 +122,58 @@ Partial Public Class report_settings
     Protected WithEvents pnlForm As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''ddltype_id control.
+    '''imgItemURL_header control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ddltype_id As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents imgItemURL_header As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''RequiredFieldValidator4 control.
+    '''fuPhoto_header control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents fuPhoto_header As Global.AjaxControlToolkit.AsyncFileUpload
     
     '''<summary>
-    '''imgItemURL control.
+    '''photo_nm1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents imgItemURL As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents photo_nm1 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''imgLoader control.
+    '''imgItemURL_footer control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents imgLoader As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents imgItemURL_footer As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''fuPhoto1 control.
+    '''fuPhoto_footer control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
+    Protected WithEvents fuPhoto_footer As Global.AjaxControlToolkit.AsyncFileUpload
     
     '''<summary>
-    '''photo_nm control.
+    '''photo_nm_footer control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents photo_nm As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''DynamicTable control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents DynamicTable As Global.ERpMaen.DynamicTable
+    Protected WithEvents photo_nm_footer As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lblRes control.

@@ -570,14 +570,14 @@ Public Class cases
                 dictNot.Add("RefCode", details_id)
                 dictNot.Add("NotTitle", "تذكير استلام وتسليم")
                 dictNot.Add("Date", dictBasicDataJson("date_m").ToString)
-                dictNot.Add("AssignedTo", dictBasicDataJson("deliverer_id"))
+                dictNot.Add("AssignedTo", LoginInfo.getperson_id(dictBasicDataJson("deliverer_id")))
                 dictNot.Add("CreatedBy", LoginInfo.GetUser__Id())
                 dictNot.Add("Remarks", "ستلام وتسليم")
                 dictNot.Add("FormUrl", "Aslah_Module/Calender.aspx?id=" + details_id)
                 If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
                     SaveNot = False
                 End If
-                dictNot("AssignedTo") = dictBasicDataJson("reciever_id")
+                dictNot("AssignedTo") = LoginInfo.getperson_id(dictBasicDataJson("reciever_id"))
                 If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
                     SaveNot = False
                 End If
@@ -586,7 +586,7 @@ Public Class cases
                 If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
                     SaveNot = False
                 End If
-                dictNot("AssignedTo") = dictBasicDataJson("deliverer_id")
+                dictNot("AssignedTo") = LoginInfo.getperson_id(dictBasicDataJson("deliverer_id"))
                 If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
                     SaveNot = False
                 End If
@@ -1691,13 +1691,13 @@ Public Class cases
                     dictNotification.Add("Remarks", "طلب لتاجيل/إلغاء معاد")
                     dictNotification.Add("FormUrl", "Aslah_Module/orders.aspx?id=" + id)
                     dictNotification.Add("NotTitle", Message)
-                    dictNotification.Add("AssignedTo", dt.Rows(0).Item("advisor_id").ToString)
+                    dictNotification.Add("AssignedTo", LoginInfo.getadvisorUser_id(dt.Rows(0).Item("advisor_id")))
                     If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
                         _sqltrans.Rollback()
                         _sqlconn.Close()
                         Return "False|لم يتم الحفظ"
                     End If
-                    dictNotification("AssignedTo") = OtherPerson
+                    dictNotification("AssignedTo") = LoginInfo.getadvisorUser_id(OtherPerson)
                     If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
                         _sqltrans.Rollback()
                         _sqlconn.Close()

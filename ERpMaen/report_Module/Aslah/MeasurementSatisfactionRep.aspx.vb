@@ -14,11 +14,20 @@ Public Class MeasurementSatisfactionRep
     End Sub
     Private Sub getReportData()
         Try
+            Dim dt1 As New DataTable
+            dt1 = DBManager.Getdatatable("SELECT isNull(header_img,'') img_header,isNull(footer_img,'') img_footer FROM tblreport_settings where isNull(deleted,0) !=1 and comp_id=" + LoginInfo.GetComp_id())
+
             Dim rdoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument
             rdoc.Load(Server.MapPath("MeasurementSatisfaction.rpt"))
 
-            ' rdoc.SetParameterValue("img_header_URL", dt1.Rows(0)("img_header").ToString)
-            ' rdoc.SetParameterValue("img_footer_URL", dt1.Rows(0)("img_footer").ToString)
+            If dt1.Rows.Count <> 0 Then
+                rdoc.SetParameterValue("img_header_URL", dt1.Rows(0)("img_header").ToString)
+                rdoc.SetParameterValue("img_footer_URL", dt1.Rows(0)("img_footer").ToString)
+            Else
+                rdoc.SetParameterValue("img_header_URL", "")
+                rdoc.SetParameterValue("img_footer_URL", "")
+
+            End If
             CrystalReportViewer1.ReportSource = rdoc
 
             CrystalReportViewer1.DataBind()

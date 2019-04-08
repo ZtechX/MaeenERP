@@ -382,4 +382,13 @@ Public Class LoginInfo
         Return ""
     End Function
 
+    Public Shared Function getperson_id(ByVal id As String) As String
+        Dim dt As New DataTable
+        dt = DBManager.Getdatatable("select id from tblUsers where User_Type=9 and related_id=" + id)
+
+        If dt.Rows.Count <> 0 Then
+            Return dt.Rows(0)(0).ToString
+        End If
+        Return ""
+    End Function
 End Class

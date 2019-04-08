@@ -32,65 +32,11 @@ Partial Public Class Notification1
     Protected WithEvents up As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''lblRes control.
+    '''DynamicTable control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblRes As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblUserId control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblUserId As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''pnlSearch control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlSearch As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''txtSearch control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtPager control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtPager As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtpagerFilteredTextBoxExtender control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtpagerFilteredTextBoxExtender As Global.AjaxControlToolkit.FilteredTextBoxExtender
-    
-    '''<summary>
-    '''gvNotification control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents gvNotification As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents DynamicTable As Global.ERpMaen.DynamicTable
 End Class

@@ -130,7 +130,10 @@
                     <%--compopox--%>
                       
                     <div class="container">
+                        
                         <div class="row">
+                             <button class="btn btn-info btn-lg pull-left" onclick="GetMeasurementSatisfaction(); return false;">نموذج قياس رضا المستفيد </button>
+                              
                             <div class="ui-widget" dir="rtl">
                                 <label>الحالات: </label>
                                 <select  id="combobox">

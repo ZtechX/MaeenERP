@@ -449,6 +449,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.CourseDetails._finance_div">
+<summary>
+finance_div control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.CourseDetails._res1">
 <summary>
 res1 control.
@@ -494,9 +503,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.CourseDetails._Text2">
+<member name="F:ERpMaen.CourseDetails._lecture_duration">
 <summary>
-Text2 control.
+lecture_duration control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1232,6 +1241,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.DiplomaCourses._lbldiplomeCode">
+<summary>
+lbldiplomeCode control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.DiplomaCourses._ddlcourse">
 <summary>
 ddlcourse control.
@@ -1403,6 +1421,60 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.DiplomaCourses._amount">
+<summary>
+amount control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaCourses._ddlpayment_type">
+<summary>
+ddlpayment_type control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaCourses._TextBox8">
+<summary>
+TextBox8 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaCourses._fileurlfinanc">
+<summary>
+fileurlfinanc control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaCourses._FnameFinanc">
+<summary>
+FnameFinanc control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaCourses._fufile7">
+<summary>
+fufile7 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.Diplomas._ToolkitScriptManager1">
 <summary>
 ToolkitScriptManager1 control.
@@ -1484,6 +1556,33 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._LblDiplome_id">
+<summary>
+LblDiplome_id control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._subject_code">
+<summary>
+subject_code control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._lbldiplomeCode">
+<summary>
+lbldiplomeCode control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.DiplomaSubjectDetails._lblStudentID">
 <summary>
 lblStudentID control.
@@ -1520,9 +1619,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.DiplomaSubjectDetails._Text4">
+<member name="F:ERpMaen.DiplomaSubjectDetails._lecture_time">
 <summary>
-Text4 control.
+lecture_time control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1727,6 +1826,78 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._TextBox6">
+<summary>
+TextBox6 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._hwansfileurl">
+<summary>
+hwansfileurl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._fnamehwans">
+<summary>
+fnamehwans control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._fuFile5">
+<summary>
+fuFile5 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._TextBox7">
+<summary>
+TextBox7 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._examansfileurl">
+<summary>
+examansfileurl control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._fnameExamans">
+<summary>
+fnameExamans control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._fuFile6">
+<summary>
+fuFile6 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.DiplomaSubjectDetails._Result1">
 <summary>
 Result1 control.
@@ -1799,15 +1970,6 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.DiplomaSubjectDetails._notes">
-<summary>
-notes control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:ERpMaen.DiplomaSubjectDetails._Result2">
 <summary>
 Result2 control.
@@ -1874,15 +2036,6 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.DiplomaSubjectDetails._TextBox3">
 <summary>
 TextBox3 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DiplomaSubjectDetails._notes2">
-<summary>
-notes2 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -8627,108 +8780,14 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.Notification1._lblRes">
+<member name="F:ERpMaen.Notification1._DynamicTable">
 <summary>
-lblRes control.
+DynamicTable control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
-</member>
-<member name="F:ERpMaen.Notification1._lblUserId">
-<summary>
-lblUserId control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.Notification1._pnlSearch">
-<summary>
-pnlSearch control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.Notification1._txtSearch">
-<summary>
-txtSearch control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.Notification1._txtPager">
-<summary>
-txtPager control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.Notification1._txtpagerFilteredTextBoxExtender">
-<summary>
-txtpagerFilteredTextBoxExtender control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.Notification1._gvNotification">
-<summary>
-gvNotification control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="M:ERpMaen.Notification1.CollectCondition">
- <summary>
- Collect condition string to fill gridview
- </summary>
-</member>
-<member name="M:ERpMaen.Notification1.FillGrid">
- <summary>
- Fill gridview with data from tblNotifications.
- </summary>
-</member>
-<member name="M:ERpMaen.Notification1.BindGridView">
- <summary>
- Load notification data from tblNotifications into the gridview.
- </summary>
-</member>
-<member name="M:ERpMaen.Notification1.gvNotifications_DataBound">
- <summary>
- Handle DataBound event of gvNotification.
- </summary>
-</member>
-<member name="M:ERpMaen.Notification1.Search(System.Object,System.EventArgs)">
- <summary>
- filter gvNotification
- </summary>
-</member>
-<member name="M:ERpMaen.Notification1.GvItems_PageIndexChanging(System.Object,System.Web.UI.WebControls.GridViewPageEventArgs)">
- <summary>
- Paging function
- </summary>
-</member>
-<member name="M:ERpMaen.Notification1.Txtpager_TextChanged(System.Object,System.EventArgs)">
- <summary>
- Set Number of rows at every page
- </summary>
-</member>
-<member name="M:ERpMaen.Notification1.Gv_Sorting(System.Object,System.Web.UI.WebControls.GridViewSortEventArgs)">
- <summary>
- Sorting gvNotifications
- </summary>
 </member>
 <member name="M:ERpMaen.PublicFunctions.ConvertDataTabletoString(System.Data.DataTable)">
  <summary>
@@ -10221,33 +10280,6 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.report_settings._cmdAdd">
-<summary>
-cmdAdd control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.report_settings._cmdDelete">
-<summary>
-cmdDelete control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.report_settings._pnlDelete">
-<summary>
-pnlDelete control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:ERpMaen.report_settings._cmdUpdate">
 <summary>
 cmdUpdate control.
@@ -10302,63 +10334,54 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.report_settings._ddltype_id">
+<member name="F:ERpMaen.report_settings._imgItemURL_header">
 <summary>
-ddltype_id control.
+imgItemURL_header control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.report_settings._RequiredFieldValidator4">
+<member name="F:ERpMaen.report_settings._fuPhoto_header">
 <summary>
-RequiredFieldValidator4 control.
+fuPhoto_header control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.report_settings._imgItemURL">
+<member name="F:ERpMaen.report_settings._photo_nm1">
 <summary>
-imgItemURL control.
+photo_nm1 control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.report_settings._imgLoader">
+<member name="F:ERpMaen.report_settings._imgItemURL_footer">
 <summary>
-imgLoader control.
+imgItemURL_footer control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.report_settings._fuPhoto1">
+<member name="F:ERpMaen.report_settings._fuPhoto_footer">
 <summary>
-fuPhoto1 control.
+fuPhoto_footer control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.report_settings._photo_nm">
+<member name="F:ERpMaen.report_settings._photo_nm_footer">
 <summary>
-photo_nm control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.report_settings._DynamicTable">
-<summary>
-DynamicTable control.
+photo_nm_footer control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -13252,6 +13275,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.DeliveryDate._txtrecieve_time">
+<summary>
+txtrecieve_time control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.DeliveryDate._Text11">
 <summary>
 Text11 control.
@@ -13444,6 +13476,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.DeliveryDate._ddltype2">
 <summary>
 ddltype2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DeliveryDate._txtcorrespondences_time">
+<summary>
+txtcorrespondences_time control.
 </summary>
 <remarks>
 Auto-generated field.

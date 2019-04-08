@@ -497,7 +497,7 @@ function applyDatatable(val) {
                     });
 
                 } else if (getFormName() == "orders") {
-                    debugger
+                    
                     if ($('td:last-child', nRow).html() == "2") {
                         $('td:last-child', nRow).html("تمت الموافقة");
                     } else if ($('td:last-child', nRow).html() == "3") {

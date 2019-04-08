@@ -391,7 +391,7 @@
               <div class="col-md-12 form-group ">
                   <div class="col-md-3 col-sm-12">
                       <label>
-                      رقم الجلسة  </lable>
+                      رقم الجلسة  </label>
                   </div>
 
                   <div class="col-md-9 col-sm-12">
@@ -449,7 +449,8 @@
                 <br />
             </div>
         </div>
-
+                   <button class="btn btn-primary" type="button" onclick="getAttendanceRegist()">نموذج تسجيل حضور تهيئة وتدرج </button>
+             
           </div>
 
             </div>

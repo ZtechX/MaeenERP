@@ -19,6 +19,9 @@ $(function () {
     }
 });
 
+function GetMeasurementSatisfaction() {
+    window.open("../report_Module/Aslah/MeasurementSatisfactionRep", "_blank");
+}
 
 function resetAll() {
     try {

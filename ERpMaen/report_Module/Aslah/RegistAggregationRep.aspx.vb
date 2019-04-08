@@ -8,8 +8,8 @@ Public Class RegistAggregationRep
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
-        ' Dim Case_id = Request.QueryString("Case_id")
-        Dim Conc_id = "7"
+        Dim Conc_id = Request.QueryString("Conc_id")
+
         If String.IsNullOrWhiteSpace(Conc_id) Then
             Dim script As String = "<script type='text/javascript' defer='defer'> alert('لا يوجد بيانات متاحة للعرض');</script>"
             ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)
@@ -25,7 +25,7 @@ Public Class RegistAggregationRep
             Dim message As String = " لا يوجد بيانات متاحة للعرض"
             Dim rdoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument
             Dim dt1 As New DataTable
-            'dt1 = DBManager.Getdatatable("SELECT img_header,img_footer FROM tbl_company_info")
+            dt1 = DBManager.Getdatatable("SELECT isNull(header_img,'') img_header,isNull(footer_img,'') img_footer FROM tblreport_settings where isNull(deleted,0) !=1 and comp_id=" + LoginInfo.GetComp_id())
             Dim dt2 As New DataTable
 
             Dim query = "SELECT  code,persons1.name  as 'Pfrom' ,persons1.indenty as 'Pfrom_num',
@@ -48,8 +48,14 @@ persons2.name as 'PAgainst',date_h,notes,persons2.indenty as 'PAgainst_num'
 
                 rdoc.Load(Server.MapPath("RegistAggregation.rpt"))
                 rdoc.SetDataSource(ds.Tables("Details"))
-                ' rdoc.SetParameterValue("img_header_URL", dt1.Rows(0)("img_header").ToString)
-                ' rdoc.SetParameterValue("img_footer_URL", dt1.Rows(0)("img_footer").ToString)
+                If dt1.Rows.Count <> 0 Then
+                    rdoc.SetParameterValue("img_header_URL", dt1.Rows(0)("img_header").ToString)
+                    rdoc.SetParameterValue("img_footer_URL", dt1.Rows(0)("img_footer").ToString)
+                Else
+                    rdoc.SetParameterValue("img_header_URL", "")
+                    rdoc.SetParameterValue("img_footer_URL", "")
+
+                End If
                 CrystalReportViewer1.ReportSource = rdoc
 
                 CrystalReportViewer1.DataBind()

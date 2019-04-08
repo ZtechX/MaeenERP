@@ -27,19 +27,24 @@ Public Class ReviewRep
             Dim message As String = " لا يوجد بيانات متاحة للعرض"
             Dim rdoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument
             Dim dt1 As New DataTable
-            'dt1 = DBManager.Getdatatable("SELECT img_header,img_footer FROM tbl_company_info")
+            dt1 = DBManager.Getdatatable("SELECT isNull(header_img,'') img_header,isNull(footer_img,'') img_footer FROM tblreport_settings where isNull(deleted,0) !=1 and comp_id=" + LoginInfo.GetComp_id())
             Dim dt2 As New DataTable
 
-            Dim query = "SELECT persons.name
-                FROM ash_case_receiving_delivery_details details left join ash_case_persons persons on details." + type + "=persons.id where details.deleted !=1 and details.id=" + details_id
+            Dim query = "SELECT persons.name FROM ash_case_receiving_delivery_details details left join ash_case_persons persons on details." + type + "=persons.id where details.deleted !=1 and details.id=" + details_id
             dt2 = DBManager.Getdatatable(query)
             If dt2.Rows.Count <> 0 Then
 
                 rdoc.Load(Server.MapPath("Review.rpt"))
                 rdoc.SetParameterValue("name", dt2.Rows(0)("name").ToString)
                 rdoc.SetParameterValue("_date", _date)
-                ' rdoc.SetParameterValue("img_header_URL", dt1.Rows(0)("img_header").ToString)
-                ' rdoc.SetParameterValue("img_footer_URL", dt1.Rows(0)("img_footer").ToString)
+                If dt1.Rows.Count <> 0 Then
+                    rdoc.SetParameterValue("img_header_URL", dt1.Rows(0)("img_header").ToString)
+                    rdoc.SetParameterValue("img_footer_URL", dt1.Rows(0)("img_footer").ToString)
+                Else
+                    rdoc.SetParameterValue("img_header_URL", "")
+                    rdoc.SetParameterValue("img_footer_URL", "")
+
+                End If
                 CrystalReportViewer1.ReportSource = rdoc
 
                 CrystalReportViewer1.DataBind()

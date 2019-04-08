@@ -994,7 +994,7 @@ function show_all(id, flag, type = "0") {
          case_id = $("#ddlcase_id").val();
     }
     $("#caseReportDive").show();
-    $("lblcase_id").html(case_id);
+   
     //get_date_expenses(case_id);
     //get_date_delivery(case_id)
     get_checked_tab(case_id);
@@ -1165,12 +1165,13 @@ function show_all(id, flag, type = "0") {
                 $("#expense_details_archive").html("");
 
             }
-      
+        $("#lblcase_id").html($("#ddlcase_id").val());
     });
 
 }
 function show_calender_details() {
     var case_id = $("#ddlcase_id").val();
+    $("#lblcase_id").html(case_id);
     get_date_children(case_id);
     get_persons(case_id, "");
     get_case_expense_basic();
@@ -1497,25 +1498,27 @@ function getCaseDetails() {
     window.open("../report_Module/Aslah/CaseDetailsRep?Case_id=" + $("#combobox").val(), "_blank");
 }
 function getReceive_and_deliver() {
-    window.open("../report_Module/Aslah/Receive_and_deliverRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
+    window.open("../report_Module/Aslah/Receive_and_deliverRep?Case_id=" + $("#lblcase_id").html() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
 }
 function getProceedingReps(DeliveryProceeding){
-    window.open("../report_Module/Aslah/ReceiveProceedingRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html() , "_blank");
+    window.open("../report_Module/Aslah/ReceiveProceedingRep?Case_id=" + $("#lblcase_id").html() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html() , "_blank");
     DeliveryProceeding();
 }
 function DeliveryProceeding() {
-    window.open("../report_Module/Aslah/DeliveryProceedingRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
+    window.open("../report_Module/Aslah/DeliveryProceedingRep?Case_id=" + $("#lblcase_id").html() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
 }
-function getAttendanceRegist(session_id) {
-    window.open("../report_Module/Aslah/AttendanceRegistRep?Case_id=" + $("#combobox").val() + "&session_id="+session_id, "_blank");
+function getAttendanceRegist() {
+    
+    window.open("../report_Module/Aslah/AttendanceRegistRep?Case_id=" + $("#lblcase_id").html() + "&session_id=" + $("#lbl_sessions_id").html(), "_blank");
 }
 function getConciliation() {
     window.open("../report_Module/Aslah/ConciliationRep?Conc_id=" + $("#case_conciliation").find("#lblconciliation_id").html(), "_blank");
 }
 function getagreement() {
-    window.open("../report_Module/Aslah/agreementRep?Case_id=" + $("#receiving_delivery_details").find("#ddlcase_id").val() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
+    window.open("../report_Module/Aslah/agreementRep?Case_id=" + $("#lblcase_id").html() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
 }
 function getReview(type) {
+    debugger
     var person_id ;
     if (type == "deliverer_id") {
         person_id = $("#receiving_delivery_details").find("#ddldeliverer_id").val();
@@ -1527,6 +1530,9 @@ function getReview(type) {
 }
 function getProcedure() {
     window.open("../report_Module/Aslah/ProceduresRep?Case_id=" + $("#combobox").val() , "_blank");
+}
+function GetMeasurementSatisfaction() {
+    window.open("../report_Module/Aslah/MeasurementSatisfactionRep", "_blank");
 }
 function getTimeline(val) {
     window.open("../Aslah_Module/Timeline?case_id=" + $("#combobox").val() + "&done=" + val +"&start_dt=''&end_dt=''", "_blank");

@@ -37,8 +37,8 @@ Public Class report_settings
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
                 '  
-                Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='RS' and comp_id=" + LoginInfo.GetComp_id(), "description", "id", "")
-                clsddltype5.SetComboItems(ddltype_id, "", True, "--اختر--", False)
+                'Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='RS' and comp_id=" + LoginInfo.GetComp_id(), "description", "id", "")
+                'clsddltype5.SetComboItems(ddltype_id, "", True, "--اختر--", False)
 
 
 
@@ -60,17 +60,21 @@ Public Class report_settings
             i = rnd.Next(10000, 99999)
             '  namer = i.ToString
             Select Case sender.id.ToString
-                Case "fuPhoto1"
-                    fu = fuPhoto1
-                    Path = "Settings_Module/images_reports/"
+                Case "fuPhoto_header"
+                    fu = fuPhoto_header
+                Case "fuPhoto_footer"
+                    fu = fuPhoto_footer
+            End Select
+
+            Path = "Settings_Module/images_reports/"
                     Prepare_Sheet(fu)
                     Dim PostedPhoto As System.Drawing.Image = System.Drawing.Image.FromStream(fu.PostedFile.InputStream)
                     Dim ImgHeight As Integer = PostedPhoto.Height
                     Dim ImgWidth As Integer = PostedPhoto.Width
                     x = CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, ImgWidth, ImgHeight, ImgWidth, ImgHeight, "Employees", namer)
                     Session("UserPhoto") = x
-            End Select
-            ClearContents(sender)
+
+                    ClearContents(sender)
             '    ScriptManager.RegisterClientScriptBlock(Me, Me.[GetType](), "newfile", "document.getElementById('imgEmployee').src = '" & url & "';", True)
         Catch ex As Exception
             'lblRes.Text = "Failure with Message " & ex.Message.ToString

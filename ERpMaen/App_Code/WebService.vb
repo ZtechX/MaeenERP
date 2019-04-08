@@ -3298,7 +3298,7 @@ Public Class WebService
     <System.Web.Script.Services.ScriptMethod()>
     Public Function GetNotifications(ByVal UserId As String) As String
         Try
-            Dim dtNotifications = DBManager.Getdatatable("select ID, RefCode, RefType, NotTitle, Remarks, Date as NotDate, IsSeen from tblNotifications where AssignedTo='" + UserId + "' and Status=1  order by date desc")
+            Dim dtNotifications = DBManager.Getdatatable("select ID, RefCode, RefType, NotTitle, Remarks, Date as NotDate, IsSeen,FormUrl from tblNotifications where AssignedTo='" + UserId + "' and isNull(Deleted,0) !=1  order by date desc")
             If dtNotifications.Rows.Count > 0 Then
                 Return ConvertDataTabletoString(dtNotifications)
             End If
@@ -3325,7 +3325,7 @@ Public Class WebService
                 SeenValue = "True"
             End If
             If DBManager.ExcuteQuery("update tblNotifications set IsSeen = '" + SeenValue + "' where Id = '" + NotId + "'") = 1 Then
-                Dim dtCount = DBManager.Getdatatable("select Count(ID) as NotCount from tblNotifications where AssignedTo='" + UserId + "' and Status=1 and CONVERT(DATE,tblNotifications.Date)=CONVERT(DATE,getdate()) and (IsSeen = 'False' or IsSeen is null)")
+                Dim dtCount = DBManager.Getdatatable("select Count(ID) as NotCount from tblNotifications where AssignedTo='" + UserId + "' and isNull(Deleted,0) !=1 and CONVERT(DATE,tblNotifications.Date)=CONVERT(DATE,getdate()) and (IsSeen = 'False' or IsSeen is null)")
                 Return CInt(dtCount.Rows(0)("NotCount").ToString)
             Else
                 Return -1
@@ -3342,7 +3342,7 @@ Public Class WebService
     <System.Web.Script.Services.ScriptMethod()>
     Public Function GetNotificationsCount(ByVal UserId As String) As Integer
         Try
-            Dim dtCount = DBManager.Getdatatable("select Count(ID) as NotCount from tblNotifications where AssignedTo='" + UserId + "' and Status =1  and (IsSeen = 'False' or IsSeen is null)")
+            Dim dtCount = DBManager.Getdatatable("select Count(ID) as NotCount from tblNotifications where AssignedTo='" + UserId + "' and isNull(Deleted,0) !=1  and (IsSeen = 'False' or IsSeen is null)")
             Return CInt(dtCount.Rows(0)("NotCount").ToString)
         Catch ex As Exception
             Return 0
@@ -3953,6 +3953,8 @@ Public Class WebService
                     End If
 
                 End If
+            ElseIf formName = "Notification" Then
+                quaryStr = quaryStr + " and AssignedTo=" + LoginInfo.GetUser__Id() + " order by date desc"
             ElseIf Not LoginInfo.isSuperAdmin() Then
                 If formName = "Users" Then
                     quaryStr = "Select tblUsers.id As 'AutoCodeHide', full_name as 'الاسم بالكامل', isNull(name, '') as 'دور المستخدم', user_indenty as 'رقم الهوية', User_PhoneNumber as 'رقم الجوال'," +
