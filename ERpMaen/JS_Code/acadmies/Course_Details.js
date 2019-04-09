@@ -1740,13 +1740,13 @@ function drawLecturesTable() {
                     else {
                         switch (element.absence ) {
                             default:
-                                text = "--";
+                                text = "<i class='success fa fa-check'><i/>";
                                 break;
                             case true:
-                                text = "<i class=' success fa fa-check'><i/>";
+                                text = "<i class=' danger fa fa-times'><i/>";
                                 break;
-                            case false:
-                                text = "<i class='danger fa fa-times'><i/>";
+                            //case false:
+                            //    text = "<i class='danger fa fa-times'><i/>";
                         }
                         data = data + '<td align="center">' + text +'</td> </tr>';
                     }
@@ -1780,9 +1780,6 @@ function drawstudentHomeworkTable() {
 
                 arr1.forEach(function (element) {
                     var degree = element.degree;
-                    if (degree == 0) {
-                        degree = "--";
-                    }
                     var file_nm = "";
                     var path = element.image;
                     if (path != "" && path != null) {
@@ -1790,8 +1787,12 @@ function drawstudentHomeworkTable() {
                             file_nm = path.split("Acadmies_module/homework/")[1];
                         }
                     }
-                   
-                    data = data + `
+                    if (degree == 0) {
+                        degree = "--";
+
+
+
+                        data = data + `
                                                     <tr>
                                                                                 <td> ${element.title}  </td>
                                                                                 <td>${element.details}   </td>
@@ -1802,17 +1803,41 @@ function drawstudentHomeworkTable() {
                                                         </a>
                                                        
                                                        </td>
+                                                        <td> ${degree} </td>
+                                                                     
                                                                                 <td>
                                    <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#file_upload_hw_answers" onclick="setHomWID(${element.id});">
                                                                 إرفاق الحل
                                                            
                                                             </button>
                                                        </td>
-                                                                                 <td> ${degree} </td>
-                                                                     
+                                                   
 
                                                                             </tr>
                                                         `;
+                    }
+                    else {
+
+
+                        data = data + `
+                                                    <tr>
+                                                                                <td> ${element.title}  </td>
+                                                                                <td>${element.details}   </td>
+                                                                                <td>
+                                                    <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>  ${file_nm}
+
+                                                        </a>
+                                                       
+                                                       </td>
+                                                        <td> ${degree} </td>
+                                                                     
+                                                                                <td> done </td>
+                                                   
+
+                                                                            </tr>
+                                                        `;
+                    }
                    
 
                 });
@@ -1841,13 +1866,6 @@ function drawstudentExamsTable() {
 
                 arr1.forEach(function (element) {
                     //  debugger
-                    var dgr = element.degree;
-                    if (dgr == 0) {
-                        dgr = "--";
-                    }
-                    else {
-                        dgr = element.degree;
-                    }
                     var file_nm = "";
                     var path = element.image;
                     if (path != "" && path != null) {
@@ -1855,8 +1873,11 @@ function drawstudentExamsTable() {
                             file_nm = path.split("Acadmies_module/exams/")[1];
                         }
                     }
+                    var dgr = element.degree;
+                    if (dgr == 0) {
+                        dgr = "--";
 
-                    data = data + `
+                        data = data + `
                                                     <tr>
                                                                                 <td> ${element.title}  </td>
                                                                                 <td>${element.details}   </td>
@@ -1867,18 +1888,44 @@ function drawstudentExamsTable() {
                                                         </a>
                                                        
                                                        </td>
+                                                  <td> ${dgr}</td>
                                                                                 <td>
                                    <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#file_upload_exam_answers" onclick="setExamID(${element.id})">
                                                                 إرفاق الحل
                                                            
                                                             </button>
                                                        </td>
-                                                                                 <td> ${dgr}</td>
+                                                                        
                                                                      
 
                                                                             </tr>
                                                         `;
 
+                    }
+                    else {
+                        dgr = element.degree;
+
+
+
+                        data = data + `
+                                                    <tr>
+                                                                                <td> ${element.title}  </td>
+                                                                                <td>${element.details}   </td>
+                                                                                <td>
+                                                        <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>  ${file_nm}
+
+                                                        </a>
+                                                       
+                                                       </td>
+                                                  <td> ${dgr}</td>
+                                                                                <td> done</td>
+                                                                        
+                                                                     
+
+                                                                            </tr>
+                                                        `;
+                    }
 
                 });
 
@@ -2026,7 +2073,7 @@ function drawConditionsTable() {
                                                      <td>
                                                        <li>
                                                         <a href="../${element.image}" download>
-                                                            <i class="zmdi zmdi-cloud-download"></i>تحميل ملف  
+                                                            <i class="fa fa-download"></i>   
 
                                                         </a>
                                                         <span>${file_nm}</span>
@@ -2082,7 +2129,7 @@ function drawCourseFile() {
             var condition_check = "";
           // console.log(val);
             if (val[0] == 1) {
-                debugger
+               debugger
              
                 var arr1 = JSON.parse(val[1]);
 
@@ -2139,7 +2186,7 @@ function drawCourseFile() {
                                                      <td>
                                                        <li>
                                                         <a href="../${element.image}" download>
-                                                            <i class="zmdi zmdi-cloud-download"></i>تحميل ملف  
+                                                            <i class="fa fa-download"></i>   
 
                                                         </a>
                                                         <span>${file_nm}</span>
@@ -2598,6 +2645,7 @@ function UploadComplete2(sender, args) {
             break;
     }
     clearContents(sender);
+    ClearMe(sender);
 }
 
 function UploadComplete3(sender, args) {

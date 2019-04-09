@@ -55,7 +55,7 @@ Public Class userPorfile
             Select Case sender.id.ToString
                 Case "fuPhoto1"
                     fu = fuPhoto1
-                    Path = "Settings_Module/images/"
+                    Path = "Login/images/"
                     Prepare_Sheet(fu)
                     Dim PostedPhoto As System.Drawing.Image = System.Drawing.Image.FromStream(fu.PostedFile.InputStream)
                     Dim ImgHeight As Integer = PostedPhoto.Height

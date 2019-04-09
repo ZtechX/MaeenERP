@@ -8,19 +8,19 @@ Public Class ReportRep
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
-        Dim Case_id = Request.QueryString("Case_id")
+        Dim Consult_id = Request.QueryString("Consult_id")
 
-        If String.IsNullOrWhiteSpace(Case_id) Then
+        If String.IsNullOrWhiteSpace(Consult_id) Then
             Dim script As String = "<script type='text/javascript' defer='defer'> alert('لا يوجد بيانات متاحة للعرض');</script>"
             ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)
             ClientScript.RegisterStartupScript(Me.GetType(), "closePage", "window.close();", True)
 
         Else
-            getReportData(Case_id)
+            getReportData(Consult_id)
         End If
 
     End Sub
-    Private Sub getReportData(ByVal Case_id As String)
+    Private Sub getReportData(ByVal Consult_id As String)
         Try
             Dim message As String = " لا يوجد بيانات متاحة للعرض"
             Dim rdoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument
@@ -28,18 +28,37 @@ Public Class ReportRep
             dt1 = DBManager.Getdatatable("SELECT isNull(header_img,'') img_header,isNull(footer_img,'') img_footer FROM tblreport_settings where isNull(deleted,0) !=1 and comp_id=" + LoginInfo.GetComp_id())
             Dim dt2 As New DataTable
 
-            Dim query = "SELECT ash_cases.code,ash_cases.date_h as 'case_dt'
-      ,persons1.indenty as 'person_from_num',persons1.name as 'person_from' 
-      FROM ash_cases 
-  left join ash_case_persons persons1 on ash_cases.person1_id=persons1.id where ash_cases.id=" + Case_id
+            Dim query = "SELECT ash_consultings.code,start_date_hj,type.Description as 'type',
+ash_consultings.name,nat.Description as nationality_id,identiy,house_tele,tel2 as'phone_num'
+  FROM ash_consultings 
+  left join tbllock_up type on type.id=ash_consultings.category_id
+left join tbllock_up nat on nat.id=ash_consultings.nationality_id
+where ash_consultings.id=" + Consult_id
             dt2 = DBManager.Getdatatable(query)
             If dt2.Rows.Count <> 0 Then
-                Dim ds As New ReportDS
+                Dim ds As New DSReport
                 ds.Tables(0).Rows.Add()
                 ds.Tables("Details").Rows(0).Item("code") = dt2.Rows(0).Item("code").ToString
-                ds.Tables("Details").Rows(0).Item("case_dt") = dt2.Rows(0).Item("case_dt").ToString
-                ds.Tables("Details").Rows(0).Item("person_from_num") = dt2.Rows(0).Item("person_from_num").ToString
-                ds.Tables("Details").Rows(0).Item("person_from") = dt2.Rows(0).Item("person_from").ToString
+                ds.Tables("Details").Rows(0).Item("consul_date") = dt2.Rows(0).Item("start_date_hj").ToString
+                Dim type = dt2.Rows(0).Item("type").ToString
+                If type = "عنف" Then
+                    ds.Tables("Details").Rows(0).Item("violence") = 1
+                ElseIf type = "حضانة" Then
+                    ds.Tables("Details").Rows(0).Item("Incubation") = 1
+                ElseIf type = "نفقة" Then
+                    ds.Tables("Details").Rows(0).Item("expense") = 1
+                ElseIf type = "خلع" Then
+                    ds.Tables("Details").Rows(0).Item("strippedoff") = 1
+                ElseIf type = "آخرى" Then
+                    ds.Tables("Details").Rows(0).Item("otherType") = 1
+                End If
+                ds.Tables("Details").Rows(0).Item("person_nm") = dt2.Rows(0).Item("name").ToString
+                ds.Tables("Details").Rows(0).Item("person_nation") = dt2.Rows(0).Item("nationality_id").ToString
+                ds.Tables("Details").Rows(0).Item("person_identity") = dt2.Rows(0).Item("identiy").ToString
+
+                ds.Tables("Details").Rows(0).Item("house_num") = dt2.Rows(0).Item("house_tele").ToString
+                ds.Tables("Details").Rows(0).Item("person_phone") = dt2.Rows(0).Item("phone_num").ToString
+
                 rdoc.Load(Server.MapPath("Report.rpt"))
                 rdoc.SetDataSource(ds.Tables("Details"))
                 If dt1.Rows.Count <> 0 Then

@@ -30,6 +30,7 @@ function showErrorMessage(message) {
         $("#lblResError").addClass("res-label-error");
         $("#lblResError").html(message);
         $("#lblResError").show();
+        
     } catch (err) {
         alert(err);
     }
@@ -67,6 +68,7 @@ function showMessage(message, divId, lblResId, color) {
         $("#" + divId).fadeIn(3000);
         $("#" + divId).fadeOut(3000);
         $("#" + lblResId).show();
+        $("#SavedivLoader").hide();
     } catch (err) {
         alert(err);
     }

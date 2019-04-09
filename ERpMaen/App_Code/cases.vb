@@ -514,7 +514,7 @@ Public Class cases
                 For p As Integer = 1 To 7
 
                     If dt_back.AddDays(p).DayOfWeek.ToString() = day_nm Then
-                        Dim temp = dt_back.AddDays(p + 1)
+                        Dim temp = dt_back.AddDays(p)
                         Dim dd = temp.Day
                         Dim MM = temp.Month
                         Dim Val = ""
@@ -544,7 +544,7 @@ Public Class cases
 
             Dim dt_date As New DataTable
             If id = "" Then
-                dt_date = DBManager.Getdatatable("select * from ash_case_receiving_delivery_details where deleted != 1 and case_id=" + case_id.ToString + " And type=" + dictBasicDataJson("type").ToString + " And date_h='" + dictBasicDataJson("date_h").ToString + "'")
+                dt_date = DBManager.Getdatatable("select * from ash_case_receiving_delivery_details where deleted != 1 and case_id=" + case_id.ToString + " And type=" + dictBasicDataJson("type").ToString + " And date_m=" + PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("date_m").ToString).ToString())
                 If dt_date.Rows.Count <> 0 Then
                     _sqltrans.Commit()
                     _sqlconn.Close()

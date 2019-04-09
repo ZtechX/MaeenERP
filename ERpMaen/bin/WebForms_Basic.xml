@@ -4182,6 +4182,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.ConsultDetails._LinkButton3">
+<summary>
+LinkButton3 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.ConsultDetails._PnlConfirm">
 <summary>
 PnlConfirm control.
@@ -5028,9 +5037,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.Dashboard._lblLink">
+<member name="F:ERpMaen.Dashboard._lblphone">
 <summary>
-lblLink control.
+lblphone control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -6971,18 +6980,18 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.userPorfile._imgLoader">
+<member name="F:ERpMaen.userPorfile._fuPhoto1">
 <summary>
-imgLoader control.
+fuPhoto1 control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.userPorfile._fuPhoto1">
+<member name="F:ERpMaen.userPorfile._photo_nm_footer">
 <summary>
-fuPhoto1 control.
+photo_nm_footer control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -9096,6 +9105,26 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="T:ERpMaen.DSReport">
+<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+<member name="T:ERpMaen.DSReport.detailsDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:ERpMaen.DSReport.detailsRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
+<member name="T:ERpMaen.DSReport.detailsRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
 <member name="F:ERpMaen.FollowCasesRep._form1">
 <summary>
 form1 control.
@@ -9301,26 +9330,6 @@ CrystalReportViewer1 control.
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
-</member>
-<member name="T:ERpMaen.ReportDS">
-<summary>
-Represents a strongly typed in-memory cache of data.
-</summary>
-</member>
-<member name="T:ERpMaen.ReportDS.DetailsDataTable">
-<summary>
-Represents the strongly named DataTable class.
-</summary>
-</member>
-<member name="T:ERpMaen.ReportDS.DetailsRow">
-<summary>
-Represents strongly named DataRow class.
-</summary>
-</member>
-<member name="T:ERpMaen.ReportDS.DetailsRowChangeEvent">
-<summary>
-Row event argument class
-</summary>
 </member>
 <member name="F:ERpMaen.ReportRep._form1">
 <summary>
@@ -11739,15 +11748,6 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.companies._clearBtn">
-<summary>
-clearBtn control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:ERpMaen.companies._ImageSlider">
 <summary>
 ImageSlider control.
@@ -13266,18 +13266,18 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.DeliveryDate._ddl_day_nm">
+<member name="F:ERpMaen.DeliveryDate._txtrecieve_time">
 <summary>
-ddl_day_nm control.
+txtrecieve_time control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.DeliveryDate._txtrecieve_time">
+<member name="F:ERpMaen.DeliveryDate._ddl_day_nm">
 <summary>
-txtrecieve_time control.
+ddl_day_nm control.
 </summary>
 <remarks>
 Auto-generated field.

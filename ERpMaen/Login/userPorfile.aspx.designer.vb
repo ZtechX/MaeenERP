@@ -221,15 +221,6 @@ Partial Public Class userPorfile
     Protected WithEvents imgItemURL As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''imgLoader control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents imgLoader As Global.System.Web.UI.WebControls.Image
-    
-    '''<summary>
     '''fuPhoto1 control.
     '''</summary>
     '''<remarks>
@@ -237,6 +228,15 @@ Partial Public Class userPorfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
+    '''photo_nm_footer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents photo_nm_footer As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''DynamicTable control.

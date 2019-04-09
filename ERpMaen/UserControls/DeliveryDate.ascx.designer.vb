@@ -104,15 +104,6 @@ Partial Public Class DeliveryDate
     Protected WithEvents ddlreciever_id As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''ddl_day_nm control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddl_day_nm As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
     '''txtrecieve_time control.
     '''</summary>
     '''<remarks>
@@ -120,6 +111,15 @@ Partial Public Class DeliveryDate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtrecieve_time As Global.System.Web.UI.HtmlControls.HtmlInputGenericControl
+    
+    '''<summary>
+    '''ddl_day_nm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddl_day_nm As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''Text11 control.

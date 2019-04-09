@@ -440,8 +440,9 @@
                                                                                 <th>اسم الواجب </th>
                                                                                 <th>تفاصيل الواجب</th>
                                                                                 <th>مرفق الواجب </th>
+                                                                                  <th>درجة الواجب </th>
                                                                                 <th>رفع حل </th>
-                                                                                 <th>درجة الواجب </th>
+                                                                               
                                                                                 
                                                                                
 
@@ -519,32 +520,13 @@
                                                                                 <th>اسم الاختبار </th>
                                                                                 <th>تفاصيل الاختبار</th>
                                                                                 <th>مرفق الاختبار </th>
+                                                                                  <th>درجة الاختبار </th>
                                                                                 <th>رفع حل </th>
-                                                                                 <th>درجة الاختبار </th>
                                                                                
-
+                                                                              
                                                                             </tr>
                                                                             <tbody id="studentExamstable">
-                                                                            <%--<tr>
-                                                                                <td> os EXAM  </td>
-                                                                                <td>define CORBA  </td>
-                                                                               <td> 
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-cloud-download"></i>   ارفاق الاختبار 
-
-                                                        </a>
-                                                        <span>(8كيلوبايت)</span>
-                                                       </td>
-                                                                               <td> 
-                                   <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#file_upload">
-                                                                إرفاق الحل
-                                                           
-                                                            </button>
-                                                       </td>
-                                                                                 <td> 20 </td>
-                                                                     
-
-                                                                            </tr>--%>
+                                                                           
                                                                                
                                                                                 </tbody>
                                                                         </table>
@@ -1204,7 +1186,7 @@
 
                                             </div>
                                             <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox SkinID="form-control" TextMode="multiline" required  class="form-control" dbColumn="notes" ClientIDMode="Static" ID="lecNotes" runat="server">
+                                                <asp:TextBox SkinID="form-control" TextMode="multiline"   class="form-control" dbColumn="notes" ClientIDMode="Static" ID="lecNotes" runat="server">
                                                 </asp:TextBox>
                                             </div>
                                         </div>
@@ -1354,11 +1336,11 @@
 
                                              <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name" class="label-required"> ملاحظات  </label>
+                                            <label for="Name" > ملاحظات  </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes" required  ClientIDMode="Static" ID="TextBox6" runat="server">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes"   ClientIDMode="Static" ID="TextBox6" runat="server">
                                             </asp:TextBox>
                                         </div>
                                     </div>
@@ -1400,11 +1382,11 @@
 
                                              <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name" class="label-required"> ملاحظات  </label>
+                                            <label for="Name" > ملاحظات  </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes" required  ClientIDMode="Static" ID="TextBox7" runat="server">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes"   ClientIDMode="Static" ID="TextBox7" runat="server">
                                             </asp:TextBox>
                                         </div>
                                     </div>
@@ -2069,7 +2051,7 @@
                                     </div>
 
                                     <div class="col-md-9 col-sm-12">
-                                        <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox8" runat="server">
+                                        <asp:TextBox SkinID="form-control" TextMode="multiline"  class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox8" runat="server">
                                         </asp:TextBox>
                                     </div>
                                 </div>

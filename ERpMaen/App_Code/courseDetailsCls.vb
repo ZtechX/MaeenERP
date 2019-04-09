@@ -611,7 +611,7 @@ Public Class courseDetailsCls
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dt As DataTable
-            dt = DBManager.Getdatatable("delete from acd_courses_students where type=1 And course_id=" + courseid)
+            dt = DBManager.Getdatatable("delete from acd_courses_students where checked=0  and type=1 And course_id=" + courseid)
 
             Dim id = ""
             Dim success2 As Boolean = True
@@ -623,6 +623,8 @@ Public Class courseDetailsCls
                 dictBasicDataJson.Add("notes", item("std_notes"))
 
                 dictBasicDataJson.Add("type", "1")
+
+                dictBasicDataJson.Add("checked", True)
                 dictBasicDataJson.Add("approved", item("action_Student"))
 
                 If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
@@ -1063,6 +1065,8 @@ Public Class courseDetailsCls
             _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
             Dim dt_user As DataTable
+            Dim dt As DataTable
+            dt = DBManager.Getdatatable("delete from acd_homework_delivery where  dvtype =1 and type=1 and homework_id=" + homeworkId + " and student_id=" + LoginInfo.GetUser__Id() + " and course_id=" + courseID)
 
             dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
@@ -1874,7 +1878,7 @@ Public Class courseDetailsCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("Select acd_courses_students.student_id, tblUsers.full_name as 'studentName' ,tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where  approved=1 and type=1 and acd_courses_students.course_id=" + course_id)
+            dt = DBManager.Getdatatable("Select acd_courses_students.student_id, tblUsers.full_name as 'studentName' ,tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on acd_courses_students.student_id=tblUsers.id where acd_courses_students.deleted=0 and  approved=1 and type=1 and acd_courses_students.course_id=" + course_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1955,9 +1959,9 @@ Public Class courseDetailsCls
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
-            'DBManager.ExcuteQuery("DELETE FROM acd_courses_students where approved=1 and course_id=" + course_id)
+            'DBManager.ExcuteQuery("DELETE FROM acd_courses_students where checked=1 and  approved=1 and course_id=" + course_id)
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes, tblImages.Image_path as 'registerFiles',tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id join tblImages on tblImages.Source_id=acd_courses_students.student_id and tblImages.related_id= acd_courses_students.course_id where acd_courses_students.approved=0 and acd_courses_students.course_id=" + course_id)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes, tblImages.Image_path as 'registerFiles',tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id join tblImages on tblImages.Source_id=acd_courses_students.student_id and tblImages.related_id= acd_courses_students.course_id where  checked=0 and type=1 and  acd_courses_students.approved=0 and acd_courses_students.course_id=" + course_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -2424,7 +2428,7 @@ Public Class courseDetailsCls
         Dim Names As New List(Of String)(10)
         Try
 
-            If DBManager.ExcuteQuery("UPDATE  acd_courses_students  set  approved=0 where student_id=" + studentId + " and course_id=" + courseID) <> -1 Then
+            If DBManager.ExcuteQuery("UPDATE  acd_courses_students  set  deleted=1 where student_id=" + studentId + " and course_id=" + courseID) <> -1 Then
                 If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "حذف", _sqlconn, _sqltrans) Then
                     success = False
                 Else

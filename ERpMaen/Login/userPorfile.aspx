@@ -42,13 +42,16 @@
                     </style>
 
                     <script type="text/javascript">
+                        $(function () {
+                            $("#fuPhoto1").find('input[type="file"]').removeClass("form-control");
+                        });
                         function UploadComplete2(sender, args) {
+                           
                             var fileLength = args.get_length();
                             var fileType = args.get_contentType();
                             //alert(sender);
                             document.getElementById('imgItemURL').src = 'images/' + args.get_fileName();
-                            var img = document.getElementById('imgLoader');
-                            img.style.display = 'none';
+                           
                             switch (true) {
                                 case (fileLength > 1000000):
 
@@ -66,11 +69,7 @@
                             }
                             clearContents(sender);
                         }
-                        function UploadStarted2() {
-                            //var fileName = args.get_fileName();
-                            var img = document.getElementById('imgLoader');
-                            img.style.display = 'block';
-                        }
+                      
                         //var prm = Sys.WebForms.PageRequestManager.getInstance();
                         //prm.add_pageLoaded(setupSB);
                         //function setupSB() {
@@ -84,6 +83,7 @@
                         function clearContents(sender) {
                             { $(sender._element).find('input').val(''); }
                         }
+
                     </script>
                 </div>
 
@@ -252,25 +252,26 @@
                                                 </div>
                                             </div>
 
-                                                                            <div class="form-group row">
-<div class="col-md-6 col-md-offset-3">
-                                    <div >
-                                        <asp:Image ID="imgItemURL" ClientIDMode="Static" runat="server" Width="114px" ImageUrl="~/App_Themes/images/add-icon.jpg" />
-                                        <div class="update-progress-img">
-                                             <asp:Image ID="imgLoader" runat="server" ClientIDMode ="Static" style="display: none;"  ImageUrl="../App_Themes/images/loader.gif" />
-                                        </div>
-                                    </div>
-                                    <div class="clear">
-                                    </div>
-                                    <div class="photo-upload-box">
-                                        <span>تحميل صورة</span>
-                                        <asp:AsyncFileUpload ID="fuPhoto1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
-                                            OnClientUploadComplete="UploadComplete2" OnClientUploadStarted="UploadStarted2"
-                                            FailedValidation="False"  />
-                                    </div>
+                                                                           <%-- <div class="form-group row">--%>
+<div class="col-md-6">
+    
+                                    <div>
+                                                <asp:Image ID="imgItemURL" ClientIDMode="Static" runat="server" Width="114px" ImageUrl="~/App_Themes/images/add-icon.jpg" />
+                                               
+                                            </div>
+                                            <div class="clear">
+                                            </div>
+                                            <div class="photo-upload-box">
+                                                <span> تحميل صورة</span>
+                                                <asp:AsyncFileUpload ID="fuPhoto1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
+                                                    OnClientUploadComplete="UploadComplete2" 
+                                                    FailedValidation="False" />
+                                                <asp:TextBox ID="photo_nm_footer" runat="server" ClientIDMode="Static" type="text" class="form-control" Style="display: none;"></asp:TextBox>
+
+                                            </div>
                                 </div>
                           
-                                            </div>
+                                          <%--  </div>--%>
                                             </div>
 
                                         </div>

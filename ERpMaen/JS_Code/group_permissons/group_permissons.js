@@ -7,7 +7,7 @@ var superAdmin = false;
 $(function () {
     $("#pnlConfirm").show();
     $("#divData").hide();
-    //$("#SavedivLoader").hide();
+    $("#ddlgroup_id").addClass("form-control");
     
     $("#pnlOps").hide();
     try {
@@ -90,12 +90,12 @@ function save() {
 
 function fillPerm(){
     try {
-
+        $("#input[type='checkbox'").prop("checked", false);
         var str = "";
        
         var ddlgroup_id = $("#ddlgroup_id").val();
         group_permissons.Edit_permissons(ddlgroup_id,function (val) {
-            debugger;
+           
             var data = JSON.parse(val[1]);
             
 

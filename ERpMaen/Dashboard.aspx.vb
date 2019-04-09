@@ -30,8 +30,8 @@ Public Class Dashboard
             dt = DBManager.Getdatatable("select * from TblUsers where Id ='" + UserId + "'")
             If Not dt Is Nothing Then
                 If dt.Rows.Count > 0 Then
-                    lblLink.InnerText = dt.Rows(0).Item("User_Email").ToString
-                    lblUserName.Text = dt.Rows(0).Item("User_Name").ToString
+                    lblphone.Text = dt.Rows(0).Item("User_PhoneNumber").ToString
+                    lblUserName.Text = dt.Rows(0).Item("full_name").ToString
                     imgUser1.ImageUrl = dt.Rows(0).Item("User_Image").ToString
                 End If
             End If

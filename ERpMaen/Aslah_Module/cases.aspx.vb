@@ -40,7 +40,7 @@ Public Class cases
 
                 Dim cls_courts As New clsFillComboByDataSource("select * from tbllock_up where  type='court' and IsNull(Deleted,0)=0 and Comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 cls_courts.SetComboItems(ddlcourt_id, "", True, "--اختر--", False)
-                Dim cls_employee As New clsFillComboByDataSource("select * from tblUsers where IsNull(Deleted,0)=0 and User_Type=5 and comp_id=" + LoginInfo.GetComp_id(), "User_Name", "id", "")
+                Dim cls_employee As New clsFillComboByDataSource("select * from tblUsers where IsNull(Deleted,0)=0 and User_Type=5 and comp_id=" + LoginInfo.GetComp_id(), "full_name", "id", "")
                 cls_employee.SetComboItems(ddlemployee_id3, "", False, "--اختر--", False)
                 'cls_employee.SetComboItems(ddlemployee_id4, "", False, "--اختر--", False)
 
@@ -59,7 +59,7 @@ Public Class cases
                 'End dropdown current state ddlservice
 
                 'DropDownList Load for service الخدمة المقدمة
-                Dim cls_ddldepart As New clsFillComboByDataSource("select * from tbllock_up where type='ST' and IsNull(Deleted,0)=0", "Description", "id", "")
+                Dim cls_ddldepart As New clsFillComboByDataSource("select * from tbllock_up where type='ST' and IsNull(Deleted,0)=0 ", "Description", "id", "")
                 cls_ddldepart.SetComboItems(ddldepart, "", True, "--اختر--", False)
 
 

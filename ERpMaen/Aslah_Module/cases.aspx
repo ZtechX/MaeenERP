@@ -129,10 +129,9 @@
                     <uc1:Result runat="server" ID="Result" />
                     <%--compopox--%>
                       
-                    <div class="container">
-                        
+                    
                         <div class="row">
-                             <button class="btn btn-info btn-lg pull-left" onclick="GetMeasurementSatisfaction(); return false;">نموذج قياس رضا المستفيد </button>
+                             <button class="btn btn-info btn-lg pull-left" onclick="GetMeasurementSatisfaction(); return false;"> <i class="fa fa-print"></i> نموذج قياس رضا المستفيد </button>
                               
                             <div class="ui-widget" dir="rtl">
                                 <label>الحالات: </label>
@@ -142,7 +141,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    
                     <input type ="text"  style="display:none;" id="userLoginType" runat="server"/>
                     <div id="divForm" class="newformstyle form_continer">
                         <div class="container">
@@ -211,10 +210,11 @@
                                                                 <asp:Label ID="lblmainid" runat="server" ClientIDMode="static" Style="display: none" dbcolumn="id"></asp:Label>
                                                                 <%-- start group 1--%>
                                    <div id="caseReportDive" class="col-md-12 form-group" style="display:none;">
-                                            <button class="btn btn-info btn-lg pull-right" onclick="getCaseReport(); return false;"> تقرير عن الحالة</button>
-                                               
-                                            <button class="btn btn-info btn-lg pull-left" onclick="getCaseDetails(); return false;">طباعة بيانات الحالة الأولية</button>
-                                         
+                                            <button class="btn btn-info btn-lg pull-right" onclick="getCaseReport(); return false;"> <i class="fa fa-print"></i> تقرير عن الحالة</button>
+                                              
+                                            <button class="btn btn-info btn-lg pull-left" onclick="getCaseDetails(); return false;"> <i class="fa fa-print"></i> بيانات الحالة الأولية</button>
+                                           <button class="btn btn-info btn-lg" onclick="GetReferral(); return false;"> <i class="fa fa-print"></i> إحالة دعوى </button>
+          
                                    </div>
                                                                 <div class=" col-md-12 form-group ">
 
@@ -543,7 +543,7 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">يانات الحاله الحالية</a>
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">ييانات الحاله الحالية</a>
                                                             </h4>
                                                         </div>
                                                         <div id="collapse5" class="panel-collapse collapse">
@@ -1016,9 +1016,11 @@
                                                             <div class="panel-body" id="case_conciliation">
                                                                 <%-- start group 1--%>
                                                                 <asp:Label ID="lblconciliation_id" ClientIDMode="static" runat="server" Style="display: none" dbcolumn="id"></asp:Label>
-                                                                                                          <div class="col-sm-12 form-group">
-                                            <button class="btn btn-info btn-lg pull-left" onclick="getConciliation(); return false;"> طباعة محضر الصلح </button>
-        </div>
+                                                                <div class="col-sm-12 form-group">
+    <button class="btn btn-info btn-lg pull-right" onclick="getRegistAggregation(); return false;"><i class="fa fa-print"></i> توثيق إتفاق </button>
+                                                                
+                                                                    <button class="btn btn-info btn-lg pull-left" onclick="getConciliation(); return false;"><i class="fa fa-print"></i> محضر الصلح </button>
+                                                                </div>
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label>

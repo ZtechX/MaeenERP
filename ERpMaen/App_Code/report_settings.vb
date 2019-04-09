@@ -45,15 +45,17 @@ Public Class report_settings
             dt = DBManager.Getdatatable("select * from tblreport_settings where comp_id=" + comp_id)
 
             Dim dictBasicDataJson As New Dictionary(Of String, Object)
-            If dt.Rows.Count <> 0 Then
+            Dim count As Integer = dt.Rows.Count
+            If count <> 0 Then
                 dictBasicDataJson.Add("deleted", 1)
-                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblreport_settings", dt.Rows(0).Item("id").ToString, _sqlconn, _sqltrans) Then
-                    dictBasicDataJson.Remove("deleted")
-                Else
-                    _sqltrans.Rollback()
-                    _sqlconn.Close()
-                    Return False
-                End If
+                For index As Integer = 0 To (count - 1)
+                    If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblreport_settings", dt.Rows(index).Item("id").ToString, _sqlconn, _sqltrans) Then
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Return False
+                    End If
+                Next
+                dictBasicDataJson.Remove("deleted")
             End If
             dictBasicDataJson.Add("header_img", header_img)
             dictBasicDataJson.Add("footer_img", footer_img)

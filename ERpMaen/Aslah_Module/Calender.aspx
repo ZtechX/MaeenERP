@@ -146,7 +146,7 @@
 let cal=new Calendar(true);
           cal.attachTo(document.getElementById('calendar'));
           cal.setLanguage('ar')
-          cal.setFirstDayOfWeek(0);
+          //cal.setFirstDayOfWeek(0);
         
 function openSidebar(){
 	document.getElementById("mySidebar").style.display = "block"

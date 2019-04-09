@@ -509,15 +509,6 @@ Partial Public Class companies
     Protected WithEvents cmdSave As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
-    '''clearBtn control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents clearBtn As Global.System.Web.UI.HtmlControls.HtmlButton
-    
-    '''<summary>
     '''ImageSlider control.
     '''</summary>
     '''<remarks>

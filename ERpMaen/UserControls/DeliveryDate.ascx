@@ -49,10 +49,7 @@
           <div id="SavedivLoader" class="loader" style="    position:absolute; padding-top:15%;  text-align: center; z-index:1000;">
                   <asp:Image ID="img" runat="server" ImageUrl="../App_Themes/images/loader.gif" />
                 </div>
-    <div class="row">
-      <button class="btn btn-info btn-lg pull-left" onclick="getReceive_and_deliver(); return false;" style="margin-right:10px;">تقرير استلام وتسليم</button>
-               <button class="btn btn-info btn-lg pull-left" onclick="getagreement(); return false;">طباعة اتفاق تنفيذ استلام وتسليم</button>
-          </div>                                
+                                   
     <div class="card card-body" >
         <%-- start group 1--%>
         <ul class="nav nav-tabs" id="li_tabs">
@@ -118,7 +115,7 @@
                     <asp:ListItem Value="0">اختر</asp:ListItem>
                 </asp:DropDownList>
                 <button class="btn btn-primary" type="button" onclick="find_persons('ddldeliverer_id',1)">اضافة مسلم </button>
-                 <button class="btn btn-primary pull-left"" type="button" onclick="getReview('deliverer_id')">طباعة إفادة مراجعة </button>
+                 <button class="btn btn-primary pull-left"" type="button" onclick="getReview('deliverer_id')"> <i class="fa fa-print"></i> إفادة مراجعة </button>
            
             </div>
         </div>
@@ -133,11 +130,26 @@
                     <asp:ListItem Value="0">اختر</asp:ListItem>
                 </asp:DropDownList>
                 <button class="btn btn-primary" type="button" onclick="find_persons('ddlreciever_id',1)">اضافة مستلم </button>
-           <button class="btn btn-primary pull-left"" type="button" onclick="getReview('reciever_id')">طباعة إفادة مراجعة </button>
+           <button class="btn btn-primary pull-left"" type="button" onclick="getReview('reciever_id')"> <i class="fa fa-print"></i> إفادة مراجعة </button>
                 </div>
         </div>
                
-<div class="col-md-12 form-group " id="Divback_dt">
+
+                <div class="col-md-12 form-group" id="Div_recieve_time" >
+                  <div class="col-md-3 col-sm-12">
+                      <label>
+                      وقت الاستلام والتسليم </label>
+                  </div>
+
+                  <div class="col-md-9 col-sm-12" id="recieve_time">
+                      <input  onkeypress="return isNumber(event);" readonly dbcolumn="recieveTime" type="time" id="txtrecieve_time"
+                          class="form-control" runat="server" clientidmode="Static" />
+
+                      <br />
+                  </div>
+              </div>
+
+          <div class="col-md-12 form-group " id="Divback_dt">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         
                                                                         <label>يوم إعادة التسليم</label>
@@ -157,21 +169,12 @@
                                                                       
 
                                                                     </div>
-                                                                </div>
-                <div class="col-md-12 form-group" id="Div_recieve_time">
-                  <div class="col-md-3 col-sm-12">
-                      <label>
-                      وقت الاستلام والتسليم </label>
-                  </div>
-
-                  <div class="col-md-9 col-sm-12" id="recieve_time">
-                      <input  onkeypress="return isNumber(event);" readonly dbcolumn="recieveTime" type="time" id="txtrecieve_time"
-                          class="form-control" runat="server" clientidmode="Static" />
-
-                      <br />
-                  </div>
-              </div>
-          </div>
+<div class="row">
+      <button class="btn btn-info btn-lg pull-left" onclick="getReceive_and_deliver(); return false;" style="margin-right:10px;"> <i class="fa fa-print"></i> تقرير استلام وتسليم</button>
+               <button class="btn btn-info btn-lg pull-left" onclick="getagreement(); return false;"> <i class="fa fa-print"></i> اتفاق تنفيذ استلام وتسليم</button>
+          </div>                                                                 
+</div>
+           </div>
           </div>
       <div id="menu2" class="tab-pane fade">
            <div class="row" style="padding:40px">
@@ -449,7 +452,7 @@
                 <br />
             </div>
         </div>
-                   <button class="btn btn-primary" type="button" onclick="getAttendanceRegist()">نموذج تسجيل حضور تهيئة وتدرج </button>
+                   <button class="btn btn-primary pull-left" type="button" onclick="getAttendanceRegist()"> <i class="fa fa-print"></i> نموذج تسجيل حضور تهيئة وتدرج </button>
              
           </div>
 
@@ -464,7 +467,7 @@
 
                   <div class="col-md-3 col-sm-12">
                       <label class="label-required">
-                      رقم الاجراء  </lable>
+                      رقم الاجراء  </label>
                   </div>
 
                   <div class="col-md-9 col-sm-12">
@@ -517,7 +520,8 @@
                 <br />
             </div>
         </div>
-
+                <button class="btn btn-primary pull-left" type="button" onclick="getProcedure()"> <i class="fa fa-print"></i> إجراءات العضو المباشر  </button>
+             
           </div>
 
       </div>

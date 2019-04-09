@@ -333,6 +333,7 @@
     <Content Include="App_Themes\images\key.png" />
     <Content Include="App_Themes\images\land.png" />
     <Content Include="App_Themes\images\left_menu_hover.jpg" />
+    <Content Include="App_Themes\images\load.gif" />
     <Content Include="App_Themes\images\loader.gif" />
     <Content Include="App_Themes\images\logo-berries.png" />
     <Content Include="App_Themes\images\logo-big.png" />
@@ -1633,6 +1634,17 @@
     <Content Include="report_Module\Aslah\ProceduresDS.xsc">
       <DependentUpon>ProceduresDS.xsd</DependentUpon>
     </Content>
+    <Content Include="report_Module\Aslah\DSReport.xsc">
+      <DependentUpon>DSReport.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Aslah\DSReport.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSReport.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="report_Module\Aslah\DSReport.xss">
+      <DependentUpon>DSReport.xsd</DependentUpon>
+    </Content>
     <None Include="report_Module\Aslah\ProceduresDS.xsd" />
     <Content Include="report_Module\Aslah\ProceduresDS.xss">
       <DependentUpon>ProceduresDS.xsd</DependentUpon>
@@ -1663,13 +1675,6 @@
       <DependentUpon>RegistAggregationDS.xsd</DependentUpon>
     </Content>
     <Content Include="report_Module\Aslah\Report.rpt" />
-    <Content Include="report_Module\Aslah\ReportDS.xsc">
-      <DependentUpon>ReportDS.xsd</DependentUpon>
-    </Content>
-    <None Include="report_Module\Aslah\ReportDS.xsd" />
-    <Content Include="report_Module\Aslah\ReportDS.xss">
-      <DependentUpon>ReportDS.xsd</DependentUpon>
-    </Content>
     <Content Include="report_Module\Aslah\Review.rpt" />
     <Content Include="report_Module\Aslah\Statisticsofcases.rpt" />
     <Content Include="report_Module\Aslah\StatisticsofcasesDS.xsc">
@@ -2336,6 +2341,11 @@
       <DependentUpon>DeliveryProceedingRep.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="report_Module\Aslah\DSReport.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSReport.xsd</DependentUpon>
+    </Compile>
     <Compile Include="report_Module\Aslah\FollowCases.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -2413,7 +2423,6 @@
     <Compile Include="report_Module\Aslah\Report.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="report_Module\Aslah\ReportDS.Designer.vb" />
     <Compile Include="report_Module\Aslah\ReportRep.aspx.designer.vb">
       <DependentUpon>ReportRep.aspx</DependentUpon>
     </Compile>

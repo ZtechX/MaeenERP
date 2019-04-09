@@ -111,11 +111,21 @@ Public Class coursatCls
                 condation = " AND name LIKE '%" + name + "%'"
             End If
             If filter = "" Then
-                dt = DBManager.Getdatatable("select  acd_courses.id,acd_courses.status,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage' from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id where acd_courses.archive=0 and  acd_courses.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_courses.id DESC")
+                If LoginInfo.getUserType = 4 Then
+                    dt = DBManager.Getdatatable("select  acd_courses.id,acd_courses.status,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage' from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id where acd_courses.trainer_id=" + LoginInfo.GetUser__Id() + " and acd_courses.archive=0 and  acd_courses.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_courses.id DESC")
+
+                Else
+                    dt = DBManager.Getdatatable("select  acd_courses.id,acd_courses.status,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage' from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id where acd_courses.archive=0 and  acd_courses.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_courses.id DESC")
+
+                End If
 
 
             ElseIf filter <> "" And filter <> 4 Then
-                dt = DBManager.Getdatatable("select  acd_courses.id, acd_courses.status ,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage' from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id where acd_courses.archive=0 and acd_courses.comp_id=" + LoginInfo.GetComp_id() + " and acd_courses.status=" + filter + condation + "ORDER BY acd_courses.id DESC")
+                If LoginInfo.getUserType = 4 Then
+                    dt = DBManager.Getdatatable("select  acd_courses.id, acd_courses.status ,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage' from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id where  acd_courses.trainer_id=" + LoginInfo.GetUser__Id() + " and acd_courses.archive=0 and acd_courses.comp_id=" + LoginInfo.GetComp_id() + " and acd_courses.status=" + filter + condation + "ORDER BY acd_courses.id DESC")
+                Else
+                    dt = DBManager.Getdatatable("select  acd_courses.id, acd_courses.status ,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage' from acd_courses join tblUsers on acd_courses.trainer_id=tblUsers.id where acd_courses.archive=0 and acd_courses.comp_id=" + LoginInfo.GetComp_id() + " and acd_courses.status=" + filter + condation + "ORDER BY acd_courses.id DESC")
+                End If
             Else
                 dt = DBManager.Getdatatable("select acd_courses_students.course_id, acd_courses.status,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage'  from acd_courses_students join acd_courses  on acd_courses_students.course_id=acd_courses.id join tblUsers on acd_courses.trainer_id=tblUsers.id where acd_courses.archive=0 and acd_courses_students.student_id=" + LoginInfo.GetUser__Id() + condation + "ORDER BY acd_courses.id DESC")
 

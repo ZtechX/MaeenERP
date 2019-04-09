@@ -74,13 +74,25 @@ function checkstudent() {
         $("#SavedivLoader").show();
      
         var CourseId = $("#Lblcourse_id").html();
-       // debugger
+       
     
         course_registerCls.checkstudentregister( CourseId ,function (val) {
+            debugger
+
+            if (val[0] == 3) {
+                document.getElementById('btnregister').style.visibility = 'hidden';
+                document.getElementById('checkstudentregister').innerHTML = "  تم حذف الطالب من الدورة";
+
+            }
 
             if (val[0] == 1) {
                 document.getElementById('btnregister').style.visibility = 'hidden';
                 document.getElementById('checkstudentregister').innerHTML = "طلبك قيد المراجعه";
+
+            }
+            if (val[0] == 2) {
+                document.getElementById('btnregister').style.visibility = 'visible';
+                //document.getElementById('checkstudentregister').innerHTML = " ارسل طلب الالتحاق من جديد ";
 
             }
 
@@ -172,8 +184,9 @@ function sendRequest() {
                     $("#SavedivLoader").hide();
                     alert("تم الحفظ بنجاح");
                     $("#register_Course").modal('hide');
-                    window.location.reload();
-                    //resetDivControls("divformsignin");
+                   
+                    window.location.replace("coursat.aspx")
+                  
                     resetAll();
                     prepareAdd();
 

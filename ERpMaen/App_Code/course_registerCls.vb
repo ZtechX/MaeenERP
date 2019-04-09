@@ -42,26 +42,27 @@ Public Class course_registerCls
             _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
 
-
+            Dim dt1 As DataTable
+            dt1 = DBManager.Getdatatable("delete from acd_courses_students where  type=1 and course_id=" + course_id + "and student_id=" + LoginInfo.GetUser__Id())
             dictBasicDataJson.Add("course_id", course_id)
             dictBasicDataJson.Add("type", "1")
             dictBasicDataJson.Add("approved", 0)
+            dictBasicDataJson.Add("checked", 0)
 
             dictBasicDataJson.Add("student_id", LoginInfo.GetUser__Id())
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
                 Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
 
+                Dim dt2 As DataTable
+                dt2 = DBManager.Getdatatable("delete from tblImages where Source='registeration' and Source_id=" + LoginInfo.GetUser__Id() + "and related_id=" + course_id)
+
                 dictBasicDataJson1.Add("Source", "registeration")
                 dictBasicDataJson1.Add("Source_id", LoginInfo.GetUser__Id())
                 dictBasicDataJson1.Add("Image_path", ImagePath)
                 dictBasicDataJson1.Add("Image_name", imageName)
                 dictBasicDataJson1.Add("related_id", course_id)
-                'If Not PublicFunctions.TransUsers_logs("3177", "acd_courses", "ادخال", _sqlconn, _sqltrans) Then
-                '    success = False
-                'Else
-                '    success = True
-                'End If
+
                 If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson1, "tblImages", "", _sqlconn, _sqltrans) Then
                     _sqltrans.Rollback()
                     _sqlconn.Close()
@@ -142,12 +143,29 @@ Public Class course_registerCls
 
         Dim Names As New List(Of String)(10)
         Try
-            Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select approved from acd_courses_students where  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+            Dim dt3 As New DataTable
 
-            If dt IsNot Nothing Then
-                If dt.Rows(0)(0).ToString = False Then
+            dt3 = DBManager.Getdatatable("select  isnull (approved,0) as 'appoved', isnull (deleted,0) as 'deleted' from acd_courses_students where approved=1 and  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+
+            If dt3 IsNot Nothing Then
+                If dt3.Rows(0)(0).ToString = True And dt3.Rows(0)(1).ToString = True Then
+
+                    Names.Add("3")
+
+
+                End If
+            Else
+
+                Names.Add("0")
+            End If
+
+            Dim dt2 As New DataTable
+
+            dt2 = DBManager.Getdatatable("select isnull (approved,0) as 'appoved',  isnull(checked,0) as'check' from acd_courses_students where  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+
+            If dt2 IsNot Nothing Then
+                If dt2.Rows(0)(0).ToString = False And dt2.Rows(0)(1).ToString = False Then
 
                     Names.Add("1")
 
@@ -157,6 +175,22 @@ Public Class course_registerCls
 
                 Names.Add("0")
             End If
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select approved ,checked from acd_courses_students where  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+
+            If dt IsNot Nothing Then
+                If dt.Rows(0)(0).ToString = False And dt.Rows(0)(1).ToString = True Then
+
+                    Names.Add("2")
+
+
+                End If
+            Else
+
+                Names.Add("0")
+            End If
+
 
 
             Return Names.ToArray

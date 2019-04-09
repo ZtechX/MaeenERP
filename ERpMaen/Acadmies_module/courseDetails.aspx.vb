@@ -37,15 +37,32 @@ Public Class CourseDetails
         Try
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
-                finance_div.Visible = False
+
                 Dim code = Request.QueryString("code")
                 Dim dt = DBManager.Getdatatable(" select  acd_courses.id from acd_courses where acd_courses.code='" + code.ToString  + "'")
                 If dt.Rows.Count <> 0 Then
                     Dim course_id = dt.Rows(0)(0).ToString
                     Lblcourse_id.InnerHtml = course_id
+                    Dim dt2 = DBManager.Getdatatable(" select   isNull(Max(acd_courses.price),0)  from acd_courses where acd_courses.code='" + code.ToString + "'")
+                    If dt2.Rows.Count <> 0 Then
+                        Dim price = dt2.Rows(0)(0)
+                        If price > 0 Then
+                            finance_div.Visible = True
+                        Else
+                            finance_div.Visible = False
+                        End If
+
+                    End If
+
                     If ERpMaen.LoginInfo.getUserType = 8 Then
 
-                        Dim dtc = DBManager.Getdatatable("select course_id from acd_courses_students where student_id=" + LoginInfo.GetUser__Id() + " and approved=1 and course_id=" + course_id)
+                        Dim dtd = DBManager.Getdatatable("select deleted   from acd_courses_students where student_id=" + LoginInfo.GetUser__Id() + " and approved=1 and course_id=" + course_id)
+                        If dtd.Rows.Count <> 0 Then
+                            'condition page 
+                            Page.Response.Redirect("course_register.aspx?code=" + code)
+
+                        End If
+                        Dim dtc = DBManager.Getdatatable("select course_id   from acd_courses_students where student_id=" + LoginInfo.GetUser__Id() + " and approved=1 and course_id=" + course_id)
                         If dtc.Rows.Count = 0 Then
                             'condition page 
                             Page.Response.Redirect("course_register.aspx?code=" + code)

@@ -5,6 +5,7 @@ var deleteWebServiceMethod = "ConsultationDetails.asmx/Delete";
 var formAutoCodeControl = "lblmainid";
 var consulat_id = "";
 var oldAdvisor = "";
+var curr_consult_id = "";
 $(function () {
     
     $("#pnlConfirm").hide();
@@ -22,7 +23,12 @@ $(function () {
 function GetMeasurementSatisfaction() {
     window.open("../report_Module/Aslah/MeasurementSatisfactionRep", "_blank");
 }
-
+function getStudyCase() {
+    window.open("../report_Module/Aslah/StudyCaseRep?Consult_id=" + curr_consult_id, "_blank");
+}
+function getReport() {
+    window.open("../report_Module/Aslah/ReportRep?Consult_id=" + curr_consult_id, "_blank");
+}
 function resetAll() {
     try {
         resetFormControls();
@@ -33,7 +39,8 @@ function resetAll() {
     }
 }
 function viewConslute(id) {
-    
+    $("#DivRep").show();
+    curr_consult_id = id;
     ConsultationDetails.Edit(id, function (val) {
         debugger
         prepareAdd();
@@ -164,7 +171,7 @@ function drawDynamicTable() {
 
 function add() {
     try {
-        
+        $("#DivRep").hide();
           prepareAdd();
         resetAll();
         getConsultNum();

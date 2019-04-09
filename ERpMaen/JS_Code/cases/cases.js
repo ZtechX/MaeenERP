@@ -1517,6 +1517,10 @@ function getConciliation() {
 function getagreement() {
     window.open("../report_Module/Aslah/agreementRep?Case_id=" + $("#lblcase_id").html() + "&details_id=" + $("#receiving_delivery_details").find("#lbldelivery_details").html(), "_blank");
 }
+function getRegistAggregation() {
+    window.open("../report_Module/Aslah/RegistAggregationRep?Conc_id=" + $("#case_conciliation").find("#lblconciliation_id").html(), "_blank");
+}
+
 function getReview(type) {
     debugger
     var person_id ;
@@ -1529,10 +1533,13 @@ function getReview(type) {
 
 }
 function getProcedure() {
-    window.open("../report_Module/Aslah/ProceduresRep?Case_id=" + $("#combobox").val() , "_blank");
+    window.open("../report_Module/Aslah/ProceduresRep?Case_id=" + $("#lblcase_id").html()  , "_blank");
 }
 function GetMeasurementSatisfaction() {
     window.open("../report_Module/Aslah/MeasurementSatisfactionRep", "_blank");
+}
+function GetReferral() {
+    window.open("../report_Module/Aslah/ReferralRep?Case_id=" + $("#lblcase_id").html(), "_blank");
 }
 function getTimeline(val) {
     window.open("../Aslah_Module/Timeline?case_id=" + $("#combobox").val() + "&done=" + val +"&start_dt=''&end_dt=''", "_blank");

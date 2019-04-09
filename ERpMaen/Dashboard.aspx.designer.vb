@@ -32,13 +32,13 @@ Partial Public Class Dashboard
     Protected WithEvents imgUser1 As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''lblLink control.
+    '''lblphone control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLink As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    Protected WithEvents lblphone As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''lblUserName control.

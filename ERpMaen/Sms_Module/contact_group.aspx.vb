@@ -35,7 +35,7 @@ Public Class contact_group
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             If Page.IsPostBack = False Then
-                Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='GP'", "description", "id", "")
+                Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='GP' and comp_id=" + LoginInfo.GetComp_id(), "description", "id", "")
                 clsddltype5.SetComboItems(ddlgroup_id, "", True, "--اختر--", False)
                 'Dim clsddltype6 As New clsFillComboByDataSource("select * from tblcontacts where ISNUll(deleted,0)=0 ", "name_ar", "id", "")
                 'clsddltype6.SetComboItems(ddlcontact_id, "", True, "--اختر--", False)

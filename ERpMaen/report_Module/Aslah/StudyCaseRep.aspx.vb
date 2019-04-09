@@ -74,13 +74,13 @@ left join tbllock_up nat on nat.id=ash_consultings.nationality_id
                 ds.Tables("Details").Rows(0).Item("dob_date_hj") = dt2.Rows(0).Item("dob_date_hj").ToString
                 Dim marital_status = dt2.Rows(0).Item("marital_status").ToString
                 If marital_status = "اعزب" Then
-                    ds.Tables("Details").Rows(0).Item("violence") = 1
+                    ds.Tables("Details").Rows(0).Item("single") = 1
                 ElseIf marital_status = "متزوج" Then
-                    ds.Tables("Details").Rows(0).Item("Incubation") = 1
+                    ds.Tables("Details").Rows(0).Item("Married") = 1
                 ElseIf marital_status = "مطلق" Then
-                    ds.Tables("Details").Rows(0).Item("expense") = 1
+                    ds.Tables("Details").Rows(0).Item("Divorced") = 1
                 ElseIf marital_status = "ارملـ/ــة" Then
-                    ds.Tables("Details").Rows(0).Item("stripped_off") = 1
+                    ds.Tables("Details").Rows(0).Item("Widowed") = 1
 
                 End If
                 ds.Tables("Details").Rows(0).Item("wifes_no") = dt2.Rows(0).Item("wifes_no").ToString
