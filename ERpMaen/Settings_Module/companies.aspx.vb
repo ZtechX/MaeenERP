@@ -37,10 +37,10 @@ Public Class companies
             If Page.IsPostBack = False Then
                 loginUser.Value = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
                 Dim comp_id = LoginInfo.GetComp_id()
-                Dim cls_Acadmin As New clsFillComboByDataSource("select * from tblUsers where User_Type !=2 and comp_id=" + comp_id, "full_name", "id", "")
+                Dim cls_Acadmin As New clsFillComboByDataSource("select * from tblUsers where (User_Type =5 or User_Type =7) and comp_id=" + comp_id, "full_name", "id", "")
                 cls_Acadmin.SetComboItems(ddl_Acadmin, "", True, "--اختر--", False)
-                Dim cls_Cenadmin As New clsFillComboByDataSource("select * from tblUsers where User_Type !=2 and comp_id=" + comp_id, "full_name", "id", "")
-                cls_Acadmin.SetComboItems(ddl_Cenadmin, "", True, "--اختر--", False)
+                Dim cls_Cenadmin As New clsFillComboByDataSource("select * from tblUsers where (User_Type =5 or User_Type =7) and comp_id=" + comp_id, "full_name", "id", "")
+                cls_Cenadmin.SetComboItems(ddl_Cenadmin, "", True, "--اختر--", False)
 
 
 

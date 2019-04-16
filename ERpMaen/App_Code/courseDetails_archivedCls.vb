@@ -1150,19 +1150,32 @@ Public Class courseDetails_archivedCls
     ''' </summary>
     <WebMethod()>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function unArchive_course(ByVal course_id As String) As String()
+    Public Function unArchive_course(ByVal course_id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As String()
         Dim Names As New List(Of String)(10)
         Try
-            If DBManager.ExcuteQuery("update acd_courses set archive=0 where id=" + course_id) <> -1 Then
-                If Not PublicFunctions.TransUsers_logs("4208", "acd_courses", "ارشيف", _sqlconn, _sqltrans) Then
-                    success = False
-                Else
-                    success = True
-                End If
-                success = True
-            Else
-                success = False
 
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            Dim id = ""
+
+            dictBasicDataJson.Add("Type", "unArc_reason")
+            dictBasicDataJson.Add("RelatedId", course_id)
+            dictBasicDataJson.Add("comp_id", LoginInfo.GetComp_id())
+
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tbllock_up", id, _sqlconn, _sqltrans) Then
+                If DBManager.ExcuteQuery("update acd_courses set archive=0 where id=" + course_id) <> -1 Then
+                    If Not PublicFunctions.TransUsers_logs("4208", "acd_courses", "ارشيف", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
+
+                    success = True
+                Else
+                    success = False
+
+                End If
             End If
             If success Then
                 Names.Add("1")

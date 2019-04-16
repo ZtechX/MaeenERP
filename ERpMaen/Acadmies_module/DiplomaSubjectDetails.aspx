@@ -193,6 +193,7 @@
             <section class="app-content">
                 <div class="row">
                      <label style="display:none" id="Lblsubject_id" runat="server" ></label>
+                       <label style="display:none" id="lblcode" runat="server" ></label>
                        <label style="display:none" id="LblDiplome_id" runat="server"></label>
                         <label style="display:none" id="subject_code" runat="server"></label>
                       <label style="display:none" id="lbldiplomeCode" runat="server"></label>

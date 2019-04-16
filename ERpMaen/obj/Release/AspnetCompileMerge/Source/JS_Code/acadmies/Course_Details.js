@@ -372,6 +372,59 @@ function saveHomeworkDegree() {
 
             var students_degree = [];
             $("#studentHWAnswers tr").each(function () {
+               
+                var obj = {};
+                obj["id"] = $(this).find("label").attr("id");
+                obj["hwmstuddegree"] = $(this).find("#Homeworkdegee").val();
+                obj["file"] = $(this).find("#homeworkfile").attr("href");
+                students_degree.push(obj);
+
+            });
+
+            console.log(students_degree);
+           var CourseId = ($("#Lblcourse_id").html());
+            var homeworkID = ($("#LblHomework_id").html());
+            // $("#SavedivLoader").show();
+
+            courseDetailsCls.savehomeworkDegree(homeworkID, CourseId ,students_degree, function (val) {
+                if (val == true) {
+
+                    $("#SavedivLoader").hide();
+                    alert("  تم الحفظ  ");
+                    $("#StudenthomeworkAnswers").modal('hide');
+
+                    resetAll();
+                    prepareAdd();
+
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+
+
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
+function saveExamkDegree() {
+
+    try {
+
+
+        if (!checkRequired()) {
+
+
+            var students_degree = [];
+            $("#studentExamAnswers tr").each(function () {
                 debugger
                 var obj = {};
                 obj["id"] = $(this).find("label").attr("id");
@@ -382,16 +435,16 @@ function saveHomeworkDegree() {
             });
 
             console.log(students_degree);
-           // var CourseId = ($("#Lblcourse_id").html());
-            var homeworkID = ($("#LblHomework_id").html());
+             var CourseId = ($("#Lblcourse_id").html());
+            var ExamId = ($("#LblExam_id").html());
             // $("#SavedivLoader").show();
 
-            courseDetailsCls.savehomeworkDegree(homeworkID ,students_degree, function (val) {
+            courseDetailsCls.saveExamDegree(ExamId, CourseId, students_degree, function (val) {
                 if (val == true) {
 
                     $("#SavedivLoader").hide();
                     alert("  تم الحفظ  ");
-                    $("#StudenthomeworkAnswers").modal('hide');
+                    $("#StudentExamskAnswers").modal('hide');
 
                     resetAll();
                     prepareAdd();
@@ -425,7 +478,7 @@ function resetAll() {
     }
 }
 
-//AddStudent
+
 
 function SaveAbsenceStudent() {
 
@@ -478,62 +531,7 @@ function SaveAbsenceStudent() {
 }
 
 
-//function AddStudent() {
 
-
-//    try {
-//        debugger
-
-//        if (!checkRequired()) {
-
-//           // $("#SavedivLoader").show();
-//            var student_arr = [];
-//            $("#courseStudents").find("tr td input:checkbox").each(function () {
-//                if ($(this).is(":checked")) {
-//                    var value = $(this).attr("student");
-//                    student_arr.push(value)
-//                }
-//            });
-//        //    console.log(student_arr);
-//            var CourseId = ($("#Lblcourse_id").html());
-
-      
-//            var x = student_arr.length;
-//            if (x != 0) {
-//                debugger
-//                courseDetailsCls.SaveStudent(CourseId, student_arr, function (val) {
-//                    if (val[0] == 1) {
-//                      //  $("#SavedivLoader").hide();
-//                        alert("تم الحفظ بنجاح");
-//                        $("#addStudentModal").modal('hide');
-//                        drawStudentTable();
-//                        window.location.reload();
-//                       // drawAbsenceTable();
-
-
-
-
-//                    } else {
-//                        alert("لم يتم الحفظ");
-//                    }
-
-
-//                });
-//            }
-//            else {
-//                $("#addStudentModal").modal('hide');
-//                //$("#SavedivLoader").hide();
-
-//            }
-//        }
-
-
-//    } catch (err) {
-//        alert(err);
-//    }
-//}
-
-//draw_public_student degree
 
 
 
@@ -645,25 +643,25 @@ function drawpublicDegreeTable() {
 function drawstudenthomeworkanswers(homeworkId) {
     try {
         //debugger
-       // var CourseId = ($("#Lblcourse_id").html());
+        var CourseId = ($("#Lblcourse_id").html());
         ($("#LblHomework_id").html(homeworkId));
 
 
-        courseDetailsCls.get_StudentsHomeworkAnswers(homeworkId, function (val) {
+        courseDetailsCls.get_StudentsHomeworkAnswers(homeworkId, CourseId , function (val) {
 
             console.log(val);
             var data = "";
             if (val[0] == 1) {
-                debugger
+              //  debugger
                 var arrstudent = JSON.parse(val[1]);
 
                 arrstudent.forEach(function (element) {
-                    debugger
+                //    debugger
 
                     var filename = "";
                     var path = element.homeworkanswer;
                     if (path != "" && path != null) {
-                        debugger
+                       // debugger
                         if (path.indexOf("Acadmies_module/coursefiles/") != -1) {
                             filename = path.split("Acadmies_module/coursefiles/")[1];
                         }
@@ -713,6 +711,77 @@ function drawstudenthomeworkanswers(homeworkId) {
     }
 }
 
+
+function drawstudentExamsanswers(ExamId) {
+    try {
+        //debugger
+        var CourseId = ($("#Lblcourse_id").html());
+        ($("#LblExam_id").html(ExamId));
+
+
+        courseDetailsCls.get_StudentsExamsAnswers(ExamId, CourseId, function (val) {
+
+            console.log(val);
+            var data = "";
+            if (val[0] == 1) {
+                debugger
+                var arrstudent = JSON.parse(val[1]);
+
+                arrstudent.forEach(function (element) {
+                    debugger
+
+                    var filename = "";
+                    var path = element.homeworkanswer;
+                    if (path != "" && path != null) {
+                        debugger
+                        if (path.indexOf("Acadmies_module/coursefiles/") != -1) {
+                            filename = path.split("Acadmies_module/coursefiles/")[1];
+                        }
+                    }
+
+                    data = data + `   <tr>
+                                    <td>
+                                        <label id=" ${element.student_id}"> ${element.studentname}</label>
+
+                                    </td>
+                                  
+                                                <td>
+                                                       <li>
+                                                        <a id="homeworkfile" href="../${element.homeworkanswer}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${filename}</span>
+                                      
+                                                    </li>
+
+                                                     </td>
+
+                                           <td>
+                         <input id="Homeworkdegee" type="text" value=" ${element.HMWDegree}" />
+                                    
+                                    </td>
+                                </tr> `
+
+
+                });
+            }
+
+            $("#studentExamAnswers").html(data);
+            $("#StudentExamskAnswers").modal();
+
+
+
+        });
+
+    }
+
+
+
+    catch (err) {
+        alert(err);
+    }
+}
 
 
 function SaveLec() {
@@ -838,12 +907,13 @@ function saveHWanswer() {
         else {
             $("#SavedivLoader").show();
             var HomeWorkId = ($("#LblHomework_id").html());
+            var CourseId = ($("#Lblcourse_id").html());
            
             var basicData = generateJSONFromControls("divFormuploadHMfiles");
 
             var Id = "";
           
-            courseDetailsCls.saveHWanswer(Id, HomeWorkId, basicData, function (val) {
+            courseDetailsCls.saveHWanswer(Id, HomeWorkId, CourseId ,basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     // debugger;
@@ -882,12 +952,13 @@ function saveExamanswer() {
         else {
             $("#SavedivLoader").show();
             var examID = ($("#LblExam_id").html());
+            var CourseId = ($("#Lblcourse_id").html());
 
             var basicData = generateJSONFromControls("divFormuploadexamfiles");
 
             var Id = "";
 
-            courseDetailsCls.saveExamanswer(Id, examID, basicData, function (val) {
+            courseDetailsCls.saveExamanswer(Id, examID, CourseId,basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     // debugger;
@@ -911,6 +982,7 @@ function saveExamanswer() {
         alert(err);
     }
 }
+
 function addFiles() {
 
     try {
@@ -1238,32 +1310,16 @@ function LectureView(LecID) {
 }
 //get lecture code
 function getlectureCode() {
-    courseDetailsCls.getlectureCode(function (val) {
+      debugger
+    var CourseId = $("#Lblcourse_id").html(); 
+    courseDetailsCls.getlectureCode(CourseId,function (val) {
         
         $("#lecture_code").val(Number(val) + 1);
     });
-}
+}                                                                                                                                                                                                                 
+                                                                                                                                             
 
-
-function viewstudDegrees(studentID) {
-  
-    var CourseId = $("#Lblcourse_id").html(); 
-
-    courseDetailsCls.EditstudDegree(CourseId, studentID, function (val) {
-        if (val[0] == "1") {
-            var data = JSON.parse(val[1]);
-            fillControlsFromJson(data[0]);
-
-
-            //$("#order_addLec").modal();
-
-        }
-
-
-    });
-}
-
-function viewHomework(HMWID) {
+      function viewHomework(HMWID) {
 
     setHomewId(HMWID);
 
@@ -1295,7 +1351,7 @@ function viewHomework(HMWID) {
 
     });
 
-}
+}                                                              
 
 function viewExam(examID) {
 
@@ -1520,6 +1576,7 @@ function GetCourses(){
             
             var arr1 = JSON.parse(val[1]);
             $("#course_title").html(arr1[0].name);
+            $("#lectureDuration").html(arr1[0].lect_duration);
             $("#course_details").html(arr1[0].description);
             $("#course_date").html(arr1[0].start_dt_hj);
             if (arr1[0].price > 0) {
@@ -1543,6 +1600,7 @@ function GetCourses(){
         alert(err);
     }
 }
+
 function drawAbsenceTable(CoursLecID) {
     try {
         var CourseId = ($("#Lblcourse_id").html());
@@ -1588,31 +1646,32 @@ function drawAbsenceTable(CoursLecID) {
 Number.prototype.padDigit = function () {
     return (this < 10) ? '0' + this : this;
 }
-function count_endtime(start_time) {
+//function count_endtime(start_time) {
     
-    var lect_time = $("#lect_time").html();
-    var t1 = start_time.split(":");
-    console.log(t1);
-    var t2 = t1[1].split(" ");
-    console.log(t2);
-    mins = Number(t2[0]) + Number(lect_time);
-    minhrs = Math.floor(parseInt(mins / 60));
-    hrs = Number(t1[0]) + minhrs;
-    mins = mins % 60;
-    console.log(lect_time);
-    console.log(mins);
-    console.log(minhrs);
-    console.log(hrs);
-    var tm = t2[1];
-    if (hrs > 12) {
-        hrs = hrs - 12;
-        if (t2[1] == "am")
-            tm = "pm";
-        else
-            tm = "am";
-    }
-    return ( hrs.padDigit() + ':' + mins.padDigit() + " " + tm);
-}
+//    var lect_time = $("#lect_time").html();
+   
+//    var t1 = start_time.split(":");
+//    console.log(t1);
+//    var t2 = t1[1].split(" ");
+//    console.log(t2);
+//    mins = Number(t2[0]) + Number(lect_time);
+//    minhrs = Math.floor(parseInt(mins / 60));
+//    hrs = Number(t1[0]) + minhrs;
+//    mins = mins % 60;
+//    console.log(lect_time);
+//    console.log(mins);
+//    console.log(minhrs);
+//    console.log(hrs);
+//    var tm = t2[1];
+//    if (hrs > 12) {
+//        hrs = hrs - 12;
+//        if (t2[1] == "am")
+//            tm = "pm";
+//        else
+//            tm = "am";
+//    }
+//    return ( hrs.padDigit() + ':' + mins.padDigit() + " " + tm);
+//}
 function drawLecturesTable() {
     try {
        // $("#SavedivLoader").show();
@@ -1625,12 +1684,12 @@ function drawLecturesTable() {
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
-                    var end_time = count_endtime(element.start_time);
+                    //var end_time = count_endtime(element.start_time);
                  
                     data = data + `<tr>
                                                       <td>${element.lecture_code} </td>
                                                      <td>${element.date_hj}  </td>
-                                                    <td>${element.start_time} الى  ${end_time}   </td>
+                                                    <td>${element.start_time}</td>
                                                        <td> ${element.hallNum} </td> `;
                     action = ` <td>
 
@@ -1681,13 +1740,13 @@ function drawLecturesTable() {
                     else {
                         switch (element.absence ) {
                             default:
-                                text = "--";
+                                text = "<i class='success fa fa-check'><i/>";
                                 break;
                             case true:
-                                text = "<i class=' success fa fa-check'><i/>";
+                                text = "<i class=' danger fa fa-times'><i/>";
                                 break;
-                            case false:
-                                text = "<i class='danger fa fa-times'><i/>";
+                            //case false:
+                            //    text = "<i class='danger fa fa-times'><i/>";
                         }
                         data = data + '<td align="center">' + text +'</td> </tr>';
                     }
@@ -1721,9 +1780,6 @@ function drawstudentHomeworkTable() {
 
                 arr1.forEach(function (element) {
                     var degree = element.degree;
-                    if (degree == 0) {
-                        degree = "--";
-                    }
                     var file_nm = "";
                     var path = element.image;
                     if (path != "" && path != null) {
@@ -1731,8 +1787,12 @@ function drawstudentHomeworkTable() {
                             file_nm = path.split("Acadmies_module/homework/")[1];
                         }
                     }
-                   
-                    data = data + `
+                    if (degree == 0) {
+                        degree = "--";
+
+
+
+                        data = data + `
                                                     <tr>
                                                                                 <td> ${element.title}  </td>
                                                                                 <td>${element.details}   </td>
@@ -1743,17 +1803,41 @@ function drawstudentHomeworkTable() {
                                                         </a>
                                                        
                                                        </td>
+                                                        <td> ${degree} </td>
+                                                                     
                                                                                 <td>
                                    <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#file_upload_hw_answers" onclick="setHomWID(${element.id});">
                                                                 إرفاق الحل
                                                            
                                                             </button>
                                                        </td>
-                                                                                 <td> ${degree} </td>
-                                                                     
+                                                   
 
                                                                             </tr>
                                                         `;
+                    }
+                    else {
+
+
+                        data = data + `
+                                                    <tr>
+                                                                                <td> ${element.title}  </td>
+                                                                                <td>${element.details}   </td>
+                                                                                <td>
+                                                    <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>  ${file_nm}
+
+                                                        </a>
+                                                       
+                                                       </td>
+                                                        <td> ${degree} </td>
+                                                                     
+                                                                                <td> done </td>
+                                                   
+
+                                                                            </tr>
+                                                        `;
+                    }
                    
 
                 });
@@ -1782,13 +1866,6 @@ function drawstudentExamsTable() {
 
                 arr1.forEach(function (element) {
                     //  debugger
-                    var dgr = element.degree;
-                    if (dgr == 0) {
-                        dgr = "--";
-                    }
-                    else {
-                        dgr = element.degree;
-                    }
                     var file_nm = "";
                     var path = element.image;
                     if (path != "" && path != null) {
@@ -1796,8 +1873,11 @@ function drawstudentExamsTable() {
                             file_nm = path.split("Acadmies_module/exams/")[1];
                         }
                     }
+                    var dgr = element.degree;
+                    if (dgr == 0) {
+                        dgr = "--";
 
-                    data = data + `
+                        data = data + `
                                                     <tr>
                                                                                 <td> ${element.title}  </td>
                                                                                 <td>${element.details}   </td>
@@ -1808,18 +1888,44 @@ function drawstudentExamsTable() {
                                                         </a>
                                                        
                                                        </td>
+                                                  <td> ${dgr}</td>
                                                                                 <td>
                                    <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#file_upload_exam_answers" onclick="setExamID(${element.id})">
                                                                 إرفاق الحل
                                                            
                                                             </button>
                                                        </td>
-                                                                                 <td> ${dgr}</td>
+                                                                        
                                                                      
 
                                                                             </tr>
                                                         `;
 
+                    }
+                    else {
+                        dgr = element.degree;
+
+
+
+                        data = data + `
+                                                    <tr>
+                                                                                <td> ${element.title}  </td>
+                                                                                <td>${element.details}   </td>
+                                                                                <td>
+                                                        <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>  ${file_nm}
+
+                                                        </a>
+                                                       
+                                                       </td>
+                                                  <td> ${dgr}</td>
+                                                                                <td> done</td>
+                                                                        
+                                                                     
+
+                                                                            </tr>
+                                                        `;
+                    }
 
                 });
 
@@ -1967,7 +2073,7 @@ function drawConditionsTable() {
                                                      <td>
                                                        <li>
                                                         <a href="../${element.image}" download>
-                                                            <i class="zmdi zmdi-cloud-download"></i>تحميل ملف  
+                                                            <i class="fa fa-download"></i>   
 
                                                         </a>
                                                         <span>${file_nm}</span>
@@ -2013,13 +2119,18 @@ function drawConditionsTable() {
 }
 function drawCourseFile() {
     try {
+
+       // debugger
         var CourseId = ($("#Lblcourse_id").html());
         //var LecID= $("#LblLecture_id").html();
         
         courseDetailsCls.get_CourseFiles(CourseId, function (val) {
             var data = "";
-            console.log(val);
+            var condition_check = "";
+          // console.log(val);
             if (val[0] == 1) {
+               debugger
+             
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
@@ -2031,9 +2142,9 @@ function drawCourseFile() {
                             file_nm = path.split("Acadmies_module/coursefiles/")[1];
                         }
                     }
+                    if (document.getElementById("checkuser").value ==1) {
 
-                    data = data + `
-                                                     <tr>
+                        data = data + `<tr>
                                                       <td>${element.notes} </td>
                                                      <td>
                                                        <li>
@@ -2044,10 +2155,8 @@ function drawCourseFile() {
                                                         <span>${file_nm}</span>
                                                     </li>
 
-                                                        </td>
-                                                  
-                                                      
-                                                         <td>
+                                                        </td> 
+                                                        <td>
 
                                                           <div class="btn-group pull-left" style="position:absolute">
                                                         <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -2065,13 +2174,30 @@ function drawCourseFile() {
                                                   
                                                       </ul>
                                                      </div>
-                                                           </td>
+                                                           </td> 
+</tr>`;
+                    }
 
-                                                   
+                    else {
 
-                                                                            </tr>
-                                                                      
-`;
+
+                        data = data + `<tr>
+                                                      <td>${element.notes} </td>
+                                                     <td>
+                                                       <li>
+                                                        <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li>
+
+                                                        </td> 
+                                                       
+</tr>`;
+
+                    }
+                   
                 });
 
 
@@ -2299,6 +2425,11 @@ function drawExams() {
                                                                                               تعديل 
                                                                                             </a>
                                                                                                     </li>
+                                                                                                     <li>
+                                                                                            <a   data-toggle="modal" href="#StudentExamskAnswers"  onclick="drawstudentExamsanswers(${element.id}) ">
+                                                                                              حلول الاختبارات  
+                                                                                            </a>
+                                                                                                    </li>
                                                                                              
                                                                                                 </ul>
                                                                                            
@@ -2514,6 +2645,7 @@ function UploadComplete2(sender, args) {
             break;
     }
     clearContents(sender);
+    ClearMe(sender);
 }
 
 function UploadComplete3(sender, args) {
@@ -2859,6 +2991,34 @@ function deleteCourse() {
         });
     }
 }
+
+
+
+function archiveCourse() {
+
+    var f = confirm("هل  تريد ارشفة الدورة");
+    if (f == true) {
+
+        var CourseId = ($("#Lblcourse_id").html());
+
+        courseDetailsCls.Archive_course(CourseId, function (val) {
+
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تمت الارشفه بنجاح  ");
+                window.location.replace("coursat.aspx");
+
+            } else {
+                alert('لم يتم الارشيف');
+            }
+
+        });
+
+    }
+    
+}
+
+
 
 
 function add() {

@@ -8,7 +8,6 @@
 <%@ Register Src="~/UserControls/Person.ascx" TagPrefix="uc1" TagName="Person" %>
 <%@ Register Src="~/UserControls/Appraisal.ascx" TagPrefix="uc1" TagName="Appraisal" %>
 
-
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
 
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
@@ -129,9 +128,11 @@
                     </div>
                     <uc1:Result runat="server" ID="Result" />
                     <%--compopox--%>
-
-                    <div class="container">
+                      
+                    
                         <div class="row">
+                             <button class="btn btn-info btn-lg pull-left" onclick="GetMeasurementSatisfaction(); return false;"> <i class="fa fa-print"></i> نموذج قياس رضا المستفيد </button>
+                              
                             <div class="ui-widget" dir="rtl">
                                 <label>الحالات: </label>
                                 <select  id="combobox">
@@ -140,7 +141,7 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
+                    
                     <input type ="text"  style="display:none;" id="userLoginType" runat="server"/>
                     <div id="divForm" class="newformstyle form_continer">
                         <div class="container">
@@ -209,10 +210,11 @@
                                                                 <asp:Label ID="lblmainid" runat="server" ClientIDMode="static" Style="display: none" dbcolumn="id"></asp:Label>
                                                                 <%-- start group 1--%>
                                    <div id="caseReportDive" class="col-md-12 form-group" style="display:none;">
-                                            <button class="btn btn-info btn-lg pull-right" onclick="getCaseReport(); return false;"> تقرير عن الحالة</button>
-                                               
-                                            <button class="btn btn-info btn-lg pull-left" onclick="getCaseDetails(); return false;">طباعة بيانات الحالة الأولية</button>
-                                         
+                                            <button class="btn btn-info btn-lg pull-right" onclick="getCaseReport(); return false;"> <i class="fa fa-print"></i> تقرير عن الحالة</button>
+                                              
+                                            <button class="btn btn-info btn-lg pull-left" onclick="getCaseDetails(); return false;"> <i class="fa fa-print"></i> بيانات الحالة الأولية</button>
+                                           <button class="btn btn-info btn-lg" onclick="GetReferral(); return false;"> <i class="fa fa-print"></i> إحالة دعوى </button>
+          
                                    </div>
                                                                 <div class=" col-md-12 form-group ">
 
@@ -229,7 +231,7 @@
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
-                                                                        التاريخ   </lable>
+                                                                        التاريخ   </label>
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
@@ -541,7 +543,7 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">يانات الحاله الحالية</a>
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">ييانات الحاله الحالية</a>
                                                             </h4>
                                                         </div>
                                                         <div id="collapse5" class="panel-collapse collapse">
@@ -870,7 +872,7 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             <h4 class="panel-title">
-                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">تسليم واستلام الاولاد </a>
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">تسليم واستلام الاولاد (الفترة الاساسية) </a>
                                                             </h4>
                                                         </div>
                                                         <div id="collapse7" class="panel-collapse collapse in">
@@ -889,7 +891,7 @@
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
-                                                   <%--             <div class="col-md-12 form-group ">
+                                                                <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
                                                                         تاريخ اول تسليم    </lable>
@@ -898,27 +900,28 @@
                                                                     <div class="col-md-9 col-sm-12">
 
                                                                         <div class="fancy-form" id="divdate_received">
-                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="first_date_received_m" ID="lblfirst_date_received_m"></asp:Label>
-                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="first_date_received_h" ID="lblfirst_date_received_h"></asp:Label>
-                                                                            <uc1:HijriCalendar runat="server" ID="HijriCalendar1" />
+                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="first_date_m" ID="lblfirst_date_received_m"></asp:Label>
+                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="first_date_h" ID="lblfirst_date_received_h"></asp:Label>
+                                                                            <uc1:HijriCalendar runat="server" ID="HijriCalendar12" />
                                                                         </div>
-
-                                                                    </div>
-                                                                </div>--%>
-
-
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label for="Name" class="label-required">يوم التسليم </label>
-
-                                                                    </div>
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList SkinID="form-control" required class="form-control" dbColumn="day_nam" ClientIDMode="Static" ID="ddlday_nam1" runat="server">
-                                                                        </asp:DropDownList>
+                                                                       
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-md-12 form-group" id="time_receiving_time">
+                                                                 <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label class="label-required">
+                                                                       لمدة (شهر) </lable>
+                                                                    </div>
+
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <input onkeypress="return isNumber(event);" required  dbColumn="month_number" type="text" id="num_months"
+                                                                            class="form-control" runat="server" clientidmode="Static" />
+
+                                                                        <br />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 form-group" id="time_receiving_time" style="margin-bottom:15px;">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
                                                                         ساعة التسليم  </lable>
@@ -928,22 +931,10 @@
                                                                         <input onkeypress="return isNumber(event);" required dbcolumn="receiving_time" type="time" id="txtreceiving_time"
                                                                             class="form-control" runat="server" readonly clientidmode="Static" />
         
-                                                                        <br />
+                                                                       
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-12 form-group ">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">
-                                                                        مدة الجلسة بالساعة </lable>
-                                                                    </div>
-
-                                                                    <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" required dbcolumn="session_time" type="text" id="txtsession_time"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
-
-                                                                        <br />
-                                                                    </div>
-                                                                </div>
+                                                              
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
@@ -958,7 +949,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group">
-                                                                    <button onclick="save_children_receive(); return false" class="btn btn-success">حفظ</button>
+                                                               <button onclick="save_children_receive(); return false" class="btn btn-success">حفظ</button>
+                                                                    
                                                                 </div>
 
 
@@ -969,6 +961,40 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-12">
+                                                <div class="panel-group" id="">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">بيانات الفترات الاضافية </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapse8" class="panel-collapse collapse in">
+                                                            <div class="panel-body" >
+                                                                <%-- start group 1--%>
+                                                                       <button id="addAnother_receive" onclick="addAnother_children_receive(); return false" class="btn btn-success">إضافة مدة آخرى</button>
+                                                              
+<table class="table table-bordered">
+    <thead>
+       <tr>
+            <th >#</th>
+            <th >تاريخ بداية الفترة</th>
+            <th >مدة التسليم كل (يوم)</th>
+            <th >لمدة (شهر)</th>
+           <th >حذف الفترة ومواعيدها</th>
+        </tr>
+    </thead>
+    <tbody id="tb_other_period">
+        
+    </tbody>
+</table>
+
+                                                                <%--end of group1--%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                         </div>
 
@@ -990,9 +1016,11 @@
                                                             <div class="panel-body" id="case_conciliation">
                                                                 <%-- start group 1--%>
                                                                 <asp:Label ID="lblconciliation_id" ClientIDMode="static" runat="server" Style="display: none" dbcolumn="id"></asp:Label>
-                                                                                                          <div class="col-sm-12 form-group">
-                                            <button class="btn btn-info btn-lg pull-left" onclick="getConciliation(); return false;"> طباعة محضر الصلح </button>
-        </div>
+                                                                <div class="col-sm-12 form-group">
+    <button class="btn btn-info btn-lg pull-right" onclick="getRegistAggregation(); return false;"><i class="fa fa-print"></i> توثيق إتفاق </button>
+                                                                
+                                                                    <button class="btn btn-info btn-lg pull-left" onclick="getConciliation(); return false;"><i class="fa fa-print"></i> محضر الصلح </button>
+                                                                </div>
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label>
@@ -1180,13 +1208,43 @@
                     <asp:HiddenField ID="tblH" runat="server" />--%>
                     </div>
                 </div>
-            </label>
-            </label>
-            </label>
-            </label>
-            </label>
-                
-    
+        
+           <div class="collapse" id="anotherPeriod" dir="rtl" style="display :none;">
+
+               
+                                                                <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label for="Name" class="label-required">(يوم)التسليم كل</label>
+
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <asp:TextBox SkinID="form-control"  required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="delivery_period" runat="server">
+                                                                        </asp:TextBox>
+                                                                    </div>
+                                                                </div>
+                                                         
+
+                                                                 <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label class="label-required">
+                                                                       لمدة (شهر) </lable>
+                                                                    </div>
+
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <input onkeypress="return isNumber(event);" required  type="text" id="month_number"
+                                                                            class="form-control" runat="server" clientidmode="Static" />
+
+                                                                        <br />
+                                                                    </div>
+                                                                </div>
+
+
+                  <div class="col-md-12 form-group ">
+                           <button onclick="save_anotherPeriod()" style="font-family: DroidKufi !important;" class="btn btn-success pull-left">حفظ</button>
+        
+                  </div>             
+
+                      </div>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

@@ -32,6 +32,15 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents Lblsubject_id As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''lblcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblcode As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''LblDiplome_id control.
     '''</summary>
     '''<remarks>

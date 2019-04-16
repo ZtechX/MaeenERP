@@ -125,21 +125,22 @@ function saveHWanswer() {
 
     try {
 
-        debugger
+        
         if (checkRequired("divFormuploadHMfiles") == 1) {
             alert("يرجى ادخال البيانات المطلوبة");
 
         }
         else {
             $("#SavedivLoader").show();
+            debugger
             var HomeWorkId = ($("#LblHomework_id").html());
             var subjectId = ($("#Lblsubject_id").html());
-
+            var code = ($("#lblcode").html());
             var basicData = generateJSONFromControls("divFormuploadHMfiles");
 
             var Id = "";
 
-            DiplomaSubjectDetailsCls.saveHWanswer(Id, HomeWorkId, subjectId, basicData, function (val) {
+            DiplomaSubjectDetailsCls.saveHWanswer(Id, code,HomeWorkId, subjectId, basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     // debugger;
@@ -177,14 +178,15 @@ function saveExamanswer() {
         }
         else {
             $("#SavedivLoader").show();
+            debugger
             var examID = ($("#LblExam_id").html());
             var subjectId = ($("#Lblsubject_id").html());
-
+            var code = ($("#lblcode").html());
             var basicData = generateJSONFromControls("divFormuploadexamfiles");
 
             var Id = "";
 
-            DiplomaSubjectDetailsCls.saveExamanswer(Id, examID, subjectId, basicData, function (val) {
+            DiplomaSubjectDetailsCls.saveExamanswer(Id, code, examID, subjectId, basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     // debugger;
@@ -225,6 +227,11 @@ function SaveExam() {
             $("#date2_hj").val($("#divdateExam #txtDateh").val());
 
             var basicData = generateJSONFromControls("divformExams");
+           
+            var code = ($("#lblcode").html());
+           
+            var diplomeId = $("#LblDiplome_id").html();
+
 
             var degreeID = $("#LblDegree_id").html();
             var subjectId = ($("#Lblsubject_id").html());
@@ -232,7 +239,7 @@ function SaveExam() {
             console.log($("#fileURL3").val());
             console.log(basicData);
             console.log($("#LblLecture_id").html());
-            DiplomaSubjectDetailsCls.SaveExam(ExamID, $("#LblLecture_id").html(),subjectId, basicData, function (val) {
+            DiplomaSubjectDetailsCls.SaveExam(ExamID, diplomeId, code, $("#LblLecture_id").html(), subjectId, basicData, function (val) {
                 if (val == true) {
                     //debugger;
                     $("#SavedivLoader").hide();
@@ -266,7 +273,7 @@ function SaveExam() {
     function sendMsg() {
         try {
 
-            debugger
+           
 
             if (checkRequired("divformconTr") == 1) {
                 alert("يرجى ادخال البيانات المطلوبة");
@@ -276,20 +283,21 @@ function SaveExam() {
 
                 $("#SavedivLoader").show();
 
-
+                debugger
 
                 var basicData = generateJSONFromControls("divformconTr");
                 var Id = "";
 
                 var subjectId = ($("#Lblsubject_id").html());
+                var code = ($("#lblcode").html());
                 var today = new Date();
                 // var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
                 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
-                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+               // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
                 console.log(basicData);
-                DiplomaSubjectDetailsCls.sendMesg(Id, subjectId, Pub_date_m, Pub_date_hj, time, basicData, function (val) {
+                DiplomaSubjectDetailsCls.sendMesg(Id, code, subjectId, Pub_date_m, Pub_date_hj, time, basicData, function (val) {
                     if (val == true) {
                         //debugger;
                         $("#SavedivLoader").hide();
@@ -382,16 +390,17 @@ function SaveExam() {
 
 
                 var basicData = generateJSONFromControls("divformHomework");
-
+                debugger
 
                 var subjectId = ($("#Lblsubject_id").html());
+                var code = ($("#lblcode").html());
                 var lectureID = $("#LblLecture_id").html();
-
+                var diplomeId = $("#LblDiplome_id").html();
 
                 var HomewID = $("#LblHomework_id").html();
 
                 console.log(basicData);
-                DiplomaSubjectDetailsCls.SaveHomeWork(HomewID, lectureID, subjectId, basicData, function (val) {
+                DiplomaSubjectDetailsCls.SaveHomeWork(HomewID, diplomeId , lectureID, subjectId, code,basicData, function (val) {
                     if (val == true) {
                         $("#SavedivLoader").hide();
                         //debugger;
@@ -834,13 +843,15 @@ function addHalls() {
                 $("#dt_hj1").val($("#divdate2 #txtDateh").val());
 
                 var subjectId = ($("#Lblsubject_id").html());
-                var studentId=  $("#lblStudentID").html();
+                var studentId = $("#lblStudentID").html();
+                var code = $("#lblcode").html();
+                var diplomeId = $("#LblDiplome_id").html();
 
                 var basicData = generateJSONFromControls("divformNote");
 
                 var Id = "";
                 console.log(basicData);
-                DiplomaSubjectDetailsCls.Savenote(Id, studentId, subjectId,basicData, function (val) {
+                DiplomaSubjectDetailsCls.Savenote(Id, diplomeId, code, studentId, subjectId, basicData, function (val) {
                     if (val == true) {
                         $("#SavedivLoader").hide();
                        // debugger;
@@ -922,13 +933,15 @@ function addHalls() {
                 $("#date_m1").val($("#txtDateh").val());
 
                 var subjectId = ($("#Lblsubject_id").html());
+                var code = $("#lblcode").html();
+                var diplomeId = $("#LblDiplome_id").html();
 
                 var basicData = generateJSONFromControls("divformactivity");
 
 
                 var Id = "";
                 console.log(basicData);
-                DiplomaSubjectDetailsCls.SaveActivit(Id, subjectId, basicData, function (val) {
+                DiplomaSubjectDetailsCls.SaveActivit(Id, diplomeId, code , subjectId, basicData, function (val) {
                     if (val == true) {
                         $("#SavedivLoader").hide();
 
@@ -2207,6 +2220,9 @@ function drawstudentExamsanswers(ExamId) {
     }
 }
 
+
+
+
 function drawstudentExamsTable() {
 
     try {
@@ -2223,12 +2239,8 @@ function drawstudentExamsTable() {
                 arr1.forEach(function (element) {
                     //  debugger
                     var dgr = element.degree;
-                    if (dgr == 0) {
-                        dgr = "--";
-                    }
-                    else {
-                        dgr = element.degree;
-                    }
+                  
+                   
                     var file_nm = "";
                     var path = element.image;
                     if (path != "" && path != null) {
@@ -2237,7 +2249,10 @@ function drawstudentExamsTable() {
                         }
                     }
 
-                    data = data + `
+                    if (dgr == 0) {
+                        dgr = "--";
+
+                        data = data + `
                                                     <tr>
                                                                                 <td> ${element.title}  </td>
                                                                                 <td>${element.details}   </td>
@@ -2259,6 +2274,29 @@ function drawstudentExamsTable() {
 
                                                                             </tr>
                                                         `;
+                    }
+                    else {
+
+                        data = data + `
+                                                    <tr>
+                                                                                <td> ${element.title}  </td>
+                                                                                <td>${element.details}   </td>
+                                                                                <td>
+                                                        <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>  ${file_nm}
+
+                                                        </a>
+                                                       
+                                                       </td>
+                                                            <td> done </td>
+                                                                            
+                                                                                 <td> ${dgr}</td>
+                                                                     
+
+                                                                            </tr>
+                                                        `;
+
+                    }
 
 
                 });
@@ -2287,9 +2325,7 @@ function drawstudentHomeworkTable() {
 
                 arr1.forEach(function (element) {
                     var degree = element.degree;
-                    if (degree == 0) {
-                        degree = "--";
-                    }
+                   
                     var file_nm = "";
                     var path = element.image;
                     if (path != "" && path != null) {
@@ -2298,7 +2334,10 @@ function drawstudentHomeworkTable() {
                         }
                     }
 
-                    data = data + `
+                    if (degree == 0) {
+                        degree = "--";
+
+                        data = data + `
                                                     <tr>
                                                                                 <td> ${element.title}  </td>
                                                                                 <td>${element.details}   </td>
@@ -2320,6 +2359,30 @@ function drawstudentHomeworkTable() {
 
                                                                             </tr>
                                                         `;
+                    }
+                    else {
+
+                        data = data + `
+                                                    <tr>
+                                                                                <td> ${element.title}  </td>
+                                                                                <td>${element.details}   </td>
+                                                                                <td>
+                                                    <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>  ${file_nm}
+
+                                                        </a>
+                                                       
+                                                       </td>
+
+                                                     <td> done </td>
+                                                                     
+                                                                                 <td> ${degree} </td>
+                                                                     
+
+                                                                            </tr>
+                                                        `;
+
+                    }
 
 
                 });
@@ -2461,9 +2524,10 @@ function saveExamkDegree() {
             console.log(students_degree);
             var subjectId = ($("#Lblsubject_id").html());
             var ExamId = ($("#LblExam_id").html());
-            // $("#SavedivLoader").show();
+            var code = ($("#lblcode").html());
+           
 
-            DiplomaSubjectDetailsCls.saveExamDegree(ExamId, subjectId, students_degree, function (val) {
+            DiplomaSubjectDetailsCls.saveExamDegree(ExamId, code , subjectId, students_degree, function (val) {
                 if (val == true) {
 
                     $("#SavedivLoader").hide();
@@ -2538,71 +2602,6 @@ function saveExamkDegree() {
             alert(err);
         }
     }
-
-//    function Studentlistview() {
-//        try {
-          
-//            var subjectId = ($("#Lblsubject_id").html());
-//            DiplomaSubjectDetailsCls.get_StudentList(subjectId, function (val) {
-
-
-//                var data = "";
-
-//                console.log(val);
-//                var arr1 = JSON.parse(val[1]);
-
-//                arr1.forEach(function (element) {
-
-//                    data = data + `
-//                                <tr >
-//                                    <td><label> ${element.StudentName}</label> </td>
-
-//                                      <td><img src="${element.User_Image}"> </td>
-                                  
-                  
-//                                    <td><input type="checkbox" student="${element.id}" style="width: 50px; height:20px;" /></td>
-
-
-
-//                                </tr>
-
-                                                                     
-//`;
-//                });
-
-//                $("#courseStudents").html(data);
-//            });
-//        } catch (err) {
-//            alert(err);
-//        }
-//    }
-//function UploadComplete2(sender, args) {
-//    debugger;
-//    var fileLength = args.get_length();
-//    var fileType = args.get_contentType();
-//    //alert(sender);
-//    document.getElementById('imgItemURL').src = 'images/' + args.get_fileName();
-//    var img = document.getElementById('imgLoader');
-//    img.style.display = 'none';
-//    switch (true) {
-//        case (fileLength > 1000000):
-
-//            fileLength = fileLength / 1000000 + 'MB';
-//            break;
-
-//        case (fileLength < 1000000):
-
-//            fileLength = fileLength / 1000000 + 'KB';
-//            break;
-
-//        default:
-//            fileLength = '1 MB';
-//            break;
-//    }
-//    clearContents(sender);
-//}
-
-
 
     function UploadComplete2(sender, args) {
 
@@ -2774,9 +2773,7 @@ function UploadComplete6(sender, args) {
     }
     clearContents(sender);
 }
-    //function ClearMe(sender) {
-    //    sender.value = '';
-    //}
+   
     function clearContents(sender) {
         { $(sender._element).find('input').val(''); }
     }
@@ -2812,8 +2809,9 @@ function UploadComplete6(sender, args) {
         if (f == true) {
 
             $("#SavedivLoader").show();
-            var subjectId = ($("#Lblsubject_id").html());
-            DiplomaSubjectDetailsCls.Delete_Student(Studentid, subjectId, function (val) {
+           // var subjectId = ($("#Lblsubject_id").html());
+            var diplome_ID = ($("#LblDiplome_id").html());
+            DiplomaSubjectDetailsCls.Delete_Student(Studentid, diplome_ID, function (val) {
 
                 debugger
                 if (val[0]==1) {
@@ -2943,26 +2941,6 @@ function deleteCourse() {
             });
         }
     }
-
-
-    //function add() {
-    //    try {
-    //        prepareAdd();
-    //        resetAll();
-    //      //  getcode();
-    //    } catch (err) {
-    //        alert(err);
-    //    }
-    //}
-
-    //function setformforupdate() {
-    //    try {
-    //        setformforupdate_all();
-    //    } catch (err) {
-    //        alert(err);
-    //    }
-    //}
-
 
     function Decide(option) {
         var temp = "";

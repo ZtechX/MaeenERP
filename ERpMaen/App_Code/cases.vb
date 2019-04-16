@@ -26,6 +26,8 @@ Public Class cases
 #Region "Global_Variables"
     Dim _sqlconn As New SqlConnection(DBManager.GetConnectionString)
     Dim _sqltrans As SqlTransaction
+    Dim sendSMS As New Boolean
+
 #End Region
 
 #Region "check_userData"
@@ -56,6 +58,22 @@ Public Class cases
 
 #End Region
 
+    Private Function getadvisorUser_data(ByVal related_id As String) As String
+        Try
+            Dim dt As New DataTable
+            dt = DBManager.Getdatatable("select isNull(id,0) id,isNull(User_PhoneNumber,0) User_PhoneNumber from tblUsers where User_Type=6 and related_id=" + related_id)
+
+            If dt.Rows.Count <> 0 Then
+                Return dt.Rows(0).Item("id").ToString + "|" + dt.Rows(0).Item("User_PhoneNumber").ToString
+            End If
+            Return ""
+
+        Catch ex As Exception
+            Return ""
+
+        End Try
+    End Function
+
 #Region "Save"
     ''' <summary>
     ''' Save  Type
@@ -64,6 +82,7 @@ Public Class cases
     <System.Web.Script.Services.ScriptMethod()>
     Public Function Save(ByVal id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal persons_owner As Dictionary(Of String, Object), ByVal person_against As Dictionary(Of String, Object), ByVal children As Dictionary(Of String, Object), ByVal status As Dictionary(Of String, Object), ByVal tabs As List(Of Object), ByVal attch_file_DataJsonList As List(Of Object)) As String
         Try
+            sendSMS = LoginInfo.SendSMS()
             Dim group_id As String = "0"
             Dim group_id_dt As New DataTable
             group_id_dt = DBManager.Getdatatable("select id from tbllock_up where RelatedId=3 and Type='PG' and Comp_id=" + LoginInfo.GetComp_id())
@@ -87,16 +106,27 @@ Public Class cases
                 _sqlconn.Close()
                 Return "false|رقم الهوية أو رقم الجوال للمنفذ والمنفذ ضدده متشابهان"
             End If
+            Dim old_advisor_phone = "0"
+            Dim New_advisor_phone = "0"
+            Dim new_advisor As String = "0"
             Dim old_advisor As String = "0"
-            Dim new_advisor As String = LoginInfo.getadvisorUser_id(dictstatus("advisor_id").ToString())
+            Dim res = getadvisorUser_data(dictstatus("advisor_id").ToString())
+            If res <> "" Then
+                Dim arr = res.Split("|")
+                new_advisor = arr(0)
+                New_advisor_phone = arr(1)
+            End If
+
+
             Dim oldNotification As String = ""
             If id <> "" Then
                 DBManager.ExcuteQuery("delete from ash_case_tabs where case_id=" + id)
-                dt_person_cases = DBManager.Getdatatable("Select person1_id,person2_id,isNull(tblUsers.id,'0') as 'advisor_id' from ash_cases  left join tblUsers" +
+                dt_person_cases = DBManager.Getdatatable("Select person1_id,person2_id,isNull(tblUsers.id,'0') as 'advisor_id',isNull(User_PhoneNumber,0) User_PhoneNumber from ash_cases  left join tblUsers" +
                                                          " on tblUsers.related_id=ash_cases.advisor_id and tblUsers.User_Type = 6  where ash_cases.id=" + id.ToString())
                 person1_id = dt_person_cases.Rows(0).Item("person1_id")
                 person2_id = dt_person_cases.Rows(0).Item("person2_id")
                 old_advisor = dt_person_cases.Rows(0).Item("advisor_id")
+                old_advisor_phone = dt_person_cases.Rows(0).Item("User_PhoneNumber")
                 If old_advisor <> "0" And new_advisor <> old_advisor Then
                     Dim dt_not As New DataTable
                     dt_not = DBManager.Getdatatable("select id from  tblNotifications  where Deleted !=1 and RefCode=" + id + " and AssignedTo=" + old_advisor + " and NotTitle='إسناد حالة'")
@@ -106,7 +136,7 @@ Public Class cases
                 End If
             End If
 
-                If Not check_userData(person1_id, dictperson_owner("indenty").ToString, dictperson_owner("phone").ToString) Then
+            If Not check_userData(person1_id, dictperson_owner("indenty").ToString, dictperson_owner("phone").ToString) Then
                 _sqltrans.Rollback()
                 _sqlconn.Close()
                 Return "false|رقم الهوية أو رقم الجوال للمنفذ مُستخدم"
@@ -208,10 +238,11 @@ Public Class cases
             dictBasicDataJson.Add("details", dictstatus("details"))
             dictBasicDataJson.Add("user_id", login_user)
 
-            If dictchildren("child_custody").ToString = dictperson_owner("name").ToString Then
-                dictBasicDataJson.Add("child_custody", dictBasicDataJson("person1_id"))
-            ElseIf dictchildren("child_custody").ToString = dictperson_against("name").ToString Then
-                dictBasicDataJson.Add("child_custody", dictBasicDataJson("person2_id"))
+            Dim child_custody = dictchildren("child_custody").ToString
+            If child_custody = dictperson_owner("name").ToString Then
+                dictBasicDataJson.Add("child_custody", person1_id)
+            ElseIf child_custody = dictperson_against("name").ToString Then
+                dictBasicDataJson.Add("child_custody", person2_id)
             End If
 
 
@@ -259,14 +290,17 @@ Public Class cases
 
                 If id = "" Then
                     Dim dictNotification As New Dictionary(Of String, Object)
+                    dictNotification.Add("RefCode", case_id)
+                    dictNotification.Add("NotTitle", "")
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", "")
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", "")
+                    dictNotification.Add("FormUrl", "Aslah_Module/cases.aspx?id=" + case_id)
                     If old_advisor <> new_advisor Then
-                        dictNotification.Add("RefCode", case_id)
-                        dictNotification.Add("NotTitle", "إسناد حالة")
-                        dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
-                        dictNotification.Add("AssignedTo", new_advisor)
-                        dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
-                        dictNotification.Add("Remarks", "حالة")
-                        dictNotification.Add("FormUrl", "Aslah_Module/cases.aspx?id=" + case_id)
+                        dictNotification("NotTitle") = "إسناد حالة"
+                        dictNotification("AssignedTo") = new_advisor
+                        dictNotification("Remarks") = "حالة"
                         If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
                             _sqltrans.Rollback()
                             _sqlconn.Close()
@@ -274,8 +308,22 @@ Public Class cases
                         End If
 
                     End If
-
-                    Dim dictPerson As New Dictionary(Of String, Object)
+                    dictNotification("Remarks") = "إنشاء حالة"
+                    dictNotification("NotTitle") = "تم إنشاء حالة خاصة بك"
+                    dictNotification("AssignedTo") = user_person1_id
+                    If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Return "False|لم يتم الحفظ"
+                    End If
+                    dictNotification("NotTitle") = "تم إنشاء حالة خاصة لك"
+                    dictNotification("AssignedTo") = user_person2_id
+                    If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Return "False|لم يتم الحفظ"
+                    End If
+            Dim dictPerson As New Dictionary(Of String, Object)
                     dictPerson.Add("case_id", case_id)
 
                     If Not PublicFunctions.TransUpdateInsert(dictPerson, "ash_case_persons", person1_id, _sqlconn, _sqltrans) Then
@@ -301,9 +349,75 @@ Public Class cases
 
                     End If
                 Next
+
+
+                Dim SMSResult = ""
+                If sendSMS Then
+
+                    Try
+                        Dim dic_sms_archive As New Dictionary(Of String, Object)
+                        dic_sms_archive.Add("user_id", LoginInfo.GetUser__Id())
+                        dic_sms_archive.Add("Message", "")
+                        dic_sms_archive.Add("Send_To", "")
+                        dic_sms_archive.Add("date_m", DateTime.Now.ToString("dd/MM/yyyy"))
+                        dic_sms_archive.Add("event_id", case_id)
+                        dic_sms_archive.Add("Type", "case")
+                        dic_sms_archive.Add("comp_id", LoginInfo.GetComp_id())
+                        Dim smsres = ""
+                        If old_advisor <> new_advisor And new_advisor <> "0" Then
+                            dic_sms_archive("Message") = "تم إسناد حالة جديدةإليك"
+                            dic_sms_archive("Send_To") = New_advisor_phone
+                            If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Return "False|لم يتم الحفظ"
+                            End If
+                            smsres = PublicFunctions.DoSendSMS(New_advisor_phone, "تم إسناد حالة جديدةإليك", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                            SMSResult = SMSResult + smsres
+                        End If
+                        SMSResult = SMSResult + "#$"
+                        If old_advisor <> "0" And id <> "" Then
+                            dic_sms_archive("Message") = "تم إلغاء اسناد حالة منك"
+                            dic_sms_archive("Send_To") = old_advisor
+                            If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Return "False|لم يتم الحفظ"
+                            End If
+                            smsres = PublicFunctions.DoSendSMS(old_advisor, "تم إلغاء اسناد حالة منك", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                            SMSResult = SMSResult + smsres
+                        End If
+                        SMSResult = SMSResult + "#$"
+                        If id = "" Then
+                            dic_sms_archive("Message") = "تم إنشاء حالة خاصة بك يمكنك تحميل التطبيق لمتابعتنا من خلاله"
+                            dic_sms_archive("Send_To") = dictperson_owner("phone").ToString()
+                            If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Return "False|لم يتم الحفظ"
+                            End If
+                            smsres = PublicFunctions.DoSendSMS(dictperson_owner("phone").ToString(), "تم إنشاء حالة خاصة بك يمكنك تحميل التطبيق لمتابعتنا من خلاله", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                            SMSResult = SMSResult + smsres
+                            SMSResult = SMSResult + "#$"
+                            dic_sms_archive("Message") = "تم إنشاء حالة لك يمكنك تحميل التطبيق لمتابعتنا من خلاله"
+                            dic_sms_archive("Send_To") = dictperson_against("phone").ToString()
+                            If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
+                                _sqltrans.Rollback()
+                                _sqlconn.Close()
+                                Return "False|لم يتم الحفظ"
+                            End If
+                            smsres = PublicFunctions.DoSendSMS(dictperson_against("phone").ToString(), "تم إنشاء حالة لك يمكنك تحميل التطبيق لمتابعتنا من خلاله", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                            SMSResult = SMSResult + smsres
+                            SMSResult = SMSResult + "#$"
+                        End If
+
+                    Catch ex As Exception
+
+                    End Try
+                End If
                 _sqltrans.Commit()
                 _sqlconn.Close()
-                Return "True|" + case_id
+                Return "True|" + case_id + "|" + SMSResult
             End If
             _sqltrans.Rollback()
             _sqlconn.Close()
@@ -333,28 +447,7 @@ Public Class cases
                 Return 0
             End If
             Dim person_id As String = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
-            If Not check_userData("", dictBasicDataJson("indenty").ToString, dictBasicDataJson("phone").ToString) Then
-                _sqltrans.Rollback()
-                _sqlconn.Close()
-                Return 0
-            End If
 
-            Dim dict As New Dictionary(Of String, Object)
-
-            dict.Add("full_name", dictBasicDataJson("name").ToString)
-            dict.Add("User_Password", dictBasicDataJson("phone").ToString)
-            dict.Add("User_PhoneNumber", dictBasicDataJson("phone").ToString)
-            dict.Add("user_indenty", dictBasicDataJson("indenty").ToString)
-            dict.Add("related_id", person_id)
-            dict.Add("Active", 1)
-            dict.Add("comp_id", LoginInfo.GetComp_id())
-            'dict.Add("User_Type", "9")
-            'dict.Add("group_id",)
-            If Not PublicFunctions.TransUpdateInsert(dict, "tblUsers", "", _sqlconn, _sqltrans) Then
-                _sqltrans.Rollback()
-                _sqlconn.Close()
-                Return 0
-            End If
             _sqltrans.Commit()
             _sqlconn.Close()
             Return person_id
@@ -427,70 +520,113 @@ Public Class cases
 
     End Function
 #End Region
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function GET_delivery_Reciever_Data(ByVal case_id As String) As String
+        Dim deliverer_id As String = ""
+        Dim reciever_id As String = ""
+        Dim advisor As String = ""
+        Dim advisor_phone As String = ""
+        Try
+            Dim dt As New DataTable
 
+            dt = DBManager.Getdatatable("select person1_id,person2_id ," &
+" child_custody,advisor_id,advisor.User_PhoneNumber as advisor_phone from ash_cases" &
+" left join tblUsers advisor on advisor.related_id=advisor_id and advisor.User_Type=6 where ash_cases.id=" + case_id)
+            If dt.Rows.Count <> 0 Then
+                deliverer_id = dt.Rows(0).Item("child_custody").ToString()
+                advisor = dt.Rows(0).Item("advisor_id").ToString()
+                advisor_phone = dt.Rows(0).Item("advisor_phone").ToString()
+                Dim p1 = dt.Rows(0).Item("person1_id").ToString()
+                Dim p2 = dt.Rows(0).Item("person2_id").ToString()
+                If deliverer_id = p1 Then
+                    reciever_id = p2
+                Else
+                    reciever_id = p1
+                End If
+            End If
+            Return deliverer_id & "|" & reciever_id & "|" & advisor & "|" & advisor_phone
+        Catch ex As Exception
+            Return deliverer_id & "|" & reciever_id & "|" & advisor & "|" & advisor_phone
+        End Try
+    End Function
 #Region "save_children_receive"
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function save_children_receive(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal arr_recive As List(Of Object)) As Boolean
-        Dim start_period As String = ""
-        Dim end_period As String = ""
+    Public Function save_children_receive(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal arr_recive As List(Of Object), ByVal basicPeriod As Boolean) As String
+        sendSMS = LoginInfo.SendSMS()
+        _sqlconn.Open()
+        _sqltrans = _sqlconn.BeginTransaction
+        Dim expected_dates = ""
+        Dim condation As String = ""
         Try
-            _sqlconn.Open()
-            _sqltrans = _sqlconn.BeginTransaction
-            Dim dt As New DataTable
-            If id <> "" Then
-                dt = DBManager.Getdatatable("select first_date_m as start_period,endPeriod_date_m as end_period from ash_case_receiving_delivery_basic where id=" + id)
-                If dt.Rows.Count <> 0 Then
-                    start_period = dt.Rows(0).Item("start_period").ToString()
-                    end_period = dt.Rows(0).Item("end_period").ToString()
-                    If Not DBManager.ExcuteQuery("update ash_case_receiving_delivery_details set deleted = 1 where type = 1 and case_id=" + case_id + " and date_m between " + start_period + " and " + end_period) <> -1 Then
-                        _sqltrans.Rollback()
-                        _sqlconn.Close()
-                        Return "False|لم يتم الحفظ"
-                    End If
+
+            Dim str_dates = ""
+            If basicPeriod Then
+                Dim dt_dates As New DataTable
+                dt_dates = DBManager.Getdatatable("select date_m  from ash_case_receiving_delivery_details where isNULL(deleted,0) != 1 And case_id = " + case_id.ToString + " And Type = 1 ")
+                If dt_dates.Rows.Count <> 0 Then
+                    str_dates = PublicFunctions.ConvertDataTabletoString(dt_dates)
                 End If
             End If
 
-            Dim advisor As String = ""
-            dt = DBManager.Getdatatable("select advisor_id from ash_cases where id=" + case_id)
-            If dt.Rows.Count <> 0 Then
-                advisor = dt.Rows(0)(0).ToString()
-            End If
-            For Each obj As Object In arr_recive
-                Dim dict_recive As Dictionary(Of String, Object) = obj
-                dict_recive.Add("advisor", advisor)
-
-                If Not PublicFunctions.TransUpdateInsert(dict_recive, "ash_case_receiving_delivery_details", "", _sqlconn, _sqltrans) Then
-                    If id <> "" Then
-                        DBManager.ExcuteQuery("update ash_case_receiving_delivery_details set deleted = NULL where type = 1 and case_id=" + case_id + " and date_m between " + start_period + " and " + end_period)
-                    End If
+            Dim dt As New DataTable
+            If id <> "" Then
+                Dim delete_res = delete_Period(id, False)
+                If delete_res = "False|لا يمكن حذف الفترة لوجود ارتباطات" Then
+                    _sqltrans.Rollback()
+                    _sqlconn.Close()
+                    Return "False|لا يمكن تعديل الفترة لوجود ارتباطات"
+                ElseIf delete_res = "False|لم يتم الحذف" Then
                     _sqltrans.Rollback()
                     _sqlconn.Close()
                     Return "False|لم يتم الحفظ"
                 End If
+
+            End If
+
+            Dim childrens As New List(Of Object)
+
+            Dim curr_dt = ""
+            Dim basic As New Dictionary(Of String, Object)
+            Dim saved = ""
+            For Each obj As Object In arr_recive
+                basic = obj
+                If basicPeriod Then
+                    curr_dt = basic("date_m").ToString
+                    If Not str_dates.IndexOf(curr_dt) = -1 Then
+                        expected_dates = expected_dates & curr_dt & " ــ  "
+                        Continue For
+                    End If
+                End If
+                saved = save_delivery_details("", case_id, obj, childrens, False)
+                If saved = "0" Then
+                    _sqltrans.Rollback()
+                    _sqlconn.Close()
+                    Return "False|لم يتم الحفظ"
+                End If
+
             Next
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
             dictBasicDataJson.Add("case_id", case_id)
-            dictBasicDataJson.Add("basic_period", 1)
+            If basicPeriod Then
+                dictBasicDataJson.Add("basic_period", 1)
+            End If
+
             dictBasicDataJson.Add("user_id", LoginInfo.GetUser__Id())
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_case_receiving_delivery_basic", id, _sqlconn, _sqltrans) Then
                 _sqltrans.Commit()
                 _sqlconn.Close()
-                Return True
+                Return "True|" & expected_dates
             End If
-            If id <> "" Then
-                DBManager.ExcuteQuery("update ash_case_receiving_delivery_details set deleted = NULL where type = 1 and case_id=" + case_id + " and date_m between " + start_period + " and " + end_period)
-            End If
+
             _sqltrans.Rollback()
             _sqlconn.Close()
-            Return False
+            Return "False|لم يتم الحفظ"
         Catch ex As Exception
-            If id <> "" Then
-                DBManager.ExcuteQuery("update ash_case_receiving_delivery_details set deleted = NULL where type = 1 and case_id=" + case_id + " and date_m between " + start_period + " and " + end_period)
-            End If
             _sqltrans.Rollback()
             _sqlconn.Close()
-            Return False
+            Return "False|لم يتم الحفظ"
         End Try
 
     End Function
@@ -498,118 +634,100 @@ Public Class cases
 
 #Region "save_delivery_details"
     <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function save_delivery_details(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal childrens As List(Of Object), ByVal new_date As String, ByVal _dt_m As String) As String
+                                                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
+    Public Function save_delivery_details(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal childrens As List(Of Object), ByVal Access As Boolean) As String
         Dim Names As New List(Of String)(10)
+
         Try
-            _sqlconn.Open()
-            _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            Dim advisor_id As String = ""
+            Dim advisor_phone As String = ""
+            If Access Then
+                _sqlconn.Open()
+                _sqltrans = _sqlconn.BeginTransaction
+                Dim dt As New DataTable
+                Dim advisor As String = ""
 
-            If _dt_m <> "" Then
-                Dim arr = _dt_m.Split("|")
-                Dim _date As String = arr(0)
-                Dim day_nm = arr(1)
-                Dim dt_back = DateTime.ParseExact(_date, "dd/MM/yyyy", Nothing)
-                For p As Integer = 1 To 7
-
-                    If dt_back.AddDays(p).DayOfWeek.ToString() = day_nm Then
-                        Dim temp = dt_back.AddDays(p)
-                        Dim dd = temp.Day
-                        Dim MM = temp.Month
-                        Dim Val = ""
-                        If dd < 10 Then
-                            Val = Val + "0" + dd.ToString() + "/"
-                        Else
-                            Val = Val + dd.ToString() + "/"
-                        End If
-                        If MM < 10 Then
-                            Val = Val + "0" + MM.ToString() + "/"
-                        Else
-                            Val = Val + MM.ToString() + "/"
-                        End If
-                        Val = Val + temp.Year.ToString()
-                        dictBasicDataJson.Add("back_date_m", Val)
-
-                        Exit For
-                    End If
-                Next
-            End If
-            Dim dt As New DataTable
-            Dim advisor As String = ""
-            dt = DBManager.Getdatatable("select advisor_id from ash_cases where id=" + case_id)
-            If dt.Rows.Count <> 0 Then
-                advisor = dt.Rows(0)(0).ToString()
-            End If
-
-            Dim dt_date As New DataTable
-            If id = "" Then
-                dt_date = DBManager.Getdatatable("select * from ash_case_receiving_delivery_details where deleted != 1 and case_id=" + case_id.ToString + " And type=" + dictBasicDataJson("type").ToString + " And date_m=" + PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("date_m").ToString).ToString())
-                If dt_date.Rows.Count <> 0 Then
-                    _sqltrans.Commit()
-                    _sqlconn.Close()
-                    Return "-100"
+                dt = DBManager.Getdatatable("Select advisor_id ,advisor.id as user_id,User_PhoneNumber from ash_cases " +
+" left join tblUsers advisor on advisor.related_id=advisor_id and advisor.User_Type=6 where ash_cases.id=" + case_id)
+                If dt.Rows.Count <> 0 Then
+                    advisor = dt.Rows(0).Item("advisor_id").ToString()
+                    advisor_id = dt.Rows(0).Item("user_id").ToString()
+                    advisor_phone = dt.Rows(0).Item("User_PhoneNumber").ToString()
                 End If
+
+                Dim dt_date As New DataTable
+                If id = "" Then
+                    dt_date = DBManager.Getdatatable("Select * from ash_case_receiving_delivery_details where deleted != 1 And case_id=" + case_id.ToString + " And type=" + dictBasicDataJson("type").ToString + " And date_m=" + PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("date_m").ToString).ToString())
+                    If dt_date.Rows.Count <> 0 Then
+                        _sqltrans.Commit()
+                        _sqlconn.Close()
+                        Return "-100"
+                    End If
+                End If
+                dictBasicDataJson.Add("advisor", advisor)
+            Else
+                advisor_id = LoginInfo.getadvisorUser_id(dictBasicDataJson("advisor").ToString())
+                advisor_phone = dictBasicDataJson("advisor_phone").ToString
             End If
 
-            dictBasicDataJson.Add("advisor", advisor)
+
             dictBasicDataJson.Add("user_id", LoginInfo.GetUser__Id())
-            'dictBasicDataJson("date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("date_m"))
-            'dictBasicDataJson("new_date_m") = PublicFunctions.ConvertDatetoNumber(dictBasicDataJson("new_date_m"))
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_case_receiving_delivery_details", id, _sqlconn, _sqltrans) Then
                 Dim details_id As String = ""
                 If id <> "" Then
                     details_id = id
+                    _sqltrans.Commit()
+                    _sqlconn.Close()
+                    Return details_id.ToString + "|" + dictBasicDataJson("type").ToString
                 Else
                     details_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
-                End If
-                Dim SaveNot As Boolean = True
+                    Dim deliverer_Data = LoginInfo.getperson_data(dictBasicDataJson("deliverer_id"))
+                    Dim reciever_Data = LoginInfo.getperson_data(dictBasicDataJson("reciever_id"))
+                    Dim deliverer_arr = deliverer_Data.Split("|")
+                    Dim reciever_arr = reciever_Data.Split("|")
+                    Dim advisor_arr As New List(Of String)
+                    advisor_arr.Add(advisor_id)
+                    advisor_arr.Add(advisor_phone)
+                    Dim day = dictBasicDataJson("date_m").ToString
+                    If Not PublicFunctions.save_recieve_not_SMS(_sqlconn, _sqltrans, day, details_id, deliverer_arr, reciever_arr, advisor_arr.ToArray()) Then
+                        If Access Then
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                        End If
+                        Return 0
+                    End If
+                    DBManager.ExcuteQuery("delete  from ash_case_children_receiving_details  where details_id=" + details_id.ToString)
+                    For Each children As Object In childrens
+                        id = 0
+                        Dim dict_children As Dictionary(Of String, Object) = children
+                        dict_children.Add("details_id", details_id)
+                        PublicFunctions.TransUpdateInsert(dict_children, "ash_case_children_receiving_details", id, _sqlconn, _sqltrans)
+                    Next
 
-                Dim dictNot As New Dictionary(Of String, Object)
-                dictNot.Add("RefCode", details_id)
-                dictNot.Add("NotTitle", "تذكير استلام وتسليم")
-                dictNot.Add("Date", dictBasicDataJson("date_m").ToString)
-                dictNot.Add("AssignedTo", LoginInfo.getperson_id(dictBasicDataJson("deliverer_id")))
-                dictNot.Add("CreatedBy", LoginInfo.GetUser__Id())
-                dictNot.Add("Remarks", "ستلام وتسليم")
-                dictNot.Add("FormUrl", "Aslah_Module/Calender.aspx?id=" + details_id)
-                If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
-                    SaveNot = False
-                End If
-                dictNot("AssignedTo") = LoginInfo.getperson_id(dictBasicDataJson("reciever_id"))
-                If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
-                    SaveNot = False
-                End If
+                    If Access Then
+                        _sqltrans.Commit()
+                        _sqlconn.Close()
+                    End If
 
-                dictNot("Date") = (DateTime.ParseExact(dictNot("Date"), "dd/MM/yyyy", Nothing)).AddDays(-1)
-                If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
-                    SaveNot = False
+                    Return details_id.ToString + "|" + dictBasicDataJson("type").ToString
+
                 End If
-                dictNot("AssignedTo") = LoginInfo.getperson_id(dictBasicDataJson("deliverer_id"))
-                If Not PublicFunctions.TransUpdateInsert(dictNot, "tblNotifications", "", _sqlconn, _sqltrans) Then
-                    SaveNot = False
-                End If
-                DBManager.ExcuteQuery("delete  from ash_case_children_receiving_details  where details_id=" + details_id.ToString)
-                For Each children As Object In childrens
-                    id = 0
-                    Dim dict_children As Dictionary(Of String, Object) = children
-                    dict_children.Add("details_id", details_id)
-                    PublicFunctions.TransUpdateInsert(dict_children, "ash_case_children_receiving_details", id, _sqlconn, _sqltrans)
-                Next
-                _sqltrans.Commit()
-                _sqlconn.Close()
-                Return details_id.ToString + "|" + dictBasicDataJson("type").ToString
 
             Else
-                _sqltrans.Rollback()
-                _sqlconn.Close()
+                If Access Then
+                    _sqltrans.Rollback()
+                    _sqlconn.Close()
+                End If
                 Return 0
             End If
 
         Catch ex As Exception
-            _sqltrans.Rollback()
-            _sqlconn.Close()
+            If Access Then
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+            End If
             Return 0
 
         End Try
@@ -618,7 +736,7 @@ Public Class cases
 #End Region
 #Region "save_conciliation"
     <WebMethod(True)>
-                                                                                                                              <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function save_conciliation(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
             _sqlconn.Open()
@@ -649,7 +767,7 @@ Public Class cases
 
 #Region "save_correspondences"
     <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function save_correspondences(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As String
         Try
             _sqlconn.Open()
@@ -701,7 +819,7 @@ Public Class cases
 
 #Region "save_sessions"
     <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
     Public Function save_sessions(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal childrens As List(Of Object), ByVal persons As List(Of Object), ByVal owner_id As String, ByVal second_party_id As String) As Integer
         Try
             _sqlconn.Open()
@@ -768,7 +886,7 @@ Public Class cases
 #End Region
 #Region "save_expense_basic"
     <WebMethod(True)>
-                                                                                                                                                          <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function save_expense_basic(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
             _sqlconn.Open()
@@ -798,7 +916,7 @@ Public Class cases
 #End Region
 #Region "save_expense_details"
     <WebMethod(True)>
-                                                                                                                                                                  <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function save_expense_details(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal new_date_m As String, ByVal new_date_h As String) As Boolean
         Try
             _sqlconn.Open()
@@ -836,7 +954,7 @@ Public Class cases
 
 #Region "save_apprisal"
     <WebMethod(True)>
-                                                                                                                                                                          <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function save_apprisal(ByVal id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
             _sqlconn.Open()
@@ -866,7 +984,7 @@ Public Class cases
 #End Region
 #Region "Get Serial"
     <WebMethod(True)>
-                                                                                                                                                                                  <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function getSerial() As Integer
         Dim dtm As New DataTable
         dtm = DBManager.Getdatatable("Select isNull(max(code) + 1,1) FROM ash_cases where comp_id=" + LoginInfo.GetComp_id())
@@ -879,7 +997,7 @@ Public Class cases
 
 #Region "Get Serial_conciliation"
     <WebMethod(True)>
-                                                                                                                                                                                              <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                            <System.Web.Script.Services.ScriptMethod()>
     Public Function getSerial_conciliation() As Integer
         Dim dtm As New DataTable
         dtm = DBManager.Getdatatable("Select isNull(max(code)+1,1) FROM ash_case_conciliation where comp_id=" + LoginInfo.GetComp_id)
@@ -892,7 +1010,7 @@ Public Class cases
 
 #Region "Get getSerial_correspondencesn"
     <WebMethod(True)>
-                                                                                                                                                                                                          <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function getSerial_correspondencesn() As Integer
         Dim dtm As New DataTable
         dtm = DBManager.Getdatatable("Select isNull(max(code)+1,1) FROM ash_case_correspondences")
@@ -905,7 +1023,7 @@ Public Class cases
 
 #Region "getSerial_sessions"
     <WebMethod(True)>
-                                                                                                                                                                                                                      <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
     Public Function getSerial_sessions() As Integer
         Dim dtm As New DataTable
         dtm = DBManager.Getdatatable("Select isNull(max(code)+1,1) FROM ash_case_sessions")
@@ -920,8 +1038,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-                                                                                                                                                                                                                              <WebMethod()>
-                                                                                                                                                                                                                                  <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                            <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function Edit(ByVal editItemId As String) As String()
 
         Dim Names As New List(Of String)(10)
@@ -942,8 +1060,8 @@ Public Class cases
 #Region "Delete"
     ''' <summary>
     ''' </summary>
-                                                                                                                                                                                                                                      <WebMethod()>
-                                                                                                                                                                                                                                          <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                    <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function Delete(ByVal deleteItems As String) As String()
         Dim Names As New List(Of String)(10)
         Try
@@ -998,8 +1116,8 @@ Public Class cases
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-                                                                                                                                                                                                                                                  <WebMethod(True)>
-                                                                                                                                                                                                                                                      <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                <WebMethod(True)>
+                                                                                                                                                                                                                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
     Public Function get_tabs() As String()
         Dim Names As New List(Of String)(10)
         Dim str = ""
@@ -1040,8 +1158,8 @@ Public Class cases
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-                                                                                                                                                                                                                                                                  <WebMethod(True)>
-                                                                                                                                                                                                                                                                      <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                <WebMethod(True)>
+                                                                                                                                                                                                                                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
     Public Function get_checked_tab(ByVal id As String) As String()
         Dim Names As New List(Of String)(10)
         Dim str = ""
@@ -1073,8 +1191,8 @@ Public Class cases
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                            <WebMethod(True)>
+                                                                                                                                                                                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function get_dates(ByVal new_date As String) As String()
         Dim Names As New List(Of String)(10)
 
@@ -1096,16 +1214,21 @@ Public Class cases
             If LoginInfo.getUserType = "6" Then
                 condation = " and advisor = " + related_id
             End If
-            Dim query As String = "SELECT  * FROM   ash_case_receiving_delivery_details  where deleted !=1 and date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation + " order by date_m"
-            dt = DBManager.Getdatatable(query)
+
+            Dim query As String = "SELECT  * FROM   ash_case_receiving_delivery_details  where deleted !=1 and convert(varchar,date_m) like '" + new_date.ToString + "__' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation + " order by date_m"
+            ' Dim query As String = "SELECT  * FROM   ash_case_receiving_delivery_details  where deleted !=1 and date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation + " order by date_m"
+
+            dt = DBManager.Getdatatable(Query)
             If dt.Rows.Count <> 0 Then
                 Names(0) = PublicFunctions.ConvertDataTabletoString(dt)
             End If
             If LoginInfo.getUserType = "9" Then
                 Return Names.ToArray
             End If
-            Dim query1 As String = "SELECT * FROM   ash_case_sessions  where date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
-            Dim query2 As String = "SELECT * FROM   ash_case_correspondences  where date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
+            Dim query1 As String = "SELECT * FROM   ash_case_sessions  where convert(varchar,date_m) like '" + new_date.ToString + "__' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
+            Dim query2 As String = "SELECT * FROM   ash_case_correspondences  where convert(varchar,date_m) like '" + new_date.ToString + "__' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
+            'Dim query1 As String = "SELECT * FROM   ash_case_sessions  where date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
+            'Dim query2 As String = "SELECT * FROM   ash_case_correspondences  where date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
 
             dt1 = DBManager.Getdatatable(query1)
             dt2 = DBManager.Getdatatable(query2)
@@ -1129,8 +1252,8 @@ Public Class cases
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                <WebMethod(True)>
+                                                                                                                                                                                                                                                                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
     Public Function get_cases(ByVal date_m As String) As String()
         Dim Names As New List(Of String)(10)
         Names.Add("0")
@@ -1188,8 +1311,8 @@ Public Class cases
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    <WebMethod(True)>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function get_option_cases() As String
 
         Try
@@ -1217,8 +1340,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
     Public Function show_all(ByVal printItemId As String, ByVal type As String) As String()
 
         Dim Names As New List(Of String)(10)
@@ -1384,8 +1507,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-                                                                                                                                                                                                                                                                                                                                                                                  <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <System.Web.Script.Services.ScriptMethod()>
     Public Function show_cases_details(ByVal printItemId As String, ByVal type As String) As String()
 
         Dim Names As New List(Of String)(10)
@@ -1448,8 +1571,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function delete_children(ByVal printItemId As String, ByVal case_id As String) As Boolean
 
         Dim Names As New List(Of String)(10)
@@ -1477,8 +1600,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-                                                                                                                                                                                                                                                                                                                                                                                                              <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function get_date_delivery(ByVal case_id As String) As String()
 
         Dim Names As New List(Of String)(10)
@@ -1506,8 +1629,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-                                                                                                                                                                                                                                                                                                                                                                                                                      <WebMethod()>
-                                                                                                                                                                                                                                                                                                                                                                                                                          <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
     Public Function get_date_expenses(ByVal case_id As String) As String()
 
         Dim Names As New List(Of String)(10)
@@ -1535,8 +1658,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-                                                                                                                                                                                                                                                                                                                                                                                                                                  <WebMethod()>
-                                                                                                                                                                                                                                                                                                                                                                                                                                      <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function get_persons(ByVal id As String) As String()
         Dim Names As New List(Of String)(10)
         Try
@@ -1561,8 +1684,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-                                                                                                                                                                                                                                                                                                                                                                                                                                              <WebMethod()>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                  <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <System.Web.Script.Services.ScriptMethod()>
     Public Function get_date_children(ByVal case_id As String) As String()
         Dim Names As New List(Of String)(10)
         Try
@@ -1587,8 +1710,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function getPreviousBenef_Action(ByVal id As String) As String()
         Dim Names As New List(Of String)(10)
         Names.Add("")
@@ -1633,8 +1756,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
     Public Function saveBenef_Action(ByVal basicDataJson As Object) As Boolean
         Try
             _sqlconn.Open()
@@ -1646,7 +1769,7 @@ Public Class cases
             Dim related_id As String = LoginInfo.getrelatedId()
             Dim dt As New DataTable
             dt = DBManager.Getdatatable("select deliverer_id,reciever_id,case_id ,isNull(p1_id.id,0) as p1_id,isNull(p2_id.id,0) as p2_id" +
-" , isNull(advisor.id, 0) as advisor_id from ash_case_receiving_delivery_details details" +
+" , isNull(advisor.id, 0) as advisor_id,advisor.User_PhoneNumber as 'advisor_phone' from ash_case_receiving_delivery_details details" +
 " left join ash_cases on ash_cases.id=details.case_id" +
 " Left join tblUsers p1_id on p1_id.related_id=details.deliverer_id And p1_id.User_Type=9" +
 " left join tblUsers p2_id on p2_id.related_id=details.reciever_id and p2_id.User_Type=9 " +
@@ -1683,33 +1806,48 @@ Public Class cases
                     ElseIf type = 2 Then
                         Message = Message + "إلغاء المعاد"
                     End If
-
-                    Dim dictNotification As New Dictionary(Of String, Object)
-                dictNotification.Add("RefCode", id)
-                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
-                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
-                    dictNotification.Add("Remarks", "طلب لتاجيل/إلغاء معاد")
-                    dictNotification.Add("FormUrl", "Aslah_Module/orders.aspx?id=" + id)
-                    dictNotification.Add("NotTitle", Message)
-                    dictNotification.Add("AssignedTo", LoginInfo.getadvisorUser_id(dt.Rows(0).Item("advisor_id")))
-                    If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
-                        _sqltrans.Rollback()
-                        _sqlconn.Close()
-                        Return "False|لم يتم الحفظ"
-                    End If
-                    dictNotification("AssignedTo") = LoginInfo.getadvisorUser_id(OtherPerson)
-                    If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
-                        _sqltrans.Rollback()
-                        _sqlconn.Close()
-                        Return "False|لم يتم الحفظ"
-                    End If
                     dictBasicDataJson.Add("case_id", dt.Rows(0).Item("case_id").ToString)
                     dictBasicDataJson.Add("comp_id", LoginInfo.GetComp_id())
                     dictBasicDataJson.Add("owner_id", LoginInfo.GetUser__Id())
+                    dictBasicDataJson.Add("otherP_Accept", "")
                     If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_orders", "", _sqlconn, _sqltrans) Then
                         _sqltrans.Rollback()
                         _sqlconn.Close()
                         Return False
+                    End If
+                    Dim order_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                    Dim dictNotification As New Dictionary(Of String, Object)
+                    dictNotification.Add("RefCode", order_id)
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", Message)
+                    dictNotification.Add("FormUrl", "Aslah_Module/orders.aspx?id=" + order_id)
+                    dictNotification.Add("NotTitle", "طلب لتاجيل/إلغاء معاد")
+                    dictNotification.Add("AssignedTo", dt.Rows(0).Item("advisor_id"))
+                    If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Return "False|لم يتم الحفظ"
+                    End If
+
+                    If LoginInfo.SendSMS() Then
+                        Dim dic_sms_archive As New Dictionary(Of String, Object)
+
+                        dic_sms_archive.Add("user_id", LoginInfo.GetUser__Id())
+                        dic_sms_archive.Add("Message", "")
+                        dic_sms_archive.Add("Send_To", "")
+                        dic_sms_archive.Add("date_m", DateTime.Now.ToString("dd/MM/yyyy"))
+                        dic_sms_archive.Add("event_id", order_id)
+                        dic_sms_archive.Add("Type", "orders")
+                        dic_sms_archive.Add("comp_id", LoginInfo.GetComp_id())
+                        dic_sms_archive("Message") = "طلب لتاجيل/إلغاء معاد"
+                        dic_sms_archive("Send_To") = dt.Rows(0).Item("advisor_phone")
+                        If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
+                            _sqltrans.Rollback()
+                            _sqlconn.Close()
+                            Return "False|لم يتم الحفظ"
+                        End If
+
                     End If
                 End If
             Else
@@ -1733,8 +1871,8 @@ Public Class cases
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <WebMethod(True)>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <System.Web.Script.Services.ScriptMethod()>
     Public Function get_case_expense_basic(ByVal case_id As String) As String
 
         Try
@@ -1758,8 +1896,8 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
     Public Function getLast_recieve(ByVal case_id As String) As String
 
         Try
@@ -1768,6 +1906,7 @@ Public Class cases
             Dim count As Integer = dt_last.Rows.Count
             If count <> 0 Then
                 Dim res = PublicFunctions.ConvertNumbertoDate(dt_last.Rows(count - 1)(0).ToString)
+                res = res + "#" + GET_delivery_Reciever_Data(case_id)
                 Return res
             End If
             Return ""
@@ -1778,78 +1917,42 @@ Public Class cases
 
 #End Region
 
-#Region "save_anotherPeriod"
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function save_anotherPeriod(ByVal basicDataJson As Object, ByVal arr_recive As List(Of Object)) As Boolean
-        Try
-            _sqlconn.Open()
-            _sqltrans = _sqlconn.BeginTransaction
-            Dim dict_basic As Dictionary(Of String, Object) = basicDataJson
-            Dim dt As New DataTable
-            Dim advisor As String = ""
-            dt = DBManager.Getdatatable("select advisor_id from ash_cases where id=" + dict_basic("case_id").ToString())
-            If dt.Rows.Count <> 0 Then
-                advisor = dt.Rows(0)(0).ToString()
-            End If
-            For Each obj As Object In arr_recive
-                Dim dict_recive As Dictionary(Of String, Object) = obj
-                dict_recive.Add("advisor", advisor)
-                If Not PublicFunctions.TransUpdateInsert(dict_recive, "ash_case_receiving_delivery_details", "", _sqlconn, _sqltrans) Then
-                    _sqltrans.Rollback()
-                    _sqlconn.Close()
-                    Return False
-
-                End If
-            Next
-            dict_basic.Add("user_id", LoginInfo.GetUser__Id())
-            If Not PublicFunctions.TransUpdateInsert(dict_basic, "ash_case_receiving_delivery_basic", "", _sqlconn, _sqltrans) Then
-                _sqltrans.Rollback()
-                _sqlconn.Close()
-                Return False
-
-            End If
-            _sqltrans.Commit()
-            _sqlconn.Close()
-            Return True
-        Catch ex As Exception
-            _sqltrans.Rollback()
-            _sqlconn.Close()
-            Return False
-        End Try
-
-    End Function
-#End Region
 
 #Region "delete_Time"
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <System.Web.Script.Services.ScriptMethod()>
     Public Function delete_Time(ByVal id As String, ByVal tabel_nm As String) As Boolean
         Try
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
             If tabel_nm = "ash_case_receiving_delivery_details" Then
-                _sqlconn.Open()
-                _sqltrans = _sqlconn.BeginTransaction
-                Dim dict As New Dictionary(Of String, Object)
-                dict.Add("deleted", 1)
-                If PublicFunctions.TransUpdateInsert(dict, "ash_case_receiving_delivery_details", id, _sqlconn, _sqltrans) Then
-                    _sqltrans.Commit()
-                    _sqlconn.Close()
-                    Return True
-                Else
-                    _sqltrans.Rollback()
-                    _sqlconn.Close()
+                If DBManager.ExcuteQueryTransaction("delete from tblsms_archive where Type='recieve_delivery' and event_id = " + id, _sqlconn, _sqltrans) Then
+                    If DBManager.ExcuteQueryTransaction("delete from tblNotifications where RefType in(1,2,3,4) and RefCode=" + id, _sqlconn, _sqltrans) Then
+                        Dim dict As New Dictionary(Of String, Object)
+                        dict.Add("deleted", 1)
+                        If PublicFunctions.TransUpdateInsert(dict, "ash_case_receiving_delivery_details", id, _sqlconn, _sqltrans) Then
+                            _sqltrans.Commit()
+                            _sqlconn.Close()
+                            Return True
+                        End If
+                    End If
                 End If
             Else
                 If PublicFunctions.DeleteFromTable(id, tabel_nm) Then
+                    _sqltrans.Commit()
+                    _sqlconn.Close()
                     Return True
                 End If
             End If
-
+            _sqltrans.Rollback()
+            _sqlconn.Close()
             Return False
         Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
             Return False
         End Try
     End Function
@@ -1860,24 +1963,58 @@ Public Class cases
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
-    <WebMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <WebMethod()>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function delete_Period(ByVal id As String) As Boolean
+    Public Function delete_Period(ByVal id As String, ByVal access As Boolean) As String
+
         Try
+
             Dim dt As New DataTable
+            Dim condation As String = ""
+
             dt = DBManager.Getdatatable("select case_id,first_date_m as start_period,endPeriod_date_m as end_period from ash_case_receiving_delivery_basic where id=" + id)
+
             If dt.Rows.Count <> 0 Then
-                If DBManager.ExcuteQuery("update ash_case_receiving_delivery_details set deleted = 1 where type = 1 and case_id=" + dt.Rows(0).Item("case_id").ToString() + " and date_m between " + dt.Rows(0).Item("start_period").ToString() + " and " + dt.Rows(0).Item("end_period").ToString()) <> -1 Then
-                    If DBManager.ExcuteQuery("delete  from ash_case_receiving_delivery_basic where id=" + id) <> -1 Then
-                        Return True
-                    Else
-                        DBManager.ExcuteQuery("update ash_case_receiving_delivery_details set deleted = NULL where type = 1 and case_id=" + dt.Rows(0).Item("case_id").ToString() + " and date_m between " + dt.Rows(0).Item("start_period").ToString() + " and " + dt.Rows(0).Item("end_period").ToString())
+                Dim case_id = dt.Rows(0).Item("case_id").ToString()
+                condation = " type = 1 and isNULL(deleted,0) != 1 and case_id=" + case_id + "  and date_m between " + dt.Rows(0).Item("start_period").ToString() + " and " + dt.Rows(0).Item("end_period").ToString()
+
+                If DBManager.Getdatatable("select id from ash_case_receiving_delivery_details where " + condation + " and id  in (select event_id from ash_orders where case_id= " + case_id + ")").Rows.Count <> 0 Then
+                    Return "False|لا يمكن حذف الفترة لوجود ارتباطات"
+                End If
+                If DBManager.Getdatatable("select id from ash_case_receiving_delivery_details where " + condation + " and (isNULL(deliverer_accept,0) =1 or isNull(reciever_accept,0) =1 )").Rows.Count <> 0 Then
+                    Return "False|لا يمكن حذف الفترة لوجود ارتباطات"
+                End If
+                If access Then
+                    _sqlconn.Open()
+                    _sqltrans = _sqlconn.BeginTransaction()
+
+                End If
+                If DBManager.ExcuteQueryTransaction("delete tblNotifications  where RefType in (1,2,3,4) and RefCode in (select id from ash_case_receiving_delivery_details where " + condation + ")", _sqlconn, _sqltrans) Then
+                    If DBManager.ExcuteQueryTransaction("delete tblsms_archive  where Type = 'recieve_delivery' and event_id in (select id from ash_case_receiving_delivery_details where " + condation + ")", _sqlconn, _sqltrans) Then
+                        If DBManager.ExcuteQueryTransaction("update ash_case_receiving_delivery_details set deleted = 1 where id in (select id from ash_case_receiving_delivery_details where " + condation + ")", _sqlconn, _sqltrans) Then
+                            If DBManager.ExcuteQueryTransaction("delete  from ash_case_receiving_delivery_basic where id=" + id) Then
+                                If access Then
+                                    _sqltrans.Commit()
+                                    _sqlconn.Close()
+                                End If
+                                Return "True"
+
+                            End If
+                        End If
                     End If
                 End If
             End If
-            Return False
+            If access Then
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+            End If
+            Return "False|لم يتم الحذف"
         Catch ex As Exception
-            Return False
+            If access Then
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+            End If
+            Return "False|لم يتم الحذف"
         End Try
     End Function
 
@@ -1888,11 +2025,11 @@ Public Class cases
     ''' get  Type data from db when update
     ''' </summary>
     <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <System.Web.Script.Services.ScriptMethod()>
     Public Function get_other_periods(ByVal case_id As String) As String
         Try
             Dim dt_period As New DataTable
-            dt_period = DBManager.Getdatatable("SELECT * from ash_case_receiving_delivery_basic where basic_period !=1 and case_id = " + case_id)
+            dt_period = DBManager.Getdatatable("SELECT * from ash_case_receiving_delivery_basic where isNUll(basic_period,0) !=1 And case_id = " + case_id)
             If dt_period.Rows.Count <> 0 Then
                 Return PublicFunctions.ConvertDataTabletoString(dt_period)
             End If

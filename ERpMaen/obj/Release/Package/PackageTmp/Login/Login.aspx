@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Login.aspx.vb" Inherits="ERpMaen.Login" %>
-
-
-<!DOCTYPE html>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %> 
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -53,7 +51,7 @@
         $(function () {
             setInterval("slideSwitch()", 9000);
         });
-
+        
 </script>
 
 
@@ -81,8 +79,13 @@ box-sizing:border-box;
     </style>
 </head>
 <body>
+   
     <form id="form1" runat="server">
-
+         <asp:ScriptManager ID="ScriptManager1" runat="server">
+        <Services>
+            <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+        </Services>
+    </asp:ScriptManager>
        <%-- <div id="slideshow">
     <img src="images/bg3.jpg" alt="Slideshow Image 1" class="active" />
     <img src="images/bg4.jpg" alt="Slideshow Image 2" />
@@ -134,6 +137,7 @@ box-sizing:border-box;
            <asp:Label ID="lblFail" runat="server" Visible="False" style="color:red;font-weight: bolder;font-size: 16px;"></asp:Label>
 
                                 </div>
+                             <a  href="#" runat="server" onclick="resetPassword();">إستعادة كلمة السر</a>
                         </div>
                     </div>
                         <footer>

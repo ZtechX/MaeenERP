@@ -39,11 +39,27 @@ Public Class CourseDetails
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
 
                 Dim code = Request.QueryString("code")
+                lblcode.InnerHtml = code
+
+
                 Dim dt = DBManager.Getdatatable(" select  acd_courses.id from acd_courses where acd_courses.code='" + code.ToString  + "'")
                 If dt.Rows.Count <> 0 Then
                     Dim course_id = dt.Rows(0)(0).ToString
                     Lblcourse_id.InnerHtml = course_id
-                    Dim dt2 = DBManager.Getdatatable(" select   isNull(Max(acd_courses.price),0)  from acd_courses where acd_courses.code='" + code.ToString + "'")
+
+                    Dim dtstatus = DBManager.Getdatatable(" select status from acd_courses where id=" + course_id)
+                    If dtstatus.Rows.Count <> 0 Then
+                        Dim status = dtstatus.Rows(0)(0)
+                        If status = 2 Then
+                            archiveBtn.Visible = True
+
+                        Else
+                            archiveBtn.Visible = False
+
+                        End If
+                    End If
+
+                    Dim dt2 = DBManager.Getdatatable(" select  isNull(Max(acd_courses.price),0)  from acd_courses where acd_courses.code='" + code.ToString + "'")
                     If dt2.Rows.Count <> 0 Then
                         Dim price = dt2.Rows(0)(0)
                         If price > 0 Then
@@ -56,15 +72,15 @@ Public Class CourseDetails
 
                     If ERpMaen.LoginInfo.getUserType = 8 Then
 
-                        Dim dtd = DBManager.Getdatatable("select deleted   from acd_courses_students where student_id=" + LoginInfo.GetUser__Id() + " and approved=1 and course_id=" + course_id)
+                        Dim dtd = DBManager.Getdatatable("select isnull(approved,0) as 'appoved', isnull(deleted,0) as 'deleted'  , isnull(checked,0) as 'checked'   from acd_courses_students where type=1 and student_id=" + LoginInfo.GetUser__Id() + "  and course_id=" + course_id)
                         If dtd.Rows.Count <> 0 Then
-                            'condition page 
-                            Page.Response.Redirect("course_register.aspx?code=" + code)
+                            If dtd.Rows(0).Item("appoved").ToString = False Or dtd.Rows(0).Item("deleted").ToString = True Or dtd.Rows(0).Item("checked").ToString = False Then
 
-                        End If
-                        Dim dtc = DBManager.Getdatatable("select course_id   from acd_courses_students where student_id=" + LoginInfo.GetUser__Id() + " and approved=1 and course_id=" + course_id)
-                        If dtc.Rows.Count = 0 Then
-                            'condition page 
+                                Page.Response.Redirect("course_register.aspx?code=" + code)
+
+                            End If
+
+                        Else
                             Page.Response.Redirect("course_register.aspx?code=" + code)
 
                         End If
@@ -84,8 +100,8 @@ Public Class CourseDetails
                     Dim clsapprove_halls As New clsFillComboByDataSource("select * from tblLock_up where type='HallNum' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id, "Description", "id", "")
                     clsapprove_halls.SetComboItems(ddlhallNum, "", True, "--اختر--", False)
 
-                    Dim clsapprove_paymentType As New clsFillComboByDataSource("select * from tblLock_up where type='Pay_TP' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id, "Description", "id", "")
-                    clsapprove_paymentType.SetComboItems(ddlpayment_type, "", True, "--اختر--", False)
+                Dim clsapprove_paymentType As New clsFillComboByDataSource("select * from tblLock_up where type='PT' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id, "Description", "id", "")
+                clsapprove_paymentType.SetComboItems(ddlpayment_type, "", True, "--اختر--", False)
 
 
                     Dim clsapprove_category As New clsFillComboByDataSource("select * from tblLock_up where type='CD' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id, "Description", "id", "")

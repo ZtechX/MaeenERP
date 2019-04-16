@@ -10,6 +10,8 @@
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/courseDetails_archivedCls.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
+                               <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+
         </Services>
     </asp:ScriptManager>
 <%--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">--%>
@@ -221,7 +223,7 @@
        <li><a data-toggle="modal" href="#publicStudentDegree" onclick="drawpublicDegreeTable();">
            درجات الطلاب
       </a></li>
-      <li><a   onclick="unarchivecourse();">
+      <li><a   data-toggle="modal" href="#unarchivecourse_modal" >
            ازالة من الارشيف
       </a></li>
       
@@ -439,21 +441,7 @@
                                                         </div>
                                                     
                                                 </div>
-                                               <%-- <div class="comment-form">
-                                                    
-                                                        <div class="form-group">
-                                                            <label for="comment_ad">اكتب تعليقك</label>
-                                 <div id="newdivcomment">
-                                                <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="comment" ClientIDMode="Static" ID="userComments" runat="server">
-                                                </asp:TextBox>
-                                     </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <button type="submit" class="btn" onclick="addComment();">ارسال</button>
-                                                           
-                                                        </div>
-                                                   
-                                                </div>--%>
+                                           
                                             </div>
                                         </div>
                                     </div>
@@ -759,7 +747,37 @@
                  </div>
             
            
-            
+            <div class="modal fade" id="unarchivecourse_modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">  سبب الازالة من الارشيف  </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divformunarchive">
+                                <div class=" row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label> السبب      </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                            <asp:TextBox SkinID="form-control" TextMode="multiline"  required class="form-control" dbColumn="Description" ClientIDMode="Static" ID="TextBox9" runat="server">
+                                            </asp:TextBox>
+                                        </div>
+                                </div>
+                                
+
+
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="unarchivecourse();">ارسال </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="modal fade" id="publicStudentDegree" tabindex="-1" role="dialog">
                 <div class="modal-dialog">

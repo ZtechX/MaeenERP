@@ -1362,5 +1362,26 @@ function GetCurrentDate_m_hj() {
     Pub_date_m = today;
     Pub_date_hj = $("#CurrentDate").find("#txtDateh").val();
  
-
+}
+function resetPassword() {
+    var user_name = $("#txtUserName").val();
+    if (user_name != "") {
+        var phone = prompt("من فضل إدخل رقم الجوال لارسال كلمة السر");
+        var regex = /^[0-9]+$/; x = "1150"
+        
+        if (phone != null && phone != "" && phone.length == 10 && phone.match(regex) != null) {
+            WebService.resetPassword(user_name, function (val) {
+                if (val != "") {
+                    alert("كلمة السر \n" + "'" + val + "'");
+                } else {
+                    alert("لا يوجد حساب بهذة الرقم");
+                }
+            });
+        } else {
+            alert("لا يوجد جوال بهذا الرقم");
+        }
+       
+    } else {
+        alert("يرجى إدخال رقم الهوية أو الجوال");
+    }
 }

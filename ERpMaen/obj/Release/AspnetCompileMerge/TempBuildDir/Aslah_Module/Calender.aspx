@@ -39,8 +39,8 @@
        
 	<div id="calendar"     class="w3-container w3-margin-top"></div>
 
-  <uc1:Result  runat ="server"
-/>             <script src="../js/hijri-date1.js"></script>
+  <uc1:Result  runat ="server"/>
+    <script src="../js/hijri-date1.js"></script>
              <script src="../js/calendar1.js"></script>
          <script src="../js_code/cases/cases.js"></script>
     <script type="text/javascript">
@@ -146,7 +146,7 @@
 let cal=new Calendar(true);
           cal.attachTo(document.getElementById('calendar'));
           cal.setLanguage('ar')
-          cal.setFirstDayOfWeek(0);
+          //cal.setFirstDayOfWeek(0);
         
 function openSidebar(){
 	document.getElementById("mySidebar").style.display = "block"

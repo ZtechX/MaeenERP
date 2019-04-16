@@ -128,7 +128,6 @@ Public Class studentCls
 
                 If dtcheckemailphone.Rows.Count = 0 Then
 
-                    dictBasicDataJson("group_id") = LoginInfo.Getgroup_id()
                     If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblUsers", UserId, _sqlconn, _sqltrans) Then
                         success = True
                     Else

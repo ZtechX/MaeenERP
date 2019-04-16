@@ -301,34 +301,38 @@ function drawstudentExamsanswers(ExamId) {
 
 
 function unarchivecourse() {
-   // debugger
-
-
-    var f = confirm("  هل  تريد ازالةالدورة من الارشيف");
-    if (f == true) {
-        var CourseId = ($("#Lblcourse_id").html());
-
-
-        courseDetails_archivedCls.unArchive_course(CourseId, function (val) {
-
-            if (val[0] == 1) {
-                $("#SavedivLoader").hide();
-                alert("تم حذف الدورة من الارشيف    ");
-                window.location.replace("archived_courses.aspx");
-
-            } else {
-                alert("لم يتم الحذف");
-            }
-
-        });
+    debugger
+    if (checkRequired("divformunarchive") == 1) {
+        alert("يرجى ادخال سبب ازالة الدورة من الارشيف ");
     }
-    
+    else {
+        $("#SavedivLoader").show();
+
+        var basicData = generateJSONFromControls("divformunarchive");
+
+        var f = confirm("  هل  تريد ازالةالدورة من الارشيف");
+        if (f == true) {
+            var CourseId = ($("#Lblcourse_id").html());
+
+
+            courseDetails_archivedCls.unArchive_course(CourseId, basicData, function (val) {
+
+                if (val[0] == 1) {
+                    $("#SavedivLoader").hide();
+                    alert("تم حذف الدورة من الارشيف    ");
+                    window.location.replace("archived_courses.aspx");
+                    $("#unarchivecourse_modal").modal('hide');
+
+                } else {
+                    alert("لم يتم الحذف");
+                    $("#unarchivecourse_modal").modal('hide');
+                }
+
+            });
+        }
+
+    }
 }
-
-
-
-
-
 
 
 function CourseView() {

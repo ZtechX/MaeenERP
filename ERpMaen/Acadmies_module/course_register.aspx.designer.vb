@@ -32,6 +32,15 @@ Partial Public Class course_register
     Protected WithEvents Lblcourse_id As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''lblcode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblcode As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''lblStudentID control.
     '''</summary>
     '''<remarks>
@@ -48,6 +57,15 @@ Partial Public Class course_register
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents img As Global.System.Web.UI.WebControls.Image
+    
+    '''<summary>
+    '''checkstudentregister control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents checkstudentregister As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''notes2 control.

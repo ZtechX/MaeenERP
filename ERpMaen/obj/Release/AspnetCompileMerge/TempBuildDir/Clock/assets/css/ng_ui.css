@@ -586,17 +586,21 @@
 	
 /* components input and button */
 .ng-input-button-container {white-space:nowrap;}
-.ng-input-button-container .ng-button {padding:5px 5px;
-	margin:0px;
-	-webkit-border-top-right-radius: 0px;
-	-webkit-border-bottom-right-radius: 0px;
-	-moz-border-radius-topright: 0px;
-	-moz-border-radius-bottomright: 0px;
-	border-top-right-radius: 0px;
-	border-bottom-right-radius: 0px;
-	border-right-width:0px;
-	vertical-align:top;
-	font-size:medium;}
+    .ng-input-button-container .ng-button {
+        height: 40px;
+        padding: 10px 5px;
+        margin: 0px;
+        margin-bottom: 10px;
+        -webkit-border-top-right-radius: 0px;
+        -webkit-border-bottom-right-radius: 0px;
+        -moz-border-radius-topright: 0px;
+        -moz-border-radius-bottomright: 0px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-right-width: 0px;
+        vertical-align: top;
+        font-size: medium;
+    }
 	
 .ng-input-button-container input {vertical-align:top;}
 	

@@ -12,7 +12,7 @@ Public Class Login
             '#####################################Remember me Start   ############################################
             If cklogin.Checked = True Then
                 Dim dt As New DataTable
-                dt = DBManager.Getdatatable("select * ,isNull(password_changed,0) as 'pass_changed' from tblUsers where (User_PhoneNumber ='" + txtUserName.Value + "' or user_indenty='" + txtUserName.Value + "')  and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
+                dt = DBManager.Getdatatable("select * ,isNull(password_changed,0) as 'pass_changed' from tblUsers where (User_PhoneNumber ='" + txtUserName.Value + "' or user_indenty='" + txtUserName.Value + "')  and User_Password = '" + txtPassword.Text + "' and isNULL(Deleted,0)  !=1 ")
                 If dt.Rows.Count > 0 Then
                     If dt.Rows(0).Item("active") = False Then
                         lblFail.Visible = True
@@ -50,7 +50,7 @@ Public Class Login
                 '############################################## Remember Me  end   #######################################
             Else
                 Dim dt As New DataTable
-                dt = DBManager.Getdatatable("select * ,isNull(password_changed,0) as 'pass_changed' from tblUsers where (User_PhoneNumber ='" + txtUserName.Value + "' or user_indenty='" + txtUserName.Value + "')  and User_Password = '" + txtPassword.Text + "' and (Deleted = 'False' or Deleted is null)")
+                dt = DBManager.Getdatatable("select * ,isNull(password_changed,0) as 'pass_changed' from tblUsers where (User_PhoneNumber ='" + txtUserName.Value + "' or user_indenty='" + txtUserName.Value + "')  and User_Password = '" + txtPassword.Text + "' and isNULL(Deleted,0)  != 1")
                 If dt.Rows.Count > 0 Then
                     If dt.Rows(0).Item("active") = False Then
                         lblFail.Visible = True

@@ -34,29 +34,33 @@ Public Class report_settings
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function save(ByVal id As String, ByVal basicDataJson As Object, ByVal imagePath As String) As Boolean
+    Public Function save(ByVal header_img As String, ByVal footer_img As String) As Boolean
+
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
-            Dim dt As DataTable
-            Dim dt_user As DataTable
-            Dim dt_category As DataTable
-            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-            If dictBasicDataJson("type_id") <> "6" Then
-                dictBasicDataJson.Add("image", imagePath)
-            Else
-                dictBasicDataJson.Add("image", "")
-            End If
+            Dim comp_id As String = LoginInfo.GetComp_id()
+            Dim dt As New DataTable
 
-            dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
-            dictBasicDataJson.Add("comp_id", dt_user.Rows(0).Item("comp_id").ToString())
-            dt = DBManager.Getdatatable("select * from tblreport_settings where comp_id=" + dt_user.Rows(0).Item("comp_id").ToString())
-            If dt.Rows.Count <> 0 Then
-                id = dt.Rows(0).Item("id")
-            Else
-                id = 0
+            dt = DBManager.Getdatatable("select * from tblreport_settings where comp_id=" + comp_id)
+
+            Dim dictBasicDataJson As New Dictionary(Of String, Object)
+            Dim count As Integer = dt.Rows.Count
+            If count <> 0 Then
+                dictBasicDataJson.Add("deleted", 1)
+                For index As Integer = 0 To (count - 1)
+                    If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblreport_settings", dt.Rows(index).Item("id").ToString, _sqlconn, _sqltrans) Then
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Return False
+                    End If
+                Next
+                dictBasicDataJson.Remove("deleted")
             End If
-            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblreport_settings", id, _sqlconn, _sqltrans) Then
+            dictBasicDataJson.Add("header_img", header_img)
+            dictBasicDataJson.Add("footer_img", footer_img)
+            dictBasicDataJson.Add("comp_id", comp_id)
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblreport_settings", "", _sqlconn, _sqltrans) Then
                 _sqltrans.Commit()
                 _sqlconn.Close()
                 Return True
@@ -74,134 +78,30 @@ Public Class report_settings
 #End Region
 
 
-#Region "Edit"
-    ''' <summary>
-    ''' get  Type data from db when update
-    ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function Edit(ByVal editItemId As String) As String()
-
-        Dim Names As New List(Of String)(10)
-        Try
-            Dim str As String = PublicFunctions.GetDataForUpdate("tblreport_settings", editItemId)
-            Names.Add("1")
-            Names.Add(str)
-            Return Names.ToArray
-        Catch ex As Exception
-            Names.Add("0")
-            Names.Add(" No Results were Found!")
-            Return Names.ToArray
-        End Try
-    End Function
-
-#End Region
-
-#Region "Delete"
-    ''' <summary>
-    ''' </summary>
-    <WebMethod()>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function Delete(ByVal deleteItems As String) As String()
-        Dim Names As New List(Of String)(10)
-        Try
-            If PublicFunctions.DeleteFromTable(deleteItems, "tblreport_settings") Then
-                Names.Add("1")
-                Names.Add("تم الحذف بنجاح!")
-            Else
-                Names.Add("2")
-                Names.Add("لا يمكن الحذف!")
-            End If
-            Return Names.ToArray
-        Catch
-            Names.Add("2")
-            Names.Add("لا يمكن الحذف!")
-            Return Names.ToArray
-        End Try
-    End Function
-#End Region
-#Region "get_groups"
+#Region "get_data"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_groups(ByVal dep_Id As String) As String()
+    Public Function get_Data() As String()
         Dim Names As New List(Of String)(10)
-        Dim str = ""
-        Dim str2 = ""
+        Names.Add("")
+        Names.Add("")
         Try
             Dim dt As New DataTable
-            Dim dt2 As New DataTable
-            ' TblInvoice.TblInvoiceFields.SAccount_cd
-            Dim query As String = "select * from tblcontacts where ISNUll(tblcontacts.deleted,0)=0 "
-            Dim query2 As String = "select * from tblcontacts_groups where group_id=" + dep_Id + ""
-            'If (dep_Id <> 0) Then
-            '    query = query + " and group_id=" + dep_Id
-            'End If
-            'query = query + " order by IInvoice_typ"
 
-            dt = DBManager.Getdatatable(query)
-            dt2 = DBManager.Getdatatable(query2)
+            dt = DBManager.Getdatatable("select isNull(header_img,'') header_img,isNull(footer_img,'') footer_img from tblreport_settings where isNull(deleted,0) != 1 and comp_id=" + LoginInfo.GetComp_id())
             If dt.Rows.Count <> 0 Then
-                str = PublicFunctions.ConvertDataTabletoString(dt)
-                Names.Add(str)
-            Else
-                Names.Add("0")
-                Return Names.ToArray
+                Names(0) = dt.Rows(0).Item("header_img").ToString()
+                Names(1) = dt.Rows(0).Item("footer_img").ToString()
             End If
-
-            If dt2.Rows.Count <> 0 Then
-                str2 = PublicFunctions.ConvertDataTabletoString(dt2)
-                Names.Add(str2)
-            Else
-                Names.Add("0")
-                Return Names.ToArray
-            End If
+            Return Names.ToArray
         Catch ex As Exception
-            Names.Add("")
             Return Names.ToArray
         End Try
-        Return Names.ToArray
     End Function
 
 #End Region
-#Region "get_report"
-    ''' <summary>
-    ''' Save  Type
-    ''' </summary>
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_report() As String()
-        Dim Names As New List(Of String)(10)
-        Dim str = ""
-        Dim str2 = ""
-        Try
-            Dim dt As New DataTable
-            Dim dt2 As New DataTable
-            Dim dt_user As DataTable
-            Dim dt_category As DataTable
-
-            dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
-            dt_category = DBManager.Getdatatable("select * from tblreport_settings where comp_id=" + dt_user.Rows(0).Item("comp_id").ToString())
-            If dt_category.Rows.Count <> 0 Then
-                str = PublicFunctions.ConvertDataTabletoString(dt_category)
-                Names.Add(str)
-            Else
-                Names.Add("0")
-                Return Names.ToArray
-            End If
-        Catch ex As Exception
-            Names.Add("")
-            Return Names.ToArray
-        End Try
-        Return Names.ToArray
-    End Function
-
-#End Region
-
-
-
-
 
 End Class

@@ -1,80 +1,42 @@
-﻿/************************************/
-// Created By : Ahmed Nayl
-// Create Date : 14/10/2018 3:30 PM
-// Description : This file contains all javaScript functions related to Companies form 
-/************************************/
-
-
-//public variables
-var deleteWebServiceMethod = "report_settings.asmx/Delete";
-// global variable used in row_click and update functions
-var editWebServiceMethod = "report_settings.asmx/Edit";
-var formAutoCodeControl = "lblmainid";
-// load function set defualt values
-var clean = true;
+﻿
 $(function () {
     $("#pnlConfirm").hide();
     $("#divData").hide();
     $("#SavedivLoader").show();
     try {
-        get_report();
-
-
+        get_Data();
+        
     } catch (err) {
         alert(err);
     }
 });
 
-// draw dynamic table for existing travel_agencies
-function drawDynamicTable() {
-    try {
-        var tableSortingColumns = [
-                { orderable: false }, null, null,
-        ];
-        var tableFilteringColumns = [
-            { type: "null" }, { type: "text" },{ type: "text" },
-        ];
-
-        var tableColumnDefs = [
-
-        ];
-        var initialSortingColumn = 1;
-        loadDynamicTable('report_settings', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
-    } catch (err) {
-        alert(err);
-    }
-}
-function get_report() {
-    report_settings.get_report(function (val) {
-        if (val != 0) {
-            var data = JSON.parse(val[0]);
-
-            $("#ddltype_id").val(data[0].type_id);
-            $("#lblmainid").html(data[0].id);
-            if (data[0].type_id != 6) {
-                $("#type_images").css("display", "block");
-                $("#imgItemURL").attr("src", data[0].image);
+function get_Data() {
+    report_settings.get_Data(function (val) {
+        
+            if (val[0] != "") {
+                $("#imgItemURL_header").attr("src", val[0]);
             } else {
-                $("#type_images").css("display", "none");
+                $("#imgItemURL_header").attr("src", "../App_Themes/images/add-icon.jpg");
+            }
+        if (val[1] != "") {
+            $("#imgItemURL_footer").attr("src", val[1]);
+            } else {
+                $("#imgItemURL_footer").attr("src", "../App_Themes/images/add-icon.jpg");
             }
             $("#cmdSave").prop("CommandArgument", "Update");
             $("#cmdUpdate").removeAttr('disabled');
-            $("#cmdDelete").removeAttr('disabled');
-        }
+        
 
     });
 
 }
 
-// empty pnlform and show it and hide function panel
-
-
 function resetAll() {
     try {
-        resetFormControls();
-        $("#lblmainid").html("");
-        $("#divuploadimage img").prop("src", "");
-        $("#imgItemURL").prop("src", "");
+        debugger
+        $("#cmdUpdate").removeAttr('disabled');
+       
     } catch (err) {
         alert(err);
     }
@@ -83,80 +45,33 @@ function resetAll() {
 function save() {
     
     try {
-        if (Page_ClientValidate("vgroup")) {
-            debugger;
-            var saveType = $("#cmdSave").attr("CommandArgument");
-            var mainImag = $("#imgItemURL").prop("src");
-            var PosId = $("#lblmainid").html();
-            var basicData = generateJSONFromControls("divForm");
-            report_settings.save( PosId, basicData, mainImag, function (val) {
-                if (val != '0') {
-                    showSuccessMessage('تم تسجيل البيانات بنجاح');
-                  //  drawDynamicTable();
+        $("#SavedivLoader").show();
+        var headerImag = $("#imgItemURL_header").prop("src");
+        var footerImag = $("#imgItemURL_footer").prop("src");
+        if (headerImag.indexOf("App_Themes/images/add-icon.jpg") != -1) {
+            headerImag = "";
+        }
+        if (footerImag.indexOf("App_Themes/images/add-icon.jpg") != -1) {
+            footerImag = "";
+        }
+        if (headerImag != "" || footerImag!= "") {
+            report_settings.save(headerImag, footerImag, function (val) {
+                $("#SavedivLoader").hide();
+                if (val ) {
+                    showSuccessMessage('تم الحفظ بنجاح');
                     cancel();
-                    get_report();
+                    get_Data();
                 } else {
                     showErrorMessage('لم يتم الحفظ');
+                    $("#pnlConfirm").show();
                 }
             });
         }
         else {
-            showErrorMessage("يرجى ادخال البيانات المطلوبه");
+            showErrorMessage("يرجى أختيار الصور");
             $("#pnlConfirm").show();
             $("#SavedivLoader").hide();
         }
-    } catch (err) {
-        alert(err);
-    }
-}
-
-
-
-// called after update function success
-function edit(val) {
-    try {
-
-        var data = JSON.parse(val[1]);
-        cancel();
-        if (val[0] != "0") {
-            fillControlsFromJson(data[0]);
-            if (data[0].type_id != 6) {
-                $("#type_images").css("display", "block");
-                $("#imgItemURL").attr("src", data[0].image);
-            } else {
-                $("#type_images").css("display", "none");
-            }
-            $("#cmdSave").prop("CommandArgument", "Update");
-            $("#cmdUpdate").removeAttr('disabled');
-            $("#cmdDelete").removeAttr('disabled');
-
-            //showSuccessMessage("");
-            //if (formOperation == "update") {
-            //    setformforupdate();
-            //    formOperation = "";
-            //}
-        } else {
-            showErrorMessage("No data found !!");
-        }
-    } catch (err) {
-        alert(err);
-    }
-}
-function get_types() {
-    if ($("#ddltype_id").val() != '6') {
-        $("#type_images").css("display", "block");
-
-    } else {
-        $("#type_images").css("display", "none");
-    }
-
-}
-
-
-function add() {
-    try {
-        prepareAdd();
-        resetAll();
     } catch (err) {
         alert(err);
     }

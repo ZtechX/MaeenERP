@@ -75,13 +75,29 @@ function checkstudent() {
         $("#SavedivLoader").show();
      
         var diplomeID = ($("#Lbldiplome_id").html());
+        var code = ($("#lblcode").html());
        // debugger
     
-        diplome_registerCls.checkstudentregister(diplomeID ,function (val) {
+        diplome_registerCls.checkstudentregister(diplomeID, function (val) {
+
+            if (val[0] == 4) {
+                window.location.replace("DiplomaCourses?code=" + code)
+
+            }
+            if (val[0] == 3) {
+                document.getElementById('btnregister').style.visibility = 'hidden';
+                document.getElementById('checkstudentregister').innerHTML = "  تم حذف الطالب من الدورة";
+
+            }
 
             if (val[0] == 1) {
                 document.getElementById('btnregister').style.visibility = 'hidden';
                 document.getElementById('checkstudentregister').innerHTML = "طلبك قيد المراجعه";
+
+            }
+            if (val[0] == 2) {
+                document.getElementById('btnregister').style.visibility = 'visible';
+                //document.getElementById('checkstudentregister').innerHTML = " ارسل طلب الالتحاق من جديد ";
 
             }
 
@@ -162,6 +178,7 @@ function sendRequest() {
             debugger
            // var StudentId = $("#lblStudentID").html();
             var diplomeID = ($("#Lbldiplome_id").html());
+            var code = ($("#lblcode").html());
             var fURL = document.getElementById("fileURL4").value;
             var fName = document.getElementById("FName4").value;
             var basicData = generateJSONFromControls("divformsignin");
@@ -169,7 +186,7 @@ function sendRequest() {
 
             var Id = "";
             console.log(basicData);
-            diplome_registerCls.SaveRegister(Id, diplomeID, fURL, fName, basicData, function (val) {
+            diplome_registerCls.SaveRegister(Id, diplomeID, code ,fURL, fName, basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     alert("تم الحفظ بنجاح");

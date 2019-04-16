@@ -66,6 +66,7 @@ Public Class consulting
                 If assignTo <> "" Then
                     Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
                     dictBasicDataJson1.Add("RefCode", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                    dictBasicDataJson1.Add("RefType", 6)
                     dictBasicDataJson1.Add("NotTitle", "رد استشارة " + consult_nm)
                     dictBasicDataJson1.Add("Date", dictBasicDataJson("message_date"))
                     dictBasicDataJson1.Add("AssignedTo", assignTo)
@@ -124,7 +125,7 @@ Public Class consulting
             Dim dt As New DataTable
             dt = DBManager.Getdatatable("SELECT created_By,ash_consultings.code,consult_nm,lokk3.Description as 'source_id',lokk1.Description as 'category_id' ," +
 " lokk2.Description as 'status', income_notes,start_date,start_date_hj," +
-" isNull((select User_Name from tblNotifications left join tblUsers  on tblNotifications.CreatedBy=tblUsers.id  where RefCode= ash_consultings.id and NotTitle='إنشاء استشارة'),'') as 'From'," +
+" isNull(ash_consultings.name,'') as 'From'," +
 " isNull(ash_advisors.name,'')  as 'To'" +
 " from ash_consultings" +
 " left join tbllock_up lokk1 on lokk1.id=ash_consultings.category_id" +
@@ -167,7 +168,10 @@ Public Class consulting
     Public Function getConsluteMess(ByVal id As String) As String
         Try
             Dim dt As New DataTable
-            dt = DBManager.Getdatatable("select messageTime,message,message_date, full_name from ash_consulting_messages left join tblUsers on user_from =tblUsers.id  where consulting_id=" + id)
+            dt = DBManager.Getdatatable("select messageTime,message,message_date,case User_Type when 6 then full_name else name end as name from ash_consulting_messages " +
+ " left join ash_consultings on consulting_id=ash_consultings.id " +
+ " left join tblUsers on tblUsers.id=ash_consulting_messages.user_from " +
+ "  where consulting_id=" + id)
             If dt.Rows.Count <> 0 Then
                 Return PublicFunctions.ConvertDataTabletoString(dt)
             End If

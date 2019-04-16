@@ -2,7 +2,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/DynamicTable.ascx" TagPrefix="uc1" TagName="DynamicTable" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="result" %>
-<%@ Register Src="~/UserControls/pnlConfirm.ascx" TagPrefix="uc1" TagName="pnlconfirm" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="content">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -95,26 +94,12 @@
                         <asp:Panel ID="pnlFunctions" runat="server" CssClass="row" Enabled="true">
                             <div class="col-md-9 col-sm-12">
                                 <ul>
-                                    <li style ="display:none;">
-                                        <asp:LinkButton OnClientClick="add(); return false;" ID="cmdSave" runat="server"
-                                            SkinID="btn-top" CausesValidation="false">
-                                     <i class="fa fa-plus"></i>
-                                           جديد
-                                        </asp:LinkButton>
-                                    </li>
-                                    <li style ="display:none;">
-                                        <asp:LinkButton ID="cmdDelete" OnClientClick="deleteItem(); return false;" ToolTip="Delete Community" runat="server" SkinID="btn-top">
-                                               <i class="fa fa-trash-o"></i>
-                                           حذف
-                                        </asp:LinkButton>
-                                        <asp:Panel ID="pnlDelete" runat="server">
-                                        </asp:Panel>
-                                    </li>
+                                    
                                     <li>
-                                        <asp:LinkButton ID="cmdUpdate" OnClientClick="setformforupdate(); return false;" runat="server" CommandArgument="1"
+                                        <asp:LinkButton  OnClientClick="save(); return false;" runat="server" CommandArgument="1"
                                             SkinID="btn-top">
-                                               <i class="fa fa-pencil-square-o"></i>
-                                           تعديل
+                                               <i class="fa fa-save"></i>
+                                           حفظ
                                         </asp:LinkButton>
                                     </li>
                                 </ul>
@@ -122,7 +107,6 @@
                         </asp:Panel>
                     </asp:Panel>
                     <uc1:result runat="server" ID="Result" />
-                    <uc1:pnlconfirm runat="server" ID="PnlConfirm" />
                 </div>
                 <!-- page content -->
                 <div id="content" class="padding-20 newformstyle form_continer">
@@ -155,7 +139,7 @@
                                         <!----------------column 1 -------------------->
 
                                         <div id="SavedivLoader" class="loader" style="display: none; text-align: center;">
-                                            <asp:Image ID="img" runat="server" ImageUrl="../images/loader.gif" />
+                                            <asp:Image ID="img" runat="server" ImageUrl="../App_Themes/images/loader.gif" />
                                         </div>
                                         <label  id="userType"></label>
                                         <div class="col-md-6">
@@ -208,19 +192,7 @@
 
 
                                             </div>
-                                                      <div id="divResearcher" runat="server" class="form-group row">
-                                                
-                                                <div  class="col-md-3 col-sm-12">
-
-                                                    <label>باحث   </label>
-                                                </div>
-                                                <div class="col-md-9 col-sm-12">
-                                                     <input name="chkManual" id="Researcher" onchange="changeResearcher();" dbcolumn="Researcher" runat="server" runat="server"  type="checkbox" />
-
-                                                </div>
-
-
-                                            </div>
+                                                      
                                                                          
                              
                                         </div>
@@ -277,69 +249,7 @@
                                         </div>
                                      
 
-                        <div class="col-md-12" id="LiPlaces">
-                            <div class="col-md-3">
-                                <table id="CTY" class="table  table-bordered ">
-                                  <thead class="thead-dark">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>المحافظة</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                                  </div>
-                        
-                            <div class="col-md-3">
-                            
-                                     <table id="CEN" class="table  table-bordered ">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>المركز</th>
-                                        </tr>
-                                    </thead>
-                                         <tbody>
-
-                                    </tbody>
-                                </table>
-                            
-                               </div>
-                                <div class="col-md-3">
-                                 <table id="VILL" class="table table-bordered ">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>القرية</th>
-                                        </tr>
-                                    </thead>
-                                     <tbody>
-
-                                    </tbody>
-                                </table>
-                                
-                           </div>
-                            <div class="col-md-3">
-                                <table id="BIO" class="table table-bordered ">
-                                  <thead class="thead-dark">
-                                        <tr>
-                                            <th>#</th>
-                                            <th>الحى</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" />
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    
                    
                                     </div>
 

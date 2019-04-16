@@ -74,27 +74,40 @@ function checkstudent() {
         $("#SavedivLoader").show();
      
         var CourseId = $("#Lblcourse_id").html();
+        var code = ($("#lblcode").html());
        
     
         course_registerCls.checkstudentregister( CourseId ,function (val) {
-            debugger
+            
 
-            if (val[0] == 3) {
+            if (val[0] == 5) {
                 document.getElementById('btnregister').style.visibility = 'hidden';
-                document.getElementById('checkstudentregister').innerHTML = "  تم حذف الطالب من الدورة";
+                document.getElementById('checkstudentregister').innerHTML = " الدورة مكتملة";
 
             }
+         
 
-            if (val[0] == 1) {
-                document.getElementById('btnregister').style.visibility = 'hidden';
-                document.getElementById('checkstudentregister').innerHTML = "طلبك قيد المراجعه";
+                if (val[0] == 4) {
+                    window.location.replace("courseDetails?code=" + code)
 
-            }
-            if (val[0] == 2) {
-                document.getElementById('btnregister').style.visibility = 'visible';
-                //document.getElementById('checkstudentregister').innerHTML = " ارسل طلب الالتحاق من جديد ";
+                }
+                if (val[0] == 3) {
+                    document.getElementById('btnregister').style.visibility = 'hidden';
+                    document.getElementById('checkstudentregister').innerHTML = "  تم حذف الطالب من الدورة";
 
-            }
+                }
+
+                //if (val[0] == 1) {
+                //    document.getElementById('btnregister').style.visibility = 'hidden';
+                //    document.getElementById('checkstudentregister').innerHTML = "طلبك قيد المراجعه";
+
+                //}
+                if (val[0] == 2) {
+                    document.getElementById('btnregister').style.visibility = 'visible';
+                    //document.getElementById('checkstudentregister').innerHTML = " ارسل طلب الالتحاق من جديد ";
+
+                }
+            
 
         });
     }
@@ -172,6 +185,7 @@ function sendRequest() {
             debugger
            // var StudentId = $("#lblStudentID").html();
             var CourseId = ($("#Lblcourse_id").html());
+            var code = ($("#lblcode").html());
             var fURL = document.getElementById("fileURL4").value;
             var fName = document.getElementById("FName4").value;
             var basicData = generateJSONFromControls("divformsignin");
@@ -179,7 +193,7 @@ function sendRequest() {
 
             var Id = "";
             console.log(basicData);
-            course_registerCls.SaveRegister(Id, CourseId, fURL, fName, basicData, function (val) {
+            course_registerCls.SaveRegister(Id, CourseId, code, fURL, fName, basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     alert("تم الحفظ بنجاح");

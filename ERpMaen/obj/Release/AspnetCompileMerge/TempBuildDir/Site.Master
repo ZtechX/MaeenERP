@@ -62,7 +62,7 @@
 
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery.easing.min.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/FloatingLabels.js")%>"></script>
-    <%--<script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Notification.js")%>"></script>--%>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Notification.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/JS_Code/Master.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/jquery.dataTables.columnFilter.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/plugins/datatable/ColVis.min.js")%>"></script>
@@ -714,7 +714,7 @@
                                 <a class="access_btn_User">
                                     <asp:Image ID="imgUser" runat="server" CssClass="user_photo_menu" />
                                     <span id="lbUsername" runat="server" class="user_text"></span><i class="fa fa-caret-down"></i></a>
-                                <div class="toggle_box_User popover bottom dropdown-menu" style="z-index: -1">
+                                <div class="toggle_box_User popover bottom dropdown-menu" style="z-index: -1;top:auto; ">
                                     <div class="arrow"></div>
                                     <ul>
                                           <li style="padding:7px 0px;">
@@ -727,7 +727,7 @@
                                 </div>
                             </div>
 
-                            <div class="" style="position: absolute;left: 170px;">
+                            <div >
                                 <button id="notification_btn" class="bg_none" data-toggle="dropdown" aria-expanded="false">
                                     <div class="notifications">
                                         <a href="#" data-toggle="popover">

@@ -185,6 +185,15 @@ Partial Public Class Users
     Protected WithEvents Checkbox1 As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
     
     '''<summary>
+    '''Checkbox2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Checkbox2 As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
+    
+    '''<summary>
     '''divResearcher control.
     '''</summary>
     '''<remarks>

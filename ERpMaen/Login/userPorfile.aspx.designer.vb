@@ -68,42 +68,6 @@ Partial Public Class userPorfile
     Protected WithEvents pnlFunctions As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''cmdSave control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cmdSave As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''cmdDelete control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cmdDelete As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''pnlDelete control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlDelete As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''cmdUpdate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cmdUpdate As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
     '''Result control.
     '''</summary>
     '''<remarks>
@@ -111,15 +75,6 @@ Partial Public Class userPorfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Result As Global.ERpMaen.Result
-    
-    '''<summary>
-    '''PnlConfirm control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents PnlConfirm As Global.ERpMaen.PnlConfirm
     
     '''<summary>
     '''lblmainid control.
@@ -174,24 +129,6 @@ Partial Public Class userPorfile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Checkbox1 As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
-    
-    '''<summary>
-    '''divResearcher control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents divResearcher As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''Researcher control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Researcher As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
     
     '''<summary>
     '''txtUserPassword control.

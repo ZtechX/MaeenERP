@@ -46,6 +46,9 @@
                     </style>
 
                     <script type="text/javascript">
+                        $(function () {
+                             $("#fuPhoto1").find('input[type="file"]').removeClass("form-control");
+                        });
                         function UploadComplete2(sender, args) {
                             var fileLength = args.get_length();
                             var fileType = args.get_contentType();

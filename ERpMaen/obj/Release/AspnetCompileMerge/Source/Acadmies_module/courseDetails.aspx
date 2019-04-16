@@ -272,6 +272,16 @@
                                                 </li>
                                                 <li>
                                                     <span id="">
+                                                         <i class="fa fa-clock-o"></i>
+                                                        <b>مدة المحاضرة</b>
+                                                       <b id="lectureDuration"></b>
+                                                           <b>دقيقة </b>
+                                                     
+                                                     
+                                                </span>
+                                              </li>
+                                                <li>
+                                                    <span id="">
                                                         <i class="fa fa-clock-o"></i>
                                                      
                                                        <b id="course_duration"></b>
@@ -430,8 +440,9 @@
                                                                                 <th>اسم الواجب </th>
                                                                                 <th>تفاصيل الواجب</th>
                                                                                 <th>مرفق الواجب </th>
+                                                                                  <th>درجة الواجب </th>
                                                                                 <th>رفع حل </th>
-                                                                                 <th>درجة الواجب </th>
+                                                                               
                                                                                 
                                                                                
 
@@ -509,32 +520,13 @@
                                                                                 <th>اسم الاختبار </th>
                                                                                 <th>تفاصيل الاختبار</th>
                                                                                 <th>مرفق الاختبار </th>
+                                                                                  <th>درجة الاختبار </th>
                                                                                 <th>رفع حل </th>
-                                                                                 <th>درجة الاختبار </th>
                                                                                
-
+                                                                              
                                                                             </tr>
                                                                             <tbody id="studentExamstable">
-                                                                            <%--<tr>
-                                                                                <td> os EXAM  </td>
-                                                                                <td>define CORBA  </td>
-                                                                               <td> 
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-cloud-download"></i>   ارفاق الاختبار 
-
-                                                        </a>
-                                                        <span>(8كيلوبايت)</span>
-                                                       </td>
-                                                                               <td> 
-                                   <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#file_upload">
-                                                                إرفاق الحل
-                                                           
-                                                            </button>
-                                                       </td>
-                                                                                 <td> 20 </td>
-                                                                     
-
-                                                                            </tr>--%>
+                                                                           
                                                                                
                                                                                 </tbody>
                                                                         </table>
@@ -569,7 +561,16 @@
                                                      اضاقة ملف   <i class="fa fa-plus"></i>
                                                     
                                                 </button>
+                                                    
                                                       <% End If %>
+                                                      <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                                                    <input type="hidden" id="checkuser"  value="1"/>
+                                                   
+                                                    <% Else  %>
+                                                     <input type="hidden" id="checkuser"  value="2"/>
+                                                    <% End If %>
+                                                    
+
                                                    </div>
                                               
                                             </div>
@@ -586,7 +587,9 @@
                         <tr>
                             <th>الملاحظة </th>
                             <th>الملف</th>
+                              <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
                             <th>الاجراء</th>
+                             <% End If %>
                             
 
                         </tr>
@@ -636,6 +639,14 @@
                                                     <i class="zmdi zmdi-headset-mic"></i> تواصل مع الادراة
                                                 </button>
                                                 <% End If %>
+
+                                                 <% if ERpMaen.LoginInfo.getUserType = 2 Then   %>
+                                                   <button type="button" class="btn btn_rec btn-dark" onclick="archiveCourse();">
+                                                    <i class="zmdi zmdi-headset-mic"></i>
+                                                        اضافة الى الارشيف</button>
+                                               
+                                                <% End If %>
+
 
 
                                             </div>
@@ -757,7 +768,6 @@
                                         </div>
                                      
                              
-
                                     <div class="inner">
                                         <div class="add-hint">
                                             <div class="hint-head side_head">
@@ -843,7 +853,7 @@
                                         </div>
                                     </div>
                                        <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
-                                              <div class="inner" id="finance_div">
+                                              <div class="inner" id="finance_div" runat="server">
                                         <div class="add-hint">
                                             <div class="hint-head side_head">
                                                 <h3>
@@ -968,7 +978,7 @@
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);"  placeholder="مدة المحاضرة بالدقيقة" required dbcolumn="lect_duration" type="text" id="Text2"
+                                            <input onkeypress="return isNumber(event);"  placeholder="مدة المحاضرة بالدقيقة" required dbcolumn="lect_duration" type="text" id="lecture_duration"
                                                 class="form-control" runat="server" clientidmode="Static" />
                                           
                                    
@@ -1172,11 +1182,11 @@
                                 
                                         <div class="row form-group">
                                             <div class="col-md-3 col-sm-12">
-                                                <label for="Name" class="label-required">الملاحظات </label>
+                                                <label for="Name" >الملاحظات </label>
 
                                             </div>
                                             <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox SkinID="form-control" TextMode="multiline" required  class="form-control" dbColumn="notes" ClientIDMode="Static" ID="lecNotes" runat="server">
+                                                <asp:TextBox SkinID="form-control" TextMode="multiline"   class="form-control" dbColumn="notes" ClientIDMode="Static" ID="lecNotes" runat="server">
                                                 </asp:TextBox>
                                             </div>
                                         </div>
@@ -1326,11 +1336,11 @@
 
                                              <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name" class="label-required"> ملاحظات  </label>
+                                            <label for="Name" > ملاحظات  </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes" required  ClientIDMode="Static" ID="TextBox6" runat="server">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes"   ClientIDMode="Static" ID="TextBox6" runat="server">
                                             </asp:TextBox>
                                         </div>
                                     </div>
@@ -1372,11 +1382,11 @@
 
                                              <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name" class="label-required"> ملاحظات  </label>
+                                            <label for="Name" > ملاحظات  </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes" required  ClientIDMode="Static" ID="TextBox7" runat="server">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes"   ClientIDMode="Static" ID="TextBox7" runat="server">
                                             </asp:TextBox>
                                         </div>
                                     </div>
@@ -1510,7 +1520,7 @@
 
                                     <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name">تفاصيل الاختبار </label>
+                                            <label for="Name" class="label-required">تفاصيل الاختبار </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
@@ -1519,16 +1529,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row form-group">
-                                        <div class="col-md-3 col-sm-12">
-                                            <label for="Name">الملاحظات </label>
-
-                                        </div>
-                                        <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" required  TextMode="multiline" class="form-control" dbColumn="notes" ClientIDMode="Static" ID="notes" runat="server">
-                                            </asp:TextBox>
-                                        </div>
-                                    </div>
+                                   
 
                                     
                           
@@ -1611,7 +1612,7 @@
 
                                     <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name">تفاصيل الواجب </label>
+                                            <label for="Name" class="label-required">تفاصيل الواجب </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
@@ -1620,16 +1621,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="row form-group">
-                                        <div class="col-md-3 col-sm-12">
-                                            <label for="Name">الملاحظات </label>
-
-                                        </div>
-                                        <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" TextMode="multiline"  required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="notes2" runat="server">
-                                            </asp:TextBox>
-                                        </div>
-                                    </div>
+                                    
                                     
                                 </div>
 
@@ -1962,6 +1954,60 @@
                 </div>
             </div>
 
+
+            <div class="modal fade" id="StudentExamskAnswers" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">حلول الاختبارات   </h4>
+                            <div class="col-md-6" >
+                            <input  id="txtstudExam_Search" onkeyup="SearchStudent();" type="text" class="form-control" placeholder="بحث عن طالب" />
+                        </div>
+                        </div>
+                        <%--  جدول الغياب--%>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="publicDeg">
+                                <tr>
+                                    <th>الاسم </th>
+                                    <th> الحل</th>
+                                     <th> الدرجة  </th>
+
+
+
+                                </tr>
+                                   
+                                <tbody id="studentExamAnswers">
+                                 
+                              
+                               <%-- <tr>
+                                    <td>
+                                        <label> ahmed mohamed</label>
+                                    </td>
+                                    <td>
+               <input id="finaldegee" type="text"   />
+                                        55
+                                    </td>
+                                    <td>
+               <input id="activitydegee" type="text"  />
+                                        66
+                                    </td>
+                                </tr>--%>
+                                         </tbody>  
+
+
+                            </table>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="saveExamkDegree();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
              <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
 
             <div class="modal fade" id="add_Financial" tabindex="-1" role="dialog">
@@ -2005,7 +2051,7 @@
                                     </div>
 
                                     <div class="col-md-9 col-sm-12">
-                                        <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox8" runat="server">
+                                        <asp:TextBox SkinID="form-control" TextMode="multiline"  class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox8" runat="server">
                                         </asp:TextBox>
                                     </div>
                                 </div>

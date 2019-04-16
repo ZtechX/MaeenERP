@@ -240,6 +240,56 @@
                                             </div>
                                         </div>
 
+                                             <div class="row form-group">
+                                            <div class="col-md-3 col-sm-12">
+                                                 <label>حساب الفيس بوك</label>
+                                            </div>
+                                            <div class="col-md-9 col-sm-12">
+                                                <asp:TextBox   dbcolumn="facebook" type="text"  class="form-control"  ClientIDMode="Static" runat="server">
+                                                </asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                                 <div class="row form-group">
+                                            <div class="col-md-3 col-sm-12">
+                                                 <label>حساب تويتر</label>
+                                            </div>
+                                            <div class="col-md-9 col-sm-12">
+                                                <asp:TextBox   dbcolumn="twitter" type="text"  class="form-control"  ClientIDMode="Static" runat="server">
+                                                </asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                              <div class="row form-group">
+                                            <div class="col-md-3 col-sm-12">
+                                                 <label>حساب انستجرام</label>
+                                            </div>
+                                            <div class="col-md-9 col-sm-12">
+                                                <asp:TextBox   dbcolumn="instagram" type="text"  class="form-control"  ClientIDMode="Static" runat="server">
+                                                </asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                            <div class="row form-group">
+                                            <div class="col-md-3 col-sm-12">
+                                                 <label>حساب يوتيوب</label>
+                                            </div>
+                                            <div class="col-md-9 col-sm-12">
+                                                <asp:TextBox   dbcolumn="youtub" type="text"  class="form-control"  ClientIDMode="Static" runat="server">
+                                                </asp:TextBox>
+
+                                            </div>
+                                        </div>
+                                            <div class="row form-group">
+                                            <div class="col-md-3 col-sm-12">
+                                                 <label>حساب واتساب</label>
+                                            </div>
+                                            <div class="col-md-9 col-sm-12">
+                                                <asp:TextBox   dbcolumn="whatsapp" type="text"  class="form-control"  ClientIDMode="Static" runat="server">
+                                                </asp:TextBox>
+
+                                            </div>
+                                        </div>
                                         <div class="row form-group">
                                             <div class="col-md-3 col-sm-12">
                                                 <label>الرقم الضريبى</label>

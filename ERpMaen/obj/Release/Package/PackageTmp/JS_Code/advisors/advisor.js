@@ -15,10 +15,10 @@ $(function () {
 
     try {
         advisor.checkUser(function (val) {
-            debugger
+            
             if (val == "Superadmin") {
                 form_load();
-                getAdvisorCode();
+                //getAdvisorCode();
                 superAdmin = true;
             } else if (val != "0") {
                 $("#cmdAdd").closest("li").remove();
@@ -84,7 +84,7 @@ function save() {
                     if (superAdmin) {
                         drawDynamicTable();
                         cancel();
-                        getAdvisorCode();
+                       // getAdvisorCode();
                     } else {
                         advisor.Edit(PosId, function (val1) {
                             edit(val1);
@@ -145,7 +145,7 @@ function add() {
     try {
         prepareAdd();
         resetAll();
-        getAdvisorCode();
+       // getAdvisorCode();
     } catch (err) {
         alert(err);
     }
@@ -159,9 +159,9 @@ function setformforupdate() {
     }
 }
 
-function getAdvisorCode() {
-    advisor.getAdvisorCode(function (val) {
-        debugger
-        $("#code").val(Number(val) + 1);
-    });
-}
+//function getAdvisorCode() {
+//    advisor.getAdvisorCode(function (val) {
+//        debugger
+//        $("#code").val(Number(val) + 1);
+//    });
+//}

@@ -716,12 +716,12 @@
                                     <span id="lbUsername" runat="server" class="user_text"></span><i class="fa fa-caret-down"></i></a>
                                 <div class="toggle_box_User popover bottom dropdown-menu" style="z-index: -1;top:auto; ">
                                     <div class="arrow"></div>
-                                    <ul>
+                                    <ul style="direction:rtl;">
                                           <li style="padding:7px 0px;">
                                          <asp:LinkButton  ID="LinkButton1" runat="server" OnClick="UserPorfile"><i class="fa-user fa"></i><span> الصفحة الشخصية </span></asp:LinkButton>
                                     </li>
                                     <li  style="padding:7px 0px;">
-                                            <asp:LinkButton  ID="lbLogout" runat="server" OnClick="LogOut"><i class="fa-sign-out fa"></i><span>خروج</span></asp:LinkButton></li>
+                                            <asp:LinkButton  ID="lbLogout" runat="server" OnClick="LogOut"><i class="fa-sign-out fa"></i> <span>خروج</span> </asp:LinkButton></li>
                                   
                                     </ul>
                                 </div>

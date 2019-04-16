@@ -34,7 +34,7 @@ Public Class userPorfile
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveUser(ByVal UserId As String, ByVal basicDataJson As Object, ByVal researchAreaJsonList As List(Of Object), ByVal image As String) As String
+    Public Function SaveUser(ByVal UserId As String, ByVal basicDataJson As Object, ByVal image As String) As String
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
@@ -43,7 +43,6 @@ Public Class userPorfile
 
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
             dictBasicDataJson.Add("User_Image", image)
-            Researcher = dictBasicDataJson("Researcher")
             Dim dtcheckemailphone As DataTable
             If LoginInfo.getUserType() = "9" Then
                 dictBasicDataJson.Add("password_changed", 1)
@@ -59,20 +58,6 @@ Public Class userPorfile
                 Return "False|رقم الهوية او التلفون مُستخدم"
             End If
 
-            If success Then
-
-                If Researcher Then
-                    If save_researchArea(researchAreaJsonList, UserId) Then
-                        success = True
-                    Else
-                        success = False
-                    End If
-                Else
-                    DBManager.ExcuteQuery("delete from tblusers_area where  user_id ='" + UserId + "'")
-                    success = True
-                End If
-
-            End If
             If success Then
                 _sqltrans.Commit()
                 _sqlconn.Close()
@@ -123,71 +108,4 @@ Public Class userPorfile
 
 #End Region
 
-    <WebMethod(True)>
-    <System.Web.Script.Services.ScriptMethod()>
-    Public Function GeltPaces() As String()
-        Dim comp_id = LoginInfo.GetComp_id()
-        Dim Names As New List(Of String)(10)
-        Dim dt As New DataTable
-        dt = DBManager.Getdatatable("SELECT  id,description from tbllock_up where type='CTY' and comp_id=  " + comp_id)
-        If dt.Rows.Count <> 0 Then
-            Names.Add(PublicFunctions.ConvertDataTabletoString(dt))
-        Else
-            Names.Add("")
-        End If
-        dt = DBManager.Getdatatable("SELECT  id,description from tbllock_up where type='CEN' and comp_id=  " + comp_id)
-        If dt.Rows.Count <> 0 Then
-            Names.Add(PublicFunctions.ConvertDataTabletoString(dt))
-        Else
-            Names.Add("")
-        End If
-        dt = DBManager.Getdatatable("SELECT  id,description from tbllock_up where type='VILL' and comp_id=  " + comp_id)
-        If dt.Rows.Count <> 0 Then
-            Names.Add(PublicFunctions.ConvertDataTabletoString(dt))
-        Else
-            Names.Add("")
-        End If
-        dt = DBManager.Getdatatable("SELECT  id,description from tbllock_up where type='BIO' and comp_id=  " + comp_id)
-        If dt.Rows.Count <> 0 Then
-            Names.Add(PublicFunctions.ConvertDataTabletoString(dt))
-        Else
-            Names.Add("")
-        End If
-        Return Names.ToArray
-    End Function
-
-
-#Region "save_researchArea"
-    ''' <summary>"
-    ''' Save About images into db 
-    ''' </summary>
-    Private Function save_researchArea(ByVal researchAreaJsonList As List(Of Object), ByVal usertId As String) As Boolean
-        Try
-            DBManager.ExcuteQuery("delete from tblusers_area where  user_id ='" + usertId + "'")
-
-            For Each areaJSON As Object In researchAreaJsonList
-                Dim dictarea As Dictionary(Of String, Object) = areaJSON
-                dictarea.Add("user_id", usertId)
-                If Not PublicFunctions.TransUpdateInsert(dictarea, "tblusers_area", "", _sqlconn, _sqltrans) Then
-                    Return False
-                End If
-            Next
-            Return True
-        Catch ex As Exception
-            Return False
-        End Try
-    End Function
-
-#End Region
-
-    <WebMethod(True)> _
-<System.Web.Script.Services.ScriptMethod()>
-    Public Function getRelatedTo(ByVal relatedto As String) As String
-        Dim dt As DataTable = New DataTable()
-        dt = DBManager.Getdatatable("select id,type from tbllock_up where RelatedId =" + relatedto)
-        If dt.Rows.Count <> 0 Then
-            Return PublicFunctions.ConvertDataTabletoString(dt)
-        End If
-        Return ""
-    End Function
 End Class

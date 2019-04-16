@@ -85,7 +85,7 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function Savenote(ByVal id As String, ByVal StudentId As String, ByVal CourseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function Savenote(ByVal id As String, ByVal StudentId As String, ByVal code As String, ByVal CourseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -102,6 +102,29 @@ Public Class courseDetailsCls
 
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_students_notes", id, _sqlconn, _sqltrans) Then
+
+                Dim dtstudents As DataTable
+
+                dtstudents = DBManager.Getdatatable("select student_id from acd_courses_students where   type=1 and approved=1 and deleted=0 and course_id=" + CourseId)
+
+                For Each item As DataRow In dtstudents.Rows
+                    Dim dictNotification As New Dictionary(Of String, Object)
+
+                    dictNotification.Add("RefCode", CourseId)
+                    dictNotification.Add("NotTitle", "  ملاحظة جديدة ")
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", item("student_id"))
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", "ملاحظة")
+                    dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                    If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                        success = True
+                    Else
+                        success = False
+                    End If
+
+                Next
                 If Not PublicFunctions.TransUsers_logs("3193", "acd_students_notes", "ادخال", _sqlconn, _sqltrans) Then
                     success = False
                 Else
@@ -142,7 +165,7 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function addStudentdegree(ByVal courseid As String, ByVal studentDegrees As Object) As Boolean
+    Public Function addStudentdegree(ByVal courseid As String, ByVal code As String, ByVal studentDegrees As Object) As Boolean
         Try
 
             _sqlconn.Open()
@@ -163,6 +186,32 @@ Public Class courseDetailsCls
                 dictBasicDataJson.Add("type", "1")
 
                 If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_student_degrees", id, _sqlconn, _sqltrans) Then
+
+
+                    Dim dictNotification As New Dictionary(Of String, Object)
+
+                    dictNotification.Add("RefCode", courseid)
+                    dictNotification.Add("NotTitle", "  درجات الدورة")
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", item("id"))
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", " الدرجة النهائية" + dictBasicDataJson("final_degree") + " درجة النشاط" + " " + dictBasicDataJson("activity_degree"))
+                    dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                    If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+
+                        If Not PublicFunctions.TransUsers_logs("3193", "acd_student_degrees", "ادخال", _sqlconn, _sqltrans) Then
+                            success = False
+                        Else
+                            success = True
+                        End If
+
+                        success = True
+                    Else
+                        success = False
+                    End If
+
+
                     If Not PublicFunctions.TransUsers_logs("3193", "acd_student_degrees", "ادخال", _sqlconn, _sqltrans) Then
                         success = False
                     Else
@@ -319,7 +368,7 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function sendMesg(ByVal id As String, ByVal CourseId As String, ByVal date_m As String, ByVal date_hj As String, ByVal msgTime As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function sendMesg(ByVal id As String, ByVal code As String, ByVal CourseId As String, ByVal date_m As String, ByVal date_hj As String, ByVal msgTime As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -341,12 +390,6 @@ Public Class courseDetailsCls
 
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_contact_trainer", id, _sqlconn, _sqltrans) Then
-                If Not PublicFunctions.TransUsers_logs("3193", "acd_contact_trainer", "ادخال", _sqlconn, _sqltrans) Then
-                    success = False
-                Else
-                    success = True
-                End If
-                success = True
 
                 Dim assignTo = ""
                 Dim dt As DataTable
@@ -355,23 +398,39 @@ Public Class courseDetailsCls
                 If dt.Rows.Count <> 0 Then
                     assignTo = dt.Rows(0)(0).ToString
                 End If
-                If assignTo <> "" Then
+
+
+                Dim username = ""
+                    Dim dtuser As DataTable
+
+                    dtuser = DBManager.Getdatatable("Select full_name from tblUsers where id=" + LoginInfo.GetUser__Id())
+                    If dtuser.Rows.Count <> 0 Then
+                        username = dtuser.Rows(0)(0).ToString
+                    End If
 
                     Dim dictBasicDataJson2 As New Dictionary(Of String, Object)
 
-                    dictBasicDataJson2.Add("RefCode", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
-                    dictBasicDataJson2.Add("NotTitle", "تواصل مع المدرب")
-                    dictBasicDataJson2.Add("Date", dictBasicDataJson("date_m"))
-                    dictBasicDataJson2.Add("AssignedTo", assignTo)
-                    dictBasicDataJson2.Add("Remarks", "رسائل من المستخدمين للمدرب")
-                    dictBasicDataJson2.Add("CreatedBy", LoginInfo.GetUser__Id())
-                    dictBasicDataJson2.Add("FormUrl", "Acadmies_module/courseDetails?course_id=" + CourseId)
-                    If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson2, "tblNotifications", "", _sqlconn, _sqltrans) Then
-                        _sqltrans.Rollback()
-                        _sqlconn.Close()
-                        Return False
+                        dictBasicDataJson2.Add("RefCode", CourseId)
+                dictBasicDataJson2.Add("NotTitle", "رسالة من" + "  " + username)
+                dictBasicDataJson2.Add("Date", dictBasicDataJson("date_m"))
+                dictBasicDataJson2.Add("AssignedTo", assignTo)
+                dictBasicDataJson2.Add("Remarks", dictBasicDataJson("message"))
+                dictBasicDataJson2.Add("CreatedBy", LoginInfo.GetUser__Id())
+                        dictBasicDataJson2.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+
+
+                If PublicFunctions.TransUpdateInsert(dictBasicDataJson2, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+
+                    If Not PublicFunctions.TransUsers_logs("3193", "acd_contact_trainer", "ادخال", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
                     End If
                 End If
+                success = True
+
+
                 _sqltrans.Commit()
                 _sqlconn.Close()
                 Return True
@@ -401,13 +460,15 @@ Public Class courseDetailsCls
 #End Region
 
 
+
+
 #Region "Save"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function sendMesgtoAdmin(ByVal id As String, ByVal CourseId As String, ByVal date_m As String, ByVal date_hj As String, ByVal msgTime As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function sendMesgtoAdmin(ByVal id As String, ByVal code As String, ByVal CourseId As String, ByVal date_m As String, ByVal date_hj As String, ByVal msgTime As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -425,42 +486,51 @@ Public Class courseDetailsCls
             dictBasicDataJson.Add("message_time", msgTime)
             dictBasicDataJson.Add("user_form", LoginInfo.GetUser__Id())
 
+            '//////////////////////////
 
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_contact_admin", id, _sqlconn, _sqltrans) Then
-                If Not PublicFunctions.TransUsers_logs("3193", "acd_contact_admin", "ادخال", _sqlconn, _sqltrans) Then
-                    success = False
-                Else
-                    success = True
-                End If
-                success = True
 
                 Dim assignTo = ""
                 Dim dt As DataTable
 
-                Dim comp_id = LoginInfo.GetComp_id()
-
-                dt = DBManager.Getdatatable("Select id from tblUsers where User_Type=7 And comp_id=" + comp_id)
+                dt = DBManager.Getdatatable("select acd_acadmies.admin ,tblUsers.full_name from acd_acadmies join tblUsers on acd_acadmies.admin=tblUsers.id where acd_acadmies.comp_id= " + LoginInfo.GetComp_id())
                 If dt.Rows.Count <> 0 Then
                     assignTo = dt.Rows(0)(0).ToString
                 End If
-                If assignTo <> "" Then
 
-                    Dim dictBasicDataJson2 As New Dictionary(Of String, Object)
 
-                    dictBasicDataJson2.Add("RefCode", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
-                    dictBasicDataJson2.Add("NotTitle", "تواصل مع مدير الاكاديمية")
-                    dictBasicDataJson2.Add("Date", dictBasicDataJson("date_m"))
-                    dictBasicDataJson2.Add("AssignedTo", assignTo)
-                    dictBasicDataJson2.Add("Remarks", "رسائل من المستخدمين لمدير الاكاديمية")
-                    dictBasicDataJson2.Add("CreatedBy", LoginInfo.GetUser__Id())
-                    dictBasicDataJson2.Add("FormUrl", "Acadmies_module/courseDetails?course_id=" + CourseId)
-                    If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson2, "tblNotifications", "", _sqlconn, _sqltrans) Then
-                        _sqltrans.Rollback()
-                        _sqlconn.Close()
-                        Return False
+                Dim username = ""
+                Dim dtuser As DataTable
+
+                dtuser = DBManager.Getdatatable("Select full_name from tblUsers where id=" + LoginInfo.GetUser__Id())
+                If dtuser.Rows.Count <> 0 Then
+                    username = dtuser.Rows(0)(0).ToString
+                End If
+
+                Dim dictBasicDataJson2 As New Dictionary(Of String, Object)
+
+                dictBasicDataJson2.Add("RefCode", CourseId)
+                dictBasicDataJson2.Add("NotTitle", "رسالة من" + "  " + username)
+                dictBasicDataJson2.Add("Date", dictBasicDataJson("date_m"))
+                dictBasicDataJson2.Add("AssignedTo", assignTo)
+                dictBasicDataJson2.Add("Remarks", dictBasicDataJson("message"))
+                dictBasicDataJson2.Add("CreatedBy", LoginInfo.GetUser__Id())
+                dictBasicDataJson2.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+
+
+                If PublicFunctions.TransUpdateInsert(dictBasicDataJson2, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+
+                    If Not PublicFunctions.TransUsers_logs("3193", "acd_contact_admin", "ادخال", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
                     End If
                 End If
+                success = True
+
+
                 _sqltrans.Commit()
                 _sqlconn.Close()
                 Return True
@@ -489,6 +559,102 @@ Public Class courseDetailsCls
     End Function
 #End Region
 
+    '#Region "Save"
+    '    ''' <summary>
+    '    ''' Save  Type
+    '    ''' </summary>
+    '    <WebMethod(True)>
+    '    <System.Web.Script.Services.ScriptMethod()>
+    '    Public Function sendMesgtoAdmin(ByVal id As String, ByVal code As String, ByVal CourseId As String, ByVal date_m As String, ByVal date_hj As String, ByVal msgTime As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    '        Try
+
+    '            _sqlconn.Open()
+    '            _sqltrans = _sqlconn.BeginTransaction
+    '            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+
+
+    '            Dim dt_user As DataTable
+
+    '            dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+    '            dictBasicDataJson.Add("course_id", CourseId)
+    '            dictBasicDataJson.Add("date_hj", date_hj)
+    '            dictBasicDataJson.Add("date_m", date_m)
+    '            dictBasicDataJson.Add("message_time", msgTime)
+    '            dictBasicDataJson.Add("user_form", LoginInfo.GetUser__Id())
+
+
+
+    '            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_contact_admin", id, _sqlconn, _sqltrans) Then
+
+
+    '                Dim assignTo = ""
+    '                Dim dt As DataTable
+
+    '                dt = DBManager.Getdatatable("select acd_acadmies.admin ,tblUsers.full_name from acd_acadmies join tblUsers on acd_acadmies.admin=tblUsers.id where acd_acadmies.comp_id= " + LoginInfo.GetComp_id())
+    '                If dt.Rows.Count <> 0 Then
+    '                    assignTo = dt.Rows(0)(0).ToString
+    '                End If
+
+
+    '                Dim username = ""
+    '                Dim dtuser As DataTable
+
+    '                dtuser = DBManager.Getdatatable("Select full_name from tblUsers where id=" + LoginInfo.GetUser__Id())
+    '                If dtuser.Rows.Count <> 0 Then
+    '                    username = dtuser.Rows(0)(0).ToString
+    '                End If
+
+    '                Dim dictBasicDataJson2 As New Dictionary(Of String, Object)
+
+    '                dictBasicDataJson2.Add("RefCode", CourseId)
+    '                dictBasicDataJson2.Add("NotTitle", "تواصل مع الادارة")
+    '                dictBasicDataJson2.Add("Date", dictBasicDataJson("date_m"))
+    '                dictBasicDataJson2.Add("AssignedTo", assignTo)
+    '                dictBasicDataJson2.Add("Remarks", username)
+    '                dictBasicDataJson2.Add("CreatedBy", LoginInfo.GetUser__Id())
+    '                dictBasicDataJson2.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+
+
+    '                If PublicFunctions.TransUpdateInsert(dictBasicDataJson2, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+    '                    If Not PublicFunctions.TransUsers_logs("3193", "acd_contact_admin", "ادخال", _sqlconn, _sqltrans) Then
+    '                        success = False
+    '                    Else
+    '                        success = True
+    '                    End If
+    '                End If
+    '                success = True
+
+
+    '                _sqltrans.Commit()
+    '                _sqlconn.Close()
+    '                Return True
+
+    '            Else
+    '                success = False
+    '            End If
+    '            If success Then
+
+    '                _sqltrans.Commit()
+    '                _sqlconn.Close()
+    '                Return True
+    '            Else
+    '                _sqltrans.Rollback()
+    '                _sqlconn.Close()
+    '                Return False
+    '            End If
+
+
+
+    '        Catch ex As Exception
+    '            _sqltrans.Rollback()
+    '            _sqlconn.Close()
+    '            Return False
+    '        End Try
+    '    End Function
+    '#End Region
+
 
 
 #Region "Save"
@@ -497,7 +663,7 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveDegree(ByVal id As String, ByVal StudentId As String, ByVal CourseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function SaveDegree(ByVal id As String, ByVal code As String, ByVal StudentId As String, ByVal CourseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -508,21 +674,41 @@ Public Class courseDetailsCls
             dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
             'dictBasicDataJson.Add("userID", (Context.Request.Cookies("UserInfo").ToString()))
+            Dim dtd As DataTable
+
+            dtd = DBManager.Getdatatable("delete from acd_student_degrees where type=1 and course_id=" + CourseId + " and student_id=" + StudentId)
 
             dictBasicDataJson.Add("course_id", CourseId)
             dictBasicDataJson.Add("student_id", StudentId)
+            dictBasicDataJson.Add("type", 1)
 
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_student_degrees", id, _sqlconn, _sqltrans) Then
 
-                If Not PublicFunctions.TransUsers_logs("3193", "acd_student_degrees", "ادخال", _sqlconn, _sqltrans) Then
-                    success = False
-                Else
+
+
+                Dim dictNotification As New Dictionary(Of String, Object)
+
+                dictNotification.Add("RefCode", CourseId)
+                dictNotification.Add("NotTitle", "  درجات الدورة")
+                dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                dictNotification.Add("AssignedTo", StudentId)
+                dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                dictNotification.Add("Remarks", " الدرجة النهائية" + dictBasicDataJson("final_degree") + " درجة النشاط" + " " + dictBasicDataJson("activity_degree"))
+                dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+
+                    If Not PublicFunctions.TransUsers_logs("3193", "acd_student_degrees", "ادخال", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
+
                     success = True
+                Else
+                    success = False
                 End If
-                success = True
-            Else
-                success = False
 
             End If
             If success Then
@@ -605,13 +791,13 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveStudent(ByVal courseid As String, ByVal students_action As Object) As Boolean
+    Public Function SaveStudent(ByVal courseid As String, ByVal code As String, ByVal students_action As Object) As Boolean
         Try
 
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dt As DataTable
-            dt = DBManager.Getdatatable("delete from acd_courses_students where checked=0  and type=1 And course_id=" + courseid)
+            dt = DBManager.Getdatatable("delete from acd_courses_students where checked=0  And type=1 And course_id=" + courseid)
 
             Dim id = ""
             Dim success2 As Boolean = True
@@ -628,15 +814,40 @@ Public Class courseDetailsCls
                 dictBasicDataJson.Add("approved", item("action_Student"))
 
                 If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
-                    If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "ادخال", _sqlconn, _sqltrans) Then
-                        success = False
-                    Else
-                        success = True
-                    End If
-                    success = True
-                Else
-                    success = False
 
+                    Dim dictNotification As New Dictionary(Of String, Object)
+                    Dim action = item("action_Student")
+                    Dim remak = ""
+                    If action = "0" Then
+                        remak = "رفض"
+                    Else
+                        remak = "قبول"
+                    End If
+                    Dim frmURL = ""
+                    If action = "1" Then
+                        frmURL = "Acadmies_module/courseDetails?code=" + code
+                    Else
+                        frmURL = "Acadmies_module/course_register?code=" + code
+                    End If
+
+                    dictNotification.Add("RefCode", courseid)
+                    dictNotification.Add("NotTitle", "  نتيجة التقديم")
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", item("id"))
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", remak)
+                    dictNotification.Add("FormUrl", frmURL)
+                    If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                        If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "ادخال", _sqlconn, _sqltrans) Then
+                            success = False
+                        Else
+                            success = True
+                        End If
+                        success = True
+                    Else
+                        success = False
+                    End If
                 End If
                 If success Then
 
@@ -737,7 +948,7 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveExam(ByVal id As String, ByVal lectureId As String, ByVal CourseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function SaveExam(ByVal id As String, ByVal lectureId As String, ByVal code As String, ByVal CourseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -755,6 +966,30 @@ Public Class courseDetailsCls
 
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_exams", id, _sqlconn, _sqltrans) Then
+
+                Dim dtstudents As DataTable
+
+                dtstudents = DBManager.Getdatatable("select student_id from acd_courses_students where   type=1 And approved=1 And deleted=0 And course_id=" + CourseId)
+
+                For Each item As DataRow In dtstudents.Rows
+                    Dim dictNotification As New Dictionary(Of String, Object)
+
+                    dictNotification.Add("RefCode", CourseId)
+                    dictNotification.Add("NotTitle", " اختبار جديد ")
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", item("student_id"))
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", dictBasicDataJson("title"))
+                    dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                    If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                        success = True
+                    Else
+                        success = False
+                    End If
+
+                Next
+
                 If Not PublicFunctions.TransUsers_logs("3193", "acd_exams", "ادخال", _sqlconn, _sqltrans) Then
                     success = False
                 Else
@@ -809,6 +1044,7 @@ Public Class courseDetailsCls
             dictBasicDataJson.Add("date_m", fin_date_m)
             dictBasicDataJson.Add("date_hj", fin_date_hj)
             dictBasicDataJson.Add("type", "1")
+            dictBasicDataJson.Add("approved", "3")
             If LoginInfo.getUserType = 8 Then
 
                 If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_payments", id, _sqlconn, _sqltrans) Then
@@ -849,7 +1085,7 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveHomeWork(ByVal id As String, ByVal lectureId As String, ByVal CourseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function SaveHomeWork(ByVal id As String, ByVal lectureId As String, ByVal code As String, ByVal CourseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -867,12 +1103,36 @@ Public Class courseDetailsCls
 
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_homeworks", id, _sqlconn, _sqltrans) Then
+
+                Dim dtstudents As DataTable
+
+                dtstudents = DBManager.Getdatatable("select student_id from acd_courses_students where   type=1 And approved=1 And deleted=0 And course_id=" + CourseId)
+
+                For Each item As DataRow In dtstudents.Rows
+                    Dim dictNotification As New Dictionary(Of String, Object)
+
+                    dictNotification.Add("RefCode", CourseId)
+                    dictNotification.Add("NotTitle", "واجب جديد ")
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", item("student_id"))
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", dictBasicDataJson("title"))
+                    dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                    If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                        success = True
+                    Else
+                        success = False
+                    End If
+
+                Next
                 If Not PublicFunctions.TransUsers_logs("3193", "acd_homeworks", "ادخال", _sqlconn, _sqltrans) Then
                     success = False
                 Else
                     success = True
                 End If
                 success = True
+
             Else
                 success = False
 
@@ -882,11 +1142,13 @@ Public Class courseDetailsCls
                 _sqltrans.Commit()
                 _sqlconn.Close()
                 Return True
+
             Else
                 _sqltrans.Rollback()
                 _sqlconn.Close()
                 Return False
             End If
+
 
         Catch ex As Exception
             _sqltrans.Rollback()
@@ -956,7 +1218,7 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveActivit(ByVal id As String, ByVal CourseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function SaveActivit(ByVal id As String, ByVal code As String, ByVal CourseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -972,6 +1234,28 @@ Public Class courseDetailsCls
 
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_students_activity", id, _sqlconn, _sqltrans) Then
+                Dim dtstudents As DataTable
+
+                dtstudents = DBManager.Getdatatable("select student_id from acd_courses_students where   type=1 And approved=1 And deleted=0 And course_id=" + CourseId)
+
+                For Each item As DataRow In dtstudents.Rows
+                    Dim dictNotification As New Dictionary(Of String, Object)
+
+                    dictNotification.Add("RefCode", CourseId)
+                    dictNotification.Add("NotTitle", "   نشاط جديد ")
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", item("student_id"))
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", "انشطة")
+                    dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                    If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                        success = True
+                    Else
+                        success = False
+                    End If
+
+                Next
                 If Not PublicFunctions.TransUsers_logs("3193", "acd_students_activity", "ادخال", _sqlconn, _sqltrans) Then
                     success = False
                 Else
@@ -1058,7 +1342,7 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function saveHWanswer(ByVal id As String, ByVal homeworkId As String, ByVal courseID As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function saveHWanswer(ByVal id As String, ByVal homeworkId As String, ByVal code As String, ByVal courseID As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -1066,7 +1350,7 @@ Public Class courseDetailsCls
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
             Dim dt_user As DataTable
             Dim dt As DataTable
-            dt = DBManager.Getdatatable("delete from acd_homework_delivery where  dvtype =1 and type=1 and homework_id=" + homeworkId + " and student_id=" + LoginInfo.GetUser__Id() + " and course_id=" + courseID)
+            dt = DBManager.Getdatatable("delete from acd_homework_delivery where  dvtype =1 And type=1 And homework_id=" + homeworkId + " And student_id=" + LoginInfo.GetUser__Id() + " And course_id=" + courseID)
 
             dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
@@ -1079,7 +1363,32 @@ Public Class courseDetailsCls
 
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_homework_delivery", id, _sqlconn, _sqltrans) Then
-                If Not PublicFunctions.TransUsers_logs("3193", "acd_homework_delivery", "ادخال", _sqlconn, _sqltrans) Then
+                Dim trainer_id As DataTable
+
+                trainer_id = DBManager.Getdatatable("select trainer_id from acd_courses where id=" + courseID)
+                Dim hmwname As DataTable
+                hmwname = DBManager.Getdatatable("select title from acd_homeworks where id=" + homeworkId + "And course_id=" + courseID)
+                Dim homeworktitle = hmwname.Rows(0)(0).ToString()
+                Dim assighnedto = trainer_id.Rows(0)(0).ToString()
+                Dim dictNotification As New Dictionary(Of String, Object)
+
+                    dictNotification.Add("RefCode", courseID)
+                    dictNotification.Add("NotTitle", "   حل الواجب  ")
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                dictNotification.Add("AssignedTo", assighnedto)
+                dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", homeworktitle)
+                    dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                    If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                        success = True
+                    Else
+                        success = False
+                    End If
+
+
+
+                    If Not PublicFunctions.TransUsers_logs("3193", "acd_homework_delivery", "ادخال", _sqlconn, _sqltrans) Then
                     success = False
                 Else
                     success = True
@@ -1115,7 +1424,7 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function saveExamanswer(ByVal id As String, ByVal examId As String, ByVal courseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function saveExamanswer(ByVal id As String, ByVal code As String, ByVal examId As String, ByVal courseId As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -1132,28 +1441,49 @@ Public Class courseDetailsCls
             dictBasicDataJson.Add("student_id", LoginInfo.GetUser__Id())
 
 
-
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_homework_delivery", id, _sqlconn, _sqltrans) Then
-                If Not PublicFunctions.TransUsers_logs("3193", "acd_homework_delivery", "ادخال", _sqlconn, _sqltrans) Then
-                    success = False
-                Else
+                    Dim trainer_id As DataTable
+
+                    trainer_id = DBManager.Getdatatable("select trainer_id from acd_courses where id=" + courseId)
+                    Dim hmwname As DataTable
+                hmwname = DBManager.Getdatatable("select title from acd_exams where id=" + examId + "And course_id=" + courseId)
+                Dim homeworktitle = hmwname.Rows(0)(0).ToString()
+                    Dim assighnedto = trainer_id.Rows(0)(0).ToString()
+                    Dim dictNotification As New Dictionary(Of String, Object)
+
+                    dictNotification.Add("RefCode", courseId)
+                dictNotification.Add("NotTitle", "   حل الاختبار  ")
+                dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", assighnedto)
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", homeworktitle)
+                    dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                    If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                        success = True
+                    Else
+                        success = False
+                    End If
+                    If Not PublicFunctions.TransUsers_logs("3193", "acd_homework_delivery", "ادخال", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
                     success = True
+                Else
+                    success = False
+
                 End If
-                success = True
-            Else
-                success = False
+                If success Then
 
-            End If
-            If success Then
-
-                _sqltrans.Commit()
-                _sqlconn.Close()
-                Return True
-            Else
-                _sqltrans.Rollback()
-                _sqlconn.Close()
-                Return False
-            End If
+                    _sqltrans.Commit()
+                    _sqlconn.Close()
+                    Return True
+                Else
+                    _sqltrans.Rollback()
+                    _sqlconn.Close()
+                    Return False
+                End If
 
         Catch ex As Exception
             _sqltrans.Rollback()
@@ -1222,24 +1552,20 @@ Public Class courseDetailsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveComment(ByVal id As String, ByVal CourseId As String, ByVal date_m As String, ByVal date_hj As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function SaveComment(ByVal id As String, ByVal CourseId As String, ByVal date_m As String, ByVal date_hj As String, ByVal time As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-            Dim dt_user As DataTable
 
-            'Dim time_m = h + "" + t
-            'Dim date_m = PublicFunctions.ConvertDatetoNumber(Date.Now.ToShortDateString.ToString)
-
-            'Dim comp_id = LoginInfo.GetComp_id()
             Dim user_id = LoginInfo.GetUser__Id()
 
 
             dictBasicDataJson.Add("user_id", user_id)
             dictBasicDataJson.Add("date_m", date_m)
             dictBasicDataJson.Add("date_hj", date_hj)
+            dictBasicDataJson.Add("time", time)
 
             dictBasicDataJson.Add("course_id", CourseId)
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_course_comments", id, _sqlconn, _sqltrans) Then
@@ -1447,7 +1773,7 @@ Public Class courseDetailsCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_course_comments.user_id,tblUsers.full_name as 'username' , acd_course_comments.comment,acd_course_comments.date_hj from acd_course_comments join tblUsers on acd_course_comments.user_id=tblUsers.id where acd_course_comments.course_id=" + CourseID)
+            dt = DBManager.Getdatatable("select acd_course_comments.user_id,tblUsers.full_name as 'username', tblUsers.User_Image as 'image' , acd_course_comments.comment,acd_course_comments.date_hj ,acd_course_comments.time from acd_course_comments join tblUsers on acd_course_comments.user_id=tblUsers.id where acd_course_comments.course_id=" + CourseID)
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
                     Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
@@ -1720,10 +2046,6 @@ Public Class courseDetailsCls
 
 #End Region
 
-
-
-
-
 #Region "get_data"
     ''' <summary>
     ''' Save  Type
@@ -1864,6 +2186,51 @@ Public Class courseDetailsCls
 #End Region
 
 
+#Region "get_homework table"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_courseDegreesTable(ByVal course_id As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            If LoginInfo.getUserType = 8 Then
+                dt = DBManager.Getdatatable("select final_degree ,activity_degree from acd_student_degrees where type=1 and course_id=" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+
+            End If
+
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+    'get_SyudentTable
+    'get_Exams
+
+#End Region
+
 #Region "get_data"
     ''' <summary>
     ''' Save  Type
@@ -1905,6 +2272,201 @@ Public Class courseDetailsCls
 
 
 #End Region
+
+#Region "get_StudentFinanceAdmin"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_StudentFinanceAdmin(ByVal course_id As String) As String()
+        Dim dt_user As DataTable
+        dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select acd_payments.id ,acd_payments.approved ,acd_payments.amount,acd_payments.image,acd_payments.student_id ,tblUsers.full_name as 'name' from acd_payments join tblUsers on tblUsers.id=acd_payments.student_id  where course_id=" + course_id)
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+
+#End Region
+
+#Region "get_StudentFinance"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_StudentFinance(ByVal course_id As String) As String()
+        Dim dt_user As DataTable
+        dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable(" select amount , (select Sum(amount)  from acd_payments where  type=1 and approved=1 and course_id=" + course_id + " and student_id=" + LoginInfo.GetUser__Id() + " group by course_id, student_id) as 'total'  , approved from acd_payments where type=1 and course_id=" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+
+
+#End Region
+
+#Region "approv_finance"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function approv_finance(ByVal studentId As String, ByVal courseID As String, ByVal code As String, ByVal payId As String) As String()
+        Dim Names As New List(Of String)(10)
+        Try
+
+            If DBManager.ExcuteQuery("UPDATE  acd_payments  set  approved=1 where  id=" + payId + " and student_id=" + studentId + " and course_id=" + courseID) <> -1 Then
+
+
+                Dim dictNotification As New Dictionary(Of String, Object)
+
+                    dictNotification.Add("RefCode", courseID)
+                dictNotification.Add("NotTitle", "  تاكيد المبلغ ")
+                dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", studentId)
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", "تاكيد المبلغ المرسل")
+                    dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                    If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                        success = True
+                    Else
+                        success = False
+                    End If
+
+                If Not PublicFunctions.TransUsers_logs("3193", "acd_payments", "حذف", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+                Names.Add("1")
+                Names.Add("تم الحفظ بنجاح!")
+            Else
+                Names.Add("2")
+                Names.Add("لم يتم التاكيد")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+            Names.Add("لا يمكن الحذف!")
+            Return Names.ToArray
+        End Try
+    End Function
+#End Region
+
+
+#Region "refuse_finance"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function refuse_finance(ByVal studentId As String, ByVal courseID As String, ByVal code As String, ByVal payId As String) As String()
+        Dim Names As New List(Of String)(10)
+        Try
+
+            If DBManager.ExcuteQuery("UPDATE  acd_payments  set  approved=2 where  id=" + payId + " and student_id=" + studentId + " and course_id=" + courseID) <> -1 Then
+
+
+                Dim dictNotification As New Dictionary(Of String, Object)
+
+                dictNotification.Add("RefCode", courseID)
+                dictNotification.Add("NotTitle", " رفض المبلغ ")
+                dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                dictNotification.Add("AssignedTo", studentId)
+                dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                dictNotification.Add("Remarks", "  رفض المبلغ المرسل ")
+                dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                    success = True
+                Else
+                    success = False
+                End If
+
+                If Not PublicFunctions.TransUsers_logs("3193", "acd_payments", "حذف", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+                Names.Add("1")
+                Names.Add("تم الحفظ بنجاح!")
+            Else
+                Names.Add("2")
+                Names.Add("لم يتم التاكيد")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+            Names.Add("لا يمكن التاكيد!")
+            Return Names.ToArray
+        End Try
+    End Function
+#End Region
+
 #Region "get_data"
     ''' <summary>
     ''' Save  Type
@@ -2118,6 +2680,46 @@ Public Class courseDetailsCls
 #End Region
     '
 
+#Region "get_data"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_StudentFnance(ByVal course_id As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select amount , approved from acd_payments where type=1 and course_id=" + course_id + "and student_id=" + LoginInfo.GetUser__Id())
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+
+
+#End Region
+
 
 #Region "get_data"
     ''' <summary>
@@ -2294,7 +2896,7 @@ Public Class courseDetailsCls
         Dim editItemId = ""
         Dim dt As DataTable
 
-        dt = DBManager.Getdatatable("select id from acd_student_degrees where course_id=" + courseID + "and student_id=" + studID)
+        dt = DBManager.Getdatatable("select id from acd_student_degrees where type=1 and  course_id=" + courseID + "and student_id=" + studID)
 
         editItemId = dt.Rows(0)(0).ToString
         Dim Names As New List(Of String)(10)
@@ -2624,6 +3226,43 @@ Public Class courseDetailsCls
             Return Names.ToArray
         End Try
     End Function
+#End Region
+
+#Region "get_data"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function checkDate(ByVal courseId As String, ByVal currentDate As String) As String()
+        'Dim dt_user As DataTable
+        'dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dtEndDate As DataTable
+
+            dtEndDate = DBManager.Getdatatable("select end_dt_m from acd_courses where id=" + courseId + "and comp_id=" + LoginInfo.GetComp_id())
+            Dim end_date = dtEndDate.Rows(0)(0).ToString()
+            Dim endDate1 = PublicFunctions.ConvertDatetoNumber(end_date)
+            Dim current = PublicFunctions.ConvertDatetoNumber(currentDate)
+            If endDate1 > current Then
+                Names.Add("1")
+            Else
+                Names.Add("0")
+
+            End If
+
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+
+            Return Names.ToArray
+        End Try
+    End Function
+
+
+
 #End Region
 
 

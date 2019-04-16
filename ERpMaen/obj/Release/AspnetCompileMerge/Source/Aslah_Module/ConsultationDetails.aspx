@@ -48,6 +48,12 @@
                                      <i class="fa fa-plus"></i>
                                            إنشاء استشارة 
                                             </asp:LinkButton>
+                         <asp:LinkButton OnClientClick="GetMeasurementSatisfaction(); return false;" ID="LinkButton3" runat="server"
+                                                SkinID="btn-top" CausesValidation="false">
+                                     <i class="fa fa-print"></i>
+                                           نموذج قياس رضا المستفيد 
+                                            </asp:LinkButton>
+                        
                      </div>
                         
                         <uc1:PnlConfirm runat="server" ID="PnlConfirm" />
@@ -68,16 +74,23 @@
     <div class="modal-content" style="overflow-y:auto ;height:-webkit-fill-available;overflow-x:hidden;" >
       <div class="modal-header">
         <button type="button" class="close" onclick="CloseConslutModal()"> &times;</button>
-        <label class="modal-title">الاستشارة</label>
-          
+      
+          <label class="modal-title">الاستشارة</label>
+       
                                             <asp:LinkButton OnClientClick="save(); return false;" ID="LinkButton1" runat="server" style="float:right;"
                                                 SkinID="btn-top" CausesValidation="false">
                                      <i class="fa fa-plus"></i>
                                            حفظ 
                                             </asp:LinkButton>
+                              
       </div>
       <div class="modal-body row" style="padding-top:0px;    direction: rtl;">
-       <div id="divForm" class="newformstyle">
+        <div id="DivRep" class="row" style="margin-top:10px;">
+                              <button class="btn btn-primary pull-left" type="button" onclick="getStudyCase()"> <i class="fa fa-print"></i> دراسة حالة  </button>
+              <button class="btn btn-primary pull-right" type="button" onclick="getReport()"> <i class="fa fa-print"></i> تقرير  </button>
+             
+                         </div>
+          <div id="divForm" class="newformstyle">
                        
            <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="vgroup" />
                         <asp:Label ID="consult_id" ClientIDMode="Static" Style="display: none" runat="server" dbColumn="id"></asp:Label>
@@ -341,7 +354,7 @@
                                         </div>
 
                                          <div class="col-md-9 col-sm-12">
-                                            <input id="tel" onkeypress="return isMobilePhoneFax(event);" dbcolumn="tel2" runat="server" type="text"  class="form-control" />
+                                            <input id="tel" onkeypress="return cust_chkNumber(event,this,10);" dbcolumn="tel2" runat="server" type="text"  class="form-control" />
                                             <asp:RequiredFieldValidator CssClass="validator" ID="RequiredFieldValidator1" runat="server" ControlToValidate="tel"
                                                 ErrorMessage="من فضلك ادخل رقم الهاتف " ValidationGroup="vgroup" ForeColor="red"></asp:RequiredFieldValidator>
                                              <br />

@@ -35,7 +35,7 @@ Public Class course_registerCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveRegister(ByVal id As String, ByVal course_id As String, ByVal ImagePath As String, ByVal imageName As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function SaveRegister(ByVal id As String, ByVal course_id As String, ByVal code As String, ByVal ImagePath As String, ByVal imageName As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -63,13 +63,33 @@ Public Class course_registerCls
                 dictBasicDataJson1.Add("Image_name", imageName)
                 dictBasicDataJson1.Add("related_id", course_id)
 
-                If Not PublicFunctions.TransUpdateInsert(dictBasicDataJson1, "tblImages", "", _sqlconn, _sqltrans) Then
-                    _sqltrans.Rollback()
-                    _sqlconn.Close()
-                    Return "False|لم يتم الحفظ"
+
+                If PublicFunctions.TransUpdateInsert(dictBasicDataJson1, "tblImages", "", _sqlconn, _sqltrans) Then
+
+                    Dim dictNotification As New Dictionary(Of String, Object)
+
+                    Dim dt3 As DataTable
+                    Dim dt4 As DataTable
+                    dt3 = DBManager.Getdatatable("select id from tblUsers where  User_Type=2  and comp_id=" + LoginInfo.GetComp_id())
+                    Dim admin = dt3.Rows(0)(0).ToString
+                    dt4 = DBManager.Getdatatable("select full_name from tblUsers where id=" + LoginInfo.GetUser__Id())
+                    Dim studentName = dt4.Rows(0)(0).ToString
+                    dictNotification.Add("RefCode", course_id)
+                    dictNotification.Add("NotTitle", " تقديمات الطلاب")
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", admin)
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", studentName)
+                    dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                    If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                        _sqltrans.Rollback()
+                        _sqlconn.Close()
+                        Return "False|لم يتم الحفظ"
+                    End If
                 End If
 
-                success = True
+                    success = True
             Else
                 success = False
 
@@ -144,56 +164,80 @@ Public Class course_registerCls
         Dim Names As New List(Of String)(10)
         Try
 
-            Dim dt3 As New DataTable
+            Dim dt5 As New DataTable
 
-            dt3 = DBManager.Getdatatable("select  isnull (approved,0) as 'appoved', isnull (deleted,0) as 'deleted' from acd_courses_students where approved=1 and  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+            dt5 = DBManager.Getdatatable("select status from acd_courses where id=" + course_id + " and comp_id=" + LoginInfo.GetComp_id())
 
-            If dt3 IsNot Nothing Then
-                If dt3.Rows(0)(0).ToString = True And dt3.Rows(0)(1).ToString = True Then
-
-                    Names.Add("3")
-
-
+            If dt5.Rows.Count <> 0 Then
+                If dt5.Rows(0)(0).ToString = "2" Then
+                    Names.Add("5")
                 End If
-            Else
-
-                Names.Add("0")
-            End If
-
-            Dim dt2 As New DataTable
-
-            dt2 = DBManager.Getdatatable("select isnull (approved,0) as 'appoved',  isnull(checked,0) as'check' from acd_courses_students where  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
-
-            If dt2 IsNot Nothing Then
-                If dt2.Rows(0)(0).ToString = False And dt2.Rows(0)(1).ToString = False Then
-
-                    Names.Add("1")
-
-
-                End If
-            Else
-
-                Names.Add("0")
-            End If
-            Dim dt As New DataTable
-
-            dt = DBManager.Getdatatable("select approved ,checked from acd_courses_students where  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
-
-            If dt IsNot Nothing Then
-                If dt.Rows(0)(0).ToString = False And dt.Rows(0)(1).ToString = True Then
-
-                    Names.Add("2")
-
-
-                End If
-            Else
-
-                Names.Add("0")
             End If
 
 
 
-            Return Names.ToArray
+            Dim dt4 As New DataTable
+
+                dt4 = DBManager.Getdatatable("select  isnull (approved,0) as 'appoved', isnull (deleted,0) as 'deleted'  , isnull (checked,0) as 'checked' from acd_courses_students where approved=1 and  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+
+                If dt4.Rows.Count <> 0 Then
+                    If dt4.Rows(0)(0).ToString = True And dt4.Rows(0)(1).ToString = False And dt4.Rows(0)(2).ToString = True Then
+
+                        Names.Add("4")
+
+
+
+                    End If
+
+                End If
+
+                Dim dt3 As New DataTable
+
+                dt3 = DBManager.Getdatatable("select  isnull (approved,0) as 'appoved', isnull (deleted,0) as 'deleted' from acd_courses_students where approved=1 and  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+
+                If dt3.Rows.Count <> 0 Then
+                    If dt3.Rows(0)(0).ToString = True And dt3.Rows(0)(1).ToString = True Then
+
+                        Names.Add("3")
+
+
+
+                    End If
+
+                End If
+
+                Dim dt2 As New DataTable
+
+                dt2 = DBManager.Getdatatable("select isnull (approved,0) as 'appoved',  isnull(checked,0) as'check' from acd_courses_students where  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+
+                If dt2.Rows.Count <> 0 Then
+                    If dt2.Rows(0)(0).ToString = False And dt2.Rows(0)(1).ToString = False Then
+
+                        Names.Add("1")
+
+
+                    End If
+
+                End If
+                Dim dt As New DataTable
+
+                dt = DBManager.Getdatatable("select approved ,checked from acd_courses_students where  course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+
+                If dt.Rows.Count <> 0 Then
+                    If dt.Rows(0)(0).ToString = False And dt.Rows(0)(1).ToString = True Then
+
+                        Names.Add("2")
+
+
+                    End If
+                Else
+
+                    Names.Add("0")
+                End If
+
+
+
+                Return Names.ToArray
         Catch ex As Exception
             Names.Add("0")
             Names.Add(" No Results were Found!")
@@ -279,51 +323,6 @@ Public Class course_registerCls
 
 
 
-    '#Region "Edit"
-    '    ''' <summary>
-    '    ''' get  Type data from db when update
-    '    ''' </summary>
-    '    <WebMethod()>
-    '    <System.Web.Script.Services.ScriptMethod()>
-    '    Public Function Edit(ByVal editItemId As String) As String()
 
-    '        Dim Names As New List(Of String)(10)
-    '        Try
-    '            Dim str As String = PublicFunctions.GetDataForUpdate("acd_courses", editItemId)
-    '            Names.Add("1")
-    '            Names.Add(str)
-    '            Return Names.ToArray
-    '        Catch ex As Exception
-    '            Names.Add("0")
-    '            Names.Add(" No Results were Found!")
-    '            Return Names.ToArray
-    '        End Try
-    '    End Function
-
-    '#End Region
-
-    '#Region "Delete"
-    '    ''' <summary>
-    '    ''' </summary>
-    '    <WebMethod()>
-    '    <System.Web.Script.Services.ScriptMethod()>
-    '    Public Function Delete(ByVal deleteItem As String) As String()
-    '        Dim Names As New List(Of String)(10)
-    '        Try
-    '            If PublicFunctions.DeleteFromTable(deleteItem, "acd_courses") Then
-    '                Names.Add("1")
-    '                Names.Add("تم الحذف بنجاح!")
-    '            Else
-    '                Names.Add("2")
-    '                Names.Add("لا يمكن الحذف!")
-    '            End If
-    '            Return Names.ToArray
-    '        Catch
-    '            Names.Add("2")
-    '            Names.Add("لا يمكن الحذف!")
-    '            Return Names.ToArray
-    '        End Try
-    '    End Function
-    '#End Region
 
 End Class

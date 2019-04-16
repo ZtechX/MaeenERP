@@ -2712,7 +2712,7 @@ padding-left: 28px !important;*/
        font-size: 12px;
     border: 1px solid #E0E0E0;
     border-radius: 0px;
-    font-family: Arial;
+     
     font-weight: bold;
     outline: none;
     color: #666;
@@ -2727,7 +2727,7 @@ padding-left: 28px !important;*/
     border: 1px solid #bbb;
     border-radius: 3px;
     behavior: url(css/PIE.htc); /* htc File for CSS3 Property in IE*/
-    font-family: Arial;
+     
     font-weight: bold;
     outline: none;
     color: #666;
@@ -2742,7 +2742,7 @@ padding-left: 28px !important;*/
     font-size: 12px;
     border: 1px solid #E0E0E0;
     border-radius: 0px;
-    font-family: Arial;
+     
     font-weight: normal;
     outline: none;
     color: #666;
@@ -2932,7 +2932,7 @@ label[for="txtSearch"]:before {
     background-image: none !important;
     border: 1px solid #DEDEDE !important;
     box-shadow: none !important;
-    font-family: Arial;
+     
     font-weight: bold;
     outline: none;
     padding: 6px 8px;
@@ -3323,7 +3323,7 @@ table.report td {
     line-height: 22px !important;
     margin: 2px auto;
     float: left;
-    font-family: arial;
+     
 }
 
     .res-label-error:before {
@@ -3339,7 +3339,7 @@ table.report td {
     line-height: 22px !important;
     margin: 2px auto;
     float: left;
-    font-family: arial;
+     
 }
 
     .res-label-success:before {
@@ -3355,7 +3355,7 @@ table.report td {
     line-height: 22px !important;
     margin: 2px auto;
     float: left;
-    font-family: arial;
+     
 }
 
     .res-label-info:before {
@@ -8907,7 +8907,7 @@ text-align: right;
     font-size: 12px;
   border: 1px solid #E0E0E0 !important;
   border-radius: 0px;
-  font-family: Arial;
+   
   outline: none;
   color: #666;
   background-color: #FFFFFF;
@@ -8924,7 +8924,7 @@ text-align: right;
     font-size: 12px;
   border: 1px solid #E0E0E0 !important;
   border-radius: 0px;
-  font-family: Arial;
+   
   outline: none;
   color: #666;
   background-color: #FFFFFF;
@@ -8941,7 +8941,7 @@ text-align: right;
     font-size: 12px;
   border: 1px solid #E0E0E0;
   border-radius: 0px;
-  font-family: Arial;
+   
   outline: none;
   color: #666;
   background-color: #FFFFFF;
@@ -9889,7 +9889,7 @@ width:100%;/*this value is different in maps theme*/
     font-size: 12px;
     border: 1px solid #E0E0E0 !important;
     border-radius: 0px;
-    font-family: Arial;
+     
     outline: none;
     color: #666;
     background-color: #FFFFFF;
@@ -9907,7 +9907,7 @@ width:100%;/*this value is different in maps theme*/
     font-size: 12px;
     border: 1px solid #E0E0E0 !important;
     border-radius: 0px;
-    font-family: Arial;
+     
     outline: none;
     color: #666;
     background-color: #FFFFFF;
@@ -9925,7 +9925,7 @@ width:100%;/*this value is different in maps theme*/
     font-size: 12px;
     border: 1px solid #E0E0E0 !important;
     border-radius: 0px;
-    font-family: Arial;
+     
     outline: none;
     color: #666;
     background-color: #FFFFFF;
@@ -9965,7 +9965,7 @@ width:100%;/*this value is different in maps theme*/
     font-size: 12px;
     border: 1px solid #E0E0E0 !important;
     border-radius: 0px;
-    font-family: Arial;
+     
     outline: none;
     color: #666;
     background-color: #FFFFFF;

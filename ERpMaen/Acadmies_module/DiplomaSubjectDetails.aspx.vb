@@ -41,6 +41,7 @@ Public Class DiplomaSubjectDetails
                 'Lblsubject_id.InnerHtml = subject_id
 
                 Dim code = Request.QueryString("code")
+                lblcode.InnerHtml = code
 
                 Dim dt = DBManager.Getdatatable(" select acd_diplome_subjects.id from acd_diplome_subjects where acd_diplome_subjects.code='" + code.ToString + "'")
                 If dt.Rows.Count <> 0 Then

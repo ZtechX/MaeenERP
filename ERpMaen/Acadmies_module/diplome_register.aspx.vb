@@ -38,6 +38,7 @@ Public Class diplome_register
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
 
                 Dim code = Request.QueryString("code")
+                lblcode.InnerHtml = code
                 Dim dt = DBManager.Getdatatable(" select  acd_diplomes.id from acd_diplomes where acd_diplomes.code='" + code.ToString + "'")
                 If dt.Rows.Count <> 0 Then
                     Dim course_id = dt.Rows(0)(0).ToString

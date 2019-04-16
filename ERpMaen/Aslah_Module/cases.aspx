@@ -259,19 +259,19 @@
                                                                 <div class=" col-md-12 form-group ">
 
                                                                     <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">
+                                                                        <label >
                                                                         رقم الصك  </lable>
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" required dbcolumn="instrument_no" type="text" id="Text9"
+                                                                        <input onkeypress="return isNumber(event);"  dbcolumn="instrument_no" type="text" id="Text9"
                                                                             class="form-control" runat="server" clientidmode="Static" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
-                                                                        <label class="label-required">
-                                                                        تاريخ الصك  </lable>
+                                                                        <label >
+                                                                        تاريخ الصك  </label>
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
@@ -948,6 +948,16 @@
                                                                         <br />
                                                                     </div>
                                                                 </div>
+                                                                                  <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label for="Name" class="label-required">(يوم)الإرجاع بعد</label>
+
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <asp:TextBox SkinID="form-control" dbcolumn="back_period" required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="txtreturn_period" runat="server">
+                                                                        </asp:TextBox>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="col-md-12 form-group">
                                                                <button onclick="save_children_receive(); return false" class="btn btn-success">حفظ</button>
                                                                     
@@ -1237,7 +1247,16 @@
                                                                         <br />
                                                                     </div>
                                                                 </div>
+                <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label for="Name" class="label-required">(يوم)الإرجاع بعد</label>
 
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <asp:TextBox SkinID="form-control" dbcolumn="back_period" required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="another_return_period" runat="server">
+                                                                        </asp:TextBox>
+                                                                    </div>
+                                                                </div>
 
                   <div class="col-md-12 form-group ">
                            <button onclick="save_anotherPeriod()" style="font-family: DroidKufi !important;" class="btn btn-success pull-left">حفظ</button>

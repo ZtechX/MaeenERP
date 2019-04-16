@@ -188,6 +188,22 @@ Public Class companies
                                     _sqltrans.Rollback()
                                     _sqlconn.Close()
                                     Names.Add("لم يتم الحفظ")
+                                Else
+                                    dic_advisor_permission("form_id") = 3187
+                                    If Not PublicFunctions.TransUpdateInsert(dic_advisor_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                        success = False
+                                        _sqltrans.Rollback()
+                                        _sqlconn.Close()
+                                        Names.Add("لم يتم الحفظ")
+                                    Else
+                                        dic_advisor_permission("form_id") = 4207
+                                        If Not PublicFunctions.TransUpdateInsert(dic_advisor_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                            success = False
+                                            _sqltrans.Rollback()
+                                            _sqlconn.Close()
+                                            Names.Add("لم يتم الحفظ")
+                                        End If
+                                    End If
                                 End If
                             End If
                         End If
@@ -220,6 +236,14 @@ Public Class companies
                                     _sqltrans.Rollback()
                                     _sqlconn.Close()
                                     Names.Add("لم يتم الحفظ")
+                                Else
+                                    dic_Beneficiaries_permission("form_id") = 4207
+                                    If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
+                                        success = False
+                                        _sqltrans.Rollback()
+                                        _sqlconn.Close()
+                                        Names.Add("لم يتم الحفظ")
+                                    End If
                                 End If
                             End If
                         End If
@@ -526,7 +550,7 @@ Public Class companies
         Dim dt_acadyme As DataTable
         Dim dt_compAdmin As DataTable
         Dim Names As New List(Of String)(10)
-        Dim condation = ""
+
 
 
         Names.Add("")
@@ -534,43 +558,29 @@ Public Class companies
         Names.Add("")
         Names.Add("")
         If Not LoginInfo.isSuperAdmin() Then
-            condation = " and User_Type = 2"
+
             Try
-                dt_compAdmin = DBManager.Getdatatable("select * from tblUsers where  id=" + LoginInfo.GetUser__Id() + condation)
+                dt_compAdmin = DBManager.Getdatatable("select * from tblUsers where User_Type = 2 and comp_id=" + LoginInfo.GetComp_id())
                 If dt_compAdmin.Rows.Count <> 0 Then
                     Dim str = PublicFunctions.ConvertDataTabletoString(dt_compAdmin)
                     Names(0) = str
 
-                    dt_company = DBManager.Getdatatable("SELECT * from tblcompanies  where  id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+                    dt_company = DBManager.Getdatatable("SELECT * from tblcompanies  where  id= " + LoginInfo.GetComp_id())
                     If dt_company.Rows.Count <> 0 Then
                         Dim str1 = PublicFunctions.ConvertDataTabletoString(dt_company)
                         Names(1) = str1
-                        ' dt_acAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=122 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                        'If dt_acAdmin.Rows.Count <> 0 Then
-                        'Dim str4 = PublicFunctions.ConvertDataTabletoString(dt_acAdmin)
-                        'Names.Add(str4)
-                        dt_acadyme = DBManager.Getdatatable("SELECT * from acd_acadmies  where  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+
+                        dt_acadyme = DBManager.Getdatatable("SELECT * from acd_acadmies  where  comp_id= " + LoginInfo.GetComp_id())
                         If dt_acadyme.Rows.Count <> 0 Then
                             Dim str2 = PublicFunctions.ConvertDataTabletoString(dt_acadyme)
                             Names(2) = str2
                         End If
-                        'Else
-                        '    Names.Add("0")
-                        '    Names.Add("0")
-                        'End If
-                        '    dt_cenAdmin = DBManager.Getdatatable("SELECT * from tblUsers  where group_id=121 and comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
-                        'If dt_cenAdmin.Rows.Count <> 0 Then
-                        '    Dim str6 = PublicFunctions.ConvertDataTabletoString(dt_cenAdmin)
-                        '    Names.Add(str6)
-                        dt_center = DBManager.Getdatatable("SELECT * from acd_training_centers  where  comp_id= " + dt_compAdmin.Rows(0).Item("comp_id").ToString())
+
+                        dt_center = DBManager.Getdatatable("SELECT * from acd_training_centers  where  comp_id= " + LoginInfo.GetComp_id())
                         If dt_center.Rows.Count <> 0 Then
                             Dim str3 = PublicFunctions.ConvertDataTabletoString(dt_center)
                             Names(3) = str3
                         End If
-                        'Else
-                        '    Names.Add("0")
-                        '    Names.Add("0")
-                        'End If
 
                     End If
                 End If

@@ -10,6 +10,7 @@
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/diplome_registerCls.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
+             <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
         </Services>
     </asp:ScriptManager>
 <%--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">--%>
@@ -115,6 +116,7 @@
             <section class="app-content">
                 <div class="row">
                      <label style="display:none" id="Lbldiplome_id" runat="server" ></label>
+                         <label style="display:none" id="lblcode" runat="server" ></label>
                   <%--   <label style="display:none" id="LblLecture_id" ></label>
                       <label style="display:none" id="LblHomework_id" ></label>
                        <label style="display:none" id="LblExam_id" ></label>

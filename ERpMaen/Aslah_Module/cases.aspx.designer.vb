@@ -554,6 +554,15 @@ Partial Public Class cases
     Protected WithEvents txtdelivery_time As Global.System.Web.UI.HtmlControls.HtmlInputGenericControl
     
     '''<summary>
+    '''txtreturn_period control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtreturn_period As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''lblconciliation_id control.
     '''</summary>
     '''<remarks>
@@ -714,4 +723,13 @@ Partial Public Class cases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents month_number As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''another_return_period control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents another_return_period As Global.System.Web.UI.WebControls.TextBox
 End Class

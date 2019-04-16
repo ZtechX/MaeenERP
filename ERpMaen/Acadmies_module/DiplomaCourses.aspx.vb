@@ -49,6 +49,14 @@ Public Class DiplomaCourses
 
                     If ERpMaen.LoginInfo.getUserType = 8 Then
 
+                        Dim dtd = DBManager.Getdatatable("select deleted   from acd_courses_students where type=2 and  student_id=" + LoginInfo.GetUser__Id() + " and approved=1 and course_id=" + deploma_id)
+                        If dtd.Rows.Count <> 0 Then
+                            If dtd.Rows(0)(0).ToString = True Then
+                                Page.Response.Redirect("diplome_register.aspx?code=" + code)
+
+                            End If
+                        End If
+
                         Dim dtc = DBManager.Getdatatable("select course_id from acd_courses_students where type=2 and student_id=" + LoginInfo.GetUser__Id() + " and approved=1 and course_id=" + deploma_id)
                         If dtc.Rows.Count = 0 Then
                             'condition page 
@@ -65,15 +73,14 @@ Public Class DiplomaCourses
                 'Dim deploma_id = Request.QueryString("deploma_id")
                 'Lbldeploma_id.InnerHtml = deploma_id
 
-
-
-
-
                 Dim clsapprove_tainer As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='4'and comp_id=" + LoginInfo.GetComp_id(), "full_name", "id", "")
                 clsapprove_tainer.SetComboItems(ddltrainer, "", True, "--اختر--", False)
 
-                Dim clsapprove_semster As New clsFillComboByDataSource("select * from tblLock_up where type='semster' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
+                Dim clsapprove_semster As New clsFillComboByDataSource("select id , name from acd_semester where  comp_id=" + LoginInfo.GetComp_id(), "name", "id", "")
                 clsapprove_semster.SetComboItems(ddlsemster, "", True, "--اختر--", False)
+
+                Dim clsapprove_semster2 As New clsFillComboByDataSource("select id , name from acd_semester where  comp_id=" + LoginInfo.GetComp_id(), "name", "id", "")
+                clsapprove_semster2.SetComboItems(ddlsemster2, "", True, "--اختر--", False)
 
                 Dim clsapprove_course As New clsFillComboByDataSource("select * from tblLock_up where type='subj' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_course.SetComboItems(ddlcourse, "", True, "--اختر--", False)

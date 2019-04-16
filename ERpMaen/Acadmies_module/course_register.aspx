@@ -10,6 +10,8 @@
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/course_registerCls.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
+                               <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+
         </Services>
     </asp:ScriptManager>
 <%--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">--%>
@@ -115,6 +117,7 @@
             <section class="app-content">
                 <div class="row">
                      <label style="display:none" id="Lblcourse_id" runat="server" ></label>
+                     <label style="display:none" id="lblcode" runat="server" ></label>
                   <%--   <label style="display:none" id="LblLecture_id" ></label>
                       <label style="display:none" id="LblHomework_id" ></label>
                        <label style="display:none" id="LblExam_id" ></label>
@@ -134,7 +137,7 @@
                                     <span id="course_title" > </span>
                                   </h3>
 
-                                <div class="btn-group pull-left" id="checkstudentregister">
+                                <div class="btn-group pull-left" id="checkstudentregister" runat="server" >
                                       <button type="button" id="btnregister" class="btn btn-info " data-toggle="modal" data-target="#register_Course" > التسجيل فى الدورة <i class="fa fa-sign-in"></i></button>
 
                                 </div>

@@ -310,6 +310,20 @@ Public Class LoginInfo
         End Try
     End Function
 
+    Public Shared Function SendSMS() As Boolean
+        Try
+            Dim dt As New DataTable
+            dt = DBManager.Getdatatable("select isNULL(active,0) from tblsms_settings where comp_id=" + LoginInfo.GetComp_id())
+
+            If dt.Rows.Count <> 0 Then
+                Return dt.Rows(0)(0)
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     Public Shared Function isSuperAdmin() As Boolean
         Try
             Dim dt As New DataTable
@@ -382,13 +396,13 @@ Public Class LoginInfo
         Return ""
     End Function
 
-    Public Shared Function getperson_id(ByVal id As String) As String
+    Public Shared Function getperson_data(ByVal id As String) As String
         Dim dt As New DataTable
-        dt = DBManager.Getdatatable("select id from tblUsers where User_Type=9 and related_id=" + id)
+        dt = DBManager.Getdatatable("select full_name,id,User_PhoneNumber from tblUsers where User_Type=9 and related_id=" + id)
 
         If dt.Rows.Count <> 0 Then
-            Return dt.Rows(0)(0).ToString
+            Return dt.Rows(0).Item("full_name").ToString & "|" & dt.Rows(0).Item("id").ToString & "|" & dt.Rows(0).Item("User_PhoneNumber").ToString
         End If
-        Return ""
+        Return "||"
     End Function
 End Class

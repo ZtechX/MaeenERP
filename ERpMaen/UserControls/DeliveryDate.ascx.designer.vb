@@ -113,15 +113,6 @@ Partial Public Class DeliveryDate
     Protected WithEvents txtrecieve_time As Global.System.Web.UI.HtmlControls.HtmlInputGenericControl
     
     '''<summary>
-    '''ddl_day_nm control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddl_day_nm As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
     '''Text11 control.
     '''</summary>
     '''<remarks>

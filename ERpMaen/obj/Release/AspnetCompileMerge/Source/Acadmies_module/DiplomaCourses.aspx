@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="DiplomaCourses.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.DiplomaCourses" %>
 <%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
 
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
@@ -123,7 +125,7 @@
                         <div class="col-md-4">
                             <h3>
                                 <i class="fa fa-book"></i>
-                                <span>مواد الدبلومه </span>
+                                <span>مواد الدبلوم </span>
                             </h3>
                         </div>
                         <div class="col-md-6" >
@@ -131,15 +133,50 @@
                         </div>
                         <div class="col-md-2">
 
-                            <div class="btn-group pull-left">
+                            <%--<div class="btn-group pull-left">
                                 <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addsubject">اضافة مادة <i class="fa fa-plus"></i></button>
 
+                            </div>--%>
+                            
+                            <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                            <div class="btn-group pull-left">
+                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    الخيارات
+                                  <i class="fa fa-cogs"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                     <li><a data-toggle="modal" href="#addsubject"> اضافه مادة
+                                    </a></li>
+                                    <li>
+                                        <a onclick="DiplomeView();">تعديل
+                                        </a></li>
+                                   
+
+                                    <li><a data-toggle="modal" href="#order_addcondition"> اضافه شرط
+                                    </a></li>
+                                  
+                                    <li><a   onclick=" deleteDiplome();"  > حذف
+                                    </a></li>
+                                    <li><a data-toggle="modal" href="#addStudentModal" > الطلاب
+                                    </a></li>
+                                     <li><a   onclick=" Archive();"  > الارشيف
+                                    </a></li>
+                                   
+                                </ul>
+                                <% End If %>
                             </div>
+                            <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+                            <div class="btn-group pull-left">
+                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#add_Financial"> اضافة مالية <i class="fa fa-plus"></i></button>
+
+                            </div>
+                            <% End if  %>
+
                         </div>
                     </div>
                 </div>
 
-                 <div class="col-md-12 col-sm-12 col-xs-12 ">
+                 <%--<div class="col-md-12 col-sm-12 col-xs-12 ">
                         <div class="col-md-4">
 
                             <div class="btn-group pull-right">
@@ -148,12 +185,13 @@
                             </div>
                         </div>
 
-                     </div>
+                     </div>--%>
             </div>
         </section>
         <section>
             <div class="row">
-                <label id="Lbldeploma_id" runat="server" ></label>
+                <label  style="display:none" id="Lbldeploma_id" runat="server" ></label>
+                  <label style="display:none" id="lbldiplomeCode" runat="server" ></label>
                 <div class="col-md-12 col-sm-12 col-xs-12 " id="courses-list">
 
                 </div>
@@ -303,7 +341,7 @@
                         </div>
                   
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary"  onclick="saveCourse();">حفظ </button>
+                        <button type="button" class="btn btn-primary"  onclick="savesubject();">حفظ </button>
 
                     </div>
                       </div>
@@ -349,8 +387,274 @@
                       </div>
                 </div>
             </div>
+
+
+        <div class="modal" id="order_addcondition" data-easein="perspectiveRightIn" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">اضافة شرط</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divFormcondition">
+
+                                <div class=" row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label>الشرط      </label>
+                                    </div>
+
+                                   <div class="col-md-9 col-sm-12">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="condition" required  ClientIDMode="Static" ID="TextBox5" runat="server">
+                                            </asp:TextBox>
+                                        </div>
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <div>
+                                        <input id="fileURL" type="hidden"  dbcolumn="image" runat="server" />
+                                        <input id="FName" type="text" required readonly="readonly" runat="server" />
+
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                    <asp:AsyncFileUpload ID="fuFile1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
+                                        OnClientUploadComplete="UploadComplete2" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="addCondition();">اضافه </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="modal" id="addCourse" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">اضافة دبلوم</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="divFormDiplome">
+                             <div class="col-md-6"> <%--col first--%>
+                            <div class=" form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="Name" class="label-required">عنوان الدبلوم </label>
+
+                                </div>
+                                <div class="col-md-9 col-sm-12">
+                                    <asp:TextBox SkinID="form-control" required class="form-control" dbColumn="name" ClientIDMode="Static" ID="courseTitle" runat="server">
+                                    </asp:TextBox>
+
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="courseTitle"
+                                        ErrorMessage="من فضلك أدخل عنوان الدبلومه  " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
+
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                 <div class="col-md-3 col-sm-12">
+                                        <label> سعر الدبلوم </label>
+                                            </div>
+
+                                      <div class="col-md-9 col-sm-12">
+                                            <input onkeypress="return isNumber(event);" dbcolumn="price" type="text" id="price"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    <br />
+                                        </div>
+                            </div>
+                                   <div class=" form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label>القسم </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                    <asp:DropDownList dbcolumn="category_id" class="form-control" ClientIDMode="Static" ID="ddlcategory" runat="server">
+                                    </asp:DropDownList>
+                                    <br />
+                                </div>
+                            </div>
+
+
+                         
+           
+                                 </div>
+                              <div class="col-md-6"> <%--second col--%>
+                           
+                                 
+                           
+                          
+                              <div class="form-group">
+                                 <div class="col-md-3 col-sm-12">
+                                        <label > عدد الطلاب    </lable>
+                                            </div>
+
+                                      <div class="col-md-9 col-sm-12">
+                                            <input onkeypress="return isNumber(event);" dbcolumn="student_number" type="text" id="studentnum"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    <br />
+                                        </div>
+                            </div>
+                          
+                      
+
+                            <div class="form-group">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="Name" >تفاصيل الدبلوم </label>
+
+                                </div>
+                                <div class="col-md-9 col-sm-12">
+                                    <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="description" ClientIDMode="Static" ID="TextBox1" runat="server">
+                                    </asp:TextBox>
+
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <br />
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="email">مميزة </label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="checkbox" dbcolumn="features" id="features" style="width: 40px;" class="form-control" />
+
+                                </div>
+                            </div>
+                                 </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary"  onclick="savediplome();">حفظ </button>
+
+                      <%--  <button type="button" data-dismiss="modal" id="savepop" class="btn btn-primary">حفظ </button>--%>
+                    </div>
+                </div>
+            </div>
         </div>
- 
+
+            <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+
+            <div class="modal fade" id="add_Financial" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"> مالية الطلاب   </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divformstudentFinanc">
+
+                                <div class="row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label class="label-required"> المبلغ   </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <input onkeypress="return isNumber(event);" placeholder="  قيمة المبلغ بالريال" required dbcolumn="amount" type="text" id="amount"
+                                            class="form-control" runat="server" clientidmode="Static" />
+
+
+                                    </div>
+                                </div>
+
+                                <div class=" row form-group ">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label class="label-required">طريقة الدفع </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <asp:DropDownList dbcolumn="payment_type" required class="form-control" ClientIDMode="Static" ID="ddlpayment_type" runat="server">
+                                        </asp:DropDownList>
+
+                                    </div>
+                                </div>
+
+                                <div class=" row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label>ملاحظات      </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+                                        <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox8" runat="server">
+                                        </asp:TextBox>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+
+                                    <div>
+                                        <input id="fileurlfinanc" type="hidden" dbcolumn="image" runat="server" />
+                                        <input id="FnameFinanc" type="text" required readonly="readonly" runat="server" />
+
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                    <asp:AsyncFileUpload ID="fufile7" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
+                                        OnClientUploadComplete="UploadComplete8" />
+                                </div>
+                                
+
+
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="addfinancial();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <% End If %>
+
+             <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">تقديمات الطلاب   </h4>
+                        </div>
+                        <%--  جدول الطلاب--%>
+                        <div class="table-responsive" id="allStudentlist">
+                            <table class="table table-bordered table-hover"  id="newitem">
+                               <thead>
+                                <tr>
+                                    <th>الطالب </th>
+                                    <th>الطلب</th>
+                                     <th>الملف</th>
+                                     <th>الاجراء</th>
+                                  
+                                </tr>
+                                 </thead>
+                                <tbody  id="action_courseStudents">
+                                         
+                                </tbody>
+                                    
+
+                            </table>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="AddDiplome_Student();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
 
     <%-- end form--%>
 </asp:Content>

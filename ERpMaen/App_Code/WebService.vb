@@ -3298,7 +3298,8 @@ Public Class WebService
     <System.Web.Script.Services.ScriptMethod()>
     Public Function GetNotifications(ByVal UserId As String) As String
         Try
-            Dim dtNotifications = DBManager.Getdatatable("select ID, RefCode, RefType, NotTitle, Remarks, Date as NotDate, IsSeen,FormUrl from tblNotifications where AssignedTo='" + UserId + "' and isNull(Deleted,0) !=1  order by date desc")
+            Dim currdate = PublicFunctions.ConvertDatetoNumber(DateTime.Now.ToString("dd/MM/yyyy")).ToString()
+            Dim dtNotifications = DBManager.Getdatatable("select ID, RefCode, RefType, NotTitle, Remarks, Date as NotDate, IsSeen,FormUrl from tblNotifications where AssignedTo='" + UserId + "' and isNull(IsSeen,0) !=1 and  (RefType not in (1,2,3,4)  or (RefType in (1,2,3,4) and Date=" + currdate.ToString + "))  order by date desc")
             If dtNotifications.Rows.Count > 0 Then
                 Return ConvertDataTabletoString(dtNotifications)
             End If
@@ -3342,7 +3343,8 @@ Public Class WebService
     <System.Web.Script.Services.ScriptMethod()>
     Public Function GetNotificationsCount(ByVal UserId As String) As Integer
         Try
-            Dim dtCount = DBManager.Getdatatable("select Count(ID) as NotCount from tblNotifications where AssignedTo='" + UserId + "' and isNull(Deleted,0) !=1  and (IsSeen = 'False' or IsSeen is null)")
+            Dim currdate = PublicFunctions.ConvertDatetoNumber(DateTime.Now.ToString("dd/MM/yyyy")).ToString()
+            Dim dtCount = DBManager.Getdatatable("select Count(ID) as NotCount from tblNotifications where AssignedTo='" + UserId + "'  and isNULL(IsSeen,0) != 1 and  (RefType not in (1,2,3,4)  or (RefType in (1,2,3,4) and Date=" + currdate.ToString + "))")
             Return CInt(dtCount.Rows(0)("NotCount").ToString)
         Catch ex As Exception
             Return 0
@@ -3954,7 +3956,8 @@ Public Class WebService
 
                 End If
             ElseIf formName = "Notification" Then
-                quaryStr = quaryStr + " and AssignedTo=" + LoginInfo.GetUser__Id() + " order by date desc"
+                Dim currdate = PublicFunctions.ConvertDatetoNumber(DateTime.Now.ToString("dd/MM/yyyy")).ToString()
+                quaryStr = quaryStr + " where AssignedTo=" + LoginInfo.GetUser__Id() + " and  (RefType not in (1,2,3,4)  or (RefType in (1,2,3,4) and Date=" + currdate.ToString + ")) order by date desc"
             ElseIf Not LoginInfo.isSuperAdmin() Then
                 If formName = "Users" Then
                     quaryStr = "Select tblUsers.id As 'AutoCodeHide', full_name as 'الاسم بالكامل', isNull(name, '') as 'دور المستخدم', user_indenty as 'رقم الهوية', User_PhoneNumber as 'رقم الجوال'," +
@@ -3962,24 +3965,22 @@ Public Class WebService
                " where isNull(superAdmin, 0) = 0 And TblUsers.comp_id =" + LoginInfo.GetComp_id()
                 ElseIf formName = "Advisors" Then
                     quaryStr = quaryStr + " where ash_advisors.comp_id=" + LoginInfo.GetComp_id()
-
+                ElseIf formName = "Students" Then
+                    quaryStr = quaryStr + " and tblUsers.comp_id=" + LoginInfo.GetComp_id()
+                ElseIf formName = "Trainers" Then
+                    quaryStr = quaryStr + " and tblUsers.comp_id=" + LoginInfo.GetComp_id()
                 ElseIf formName = "orders" Then
                     Dim userType = LoginInfo.getUserType()
-
                     If userType = "2" Or userType = "7" Then
                         quaryStr = quaryStr + " where ash_orders.comp_id=" + LoginInfo.GetComp_id()
                     ElseIf userType = "6" Then
                         quaryStr = quaryStr + "  where ash_orders.case_id in(select id from ash_cases where advisor_id = " + LoginInfo.getrelatedId() + ")"
                     ElseIf userType = "9" Then
-                        quaryStr = quaryStr + "  where ash_orders.case_id in(select id from ash_cases where person1_id = " + LoginInfo.getrelatedId() + " or person2_id =" + LoginInfo.getrelatedId() + ")"
-                    ElseIf formName = "Students" Then
-                        quaryStr = quaryStr + " and tblUsers.comp_id=" + LoginInfo.GetComp_id()
-                    ElseIf formName = "Trainers" Then
-                        quaryStr = quaryStr + " and tblUsers.comp_id=" + LoginInfo.GetComp_id()
+                        quaryStr = quaryStr + "  where (ash_orders.owner_id=" + LoginInfo.GetUser__Id() + " or (ash_orders.status=2 and otherP_Accept is NULL)) and ash_orders.case_id in(select id from ash_cases where person1_id = " + LoginInfo.getrelatedId() + " or person2_id =" + LoginInfo.getrelatedId() + ")"
                     End If
 
-                ElseIf formName = "CommonQuest" Or formName = "email_setting" Or formName = "Signature_setting" Then
-                        quaryStr = quaryStr + " where comp_id=" + LoginInfo.GetComp_id()
+                ElseIf formName = "CommonQuest" Or formName = "email_setting" Or formName = "Signature_setting" Or formName = "sms_setting" Then
+                    quaryStr = quaryStr + " where comp_id=" + LoginInfo.GetComp_id()
                 End If
             End If
 
@@ -4591,9 +4592,11 @@ Public Class WebService
     Public Function resetPassword(ByVal userName As String) As String
         Try
             Dim dt As New DataTable
-            dt = DBManager.Getdatatable("select User_Password from tblUsers where isNull(deleted,0) != 1 and (User_PhoneNumber ='" + userName + "' or user_indenty='" + userName + "')")
+            dt = DBManager.Getdatatable("select User_Password from tblUsers where isNull(deleted,0) != 1 and User_PhoneNumber ='" + userName + "'")
             If dt.Rows.Count <> 0 Then
-                Return dt.Rows(0)(0).ToString()
+                Dim message = "كلمة المرور هى : " & dt.Rows(0)(0).ToString()
+                Dim res = PublicFunctions.DoSendSMS(userName, message, "")
+                Return res.ToString
             End If
             Return ""
         Catch ex As Exception

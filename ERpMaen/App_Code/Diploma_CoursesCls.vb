@@ -264,41 +264,95 @@ Public Class Diploma_CoursesCls
 
 
 
+#Region "get_data"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function checkSemesterDate(ByVal semester_id As String, ByVal diplomeId As String, ByVal currentDate As String) As String()
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dtsemsubj As DataTable
 
-    '#Region "update archive"
-    '    ''' <summary>
-    '    ''' </summary>
-    '    <WebMethod()>
-    '    <System.Web.Script.Services.ScriptMethod()>
-    '    Public Function Archive_Diplome(ByVal diplomeId As String) As String()
-    '        Dim Names As New List(Of String)(10)
-    '        Try
-    '            If DBManager.ExcuteQuery("update acd_diplomes set archive=1 where id=" + diplomeId) <> -1 Then
-    '                If Not PublicFunctions.TransUsers_logs("4209", "acd_diplomes", "ارشيف", _sqlconn, _sqltrans) Then
-    '                    success = False
-    '                Else
-    '                    success = True
-    '                End If
-    '                success = True
-    '            Else
-    '                success = False
+            dtsemsubj = DBManager.Getdatatable("select subject_id from  acd_diplome_subjects where semster_id=" + semester_id + " and diplome_id=" + diplomeId + "and archive=0")
+            If dtsemsubj.Rows.Count <> 0 Then
 
-    '            End If
-    '            If success Then
-    '                Names.Add("1")
+                Dim dtEndDate As DataTable
 
-    '            Else
-    '                Names.Add("2")
+                dtEndDate = DBManager.Getdatatable("select end_date_m from acd_semester where id=" + semester_id + "and comp_id=" + LoginInfo.GetComp_id())
+                Dim end_date = dtEndDate.Rows(0)(0).ToString()
+                Dim current = PublicFunctions.ConvertDatetoNumber(currentDate)
+                If end_date > current Then
+                    Names.Add("1")
+                Else
+                    Names.Add("2")
 
-    '            End If
-    '            Return Names.ToArray
-    '        Catch
-    '            Names.Add("2")
+                End If
+            Else
 
-    '            Return Names.ToArray
-    '        End Try
-    '    End Function
-    '#End Region
+                Names.Add("0")
+            End If
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+
+                Return Names.ToArray
+            End Try
+
+
+    End Function
+
+
+
+#End Region
+
+
+#Region "update archive"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function Archive_Semester(ByVal semesterID As String, ByVal diplomeId As String) As String()
+        Dim Names As New List(Of String)(10)
+        Try
+            If DBManager.ExcuteQuery("update acd_diplome_subjects set archive=1 where diplome_id=" + diplomeId + " and semster_id=" + semesterID) <> -1 Then
+                If Not PublicFunctions.TransUsers_logs("4209", "acd_diplome_subjects", "ارشيف", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+                'Dim dtEndDate As DataTable
+
+                'dtEndDate = DBManager.Getdatatable("select end_date_m from acd_semester where id=" + semesterID + "and comp_id=" + LoginInfo.GetComp_id())
+                'Dim end_date = dtEndDate.Rows(0)(0).ToString()
+                'Dim current = PublicFunctions.ConvertDatetoNumber(currentDate)
+                'If end_date > current Then
+                '    Names.Add("2")
+                'Else
+                '    Names.Add("1")
+
+                'End If
+                Names.Add("1")
+
+            Else
+                Names.Add("0")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("0")
+
+            Return Names.ToArray
+        End Try
+    End Function
+#End Region
 
 
 #Region "Save"
@@ -371,7 +425,7 @@ Public Class Diploma_CoursesCls
             If name <> "" Then
                 condation = " where name LIKE '%" + name + "%'"
             End If
-            dt = DBManager.Getdatatable("select  acd_diplome_subjects.code , acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , acd_diplome_subjects.subject_goal , acd_diplome_subjects.trainer_id,tblUsers.full_name,tblUsers.User_Image as 'trainerImage' ,tbllock_up.Description as 'subjectName' , lockup2.Description  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join tbllock_up as lockup2 on acd_diplome_subjects.semster_id=lockup2.id where acd_diplome_subjects.archive=0 and  diplome_id=" + diploma_id + condation)
+            dt = DBManager.Getdatatable("select  acd_diplome_subjects.code , acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , acd_diplome_subjects.subject_goal , acd_diplome_subjects.trainer_id,tblUsers.full_name,tblUsers.User_Image as 'trainerImage' ,tbllock_up.Description as 'subjectName' , acd_semester.name  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join acd_semester  on acd_diplome_subjects.semster_id=acd_semester.id where acd_diplome_subjects.archive=0 and  diplome_id=" + diploma_id + condation)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -441,7 +495,7 @@ Public Class Diploma_CoursesCls
             Dim dt As New DataTable
             'DBManager.ExcuteQuery("DELETE FROM acd_courses_students where approved=1 and course_id=" + course_id)
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes, tblImages.Image_path as 'registerFiles',tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id join tblImages on tblImages.Source_id=acd_courses_students.student_id and tblImages.related_id= acd_courses_students.course_id where acd_courses_students.type=2 and  acd_courses_students.approved=0 and acd_courses_students.course_id=" + diplomeID)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes, tblImages.Image_path as 'registerFiles',tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id join tblImages on tblImages.Source_id=acd_courses_students.student_id and tblImages.related_id= acd_courses_students.course_id where acd_courses_students.type=2 and  acd_courses_students.checked=0 and acd_courses_students.course_id=" + diplomeID)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -476,13 +530,13 @@ Public Class Diploma_CoursesCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveStudent(ByVal diplomeID As String, ByVal students_action As Object) As Boolean
+    Public Function SaveStudent(ByVal diplomeID As String, ByVal code As String, ByVal students_action As Object) As Boolean
         Try
 
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dt As DataTable
-            dt = DBManager.Getdatatable("delete from acd_courses_students where type=2 And course_id=" + diplomeID)
+            dt = DBManager.Getdatatable("delete from acd_courses_students where checked=0  And type=2 And course_id=" + diplomeID)
 
             Dim id = ""
             Dim success2 As Boolean = True
@@ -495,16 +549,46 @@ Public Class Diploma_CoursesCls
 
                 dictBasicDataJson.Add("type", "2")
                 dictBasicDataJson.Add("approved", item("action_Student"))
+                dictBasicDataJson.Add("checked", True)
 
                 If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
-                    If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "ادخال", _sqlconn, _sqltrans) Then
-                        success = False
+
+                    Dim dictNotification As New Dictionary(Of String, Object)
+                    Dim action = item("action_Student")
+                    Dim remak = ""
+                    If action = "0" Then
+                        remak = "رفض"
                     Else
+                        remak = "قبول"
+                    End If
+                    Dim frmURL = ""
+                    If action = "1" Then
+                        frmURL = "Acadmies_module/DiplomaCourses?code=" + code
+                    Else
+                        frmURL = "Acadmies_module/diplome_register?code=" + code
+                    End If
+
+                    dictNotification.Add("RefCode", diplomeID)
+                    dictNotification.Add("NotTitle", "  نتيجة التقديم")
+                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                    dictNotification.Add("AssignedTo", item("id"))
+                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                    dictNotification.Add("Remarks", remak)
+                    dictNotification.Add("FormUrl", frmURL)
+                    If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                        If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "ادخال", _sqlconn, _sqltrans) Then
+                            success = False
+                        Else
+                            success = True
+                        End If
                         success = True
+                    Else
+                        success = False
                     End If
                     success = True
-                Else
-                    success = False
+                    Else
+                        success = False
 
                 End If
                 If success Then

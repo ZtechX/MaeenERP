@@ -627,15 +627,12 @@
          <div class="col-xs-12 well">
                          <div class="row">
                                     <!------ form action button start-->
-                                    <div class="form-actions pull-left" style="margin-top: -10px;">
+                                    <div  style="margin-top: -10px;margin-left:auto;margin-right:auto;width:100px;">
                                         <button validationgroup="vgroup" id="cmdSave" runat="server" clientidmode="Static" commandargument="New" type="button" onclick="save_companies();" class="btn btn-success btn3d">
                                             حفظ البيانات
 		                       	<i class="ace-icon fa fa-save "></i>
                                         </button>
-                                        <button id="clearBtn" runat="server" clientidmode="Static" style="display: none" type="button" onclick="cancel2(); return false;" class="btn btn-white btn3d">
-                                            <i class=" fa fa-eraser "></i>
-                                            <span>مسح البيانات</span>
-                                        </button>
+                                       
                                     </div>
                                     <!------ form action button end -->
                                 </div>

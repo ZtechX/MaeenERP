@@ -53,7 +53,7 @@
                     <div class="update-progress02">
                         <asp:UpdateProgress ID="upg" runat="server" AssociatedUpdatePanelID="up2">
                             <ProgressTemplate>
-                                <asp:Image ID="imgLoader" ClientIDMode="Static" runat="server" ImageUrl="~/Images/loader.gif" />
+                                <asp:Image ID="imgLoader" ClientIDMode="Static" runat="server" ImageUrl="~/App_Themes/Images/loader.gif" />
                             </ProgressTemplate>
                         </asp:UpdateProgress>
                     </div>

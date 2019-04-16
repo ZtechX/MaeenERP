@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Dashboard.aspx.vb" Inherits="ERpMaen.Dashboard" Theme="Theme1" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -665,10 +664,10 @@
          <table   style="width:100% ; margin-top:10px;">
             
             <tr>
-                <td style="font-weight:bold;">البريد الالكترونى </td>
+                <td style="font-weight:bold;">رقم الجوال  </td>
                 <td>
                     <div class="userInfo">
-                        <a id="lblLink" runat="server"></a>
+                        <asp:Label id="lblphone" runat="server"></asp:Label>
                     </div>
                 </td>
             </tr>

@@ -145,9 +145,10 @@
     
 let cal=new Calendar(true);
           cal.attachTo(document.getElementById('calendar'));
-          cal.setLanguage('ar')
-          //cal.setFirstDayOfWeek(0);
+          cal.setLanguage('ar');
         
+          //cal.setFirstDayOfWeek(0);
+  
 function openSidebar(){
 	document.getElementById("mySidebar").style.display = "block"
 }
@@ -187,11 +188,14 @@ function setTheme(){
 	else cal.setTheme(el.value)
 }
 
-function setTodayTimeout(){
+          function setTodayTimeout() {
+              alert("setTodayTimeout");
 	let el=document.getElementById('valTimeout');
-	cal.setTodayTimeout(el.value)
+    cal.setTodayTimeout(el.value);
+   
           }
-// selectLang('ar');
+         
+
     </script>
   </ContentTemplate>
     </asp:UpdatePanel>

@@ -36,15 +36,32 @@ Public Class course_register
         Try
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
-
+                Dim course_id = ""
                 Dim code = Request.QueryString("code")
-                Dim dt = DBManager.Getdatatable(" select  acd_courses.id from acd_courses where acd_courses.code='" + code.ToString + "'")
+                lblcode.InnerHtml = code
+                Dim dt = DBManager.Getdatatable(" select  acd_courses.id,status from acd_courses where acd_courses.code='" + code.ToString + "'")
                 If dt.Rows.Count <> 0 Then
-                    Dim course_id = dt.Rows(0)(0).ToString
+                    course_id = dt.Rows(0)(0).ToString
                     Lblcourse_id.InnerHtml = course_id
+                    If dt.Rows(0)(1).ToString = "1" Then
+                        checkstudentregister.InnerHtml = "  الدورة حالية"
+                    End If
+                    If dt.Rows(0)(1).ToString = "2" Then
+                        checkstudentregister.InnerHtml = "  الدورة مكتملة"
+                    End If
                 End If
 
 
+                Dim dt2 = DBManager.Getdatatable("select isnull(approved,0) as 'appoved',  isnull(checked,0) as'check', isnull(deleted,0) as 'deleted'  from acd_courses_students where  type=1 and course_id =" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+
+                If dt2.Rows.Count <> 0 Then
+                    If dt2.Rows(0).Item("appoved").ToString = False And dt2.Rows(0).Item("check").ToString = False And dt2.Rows(0).Item("deleted").ToString = False Then
+                        checkstudentregister.InnerHtml = "طلبك قيد المراجعة"
+                    End If
+                    If dt2.Rows(0).Item("deleted").ToString = True Then
+                        checkstudentregister.InnerHtml = " تم الحذف من الدورة "
+                    End If
+                End If
                 'Dim clsapprove_type As New clsFillComboByDataSource("select * from tblLock_up where type='is' and IsNull(Deleted,0)=0", "Description", "id", "")
                 'clsapprove_type.SetComboItems(ddlspecial_id, "", True, "--اختر--", False)
 

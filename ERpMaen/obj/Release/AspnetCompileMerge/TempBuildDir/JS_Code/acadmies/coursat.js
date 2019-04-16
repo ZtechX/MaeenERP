@@ -170,7 +170,7 @@ function changePage(page) {
  
 function drawAllCourses() {
     try {
-     
+        debugger
 
         coursatCls.get_Courses("", "", function (val) {
             //debugger

@@ -72,19 +72,8 @@
                             <asp:Panel ID="pnlForm" runat="server">
                                 <div class="col-md-6">
 
-                                     <div class="form-group">
-                                        <div class="col-md-3 col-sm-12">
-                                            <label class="label-required">
-                                            كود المستشار  </lable>
-                                        </div>
+                                    
 
-                                        <div class="col-md-9 col-sm-12">
-                                            <input required onkeypress="return cust_chkNumber(event,this,10);" readonly="readonly" dbcolumn="code" type="text" id="code"
-                                                class="form-control" runat="server" clientidmode="Static" />
-
-                                            <br />
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
                                             <label for="Name" class="label-required">اسم المستشار</label>
@@ -115,8 +104,8 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox required class="form-control" dbColumn="password" ClientIDMode="Static" ID="TextBox3" runat="server">
-                                            </asp:TextBox>
+                                            <input type="password" required class="form-control" dbColumn="password" ClientIDMode="Static" ID="TextBox3" runat="server"/>
+                                            
                                             <br />
                                         </div>
 

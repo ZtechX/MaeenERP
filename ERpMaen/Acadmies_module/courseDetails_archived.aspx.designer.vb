@@ -66,4 +66,13 @@ Partial Public Class courseDetails_archived
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents finaldegree As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''TextBox9 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox9 As Global.System.Web.UI.WebControls.TextBox
 End Class

@@ -10,6 +10,8 @@
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/courseDetailsCls.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
+                   <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
+
         </Services>
     </asp:ScriptManager>
 <%--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">--%>
@@ -192,6 +194,7 @@
             <section class="app-content">
                 <div class="row">
                      <label style="display:none" id="Lblcourse_id" runat="server" ></label>
+                     <label style="display:none" id="lblcode" runat="server" ></label>
                      <label style="display:none" id="LblLecture_id" ></label>
                       <label style="display:none" id="LblHomework_id" ></label>
                        <label style="display:none" id="LblExam_id" ></label>
@@ -545,6 +548,56 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="inner">
+                                        <div class="order-desc row">
+                                            <div class="desc-head order_wid col-md-12"">
+                                                <div class=" pull-right">
+                                                <i class="zmdi zmdi-file-text zmdi-hc-lg"></i>
+                                                <h3> درجات الدورة </h3>
+                                                    </div>
+                                              
+                                                
+                                            </div>
+                                            <div class="desc-body">
+
+
+
+                                                <section class="app-content">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 col-xs-12 pull-right">
+
+                                                            <div class="widget-body">
+                                                                <div class="trans-data col-xs-12">
+                                                                  
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-bordered table-hover">
+                                                                            <tr>
+                                                                                <th> الدرجة النهائية </th>
+                                                                                <th> درجة النشاط</th>
+                                                                               
+
+                                                                            </tr>
+
+                                                                            <tbody id="studentcourseDegreestable">
+
+                     
+                                                                                   </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                                <%-- نهايةالجدول--%>
+                                            </div>
+                                        </div>
+                                    </div>
                                   
                                <% End If %>
                                     
@@ -641,7 +694,7 @@
                                                 <% End If %>
 
                                                  <% if ERpMaen.LoginInfo.getUserType = 2 Then   %>
-                                                   <button type="button" class="btn btn_rec btn-dark" onclick="archiveCourse();">
+                                                   <button type="button" class="btn btn_rec btn-dark"  id="archiveBtn" onclick="archiveCourse();" runat="server">
                                                     <i class="zmdi zmdi-headset-mic"></i>
                                                         اضافة الى الارشيف</button>
                                                
@@ -677,7 +730,7 @@
                                      </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <button type="submit" class="btn" onclick="addComment();">ارسال</button>
+                                                            <button type="button" class="btn" onclick="addComment();">ارسال</button>
                                                            
                                                         </div>
                                                    
@@ -720,7 +773,49 @@
                                     </div>
 
 
+                                        <% if ERpMaen.LoginInfo.getUserType = 2 Then   %>
+                                    <div class="inner">
+                                        <div class="add-hint">
+                                            
+                                            <div class="hint-head side_head">
+                                                    <div>
+                                                        <h3>
+                                                            <i class="zmdi zmdi-storage zmdi-hc-lg"></i>
+                                                            مالية الطلاب  
+                                                        </h3>
+                                              
+                                                </div>
+                                              
 
+                                                        </div>
+                                                
+                                            <div class="table-responsive" >
+                                             
+
+                                                <table id="student">
+                                                     <tr>
+                                                        <th>الطالب </th>
+                                                        <th>المبلغ</th>
+                                                        <th>الصورة </th>
+                                                           <th>الحالة </th>
+                                                         <th>الاجراء </th>
+
+                                                    </tr>
+                                                    <tbody id="Student_Finance">
+
+                                                    </tbody>
+
+
+                                                 <%-- here--%>
+                                                </table>
+                                            </div>
+
+                                      
+                                             </div>
+                                       
+                                        </div>
+
+                                       <% End If %>
                                       <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
                                     <div class="inner">
                                         <div class="add-hint">
@@ -734,10 +829,15 @@
                                               
                                                     
                                                         <div class=" pull-left">
+                                                               
+                                      <% if ERpMaen.LoginInfo.getUserType = 2 Then   %>
                                                         <button style="margin-top: -20px;" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addStudentModal">
                                                             اضافة طلاب   <i class="fa fa-plus zmdi zmdi-storage zmdi-hc-lg"></i>
 
                                                         </button>
+                                                            
+                                      <% End If    %>
+                                                                    
 
                                                     </div>
                                                 </div>
@@ -767,6 +867,7 @@
                                        
                                         </div>
                                      
+
                              
                                     <div class="inner">
                                         <div class="add-hint">
@@ -862,11 +963,32 @@
                                                 </h3>
                                             </div>
                                             <div class="hint-body">
-                                                <p>
-                                                    لا توجد ماليات الان
+                                              
+                                            
+                                               <div class="table-responsive" >
+                                             
+                                                <table class="table table-bordered">
+                                                     <tr>
+                                                       
+                                                        <th>المبلغ</th>
+                                                        <th>الحاله </th>
+                                                     
 
- 
-                                                </p>
+                                                    </tr>
+                                                    <tbody id="financestudent">
+
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td>اجمالى المبالغ المؤكدة</td>
+                                                            <td><label id="total_money"></label></td>
+                                                        </tr>
+                                                    </tfoot>
+
+                                                 <%-- here--%>
+                                                </table>
+                                            </div>
+                                                   
                                                 <button type="button" class="btn btn-purple btn-hint" data-toggle="modal" data-target="#add_Financial">اضافة مالية جديدة</button>
                                             </div>
                                         </div>
@@ -1817,6 +1939,8 @@
                     </div>
                 </div>
             </div>
+
+            
 
            <div class="modal fade" id="contact_admin" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
