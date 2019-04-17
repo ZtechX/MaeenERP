@@ -262,7 +262,7 @@ function checkFormOperation() {
             }
         }
     } catch (err) {
-        alert(err);
+       // alert(err);
     }
 }
 

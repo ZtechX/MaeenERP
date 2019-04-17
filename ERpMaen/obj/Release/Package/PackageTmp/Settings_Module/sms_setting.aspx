@@ -47,8 +47,8 @@
                         <asp:Panel ID="pnlOps" runat="server" Style="text-align: right">
                          <asp:Panel ID="pnlFunctions" runat="server" CssClass="row" Enabled="true">
                                 <div class="col-md-9 col-sm-12">
-                                    <ul>
-                                        <li>
+                                    <ul id="DivAction">
+                                        <li >
                                             <asp:LinkButton OnClientClick="add(); return false;" ID="cmdAdd" runat="server"
                                                 SkinID="btn-top" CausesValidation="false">
                                      <i class="fa fa-plus"></i>

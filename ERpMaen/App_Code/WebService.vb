@@ -3970,6 +3970,10 @@ Public Class WebService
                 ElseIf formName = "Trainers" Then
                     quaryStr = quaryStr + " and tblUsers.comp_id=" + LoginInfo.GetComp_id()
                 ElseIf formName = "orders" Then
+                    quaryStr = quaryStr + " ,case owner_id when " + LoginInfo.GetUser__Id() + " then '11_'+convert(varchar,ash_orders.status) else '1_'+convert(varchar,ash_orders.status) end as 'موافقة / رفض' from ash_orders left join tblUsers owner on owner.id=owner_id" +
+  " left join ash_case_receiving_delivery_details on ash_case_receiving_delivery_details.id=event_id " +
+  " left join ash_cases on ash_case_receiving_delivery_details.case_id=ash_cases.id" +
+  " left join tblUsers person on person.related_id=ash_cases.person1_id and person.User_Type=9 "
                     Dim userType = LoginInfo.getUserType()
                     If userType = "2" Or userType = "7" Then
                         quaryStr = quaryStr + " where ash_orders.comp_id=" + LoginInfo.GetComp_id()

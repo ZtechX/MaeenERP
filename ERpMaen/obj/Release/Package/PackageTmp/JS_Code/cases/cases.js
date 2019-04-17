@@ -101,17 +101,13 @@ function get_option_cases() {
     cases.get_option_cases(function (val) {
         if (val != "") {
             var data = JSON.parse(val);
-            console.log(data);
             var div_data = "";
             for (var x = 0; x < data.length; x++) {
                 div_data = div_data + "<option value=" + data[x].case_id + ">حالة#" + data[x].cases + "  " + "مقدمة من : " + data[x].person+" "+  "رقم الهوية : " + data[x].num + "  " + " </option> ";
             }
             $('#combobox').html(div_data);
             $('#ddlcase_id').append(div_data);
-           
         }
-
-
     });
     
 }
@@ -129,7 +125,11 @@ function add() {
             $("#case_" + i).css("display", "none");
         }
         $("#ddlchild_custody").html("");
-        $("#case_active").addClass("active")
+        $("#case_active").addClass("active");
+        $("#case_0").hide();
+        $("#combobox").val(-1);
+        $("#txt_selectedCase").val("");
+        
     } catch (err) {
         alert(err);
     }
@@ -151,7 +151,7 @@ function save() {
     try {
         
         setRequired_Date("divdate3");
-        setRequired_Date("instrum_date");
+        
         $(".error").removeClass('error');
        
         $("#lblstart_date").html($("#divdate3 #txtDatem").val());
@@ -203,8 +203,31 @@ function save() {
                 resetDivControls("person_owner");
                 resetDivControls("person_against");
                 resetDivControls("get_children");
-                resetDivControls("get_status");
-                    showSuccessMessage("تم الحفظ بنجاح");
+                 resetDivControls("get_status");
+                 var SMS_Res = val.split("|")[2];
+                 if (SMS_Res == "") {
+                     alert("تم الحفظ بنجاح\n ولم يتم إرسال أى رسائل جوال لاى شخص");
+                 }
+                 var arr_str = SMS_Res.split("#$");
+                 var addation_info = "";
+                 if (arr_str[0] != "تم استلام الارقام بنجاح" && arr_str[0] != "") {
+                     addation_info += "لم يتم إرسال رسالة جوال بإسناد حالة إلى المستشار :" + arr_str[0]+"\n";
+                 }
+                 if (arr_str[1] != "تم استلام الارقام بنجاح" && arr_str[1] != "") {
+                     addation_info += "لم يتم إرسال رسالة جوال بإلغاءإسناد حالة إلى المستشار :" + arr_str[1] +"\n";
+                 }
+                 if (arr_str[2] != "تم استلام الارقام بنجاح" && arr_str[2] != "") {
+                     addation_info += "لم يتم إرسال رسالة جوال بإنشاء حالة إلى المنفذ :" + arr_str[2]+"\n";
+                 }
+                 if (arr_str[3] != "تم استلام الارقام بنجاح" && arr_str[3] != "") {
+                     addation_info += "لم يتم إرسال رسالة جوال بإنشاء حالة إلى المنفذ ضده :" + arr_str[3]+"\n";
+                 }
+                 if (addation_info == "") {
+                     showSuccessMessage("تم الحفظ بنجاح");
+                 } else {
+                     alert("تم الحفظ بنجاح\n" + addation_info );
+                 }
+              
             } else {
                  showErrorMessage(res);
             }
@@ -275,67 +298,192 @@ function save_children_receive() {
     setRequired_time("time_delivery_time");
     if (!checkRequired("children_receive")) {
         
-        var start_dt_m = $("#divdate_received #txtDatem").val();
-        var start_dt_h = $("#divdate_received #txtDateh").val();
-        $("#lblfirst_date_received_m").html(start_dt_m);
-        $("#lblfirst_date_received_h").html(start_dt_h);
+        cases.GET_delivery_Reciever_Data(case_id, function (Reval) {
+            debugger
+            var arr_Reval = Reval.split("|");
+            if (arr_Reval[0] != "" && arr_Reval[1] != "" && arr_Reval[2] != "" && arr_Reval[3] != "") {
+               
+                var deliver = arr_Reval[0];
+                var reciever = arr_Reval[1];
+                var advisor = arr_Reval[2];
+                var advisor_phone = arr_Reval[3];
+                var start_dt_m = $("#divdate_received #txtDatem").val();
+                var start_dt_h = $("#divdate_received #txtDateh").val();
+                $("#lblfirst_date_received_m").html(start_dt_m);
+                $("#lblfirst_date_received_h").html(start_dt_h);
 
-        var children_receive = generateJSONFromControls("children_receive");
-var PosId = $("#lblchild_recive_id").html();
+                var children_receive = generateJSONFromControls("children_receive");
+                var PosId = $("#lblchild_recive_id").html();
 
-        var reciveJson = [];
-        reciveJson.push({ "date_m": start_dt_m, "date_h": start_dt_h, "type": 1, "case_id": case_id});
+                var reciveJson = [];
+                reciveJson.push({ "date_m": start_dt_m, "date_h": start_dt_h, "type": 1,
+                    "case_id": case_id, "deliverer_id": deliver,
+                    "reciever_id": reciever, "advisor": advisor, "advisor_phone": advisor_phone
+                });
 
-        var days_num = Number($("#txtdelivery_period").val());
-        var arr_dt = start_dt_m.split("/");
-        var dateString = arr_dt[1] + "/" + arr_dt[0] + "/" + arr_dt[2];
-        var dateObject = new Date(dateString);
-        var end_dt = new Date(dateString);
-        dateObject.setDate(dateObject.getDate() + days_num);
-        end_dt.setDate(end_dt.getDate() + (Number($("#num_months").val()) * 30));
-       
-        while (dateObject <= end_dt) {
-            var str_dt = getDate_m_hj(dateObject).split("|");
-            reciveJson.push({ "date_m": str_dt[0], "date_h": str_dt[1], "type": 1, "case_id": case_id });
-            children_receive["endPeriod_date_m"] = str_dt[0];
-            dateObject.setDate(dateObject.getDate() + days_num);
-        }
+                var days_num = Number($("#txtdelivery_period").val());
+                var return_days_num = Number($("#txtreturn_period").val());
+                var arr_dt = start_dt_m.split("/");
+                var dateString = arr_dt[1] + "/" + arr_dt[0] + "/" + arr_dt[2];
+                var dateObject = new Date(dateString);
+                var end_dt = new Date(dateString);
 
-        cases.save_children_receive(PosId, case_id, children_receive, reciveJson, function (val) {
-            $("#SavedivLoader").hide();
-                if (val) {
-                    show_all(case_id, 1);
-                    showSuccessMessage("تم الحفظ بنجاح");
-                } else {
-                    showErrorMessage(val.split("|")[1]);
+                var return_dateObject = new Date(dateString);
+                return_dateObject.setDate(return_dateObject.getDate() + return_days_num);
+                var return_str_dt = getDate_m_hj(return_dateObject).split("|");
+                reciveJson.push({
+                    "date_m": return_str_dt[0], "date_h": return_str_dt[1],
+                    "type": 1, "case_id": case_id, "deliverer_id": reciever,
+                     "reciever_id": deliver, "advisor": advisor, "advisor_phone": advisor_phone
+                });
+
+
+                dateObject.setDate(dateObject.getDate() + days_num);
+                return_dateObject.setDate(return_dateObject.getDate() + days_num);
+                end_dt.setDate(end_dt.getDate() + (Number($("#num_months").val()) * 30));
+
+                while (dateObject <= end_dt) {
+                    var str_dt = getDate_m_hj(dateObject).split("|");
+                    reciveJson.push({
+                        "date_m": str_dt[0], "date_h": str_dt[1], "type": 1,
+                        "case_id": case_id, "deliverer_id": deliver,
+                        "reciever_id": reciever,  "advisor": advisor, "advisor_phone": advisor_phone
+                    });
+                    
+                    var return_str_dt = getDate_m_hj(return_dateObject).split("|");
+                    reciveJson.push({
+                        "date_m": return_str_dt[0], "date_h": return_str_dt[1], "type": 1,
+                        "case_id": case_id, "deliverer_id": reciever, 
+                        "reciever_id": deliver,"advisor": advisor, "advisor_phone": advisor_phone
+                    });
+
+                    children_receive["endPeriod_date_m"] = return_str_dt[0];
+
+                    return_dateObject.setDate(return_dateObject.getDate() + days_num);
+                    dateObject.setDate(dateObject.getDate() + days_num);
                 }
-            });
+                cases.save_children_receive(PosId, case_id, children_receive, reciveJson,true, function (_val) {
+                    $("#SavedivLoader").hide();
+                    var Res_arr = _val.split("|");
+                    if (Res_arr[0] == "True") {
+                        show_all(case_id, 1);
+                        showSuccessMessage("تم الحفظ بنجاح");
+                        if (Res_arr[1] != "") {
+                            alert("التواريخ التى لم تسجل لوجود معاد للحالة مسبق فى نفس التوقيت\n[ ــ  " + Res_arr[1] + "]");
+                        }
+                    } else {
+                            showErrorMessage(Res_arr[1]);
+                    }
+                });
+            } else {
+                showErrorMessage("بيانات الحالة ناقصة");
+            }
+        });
+        
 } else {
         alert("يرجى ادخال البيانات المطلوبه");
         $("#SavedivLoader").hide();
 }
+    
+}
 
+function save_anotherPeriod() {
+    var case_id = $("#lblcase_id").html();
+    $("#SavedivLoader").show();
+    if (!checkRequired("anotherPeriod")) {
+        cases.getLast_recieve(case_id, function (val) {
+
+            if (val != "") {
+                var arr_Reval = val.split("#");
+                if (arr_Reval[1].indexOf("|||") != -1) {
+                    showErrorMessage("بيانات الحالة ناقصة");
+                    return;
+                }
+                var arr = arr_Reval[1].split("|");
+                var deliver = arr[0];
+                var reciever = arr[1];
+                var advisor = arr[2];
+                var advisor_phone = arr[3];
+                var start_dt_m = arr_Reval[0];
+                var reciveJson = [];
+                var children_recieve = {};
+                 
+                var days_num = Number($("#delivery_period").val());
+                var return_days_num = Number($("#another_return_period").val());
+                
+                var arr_dt = start_dt_m.split("/");
+                var dateString = arr_dt[1] + "/" + arr_dt[0] + "/" + arr_dt[2];
+                var dateObject = new Date(dateString);
+                var end_dt = new Date(dateString);
+                var return_dateObject = new Date(dateString);
+                
+                dateObject.setDate(dateObject.getDate() + days_num);
+                end_dt.setDate(end_dt.getDate() + (Number($("#month_number").val()) * 30));
+                return_dateObject.setDate(return_dateObject.getDate() + return_days_num + days_num);
+
+                children_recieve["delivery_period"] = days_num;
+                children_recieve["back_period"] = return_days_num;
+                children_recieve["month_number"] = $("#month_number").val();
+                var first = 0;
+                while (dateObject <= end_dt) {
+                    var str_dt = getDate_m_hj(dateObject).split("|");
+                    if (first == 0) {
+                        children_recieve["first_date_m"] = str_dt[0];
+                        children_recieve["first_date_h"] = str_dt[1];
+                    }
+                    first = 1;
+                    reciveJson.push({ "date_m": str_dt[0], "date_h": str_dt[1], "type": 1, "case_id": case_id, "deliverer_id": deliver, "reciever_id": reciever, "advisor": advisor, "advisor_phone": advisor_phone });
+                    
+                    var return_str_dt = getDate_m_hj(return_dateObject).split("|");
+                    reciveJson.push({ "date_m": return_str_dt[0], "date_h": return_str_dt[1], "type": 1, "case_id": case_id, "deliverer_id": reciever, "reciever_id": deliver, "advisor": advisor, "advisor_phone": advisor_phone });
+
+                    children_recieve["endPeriod_date_m"] = return_str_dt[0];
+
+                    return_dateObject.setDate(return_dateObject.getDate() + days_num);
+                    dateObject.setDate(dateObject.getDate() + days_num);
+                }
+
+
+                cases.save_children_receive("", case_id,children_recieve, reciveJson,false, function (val1) {
+                    var Res_arr = val1.split("|");
+                    if (Res_arr[0] == "True") {
+                        $("#anotherPeriod").dialog("close");
+                        resetDivControls("anotherPeriod");
+                        showSuccessMessage("تم الحفظ بنجاح");
+                        fill_tb_other_period(case_id);
+                        if (Res_arr[1] != "") {
+                            alert("التواريخ التى لم تسجل لوجود معاد للحالة مسبق فى نفس التوقيت\n[ ــ  " + Res_arr[1] + "]");
+                        }
+                    } else {
+                        showErrorMessage("لم يتم الحفظ");
+                    }
+                    $("#SavedivLoader").hide();
+                });
+            } else {
+                $("#SavedivLoader").hide();
+                alert("لم تحدد مدة مسبقة بعد");
+            }
+        });
+
+    } else {
+        $("#SavedivLoader").hide();
+        alert("يرجى ادخال البيانات المطلوبه");
+    }
 
 }
+
 
 // end save_children_receive
 //////////////////////////////
 // save_delivery_details
 function save_delivery_details() {
+    if ($("#ddldeliverer_id").val() == $("#ddlreciever_id").val()) {
+        alert("لا يمكن ان يكون المسلم والمستلم نفس الشخص");
+        return;
+    }
     var ddltype = $("#ddltype").val();
-    //if (!checkRequired("receiving_delivery_details")) {
-    //$("#lbldate_m").html($("#divdate_delivery #txtDatem").val());
-    //$("#lbldate_h").html($("#divdate_delivery #txtDateh").val());
 
-    //$("#lblnew_date_m").html($("#div_new_date #txtDatem").val());
-    //$("#lblnew_date_h").html($("#div_new_date #txtDateh").val());
-    debugger
-    var day_num = $("#ddl_day_nm").val();
-    var _dt_m = "";
-  
-    
     var children_delivery_details = generateJSONFromControls("receiving_delivery_details");
-    //children_delivery_details["receiving_delivery_done"] = $("#receiving_delivery_done").prop('checked');
     var case_id = $("#ddlcase_id").val();
     
     var PosId = $("#lbldelivery_details").html();
@@ -348,17 +496,23 @@ function save_delivery_details() {
             alert("يجب ان تختار الاولاد");
             return;
         }
-        if (day_num != 0) {
-            _dt_m = $(currend_Sender).find("#dateval").attr('date') + "|" + day_num;
-        } 
+        
     }
     $("#SavedivLoader").show();
-    cases.save_delivery_details(PosId, case_id, children_delivery_details, children_gson, res, _dt_m, function (val) {
+    cases.save_delivery_details(PosId, case_id, children_delivery_details, children_gson,true,  function (val) {
+
         if (val != "-100") {
             $('#receiving_delivery_details').dialog("close");
-            $("#Appraisal").dialog({
-                width: "800px",
-            });
+            if (val == "0") {
+                $("#SavedivLoader").hide();
+                showSuccessMessage("لم يتم الحفظ");
+                return;
+            }
+            if ($("#Login_userType").html() == "9") {
+                $("#Appraisal").dialog({
+                    width: "800px",
+                });
+            }
             var res_id = val.split("|")[0]
             var res_type = val.split("|")[1]
             $("#lbltype").html(res_type)
@@ -431,12 +585,14 @@ function save_correspondences() {
         var PosId = $("#lblcorrespondences_id").html();
         $("#SavedivLoader").show();
         cases.save_correspondences(PosId, case_id, case_correspondences, function (val) {
-            debugger
+            
             if (val != "-100") {
                 $('#receiving_delivery_details').dialog("close");
-            $("#Appraisal").dialog({
-                width: "800px",
-            });
+                if ($("#Login_userType").html() == "9") {
+                    $("#Appraisal").dialog({
+                        width: "800px",
+                    });
+                }
             var res_id = val;
             $("#lbldetail_id").html(res_id)
             $("#lblcase_apprisal_id").html(case_id)
@@ -467,6 +623,10 @@ function save_correspondences() {
 /////////////////////
 // save_sessions
 function save_sessions() {
+    if ($("#ddldeliverer_id").val() == $("#ddlreciever_id").val()) {
+        alert("لا يمكن ان يكون المسلم والمستلم نفس الشخص");
+        return;
+    }
     setRequired_Date("divdate_sessions");
     setRequired_time("time_entry_time");
     setRequired_time("time_exite_time");
@@ -486,9 +646,11 @@ function save_sessions() {
         cases.save_sessions(PosId, case_id, sessions, children_gson, persons_gson, owner_id, second_party_id, function (val) {
             if (val != "-100") {
                 $('#receiving_delivery_details').dialog("close");
-                $("#Appraisal").dialog({
-                    width: "800px",
-                });
+                if ($("#Login_userType").html() == "9") {
+                    $("#Appraisal").dialog({
+                        width: "800px",
+                    });
+                }
                 var res_id = val;
                 $("#lbldetail_id").html(res_id)
                 $("#lblcase_apprisal_id").html(case_id)
@@ -1326,6 +1488,7 @@ function mark_all(event,table_id) {
     }
 }
 function search_type() {
+    
     var ddlsearch_type = $("#ddlsearch_type").val();
     $("#cases_dates tr").each(function () {
 
@@ -1522,7 +1685,7 @@ function getRegistAggregation() {
 }
 
 function getReview(type) {
-    debugger
+    
     var person_id ;
     if (type == "deliverer_id") {
         person_id = $("#receiving_delivery_details").find("#ddldeliverer_id").val();
@@ -1598,64 +1761,6 @@ function addAnother_children_receive () {
         width: "500px",
     });
 }
-function save_anotherPeriod() {
-    var case_id = $("#lblcase_id").html();
-    $("#SavedivLoader").show();
-    if (!checkRequired("anotherPeriod")) {
-        cases.getLast_recieve(case_id, function (val) {
-            $("#SavedivLoader").hide();
-            if (val != "") {
-                
-                var start_dt_m = val ;
-                var reciveJson = [];
-                var children_recieve = {};
-                children_recieve["case_id"] = case_id;
-                var days_num = Number($("#delivery_period").val());
-                var arr_dt = start_dt_m.split("/");
-                var dateString = arr_dt[1] + "/" + arr_dt[0] + "/" + arr_dt[2];
-                var dateObject = new Date(dateString);
-                var end_dt = new Date(dateString);
-                
-                dateObject.setDate(dateObject.getDate() + days_num);
-                end_dt.setDate(end_dt.getDate() + (Number($("#month_number").val()) * 30));
-                children_recieve["delivery_period"] = days_num;
-                children_recieve["month_number"] = $("#month_number").val();
-                var first = 0;
-                while (dateObject <= end_dt) {
-                    var str_dt = getDate_m_hj(dateObject).split("|");
-                    if (first == 0) {
-                        children_recieve["first_date_m"] = str_dt[0];
-                        children_recieve["first_date_h"] = str_dt[1];
-                    }
-                    first = 1;
-                    children_recieve["endPeriod_date_m"] = str_dt[0];
-
-                    reciveJson.push({ "date_m": str_dt[0], "date_h": str_dt[1], "type": 1, "case_id": case_id });
-                    dateObject.setDate(dateObject.getDate() + days_num);
-                }
-
-                debugger
-                cases.save_anotherPeriod(children_recieve,reciveJson, function (val1) {
-                    if (val1) {
-                        $("#anotherPeriod").dialog("close");
-                        resetDivControls("anotherPeriod");
-                        showSuccessMessage("تم الحفظ بنجاح");
-                        fill_tb_other_period(case_id);
-                    } else {
-                        showErrorMessage("لم يتم الحفظ");
-                    }
-                });
-            } else {
-                alert("لم تحدد مدة مسبقة بعد");
-            }
-        });
-       
-    } else {
-        $("#SavedivLoader").hide();
-        alert("يرجى ادخال البيانات المطلوبه");
-    }
-
-}
 
 function delete_Time(id, tabel_nm) {
     $("#SavedivLoader").show();
@@ -1691,12 +1796,14 @@ function fill_tb_other_period(case_id) {
 }
 
 function delete_Period(id, case_id) {
-    cases.delete_Period(id, function (val) {
-        if (val) {
+    cases.delete_Period(id,true, function (val) {
+        debugger
+        var arr = val.split("|");
+        if (arr[0] == "True") {
             showSuccessMessage("تم الحذف بنجاح");
             fill_tb_other_period(case_id);
         } else {
-            showErrorMessage("لم يتم الحذف");
+            showErrorMessage(arr[1]);
         }
     });
 }

@@ -99,17 +99,39 @@ Public Class coursatCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_Courses(ByVal filter As String, ByVal name As String) As String()
-        Dim dt_user As DataTable
-        dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
-        Dim comp_id = dt_user.Rows(0).Item("comp_id").ToString
+    Public Function get_Courses(ByVal filter As String, ByVal name As String, ByVal currentdate As String) As String()
+
         Dim Names As New List(Of String)(10)
         Try
+            Dim dtstatus As New DataTable
+
+            dtstatus = DBManager.Getdatatable("select id , status, start_dt_m,  end_dt_m from acd_courses where archive=0 and comp_id=" + LoginInfo.GetComp_id())
+            For Each item As DataRow In dtstatus.Rows
+                Dim start_date = item("start_dt_m").ToString()
+                Dim end_date = item("end_dt_m").ToString()
+                Dim currentDt = PublicFunctions.ConvertDatetoNumber(currentdate)
+                Dim ST_DT = PublicFunctions.ConvertDatetoNumber(start_date)
+                Dim END_DT = PublicFunctions.ConvertDatetoNumber(end_date)
+
+
+
+                If END_DT < currentDt Then
+                    DBManager.ExcuteQuery("update acd_courses set status=2 where  id=" + item("id").ToString() + " and archive=0 and comp_id=" + LoginInfo.GetComp_id())
+                ElseIf ST_DT < currentDt And END_DT > currentDt Then
+                    DBManager.ExcuteQuery("update acd_courses set status=1 where id=" + item("id").ToString() + "and  archive=0 and comp_id=" + LoginInfo.GetComp_id())
+                Else
+                    DBManager.ExcuteQuery("update acd_courses set status=0 where  id=" + item("id").ToString() + "and archive=0 and comp_id=" + LoginInfo.GetComp_id())
+
+                End If
+
+            Next
+
             Dim dt As New DataTable
             Dim condation = ""
             If name <> "" Then
                 condation = " AND name LIKE '%" + name + "%'"
             End If
+
             If filter = "" Then
                 If LoginInfo.getUserType = 4 Then
                     dt = DBManager.Getdatatable("select  acd_courses.id,acd_courses.status,acd_courses.code as 'code' , acd_courses.name , acd_courses.description, acd_courses.start_dt_m, acd_courses.trainer_id,tblUsers.full_name ,tblUsers.User_Image as 'trImage',IsNull(price,0) as price,tbllock_up.Description as 'department' from acd_courses join tbllock_up on acd_courses.category_id=tbllock_up.id join tblUsers on acd_courses.trainer_id=tblUsers.id where acd_courses.trainer_id=" + LoginInfo.GetUser__Id() + " and acd_courses.archive=0 and  acd_courses.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_courses.id DESC")

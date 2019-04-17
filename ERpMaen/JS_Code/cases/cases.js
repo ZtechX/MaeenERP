@@ -208,25 +208,25 @@ function save() {
                  if (SMS_Res == "") {
                      alert("تم الحفظ بنجاح\n ولم يتم إرسال أى رسائل جوال لاى شخص");
                  }
-                 var arr_str = SMS_Res.split("#$");
-                 var addation_info = "";
-                 if (arr_str[0] != "تم استلام الارقام بنجاح" && arr_str[0] != "") {
-                     addation_info += "لم يتم إرسال رسالة جوال بإسناد حالة إلى المستشار :" + arr_str[0]+"\n";
-                 }
-                 if (arr_str[1] != "تم استلام الارقام بنجاح" && arr_str[1] != "") {
-                     addation_info += "لم يتم إرسال رسالة جوال بإلغاءإسناد حالة إلى المستشار :" + arr_str[1] +"\n";
-                 }
-                 if (arr_str[2] != "تم استلام الارقام بنجاح" && arr_str[2] != "") {
-                     addation_info += "لم يتم إرسال رسالة جوال بإنشاء حالة إلى المنفذ :" + arr_str[2]+"\n";
-                 }
-                 if (arr_str[3] != "تم استلام الارقام بنجاح" && arr_str[3] != "") {
-                     addation_info += "لم يتم إرسال رسالة جوال بإنشاء حالة إلى المنفذ ضده :" + arr_str[3]+"\n";
-                 }
-                 if (addation_info == "") {
+                // var arr_str = SMS_Res.split("#$");
+                 //var addation_info = "";
+                 //if (arr_str[0] != "تم استلام الارقام بنجاح" && arr_str[0] != "") {
+                 //    addation_info += "لم يتم إرسال رسالة جوال بإسناد حالة إلى المستشار :" + arr_str[0]+"\n";
+                 //}
+                 //if (arr_str[1] != "تم استلام الارقام بنجاح" && arr_str[1] != "") {
+                 //    addation_info += "لم يتم إرسال رسالة جوال بإلغاءإسناد حالة إلى المستشار :" + arr_str[1] +"\n";
+                 //}
+                 //if (arr_str[2] != "تم استلام الارقام بنجاح" && arr_str[2] != "") {
+                 //    addation_info += "لم يتم إرسال رسالة جوال بإنشاء حالة إلى المنفذ :" + arr_str[2]+"\n";
+                 //}
+                 //if (arr_str[3] != "تم استلام الارقام بنجاح" && arr_str[3] != "") {
+                 //    addation_info += "لم يتم إرسال رسالة جوال بإنشاء حالة إلى المنفذ ضده :" + arr_str[3]+"\n";
+                 //}
+                 //if (addation_info == "") {
                      showSuccessMessage("تم الحفظ بنجاح");
-                 } else {
-                     alert("تم الحفظ بنجاح\n" + addation_info );
-                 }
+                 //} else {
+                 //    alert("تم الحفظ بنجاح\n" + addation_info );
+                 //}
               
             } else {
                  showErrorMessage(res);

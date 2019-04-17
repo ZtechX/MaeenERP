@@ -7,9 +7,10 @@
 'use strict';
 var mdate1 = "";
 function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
+    
     if (typeof HijriDate == 'undefined') throw new Error('HijriDate() class required!');
     let cd = typeof this == 'object' ? this : window, gdate = new Date(), hdate = new HijriDate(), dispDate, tzOffset = Date.parse('01 Jan 1970'),
-        gridAni = 'zoom', actTmoId, isDispToday = false, isAttached = false, isAccOpened = false, isAutoNewTheme, isRTL = false,
+        gridAni = 'zoom', actTmoId, isDispToday = false, isAttached = false, isAccOpened = false, isAutoNewTheme, isRTL = true,
         aboutElm, aboutTitleElm, aboutDateElm, aboutCloseBtnElm,
         isSmallScreen = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) < 640,
         createElm = function (tagName, className, innerHTML) {
@@ -110,7 +111,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                 el.setAttribute('firstday', i);
                 addEvt(el, 'click', onSelFirstDay);
                 accFirstDayElm.appendChild(el)
-            } updMenuLbl(); updCalModMenuLbl(); updFirstDayMenuLbl(); updHeader(); createWdayTitle(); createDates()
+            } updMenuLbl(); updCalModMenuLbl(); updFirstDayMenuLbl();  updHeader(); createWdayTitle(); createDates()
         },
         updMenuLbl = function () {
             let c = Calendar.getVal;
@@ -151,6 +152,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
             while (wdayTitleElm.firstChild) wdayTitleElm.removeChild(wdayTitleElm.firstChild); createWdayTitle()
         },
         createDates = function () {
+            debugger
             let dispTm = dispDate.getTime(), ppdr = dispDate.getDay() - firstDay;
             if (ppdr < 0) ppdr += 7;
             let pcdr = dispDate.getDayCountInMonth(), pndr = (7 - (ppdr + pcdr) % 7) % 7;
@@ -161,18 +163,26 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
             if (isDispToday) {
                 isDispToday = false; replaceClass(menuTodayElm, 'w3-transparent', 'w3-button w3-ripple'); menuTodayElm.disabled = false
             }
-            var month = dispDate.getMonth() + 2;
-            var year = dispDate.getFullYear();
+            //var month = dispDate.getMonth() + 2;
+            //var year = dispDate.getFullYear();
+            //if (month < 10) {
+            //    month = "0" + month;
+            //} else {
+            //    month = month;
+            //}
+            //var new_date_h = month + "/" + year;
+            var month = getOppsDate().getMonth() + 1;
+            var year = getOppsDate().getFullYear();
             if (month < 10) {
                 month = "0" + month;
             } else {
                 month = month;
             }
-            var new_date_h = month + "/" + year;
+            var new_date_m = year + month;
             var monthdata = "";
             var monthdata1 = "";
             var monthdata2 = "";
-            cases.get_dates(new_date_h, function (val) {
+            cases.get_dates(new_date_m, function (val) {
                 if (val[0] != "0") {
                      monthdata = JSON.parse(val[0]);
                 }
@@ -195,7 +205,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                         //if (i % 7 == isFri) grid.className += isToday ? ' w3-teal' : ' w3-text-teal';
                         //else if (i % 7 == isSun) grid.className += isToday ? ' w3-red' : ' w3-text-red';
                         if (isToday) grid.className += ' w3-dark-grey';
-                        if (i <= ppdr || ppdr + pcdr < i) { grid.className += ' w3-disabled'; grid.style.cursor = 'default' }
+                        if (i <= ppdr || ppdr + pcdr < i) { grid.style.cursor = 'default' }
                         else if (isToday) {
                             isDispToday = true;
                             grid.className += ' w3-round-large';
@@ -262,7 +272,10 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
         recreateDates = function () {
             while (gridsElm.children[1]) gridsElm.removeChild(gridsElm.children[1]); createDates();
         },
-        updCal = function () { updHeader();recreateDates() },
+        updCal = function () {
+            updHeader();
+            recreateDates()
+        },
         onDecMonth = function () { gridAni = 'right'; return isRTL ? incMonth() : decMonth() },
         onIncMonth = function () { gridAni = 'left'; return isRTL ? decMonth() : incMonth() },
         onDecYear = function () { gridAni = 'right'; return isRTL ? incYear() : decYear() },
@@ -361,7 +374,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                 c.lang = l;
                 replaceClass(gridsElm, ' right-to-left', '');
                 isRTL = c.getVal('isRTL'); if (isRTL) gridsElm.className += ' right-to-left';
-                gridAni = 'zoom'; updMenuLbl(); updCalModMenuLbl(); updFirstDayMenuLbl(); updTodayLbl(); updHeader();
+                gridAni = 'zoom'; updMenuLbl(); updCalModMenuLbl(); updFirstDayMenuLbl(); updTodayLbl(); 
                 recreateWdayTitle(); /*recreateDates()*/; return true
             }
         } return false
@@ -488,23 +501,24 @@ Object.defineProperty(Calendar, 'getDigit', {
     }
 });
 Object.defineProperty(Calendar, 'themes', { value: ['amber', 'aqua', 'black', 'blue', 'blue-grey', 'brown', 'cyan', 'dark-grey', 'deep-orange', 'deep-purple', 'green', 'grey', 'indigo', 'khaki', 'light-blue', 'light-green', 'lime', 'orange', 'pink', 'purple', 'red', 'teal', 'yellow'] });
-Object.defineProperty(Calendar, 'lang', { value: 'en', writable: true });
+Object.defineProperty(Calendar, 'lang', { value: 'ar', writable: true });
 Object.defineProperty(Calendar, 'getVal', { value: function (key) { return Calendar.language[Calendar.lang][key] } });
 Calendar.language = {
     en: {
-        isRTL: false,
-        menuItem0: ["Hijri calendar", "Gregorian calendar"],
-        menuItem1: "Firstday",
-        menuItem2: "Today",
-        menuItem3: "New theme",
-        menuItem4: "About",
-        menuItem5: "Close",
-        eraSuffix: ["AD", "BC"],
-        hEraSuffix: ["H", "BH"],
-        monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        monthShortNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        weekdayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        weekdayShortNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        isRTL: true,
+        digit: ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"],
+        menuItem0: ["التقويم الهجري", ""],
+        menuItem1: "اليوم الأول",
+        menuItem2: "اليوم",
+        menuItem3: "لون جديد",
+        menuItem4: "حول",
+        menuItem5: "أغلق",
+        eraSuffix: ["ميلادي", "قبل الميلاد"],
+        hEraSuffix: ["هجرة", "قبل الهجرة"],
+        monthNames: ["يَنايِر", "فِبرايِر", "مارِس", "أبريل", "مايو", "يونيو", "يوليو", "أغُسطُس", "سِبْتَمْبِر", "أکْتوبر", "نوفَمْبِر", "ديسَمْبِر"],
+        weekdayNames: ["الأحَد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"],
+        hMonthNames: ["المُحَرَّم", "صَفَر ", "رَبيع الاوَّل", "رَبيع الآخِر", "جُمادى الأولى", "جُمادى الآخِرة", "رَجَب", "شَعبان", "رَمَضان", "شَوّال", "ذو القَعدة", "ذو الحِجّة"]
+
     }
 };
 Calendar.language['id'] = {
@@ -550,8 +564,7 @@ function getmydate(sender) {
     $("#lbldelivery_date_h1").html($(sender).find("#dateval").attr('hdate'));
     $("#lbldelivery_date_m2").html($(sender).find("#dateval").attr('date'));
     $("#lbldelivery_date_h2").html($(sender).find("#dateval").attr('hdate'));
-    if ($(sender).hasClass("w3-disabled")) {
-    } else {
+    
   
         if (id != "") {
          //   show_all(id, 1);
@@ -574,7 +587,7 @@ function getmydate(sender) {
             add_new_date();
         }
       
-    }
+    
    
 
 }

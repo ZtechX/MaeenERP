@@ -141,12 +141,12 @@
                             </h3>
                         </div>
                         <div class="col-md-6" >
-                            <input  id="txt_Search" onkeyup="searchDiploma();" type="text" class="form-control" placeholder="بحث عن دبلومه" />
+                            <input  id="txt_Search" onkeyup="searchDiploma();" type="text" class="form-control" placeholder="بحث عن دبلوم" />
                         </div>
                         <div class="col-md-2">
                               <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
                             <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addCourse">اضافة دبلومه <i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addCourse">اضافة دبلوم <i class="fa fa-plus"></i></button>
 
                             </div>
                               <% End If  %>
@@ -195,14 +195,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">اضافة دبلومه</h4>
+                        <h4 class="modal-title">اضافة دبلوم</h4>
                     </div>
                     <div class="modal-body">
                         <div id="divForm">
                              <div class="col-md-6"> <%--col first--%>
                             <div class=" form-group ">
                                 <div class="col-md-3 col-sm-12">
-                                    <label for="Name" class="label-required">عنوان الدبلومه </label>
+                                    <label for="Name" class="label-required">عنوان الدبلوم </label>
 
                                 </div>
                                 <div class="col-md-9 col-sm-12">
@@ -210,14 +210,14 @@
                                     </asp:TextBox>
 
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="courseTitle"
-                                        ErrorMessage="من فضلك أدخل عنوان الدبلومه  " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
+                                        ErrorMessage="من فضلك أدخل عنوان الدبلوم  " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
 
                                 </div>
                             </div>
 
                              <div class="form-group">
                                  <div class="col-md-3 col-sm-12">
-                                        <label> سعر الدبلومه </label>
+                                        <label> سعر الدبلوم </label>
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">

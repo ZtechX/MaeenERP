@@ -730,6 +730,62 @@ Public Class courseDetailsCls
 #End Region
 
 
+#Region "Save"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function saveResponse(ByVal code As String, ByVal StudentId As String, ByVal CourseId As String, ByVal comment As String) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+
+            If DBManager.ExcuteQuery("UPDATE  acd_courses_students  set comment='" + comment + "'" + "where type=1 and student_id=" + StudentId + " and course_id=" + CourseId) <> -1 Then
+
+                Dim dictNotification As New Dictionary(Of String, Object)
+
+                dictNotification.Add("RefCode", CourseId)
+                dictNotification.Add("NotTitle", " نتيجة التقديم")
+                dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                dictNotification.Add("AssignedTo", StudentId)
+                dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                dictNotification.Add("Remarks", comment)
+                dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+
+                    If Not PublicFunctions.TransUsers_logs("3193", "acd_courses_students", "ادخال", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
+
+                    success = True
+                Else
+                    success = False
+                End If
+
+            End If
+            If success Then
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
+
 
 #Region "Save"
     ''' <summary>
@@ -796,24 +852,11 @@ Public Class courseDetailsCls
 
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
-            Dim dt As DataTable
-            dt = DBManager.Getdatatable("delete from acd_courses_students where checked=0  And type=1 And course_id=" + courseid)
 
-            Dim id = ""
             Dim success2 As Boolean = True
             For Each item As Object In students_action
-                Dim dictBasicDataJson As New Dictionary(Of String, Object)
-                dictBasicDataJson.Add("course_id", courseid)
 
-                dictBasicDataJson.Add("student_id", item("id"))
-                dictBasicDataJson.Add("notes", item("std_notes"))
-
-                dictBasicDataJson.Add("type", "1")
-
-                dictBasicDataJson.Add("checked", True)
-                dictBasicDataJson.Add("approved", item("action_Student"))
-
-                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
+                If DBManager.ExcuteQuery("UPDATE  acd_courses_students set checked=1 , approved=" + item("action_Student") + " where type=1 and course_id=" + courseid + " and student_id=" + item("id")) <> -1 Then
 
                     Dim dictNotification As New Dictionary(Of String, Object)
                     Dim action = item("action_Student")

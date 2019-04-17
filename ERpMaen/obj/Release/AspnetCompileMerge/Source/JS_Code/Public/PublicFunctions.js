@@ -1364,18 +1364,15 @@ function GetCurrentDate_m_hj() {
  
 }
 function resetPassword() {
+    debugger
     var user_name = $("#txtUserName").val();
     if (user_name != "") {
-        var phone = prompt("من فضل إدخل رقم الجوال لارسال كلمة السر");
+        var phone = prompt("من فضل إدخل رقم الجوال لارسال كلمة المرور");
         var regex = /^[0-9]+$/; x = "1150"
         
-        if (phone != null && phone != "" && phone.length == 10 && phone.match(regex) != null) {
-            WebService.resetPassword(user_name, function (val) {
-                if (val != "") {
-                    alert("كلمة السر \n" + "'" + val + "'");
-                } else {
-                    alert("لا يوجد حساب بهذة الرقم");
-                }
+        if (phone != null && phone != ""  && phone.match(regex) != null) {
+            WebService.resetPassword(phone, function (val) {
+                alert(val);
             });
         } else {
             alert("لا يوجد جوال بهذا الرقم");

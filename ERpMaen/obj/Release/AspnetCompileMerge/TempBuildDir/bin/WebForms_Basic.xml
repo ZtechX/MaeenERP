@@ -530,6 +530,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.CourseDetails._lblcode">
+<summary>
+lblcode control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.CourseDetails._lblStudentID">
 <summary>
 lblStudentID control.
@@ -542,6 +551,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.CourseDetails._img">
 <summary>
 img control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CourseDetails._archiveBtn">
+<summary>
+archiveBtn control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1259,6 +1277,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.courseDetails_archived._TextBox9">
+<summary>
+TextBox9 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.course_register._ToolkitScriptManager1">
 <summary>
 ToolkitScriptManager1 control.
@@ -1277,6 +1304,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.course_register._lblcode">
+<summary>
+lblcode control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.course_register._lblStudentID">
 <summary>
 lblStudentID control.
@@ -1289,6 +1325,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.course_register._img">
 <summary>
 img control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.course_register._checkstudentregister">
+<summary>
+checkstudentregister control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1433,6 +1478,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.DiplomaCourses._subject">
 <summary>
 subject control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaCourses._ddlsemster2">
+<summary>
+ddlsemster2 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1658,6 +1712,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.DiplomaSubjectDetails._Lblsubject_id">
 <summary>
 Lblsubject_id control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._lblcode">
+<summary>
+lblcode control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2297,6 +2360,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.diplome_register._Lbldiplome_id">
 <summary>
 Lbldiplome_id control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.diplome_register._lblcode">
+<summary>
+lblcode control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -4065,6 +4137,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.cases._txtreturn_period">
+<summary>
+txtreturn_period control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.cases._lblconciliation_id">
 <summary>
 lblconciliation_id control.
@@ -4221,6 +4302,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.cases._month_number">
 <summary>
 month_number control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.cases._another_return_period">
+<summary>
+another_return_period control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -6935,54 +7025,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.userPorfile._cmdSave">
-<summary>
-cmdSave control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.userPorfile._cmdDelete">
-<summary>
-cmdDelete control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.userPorfile._pnlDelete">
-<summary>
-pnlDelete control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.userPorfile._cmdUpdate">
-<summary>
-cmdUpdate control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:ERpMaen.userPorfile._Result">
 <summary>
 Result control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.userPorfile._PnlConfirm">
-<summary>
-PnlConfirm control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -7037,24 +7082,6 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.userPorfile._Checkbox1">
 <summary>
 Checkbox1 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.userPorfile._divResearcher">
-<summary>
-divResearcher control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.userPorfile._Researcher">
-<summary>
-Researcher control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -12072,6 +12099,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.Users._Checkbox2">
+<summary>
+Checkbox2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.Users._divResearcher">
 <summary>
 divResearcher control.
@@ -13377,15 +13413,6 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.DeliveryDate._txtrecieve_time">
 <summary>
 txtrecieve_time control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.DeliveryDate._ddl_day_nm">
-<summary>
-ddl_day_nm control.
 </summary>
 <remarks>
 Auto-generated field.

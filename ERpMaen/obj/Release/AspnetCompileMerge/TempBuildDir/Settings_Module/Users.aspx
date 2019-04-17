@@ -205,8 +205,8 @@
                                                   </div>
                                                   </div>
                                                <div class="form-group row">
-                                                
-                                                <div class="col-md-3 col-sm-12">
+                                                <div class="col-md-6">
+                                                    <div class="col-md-3 col-sm-12">
 
                                                     <label>نشط   </label>
                                                 </div>
@@ -214,9 +214,24 @@
                                                      <input name="chkManual" id="Checkbox1" dbcolumn="Active" runat="server"  type="checkbox" />
 
                                                 </div>
+                                                </div>
+                                                
+                                                     <div class="col-md-6">
+                                                
+                                                <div class="col-md-5 col-sm-12">
+
+                                                    <label>استلام استشارات   </label>
+                                                </div>
+                                                <div class="col-md-7 col-sm-12">
+                                                     <input name="chkManual" id="Checkbox2" dbcolumn="recieve_Consult" runat="server"  type="checkbox" />
+
+                                                </div>
 
 
                                             </div>
+
+                                            </div>
+                                           
                                                       <div id="divResearcher" runat="server" class="form-group row">
                                                 
                                                 <div  class="col-md-3 col-sm-12">

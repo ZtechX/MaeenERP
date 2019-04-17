@@ -45,13 +45,14 @@ function drawOldMess() {
         if (val != "") {
             var conslut_mess = JSON.parse(val);
             var str = "";
+            debugger
             conslut_mess.forEach(function (mess) {
-                
+                debugger
                 var date_time = "<pre style='margin-bottom: 0px;'>"+"التاريخ : "+ mess.message_date;
                 var time =mess.messageTime;
                 date_time += "     التوقيت : " + (time == null ? "" : time) +"</pre>";
                 str += `<div class="col-md-9">
-<label style="float:right;margin-right: 5px;"><pre style='margin-bottom: 0px;'>من : ${mess.full_name}</pre></label ><label style="float:left;">${date_time}</label>
+<label style="float:right;margin-right: 5px;"><pre style='margin-bottom: 0px;'>من : ${mess.name}</pre></label ><label style="float:left;">${date_time}</label>
 <textarea readonly="readonly"  rows="5" cols="20"  class="textbox icon-common" style="margin-right: 0px;margin-top: 0px; margin-bottom: 10px;">${mess.message}</textarea>
 </div><br/>
 `

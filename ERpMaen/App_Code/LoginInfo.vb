@@ -11,6 +11,23 @@ Imports System.Web
 Imports ERpMaen
 
 Public Class LoginInfo
+
+    Public Shared Sub CheckPermisionsNew(ByVal page As Page, ByVal groupId As String)
+        Try
+            Dim pageName As String = PublicFunctions.GetPageName(page.Request.Url.ToString)
+            If pageName <> "Dashboard" And pageName <> "userPorfile" Then
+                Dim pf As New PublicFunctions
+                Dim dt As New DataTable
+                dt = DBManager.Getdatatable("select * from tblgroup_permissons inner join tblforms on tblgroup_permissons.form_id=tblforms.id where group_id = " + groupId.ToString + "  and tblforms.FormName='" + pageName + "' and isnull(f_access,0)=1")
+                If dt.Rows.Count = 0 Then
+                    page.Response.Redirect("~/AccessDenied.aspx")
+                End If
+            End If
+        Catch ex As Exception
+            page.Response.Redirect("~/AccessDenied.aspx")
+        End Try
+    End Sub
+
     Public Shared Function CheckPermisions(ByRef grid As GridView, ByRef Add As LinkButton, ByRef Update As LinkButton, ByRef Delete As LinkButton, ByRef Print As LinkButton, ByRef Search As TextBox, ByVal page As Page, ByVal UserId As String, ByRef FormName As Label) As String
         Dim pageName As String = PublicFunctions.GetPageName(page.Request.Url.ToString)
         Dim dtLeadsProperty As New TblPermissions

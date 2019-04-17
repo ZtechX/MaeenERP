@@ -425,7 +425,7 @@ Public Class Diploma_CoursesCls
             If name <> "" Then
                 condation = " where name LIKE '%" + name + "%'"
             End If
-            dt = DBManager.Getdatatable("select  acd_diplome_subjects.code , acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , acd_diplome_subjects.subject_goal , acd_diplome_subjects.trainer_id,tblUsers.full_name,tblUsers.User_Image as 'trainerImage' ,tbllock_up.Description as 'subjectName' , acd_semester.name  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join acd_semester  on acd_diplome_subjects.semster_id=acd_semester.id where acd_diplome_subjects.archive=0 and  diplome_id=" + diploma_id + condation)
+            dt = DBManager.Getdatatable("select acd_diplomes.name as 'dpname' , acd_diplome_subjects.code , acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , acd_diplome_subjects.subject_goal , acd_diplome_subjects.trainer_id,tblUsers.full_name,tblUsers.User_Image as 'trainerImage' ,tbllock_up.Description as 'subjectName' , acd_semester.name  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join acd_semester  on acd_diplome_subjects.semster_id=acd_semester.id join acd_diplomes on acd_diplomes.id=acd_diplome_subjects.diplome_id where acd_diplome_subjects.archive=0 and  diplome_id=" + diploma_id + condation)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then

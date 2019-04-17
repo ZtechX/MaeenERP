@@ -6,10 +6,10 @@ var formAutoCodeControl = "lblmainid";
 var superAdmin = false;
 var selected_id = "";
 $(function () {
-
+  //  window.alert = function () { };
     try {
         $("#SavedivLoader").show();
-                form_load();
+               form_load();
     } catch (err) {
         alert(err);
     }

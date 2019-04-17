@@ -3,9 +3,9 @@ var deleteWebServiceMethod = "sms_setting.asmx/Delete";
 // global variable used in row_click and update functions
 var editWebServiceMethod = "sms_setting.asmx/Edit";
 var formAutoCodeControl = "lblmainid";
-
+var Superadmin = false;
 $(function () {
-    $("#pnlConfirm").hide();
+    
     $("#divData").hide();
     $("#SavedivLoader").show();
 
@@ -14,6 +14,8 @@ $(function () {
         sms_setting.checkUser(function (val) {
             
             if (val == "Superadmin") {
+                Superadmin = true;
+                $("#pnlConfirm").hide();
                 form_load();
                 //$("#pnlConfirm").show();
                 $("#divData").show();
@@ -26,6 +28,7 @@ $(function () {
                 sms_setting.get_data(val, function (val1) {
                     edit(val1);
                     $("#ddlComps").val(val);
+                    $("#DivAction").remove();
                 });
             }
         });
@@ -57,15 +60,21 @@ function save() {
             var basicData = generateJSONFromControls("divForm");
             var PosId = $("#lblmainid").html();
             sms_setting.Save(PosId, basicData, function (val) {
+                
                 if (val == true) {
                   
                     showSuccessMessage("تم الحفظ بنجاح");
-
-                    drawDynamicTable();
-                    cancel();
+                    if (Superadmin) {
+                        drawDynamicTable();
+                        cancel();
+                        $("#pnlConfirm").hide();
+                    } else {
+                        $("#pnlConfirm").show();
+                    }
                    
                 } else {
                     showErrorMessage("لم يتم الحفظ");
+                    $("#pnlConfirm").show();
                 }
                
                 $("#SavedivLoader").hide();
@@ -82,7 +91,6 @@ function edit(val) {
         if (val[0] == "1") {
             var data = JSON.parse(val[1]);
             fillControlsFromJson(data[0]);
-            showSuccessMessage("Record Selected");
             $("#cmdSave").prop("CommandArgument", "Update");
             $("#cmdUpdate").removeAttr('disabled');
             $("#cmdDelete").removeAttr('disabled');
@@ -91,7 +99,6 @@ function edit(val) {
                 formOperation = "";
             }
         }
-        $("#pnlConfirm").hide();
         $("#divData").show();
         $("#SavedivLoader").hide();
 }

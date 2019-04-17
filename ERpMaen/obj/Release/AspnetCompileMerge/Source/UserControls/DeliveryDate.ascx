@@ -150,29 +150,11 @@
               </div>
 
           <div class="col-md-12 form-group " id="Divback_dt">
-                                                                    <div class="col-md-3 col-sm-12">
-                                                                        
-                                                                        <label>يوم إعادة التسليم</label>
-                                                                    </div>
+                                                                   
 
-                                                                    <div class="col-md-9 col-sm-12">
- <asp:DropDownList runat="server" class="form-control" ClientIDMode="Static" ID="ddl_day_nm" dbcolumn="back_day_nm">
-                                                                               <asp:ListItem Text="أختر" Value="0" Selected="True" ></asp:ListItem>
-                                                                               <asp:ListItem Text="السبت" Value="Saturday" ></asp:ListItem>
-                                                                               <asp:ListItem Text="الاحد" Value="Sunday" ></asp:ListItem>
-                                                                               <asp:ListItem Text="الاتنين" Value="Monday" ></asp:ListItem>
-                                                                               <asp:ListItem Text="الثلاثاء" Value="Tuesday" ></asp:ListItem>
-                                                                               <asp:ListItem Text="الاربعاء" Value="Wednesday" ></asp:ListItem>
-                                                                               <asp:ListItem Text="الخميس" Value="Thursday" ></asp:ListItem>
-                                                                               <asp:ListItem Text="الجمعة" Value="Friday" ></asp:ListItem>
-                                                                           </asp:DropDownList>
-                                                                      
-
-                                                                    </div>
-<div class="row">
       <button class="btn btn-info btn-lg pull-left" onclick="getReceive_and_deliver(); return false;" style="margin-right:10px;"> <i class="fa fa-print"></i> تقرير استلام وتسليم</button>
                <button class="btn btn-info btn-lg pull-left" onclick="getagreement(); return false;"> <i class="fa fa-print"></i> اتفاق تنفيذ استلام وتسليم</button>
-          </div>                                                                 
+                                                                        
 </div>
            </div>
           </div>
@@ -204,7 +186,7 @@
 
             <div class="col-md-3 col-sm-12">
                 <label class="label-required">
-                المبلغ    </lable>
+                المبلغ    </label>
             </div>
 
             <div class="col-md-9 col-sm-12">

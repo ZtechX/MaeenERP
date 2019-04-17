@@ -644,6 +644,15 @@ Partial Public Class CourseDetails
     Protected WithEvents conmsg As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''rejectId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rejectId As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''message control.
     '''</summary>
     '''<remarks>

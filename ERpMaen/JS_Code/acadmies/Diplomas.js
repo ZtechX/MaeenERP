@@ -4,7 +4,7 @@
 //var editWebServiceMethod = "coursatCls.asmx/Edit";
 var formAutoCodeControl = "lblmainid";
 var diplomasList = [];
-var records_per_page = 2;
+var records_per_page = 6;
 var numPages = 0;
 var current_page = 1;
 
@@ -50,10 +50,11 @@ function saveCourse() {
                 if (val == true) {
                     debugger;
                     alert("تم الحفظ بنجاح");
+                    drawCourses();
                     $("#addCourse").modal('hide');
                     resetDivControls("divForm");
                   
-                    drawCourses();
+                 
                     
                  
 

@@ -144,14 +144,14 @@
 
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-12">
-                                        <label  class="label-required">رقم الهاتف</label>
+                                        <label  class="label-required">رقم الجوال</label>
 
                                         </div>
 
                                          <div class="col-md-9 col-sm-12">
                                             <input onkeypress="return isMobilePhoneFax(event);" dbcolumn="User_PhoneNumber" runat="server" type="text" id="txttel" class="form-control" />
                                             <asp:RequiredFieldValidator CssClass="validator" ID="RequiredFieldValidator1" runat="server" ControlToValidate="txttel"
-                                                ErrorMessage="من فضلك ادخل رقم الهاتف " ValidationGroup="vgroup" ForeColor="red"></asp:RequiredFieldValidator>
+                                                ErrorMessage="من فضلك ادخل رقم الجوال " ValidationGroup="vgroup" ForeColor="red"></asp:RequiredFieldValidator>
 
                                         </div>
                                     </div>

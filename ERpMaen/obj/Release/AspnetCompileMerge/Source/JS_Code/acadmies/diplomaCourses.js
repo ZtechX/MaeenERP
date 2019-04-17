@@ -38,6 +38,106 @@ function resetAll() {
 
 
 
+function archiveSemester() {
+
+    debugger
+    var f = confirm(" عند ارشفة الكورس لن تتمكن من التعديل هل تريد الارشفة");
+
+    if (f == true) {
+
+        var semester_id = $("#ddlsemster2").val();
+        var diplomeId = ($("#Lbldeploma_id").html());
+
+
+        Diploma_CoursesCls.checkSemesterDate(semester_id, diplomeId, Pub_date_m, function (val) {
+            if (val[0] == 1) {
+
+                var f = confirm("الفصل الدراسى لم ينتهى  هل تريد الارشفة");
+
+                if (f == true) {
+
+
+                    var diplomeId = ($("#Lbldeploma_id").html());
+                    var diplomeCode = ($("#lbldiplomeCode").html());
+                    var semester_id = $("#ddlsemster2").val();
+
+                    Diploma_CoursesCls.Archive_Semester(semester_id, diplomeId, function (val) {
+
+
+                        if (val[0] == 1) {
+                            $("#SavedivLoader").hide();
+                            alert("تمت الارشفه بنجاح  ");
+                            window.location.replace("DiplomaCourses?code=" + diplomeCode);
+                            //window.location.reload();
+
+                        }
+
+                        else {
+                            alert('  لم يتم الارشيف  ');
+                        }
+
+                    });
+                }
+                else {
+                    $("#semester_archiveModal").modal('hide')
+                }
+            }
+            else if (val[0] == 2) {
+
+                var f = confirm("هل تريد الارشفة");
+
+                if (f == true) {
+
+
+                    var diplomeId = ($("#Lbldeploma_id").html());
+                    var diplomeCode = ($("#lbldiplomeCode").html());
+                    var semester_id = $("#ddlsemster2").val();
+
+                    Diploma_CoursesCls.Archive_Semester(semester_id, diplomeId, function (val) {
+
+
+                        if (val[0] == 1) {
+                            $("#SavedivLoader").hide();
+                            alert("تمت الارشفه بنجاح  ");
+                            window.location.replace("DiplomaCourses?code=" + diplomeCode);
+                            //window.location.reload();
+
+                        }
+                        //else if (val[0] == 2) {
+                        //    alert('  الفصل الدراسى لم ينتهى بعد ');
+                        //    $("#SavedivLoader").hide();
+                        //    alert("تمت الارشفه بنجاح  ");
+                        //    window.location.replace("DiplomaCourses?code=" + diplomeCode);
+                        //}
+                        else {
+                            alert('  لم يتم الارشيف  ');
+                        }
+
+                    });
+                }
+                else {
+                    alert(" لم يتم الارشيف")
+                }
+
+            }
+            else {
+                alert(" No results found");
+                $("#semester_archiveModal").modal('hide')
+
+            }
+
+
+        });
+    }
+    else {
+
+        $("#semester_archiveModal").modal('hide')
+    }
+
+    }
+
+
+
 function addfinancial() {
     //add financial
 
@@ -214,6 +314,7 @@ function changePage(page) {
                                     <span> ${element.created_at_hj} </span>
                                      <i class="fa fa-calendar-check-o"></i>
                                     <span>${element.semster}</span>
+
                                 </div>
                              
                                    
@@ -397,12 +498,13 @@ function AddDiplome_Student() {
 
             });
 
-            var diplomeID = ($("#Lbldeploma_id").html());
+        var diplomeID = ($("#Lbldeploma_id").html());
+        var code = ($("#lbldiplomeCode").html());
 
             //var x = student_arr.length;
             //if (x != 0) {
 
-            Diploma_CoursesCls.SaveStudent(diplomeID, student_arr, function (val) {
+            Diploma_CoursesCls.SaveStudent(diplomeID, code,student_arr, function (val) {
                 if (val == true) {
                     debugger
                     //  $("#SavedivLoader").hide();

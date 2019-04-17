@@ -31,10 +31,14 @@ Imports AjaxControlToolkit
 Public Class SiteMaster
     Inherits MasterPage
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+        group_id = LoginInfo.Getgroup_id()
+
+        LoginInfo.CheckPermisionsNew(Me.Page, group_id)
+
         Page.Header.DataBind()
         'SalesManCode = LoginInfo.GetSalesmanCode(Request.Cookies("UserInfo"), Me.Page)
-        UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
-        group_id = LoginInfo.Getgroup_id()
+        Dim UserId = LoginInfo.GetUser__Id()
+
         lblUserId.Text = UserId
         'clsGeneralVariables.usertype = pf.GetUserType(SalesManCode)
         ScriptManager.RegisterStartupScript(Me, Me.[GetType](), "yeah", "menu();", True)

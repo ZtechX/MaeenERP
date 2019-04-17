@@ -4,7 +4,7 @@ var deleteWebServiceMethod = "coursatCls.asmx/Delete";
 var editWebServiceMethod = "coursatCls.asmx/Edit";
 var formAutoCodeControl = "lblmainid";
 var CoursesList = [];
-var records_per_page = 3;
+var records_per_page = 6;
 var numPages = 0;
 var current_page = 1;
 $(function () {
@@ -138,17 +138,23 @@ function changePage(page) {
     $("#courses-list").html("");
     var data = "";
     var colors = ["#5cb85c", "#428bca", "#000"];
-    
+   
 
         for (var i = (page - 1) * records_per_page; i < (page * records_per_page) && i < CoursesList.length; i++) {
             var element = CoursesList[i];
+            var costdiv = `<i class="fa fa-money" style="color:brown;"></i>
+                <span style="color:brown;">${element.price}   </span>`;
+            if (element.price == 0) {
+                 costdiv = ` <span style="color:blue;">مجاناً</span>`;
+            }
             data = data + `<div class="col-md-4 col-sm-12" >
 <div class="block">
                         <div class="block-title" style="background:${colors[element.status]}">
                             <h5><a href="courseDetails.aspx?code=${element.code}">${element.name}</a></h5>
                         </div>
                         <div class="block-desc">
-                            <p class="desc">${element.description}</p>
+<b>${element.department}: <b/>
+                            <p class="desc" style="height:100px;">${element.description.substring(0, 200)}....</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
                                     <img class="avatar" src="${element.trImage}" />
@@ -157,6 +163,8 @@ function changePage(page) {
                                 <div class="block-date pull-left">
                                     <i class="fa fa-calendar-check-o"></i>
                                     <span>${element.start_dt_m}   </span>
+<br>
+${costdiv}
                                 </div>
                             </div>
 </div>

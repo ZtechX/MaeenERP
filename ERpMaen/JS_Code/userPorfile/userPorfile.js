@@ -1,4 +1,5 @@
-﻿$(function () {
+﻿var doRedirect = false;
+$(function () {
     try {
         $("input").attr("class", "");
         $("select").attr("class", "");
@@ -40,7 +41,10 @@ function save() {
                 $("#SavedivLoader").hide();
                 if (val.split("|")[0] == "True") {
                     showSuccessMessage("تم الحفظ بنجاح");
-                    location.reload();
+                    if (doRedirect) {
+                        location.replace("/Dashboard.aspx");
+                    }
+                    
                 } else {
                     showErrorMessage(val.split("|")[1]);
                     $("#SavedivLoader").hide();
@@ -74,6 +78,7 @@ function edit(val) {
            
             $("#SavedivLoader").hide();
             if (data[0].User_Type == 9 && !(data[0].password_changed)) {
+                doRedirect = true;
                 $("#cssmenu li:not(:first-child)").remove();
                 $("#txtUserPassword").val("");
                 alert("يرجى تغيير كلمة المرور الأفتراضية");
