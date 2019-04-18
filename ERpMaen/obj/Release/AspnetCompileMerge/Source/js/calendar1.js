@@ -6,6 +6,7 @@
  */
 'use strict';
 var mdate1 = "";
+
 function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
     
     if (typeof HijriDate == 'undefined') throw new Error('HijriDate() class required!');
@@ -171,18 +172,23 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
             //    month = month;
             //}
             //var new_date_h = month + "/" + year;
-            var month = getOppsDate().getMonth() + 1;
-            var year = getOppsDate().getFullYear();
-            if (month < 10) {
-                month = "0" + month;
-            } else {
-                month = month;
-            }
-            var new_date_m = year + month;
+            debugger
+           var first_Grid_day = getOppsDate;
+            first_Grid_day().setDate(sdate);
+            var first_day = first_Grid_day().getDateString();
+            
+            //var month = getOppsDate().getMonth() + 1;
+            //var year = getOppsDate().getFullYear();
+            //if (month < 10) {
+            //    month = "0" + month;
+            //} else {
+            //    month = month;
+            //}
+            //var new_date_m = year + month;
             var monthdata = "";
             var monthdata1 = "";
             var monthdata2 = "";
-            cases.get_dates(new_date_m, function (val) {
+            cases.get_dates(first_day, function (val) {
                 if (val[0] != "0") {
                      monthdata = JSON.parse(val[0]);
                 }
@@ -192,6 +198,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                 if (val[2] != "0") {
                     monthdata2 = JSON.parse(val[2]);
                 }
+                debugger
                     for (let i = 1; i <= ppdr + pcdr + pndr; i++) {
                         if (gridCtr == 0) { var row = createElm('div', 'w3-cell-row w3-center'); gridsElm.appendChild(row) }
                         let grid = createElmgrid('div', 'w3-cell w3-animate-' + gridAni, getOppsDate().getDayCountInMonth()),
@@ -217,6 +224,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                             grid.className += ' w3-btn w3-ripple w3-round-large w3-black'; grid.style.cursor = 'pointer'; addEvt(grid, 'click', onAbout)
                         }
                         mdate1 = (sdate < 10 ? "0" + sdate : sdate) + '/' + ((getOppsDate().getMonth() + 1) < 10 ? "0" + (getOppsDate().getMonth() + 1) : (getOppsDate().getMonth() + 1)) + '/' + (getOppsDate().getFullYear());
+                        debugger
                         var res = comparedate(monthdata, mdate1);
                         var res1 = comparedate(monthdata1, mdate1);
                         var res2 = comparedate(monthdata2, mdate1);

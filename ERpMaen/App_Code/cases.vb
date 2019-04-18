@@ -238,11 +238,15 @@ Public Class cases
             dictBasicDataJson.Add("details", dictstatus("details"))
             dictBasicDataJson.Add("user_id", login_user)
 
-            Dim child_custody = dictchildren("child_custody").ToString
+            Dim child_custody = dictchildren("child_custody_selTXT").ToString
             If child_custody = dictperson_owner("name").ToString Then
                 dictBasicDataJson.Add("child_custody", person1_id)
             ElseIf child_custody = dictperson_against("name").ToString Then
                 dictBasicDataJson.Add("child_custody", person2_id)
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return "False|برجاء اختيار حضانة الاطفال"
             End If
 
 
@@ -554,18 +558,17 @@ Public Class cases
 #Region "save_children_receive"
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function save_children_receive(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal arr_recive As List(Of Object), ByVal basicPeriod As Boolean) As String
+    Public Function save_case_receiving_delivery(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal arr_recive As List(Of Object), ByVal basicPeriod As Boolean, ByVal type As String) As String
         sendSMS = LoginInfo.SendSMS()
         _sqlconn.Open()
         _sqltrans = _sqlconn.BeginTransaction
         Dim expected_dates = ""
         Dim condation As String = ""
         Try
-
             Dim str_dates = ""
             If basicPeriod Then
                 Dim dt_dates As New DataTable
-                dt_dates = DBManager.Getdatatable("select date_m  from ash_case_receiving_delivery_details where isNULL(deleted,0) != 1 And case_id = " + case_id.ToString + " And Type = 1 ")
+                dt_dates = DBManager.Getdatatable("select date_m  from ash_case_receiving_delivery_details where isNULL(deleted,0) != 1 And case_id = " + case_id.ToString + " And Type = " + type)
                 If dt_dates.Rows.Count <> 0 Then
                     str_dates = PublicFunctions.ConvertDataTabletoString(dt_dates)
                 End If
@@ -573,7 +576,7 @@ Public Class cases
 
             Dim dt As New DataTable
             If id <> "" Then
-                Dim delete_res = delete_Period(id, False)
+                Dim delete_res = delete_Period(id, type, False)
                 If delete_res = "False|لا يمكن حذف الفترة لوجود ارتباطات" Then
                     _sqltrans.Rollback()
                     _sqlconn.Close()
@@ -615,7 +618,12 @@ Public Class cases
             End If
 
             dictBasicDataJson.Add("user_id", LoginInfo.GetUser__Id())
-            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_case_receiving_delivery_basic", id, _sqlconn, _sqltrans) Then
+            Dim tabel_nm = "ash_case_receiving_delivery_basic"
+            If type = "2" Then
+                tabel_nm = "ash_case_expense_basic"
+            End If
+
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, tabel_nm, id, _sqlconn, _sqltrans) Then
                 _sqltrans.Commit()
                 _sqlconn.Close()
                 Return "True|" & expected_dates
@@ -885,36 +893,36 @@ Public Class cases
 
     End Function
 #End Region
-#Region "save_expense_basic"
-    <WebMethod(True)>
-                                                                                                                                                                                                                                                                                        <System.Web.Script.Services.ScriptMethod()>
-    Public Function save_expense_basic(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
-        Try
-            _sqlconn.Open()
-            _sqltrans = _sqlconn.BeginTransaction
-            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-            dictBasicDataJson.Add("case_id", case_id)
-            dictBasicDataJson.Add("user_id", LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
-            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_case_expense_basic", id, _sqlconn, _sqltrans) Then
-                Dim basic_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+    '#Region "save_expense_basic"
+    '    <WebMethod(True)>
+    '    <System.Web.Script.Services.ScriptMethod()>
+    '    Public Function save_expense_basic(ByVal id As String, ByVal case_id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal arr_recive As List(Of Object), ByVal basicPeriod As Boolean) As Boolean
+    '        Try
+    '            _sqlconn.Open()
+    '            _sqltrans = _sqlconn.BeginTransaction
+    '            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+    '            dictBasicDataJson.Add("case_id", case_id)
+    '            dictBasicDataJson.Add("user_id", LoginInfo.GetUser__Id())
+    '            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "ash_case_expense_basic", id, _sqlconn, _sqltrans) Then
+    '                Dim basic_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
 
-                _sqltrans.Commit()
-                    _sqlconn.Close()
-                    Return True
-                Else
-                    _sqltrans.Rollback()
-                _sqlconn.Close()
-                Return False
-            End If
+    '                _sqltrans.Commit()
+    '                _sqlconn.Close()
+    '                Return True
+    '            Else
+    '                _sqltrans.Rollback()
+    '                _sqlconn.Close()
+    '                Return False
+    '            End If
 
-        Catch ex As Exception
-            _sqltrans.Rollback()
-            _sqlconn.Close()
-            Return False
-        End Try
+    '        Catch ex As Exception
+    '            _sqltrans.Rollback()
+    '            _sqlconn.Close()
+    '            Return False
+    '        End Try
 
-    End Function
-#End Region
+    '    End Function
+    '#End Region
 #Region "save_expense_details"
     <WebMethod(True)>
                                                                                                                                                                                                                                                                                                 <System.Web.Script.Services.ScriptMethod()>
@@ -1968,18 +1976,21 @@ Public Class cases
     ''' </summary>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <WebMethod()>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function delete_Period(ByVal id As String, ByVal access As Boolean) As String
+    Public Function delete_Period(ByVal id As String, ByVal type As String, ByVal access As Boolean) As String
 
         Try
 
             Dim dt As New DataTable
             Dim condation As String = ""
-
-            dt = DBManager.Getdatatable("select case_id,first_date_m as start_period,endPeriod_date_m as end_period from ash_case_receiving_delivery_basic where id=" + id)
+            Dim tb_nm As String = "ash_case_receiving_delivery_basic"
+            If type = "2" Then
+                tb_nm = "ash_case_expense_basic"
+            End If
+            dt = DBManager.Getdatatable("select case_id,first_date_m as start_period,endPeriod_date_m as end_period from " + tb_nm + " where id=" + id)
 
             If dt.Rows.Count <> 0 Then
                 Dim case_id = dt.Rows(0).Item("case_id").ToString()
-                condation = " type = 1 and isNULL(deleted,0) != 1 and case_id=" + case_id + "  and date_m between " + dt.Rows(0).Item("start_period").ToString() + " and " + dt.Rows(0).Item("end_period").ToString()
+                condation = " type = " + type + " and isNULL(deleted,0) != 1 and case_id=" + case_id + "  and date_m between " + dt.Rows(0).Item("start_period").ToString() + " and " + dt.Rows(0).Item("end_period").ToString()
 
                 If DBManager.Getdatatable("select id from ash_case_receiving_delivery_details where " + condation + " and id  in (select event_id from ash_orders where case_id= " + case_id + ")").Rows.Count <> 0 Then
                     Return "False|لا يمكن حذف الفترة لوجود ارتباطات"
@@ -1995,7 +2006,7 @@ Public Class cases
                 If DBManager.ExcuteQueryTransaction("delete tblNotifications  where RefType in (1,2,3,4) and RefCode in (select id from ash_case_receiving_delivery_details where " + condation + ")", _sqlconn, _sqltrans) Then
                     If DBManager.ExcuteQueryTransaction("delete tblsms_archive  where Type = 'recieve_delivery' and event_id in (select id from ash_case_receiving_delivery_details where " + condation + ")", _sqlconn, _sqltrans) Then
                         If DBManager.ExcuteQueryTransaction("update ash_case_receiving_delivery_details set deleted = 1 where id in (select id from ash_case_receiving_delivery_details where " + condation + ")", _sqlconn, _sqltrans) Then
-                            If DBManager.ExcuteQueryTransaction("delete  from ash_case_receiving_delivery_basic where id=" + id) Then
+                            If DBManager.ExcuteQueryTransaction("delete  from " + tb_nm + " where id=" + id) Then
                                 If access Then
                                     _sqltrans.Commit()
                                     _sqlconn.Close()
@@ -2028,11 +2039,16 @@ Public Class cases
     ''' get  Type data from db when update
     ''' </summary>
     <WebMethod()>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_other_periods(ByVal case_id As String) As String
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_other_periods(ByVal case_id As String, ByVal type As String) As String
         Try
+
+            Dim tb_nm As String = "ash_case_receiving_delivery_basic"
+            If type = "2" Then
+                tb_nm = "ash_case_expense_basic"
+            End If
             Dim dt_period As New DataTable
-            dt_period = DBManager.Getdatatable("SELECT * from ash_case_receiving_delivery_basic where isNUll(basic_period,0) !=1 And case_id = " + case_id)
+            dt_period = DBManager.Getdatatable("SELECT * from " + tb_nm + " where isNUll(basic_period,0) !=1 And case_id = " + case_id)
             If dt_period.Rows.Count <> 0 Then
                 Return PublicFunctions.ConvertDataTabletoString(dt_period)
             End If

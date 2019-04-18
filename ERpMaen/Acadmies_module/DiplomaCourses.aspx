@@ -165,14 +165,31 @@
                                     </a></li>
                                    
                                 </ul>
-                                <% End If %>
+                               
                             </div>
+                             <% End If %>
                             <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+                        
                             <div class="btn-group pull-left">
-                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#add_Financial"> اضافة مالية <i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    الخيارات
+                                  <i class="fa fa-cogs"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                     <li><a data-toggle="modal" href="#add_Financial">  اضافة مالية
+                                    </a></li>
+                                  
+                                    <li><a data-toggle="modal" href="#studentDegreesDiplome" onclick="studentDegreesIN_Diplome();">درجات الدبلوم
+                                    </a></li>
 
+                                    
+                                   
+                                </ul>
+                               
                             </div>
-                            <% End if  %>
+                             <% End If %>
+
+                          
 
                         </div>
                     </div>
@@ -583,6 +600,42 @@
 
 
             <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+
+             <div class="modal fade" id="studentDegreesDiplome" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"> درجات مواد الدبلوم   </h4>
+                        </div>
+                        <%--  جدول الطلاب--%>
+                        <div class="table-responsive" >
+                            <table class="table table-bordered table-hover"  id="newitem">
+                               <thead>
+                                <tr>
+                                    <th>المادة </th>
+                                    <th>درجة النشاط</th>
+                                     <th>الدرجة النهائية</th>
+                                    
+                                  
+                                </tr>
+                                 </thead>
+                                <tbody  id="studentDiplomeDegreestable">
+                                         
+                                </tbody>
+                                    
+
+                            </table>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button"   data-dismiss="modal" class="btn btn-primary" >close </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="modal fade" id="add_Financial" tabindex="-1" role="dialog">
                 <div class="modal-dialog">

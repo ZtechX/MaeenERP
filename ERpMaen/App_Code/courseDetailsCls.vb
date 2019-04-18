@@ -2229,7 +2229,7 @@ Public Class courseDetailsCls
 #End Region
 
 
-#Region "get_homework table"
+#Region "get_courseDegree table"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
@@ -2566,7 +2566,7 @@ Public Class courseDetailsCls
             Dim dt As New DataTable
             'DBManager.ExcuteQuery("DELETE FROM acd_courses_students where checked=1 and  approved=1 and course_id=" + course_id)
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes, tblImages.Image_path as 'registerFiles',tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id join tblImages on tblImages.Source_id=acd_courses_students.student_id and tblImages.related_id= acd_courses_students.course_id where  checked=0 and type=1 and  acd_courses_students.approved=0 and acd_courses_students.course_id=" + course_id)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes,tblUsers.full_name as 'studentName' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id  where  checked=0 and type=1 and  acd_courses_students.approved=0 and acd_courses_students.course_id=" + course_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -2636,6 +2636,46 @@ Public Class courseDetailsCls
 
 #End Region
 
+
+#Region "get_studentFiles"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_studentFiles(ByVal course_id As String, ByVal studentId As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable(" select acd_course_conditions.condition as 'conditionName', tblImages.Image_name as 'Name' ,tblImages.Image_path as 'file' from tblImages  join  acd_course_conditions on tblImages.related_id=acd_course_conditions.id where Source='registeration files' and  Source_id=" + studentId + " and related_id in(select id from acd_course_conditions where type=1 and course_id=" + course_id + ")")
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+
+
+#End Region
 
 
 #Region "get_data"

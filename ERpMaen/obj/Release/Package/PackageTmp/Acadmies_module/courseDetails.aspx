@@ -413,6 +413,66 @@
                                         </div>
                                     </div>
                                     <% End If %>
+
+
+                                     <% if ERpMaen.LoginInfo.getUserType = 2 Then   %>
+                                    <div class="inner">
+                                        <div class="order-desc row">
+                                            <div class="desc-head order_wid col-md-12"">
+                                                <div class=" pull-right">
+                                                <i class="zmdi zmdi-file-text zmdi-hc-lg"></i>
+                                                <h3>  مالية الطلاب </h3>
+                                                    </div>
+                                             
+                                              
+                                            </div>
+                                            <div class="desc-body">
+
+                                                <section class="app-content">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 col-xs-12 pull-right"  >
+                                                             <div class="widget-body">
+                <div class="trans-data col-xs-12" >
+                                                      <%--finance new--%>             
+                
+                    <div class="table-responsive" >
+                                             
+
+                                                <table id="student">
+                                                     <tr>
+                                                        <th>الطالب </th>
+                                                        <th>المبلغ</th>
+                                                        <th>الصورة </th>
+                                                           <th>الحالة </th>
+                                                         <th>الاجراء </th>
+
+                                                    </tr>
+                                                    <tbody id="Student_Finance">
+
+                                                    </tbody>
+
+
+                                                 <%-- here--%>
+                                                </table>
+                                            </div>
+
+
+                    </div>
+                                                                 </div>    </div>
+                                                          
+                                                            
+                                                      
+                                                    </div>
+                                                </section>
+
+                                           
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% End If %>
+
+
+
                                       <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
                                          
                                     <div class="inner">
@@ -772,50 +832,7 @@
                                         </div>
                                     </div>
 
-
-                                        <% if ERpMaen.LoginInfo.getUserType = 2 Then   %>
-                                    <div class="inner">
-                                        <div class="add-hint">
-                                            
-                                            <div class="hint-head side_head">
-                                                    <div>
-                                                        <h3>
-                                                            <i class="zmdi zmdi-storage zmdi-hc-lg"></i>
-                                                            مالية الطلاب  
-                                                        </h3>
-                                              
-                                                </div>
-                                              
-
-                                                        </div>
-                                                
-                                            <div class="table-responsive" >
-                                             
-
-                                                <table id="student">
-                                                     <tr>
-                                                        <th>الطالب </th>
-                                                        <th>المبلغ</th>
-                                                        <th>الصورة </th>
-                                                           <th>الحالة </th>
-                                                         <th>الاجراء </th>
-
-                                                    </tr>
-                                                    <tbody id="Student_Finance">
-
-                                                    </tbody>
-
-
-                                                 <%-- here--%>
-                                                </table>
-                                            </div>
-
-                                      
-                                             </div>
                                        
-                                        </div>
-
-                                       <% End If %>
                                       <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
                                     <div class="inner">
                                         <div class="add-hint">
@@ -1940,7 +1957,39 @@
                 </div>
             </div>
 
-            
+            <div class="modal fade" id="reject_Reason" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">  التعليق   </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divformReject_Reason">
+                              <div class=" row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label>  التعليق  </label>
+                                    </div>
+
+                        
+                                            <div class="col-md-9 col-sm-12">
+                                                <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control " required dbColumn="comment" ClientIDMode="Static" ID="rejectId" runat="server">
+                                                </asp:TextBox>
+
+                                                </div>
+                                            </div>
+                                
+
+
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="saveResponse();">ارسال </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
            <div class="modal fade" id="contact_admin" tabindex="-1" role="dialog">
                 <div class="modal-dialog">

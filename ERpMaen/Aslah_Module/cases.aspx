@@ -1149,7 +1149,7 @@
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
-                                                             <%--   <div class="col-md-12 form-group ">
+                                                                <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
                                                                         تاريخ اول تسليم  </lable>
@@ -1158,13 +1158,13 @@
                                                                     <div class="col-md-9 col-sm-12">
 
                                                                         <div class="fancy-form" id="date_expenses_basic">
-                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_m" ID="lbldate_m_expenses_basic"></asp:Label>
-                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_h" ID="lbldate_h_expenses_basic"></asp:Label>
+                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="first_date_m" ID="lbldate_m_expenses_basic"></asp:Label>
+                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="first_date_h" ID="lbldate_h_expenses_basic"></asp:Label>
                                                                             <uc1:HijriCalendar runat="server" ID="HijriCalendar10" />
                                                                         </div>
 
                                                                     </div>
-                                                                </div>--%>
+                                                                </div>
 
                                                                 <div class=" col-md-12 form-group ">
 
@@ -1174,10 +1174,25 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" required dbcolumn="amount" type="text" id="Text11"
+                                                                        <input onkeypress="return isNumber(event);" required dbcolumn="amount" type="text" id="expense_amount"
                                                                             class="form-control" runat="server" clientidmode="Static" />
                                                                     </div>
                                                                 </div>
+
+                                                                 <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label class="label-required">
+                                                                       لمدة (شهر) </lable>
+                                                                    </div>
+
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <input onkeypress="return isNumber(event);" required  dbColumn="month_number" type="text" id="expense_month"
+                                                                            class="form-control" runat="server" clientidmode="Static" />
+
+                                                                        <br />
+                                                                    </div>
+                                                                </div>
+                                                               
                                                                 <div class="col-md-12 form-group">
                                                                     <button onclick="save_expense_basic();" class="btn btn-success">حفظ</button>
                                                                 </div>
@@ -1190,6 +1205,41 @@
                                                 </div>
 
 
+                                            </div>
+                                            
+                                            <div class="col-md-12">
+                                                <div class="panel-group" id="">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h4 class="panel-title">
+                                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse11">بيانات الفترات الاضافية </a>
+                                                            </h4>
+                                                        </div>
+                                                        <div id="collapse11" class="panel-collapse collapse in">
+                                                            <div class="panel-body" >
+                                                                <%-- start group 1--%>
+                                                                       <button id="addAnother_receiveExpense" onclick="addAnother_expense_receive(); return false" class="btn btn-success">إضافة مدة آخرى</button>
+                                                              
+<table class="table table-bordered">
+    <thead>
+       <tr>
+            <th >#</th>
+            <th >تاريخ بداية الفترة</th>
+            <th >مدة التسليم كل (يوم)</th>
+            <th >لمدة (شهر)</th>
+           <th >حذف الفترة ومواعيدها</th>
+        </tr>
+    </thead>
+    <tbody id="tb_other_period_expense">
+        
+    </tbody>
+</table>
+
+                                                                <%--end of group1--%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
 
@@ -1254,6 +1304,52 @@
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
                                                                         <asp:TextBox SkinID="form-control" dbcolumn="back_period" required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="another_return_period" runat="server">
+                                                                        </asp:TextBox>
+                                                                    </div>
+                                                                </div>
+
+                  <div class="col-md-12 form-group ">
+                           <button onclick="save_anotherPeriod()" style="font-family: DroidKufi !important;" class="btn btn-success pull-left">حفظ</button>
+        
+                  </div>             
+
+                      </div>
+
+                  <div class="collapse" id="anotherPeriod_expense" dir="rtl" style="display :none;">
+
+               
+                                                                <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label for="Name" class="label-required">(يوم)التسليم كل</label>
+
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <asp:TextBox SkinID="form-control"  required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="TextBox1" runat="server">
+                                                                        </asp:TextBox>
+                                                                    </div>
+                                                                </div>
+                                                         
+
+                                                                 <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label class="label-required">
+                                                                       لمدة (شهر) </lable>
+                                                                    </div>
+
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <input onkeypress="return isNumber(event);" required  type="text" id="Text1"
+                                                                            class="form-control" runat="server" clientidmode="Static" />
+
+                                                                        <br />
+                                                                    </div>
+                                                                </div>
+                <div class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label for="Name" class="label-required">(يوم)الإرجاع بعد</label>
+
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <asp:TextBox SkinID="form-control" dbcolumn="back_period" required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="TextBox2" runat="server">
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>

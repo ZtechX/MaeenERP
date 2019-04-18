@@ -49,48 +49,51 @@ function saveCourse() {
         } else {
 
 
-          
+
             $("#end_datem").val($("#divdate2 #txtDatem").val());
             $("#end_datehj").val($("#divdate2 #txtDateh").val());
-          
+
             $("#start_date_m").val($("#divdate1 #txtDatem").val());
             $("#start_date_hj").val($("#divdate1 #txtDateh").val());
 
             var enddate_m = document.getElementById("end_datem").value;
-           
+
             var startdate_m = document.getElementById("start_date_m").value;
 
-           // console.log(enddate_m + "     " + startdate_m);
+            // console.log(enddate_m + "     " + startdate_m);
 
+            if (startdate_m >= Pub_date_m) {
+                if (enddate_m > startdate_m) {
+                    var basicData = generateJSONFromControls("divForm");
 
-            if (enddate_m > startdate_m)
-            {
-                var basicData = generateJSONFromControls("divForm");
+                    var Id = "";
+                    $("#SavedivLoader").show();
+                    coursatCls.Save(Id, basicData, function (val) {
+                        if (val === true) {
 
-                var Id = "";
-                $("#SavedivLoader").show();
-                coursatCls.Save(Id, basicData, function (val) {
-                    if (val === true) {
+                            $("#addCourse").modal('hide');
+                            resetDivControls("divForm");
+                            drawAllCourses();
+                            $("#SavedivLoader").hide();
+                            alert("تم الحفظ بنجاح");
+                            getcousreCode();
 
-                        $("#addCourse").modal('hide');
-                        resetDivControls("divForm");
-                        drawAllCourses();
-                        $("#SavedivLoader").hide();
-                        alert("تم الحفظ بنجاح");
-                        getcousreCode();
+                        } else {
+                            alert("لم يتم الحفظ");
+                        }
 
-                    } else {
-                        alert("لم يتم الحفظ");
-                    }
+                    });
+                }
+                else {
+                    alert("تاريخ البداية اكبر من تاريخ النهاية")
+                }
 
-                });
             }
+
             else {
-                alert("تاريخ البداية اكبر من تاريخ النهاية")
+                alert("تاريخ البداية اقل من تاريخ اليوم ")
             }
-
         }
-
 
     } catch (err) {
         alert(err);
@@ -178,9 +181,10 @@ ${costdiv}
  
 function drawAllCourses() {
     try {
+
         debugger
 
-        coursatCls.get_Courses("", "", function (val) {
+        coursatCls.get_Courses("", "", Pub_date_m,function (val) {
             //debugger
             var data = "";
             var arr1 = JSON.parse(val[1]);
@@ -211,9 +215,9 @@ function drawAllCourses() {
 
 function drawCourses(filter){
     try {
-       
-        
-        coursatCls.get_Courses(filter, "", function (val) {
+
+        debugger
+        coursatCls.get_Courses(filter, "", Pub_date_m, function (val) {
             //debugger
             var data = "";
             if (val[0] == "0") {
@@ -260,7 +264,7 @@ function searchCourses() {
 
 
         var courseName = $("#txt_Search").val();
-        coursatCls.get_Courses("", courseName, function (val) {
+        coursatCls.get_Courses("", courseName, Pub_date_m, function (val) {
             var data = "";
             var arr1 = JSON.parse(val[1]);
             CoursesList = arr1;

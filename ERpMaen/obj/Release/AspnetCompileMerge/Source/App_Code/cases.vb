@@ -310,6 +310,7 @@ Public Class cases
                     End If
                     dictNotification("Remarks") = "إنشاء حالة"
                     dictNotification("NotTitle") = "تم إنشاء حالة خاصة بك"
+                    dictNotification("FormUrl") = "Aslah_Module/Calender.aspx"
                     dictNotification("AssignedTo") = user_person1_id
                     If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
                         _sqltrans.Rollback()
@@ -1192,11 +1193,13 @@ Public Class cases
     ''' Save  Type
     ''' </summary>
                                                                                                                                                                                                                                                                                                                                                                                                             <WebMethod(True)>
-                                                                                                                                                                                                                                                                                                                                                                                                                <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_dates(ByVal new_date As String) As String()
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_dates(ByVal first_Grid_day As String) As String()
         Dim Names As New List(Of String)(10)
 
         Try
+            Dim start_dt = (PublicFunctions.ConvertDatetoNumber(first_Grid_day)).ToString()
+            Dim end_dt = (PublicFunctions.ConvertDatetoNumber(Date.ParseExact(first_Grid_day, "dd/MM/yyyy", Nothing).AddDays(34))).ToString()
             Names.Add("0")
             Names.Add("0")
             Names.Add("0")
@@ -1215,18 +1218,18 @@ Public Class cases
                 condation = " and advisor = " + related_id
             End If
 
-            Dim query As String = "SELECT  * FROM   ash_case_receiving_delivery_details  where deleted !=1 and convert(varchar,date_m) like '" + new_date.ToString + "__' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation + " order by date_m"
+            Dim query As String = "SELECT  * FROM   ash_case_receiving_delivery_details  where deleted !=1 and date_m between " + start_dt + " and " + end_dt + " and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation + " order by date_m"
             ' Dim query As String = "SELECT  * FROM   ash_case_receiving_delivery_details  where deleted !=1 and date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation + " order by date_m"
 
-            dt = DBManager.Getdatatable(Query)
+            dt = DBManager.Getdatatable(query)
             If dt.Rows.Count <> 0 Then
                 Names(0) = PublicFunctions.ConvertDataTabletoString(dt)
             End If
             If LoginInfo.getUserType = "9" Then
                 Return Names.ToArray
             End If
-            Dim query1 As String = "SELECT * FROM   ash_case_sessions  where convert(varchar,date_m) like '" + new_date.ToString + "__' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
-            Dim query2 As String = "SELECT * FROM   ash_case_correspondences  where convert(varchar,date_m) like '" + new_date.ToString + "__' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
+            Dim query1 As String = "SELECT * FROM   ash_case_sessions  where date_m between " + start_dt + " and " + end_dt + "  and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
+            Dim query2 As String = "SELECT * FROM   ash_case_correspondences  where date_m between " + start_dt + " and " + end_dt + "  and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
             'Dim query1 As String = "SELECT * FROM   ash_case_sessions  where date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
             'Dim query2 As String = "SELECT * FROM   ash_case_correspondences  where date_h LIKE '___" + new_date.ToString + "%' and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
 
@@ -1252,7 +1255,7 @@ Public Class cases
     ''' <summary>
     ''' Save  Type
     ''' </summary>
-                                                                                                                                                                                                                                                                                                                                                                                                                                <WebMethod(True)>
+    <WebMethod(True)>
                                                                                                                                                                                                                                                                                                                                                                                                                                     <System.Web.Script.Services.ScriptMethod()>
     Public Function get_cases(ByVal date_m As String) As String()
         Dim Names As New List(Of String)(10)

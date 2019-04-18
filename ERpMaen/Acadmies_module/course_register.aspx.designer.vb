@@ -68,13 +68,13 @@ Partial Public Class course_register
     Protected WithEvents checkstudentregister As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''notes2 control.
+    '''studentRequest control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents notes2 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents studentRequest As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''fileURL4 control.

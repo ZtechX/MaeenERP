@@ -561,6 +561,56 @@
                                         </div>
                                     </div>
                                   
+                                    <div class="inner">
+                                        <div class="order-desc row">
+                                            <div class="desc-head order_wid col-md-12"">
+                                                <div class=" pull-right">
+                                                <i class="zmdi zmdi-file-text zmdi-hc-lg"></i>
+                                                <h3> درجات المادة </h3>
+                                                    </div>
+                                              
+                                                
+                                            </div>
+                                            <div class="desc-body">
+
+
+
+                                                <section class="app-content">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 col-xs-12 pull-right">
+
+                                                            <div class="widget-body">
+                                                                <div class="trans-data col-xs-12">
+                                                                  
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-bordered table-hover">
+                                                                            <tr>
+                                                                                <th> الدرجة النهائية </th>
+                                                                                <th> درجة النشاط</th>
+                                                                               
+
+                                                                            </tr>
+
+                                                                            <tbody id="studentcourseDegreestable">
+
+                     
+                                                                                   </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                                <%-- نهايةالجدول--%>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                <% End If %>
 
                                     <div class="inner">
@@ -701,7 +751,7 @@
                                             <div class="owner-head side_head">
                                                 <h3 >
                                                     <i class="zmdi zmdi-account zmdi-hc-lg"></i>
-                                                    مدرب الدورة
+                                                    مدرس المادة 
                                                 </h3>
                                             </div>
                                             <div class="owner-body">

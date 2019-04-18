@@ -625,8 +625,12 @@ function drawCourses(){
         Diploma_CoursesCls.get_Courses(diplomeID,"",function (val) {
            
           //  var data = "";
-            console.log(val);
+           // var arr1 = JSON.parse(val[1]);
+         
+          
+
             var arr1 = JSON.parse(val[1]);
+            $("#diplome_title").html(arr1[0].dpname);
             subjectList = arr1;
             numPages = Math.ceil(subjectList.length / records_per_page);
 

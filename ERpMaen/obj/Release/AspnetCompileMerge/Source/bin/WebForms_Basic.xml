@@ -1142,6 +1142,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.CourseDetails._rejectId">
+<summary>
+rejectId control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.CourseDetails._message">
 <summary>
 message control.
@@ -2423,6 +2432,213 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.diplome_register._fuFile3">
 <summary>
 fuFile3 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._ToolkitScriptManager1">
+<summary>
+ToolkitScriptManager1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._up">
+<summary>
+up control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._upg">
+<summary>
+upg control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._lblFormName">
+<summary>
+lblFormName control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._pnlOps">
+<summary>
+pnlOps control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._pnlFunctions">
+<summary>
+pnlFunctions control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._cmdAdd">
+<summary>
+cmdAdd control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._cmdDelete">
+<summary>
+cmdDelete control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._pnlDelete">
+<summary>
+pnlDelete control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._cmdUpdate">
+<summary>
+cmdUpdate control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._PnlConfirm">
+<summary>
+PnlConfirm control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._Result">
+<summary>
+Result control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._ValidationSummary2">
+<summary>
+ValidationSummary2 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._lblmainid">
+<summary>
+lblmainid control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._pnlForm">
+<summary>
+pnlForm control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._Name">
+<summary>
+Name control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._RequiredFieldValidator4">
+<summary>
+RequiredFieldValidator4 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._ddlyear">
+<summary>
+ddlyear control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._HijriCalendar">
+<summary>
+HijriCalendar control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._HijriCalendar1">
+<summary>
+HijriCalendar1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._DynamicTable">
+<summary>
+DynamicTable control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._lblRes">
+<summary>
+lblRes control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.semester._tblH">
+<summary>
+tblH control.
 </summary>
 <remarks>
 Auto-generated field.

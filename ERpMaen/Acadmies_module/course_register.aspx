@@ -48,6 +48,46 @@
     //});
 </script>
 
+    <%--<script type="text/javascript">
+                         function UploadComplete2(sender, args) {
+                             debugger;
+                            var fileLength = args.get_length();
+                            var fileType = args.get_contentType();
+                           
+                            document.getElementById('imgItemURL').src = 'images/' + args.get_fileName();
+                            var img = document.getElementById('imgLoader');
+                            img.style.display = 'none';
+                            switch (true) {
+                                case (fileLength > 1000000):
+
+                                    fileLength = fileLength / 1000000 + 'MB';
+                                    break;
+
+                                case (fileLength < 1000000):
+
+                                    fileLength = fileLength / 1000000 + 'KB';
+                                    break;
+
+                                default:
+                                    fileLength = '1 MB';
+                                    break;
+                            }
+                            clearContents(sender);
+                        }
+                        function UploadStarted2() {
+                            //var fileName = args.get_fileName();
+                            var img = document.getElementById('imgLoader');
+                            img.style.display = 'block';
+                        }
+              
+                        function ClearMe(sender) {
+                            sender.value = '';
+                        }
+                        function clearContents(sender) {
+                            { $(sender._element).find('input').val(''); }
+                        }
+                    </script>--%>
+
   <%--  <script>
         Breakpoints();
     </script>--%>
@@ -118,6 +158,7 @@
                 <div class="row">
                      <label style="display:none" id="Lblcourse_id" runat="server" ></label>
                      <label style="display:none" id="lblcode" runat="server" ></label>
+                     <label style="display:none" id="Lblcondition_id" ></label>
                   <%--   <label style="display:none" id="LblLecture_id" ></label>
                       <label style="display:none" id="LblHomework_id" ></label>
                        <label style="display:none" id="LblExam_id" ></label>
@@ -138,7 +179,7 @@
                                   </h3>
 
                                 <div class="btn-group pull-left" id="checkstudentregister" runat="server" >
-                                      <button type="button" id="btnregister" class="btn btn-info " data-toggle="modal" data-target="#register_Course" > التسجيل فى الدورة <i class="fa fa-sign-in"></i></button>
+                                      <button type="button" id="btnregister" class="btn btn-info " data-toggle="modal" data-target="#register_Course" onclick="drawcourseConditions();" > التسجيل فى الدورة <i class="fa fa-sign-in"></i></button>
 
                                 </div>
                              
@@ -223,8 +264,7 @@
                         <tr>
                             <th>الشرط </th>
                             <th>الملف</th>
-                          <%--  <th>الاجراء</th>--%>
-                            
+                          
 
                         </tr>
                         <tbody id="conditions-table">
@@ -289,6 +329,7 @@
                  </section>
             
           
+            
 
 
 
@@ -301,9 +342,25 @@
                         </div>
                         <div class="modal-body">
                             <div id="divformsignin" class="row">
-                                <%-- <div class="col-md-12">
-                                        <uc1:Result runat="server"  ID ="Result2" />
-                                    </div>--%>
+                               <div class="table-responsive" id="allStudentlist">
+                            <table class="table table-bordered table-hover"  id="newitem">
+                               <thead>
+                                <tr>
+                                    <th>الشرط </th>
+                                   
+                                     <th>ارفاق الملف</th>
+                                   
+                                    
+                                  
+                                </tr>
+                                 </thead>
+                                <tbody  id="action_courseStudents">
+                                         
+                                </tbody>
+                                    
+
+                            </table>
+                        </div>
 
                                     <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
@@ -311,24 +368,11 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" TextMode="multiline" placeholder="طلب التقديم"  required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="notes2" runat="server">
+                                            <asp:TextBox SkinID="form-control" TextMode="multiline" placeholder="طلب التقديم"  required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="studentRequest" runat="server">
                                             </asp:TextBox>
                                         </div>
                                     </div>
-                                  <div class="form-group ">
-
-                                       
-                                        <%--     <label id="fileupload">  </label>--%>
-                                            <input id="fileURL4" required type="hidden" dbcolumn="Image_path" runat="server" />
-                                            <input id="FName4" type="text" readonly="readonly" runat="server" />
-
-                                      
-                                        <div class="clear">
-                                        </div>
-                                        <asp:AsyncFileUpload ID="fuFile3" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
-                                            OnClientUploadComplete="UploadComplete4" />
-                                       
-                                    </div>
+                                  
                                     
                                 
 
@@ -341,6 +385,42 @@
                 </div>
             </div>
            
+            <div class="modal" id="upload_conditionFiles" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">  شروط الدورة </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divFormuploadHMfiles">
+
+                                             
+                                <div class="form-group ">
+
+                                       
+                                       
+                                            <input id="fileURL4" required type="hidden" dbcolumn="Image_path" runat="server" />
+                                            <input id="FName4" type="text" readonly="readonly" runat="server" />
+
+                                      
+                                        <div class="clear">
+                                        </div>
+                                        <asp:AsyncFileUpload ID="fuFile3" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
+                                            OnClientUploadComplete="UploadComplete4" />
+                                       
+                                    </div>
+                                
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="addcondFile();">اضافه </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
            
     </main>
 

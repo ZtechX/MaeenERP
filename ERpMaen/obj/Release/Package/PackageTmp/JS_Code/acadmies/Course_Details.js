@@ -549,10 +549,13 @@ function AddStudent() {
     //قبول الطلاب 
 
     try {
-        
+
+        debugger
 
         if (!checkRequired()) {
 
+            var CourseId = ($("#Lblcourse_id").html());
+            var code = ($("#lblcode").html());
             
             var student_arr = [];
             $("#action_courseStudents tr").each(function () {
@@ -562,15 +565,14 @@ function AddStudent() {
                 //obj["file"] = $(this).find("#registerFiles").attr("href");
                 obj["action_Student"] = $(this).find("#action").val();
                 student_arr.push(obj);
+             
 
             });
 
             var CourseId = ($("#Lblcourse_id").html());
             var code = ($("#lblcode").html());
-            
-            //var x = student_arr.length;
-            //if (x != 0) {
-            
+          
+           
             courseDetailsCls.SaveStudent(CourseId, code, student_arr, function (val) {
                 if (val == true) {
                         //  $("#SavedivLoader").hide();
@@ -2865,7 +2867,7 @@ function SaveDegree() {
 
 function Studentlistview() {
     try {
-        
+        debugger
        var CourseId = ($("#Lblcourse_id").html());
         courseDetailsCls.get_StudentList( CourseId,function (val) {
 
@@ -2900,7 +2902,8 @@ function Studentlistview() {
                                                     </li> </td>
                                                             <td>
                                                
-                                                  <select  style="width:100px;" id="action" >
+                                                  <select  onchange="checkReason();" onclick="setStudentId(${element.student_id});" style="width:100px;" id="action" >
+                                                     <option value="-1">اختر</option>                                                    
                                                     <option value="0">رفض</option>
                                                     <option value="1">قبول</option>
                                                       </select>
@@ -2914,8 +2917,7 @@ function Studentlistview() {
             });
             
             $("#action_courseStudents").html(data);
-            //var xx = document.getElementById("action").value;
-            //console.log(xx);
+           
             
         });
     } catch (err) {
@@ -2923,6 +2925,56 @@ function Studentlistview() {
     }
 }
 
+function setStudentId(studentID) {
+    ($("#lblStudentID").html(studentID));
+}
+
+function checkReason() {
+    
+   
+        $("#reject_Reason").modal();
+    
+}
+
+function saveResponse() {
+    try {
+        debugger
+
+        if (checkRequired("divformReject_Reason") == 1) {
+            alert("ادخل البيانات المطلوبة")
+        }
+
+        else {
+            $("#SavedivLoader").show();
+
+
+            var StudentId = $("#lblStudentID").html();
+            var CourseId = ($("#Lblcourse_id").html());
+            var code = ($("#lblcode").html());
+            var comment = $("#rejectId").val();
+         
+            
+            courseDetailsCls.saveResponse(code, StudentId, CourseId, comment , function (val) {
+                if (val == true) {
+                    $("#SavedivLoader").hide();
+                    alert("تم الحفظ بنجاح");
+                    $("#reject_Reason").modal('hide');
+                  
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+
+    
+}
 
 
 

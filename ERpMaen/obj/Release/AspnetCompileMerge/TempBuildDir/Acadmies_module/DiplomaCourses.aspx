@@ -125,11 +125,12 @@
                         <div class="col-md-4">
                             <h3>
                                 <i class="fa fa-book"></i>
-                                <span>مواد الدبلوم </span>
+
+                                <span id="diplome_title">  </span>
                             </h3>
                         </div>
                         <div class="col-md-6" >
-                            <input  id="txt_Search" onkeypress="searchCourses();" type="text" class="form-control" placeholder="بحث عن دورة" />
+                            <input  id="txt_Search" onkeypress="searchCourses();" type="text" class="form-control" placeholder="بحث عن مادة" />
                         </div>
                         <div class="col-md-2">
 

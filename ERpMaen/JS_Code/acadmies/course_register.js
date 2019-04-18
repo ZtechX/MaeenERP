@@ -150,8 +150,9 @@ function drawConditionsTable() {
                                                     </li>
 
                                                      </td>
-                                                      
-                                                                            </tr>
+
+                          
+                                                       </tr>
                  
                                                                                
                                                                       
@@ -166,15 +167,111 @@ function drawConditionsTable() {
         alert(err);
     }
 }
+function setconditionID(condID) {
+    $("#Lblcondition_id").html(condID);
+
+}
+
+function drawcourseConditions() {
+    try {
+        debugger
+        var CourseId = ($("#Lblcourse_id").html());
+        course_registerCls.get_courseFiles(CourseId, function (val) {
 
 
+            var data = "";
+            console.log(val);
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
 
+                arr1.forEach(function (element) {
+                    //debugger
+                    //var file_nm = "";
+                    //var path = element.upImg;
+                    //if (path != "" && path != null) {
+                    //    if (path.indexOf("Acadmies_module/images/") != -1) {
+                    //        file_nm = path.split("Acadmies_module/images/")[1];
+                    //    }
+                    //}
+                    data = data + `
+                                                     <tr>
+                                                      <td>${element.condition} </td>
+                                                     
+                                                <td>
+                                   <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#upload_conditionFiles" onclick="setconditionID(${element.id});">
+                                                                 upload file
+                                                           
+                                                            </button>
+                                                       </td>
+                                 
+ 
+  
+                                                      
+                                                                            </tr>
+                 
+                                                                               
+                                                                      
+`;
+                });
+
+
+              
+            }
+            $("#action_courseStudents").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
+function addcondFile() {
+
+    try {
+
+        debugger
+            $("#SavedivLoader").show();
+
+        var conditionId = ($("#Lblcondition_id").html());
+            var CourseId = ($("#Lblcourse_id").html());
+          
+            var fURL = document.getElementById("fileURL4").value;
+            var fName = document.getElementById("FName4").value;
+        
+
+
+            var Id = "";
+
+        course_registerCls.addcondFile(Id, CourseId, conditionId, fURL, fName, function (val) {
+                if (val == true) {
+                    $("#SavedivLoader").hide();
+                    alert("تم الحفظ بنجاح");
+                    resetDivControls("divFormuploadHMfiles");
+                    $("#upload_conditionFiles").modal('hide');
+                   //drawcourseConditions();
+
+                  
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+      
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
 
 
 function sendRequest() {
 
     try {
 
+        debugger
 
         if (checkRequired("divformsignin") == 1) {
             alert("ادخل البيانات المطلوبة")
@@ -182,18 +279,18 @@ function sendRequest() {
 
         else {
             $("#SavedivLoader").show();
-            debugger
-           // var StudentId = $("#lblStudentID").html();
+           
+          
             var CourseId = ($("#Lblcourse_id").html());
             var code = ($("#lblcode").html());
-            var fURL = document.getElementById("fileURL4").value;
-            var fName = document.getElementById("FName4").value;
-            var basicData = generateJSONFromControls("divformsignin");
+          
+            var stdREq = $("#studentRequest").val();
+           
 
 
             var Id = "";
-            console.log(basicData);
-            course_registerCls.SaveRegister(Id, CourseId, code, fURL, fName, basicData, function (val) {
+          
+            course_registerCls.SaveRegister(Id, CourseId, code, stdREq,  function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     alert("تم الحفظ بنجاح");

@@ -308,6 +308,51 @@ Public Class Diploma_CoursesCls
 #End Region
 
 
+#Region "get_diplome_Degree table"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_diplomeDegree(ByVal diplomeId As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            If LoginInfo.getUserType = 8 Then
+                dt = DBManager.Getdatatable("select acd_diplome_subjects.id, acd_student_degrees.final_degree,  acd_student_degrees.activity_degree,acd_diplome_subjects.subject_id ,tbllock_up.Description as 'subjectName'  from  acd_diplome_subjects join tbllock_up on tbllock_up.id =acd_diplome_subjects.subject_id join acd_student_degrees on acd_student_degrees.course_id=acd_diplome_subjects.id and student_id=" + LoginInfo.GetUser__Id() + " and acd_student_degrees.type=2 where diplome_id=" + diplomeId)
+
+            End If
+
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+    'get_SyudentTable
+    'get_Exams
+
+#End Region
+
 #Region "update archive"
     ''' <summary>
     ''' </summary>

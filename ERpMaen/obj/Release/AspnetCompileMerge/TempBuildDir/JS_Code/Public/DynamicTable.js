@@ -498,14 +498,17 @@ function applyDatatable(val) {
 
                 } else if (getFormName() == "orders") {
                     var user_type = $("#userloginType").html();
-                    if ($('td:last-child', nRow).html() == "2" && user_type == "6") {
+                    var arr = $('td:last-child', nRow).html().split("_");
+                    var last_child = arr[1];
+                    var orderOwner = arr[0];
+                    if (last_child == "2" && (user_type == "6" || orderOwner== 11)) {
                         $('td:last-child', nRow).html("تمت الموافقة");
-                    } else if ($('td:last-child', nRow).html() == "3" && user_type == "6") {
+                    } else if (last_child == "3" && (user_type == "6" || orderOwner == 11)) {
                         $('td:last-child', nRow).html("تم الرفض");
-                    } else if ($('td:last-child', nRow).html() == "1" && (user_type == "6" || (user_type == "9" && aData[6] == "لم تحدد بعد"))) {
+                    } else if (last_child == "1" && (user_type == "6" || (user_type == "9" && aData[6] == "لم تحدد بعد"))) {
                         var style = "font-size: 15px;border-radius: 10px;border:1px solid #cccccc;padding: 0px 5px;"
                         $('td:last-child', nRow).html('<div class="hidden-sm hidden-xs action-buttons"><a onclick="ChangeOrderStatus(' + aData[0] + ',1); return 0;"  style="color:green;margin-left:25px;' + style + '"><i class=" fa fa-check fa-md" style="padding: 0px 2px;"></i></a><a onclick="ChangeOrderStatus(' + aData[0] + ',0); return 0;"  style="color:red;' + style + '"><i class="fa fa-close fa-md" style="padding: 0px 3px;"></i></a></div>');
-                    } else {
+                    } else if (last_child == "1"){
                         $('td:last-child', nRow).html("طلبك قيد المراجعة");
                     }
                 }

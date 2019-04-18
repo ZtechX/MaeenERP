@@ -35,12 +35,12 @@ Public Class course_registerCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveRegister(ByVal id As String, ByVal course_id As String, ByVal code As String, ByVal ImagePath As String, ByVal imageName As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function SaveRegister(ByVal id As String, ByVal course_id As String, ByVal code As String, ByVal student_notes As String) As Boolean
         Try
 
             _sqlconn.Open()
-            _sqltrans = _sqlconn.BeginTransaction
-            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+            _sqltrans = _sqlconn.BeginTransaction()
+            Dim dictBasicDataJson As New Dictionary(Of String, Object)
 
             Dim dt1 As DataTable
             dt1 = DBManager.Getdatatable("delete from acd_courses_students where  type=1 and course_id=" + course_id + "and student_id=" + LoginInfo.GetUser__Id())
@@ -48,48 +48,85 @@ Public Class course_registerCls
             dictBasicDataJson.Add("type", "1")
             dictBasicDataJson.Add("approved", 0)
             dictBasicDataJson.Add("checked", 0)
+            dictBasicDataJson.Add("notes", student_notes)
 
             dictBasicDataJson.Add("student_id", LoginInfo.GetUser__Id())
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
-                Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
-
-                Dim dt2 As DataTable
-                dt2 = DBManager.Getdatatable("delete from tblImages where Source='registeration' and Source_id=" + LoginInfo.GetUser__Id() + "and related_id=" + course_id)
-
-                dictBasicDataJson1.Add("Source", "registeration")
-                dictBasicDataJson1.Add("Source_id", LoginInfo.GetUser__Id())
-                dictBasicDataJson1.Add("Image_path", ImagePath)
-                dictBasicDataJson1.Add("Image_name", imageName)
-                dictBasicDataJson1.Add("related_id", course_id)
 
 
-                If PublicFunctions.TransUpdateInsert(dictBasicDataJson1, "tblImages", "", _sqlconn, _sqltrans) Then
+                Dim dictNotification As New Dictionary(Of String, Object)
 
-                    Dim dictNotification As New Dictionary(Of String, Object)
+                Dim dt3 As DataTable
+                Dim dt4 As DataTable
+                dt3 = DBManager.Getdatatable("select id from tblUsers where  User_Type=2  and comp_id=" + LoginInfo.GetComp_id())
+                Dim admin = dt3.Rows(0)(0).ToString
+                dt4 = DBManager.Getdatatable("select full_name from tblUsers where id=" + LoginInfo.GetUser__Id())
+                Dim studentName = dt4.Rows(0)(0).ToString
+                dictNotification.Add("RefCode", course_id)
+                dictNotification.Add("NotTitle", " تقديمات الطلاب")
+                dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                dictNotification.Add("AssignedTo", admin)
+                dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                dictNotification.Add("Remarks", studentName)
+                dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
+                If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
 
-                    Dim dt3 As DataTable
-                    Dim dt4 As DataTable
-                    dt3 = DBManager.Getdatatable("select id from tblUsers where  User_Type=2  and comp_id=" + LoginInfo.GetComp_id())
-                    Dim admin = dt3.Rows(0)(0).ToString
-                    dt4 = DBManager.Getdatatable("select full_name from tblUsers where id=" + LoginInfo.GetUser__Id())
-                    Dim studentName = dt4.Rows(0)(0).ToString
-                    dictNotification.Add("RefCode", course_id)
-                    dictNotification.Add("NotTitle", " تقديمات الطلاب")
-                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
-                    dictNotification.Add("AssignedTo", admin)
-                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
-                    dictNotification.Add("Remarks", studentName)
-                    dictNotification.Add("FormUrl", "Acadmies_module/courseDetails?code=" + code)
-                    If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
-
-                        _sqltrans.Rollback()
-                        _sqlconn.Close()
-                        Return "False|لم يتم الحفظ"
-                    End If
+                    _sqltrans.Rollback()
+                    _sqlconn.Close()
+                    Return "False|لم يتم الحفظ"
                 End If
 
-                    success = True
+
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
+
+
+#Region "Save"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function addcondFile(ByVal id As String, ByVal course_id As String, ByVal condID As String, ByVal imagePath As String, ByVal imgName As String) As Boolean
+        Try
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction()
+
+            Dim dictBasicDataJson As New Dictionary(Of String, Object)
+
+            dictBasicDataJson.Add("related_id", condID)
+            dictBasicDataJson.Add("Source_id", LoginInfo.GetUser__Id())
+            dictBasicDataJson.Add("Image_path", imagePath)
+            dictBasicDataJson.Add("Image_name", imgName)
+            dictBasicDataJson.Add("Source", "registeration files")
+
+
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblImages", id, _sqlconn, _sqltrans) Then
+
+
+                success = True
             Else
                 success = False
 
@@ -264,18 +301,22 @@ Public Class course_registerCls
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
+            'If ERpMaen.LoginInfo.getUserType = 8 Then
+            '    dt = DBManager.Getdatatable("select id, image, tblImages.Image_path as 'upImg' ,condition from acd_course_conditions join tblImages on tblImages.related_id=acd_course_conditions.id  and tblImages.Source_id=" + LoginInfo.GetUser__Id() + " where course_id=" + CourseID)
+            'Else
+            dt = DBManager.Getdatatable("select id, image, condition from acd_course_conditions where course_id=" + CourseID)
 
-            dt = DBManager.Getdatatable("select image, condition from acd_course_conditions where course_id=" + CourseID)
-            If dt IsNot Nothing Then
-                If dt.Rows.Count <> 0 Then
-                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
-                    Names.Add("1")
-                    Names.Add(Str)
-                    Return Names.ToArray
+                'End If
+                If dt IsNot Nothing Then
+                    If dt.Rows.Count <> 0 Then
+                        Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                        Names.Add("1")
+                        Names.Add(Str)
+                        Return Names.ToArray
+                    End If
+
                 End If
-
-            End If
-            Names.Add("0")
+                Names.Add("0")
             Names.Add(" No Results were Found!")
             Return Names.ToArray
         Catch ex As Exception

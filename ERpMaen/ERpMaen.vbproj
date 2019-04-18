@@ -180,6 +180,7 @@
     <Content Include="Acadmies_module\images\Lighthouse.jpg" />
     <Content Include="Acadmies_module\images\Penguins.jpg" />
     <Content Include="Acadmies_module\images\Tulips.jpg" />
+    <Content Include="Acadmies_module\semester.aspx" />
     <Content Include="Acadmies_module\Students.aspx" />
     <Content Include="Acadmies_module\trainers.aspx" />
     <Content Include="Acadmies_module\training_centers.aspx" />
@@ -762,6 +763,7 @@
     <Content Include="ASMX_WebServices\diplome_registerCls.asmx" />
     <Content Include="ASMX_WebServices\orders.asmx" />
     <Content Include="ASMX_WebServices\DiplomaSubjectDetailsCls.asmx" />
+    <Content Include="ASMX_WebServices\semesterCls.asmx" />
     <Content Include="ASMX_WebServices\studentCls.asmx" />
     <Content Include="ASMX_WebServices\Timeline.asmx" />
     <Content Include="ASMX_WebServices\trainersCls.asmx" />
@@ -1854,6 +1856,7 @@
     <Content Include="JS_Code\acadmies\Diplomas.js" />
     <Content Include="JS_Code\acadmies\DiplomaSubjectDetails.js" />
     <Content Include="JS_Code\acadmies\diplome_register.js" />
+    <Content Include="JS_Code\acadmies\semester.js" />
     <Content Include="JS_Code\acadmies\student.js" />
     <Content Include="JS_Code\acadmies\trainers.js" />
     <Content Include="JS_Code\acadmies\training_centers.js" />
@@ -2493,6 +2496,13 @@
       <DependentUpon>diplome_register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Acadmies_module\semester.aspx.designer.vb">
+      <DependentUpon>semester.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\semester.aspx.vb">
+      <DependentUpon>semester.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Acadmies_module\Students.aspx.designer.vb">
       <DependentUpon>Students.aspx</DependentUpon>
     </Compile>
@@ -2614,6 +2624,9 @@
       <SubType>Component</SubType>
     </Content>
     <Content Include="App_Code\userPorfile.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\semesterCls.vb">
       <SubType>Component</SubType>
     </Content>
     <Compile Include="App_Start\BundleConfig.vb" />

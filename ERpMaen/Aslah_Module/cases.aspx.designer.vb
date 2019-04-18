@@ -662,13 +662,49 @@ Partial Public Class cases
     Protected WithEvents txtdelivery_period_expenses As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''Text11 control.
+    '''lbldate_m_expenses_basic control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text11 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents lbldate_m_expenses_basic As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lbldate_h_expenses_basic control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbldate_h_expenses_basic As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''HijriCalendar10 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar10 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''expense_amount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents expense_amount As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''expense_month control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents expense_month As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''ImageSlider control.
@@ -732,4 +768,31 @@ Partial Public Class cases
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents another_return_period As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''TextBox1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''Text1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Text1 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''TextBox2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents TextBox2 As Global.System.Web.UI.WebControls.TextBox
 End Class

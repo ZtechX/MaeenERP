@@ -26,6 +26,8 @@ $(function () {
         drawstudentExamsTable();
        // Studentlistview();
         drawHomeworks();
+
+        drawstudentDiplome_DegreesTable();
         drawExams();
         drawCourseFile();
         drawstudentHomeworkTable();
@@ -90,6 +92,55 @@ catch (err) {
         alert(err);
     }
 }
+
+
+function drawstudentDiplome_DegreesTable() {
+   
+    try {
+        //debugger
+        // $("#SavedivLoader").show();
+        var subjectId = ($("#Lblsubject_id").html());
+        DiplomaSubjectDetailsCls.get_courseDegreesTable(subjectId, function (val) {
+
+
+            var data = "";
+            console.log(val);
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+                    var degree = element.degree;
+
+                    if (degree == 0) {
+                        degree = "--";
+                    }
+
+
+
+                    data = data + `
+                                                           <tr>
+                                                                                <td> ${element.final_degree}  </td>
+                                                                                <td>${element.activity_degree}   </td>
+                                                                            
+                                                                            </tr>
+                                                        `;
+
+
+
+
+                });
+
+
+            }
+            $("#studentcourseDegreestable").html(data);
+            $("#SavedivLoader").hide();
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
 
 
 function setLectId(lecutreId) {
@@ -1414,6 +1465,7 @@ function SearchStudent() {
         }
 }
 
+  
 
 
 
