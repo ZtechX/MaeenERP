@@ -766,6 +766,40 @@
                                         
                                         </div>
                                     </div>
+
+                                    <div class="inner">
+                                        <div class="comments">
+                                             <div class="edit-head order_wid">
+                                                <i class="zmdi zmdi-wrench zmdi-hc-lg"></i>
+                                                <h3> روابط مفيدة </h3>
+                                              
+                                            </div>
+                                         
+                                            <div class="comment-body">
+                                               
+                                                <div class="comment-users">
+                                                   
+                                                    <div id="divformLinks">
+                                                        
+                                              
+                                                                
+                                                        </div>
+                                                    
+                                                </div>
+                                                <div class="comment-form">
+                                                    
+                                                        <div class="form-group">
+
+                                                         <button type="button" class="btn btn-purple btn-hint" data-toggle="modal" data-target="#addLinks_modal">اضافة رابط </button>
+                                                           
+                                                        </div>
+                                                     
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="inner">
                                         <div class="comments">
                                          
@@ -971,7 +1005,8 @@
                                         </div>
                                     </div>
                                        <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
-                                              <div class="inner" id="finance_div" runat="server">
+                                          
+                                    <div class="inner" id="finance_div" runat="server">
                                         <div class="add-hint">
                                             <div class="hint-head side_head">
                                                 <h3>
@@ -1010,6 +1045,45 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+
+                                    <div class="inner" id="Div1" runat="server">
+                                        <div class="add-hint">
+                                            <div class="hint-head side_head">
+                                                <h3>
+                                                    <i class="zmdi zmdi-storage zmdi-hc-lg"></i>
+                                                     شهادة الدورة
+                                                </h3>
+                                            </div>
+                                            <div class="hint-body">
+                                              
+                                            
+                                               <div class="table-responsive" >
+                                             
+                                                <table class="table table-bordered">
+                                                     <tr>
+                                                       
+                                                        <th>اصل الشهادة</th>
+                                                       
+                                                     
+
+                                                    </tr>
+                                                    <tbody id="student_Certificate">
+
+                                                    </tbody>
+                                                   
+
+                                               
+                                                </table>
+                                            </div>
+                                                   
+                                              
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                      <% End If %>
                                     <div class="inner">
                                         <div class="add-hint">
@@ -1554,6 +1628,68 @@
                 </div>
             </div>
 
+            <div class="modal" id="addLinks_modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">  رابط جديد</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12" id="divFormAddLinks">
+                          
+                          
+                            <div class="row form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label class="label-required" >العنوان  </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                            <input dbcolumn="title" required type="text" id="link_title"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    <br />
+                                        </div>
+                            </div>
+
+                            <div class="row form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label class="label-required">الرابط  </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                            <input dbcolumn="URL" type="text" required id="link_url"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    <br />
+                                        </div>
+                            </div>
+
+                             <div class="row form-group">
+                                        <div class="col-md-3 col-sm-12">
+                                            <label for="Name" > الوصف  </label>
+
+                                        </div>
+                                        <div class="col-md-9 col-sm-12">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes"   ClientIDMode="Static" ID="linkNote" runat="server">
+                                            </asp:TextBox>
+                                        </div>
+                                    </div>
+                                     
+                          
+                                 </div>
+
+
+
+                        </div>
+                  
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-primary" onclick="addNewlink();">حفظ </button>
+
+                    </div>
+                      </div>
+                </div>
+            </div>
 
             <div class="modal fade" id="absenceModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -1816,6 +1952,77 @@
                 </div>
             </div>
                  </div>
+
+            <div class="modal fade" id="certificateModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">الشهادات  </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divFormcertificate">
+                                
+                                <div class=" row form-group">
+                                            <div class="col-md-3 col-sm-12">
+                                                <label>  كود الشهادة       </label>
+                                            </div>
+
+                                            <div class="col-md-9 col-sm-12">
+                                                <input  dbcolumn="certificate_code" required type="text" id="certif_code"
+                                                    class="form-control" runat="server" clientidmode="Static" />
+
+
+                                            </div>
+                                        </div>
+
+                                
+                                <div class=" row form-group">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label class="label-required">
+                                             التاريخ  
+                                        </label>
+                                    </div>
+
+                                    <div class="col-md-9 col-sm-12">
+
+                                        <div class="fancy-form" id="divdate_certif">
+                                            <input dbcolumn="date_hj" type="hidden" id="dtcf_hj" />
+                                            <input dbcolumn="date_m" type="hidden" id="dtcf_m" />
+                                            <uc1:HijriCalendar runat="server" ID="HijriCalendar7" />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                  <div class="form-group row">
+
+                                    <div>
+                                        <input id="FURL_CERTIF" type="hidden" dbcolumn="image" runat="server" />
+                                        <input id="FnameCertif" type="text" required readonly="readonly" runat="server" />
+
+                                    </div>
+                                    <div class="clear">
+                                    </div>
+                                    <asp:AsyncFileUpload ID="fuFile9" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
+                                        OnClientUploadComplete="UploadComplete9" />
+                                </div>
+
+                                </div>
+
+                            </div>
+                            
+                      
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="saveCertificate();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
             <div class="modal fade" id="addNote" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">

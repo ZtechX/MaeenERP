@@ -25,6 +25,7 @@ $(function () {
         drawHomeworks();
         drawExams();
         drawCourseFile();
+        drawStudentCertificateTable();
      
         drawstudentHomeworkTable();
         drawStudentfinanceforAdmin();
@@ -1182,6 +1183,159 @@ function AddNote() {
     }
 }
 
+
+function saveCertificate() {
+
+    try {
+
+        debugger
+
+        if (checkRequired("divFormcertificate") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+        }
+        else {
+            $("#SavedivLoader").show();
+
+            $("#dtcf_m").val($("#divdate_certif #txtDatem").val());
+            $("#dtcf_hj").val($("#divdate_certif #txtDateh").val());
+
+            var CourseId = ($("#Lblcourse_id").html());
+            var studentId = $("#lblStudentID").html();
+            var code = ($("#lblcode").html());
+
+            var basicData = generateJSONFromControls("divFormcertificate");
+
+
+            var Id = "";
+           
+            courseDetailsCls.saveCertificate(Id, studentId, code, CourseId, basicData, function (val) {
+                if (val == true) {
+                    $("#SavedivLoader").hide();
+                    // debugger;
+                    alert("تم الحفظ بنجاح");
+                    $("#certificateModal").modal('hide');
+                   
+                    resetAll();
+                    prepareAdd();
+
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
+function drawCourseLinks() {
+    debugger
+    //روابط مفيدة
+    try {
+
+        var CourseId = ($("#Lblcourse_id").html());
+        courseDetailsCls.get_courseLinks(CourseId, function (val) {
+
+
+            var data = "";
+
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+
+
+
+                    data = data + `
+                     <ul>
+
+                                                            <li>
+                                                                <div class="user">
+                                                                    <div class="usr-img">
+                                                                        <img  class="avatar" src="${element.suerImage}">
+                                                                    </div>
+                                                                    <div class="usr-data">
+                                                                        <h3>
+                                                                            <a href="#"> ${element.username}</a>
+                                                                        </h3>
+                                                                          <span>
+                                                                        <i class="zmdi zmdi-calendar"></i>
+                                                                      ${element.date_hj}
+                                                               
+                                                                </span>
+                                                            <span> <h3>
+                                                                <a href="${element.URL}"> ${element.title}</a>
+                                                                        </h3></span>
+                                                                        <p>${element.notes} </p>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+    </u>
+
+
+    `;
+                });
+
+            }
+            $("#divformLinks").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
+function addNewlink() {
+
+    try {
+
+        //   debugger
+        if (checkRequired("divFormAddLinks") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+        }
+        else {
+
+            var CourseId = ($("#Lblcourse_id").html());
+            var basicData = generateJSONFromControls("divFormAddLinks");
+
+            var Id = "";
+            var today = new Date();
+
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+            courseDetailsCls.saveCourseLinks(Id, CourseId, Pub_date_m, Pub_date_hj, time, basicData, function (val) {
+                if (val == true) {
+                    debugger
+                    alert("تم الحفظ بنجاح");
+
+                    resetDivControls("divFormAddLinks");
+                    $("#addLinks_modal").modal('hide');
+                    drawCourseLinks();
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
+
 function addComment() {
     try {
 
@@ -1201,7 +1355,7 @@ function addComment() {
 
 
             var Id = "";
-          //  console.log(basicData);
+        
             var today = new Date();
            
             var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -1449,13 +1603,18 @@ function studentSearch() {
                                                                                             </a>
                                                                                                     </li>
                                                                                                 <li>
-                                                                                            <a   data-toggle="modal" href="#studentDegrees" onclick= "Setstudentid(${element.student_id});">
+                                                                                            <a   data-toggle="modal" href="#studentDegrees" onclick="Setstudentid(${element.student_id});">
                                                                                                 الدرجات 
                                                                                             </a>
                                                                                                     </li>
                                                                                                 <li>
                                                                                             <a   data-toggle="modal" href="#addNote" onclick="viewstudDegrees(${element.student_id});Setstudentid(${element.student_id});">
                                                                                                 اضافة ملاحظة
+                                                                                            </a>
+                                                                                                    </li>
+                                                                                              <li>
+                                                                                            <a   data-toggle="modal" href="#certificateModal" onclick="Setstudentid(${element.student_id});">
+                                                                                                اضافة شهادة 
                                                                                             </a>
                                                                                                     </li>
                                                                                                 </ul>
@@ -2016,7 +2175,7 @@ function drawCourseComments() {
          
 
             var data = "";
-            console.log(val);
+          
             if (val[0] == 1) {
                 var arr1 = JSON.parse(val[1]);
 
@@ -2117,6 +2276,60 @@ function SearchStudent() {
 
 
 
+function drawStudentCertificateTable() {
+    try {
+        debugger
+        var CourseId = ($("#Lblcourse_id").html());
+        courseDetailsCls.get_certificate(CourseId, function (val) {
+
+
+            var data = "";
+            console.log(val);
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+                    //debugger
+                    var file_nm = "";
+                    var path = element.image;
+                    if (path != "" && path != null) {
+                        if (path.indexOf("Acadmies_module/coursefiles/") != -1) {
+                            file_nm = path.split("Acadmies_module/coursefiles/")[1];
+                        } 
+                    }
+                    data = data + `
+                                                     <tr>
+                                                   
+                                                     <td>
+                                                       <li>
+                                                        <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li>
+
+                                                     </td>
+
+                                                                            </tr>
+                 
+                                                                               
+                                                                      
+`;
+                });
+
+
+            }
+            $("#student_Certificate").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
+
+
 function drawConditionsTable() {
     try {
         var CourseId = ($("#Lblcourse_id").html());
@@ -2187,6 +2400,8 @@ function drawConditionsTable() {
         alert(err);
     }
 }
+
+
 function drawCourseFile() {
     try {
 
@@ -2346,6 +2561,12 @@ function drawStudentTable() {
                                                                                                 <li>
                                                                                             <a   data-toggle="modal" href="#addNote" onclick="Setstudentid(${element.student_id});">
                                                                                                 اضافة ملاحظة
+                                                                                            </a>
+                                                                                                    </li>
+
+                                                                                               <li>
+                                                                                            <a   data-toggle="modal" href="#certificateModal" onclick="Setstudentid(${element.student_id});">
+                                                                                                اضافة شهادة 
                                                                                             </a>
                                                                                                     </li>
                                                                                                 </ul>
@@ -3235,6 +3456,35 @@ function UploadComplete8(sender, args) {
     clearContents(sender);
 }
 
+function UploadComplete9(sender, args) {
+
+    var fileLength = args.get_length();
+    var fileType = args.get_contentType();
+    //alert(sender);
+    $('#FURL_CERTIF').val('Acadmies_module/coursefiles/' + args.get_fileName());
+    $("#FnameCertif").val(args.get_fileName());
+
+
+
+    //var img = document.getElementById('imgLoader');
+    //img.style.display = 'none';
+    switch (true) {
+        case (fileLength > 1000000):
+
+            fileLength = fileLength / 1000000 + 'MB';
+            break;
+
+        case (fileLength < 1000000):
+
+            fileLength = fileLength / 1000000 + 'KB';
+            break;
+
+        default:
+            fileLength = '1 MB';
+            break;
+    }
+    clearContents(sender);
+}
 
 function ClearMe(sender) {
     sender.value = '';

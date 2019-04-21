@@ -50,9 +50,10 @@ function saveCourse() {
                 if (val == true) {
                     debugger;
                     alert("تم الحفظ بنجاح");
-                    drawCourses();
+                   
                     $("#addCourse").modal('hide');
                     resetDivControls("divForm");
+                    drawAllCourses();
                   
                  
                     

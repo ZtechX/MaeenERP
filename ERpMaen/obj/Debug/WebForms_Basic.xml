@@ -1295,24 +1295,6 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.courseDetailsManage._ToolkitScriptManager1">
-<summary>
-ToolkitScriptManager1 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.courseDetailsTrainer._ToolkitScriptManager1">
-<summary>
-ToolkitScriptManager1 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:ERpMaen.courseDetails_archived._ToolkitScriptManager1">
 <summary>
 ToolkitScriptManager1 control.

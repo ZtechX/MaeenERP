@@ -157,8 +157,6 @@
     <Content Include="Acadmies_module\Archived_DiplomaSubjectDetails.aspx" />
     <Content Include="Acadmies_module\coursat.aspx" />
     <Content Include="Acadmies_module\courseDetails.aspx" />
-    <Content Include="Acadmies_module\courseDetailsManage.aspx" />
-    <Content Include="Acadmies_module\courseDetailsTrainer.aspx" />
     <Content Include="Acadmies_module\courseDetails_archived.aspx" />
     <Content Include="Acadmies_module\course_register.aspx" />
     <Content Include="Acadmies_module\DiplomaCourses.aspx" />
@@ -2438,20 +2436,6 @@
     </Compile>
     <Compile Include="Acadmies_module\courseDetails.aspx.vb">
       <DependentUpon>courseDetails.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Acadmies_module\courseDetailsManage.aspx.designer.vb">
-      <DependentUpon>courseDetailsManage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Acadmies_module\courseDetailsManage.aspx.vb">
-      <DependentUpon>courseDetailsManage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Acadmies_module\courseDetailsTrainer.aspx.designer.vb">
-      <DependentUpon>courseDetailsTrainer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Acadmies_module\courseDetailsTrainer.aspx.vb">
-      <DependentUpon>courseDetailsTrainer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Acadmies_module\courseDetails_archived.aspx.designer.vb">

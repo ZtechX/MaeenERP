@@ -33,7 +33,7 @@ $(function () {
                 }
             });
         });
-       
+        //setInterval(drawOldMess, 10000);
     } catch (err) {
         alert(err);
     }

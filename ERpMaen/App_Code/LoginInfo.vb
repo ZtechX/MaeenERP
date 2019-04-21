@@ -15,7 +15,13 @@ Public Class LoginInfo
     Public Shared Sub CheckPermisionsNew(ByVal page As Page, ByVal groupId As String)
         Try
             Dim pageName As String = PublicFunctions.GetPageName(page.Request.Url.ToString)
-            If pageName <> "Dashboard" And pageName <> "userPorfile" Then
+            If pageName <> "Dashboard" And pageName <> "userPorfile" And pageName <> "course_register" And
+                pageName <> "courseDetails" And pageName <> "Archived_DiplomaCourses" And
+                pageName <> "Archived_DiplomaSubjectDetails" And
+               pageName <> "courseDetails_archived" And
+               pageName <> "DiplomaCourses" And
+               pageName <> "DiplomaSubjectDetails" And
+               pageName <> "diplome_register" Then
                 Dim pf As New PublicFunctions
                 Dim dt As New DataTable
                 dt = DBManager.Getdatatable("select * from tblgroup_permissons inner join tblforms on tblgroup_permissons.form_id=tblforms.id where group_id = " + groupId.ToString + "  and tblforms.FormName='" + pageName + "' and isnull(f_access,0)=1")

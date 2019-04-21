@@ -37,7 +37,7 @@ Public Class SiteMaster
 
         Page.Header.DataBind()
         'SalesManCode = LoginInfo.GetSalesmanCode(Request.Cookies("UserInfo"), Me.Page)
-        Dim UserId = LoginInfo.GetUser__Id()
+        UserId = LoginInfo.GetUser__Id()
 
         lblUserId.Text = UserId
         'clsGeneralVariables.usertype = pf.GetUserType(SalesManCode)

@@ -18,6 +18,7 @@ $(function () {
     try {
         drawCourses();
         Studentlistview();
+       // drawFinanceStudent();
        
      
 
@@ -103,12 +104,7 @@ function archiveSemester() {
                             //window.location.reload();
 
                         }
-                        //else if (val[0] == 2) {
-                        //    alert('  الفصل الدراسى لم ينتهى بعد ');
-                        //    $("#SavedivLoader").hide();
-                        //    alert("تمت الارشفه بنجاح  ");
-                        //    window.location.replace("DiplomaCourses?code=" + diplomeCode);
-                        //}
+                       
                         else {
                             alert('  لم يتم الارشيف  ');
                         }
@@ -138,6 +134,62 @@ function archiveSemester() {
 
 
 
+function drawFinanceStudent() {
+    try {
+        debugger
+        var diplomeId = ($("#Lbldeploma_id").html());
+        Diploma_CoursesCls.get_StudentFnance(diplomeId, function (val) {
+
+            var data = "";
+
+            if (val[0] === "1") {
+                var check = ""
+                var arr1 = JSON.parse(val[1]);
+                var total = 0;
+                arr1.forEach(function (element) {
+                    if (element.approved == 1) {
+                        check = "  تم تاكيد المبلغ "
+                        total = total + element.amount;
+                    }
+                    else if (element.approved == 2) {
+                        check = "  لم يتم تاكيد المبلغ "
+                    }
+
+                    else {
+                        check = "  قيد المراجعه "
+                    }
+
+                    data = data + `
+                                                    <tr>
+                                                      
+                                                        <td>
+                                            <label>${element.amount} </label>
+                                                                  </td>
+                                                              <td>
+                                                             <label>${check}  </label>
+                            
+                                                        </td>
+                                                     
+                                                    </tr>
+                                             
+                 
+                                                                               
+                                                                      
+`;
+
+                });
+            }
+
+            $("#financestudent").html(data);
+            $("#total_money").html(total);
+        });
+    }
+    catch (err) {
+        alert(err);
+    }
+}
+
+
 function addfinancial() {
     //add financial
 
@@ -161,6 +213,7 @@ function addfinancial() {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     // debugger;
+                    drawFinanceStudent();
                     alert("تم الحفظ بنجاح");
                     $("#add_Financial").modal('hide');
                   
@@ -182,6 +235,171 @@ function addfinancial() {
     }
 }
 
+
+function drawStudentfinanceforAdmin() {
+    try {
+        debugger
+        var diplomeId = ($("#Lbldeploma_id").html());
+        Diploma_CoursesCls.get_StudentFinanceAdmin(diplomeId, function (val) {
+
+
+            var data = "";
+
+            console.log(val);
+
+            if (val[0] === "1") {
+                var arr1 = JSON.parse(val[1]);
+                arr1.forEach(function (element) {
+                    var status = "";
+                    if (element.approved == 1) {
+                        status = "تم التاكيد"
+                    }
+                    else if (element.approved == 2) {
+                        status = "تم الرفض"
+                    }
+                    else {
+                        status = "قيد المراجعة"
+                    }
+                    var file_nm = "";
+                    var path = element.image;
+                    if (path != "" && path != null) {
+                        if (path.indexOf("Acadmies_module/coursefiles/") != -1) {
+                            file_nm = path.split("Acadmies_module/coursefiles/")[1];
+                        }
+                    }
+
+
+                    data = data + `<table id="student">
+
+                                                    <tr>
+ 
+                                                        <td>
+
+                                                            <label>${element.name}  </label>
+                                                        </td>
+                                                      <td>
+                                               
+                                                  <label>${element.amount} </label>
+                                                     
+                                                            </td>
+                                                      <td>
+                                                       <li>
+                                                        <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li>
+                                    <td> ${status}</td>
+
+                                                     </td>
+                                                         <td>
+                                                             <div class="btn-group pull-left"  style="position:absolute; margin-bottom:5px;">
+                                                                                        <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                                                                            <i class="fa fa-cogs"></i>
+
+                                                                                        </button>
+                                                                                        <ul class="dropdown-menu">
+
+
+                                                                                                <li>
+                                                                                            <a   onclick="approv_finance(${element.student_id} , ${element.id});">
+                                                                                                تاكيد
+                                                                                            </a>
+                                                                                                    </li>
+                                                                                                <li>
+                                                                                            <a   onclick="refuse_finance(${element.student_id},${element.id});">
+                                                                                                رفض
+                                                                                            </a>
+                                                                                                    </li>
+                                                                                             
+                                                                                               
+                                                                                                </ul>
+                                                                                           
+                                                                                        </div>
+                                                                                          
+
+                                                        </td>
+                                                     
+
+                                                    </tr>
+                                                  
+                                                </table>
+                 
+                                                                               
+                                                                      
+`;
+                });
+            }
+            $("#Student_Finance").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
+function approv_finance(Studentid, payId) {
+
+    var f = confirm("هل  تريد تاكيد المبلغ ");
+    if (f == true) {
+
+        $("#SavedivLoader").show();
+        var diplomeID = ($("#Lbldeploma_id").html());
+        var code = $("#lbldiplomeCode").html();
+        Diploma_CoursesCls.approv_finance(Studentid, diplomeID, code, payId, function (val) {
+
+
+            if (val[0] == 1) {
+
+                $("#SavedivLoader").hide();
+
+                alert("تم التاكيد بنجاح");
+                drawStudentfinanceforAdmin();
+
+
+
+            } else {
+                showErrorMessage('لم يتم التاكيد');
+            }
+
+        });
+    }
+
+}
+
+
+function refuse_finance(Studentid, payId) {
+
+    var f = confirm("هل  تريد تاكيد المبلغ ");
+    if (f == true) {
+
+        $("#SavedivLoader").show();
+        var diplomeID = ($("#Lbldeploma_id").html());
+        var code = $("#lbldiplomeCode").html();
+        Diploma_CoursesCls.refuse_finance(Studentid, diplomeID, code, payId, function (val) {
+
+
+            if (val[0] == 1) {
+
+                $("#SavedivLoader").hide();
+
+                alert("تم الرفض ");
+                drawStudentfinanceforAdmin();
+
+
+
+            } else {
+                showErrorMessage('لم يتم الرفض ');
+            }
+
+        });
+    }
+
+}
+
+
 function savediplome() {
 
     try {
@@ -199,7 +417,7 @@ function savediplome() {
 
             var basicData = generateJSONFromControls("divFormDiplome");
 
-            console.log(basicData);
+           // console.log(basicData);
             Diploma_CoursesCls.SaveDiplome(diplomeID, basicData, function (val) {
                 if (val == true) {
 
@@ -428,6 +646,33 @@ function UploadComplete2(sender, args) {
 }
 
 
+function UploadComplete3(sender, args) {
+
+    var fileLength = args.get_length();
+    var fileType = args.get_contentType();
+    //alert(sender);
+    $('#fileurlfinanc').val('Acadmies_module/coursefiles/' + args.get_fileName());
+    $("#FnameFinanc").val(args.get_fileName());
+
+
+    switch (true) {
+        case (fileLength > 1000000):
+
+            fileLength = fileLength / 1000000 + 'MB';
+            break;
+
+        case (fileLength < 1000000):
+
+            fileLength = fileLength / 1000000 + 'KB';
+            break;
+
+        default:
+            fileLength = '1 MB';
+            break;
+    }
+    clearContents(sender);
+}
+
 function ClearMe(sender) {
     sender.value = '';
 }
@@ -577,11 +822,40 @@ function studentDegreesIN_Diplome() {
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
-                    var degree = element.degree;
-
-                    if (degree == 0) {
-                        degree = "--";
+                    var grad = "";
+                   
+                    var finalDegree = element.final_exam_degrees;
+                    //var activityDegree = element.activity_degrees;
+                    var finalGrad = ((element.final_degree) / (finalDegree)) * 100;
+                    if (finalGrad >= 95) {
+                        grad = "A+"
                     }
+                    else if (finalGrad >= 90) {
+                        grad = "A"
+                    }
+                    else if (finalGrad >= 85) {
+                        grad = "B+"
+                    }
+                    else if (finalGrad >= 80) {
+                        grad = "B"
+                    }
+                    else if (finalGrad >= 75) {
+                        grad = "C+"
+                    }
+                    else if (finalGrad >= 70) {
+                        grad = "C"
+                    }
+                    else if (finalGrad >= 65) {
+                        grad = "D+"
+                    }
+                    else if (finalGrad >= 60) {
+                        grad = "D"
+                    }
+                    else {
+                        grad = "E"
+                    }
+                  
+                    
 
 
 
@@ -589,8 +863,8 @@ function studentDegreesIN_Diplome() {
                                                            <tr>
                                                             <td> ${element.subjectName}  </td>
                                                       <td>${element.activity_degree}   </td>
-                                                                                <td> ${element.final_degree}  </td>
-                                                                              
+                                                          <td> ${element.final_degree}  </td>
+                                                          <td>  ${grad} </td>   
                                                                             
                                                                             </tr>
                                                         `;
