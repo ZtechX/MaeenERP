@@ -89,6 +89,44 @@
             margin: 0px !important;
             width: auto;
         }
+
+          #student {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #student td:first-child {
+                width: 35%;
+            }
+
+            #student td:last-child {
+                width: 20%;
+            }
+
+            #student td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                height: 60px;
+            }
+
+            #student tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #student tr:hover {
+                background-color: #ddd;
+            }
+
+            #student th {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                text-align: center;
+                background-color: #3A364A;
+                color: white;
+            }
+
+
         /*popup edit*/
         .modal-dialog {
             
@@ -156,6 +194,8 @@
 
                                     <li><a data-toggle="modal" href="#order_addcondition"> اضافه شرط
                                     </a></li>
+                                     <li><a data-toggle="modal" href="#StudentFinanceModal" onclick ="drawStudentfinanceforAdmin();">  مالية الطلاب
+                                    </a></li>
                                   
                                     <li><a   onclick=" deleteDiplome();"  > حذف
                                     </a></li>
@@ -176,7 +216,7 @@
                                   <i class="fa fa-cogs"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                     <li><a data-toggle="modal" href="#add_Financial">  اضافة مالية
+                                     <li><a data-toggle="modal" href="#add_Financial" onclick="drawFinanceStudent();">  اضافة مالية
                                     </a></li>
                                   
                                     <li><a data-toggle="modal" href="#studentDegreesDiplome" onclick="studentDegreesIN_Diplome();">درجات الدبلوم
@@ -616,6 +656,7 @@
                                     <th>المادة </th>
                                     <th>درجة النشاط</th>
                                      <th>الدرجة النهائية</th>
+                                      <th> التقدير</th>
                                     
                                   
                                 </tr>
@@ -645,6 +686,7 @@
                             <h4 class="modal-title"> مالية الطلاب   </h4>
                         </div>
                         <div class="modal-body">
+                            <div class="col-md-6" >
                             <div id="divformstudentFinanc">
 
                                 <div class="row form-group">
@@ -678,7 +720,7 @@
                                     </div>
 
                                     <div class="col-md-9 col-sm-12">
-                                        <asp:TextBox SkinID="form-control" TextMode="multiline" required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox8" runat="server">
+                                        <asp:TextBox SkinID="form-control" TextMode="multiline"  class="form-control" dbColumn="notes" ClientIDMode="Static" ID="TextBox8" runat="server">
                                         </asp:TextBox>
                                     </div>
                                 </div>
@@ -693,13 +735,40 @@
                                     </div>
                                     <div class="clear">
                                     </div>
-                                    <asp:AsyncFileUpload ID="fufile7" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
-                                        OnClientUploadComplete="UploadComplete8" />
+                                    <asp:AsyncFileUpload ID="fufile3" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
+                                        OnClientUploadComplete="UploadComplete3" />
                                 </div>
-                                
+                                 </div>
+                                </div>
+                             <div class="col-md-6" >    
 
+                                      <div class="table-responsive" >
+                                             
+                                                <table class="table table-bordered">
+                                                     <tr>
+                                                       
+                                                        <th>المبلغ</th>
+                                                        <th>الحاله </th>
+                                                     
 
-                            </div>
+                                                    </tr>
+                                                    <tbody id="financestudent">
+
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td>اجمالى المبالغ المؤكدة</td>
+                                                            <td><label id="total_money"></label></td>
+                                                        </tr>
+                                                    </tfoot>
+
+                                                 <%-- here--%>
+                                                </table>
+                                            </div>
+
+                                 </div>
+
+                           
                             
                         </div>
                         <div class="modal-footer">
@@ -745,10 +814,45 @@
                 </div>
             </div>
 
-        </div>
+    <div class="modal fade" id="StudentFinanceModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">مالية الطلاب   </h4>
+                        </div>
+                      
+                       <div class="table-responsive" >
+                                             
+
+                                                <table id="student">
+                                                     <tr>
+                                                        <th>الطالب </th>
+                                                        <th>المبلغ</th>
+                                                        <th>الصورة </th>
+                                                           <th>الحالة </th>
+                                                         <th>الاجراء </th>
+
+                                                    </tr>
+                                                    <tbody id="Student_Finance">
+
+                                                    </tbody>
+
+
+                                                 <%-- here--%>
+                                                </table>
+                                            </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button"  data-dismiss="modal" class="btn btn-primary">close </button>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        
+    </div>
 
 
     <%-- end form--%>
 </asp:Content>
-
-<%--select acd_diplome_subjects.id as 'AutoCodeHide' ,acd_diplome_subjects.subject_id ,acd_diplome_subjects.price ,acd_diplome_subjects.student_number , acd_diplome_subjects.subject_goal from acd_diplome_subjects--%>

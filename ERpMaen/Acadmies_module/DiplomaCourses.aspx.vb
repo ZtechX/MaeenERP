@@ -85,7 +85,7 @@ Public Class DiplomaCourses
                 Dim clsapprove_course As New clsFillComboByDataSource("select * from tblLock_up where type='subj' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_course.SetComboItems(ddlcourse, "", True, "--اختر--", False)
 
-                Dim clsapprove_paymentType As New clsFillComboByDataSource("select * from tblLock_up where type='Pay_TP' and IsNull(Deleted,0)=0", "Description", "id", "")
+                Dim clsapprove_paymentType As New clsFillComboByDataSource("select * from tblLock_up where type='PT' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_paymentType.SetComboItems(ddlpayment_type, "", True, "--اختر--", False)
 
                 Dim clsapprove_category As New clsFillComboByDataSource("select * from tblLock_up where type='CD' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
@@ -121,13 +121,21 @@ Public Class DiplomaCourses
                 Case "fuFile1"
                     fu = fuFile1
 
+
                     Path = "Acadmies_module/images/"
                     Prepare_Sheet(fu)
-                    ' Dim PostedPhoto As System.Drawing.Image = System.Drawing.Image.FromStream(fu.PostedFile.InputStream)
-                    'Dim ImgHeight As Integer = PostedPhoto.Height
-                    'Dim ImgWidth As Integer = PostedPhoto.Width
+
                     CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
-                    ' Session("UserPhoto") = x
+
+
+                Case "fufile3"
+                    fu = fuFile1
+
+                    Path = "Acadmies_module/coursefiles /"
+                    Prepare_Sheet(fu)
+
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+
 
             End Select
             ClearContents(sender)

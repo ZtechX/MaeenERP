@@ -129,9 +129,6 @@ function drawDynamicTable() {
     }
 }
 
-
-
-
 function add() {
     try {
         prepareAdd();

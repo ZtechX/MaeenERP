@@ -561,6 +561,55 @@ function DiplomeView() {
 
 
 
+function studentDegreesIN_Diplome() {
+    //السجل الاكاديمي
+    debugger
+    try {
+        //debugger
+        // $("#SavedivLoader").show();
+        var diplomeID = ($("#Lbldeploma_id").html());
+        Diploma_CoursesCls.get_diplomeDegree(diplomeID, function (val) {
+
+
+            var data = "";
+            console.log(val);
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+                    var degree = element.degree;
+
+                    if (degree == 0) {
+                        degree = "--";
+                    }
+
+
+
+                    data = data + `
+                                                           <tr>
+                                                            <td> ${element.subjectName}  </td>
+                                                      <td>${element.activity_degree}   </td>
+                                                                                <td> ${element.final_degree}  </td>
+                                                                              
+                                                                            
+                                                                            </tr>
+                                                        `;
+
+
+
+
+                });
+
+
+            }
+            $("#studentDiplomeDegreestable").html(data);
+            $("#SavedivLoader").hide();
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
 
 function addsubject() {
 

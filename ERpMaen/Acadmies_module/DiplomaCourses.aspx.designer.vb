@@ -266,11 +266,11 @@ Partial Public Class DiplomaCourses
     Protected WithEvents FnameFinanc As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
-    '''fufile7 control.
+    '''fufile3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents fufile7 As Global.AjaxControlToolkit.AsyncFileUpload
+    Protected WithEvents fufile3 As Global.AjaxControlToolkit.AsyncFileUpload
 End Class

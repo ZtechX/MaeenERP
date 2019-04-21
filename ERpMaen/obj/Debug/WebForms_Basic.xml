@@ -584,6 +584,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.CourseDetails._Div1">
+<summary>
+Div1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.CourseDetails._res1">
 <summary>
 res1 control.
@@ -872,6 +881,33 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.CourseDetails._link_title">
+<summary>
+link_title control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CourseDetails._link_url">
+<summary>
+link_url control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CourseDetails._linkNote">
+<summary>
+linkNote control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.CourseDetails._Result1">
 <summary>
 Result1 control.
@@ -1028,6 +1064,51 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.CourseDetails._finaldegree">
 <summary>
 finaldegree control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CourseDetails._certif_code">
+<summary>
+certif_code control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CourseDetails._HijriCalendar7">
+<summary>
+HijriCalendar7 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CourseDetails._FURL_CERTIF">
+<summary>
+FURL_CERTIF control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CourseDetails._FnameCertif">
+<summary>
+FnameCertif control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.CourseDetails._fuFile9">
+<summary>
+fuFile9 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1349,9 +1430,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.course_register._notes2">
+<member name="F:ERpMaen.course_register._studentRequest">
 <summary>
-notes2 control.
+studentRequest control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -1637,9 +1718,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.DiplomaCourses._fufile7">
+<member name="F:ERpMaen.DiplomaCourses._fufile3">
 <summary>
-fufile7 control.
+fufile3 control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2000,6 +2081,33 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.DiplomaSubjectDetails._hall">
 <summary>
 hall control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._link_title">
+<summary>
+link_title control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._link_url">
+<summary>
+link_url control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._linkNote">
+<summary>
+linkNote control.
 </summary>
 <remarks>
 Auto-generated field.

@@ -24,14 +24,18 @@ $(function () {
         drawActivity();
         drawConditionsTable();
         drawstudentExamsTable();
-       // Studentlistview();
+        drawCourseLinks();
         drawHomeworks();
 
         drawstudentDiplome_DegreesTable();
         drawExams();
         drawCourseFile();
         drawstudentHomeworkTable();
-       drawCourseComments();
+      
+
+        setInterval(function () {
+            drawCourseComments();
+        }, 10000);
         $("#SavedivLoader").hide();
 
     } catch (err) {
@@ -531,13 +535,7 @@ function SaveExam() {
 
                     });
                
-                //else {
-                //    alert("لا يوجد غياب");
-                //    $("#SavedivLoader").hide();
-                //    $("#absenceModal").modal('hide');
-
-
-                //}
+                
             }
 
 
@@ -546,57 +544,7 @@ function SaveExam() {
         }
     }
 
-    //function AddStudent() {
-
-    //    try {
-
-
-
-    //        //if (!checkRequired()) {
-       
-
-
-    //        $("#SavedivLoader").show();
-    //        var student_arr = [];
-    //        $("#courseStudents").find("tr td input:checkbox").each(function () {
-    //            if ($(this).is(":checked")) {
-    //                var value = $(this).attr("student");
-    //                student_arr.push(value)
-    //            }
-    //        });
-    //        console.log(student_arr);
-    //        var subjectId = ($("#Lblsubject_id").html());
-
-    //        var x = student_arr.length;
-    //        if (x != 0) {
-    //            DiplomaSubjectDetailsCls.SaveStudent(subjectId, student_arr, function (val) {
-    //                if (val == true) {
-    //                    $("#SavedivLoader").hide();
-    //                    alert("تم الحفظ بنجاح");
-    //                    $("#addStudentModal").modal('hide');
-    //                    drawStudentTable();
-    //                    //drawAbsenceTable();
-
-
-    //                } else {
-    //                    alert("لم يتم الحفظ");
-    //                }
-
-
-    //            });
-    //        }
-    //        else {
-    //            $("#addStudentModal").modal('hide');
-    //            $("#SavedivLoader").hide();
-
-    //        }
-
-
-
-    //    } catch (err) {
-    //        alert(err);
-    //    }
-    //}
+    
 
 
 function addStudentdegree() {
@@ -789,6 +737,50 @@ function addHalls() {
     }
 }
 
+function addNewlink() {
+
+    try {
+
+     //   debugger
+        if (checkRequired("divFormAddLinks") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+        }
+        else {
+
+            var subjectId = ($("#Lblsubject_id").html());
+            var basicData = generateJSONFromControls("divFormAddLinks");
+
+            var Id = "";
+            var today = new Date();
+
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+           
+            DiplomaSubjectDetailsCls.saveCourseLinks(Id, subjectId,  Pub_date_m, Pub_date_hj, time, basicData, function (val) {
+                if (val == true) {
+                  debugger
+                    alert("تم الحفظ بنجاح");
+                    
+                    resetDivControls("divFormAddLinks");
+                    $("#addLinks_modal").modal('hide');
+                    drawCourseLinks();
+
+
+
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+
+
+            });
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
 
     function addFiles() {
 
@@ -945,8 +937,11 @@ function addHalls() {
 
 
                 var Id = "";
-                console.log(basicData);
-                DiplomaSubjectDetailsCls.SaveComment(Id, subjectId, Pub_date_m, Pub_date_hj, basicData, function (val) {
+
+                var today = new Date();
+
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                DiplomaSubjectDetailsCls.SaveComment(Id, subjectId, Pub_date_m, Pub_date_hj, time, basicData, function (val) {
                     if (val == true) {
                         debugger;
 
@@ -1625,10 +1620,12 @@ function drawLecturesTable() {
                                                                         <h3>
                                                                             <a href="#"> ${element.username}</a>
                                                                         </h3>
-                                                                        <span>
-                                                                            <i class="zmdi zmdi-calendar"></i>
-                                                                          ${element.date_hj}
-                                                                    </span>
+                                                                          <span>
+                                                                        <i class="zmdi zmdi-calendar"></i>
+                                                                      ${element.date_hj}
+                                                                  <i class="zmdi zmdi-calendar"></i>
+                                                                      ${element.time}
+                                                                </span>
                                                                         <p>${element.comment} </p>
                                                                     </div>
                                                                 </div>
@@ -1672,6 +1669,64 @@ function archiveCourse() {
 
     }
 
+}
+
+
+
+function drawCourseLinks() {
+    debugger
+    //روابط مفيدة
+    try {
+
+        var subjectId = ($("#Lblsubject_id").html());
+        DiplomaSubjectDetailsCls.get_courseLinks(subjectId, function (val) {
+           
+
+            var data = "";
+          
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+
+
+
+                    data = data + `
+                     <ul>
+
+                                                            <li>
+                                                                <div class="user">
+                                                                    <div class="usr-img">
+                                                                        <img  class="avatar" src="${element.suerImage}">
+                                                                    </div>
+                                                                    <div class="usr-data">
+                                                                        <h3>
+                                                                            <a href="#"> ${element.username}</a>
+                                                                        </h3>
+                                                                          <span>
+                                                                        <i class="zmdi zmdi-calendar"></i>
+                                                                      ${element.date_hj}
+                                                               
+                                                                </span>
+                                                            <span> <h3>
+                                                                <a href="${element.URL}"> ${element.title}</a>
+                                                                        </h3></span>
+                                                                        <p>${element.notes} </p>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+    </u>
+
+
+    `;
+                });
+
+            }
+            $("#divformLinks").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
 }
 
 

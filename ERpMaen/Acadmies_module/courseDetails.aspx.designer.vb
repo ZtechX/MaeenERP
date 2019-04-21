@@ -86,6 +86,15 @@ Partial Public Class CourseDetails
     Protected WithEvents finance_div As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''Div1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Div1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''res1 control.
     '''</summary>
     '''<remarks>
@@ -374,6 +383,33 @@ Partial Public Class CourseDetails
     Protected WithEvents fuFile6 As Global.AjaxControlToolkit.AsyncFileUpload
     
     '''<summary>
+    '''link_title control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents link_title As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''link_url control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents link_url As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''linkNote control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents linkNote As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''Result1 control.
     '''</summary>
     '''<remarks>
@@ -534,6 +570,51 @@ Partial Public Class CourseDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents finaldegree As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''certif_code control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents certif_code As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''HijriCalendar7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar7 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''FURL_CERTIF control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FURL_CERTIF As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
+    '''FnameCertif control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FnameCertif As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''fuFile9 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fuFile9 As Global.AjaxControlToolkit.AsyncFileUpload
     
     '''<summary>
     '''txtnote control.

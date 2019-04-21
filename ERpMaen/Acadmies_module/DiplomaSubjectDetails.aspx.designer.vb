@@ -311,6 +311,33 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents hall As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
+    '''link_title control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents link_title As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''link_url control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents link_url As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''linkNote control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents linkNote As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''TextBox6 control.
     '''</summary>
     '''<remarks>

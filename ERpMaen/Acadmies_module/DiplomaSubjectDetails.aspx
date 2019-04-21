@@ -288,11 +288,7 @@
                                                   
                                                 </span>
                                                 </li>
-                                              <%--  <li>
-                                                    <span class="price" id="course_stat">
-                                                                                                            
-                                                </span>
-                                                </li>--%>
+                                        
 
                                             </ul>
                                         </div>
@@ -342,8 +338,7 @@
                     </div>
                                                                  </div>    </div>
                                                           
-                                                            <!-- end widget-body -->
-                                                            <!-- end widget -->
+                                                           
                                                       
                                                     </div>
                                                 </section>
@@ -393,8 +388,7 @@
                     </div>
                                                                  </div>    </div>
                                                           
-                                                            <!-- end widget-body -->
-                                                            <!-- end widget -->
+                                                           
                                                       
                                                     </div>
                                                 </section>
@@ -430,7 +424,7 @@
 
                                                             <div class="widget-body">
                                                                 <div class="trans-data col-xs-12">
-                                                                   <%-- <h3>جدول الواجبات </h3>--%>
+                                                                 
                                                                     <div class="table-responsive">
                                                                         <table class="table table-bordered table-hover">
                                                                             <tr>
@@ -447,26 +441,7 @@
                                                                             <tbody id="studenthomeworktable">
 
                      
-                                                                        <%--    <tr>
-                                                                                <td> os assigment  </td>
-                                                                                <td>define CORBA  </td>
-                                                                                <td> 
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-cloud-download"></i>   ارفاق الواجب 
-
-                                                        </a>
-                                                        <span>(8كيلوبايت)</span>
-                                                       </td>
-                                                                                <td> 
-                                   <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#file_upload">
-                                                                إرفاق الحل
-                                                           
-                                                            </button>
-                                                       </td>
-                                                                                 <td> 5 </td>
-                                                                     
-
-                                                                            </tr>--%>
+                                                                        
                                                                             
 
 
@@ -483,7 +458,6 @@
                                                     </div>
                                                 </section>
 
-                                                <%-- نهايةالجدول--%>
                                             </div>
                                         </div>
                                     </div>
@@ -501,7 +475,7 @@
                                             <div class="desc-body">
 
 
-                                                <%-- الجدول بداية--%>
+                                             
 
                                                 <section class="app-content">
                                                     <div class="row">
@@ -509,7 +483,7 @@
 
                                                             <div class="widget-body">
                                                                 <div class="trans-data col-xs-12">
-                                                                   <%-- <h3>جدول الواجبات </h3>--%>
+                                                                  
                                                                     <div class="table-responsive">
                                                                         <table class="table table-bordered table-hover">
                                                                             <tr>
@@ -522,26 +496,7 @@
 
                                                                             </tr>
                                                                             <tbody id="studentExamstable">
-                                                                            <%--<tr>
-                                                                                <td> os EXAM  </td>
-                                                                                <td>define CORBA  </td>
-                                                                               <td> 
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-cloud-download"></i>   ارفاق الاختبار 
-
-                                                        </a>
-                                                        <span>(8كيلوبايت)</span>
-                                                       </td>
-                                                                               <td> 
-                                   <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#file_upload">
-                                                                إرفاق الحل
-                                                           
-                                                            </button>
-                                                       </td>
-                                                                                 <td> 20 </td>
-                                                                     
-
-                                                                            </tr>--%>
+                                                                          
                                                                                
                                                                                 </tbody>
                                                                         </table>
@@ -550,8 +505,7 @@
 
 
                                                             </div>
-                                                            <!-- end widget-body -->
-                                                            <!-- end widget -->
+                                                          
                                                         </div>
                                                     </div>
                                                 </section>
@@ -677,7 +631,7 @@
                                             <div class="edit-head order_wid">
                                                 <i class="zmdi zmdi-wrench zmdi-hc-lg"></i>
                                                 <h3>التحكم في الدورة</h3>
-                                                <%--نكتب عنوان مناسب غير ده--%>
+                                              
                                             </div>
                                             <div class="edit-body">
                                             <button type="button" class="btn btn_rate btn-warning" data-toggle="modal" data-target="#courseEvalution" onclick="viewEvaluation();">
@@ -708,6 +662,40 @@
                                         
                                         </div>
                                     </div>
+
+                                    <div class="inner">
+                                        <div class="comments">
+                                             <div class="edit-head order_wid">
+                                                <i class="zmdi zmdi-wrench zmdi-hc-lg"></i>
+                                                <h3> روابط مفيدة </h3>
+                                              
+                                            </div>
+                                         
+                                            <div class="comment-body">
+                                               
+                                                <div class="comment-users">
+                                                   
+                                                    <div id="divformLinks">
+                                                        
+                                              
+                                                                
+                                                        </div>
+                                                    
+                                                </div>
+                                                <div class="comment-form">
+                                                    
+                                                        <div class="form-group">
+
+                                                         <button type="button" class="btn btn-purple btn-hint" data-toggle="modal" data-target="#addLinks_modal">اضافة رابط </button>
+                                                           
+                                                        </div>
+                                                     
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="inner">
                                         <div class="comments">
                                          
@@ -717,7 +705,7 @@
                                                    
                                                     <div id="divformComments">
                                                         
-                                                <%--  //comments--%>
+                                           
                                                                 
                                                         </div>
                                                     
@@ -734,7 +722,7 @@
                                                    
                                                         <div class="form-group">
 
-                                                            <button type="submit" class="btn" onclick="addComment();">ارسال</button>
+                                                            <button type="button" class="btn" onclick="addComment();">ارسال</button>
                                                            
                                                         </div>
                                                      
@@ -788,13 +776,7 @@
                                                         </h3>
                                               
                                                     
-                                                       <%-- <div class=" pull-left">
-                                                        <button style="margin-top: -20px;" type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#addStudentModal">
-                                                            اضافة طلاب   <i class="fa fa-plus zmdi zmdi-storage zmdi-hc-lg"></i>
-
-                                                        </button>
-
-                                                    </div>--%>
+                                                       
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -813,7 +795,7 @@
 
 
                                                
-                                                 <%-- here--%>
+                                               
                                                 </table>
                                             </div>
 
@@ -917,26 +899,7 @@
                                         </div>
                                     </div>
 
-                                    <%--  <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
-                                              <div class="inner" id="finance_div">
-                                        <div class="add-hint">
-                                            <div class="hint-head side_head">
-                                                <h3>
-                                                    <i class="zmdi zmdi-storage zmdi-hc-lg"></i>
-                                                     الماليات
-                                                </h3>
-                                            </div>
-                                            <div class="hint-body">
-                                                <p>
-                                                    لا توجد ماليات الان
-
- 
-                                                </p>
-                                                <button type="button" class="btn btn-purple btn-hint" data-toggle="modal" data-target="#add_Financial">اضافة مالية جديدة</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                     <% End If %>--%>
+                                    
 
 
                                     <div class="inner">
@@ -1254,39 +1217,7 @@
                     </div>
                 </div>
             </div>
-              <%--<div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">الطلاب   </h4>
-                        </div>
-                       
-                        <div class="table-responsive" id="allStudentlist">
-                            <table class="table table-bordered table-hover"  id="newitem">
-                               <thead>
-                                <tr>
-                                    <th>الاسم </th>
-                                    <th>الصورة</th>
-                                     <th>اضافة</th>
-                                  
-                                </tr>
-                                 </thead>
-                                <tbody  id="courseStudents">
-                                         
-                                </tbody>
-                                    
-
-                            </table>
-                        </div>
-
-
-                        <div class="modal-footer">
-                            <button type="button"  class="btn btn-primary" onclick="AddStudent();">حفظ </button>
-                        </div>
-                    </div>
-                </div>
-            </div>--%>
+              
 
             <div class="modal" id="order_addcondition" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -1439,19 +1370,7 @@
                                 <tbody id="pblcstudentdegrees">
                                  
                               
-                               <%-- <tr>
-                                    <td>
-                                        <label> ahmed mohamed</label>
-                                    </td>
-                                    <td>
-               <input id="finaldegee" type="text"   />
-                                        55
-                                    </td>
-                                    <td>
-               <input id="activitydegee" type="text"  />
-                                        66
-                                    </td>
-                                </tr>--%>
+                              
                                          </tbody>  
 
 
@@ -1467,7 +1386,7 @@
             </div>
 
 
-                           <div class="modal" id="AddHall" tabindex="-1" role="dialog">
+              <div class="modal" id="AddHall" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1508,6 +1427,69 @@
             </div>
 
 
+            <div class="modal" id="addLinks_modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">  رابط جديد</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12" id="divFormAddLinks">
+                          
+                          
+                            <div class="row form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label class="label-required" >العنوان  </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                            <input dbcolumn="title" required type="text" id="link_title"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    <br />
+                                        </div>
+                            </div>
+
+                            <div class="row form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label class="label-required">الرابط  </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                            <input dbcolumn="URL" type="text" required id="link_url"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    <br />
+                                        </div>
+                            </div>
+
+                             <div class="row form-group">
+                                        <div class="col-md-3 col-sm-12">
+                                            <label for="Name" > الوصف  </label>
+
+                                        </div>
+                                        <div class="col-md-9 col-sm-12">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes"   ClientIDMode="Static" ID="linkNote" runat="server">
+                                            </asp:TextBox>
+                                        </div>
+                                    </div>
+                                     
+                          
+                                 </div>
+
+
+
+                        </div>
+                  
+                    <div class="modal-footer">
+                        <button type="button"  class="btn btn-primary" onclick="addNewlink();">حفظ </button>
+
+                    </div>
+                      </div>
+                </div>
+            </div>
+
               <div class="modal" id="file_upload_hw_answers" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -1520,7 +1502,7 @@
 
                                              <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name" class="label-required"> ملاحظات  </label>
+                                            <label for="Name" > ملاحظات  </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">

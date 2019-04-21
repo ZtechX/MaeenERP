@@ -665,16 +665,15 @@ function drawstudenthomeworkanswers(homeworkId) {
             console.log(val);
             var data = "";
             if (val[0] == 1) {
-              //  debugger
+             
                 var arrstudent = JSON.parse(val[1]);
 
                 arrstudent.forEach(function (element) {
-                //    debugger
-
+                
                     var filename = "";
                     var path = element.homeworkanswer;
                     if (path != "" && path != null) {
-                       // debugger
+                      
                         if (path.indexOf("Acadmies_module/coursefiles/") != -1) {
                             filename = path.split("Acadmies_module/coursefiles/")[1];
                         }
@@ -2892,15 +2891,15 @@ function Studentlistview() {
                                 <tr >
                                     <td><label id="${element.student_id}" > ${element.studentName}</label> </td>
                                     <td><label id="notes_student"> ${element.notes}</label> </td>
-                                       <td>
-                                                   <li>
-                                                        <a id="registerFiles" href="../${element.registerFiles}" download>
-                                                            <i class="fa fa-download"></i>   
+                                       
+                                          <td>
+                                   <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#studentFilesModal" onclick="drawstudentFiles(${element.student_id});">
+                                                                 student files
+                                                           
+                                                            </button>
+                                                       </td>
 
-                                                        </a>
-                                                        <span>${file_nm}</span>
-                                                    </li> </td>
-                                                            <td>
+                                                         <td>
                                                
                                                   <select  onchange="checkReason();" onclick="setStudentId(${element.student_id});" style="width:100px;" id="action" >
                                                      <option value="-1">اختر</option>                                                    
@@ -2921,6 +2920,59 @@ function Studentlistview() {
             
         });
     } catch (err) {
+        alert(err);
+    }
+}
+
+function drawstudentFiles(studentId) {
+    try {
+        debugger
+        var CourseId = ($("#Lblcourse_id").html());
+        courseDetailsCls.get_studentFiles(CourseId, studentId,function (val) {
+
+            var data = "";
+
+            if (val[0] === "1") {
+              
+                var arr1 = JSON.parse(val[1]);
+              
+                arr1.forEach(function (element) {
+                  
+
+                    data = data + `   <tr>
+                                    
+                                                            <td>
+                                                              <label>${element.conditionName}</label>
+                                                            </td>
+                                  
+
+                                                <td>
+                                                       <li>
+                                                        <a id="homeworkfile" href="../${element.file}" download>
+                                                            <i class="fa fa-download"></i>   
+                                                     <span>${element.Name}</span>
+                                                        </a>
+                                                      
+                                      
+                                                    </li>
+                                         </td>
+
+                                                    
+                           </tr>
+                                             
+                 
+                                                                               
+                                                                      
+`;
+                
+                });
+            }
+
+            $("#studentFiles").html(data);
+          
+        });
+    }
+    catch (err) {
         alert(err);
     }
 }

@@ -1377,24 +1377,19 @@ Public Class DiplomaSubjectDetailsCls
     'SaveComment get_CourseStudentsandDegree
 
 
-#Region "Save"
+#Region "Save comment"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveComment(ByVal id As String, ByVal CourseId As String, ByVal date_m As String, ByVal date_hj As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function SaveComment(ByVal id As String, ByVal CourseId As String, ByVal date_m As String, ByVal date_hj As String, ByVal time As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-            Dim dt_user As DataTable
 
-            'Dim time_m = h + "" + t
-            'Dim date_m = PublicFunctions.ConvertDatetoNumber(Date.Now.ToShortDateString.ToString)
-
-            'Dim comp_id = LoginInfo.GetComp_id()
             Dim user_id = LoginInfo.GetUser__Id()
 
 
@@ -1402,6 +1397,7 @@ Public Class DiplomaSubjectDetailsCls
             dictBasicDataJson.Add("date_m", date_m)
             dictBasicDataJson.Add("date_hj", date_hj)
             dictBasicDataJson.Add("type", "2")
+            dictBasicDataJson.Add("time", time)
 
             dictBasicDataJson.Add("course_id", CourseId)
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_course_comments", id, _sqlconn, _sqltrans) Then
@@ -1435,7 +1431,97 @@ Public Class DiplomaSubjectDetailsCls
 #End Region
 
 
-#Region "get_data"
+#Region "Save links"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function saveCourseLinks(ByVal id As String, ByVal subjectId As String, ByVal date_m As String, ByVal date_hj As String, ByVal time As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+
+            Dim user_id = LoginInfo.GetUser__Id()
+
+
+            dictBasicDataJson.Add("add_by", user_id)
+            dictBasicDataJson.Add("date_m", date_m)
+            dictBasicDataJson.Add("date_hj", date_hj)
+            dictBasicDataJson.Add("type", "2")
+            dictBasicDataJson.Add("course_id", subjectId)
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_links", id, _sqlconn, _sqltrans) Then
+                If Not PublicFunctions.TransUsers_logs("4203", "acd_links", "ادخال", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
+
+
+#Region "get_links"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_courseLinks(ByVal CourseID As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select acd_links.add_by,tblUsers.full_name as 'username',tblUsers.User_Image as 'suerImage', acd_links.title,acd_links.date_hj , acd_links.URL , acd_links.notes from acd_links join tblUsers on acd_links.add_by=tblUsers.id where acd_links.type=2 and acd_links.course_id=" + CourseID)
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+#End Region
+
+
+#Region "get_comments"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
@@ -1449,7 +1535,7 @@ Public Class DiplomaSubjectDetailsCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_course_comments.user_id,tblUsers.full_name as 'username',tblUsers.User_Image as 'suerImage', acd_course_comments.comment,acd_course_comments.date_hj from acd_course_comments join tblUsers on acd_course_comments.user_id=tblUsers.id where acd_course_comments.type=2 and acd_course_comments.course_id=" + CourseID)
+            dt = DBManager.Getdatatable("select acd_course_comments.user_id,tblUsers.full_name as 'username',tblUsers.User_Image as 'suerImage', acd_course_comments.comment,acd_course_comments.date_hj , acd_course_comments.time from acd_course_comments join tblUsers on acd_course_comments.user_id=tblUsers.id where acd_course_comments.type=2 and acd_course_comments.course_id=" + CourseID)
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
                     Dim Str = PublicFunctions.ConvertDataTabletoString(dt)

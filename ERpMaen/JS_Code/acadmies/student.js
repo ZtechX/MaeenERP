@@ -167,6 +167,3 @@ function setformforupdate() {
         alert(err);
     }
 }
-
-
-

@@ -171,6 +171,13 @@ Public Class CourseDetails
                     CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
 
 
+                Case "fuFile9"
+                    fu = fuFile6
+
+                    Path = "Acadmies_module/coursefiles/"
+                    Prepare_Sheet(fu)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+
                 Case "fuFile7"
                     fu = fufile7
 

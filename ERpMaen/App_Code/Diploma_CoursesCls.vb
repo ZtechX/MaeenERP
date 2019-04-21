@@ -263,6 +263,46 @@ Public Class Diploma_CoursesCls
 #End Region
 
 
+#Region "get_data"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_StudentFnance(ByVal diplomeID As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select amount , approved from acd_payments where type=2 and course_id=" + diplomeID + "and student_id=" + LoginInfo.GetUser__Id())
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+
+
+#End Region
+
 
 #Region "get_data"
     ''' <summary>
@@ -308,6 +348,160 @@ Public Class Diploma_CoursesCls
 #End Region
 
 
+
+#Region "get_StudentFinanceAdmin"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_StudentFinanceAdmin(ByVal diplomeId As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select acd_payments.id ,acd_payments.approved ,acd_payments.amount,acd_payments.image,acd_payments.student_id ,tblUsers.full_name as 'name' from acd_payments join tblUsers on tblUsers.id=acd_payments.student_id  where type=2 and course_id=" + diplomeId)
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+
+#End Region
+
+
+
+#Region "approv_finance"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function approv_finance(ByVal studentId As String, ByVal diplomeid As String, ByVal code As String, ByVal payId As String) As String()
+        Dim Names As New List(Of String)(10)
+        Try
+
+            If DBManager.ExcuteQuery("UPDATE  acd_payments  set  approved=1 where type=2 and id=" + payId + " and student_id=" + studentId + " and course_id=" + diplomeid) <> -1 Then
+
+
+                Dim dictNotification As New Dictionary(Of String, Object)
+
+                dictNotification.Add("RefCode", diplomeid)
+                dictNotification.Add("NotTitle", "  تاكيد المبلغ ")
+                dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                dictNotification.Add("AssignedTo", studentId)
+                dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                dictNotification.Add("Remarks", "تاكيد المبلغ المرسل")
+                dictNotification.Add("FormUrl", "Acadmies_module/DiplomaCourses?code=" + code)
+                If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                    success = True
+                Else
+                    success = False
+                End If
+
+                If Not PublicFunctions.TransUsers_logs("4209", "acd_payments", "حذف", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+                Names.Add("1")
+                Names.Add("تم الحفظ بنجاح!")
+            Else
+                Names.Add("2")
+                Names.Add("لم يتم التاكيد")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+            Names.Add("لا يمكن الحذف!")
+            Return Names.ToArray
+        End Try
+    End Function
+#End Region
+
+
+#Region "refuse_finance"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function refuse_finance(ByVal studentId As String, ByVal diplomeId As String, ByVal code As String, ByVal payId As String) As String()
+        Dim Names As New List(Of String)(10)
+        Try
+
+            If DBManager.ExcuteQuery("UPDATE  acd_payments  set  approved=2 where type=2 and  id=" + payId + " and student_id=" + studentId + " and course_id=" + diplomeId) <> -1 Then
+
+
+                Dim dictNotification As New Dictionary(Of String, Object)
+
+                dictNotification.Add("RefCode", diplomeId)
+                dictNotification.Add("NotTitle", " رفض المبلغ ")
+                dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                dictNotification.Add("AssignedTo", studentId)
+                dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
+                dictNotification.Add("Remarks", "  رفض المبلغ المرسل ")
+                dictNotification.Add("FormUrl", "Acadmies_module/DiplomaCourses?code=" + code)
+                If PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+
+                    success = True
+                Else
+                    success = False
+                End If
+
+                If Not PublicFunctions.TransUsers_logs("4209", "acd_payments", "حذف", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+                Names.Add("1")
+                Names.Add("تم الحفظ بنجاح!")
+            Else
+                Names.Add("2")
+                Names.Add("لم يتم التاكيد")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+            Names.Add("لا يمكن التاكيد!")
+            Return Names.ToArray
+        End Try
+    End Function
+#End Region
+
+
 #Region "get_diplome_Degree table"
     ''' <summary>
     ''' Save  Type
@@ -321,7 +515,7 @@ Public Class Diploma_CoursesCls
             Dim dt As New DataTable
 
             If LoginInfo.getUserType = 8 Then
-                dt = DBManager.Getdatatable("select acd_diplome_subjects.id, acd_student_degrees.final_degree,  acd_student_degrees.activity_degree,acd_diplome_subjects.subject_id ,tbllock_up.Description as 'subjectName'  from  acd_diplome_subjects join tbllock_up on tbllock_up.id =acd_diplome_subjects.subject_id join acd_student_degrees on acd_student_degrees.course_id=acd_diplome_subjects.id and student_id=" + LoginInfo.GetUser__Id() + " and acd_student_degrees.type=2 where diplome_id=" + diplomeId)
+                dt = DBManager.Getdatatable("select  acd_diplome_subjects.final_exam_degrees , acd_diplome_subjects.activity_degrees ,acd_diplome_subjects.id, acd_student_degrees.final_degree,  acd_student_degrees.activity_degree,acd_diplome_subjects.subject_id ,tbllock_up.Description as 'subjectName'  from  acd_diplome_subjects join tbllock_up on tbllock_up.id =acd_diplome_subjects.subject_id join acd_student_degrees on acd_student_degrees.course_id=acd_diplome_subjects.id and student_id=" + LoginInfo.GetUser__Id() + " and acd_student_degrees.type=2 where diplome_id=" + diplomeId)
 
             End If
 

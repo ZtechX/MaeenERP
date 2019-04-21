@@ -1353,7 +1353,7 @@
                                 <tr>
                                     <th>الطالب </th>
                                     <th>الطلب</th>
-                                     <th>الملف</th>
+                                    <th>الملفات</th>
                                      <th>الاجراء</th>
                                   
                                 </tr>
@@ -1979,7 +1979,7 @@
                                                 </div>
                                             </div>
                                 
-
+                                
 
                             </div>
                             
@@ -2127,6 +2127,40 @@
                 </div>
             </div>
 
+
+            <div class="modal fade" id="studentFilesModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">ملفات الطالب    </h4>
+                           
+                        </div>
+                   
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" >
+                                <tr>
+                                    <th>الشرط </th>
+                                     <th> ملفات الطالب </th>
+                                  
+                                </tr>
+                                   
+                                <tbody id="studentFiles">
+                                 
+                             
+                                         </tbody>  
+
+
+                            </table>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal"  class="btn btn-primary" >close </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="modal fade" id="StudentExamskAnswers" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
