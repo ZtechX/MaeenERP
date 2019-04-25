@@ -10,10 +10,10 @@ $(function () {
 
     try {
        form_load();
-        //drawDynamicTable();
+       
         
     } catch (err) {
-       // alert(err);
+       
     }
 });
 
@@ -107,26 +107,11 @@ function edit(val) {
     $("#SavedivLoader").hide();
 }
 
-//function drawDynamicTable() {
-//    try {
-//        debugger
-        
-//        var tableSortingColumns = [
-//            { orderable: false }, null, null, 
-//        ];
-//        var tableFilteringColumns = [
-//            { type: "null" }, { type: "text" }, { type: "text" },
-//        ];
-
-//        var tableColumnDefs = [
-
-//        ];
-//        var initialSortingColumn = 0;
-//        loadDynamicTable('Students', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
-//    } catch (err) {
-//        //alert(err);
-//    }
-//}
+function getStudentCode() {
+    
+        $("#code").val(Number(val) + 1);
+   
+}
 
 
 function drawDynamicTable() {

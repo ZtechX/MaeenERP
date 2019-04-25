@@ -32,15 +32,6 @@ Partial Public Class Diplomas
     Protected WithEvents courseTitle As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''RequiredFieldValidator4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
     '''price control.
     '''</summary>
     '''<remarks>
@@ -57,6 +48,15 @@ Partial Public Class Diplomas
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlcategory As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''ddlcoordinator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlcoordinator As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''studentnum control.

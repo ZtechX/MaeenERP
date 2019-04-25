@@ -10,12 +10,12 @@ var current_page = 1;
 $(function () {
     $("#pnlConfirm").hide();
     $("#divData").hide();
-    //$("#SavedivLoader").show();
+   
 
     try {
 
         drawAllCourses();
-       // getcousreCode();
+      
     } catch (err) {
         alert(err);
     }
@@ -59,9 +59,7 @@ function saveCourse() {
             var enddate_m = document.getElementById("end_datem").value;
 
             var startdate_m = document.getElementById("start_date_m").value;
-
-            // console.log(enddate_m + "     " + startdate_m);
-
+            
             if (startdate_m >= Pub_date_m) {
                 if (enddate_m > startdate_m) {
                     var basicData = generateJSONFromControls("divForm");
@@ -101,7 +99,7 @@ function saveCourse() {
 }
 
 function edit(val) {
-    debugger
+   
     resetAll();
  
         if (val[0] == "1") {
@@ -128,7 +126,7 @@ function prevPage() {
     }
 }
 function changePage(page) {
-    //debugger
+    
     current_page = page;
     if (page < 1) {
         page = 1;
@@ -182,10 +180,10 @@ ${costdiv}
 function drawAllCourses() {
     try {
 
-        debugger
+      debugger
 
         coursatCls.get_Courses("", "", Pub_date_m,function (val) {
-            //debugger
+           
             var data = "";
             var arr1 = JSON.parse(val[1]);
             CoursesList = arr1;

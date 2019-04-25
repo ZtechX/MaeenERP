@@ -859,14 +859,13 @@ Optional ByVal MinNumber As Integer = 0) As Integer
     End Function
 #End Region
 #Region "SMS"
-    Shared Function DoSendSMS(ByVal MobilNumbers As String, ByVal MobileMessage As String, ByVal id As String) As String
+    Shared Function DoSendSMS(ByVal MobilNumbers As String, ByVal MobileMessage As String, ByVal id As String, ByVal dt As DataTable) As String
         Dim request As HttpWebRequest
         Dim response As HttpWebResponse = Nothing
         Dim reader As StreamReader
-        Dim dt As New DataTable
+        ' Dim dt As New DataTable
         Try
-
-            dt = DBManager.Getdatatable("select * from tblsms_settings where comp_id=" + "(select isNULL(comp_id,0)  from tblUsers where isNull(deleted,0) != 1 and User_PhoneNumber ='" + MobilNumbers + "')")
+            ' dt = DBManager.Getdatatable("select * from tblsms_settings where comp_id=" + "(select isNULL(comp_id,0)  from tblUsers where isNull(deleted,0) != 1 and User_PhoneNumber ='" + MobilNumbers + "')")
             If dt.Rows.Count <> 0 Then
                 Dim UserName As String
                 UserName = dt.Rows(0).Item("user_name").ToString()
@@ -886,6 +885,11 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                 Catch
                     DoSendSMS = Err.Description
                 End Try
+                If DoSendSMS = "تم استلام الارقام بنجاح" Then
+                    If id <> "" Then
+                        DBManager.ExcuteQuery("update tblsms_archive set Send=1 where id=" + id)
+                    End If
+                End If
                 If Not IsNumeric(DoSendSMS) Then
                     DoSendSMS = DoSendSMS
                     Exit Function
@@ -894,11 +898,7 @@ Optional ByVal MinNumber As Integer = 0) As Integer
                         DoSendSMS = "Êã ÈäÌÇÍ"
                     End If
                 End If
-                If DoSendSMS = "تم استلام الارقام بنجاح" Then
-                    If id <> "" Then
-                        DBManager.ExcuteQuery("update tblsms_archive set Send=1 where id=" + id)
-                    End If
-                End If
+
                 Return DoSendSMS
             End If
 

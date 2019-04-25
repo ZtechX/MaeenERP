@@ -38,136 +38,7 @@ function resetAll() {
 
 
 
-//function addfinancial() {
-//    //add financial
 
-//    try {
-//        debugger
-
-//        if (checkRequired("divformstudentFinanc") == 1) {
-//            alert("يرجى ادخال البيانات المطلوبة");
-
-//        }
-//        else {
-//            $("#SavedivLoader").show();
-         
-//            var diplomeID = ($("#Lbldeploma_id").html());
-
-//            var basicData = generateJSONFromControls("divformstudentFinanc");
-
-//            var Id = "";
-
-//            Archived_Diploma_CoursesCls.Savefinanc(Id, diplomeID, Pub_date_m, Pub_date_hj, basicData, function (val) {
-//                if (val == true) {
-//                    $("#SavedivLoader").hide();
-//                    // debugger;
-//                    alert("تم الحفظ بنجاح");
-//                    $("#add_Financial").modal('hide');
-                  
-//                    resetDivControls("divformstudentFinanc");
-
-
-
-//                } else {
-//                    alert("لم يتم الحفظ");
-//                }
-
-
-//            });
-//        }
-
-
-//    } catch (err) {
-//        alert(err);
-//    }
-//}
-
-//function savediplome() {
-
-//    try {
-
-//        //setRequired_Date("divdate1");
-//        //setRequired_Date("divdate2");
-//        var diplomeID = ($("#Lbldeploma_id").html());
-
-//        if (checkRequired("divFormDiplome") == 1) {
-//            alert("يرجى ادخال البيانات المطلوبة");
-//        }
-//        else {
-//            //$("#date_m").val($("#txtDatem").val());
-//            //$("#date_hj").val($("#txtDateh").val());
-
-//            var basicData = generateJSONFromControls("divFormDiplome");
-
-//            console.log(basicData);
-//            Diploma_CoursesCls.SaveDiplome(diplomeID, basicData, function (val) {
-//                if (val == true) {
-
-//                    alert("تم الحفظ بنجاح");
-//                   // drawCourses();
-
-//                    $("#addCourse").modal('hide');
-//                    resetDivControls("divFormDiplome");
-
-
-//                } else {
-//                    alert("لم يتم الحفظ");
-//                }
-
-
-//            });
-//        }
-
-
-//    } catch (err) {
-//        alert(err);
-//    }
-//}
-
-//function savesubject(){
-
-//    try {
-
-//        setRequired_Date("divdate1");
-//        //setRequired_Date("divdate2");
-//        var diplomeID = ($("#Lbldeploma_id").html());      
-        
-//        if (checkRequired("divForm") == 1) {
-//            alert("يرجى ادخال البيانات المطلوبة");
-//        }
-//        else {
-//            $("#date_m").val($("#txtDatem").val());
-//            $("#date_hj").val($("#txtDateh").val());
-        
-//            var basicData = generateJSONFromControls("divForm");
-      
-//            var Id = "";
-//            console.log(basicData);
-//            Diploma_CoursesCls.Save(Id, diplomeID, basicData, function (val) {
-//                if (val == true) {
-                   
-//                    alert("تم الحفظ بنجاح");
-//                    drawCourses(); 
-                  
-//                    $("#addsubject").modal('hide');
-//                    resetDivControls("divForm");
-                   
-
-//                } else {
-//                    alert("لم يتم الحفظ");
-//                }
-
-               
-//            });
-//        }
-           
-       
-//    } catch (err) {
-//        alert(err);
-//    }
-//}
-
-////// pagination /////////////
 function nextPage() {
     debugger
     if (current_page < numPages) {
@@ -230,8 +101,7 @@ function changePage(page) {
 
 function Studentlistview() {
     try {
-        debugger
-
+        
         var diplomeID = ($("#Lbldeploma_id").html());
         Archived_Diploma_CoursesCls.get_StudentList(diplomeID, function (val) {
 
@@ -333,7 +203,7 @@ function clearContents(sender) {
 
 
 function edit(val) {
-    debugger
+   
     resetAll();
  
         if (val[0] == "1") {
@@ -351,10 +221,10 @@ function drawCourses(){
         debugger
         var diplomeID = ($("#Lbldeploma_id").html());
         Archived_Diploma_CoursesCls.get_Courses(diplomeID,"",function (val) {
-            debugger
-          //  var data = "";
-            console.log(val);
+         
+           
             var arr1 = JSON.parse(val[1]);
+            $("#diplome_title").html(arr1[0].name);
             subjectList = arr1;
             numPages = Math.ceil(subjectList.length / records_per_page);
 

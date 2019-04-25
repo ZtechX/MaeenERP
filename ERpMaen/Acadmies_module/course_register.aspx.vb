@@ -98,26 +98,13 @@ Public Class course_register
         Dim fu As New AjaxControlToolkit.AsyncFileUpload
         Try
             i = rnd.Next(10000, 99999)
-            '  namer = i.ToString
-            Select Case sender.id.ToString
+            fu = fuPhoto1
+            Path = "Acadmies_module/images/"
+            Prepare_Sheet(fu)
+            CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
 
-
-                Case "fuFile3"
-                    fu = fuFile3
-
-                    Path = "Acadmies_module/images/"
-                    Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
-
-
-
-
-            End Select
             ClearContents(sender)
-            '    ScriptManager.RegisterClientScriptBlock(Me, Me.[GetType](), "newfile", "document.getElementById('imgEmployee').src = '" & url & "';", True)
         Catch ex As Exception
-            'lblRes.Text = "Failure with Message " & ex.Message.ToString
-            'lblRes.CssClass = "res-label-error"
             ScriptManager.RegisterClientScriptBlock(Me, Me.[GetType](), "", "$('#lblRes').fadeIn(3000);", True)
         End Try
     End Sub
@@ -126,10 +113,12 @@ Public Class course_register
         Dim FileLength As Integer = f.PostedFile.ContentLength
         Dim MyFile As HttpPostedFile = f.PostedFile
         Session("fu2Name") = f.FileName
-
         Session("fu2File") = f.PostedFile
         Session("FileType") = System.IO.Path.GetExtension(f.FileName).ToLower()
-
+        Dim MyImageData2(FileLength) As Byte
+        ' byte[] myData = new Byte[nFileLen]
+        MyFile.InputStream.Read(MyImageData2, 0, FileLength)
+        Session("FileArray") = MyImageData2
         Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
         Dim FileAppend As Integer = 0
         Dim i As Integer = 0

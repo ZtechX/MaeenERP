@@ -36,86 +36,76 @@ Public Class diplome_registerCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveRegister(ByVal id As String, ByVal diplomeId As String, ByVal code As String, ByVal ImagePath As String, ByVal imageName As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function SaveRegister(ByVal diplomeId As String, ByVal code As String, ByVal student_notes As String, ByVal arr_files As List(Of Object)) As Boolean
         Try
-
+            Dim dt As New DataTable
+            Dim dt1 As New DataTable
+            Dim admin = ""
+            Dim studentName = ""
+            dt = DBManager.Getdatatable("select admin from acd_acadmies where  comp_id=" + LoginInfo.GetComp_id())
+            If dt.Rows.Count <> 0 Then
+                admin = dt.Rows(0)(0).ToString
+            End If
+            dt1 = DBManager.Getdatatable("select full_name from tblUsers where id=" + LoginInfo.GetUser__Id())
+            If dt1.Rows.Count <> 0 Then
+                studentName = dt1.Rows(0)(0).ToString
+            End If
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
-            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-
-
+            Dim loginUser_id = LoginInfo.GetUser__Id()
+            Dim basic As New Dictionary(Of String, Object)
+            For Each obj As Object In arr_files
+                basic = obj
+                basic.Add("Source_id", loginUser_id)
+                If DBManager.ExcuteQueryTransaction("delete from tblImages where  Source_id=" + loginUser_id + " and related_id=" + basic("related_id").ToString, _sqlconn, _sqltrans) = -1 Then
+                    _sqltrans.Rollback()
+                    Return "False|لم يتم الحفظ"
+                End If
+                If Not PublicFunctions.TransUpdateInsert(basic, "tblImages", "", _sqlconn, _sqltrans) Then
+                    _sqltrans.Rollback()
+                    _sqlconn.Close()
+                    Return "False|لم يتم الحفظ"
+                End If
+            Next
+            If DBManager.ExcuteQueryTransaction("delete from acd_courses_students where  type=2 and course_id=" + diplomeId + "and student_id=" + loginUser_id, _sqlconn, _sqltrans) = -1 Then
+                _sqltrans.Rollback()
+                Return "False|لم يتم الحفظ"
+            End If
+            Dim dictBasicDataJson As New Dictionary(Of String, Object)
             dictBasicDataJson.Add("course_id", diplomeId)
             dictBasicDataJson.Add("type", "2")
             dictBasicDataJson.Add("approved", 0)
             dictBasicDataJson.Add("checked", 0)
-
-            dictBasicDataJson.Add("student_id", LoginInfo.GetUser__Id())
-
-            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", id, _sqlconn, _sqltrans) Then
-                Dim dictBasicDataJson1 As New Dictionary(Of String, Object)
-
-
-                Dim dt2 As DataTable
-                dt2 = DBManager.Getdatatable("delete from tblImages where Source='registeration' and Source_id=" + LoginInfo.GetUser__Id() + "and related_id=" + diplomeId)
-
-                dictBasicDataJson1.Add("Source", "registeration")
-                dictBasicDataJson1.Add("Source_id", LoginInfo.GetUser__Id())
-                dictBasicDataJson1.Add("Image_path", ImagePath)
-                dictBasicDataJson1.Add("Image_name", imageName)
-                dictBasicDataJson1.Add("related_id", diplomeId)
-                'If Not PublicFunctions.TransUsers_logs("3177", "acd_courses", "ادخال", _sqlconn, _sqltrans) Then
-                '    success = False
-                'Else
-                '    success = True
-                'End If
-                If PublicFunctions.TransUpdateInsert(dictBasicDataJson1, "tblImages", "", _sqlconn, _sqltrans) Then
-
-                    Dim dictNotification As New Dictionary(Of String, Object)
-
-                    Dim dt3 As DataTable
-                    Dim dt4 As DataTable
-                    dt3 = DBManager.Getdatatable("select id from tblUsers where  User_Type=2  and comp_id=" + LoginInfo.GetComp_id())
-                    Dim admin = dt3.Rows(0)(0).ToString
-                    dt4 = DBManager.Getdatatable("select full_name from tblUsers where id=" + LoginInfo.GetUser__Id())
-                    Dim studentName = dt4.Rows(0)(0).ToString
-                    dictNotification.Add("RefCode", diplomeId)
-                    dictNotification.Add("NotTitle", " تقديمات الطلاب")
-                    dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
-                    dictNotification.Add("AssignedTo", admin)
-                    dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
-                    dictNotification.Add("Remarks", studentName)
-                    dictNotification.Add("FormUrl", "Acadmies_module/DiplomaCourses?code=" + code)
-                    If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
-
-                        _sqltrans.Rollback()
-                        _sqlconn.Close()
-                        Return "False|لم يتم الحفظ"
-                    End If
+            dictBasicDataJson.Add("notes", student_notes)
+            dictBasicDataJson.Add("student_id", loginUser_id)
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_courses_students", "", _sqlconn, _sqltrans) Then
+                Dim dictNotification As New Dictionary(Of String, Object)
+                dictNotification.Add("NotTitle", " تقديمات الطلاب")
+                dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
+                dictNotification.Add("AssignedTo", admin)
+                dictNotification.Add("CreatedBy", loginUser_id)
+                dictNotification.Add("Remarks", studentName)
+                dictNotification.Add("RefCode", diplomeId)
+                dictNotification.Add("FormUrl", "Acadmies_module/DiplomaCourses?code=" + code)
+                If Not PublicFunctions.TransUpdateInsert(dictNotification, "tblNotifications", "", _sqlconn, _sqltrans) Then
+                    _sqltrans.Rollback()
+                    _sqlconn.Close()
+                    Return "False|لم يتم الحفظ"
                 End If
-
-                success = True
-            Else
-                success = False
-
-            End If
-            If success Then
-
-                _sqltrans.Commit()
-                _sqlconn.Close()
-                Return True
-            Else
-                _sqltrans.Rollback()
-                _sqlconn.Close()
-                Return False
             End If
 
+            _sqltrans.Commit()
+            _sqlconn.Close()
+            Return True
         Catch ex As Exception
             _sqltrans.Rollback()
             _sqlconn.Close()
             Return False
         End Try
+
     End Function
 #End Region
+
 
 #Region "get_data"
     ''' <summary>
@@ -253,14 +243,13 @@ Public Class diplome_registerCls
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
     Public Function get_courseFiles(ByVal diplomeId As String) As String()
-        Dim dt_user As DataTable
-        dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
+
 
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select image, condition from acd_course_conditions where type=2 and course_id=" + diplomeId)
+            dt = DBManager.Getdatatable("select  id,image, condition from acd_course_conditions where type=2 and course_id=" + diplomeId)
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
                     Dim Str = PublicFunctions.ConvertDataTabletoString(dt)

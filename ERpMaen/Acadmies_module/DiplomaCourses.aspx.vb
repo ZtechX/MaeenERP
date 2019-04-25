@@ -42,10 +42,11 @@ Public Class DiplomaCourses
 
                 Dim code = Request.QueryString("code")
                 lbldiplomeCode.InnerHtml = code
-                Dim dt = DBManager.Getdatatable(" select  acd_diplomes.id from acd_diplomes where acd_diplomes.code='" + code.ToString + "'")
+                Dim dt = DBManager.Getdatatable(" select  acd_diplomes.id,acd_diplomes.name from acd_diplomes where acd_diplomes.code='" + code.ToString + "'")
                 If dt.Rows.Count <> 0 Then
                     Dim deploma_id = dt.Rows(0)(0).ToString
                     Lbldeploma_id.InnerHtml = deploma_id
+                    diplome_title.InnerHtml = dt.Rows(0)(1).ToString
 
                     If ERpMaen.LoginInfo.getUserType = 8 Then
 
@@ -91,8 +92,10 @@ Public Class DiplomaCourses
                 Dim clsapprove_category As New clsFillComboByDataSource("select * from tblLock_up where type='CD' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_category.SetComboItems(ddlcategory, "", True, "--اختر--", False)
 
+                Dim clsDiplomeCoordinator As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='14' and comp_id=" + LoginInfo.GetComp_id, "full_name", "id", "")
+                clsDiplomeCoordinator.SetComboItems(ddlcoordinator, "", True, "--اختر--", False)
 
-
+                dplm_delete_condtion.InnerHtml = ERpMaen.LoginInfo.get_form_operation("5")
 
 
 

@@ -16,7 +16,7 @@ $(function () {
         getlectureCode();
 
         //$("#SavedivLoader").show();
-
+        
        
         drawLecturesTable();
         drawStudentTable();
@@ -24,7 +24,7 @@ $(function () {
         drawActivity();
         drawConditionsTable();
         drawstudentExamsTable();
-        drawCourseLinks();
+        drawCourseLinksTable();
         drawHomeworks();
 
         drawstudentDiplome_DegreesTable();
@@ -550,48 +550,111 @@ function SaveExam() {
 function addStudentdegree() {
 
     try {
-
         debugger
+      
         if (!checkRequired()) {
-            debugger
+            var subject_FinalDegree = parseInt($("#lblsub_FinalDegree").html());
+            var subject_ActivityDegree = parseInt($("#lblsub_ActivityDegree").html());
          
             var students_degree=[];
             $("#pblcstudentdegrees tr").each(function ()
             {
                 var obj = {};
                 obj["id"]  =$(this).find("label").attr("id");
-                obj["fdegree"] = $(this).find("#finaldegee").val();
-                obj["Acdegree"] = $(this).find("#activitydegee").val();
-                students_degree.push(obj);
+                obj["fdegree"] = parseInt($(this).find("#finaldegee").val());
+                obj["Acdegree"] = parseInt($(this).find("#activitydegee").val());
+                if (obj["fdegree"] > subject_FinalDegree || obj["Acdegree"] > subject_ActivityDegree) {
+                    alert("الدرجات لا يمكن ان تكون اكبر من درجة المادة");
+                }
+                else { students_degree.push(obj);}
+              
                 
             });
 
-            console.log(students_degree);
+           
             var subjectId = ($("#Lblsubject_id").html());
-           // var diplome_ID = ($("#LblDiplome_id").html());
-           // $("#SavedivLoader").show();
-        
-            DiplomaSubjectDetailsCls.addStudentdegree(subjectId, students_degree, function (val) {
-                if (val == true) {
+            if (students_degree.length!=0) {
 
-                    $("#SavedivLoader").hide();
-                    alert("  تم الحفظ  ");
-                    $("#publicStudentDegree").modal('hide');
-                  
-                    resetAll();
-                    prepareAdd();
+                DiplomaSubjectDetailsCls.addStudentdegree(subjectId, students_degree, function (val) {
+                    if (val == true) {
 
+                        $("#SavedivLoader").hide();
+                        alert("  تم الحفظ  ");
+                        $("#publicStudentDegree").modal('hide');
+
+                        resetAll();
+                        prepareAdd();
 
 
 
-                } else {
-                    alert("لم يتم الحفظ");
+
+                    } else {
+                        alert("لم يتم الحفظ");
+                    }
+
+
+                });
+            }
+           
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
+function Approve_Studentdegree() {
+
+    try {
+
+
+        if (!checkRequired()) {
+            var subject_FinalDegree = parseInt($("#lblsub_FinalDegree").html());
+            var subject_ActivityDegree = parseInt($("#lblsub_ActivityDegree").html());
+
+            var students_degree = [];
+            $("#pblcstudentdegrees tr").each(function () {
+                var obj = {};
+                obj["id"] = $(this).find("label").attr("id");
+                obj["fdegree"] = $(this).find("#finaldegee").val();
+                obj["Acdegree"] = $(this).find("#activitydegee").val();
+                if (obj["fdegree"] > subject_FinalDegree || obj["Acdegree"] > subject_ActivityDegree) {
+                    alert("الدرجات لا يمكن ان تكون اكبر من درجة المادة");
                 }
-
+                else { students_degree.push(obj);}
+                students_degree.push(obj);
 
             });
 
-           
+          
+            var subjectId = ($("#Lblsubject_id").html());
+            if (students_degree.length != 0) {
+
+                DiplomaSubjectDetailsCls.Approve_Studentdegree(subjectId, students_degree, function (val) {
+                    if (val == true) {
+
+                        $("#SavedivLoader").hide();
+                        alert("  تم الحفظ  ");
+                        $("#publicStudentDegree").modal('hide');
+
+                        resetAll();
+                        prepareAdd();
+
+
+
+
+                    } else {
+                        alert("لم يتم الحفظ");
+                    }
+
+
+                });
+
+            }
+            //else {
+            //    alert("no result found to save")
+            //}
         }
 
 
@@ -762,7 +825,7 @@ function addNewlink() {
                     
                     resetDivControls("divFormAddLinks");
                     $("#addLinks_modal").modal('hide');
-                    drawCourseLinks();
+                    drawCourseLinksTable();
 
 
 
@@ -1097,7 +1160,66 @@ function viewEvaluation() {
 }
 
 
+function drawCourseLinksTable() {
+    try {
+        
+        var subjectId = ($("#Lblsubject_id").html());
+        DiplomaSubjectDetailsCls.get_courseLinks(subjectId, function (val) {
 
+
+            var data = "";
+
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+
+                    data = data + `
+                                                     <tr>
+                                                     
+                                                     <td>
+                                                         <a href="${element.URL}"> ${element.title}</a>
+                                                                      
+                                                      
+                                                     </td>
+
+                                         <td><p>${element.notes}</p></td>
+                                                       <td>
+                                                          <div class="btn-group pull-left" style="position:absolute">
+                                                        <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                                   <i class="fa fa-cogs"></i>
+
+                                                                </button>
+                                                                <ul  class="dropdown-menu">
+
+                                                                 <li>
+                                                                                            <a   onclick="Delete_Link(${element.id});">
+                                                                                                حذف
+                                                                                            </a>
+                                                                                                    </li>
+                                                  
+                                                      </ul>
+                                                     </div>
+                                                           </td>
+
+                                                   
+
+                                                                            </tr>
+                 
+                                                                               
+                                                                      
+`;
+                });
+
+
+            }
+            $("#course_Links").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
 
 
 
@@ -1180,13 +1302,14 @@ function viewHomework(HMWID) {
                 //console.log(val);
                 if (val[0] == "1") {
                     var arr1 = JSON.parse(val[1]);
-
+                    var i = 0;
                     arr1.forEach(function (element) {
-
+                        i++;
                         data = data + `
                                        <table id="student">
 
                                                         <tr>
+<td>${i}</td>
                                                             <td><img src="${element.studImag}"/></td>
 
                                                             <td>
@@ -1197,7 +1320,7 @@ function viewHomework(HMWID) {
 
                                                             </td>
                                                             <td>
-                                                                 <div class="btn-group pull-left"  style="position:absolute; margin-bottom:5px;">
+                                                                 <div class="btn-group pull-left"  >
                                                                                             <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                                                                                 <i class="fa fa-cogs"></i>
@@ -1323,11 +1446,11 @@ function SearchStudent() {
                                         <label id=" ${element.student_id}"> ${element.studentname}</label>
                                     </td>
                                     <td>
-               <input id="finaldegee" type="text" value=" ${element.final}"   />
+               <input  onkeypress="return isNumber(event);" id="finaldegee" type="text" value=" ${element.final}"   />
                                    
                                     </td>
                                     <td>
-               <input id="activitydegee" type="text" value=" ${element.activityDegree}" />
+               <input  onkeypress="return isNumber(event);" id="activitydegee" type="text" value=" ${element.activityDegree}" />
                                     
                                     </td>
                                 </tr> `
@@ -1396,13 +1519,14 @@ function SearchStudent() {
 
             DiplomaSubjectDetailsCls.get_course(subjectId, function (val) {
 
-                console.log(val);
+                //console.log(val);
 
                 var arr1 = JSON.parse(val[1]);
                 $("#subject_title").html(arr1[0].subjectName);
                 $("#subjectGoal").html(arr1[0].subject_goal);
                 $("#course_date").html(arr1[0].created_at_hj);
-                //$("#lect_time").html(arr1[0].lecture_time);
+                $("#lblsub_FinalDegree").html(arr1[0].final_exam_degrees);
+                $("#lblsub_ActivityDegree").html(arr1[0].activity_degrees);
                 $("#lectureDuration").html(arr1[0].lecture_time);
 
                 $("#subject_semster").html(arr1[0].semster);
@@ -1549,11 +1673,7 @@ function drawLecturesTable() {
                                                                            </a>
                                     </li>
 
-                                                                            <li>
-                                                                            <a data-toggle="modal" href="#exams"  onclick="setLectId(${element.id});">
-                                                                                اضافة اختبار
-                                                                               </a>
-                                                                                     </li>
+                                                                         
                                                                                     <li>
                                                                             <a data-toggle="modal" href="#homeworks"  onclick="setLectId(${element.id});">
                                                                                 اضافة واجب
@@ -1673,63 +1793,6 @@ function archiveCourse() {
 
 
 
-function drawCourseLinks() {
-    debugger
-    //روابط مفيدة
-    try {
-
-        var subjectId = ($("#Lblsubject_id").html());
-        DiplomaSubjectDetailsCls.get_courseLinks(subjectId, function (val) {
-           
-
-            var data = "";
-          
-            if (val[0] == 1) {
-                var arr1 = JSON.parse(val[1]);
-
-                arr1.forEach(function (element) {
-
-
-
-                    data = data + `
-                     <ul>
-
-                                                            <li>
-                                                                <div class="user">
-                                                                    <div class="usr-img">
-                                                                        <img  class="avatar" src="${element.suerImage}">
-                                                                    </div>
-                                                                    <div class="usr-data">
-                                                                        <h3>
-                                                                            <a href="#"> ${element.username}</a>
-                                                                        </h3>
-                                                                          <span>
-                                                                        <i class="zmdi zmdi-calendar"></i>
-                                                                      ${element.date_hj}
-                                                               
-                                                                </span>
-                                                            <span> <h3>
-                                                                <a href="${element.URL}"> ${element.title}</a>
-                                                                        </h3></span>
-                                                                        <p>${element.notes} </p>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-    </u>
-
-
-    `;
-                });
-
-            }
-            $("#divformLinks").html(data);
-        });
-    } catch (err) {
-        alert(err);
-    }
-}
-
-
 function drawpublicDegreeTable() {
     try {
         debugger
@@ -1752,11 +1815,11 @@ function drawpublicDegreeTable() {
                                         <label id=" ${element.student_id}"> ${element.studentname}</label>
                                     </td>
                                     <td>
-               <input id="finaldegee" type="text" value=" ${element.final}"   />
+               <input   onkeypress="return isNumber(event);" id="finaldegee" type="text" value=" ${element.final}"   />
                                    
                                     </td>
                                     <td>
-               <input id="activitydegee" type="text" value=" ${element.activityDegree}" />
+               <input onkeypress="return isNumber(event);" id="activitydegee" type="text" value=" ${element.activityDegree}" />
                                     
                                     </td>
                                 </tr> `
@@ -1781,6 +1844,55 @@ function drawpublicDegreeTable() {
                 }
             }
 
+function drawApproved_StudentDegree() {
+    try {
+        debugger
+        var subjectId = ($("#Lblsubject_id").html());
+        var diplome_ID = ($("#LblDiplome_id").html());
+       
+        DiplomaSubjectDetailsCls.get_pub_StudentsDegree(diplome_ID, subjectId, function (val) {
+
+            console.log(val);
+            var data = "";
+            if (val[0] == 1) {
+                var arrstudent = JSON.parse(val[1]);
+
+                arrstudent.forEach(function (element) {
+
+
+                    data = data + `   <tr>
+                                    <td>
+                                        <label id=" ${element.student_id}"> ${element.studentname}</label>
+                                    </td>
+                                    <td>
+               <input   onkeypress="return isNumber(event);" id="finaldegee" type="text" value=" ${element.final}"   />
+                                   
+                                    </td>
+                                    <td>
+               <input onkeypress="return isNumber(event);" id="activitydegee" type="text" value=" ${element.activityDegree}" />
+                                    
+                                    </td>
+                                </tr> `
+
+
+                });
+            }
+
+            $("#pblcstudentdegrees_Admin").html(data);
+            $("#publicStudentDegree_Admin").modal();
+
+
+
+        });
+
+    }
+
+
+
+    catch (err) {
+        alert(err);
+    }
+}
 
     function drawConditionsTable() {
         try {
@@ -1950,13 +2062,13 @@ function drawpublicDegreeTable() {
                 
                 console.log(val);
                 var arr1 = JSON.parse(val[1]);
-
+                var i = 0;
                 arr1.forEach(function (element) {
-
+                    i++;
                     data = data + `<table id="student">
 
                                                     <tr>
- 
+  <td>${i}</td>
                                                 <td><img src="${element.studImag}"> </td>
 
                                                         <td>
@@ -1966,7 +2078,7 @@ function drawpublicDegreeTable() {
 
                                                         </td>
                                                         <td>
-                                                             <div class="btn-group pull-left"  style="position:absolute; margin-bottom:5px;">
+                                                             <div class="btn-group pull-left"  >
                                                                                         <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                          
                                                                                             <i class="fa fa-cogs"></i>
@@ -2048,7 +2160,7 @@ function drawpublicDegreeTable() {
 
                                                             </td>
                                                             <td>
-                                                                 <div class="btn-group pull-left"  style="position:absolute; margin-bottom:5px;">
+                                                                 <div class="btn-group pull-left"  >
                                                                                             <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                                                                                 <i class="fa fa-cogs"></i>
@@ -2131,7 +2243,7 @@ function drawpublicDegreeTable() {
 
                                                             </td>
                                                             <td>
-                                                                 <div class="btn-group pull-left"  style="position:absolute; margin-bottom:5px;">
+                                                                 <div class="btn-group pull-left"  >
                                                                                             <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                                                                                 <i class="fa fa-cogs"></i>
@@ -2395,7 +2507,7 @@ function drawstudentExamsTable() {
                                                         </a>
                                                        
                                                        </td>
-                                                            <td> done </td>
+                                                            <td> تم الحل </td>
                                                                             
                                                                                  <td> ${dgr}</td>
                                                                      
@@ -2481,7 +2593,7 @@ function drawstudentHomeworkTable() {
                                                        
                                                        </td>
 
-                                                     <td> done </td>
+                                                     <td> تم الحل </td>
                                                                      
                                                                                  <td> ${degree} </td>
                                                                      
@@ -2886,6 +2998,25 @@ function UploadComplete6(sender, args) {
     }
 
 
+function Delete_Link(link_Id) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+        // debugger
+        courseDetailsCls.Delete_Link(link_Id, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                drawCourseLinksTable();
+
+            } else {
+                alert('لم يتم الحذف');
+            }
+
+        });
+    }
+
+}
 
     function DeleteLec(LecID) {
         var f = confirm("هل  تريد الحذف");

@@ -23,6 +23,24 @@ Partial Public Class DiplomaCourses
     Protected WithEvents ToolkitScriptManager1 As Global.System.Web.UI.ScriptManager
     
     '''<summary>
+    '''dplm_delete_condtion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_delete_condtion As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''diplome_title control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents diplome_title As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''Lbldeploma_id control.
     '''</summary>
     '''<remarks>
@@ -68,33 +86,6 @@ Partial Public Class DiplomaCourses
     Protected WithEvents ddlsemster As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''Text2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Text2 As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''Text3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Text3 As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''HijriCalendar control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents HijriCalendar As Global.ERpMaen.CustomerCalendar
-    
-    '''<summary>
     '''ddltrainer control.
     '''</summary>
     '''<remarks>
@@ -102,6 +93,24 @@ Partial Public Class DiplomaCourses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddltrainer As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''finaldegree control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents finaldegree As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
+    '''activityDegree control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents activityDegree As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''description control.
@@ -201,6 +210,15 @@ Partial Public Class DiplomaCourses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlcategory As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''ddlcoordinator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlcoordinator As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''studentnum control.

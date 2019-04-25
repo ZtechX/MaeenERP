@@ -1236,7 +1236,7 @@ function saveCertificate() {
 }
 
 function drawCourseLinks() {
-    debugger
+    
     //روابط مفيدة
     try {
 
@@ -1294,8 +1294,7 @@ function drawCourseLinks() {
 function addNewlink() {
 
     try {
-
-        //   debugger
+    
         if (checkRequired("divFormAddLinks") == 1) {
             alert("يرجى ادخال البيانات المطلوبة");
         }

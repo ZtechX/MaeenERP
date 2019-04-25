@@ -178,6 +178,7 @@
     <Content Include="Acadmies_module\images\Lighthouse.jpg" />
     <Content Include="Acadmies_module\images\Penguins.jpg" />
     <Content Include="Acadmies_module\images\Tulips.jpg" />
+    <Content Include="Acadmies_module\Pub_Instructions.aspx" />
     <Content Include="Acadmies_module\semester.aspx" />
     <Content Include="Acadmies_module\Students.aspx" />
     <Content Include="Acadmies_module\trainers.aspx" />
@@ -761,6 +762,7 @@
     <Content Include="ASMX_WebServices\diplome_registerCls.asmx" />
     <Content Include="ASMX_WebServices\orders.asmx" />
     <Content Include="ASMX_WebServices\DiplomaSubjectDetailsCls.asmx" />
+    <Content Include="ASMX_WebServices\Pub_InstructionsCls.asmx" />
     <Content Include="ASMX_WebServices\semesterCls.asmx" />
     <Content Include="ASMX_WebServices\studentCls.asmx" />
     <Content Include="ASMX_WebServices\Timeline.asmx" />
@@ -1671,8 +1673,12 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Hall_Module\Halls.aspx" />
+    <Content Include="images\excel_img.png" />
     <Content Include="images\FilterClear.png" />
     <Content Include="images\ajax-loader.gif" />
+    <Content Include="images\pdf_img.png" />
+    <Content Include="images\powerPoint_img.png" />
+    <Content Include="images\word_img.png" />
     <Content Include="js\adapters\mootools-adapter.js" />
     <Content Include="js\adapters\mootools-adapter.src.js" />
     <Content Include="js\adapters\prototype-adapter.js" />
@@ -1854,6 +1860,7 @@
     <Content Include="JS_Code\acadmies\Diplomas.js" />
     <Content Include="JS_Code\acadmies\DiplomaSubjectDetails.js" />
     <Content Include="JS_Code\acadmies\diplome_register.js" />
+    <Content Include="JS_Code\acadmies\Pub_Instructions.js" />
     <Content Include="JS_Code\acadmies\semester.js" />
     <Content Include="JS_Code\acadmies\student.js" />
     <Content Include="JS_Code\acadmies\trainers.js" />
@@ -2480,6 +2487,13 @@
       <DependentUpon>diplome_register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Acadmies_module\Pub_Instructions.aspx.designer.vb">
+      <DependentUpon>Pub_Instructions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Acadmies_module\Pub_Instructions.aspx.vb">
+      <DependentUpon>Pub_Instructions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Acadmies_module\semester.aspx.designer.vb">
       <DependentUpon>semester.aspx</DependentUpon>
     </Compile>
@@ -2611,6 +2625,9 @@
       <SubType>Component</SubType>
     </Content>
     <Content Include="App_Code\semesterCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\Pub_InstructionsCls.vb">
       <SubType>Component</SubType>
     </Content>
     <Compile Include="App_Start\BundleConfig.vb" />

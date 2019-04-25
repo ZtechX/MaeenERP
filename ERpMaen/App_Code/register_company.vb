@@ -44,7 +44,6 @@ Public Class register_company
             dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
             If DBManager.ExcuteQueryTransaction("delete  from tblregist_settings where category_id=" + DetailsJSON1("category_id").ToString, _sqlconn, _sqltrans) = -1 Then
                 _sqltrans.Rollback()
-                _sqlconn.Close()
                 Return False
             End If
             For Each DetailsJSON As Dictionary(Of String, Object) In basicDataJson

@@ -192,14 +192,12 @@ Public Class orders
                                 _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
-                            If Not DBManager.ExcuteQueryTransaction("update tblNotifications set Date=" + dt_new + " where RefCode=" + event_id + " and RefType in (1,2,3,4)", _sqlconn, _sqltrans) Then
+                            If DBManager.ExcuteQueryTransaction("update tblNotifications set Date=" + dt_new + " where RefCode=" + event_id + " and RefType in (1,2,3,4)", _sqlconn, _sqltrans) = -1 Then
                                 _sqltrans.Rollback()
-                                _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
-                            If Not DBManager.ExcuteQueryTransaction("update tblsms_archive set date_m=" + dt_new + " where event_id=" + event_id + " and Type='recieve_delivery' ", _sqlconn, _sqltrans) Then
+                            If DBManager.ExcuteQueryTransaction("update tblsms_archive set date_m=" + dt_new + " where event_id=" + event_id + " and Type='recieve_delivery' ", _sqlconn, _sqltrans) = -1 Then
                                 _sqltrans.Rollback()
-                                _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
                         ElseIf order_type = "إلغاء" Then
@@ -212,14 +210,12 @@ Public Class orders
                                 _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
-                            If Not DBManager.ExcuteQueryTransaction("delete from  tblNotifications  where RefCode=" + event_id + " and RefType in (1,2,3,4)", _sqlconn, _sqltrans) Then
+                            If DBManager.ExcuteQueryTransaction("delete from  tblNotifications  where RefCode=" + event_id + " and RefType in (1,2,3,4)", _sqlconn, _sqltrans) = -1 Then
                                 _sqltrans.Rollback()
-                                _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
-                            If Not DBManager.ExcuteQueryTransaction("delete from tblsms_archive where event_id=" + event_id + " and Type='recieve_delivery' ", _sqlconn, _sqltrans) Then
+                            If DBManager.ExcuteQueryTransaction("delete from tblsms_archive where event_id=" + event_id + " and Type='recieve_delivery' ", _sqlconn, _sqltrans) = -1 Then
                                 _sqltrans.Rollback()
-                                _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
 

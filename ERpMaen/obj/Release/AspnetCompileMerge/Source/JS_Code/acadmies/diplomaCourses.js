@@ -400,6 +400,100 @@ function refuse_finance(Studentid, payId) {
 }
 
 
+function drawConditionsTable() {
+    try {
+        debugger
+        var diplomeID = ($("#Lbldeploma_id").html());
+        Diploma_CoursesCls.get_Condition(diplomeID, function (val) {
+
+
+            var data = "";
+          
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+                
+                    var file_nm = "";
+                    var path = element.image;
+                    if (path != "" && path != null) {
+                        if (path.indexOf("Acadmies_module/images/") != -1) {
+                            file_nm = path.split("Acadmies_module/images/")[1];
+                        }
+                    }
+                    data = data + `
+                                                     <tr>
+                                                      <td>${element.condition} </td>
+                                                     <td>
+                                                       <li>
+                                                        <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li>
+
+                                                     </td>
+                                                       <td>
+
+                                                          <div class="btn-group pull-left" style="position:absolute">
+                                                        <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                                   <i class="fa fa-cogs"></i>
+
+                                                                </button>
+                                                                <ul  class="dropdown-menu">
+
+                                                                 <li>
+                                                                                            <a   onclick="DeleteCondition(${element.id});">
+                                                                                                حذف
+                                                                                            </a>
+                                                                                                    </li>
+                                                  
+                                                      </ul>
+                                                     </div>
+                                                           </td>
+
+                                                   
+
+                                                                            </tr>
+                 
+                                                                               
+                                                                      
+`;
+                });
+
+
+            }
+            $("#conditions-table").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
+function DeleteCondition(condID) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+        // debugger
+        Diploma_CoursesCls.Delete_condition(condID, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                drawConditionsTable();
+
+            } else {
+                alert('لم يتم الحذف');
+            }
+
+        });
+    }
+
+}
+
+
 function savediplome() {
 
     try {

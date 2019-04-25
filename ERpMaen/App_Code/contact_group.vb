@@ -44,7 +44,6 @@ Public Class contact_group
             Dim dt_user As DataTable
             If DBManager.ExcuteQueryTransaction("delete  from tblcontacts_groups where group_id=" + DetailsJSON1("group_id").ToString, _sqlconn, _sqltrans) = -1 Then
                 _sqltrans.Rollback()
-                _sqlconn.Close()
                 Return False
             End If
 

@@ -341,7 +341,11 @@
                             <th>التاريخ</th>
                             <th>الوقت </th>
                             <th>القاعه </th>
-                            <th>الاجراء </th>
+                             <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
+                            <th>الحاله </th>
+                             <% Else    %>
+                               <th>الاجراء </th>
+                             <%end if   %>
 
                         </tr>
                         <tbody id="lectures-table">
@@ -421,7 +425,7 @@
                                             <div class="desc-head order_wid col-md-12"">
                                                 <div class=" pull-right">
                                                 <i class="zmdi zmdi-file-text zmdi-hc-lg"></i>
-                                                <h3>  مالية الطلاب </h3>
+                                                <h3>   الدفعات المالية </h3>
                                                     </div>
                                              
                                               
@@ -442,7 +446,8 @@
                                                      <tr>
                                                         <th>الطالب </th>
                                                         <th>المبلغ</th>
-                                                        <th>الصورة </th>
+                                                        <th>التاريخ </th>
+                                                         <th>المرفق </th>
                                                            <th>الحالة </th>
                                                          <th>الاجراء </th>
 
@@ -666,6 +671,57 @@
                                             <div class="desc-head order_wid col-md-12"">
                                                 <div class=" pull-right">
                                                 <i class="zmdi zmdi-file-text zmdi-hc-lg"></i>
+                                                <h3>روابط مفيده  </h3>
+                                                    </div>
+                                               <div class=" pull-left">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLinks_modal">
+                                                    اضافة رابط   <i class="fa fa-plus"></i>
+                                                    
+                                                </button>
+                                                   </div>
+                                              
+                                            </div>
+                                            <div class="desc-body">
+
+                                                <section class="app-content">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 col-xs-12 pull-right"  >
+                                                             <div class="widget-body">
+                <div class="trans-data col-xs-12" >
+                                                                  
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                          
+                            <th>الرابط</th>
+                            <th>الوصف</th>
+                             <th>الاجراء</th>
+                            
+
+                        </tr>
+                        <tbody id="course_Links">
+
+                        </tbody>
+                        </table>
+                    </div>
+                    </div>
+                                                                 </div>    </div>
+                                                          
+                                                            
+                                                      
+                                                    </div>
+                                                </section>
+
+                                           
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="inner">
+                                        <div class="order-desc row">
+                                            <div class="desc-head order_wid col-md-12"">
+                                                <div class=" pull-right">
+                                                <i class="zmdi zmdi-file-text zmdi-hc-lg"></i>
                                                 <h3>ملفات الدورة  </h3>
                                                     </div>
                                                <div class=" pull-left">
@@ -767,39 +823,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="inner">
-                                        <div class="comments">
-                                             <div class="edit-head order_wid">
-                                                <i class="zmdi zmdi-wrench zmdi-hc-lg"></i>
-                                                <h3> روابط مفيدة </h3>
-                                              
-                                            </div>
-                                         
-                                            <div class="comment-body">
-                                               
-                                                <div class="comment-users">
-                                                   
-                                                    <div id="divformLinks">
-                                                        
-                                              
-                                                                
-                                                        </div>
-                                                    
-                                                </div>
-                                                <div class="comment-form">
-                                                    
-                                                        <div class="form-group">
-
-                                                         <button type="button" class="btn btn-purple btn-hint" data-toggle="modal" data-target="#addLinks_modal">اضافة رابط </button>
-                                                           
-                                                        </div>
-                                                     
-                                                   
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    
                                     <div class="inner">
                                         <div class="comments">
                                          
@@ -1011,7 +1035,7 @@
                                             <div class="hint-head side_head">
                                                 <h3>
                                                     <i class="zmdi zmdi-storage zmdi-hc-lg"></i>
-                                                     الماليات
+                                                     الدفعات المالية
                                                 </h3>
                                             </div>
                                             <div class="hint-body">
@@ -1034,6 +1058,10 @@
                                                         <tr>
                                                             <td>اجمالى المبالغ المؤكدة</td>
                                                             <td><label id="total_money"></label></td>
+                                                        </tr>
+                                                         <tr>
+                                                            <td>  المبلغ المتبقى</td>
+                                                            <td><label id="Rest_money"></label></td>
                                                         </tr>
                                                     </tfoot>
 
@@ -1126,7 +1154,7 @@
                         <div class="modal-body">
                             <div class="modal-body">
                                 <div id="divformEditCourse" class="row">
-                                    <%--  <label style="display:none" id="Label1" runat="server" ></label>--%>
+                           
                                     <div class="col-md-12">
                                         <uc1:Result runat="server"  ID ="res1" />
                                     </div>
@@ -1271,8 +1299,6 @@
                     </div>
                 </div>
             </div>
-
-            
 
             <div class="modal" id="activity_edit" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -1629,65 +1655,61 @@
             </div>
 
             <div class="modal" id="addLinks_modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">  رابط جديد</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="col-md-12" id="divFormAddLinks">
-                          
-                          
-                            <div class="row form-group ">
-                                <div class="col-md-3 col-sm-12">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"> رابط جديد</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divFormAddLinks">
+
+                                <div class="row form-group">
+                                        <div class="col-md-3 col-sm-12">
                                     <label class="label-required" >العنوان  </label>
                                 </div>
 
                                 <div class="col-md-9 col-sm-12">
-                                            <input dbcolumn="title" required type="text" id="link_title"
+                                            <input dbcolumn="title" required type="text" id="Text1"
                                                 class="form-control" runat="server" clientidmode="Static" />
                                           
-                                    <br />
+                                   
                                         </div>
-                            </div>
+                                    </div>
 
-                            <div class="row form-group ">
-                                <div class="col-md-3 col-sm-12">
+                                <div class="form-group row">
+
+                                    <div class="col-md-3 col-sm-12">
                                     <label class="label-required">الرابط  </label>
                                 </div>
 
                                 <div class="col-md-9 col-sm-12">
-                                            <input dbcolumn="URL" type="text" required id="link_url"
+                                            <input dbcolumn="URL" type="text" required id="Text2"
                                                 class="form-control" runat="server" clientidmode="Static" />
                                           
                                     <br />
                                         </div>
-                            </div>
+                                                                                                                   
+                                </div>
 
-                             <div class="row form-group">
+                                <div class=" form-group row">
                                         <div class="col-md-3 col-sm-12">
                                             <label for="Name" > الوصف  </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes"   ClientIDMode="Static" ID="linkNote" runat="server">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes"   ClientIDMode="Static" ID="TextBox9" runat="server">
                                             </asp:TextBox>
                                         </div>
                                     </div>
-                                     
-                          
-                                 </div>
-
+                            </div>
 
 
                         </div>
-                  
-                    <div class="modal-footer">
-                        <button type="button"  class="btn btn-primary" onclick="addNewlink();">حفظ </button>
-
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="addNewlink();">حفظ </button>
+                        </div>
                     </div>
-                      </div>
                 </div>
             </div>
 
@@ -2474,7 +2496,7 @@
                                 <div class="form-group row">
 
                                     <div>
-                                        <input id="fileurlfinanc" type="hidden" dbcolumn="image" runat="server" />
+                                        <input id="fileurlfinanc" type="hidden" required dbcolumn="image" runat="server" />
                                         <input id="FnameFinanc" type="text" required readonly="readonly" runat="server" />
 
                                     </div>

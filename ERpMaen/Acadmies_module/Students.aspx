@@ -127,7 +127,7 @@
                                             <br />
                                         </div>
                                     </div>--%>
-                                    <div class="form-group">
+                                    <div class=" row form-group">
                                         <div class="col-md-3 col-sm-12">
                                             <label for="Name" class="label-required">اسم الطالب</label>
 
@@ -142,7 +142,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class=" row form-group">
                                         <div class="col-md-3 col-sm-12">
                                         <label  class="label-required">رقم الجوال</label>
 
@@ -155,7 +155,7 @@
 
                                         </div>
                                     </div>
-                                      <div class="form-group">
+                                      <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
                                         <label class="label-required"> رقم الهوية  </lable>
                                             </div>
@@ -176,7 +176,7 @@
                                 <div class="col-md-6">
 
 
-                                    <div class="form-group">
+                                    <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
                                             <label  for="TextBox1">البريد الالكتروني</label>
 
@@ -188,9 +188,21 @@
                                         </div>
                                     </div>
 
+                                     <div class="row form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label class="label-required">النوع </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12" style="direction:rtl;">
+                                    <asp:DropDownList dbcolumn="gender" required class="form-control" ClientIDMode="Static" ID="ddlGender" runat="server">
+                                    </asp:DropDownList>
+                                    <br />
+                                </div>
+                            </div>
+
                                  
 
-                                    <div class="form-group">
+                                    <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
                                             <label for="TextBox1">كلمة المرور </label>
 

@@ -11,106 +11,21 @@
             <asp:ServiceReference Path="~/ASMX_WebServices/course_registerCls.asmx" />
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
                                <asp:ServiceReference Path="~/ASMX_WebServices/WebService.asmx" />
-
-        </Services>
+</Services>
     </asp:ScriptManager>
-<%--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">--%>
-
-<%--    <link rel="stylesheet" href="../libs/bower/font-awesome/css/font-awesome.min.css">--%>
-<%--    <link rel="stylesheet" href="../libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">--%>
-    <link rel="stylesheet" href="../assets/css/app.min.css">
-<%--    <script src="../libs/bower/breakpoints.js/dist/breakpoints.min.js"></script>--%>
- <%--   <link rel="stylesheet" type="text/css" href="../libs/bower/switchery/dist/switchery.min.css">
-    <link rel="stylesheet" type="text/css" href="../libs/bower/lightbox2/dist/css/lightbox.min.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/jquery.mCustomScrollbar.min.css">--%>
-    <%--<link rel="stylesheet" href="../libs/bower/bootstrap-fileInput/fileinput.min.css">
-    <link rel="stylesheet" href="../libs/bower/bootstrap-fileInput/explorer/theme.css">--%>
-<%--    <link rel="stylesheet" href="../assets/css/owl.carousel.css">--%>
-<%--    <link rel="stylesheet" href="../assets/css/star-rating.min.css">--%>
-    <link rel="stylesheet" type="text/css" href="../assets/css/ontime.css"/>
+ <link rel="stylesheet" href="../assets/css/app.min.css"/>
+<link rel="stylesheet" type="text/css" href="../assets/css/ontime.css"/>
     <link rel="stylesheet" type="text/css" href="../assets/css/ontime-rtl.css"/>
     <script type="text/javascript" src="../Clock/ng_all.js"></script>
 <script type="text/javascript" src="../Clock/ng_ui.js"></script>
 <script type="text/javascript" src="../Clock/components/timepicker.js"></script>
-    <script type="text/javascript">
-    //ng.ready(function () {
-      
-    //    var tp = new ng.TimePicker({
-    //        input: 'startTime', // the input field id
-    //        start: '12:00 am',  // what's the first available hour
-    //        end: '11:00 pm',  // what's the last avaliable hour
-    //        top_hour: 12,  // what's the top hour (in the clock face, 0 = midnight)
-    //        name: 'startTime',
-            
-    //    });
-         
-        
-    //});
-</script>
-
-    <%--<script type="text/javascript">
-                         function UploadComplete2(sender, args) {
-                             debugger;
-                            var fileLength = args.get_length();
-                            var fileType = args.get_contentType();
-                           
-                            document.getElementById('imgItemURL').src = 'images/' + args.get_fileName();
-                            var img = document.getElementById('imgLoader');
-                            img.style.display = 'none';
-                            switch (true) {
-                                case (fileLength > 1000000):
-
-                                    fileLength = fileLength / 1000000 + 'MB';
-                                    break;
-
-                                case (fileLength < 1000000):
-
-                                    fileLength = fileLength / 1000000 + 'KB';
-                                    break;
-
-                                default:
-                                    fileLength = '1 MB';
-                                    break;
-                            }
-                            clearContents(sender);
-                        }
-                        function UploadStarted2() {
-                            //var fileName = args.get_fileName();
-                            var img = document.getElementById('imgLoader');
-                            img.style.display = 'block';
-                        }
-              
-                        function ClearMe(sender) {
-                            sender.value = '';
-                        }
-                        function clearContents(sender) {
-                            { $(sender._element).find('input').val(''); }
-                        }
-                    </script>--%>
-
-  <%--  <script>
-        Breakpoints();
-    </script>--%>
+  
     <style>
         .btn-group {
             margin: 0px !important;
             width: auto;
         }
     </style>
- <%-- <script src="../assets/js/core.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../libs/bower/moment/moment.js"></script>
-    <script src="../libs/bower/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="../assets/js/fullcalendar.js"></script>
-    <script src="../libs/bower/switchery/dist/switchery.min.js"></script>
-    <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>--%>
-<%--    <script src="../assets/js/ontime.js"></script>--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--%>
-
-<!-- Latest compiled and minified CSS -->
-
-
-<!-- Latest compiled JavaScript -->
 
     <style>
         .app-main {
@@ -135,7 +50,40 @@
             }
         }
 
+.comp-logo {
+    width: 100%;
+    height: auto;
+    min-height: 70px;
+    max-height:70px;
+    background-color: #efefef;
+    overflow-y: hidden;
+    border:2px solid #efefef;
+}
 
+.up-btn:hover {
+    background-color: #0b4d73;
+}
+.up-btn {
+    width: 100%;
+    height: 30px;
+    background: #0b669a;
+    color: #fff;
+    border: none;
+    border-radius: 0px 0px 10px 10px;
+    transition: all ease 01s;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.comp-logo
+{
+   background-size: contain!important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
 
     </style>
 
@@ -147,11 +95,56 @@
         <div class="wrap">
              <div>
 
-                   <script type="text/javascript">
-                      
-                    </script>
                     <script src="../JS_Code/acadmies/course_register.js"></script>
+                 <script type="text/javascript">
+                      function UploadComplete2(sender, args) {
+                           debugger
+                            var fileLength = args.get_length();
+                          var fileType = args.get_contentType();
+                          if (fileType.indexOf("image/") != -1) {
+                              $('#img_' + section_id).css('background', 'url("images/' + args.get_fileName() + '")');
+                          }
+                           else if (fileType.indexOf("presentation") != -1  || fileType.indexOf("ms-powerpoint") !=-1 || fileType.indexOf(".pptx") != -1) {
+                              $('#img_' + section_id).css('background', 'url("../images/powerPoint_img.png")');
+                          }
+                          else if (fileType.indexOf("sheet") != -1  || fileType.indexOf("vnd.ms-excel") !=-1 || fileType.indexOf(".xlsx") != -1) {
+                              $('#img_' + section_id).css('background', 'url("../images/excel_img.png")');
+                          }
+                          else if (fileType.indexOf("document") != -1  || fileType.indexOf("msword") !=-1 || fileType.indexOf(".docx") != -1) {
+                              $('#img_' + section_id).css('background', 'url("../images/word_img.png")');
+                          }
+                          else if (fileType.indexOf("application/pdf") != -1) {
+                              $('#img_' + section_id).css('background', 'url("../images/pdf_img.png")');
+                          }
+                          var file_nm = args.get_fileName();
+                          $('#lblSec_' + section_id).html("Acadmies_module/images/" + file_nm);
+                          $('#lblSec_' + section_id).attr("name",file_nm.split('.').slice(0, -1).join('.'));
+                           
+                            switch (true) {
+                                case (fileLength > 1000000):
 
+                                    fileLength = fileLength / 1000000 + 'MB';
+                                    break;
+
+                                case (fileLength < 1000000):
+
+                                    fileLength = fileLength / 1000000 + 'KB';
+                                    break;
+
+                                default:
+                                    fileLength = '1 MB';
+                                    break;
+                            }
+                            clearContents(sender);
+                        }
+                      function ClearMe(sender) {
+                            sender.value = '';
+                        }
+                        function clearContents(sender) {
+                            { $(sender._element).find('input').val(''); }
+                        }
+
+                 </script>
 
                 </div>
             <section class="app-content">
@@ -159,12 +152,7 @@
                      <label style="display:none" id="Lblcourse_id" runat="server" ></label>
                      <label style="display:none" id="lblcode" runat="server" ></label>
                      <label style="display:none" id="Lblcondition_id" ></label>
-                  <%--   <label style="display:none" id="LblLecture_id" ></label>
-                      <label style="display:none" id="LblHomework_id" ></label>
-                       <label style="display:none" id="LblExam_id" ></label>
-                    <label style="display:none" id="LblAbsence_id" ></label>
-                    <label style="display:none" id="lect_time" ></label>--%>
-                    <label style="display:none" id="lblStudentID" runat="server" ></label>
+                 <label style="display:none" id="lblStudentID" runat="server" ></label>
                     <div id="SavedivLoader" class="loader" style="display: none; text-align: center;">
                         <asp:Image ID="img" runat="server" ImageUrl="../App_Themes/images/loader.gif" />
                     </div>
@@ -328,10 +316,7 @@
                     </div>
                  </section>
             
-          
-            
-
-
+          </div>
 
             <div class="modal fade" id="register_Course" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -340,7 +325,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">طلب التقديم  </h4>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" style="padding-left:25px;padding-right:25px;height:400px;overflow-y:scroll;">
                             <div id="divformsignin" class="row">
                                <div class="table-responsive" id="allStudentlist">
                             <table class="table table-bordered table-hover"  id="newitem">
@@ -350,24 +335,22 @@
                                    
                                      <th>ارفاق الملف</th>
                                    
-                                    
-                                  
                                 </tr>
                                  </thead>
                                 <tbody  id="action_courseStudents">
-                                         
+                                       
                                 </tbody>
                                     
 
                             </table>
                         </div>
 
-                                    <div class="row form-group">
-                                        <div class="col-md-3 col-sm-12">
-                                            <label for="Name">الطلب </label>
+                                    <div class="row form-group" style="margin-top:15px;margin-bottom:0px;">
+                                        <div class="col-md-2 col-sm-12">
+                                            <label class="label-required" for="Name">الطلب </label>
 
                                         </div>
-                                        <div class="col-md-9 col-sm-12">
+                                        <div class="col-md-10 col-sm-12">
                                             <asp:TextBox SkinID="form-control" TextMode="multiline" placeholder="طلب التقديم"  required class="form-control" dbColumn="notes" ClientIDMode="Static" ID="studentRequest" runat="server">
                                             </asp:TextBox>
                                         </div>
@@ -379,49 +362,16 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                            
                             <button type="button"  class="btn btn-primary" onclick="sendRequest();">ارسال </button>
                         </div>
                     </div>
                 </div>
             </div>
            
-            <div class="modal" id="upload_conditionFiles" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">  شروط الدورة </h4>
-                        </div>
-                        <div class="modal-body">
-                            <div id="divFormuploadHMfiles">
-
-                                             
-                                <div class="form-group ">
-
-                                       
-                                       
-                                            <input id="fileURL4" required type="hidden" dbcolumn="Image_path" runat="server" />
-                                            <input id="FName4" type="text" readonly="readonly" runat="server" />
-
-                                      
-                                        <div class="clear">
-                                        </div>
-                                        <asp:AsyncFileUpload ID="fuFile3" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
-                                            OnClientUploadComplete="UploadComplete4" />
-                                       
-                                    </div>
-                                
-                            </div>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button"  class="btn btn-primary" onclick="addcondFile();">اضافه </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           
+        <asp:AsyncFileUpload ID="fuPhoto1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
+                                                    OnClientUploadComplete="UploadComplete2" style="display:none;"
+                                                    FailedValidation="False" />
     </main>
 
     <%-- end form--%>

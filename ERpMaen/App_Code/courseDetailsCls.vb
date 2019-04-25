@@ -1819,7 +1819,95 @@ Public Class courseDetailsCls
 
 #End Region
 
+#Region "get_links"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_courseLinks(ByVal CourseID As String) As String()
 
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select acd_links.id,acd_links.add_by,tblUsers.full_name as 'username',tblUsers.User_Image as 'suerImage', acd_links.title,acd_links.date_hj , acd_links.URL , acd_links.notes from acd_links join tblUsers on acd_links.add_by=tblUsers.id where acd_links.type=1 and acd_links.course_id=" + CourseID)
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+#End Region
+
+
+
+#Region "Save links"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function saveCourseLinks(ByVal id As String, ByVal courseId As String, ByVal date_m As String, ByVal date_hj As String, ByVal time As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
+
+            Dim user_id = LoginInfo.GetUser__Id()
+
+
+            dictBasicDataJson.Add("add_by", user_id)
+            dictBasicDataJson.Add("date_m", date_m)
+            dictBasicDataJson.Add("date_hj", date_hj)
+            dictBasicDataJson.Add("type", "1")
+            dictBasicDataJson.Add("course_id", courseId)
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_links", id, _sqlconn, _sqltrans) Then
+                If Not PublicFunctions.TransUsers_logs("3193", "acd_links", "ادخال", _sqlconn, _sqltrans) Then
+                    success = False
+                Else
+                    success = True
+                End If
+                success = True
+            Else
+                success = False
+
+            End If
+            If success Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
 
 #Region "get_data"
     ''' <summary>
@@ -1879,7 +1967,7 @@ Public Class courseDetailsCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_course_comments.user_id,tblUsers.full_name as 'username', tblUsers.User_Image as 'image' , acd_course_comments.comment,acd_course_comments.date_hj ,acd_course_comments.time from acd_course_comments join tblUsers on acd_course_comments.user_id=tblUsers.id where acd_course_comments.course_id=" + CourseID)
+            dt = DBManager.Getdatatable("select  acd_course_comments.id , acd_course_comments.user_id,tblUsers.full_name as 'username', tblUsers.User_Image as 'image' , acd_course_comments.comment,acd_course_comments.date_hj ,acd_course_comments.time from acd_course_comments join tblUsers on acd_course_comments.user_id=tblUsers.id where acd_course_comments.course_id=" + CourseID)
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
                     Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
@@ -2386,14 +2474,12 @@ Public Class courseDetailsCls
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
     Public Function get_StudentFinanceAdmin(ByVal course_id As String) As String()
-        Dim dt_user As DataTable
-        dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_payments.id ,acd_payments.approved ,acd_payments.amount,acd_payments.image,acd_payments.student_id ,tblUsers.full_name as 'name' from acd_payments join tblUsers on tblUsers.id=acd_payments.student_id  where type=1 and course_id=" + course_id)
+            dt = DBManager.Getdatatable("select acd_payments.id ,acd_payments.date_hj ,acd_payments.approved ,acd_payments.amount,acd_payments.image,acd_payments.student_id ,tblUsers.full_name as 'name' from acd_payments join tblUsers on tblUsers.id=acd_payments.student_id  where type=1 and course_id=" + course_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -2838,7 +2924,7 @@ Public Class courseDetailsCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select amount , approved from acd_payments where type=1 and course_id=" + course_id + "and student_id=" + LoginInfo.GetUser__Id())
+            dt = DBManager.Getdatatable("select acd_payments.amount , acd_payments.approved , acd_courses.price from acd_payments join acd_courses on acd_courses.id=acd_payments.course_id where type=1 and course_id=" + course_id + "and student_id=" + LoginInfo.GetUser__Id())
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -2916,14 +3002,12 @@ Public Class courseDetailsCls
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
     Public Function get_Condition(ByVal course_id As String) As String()
-        Dim dt_user As DataTable
-        dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select id, condition,image from acd_course_conditions where acd_course_conditions.course_id=" + course_id)
+            dt = DBManager.Getdatatable("select id, condition,image from acd_course_conditions where type=1 and  acd_course_conditions.course_id=" + course_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -3248,7 +3332,7 @@ Public Class courseDetailsCls
 
 
 
-#Region "Delete"
+#Region "Delete file"
     ''' <summary>
     ''' </summary>
     <WebMethod()>
@@ -3285,7 +3369,7 @@ Public Class courseDetailsCls
     End Function
 #End Region
 
-#Region "Delete"
+#Region "Delete condition"
     ''' <summary>
     ''' </summary>
     <WebMethod()>
@@ -3311,6 +3395,62 @@ Public Class courseDetailsCls
 
     End Function
 #End Region
+
+#Region "Delete comment"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function Delete_comment(ByVal deleteItem As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            If PublicFunctions.DeleteFromTable(deleteItem, "acd_course_comments") Then
+                Names.Add("1")
+                Names.Add("تم الحذف بنجاح!")
+            Else
+                Names.Add("2")
+                Names.Add("لا يمكن الحذف!")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+            Names.Add("لا يمكن الحذف!")
+            Return Names.ToArray
+        End Try
+
+    End Function
+#End Region
+
+
+#Region "Delete link"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function Delete_Link(ByVal deleteItem As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            If PublicFunctions.DeleteFromTable(deleteItem, "acd_links") Then
+                Names.Add("1")
+                Names.Add("تم الحذف بنجاح!")
+            Else
+                Names.Add("2")
+                Names.Add("لا يمكن الحذف!")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+            Names.Add("لا يمكن الحذف!")
+            Return Names.ToArray
+        End Try
+
+    End Function
+#End Region
+
 #Region "Delete"
     ''' <summary>
     ''' </summary>

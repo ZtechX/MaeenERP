@@ -77,29 +77,11 @@ Partial Public Class course_register
     Protected WithEvents studentRequest As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''fileURL4 control.
+    '''fuPhoto1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents fileURL4 As Global.System.Web.UI.HtmlControls.HtmlInputHidden
-    
-    '''<summary>
-    '''FName4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FName4 As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''fuFile3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents fuFile3 As Global.AjaxControlToolkit.AsyncFileUpload
+    Protected WithEvents fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
 End Class

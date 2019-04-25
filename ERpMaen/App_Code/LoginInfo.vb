@@ -21,7 +21,7 @@ Public Class LoginInfo
                pageName <> "courseDetails_archived" And
                pageName <> "DiplomaCourses" And
                pageName <> "DiplomaSubjectDetails" And
-               pageName <> "diplome_register" Then
+               pageName <> "diplome_register" And pageName <> "Timeline" Then
                 Dim pf As New PublicFunctions
                 Dim dt As New DataTable
                 dt = DBManager.Getdatatable("select * from tblgroup_permissons inner join tblforms on tblgroup_permissons.form_id=tblforms.id where group_id = " + groupId.ToString + "  and tblforms.FormName='" + pageName + "' and isnull(f_access,0)=1")
@@ -347,6 +347,20 @@ Public Class LoginInfo
             Return False
         End Try
     End Function
+    Public Shared Function GetSMSConfig() As DataTable
+        Dim dt As New DataTable
+        Try
+            dt = DBManager.Getdatatable("select *,isNULL(active,0) as sendsms from tblsms_settings where comp_id=" + LoginInfo.GetComp_id())
+
+            If dt.Rows.Count <> 0 Then
+                Return dt.Rows(0)(0)
+            Else
+                Return dt
+            End If
+        Catch ex As Exception
+            Return dt
+        End Try
+    End Function
     Public Shared Function isSuperAdmin() As Boolean
         Try
             Dim dt As New DataTable
@@ -427,5 +441,42 @@ Public Class LoginInfo
             Return dt.Rows(0).Item("full_name").ToString & "|" & dt.Rows(0).Item("id").ToString & "|" & dt.Rows(0).Item("User_PhoneNumber").ToString
         End If
         Return "||"
+    End Function
+
+
+    Public Shared Function get_form_operation(ByVal id As String) As Boolean
+        Dim dt As New DataTable
+        Dim group_id = LoginInfo.Getgroup_id()
+        If LoginInfo.getUserType <> 8 Then
+            dt = DBManager.Getdatatable("select * from tbl_group_operations  join tbl_form_operations on tbl_group_operations.form_operation_id=tbl_form_operations.id  where active=1 and  group_perm_id=" + group_id + " and form_operation_id=" + id)
+            If dt.Rows.Count <> 0 Then
+                Return True
+            Else
+                Return False
+
+            End If
+        Else
+            Return False
+        End If
+
+
+    End Function
+
+    Public Shared Function get_form_operation_group(ByVal id As String) As Boolean
+        Dim dt As New DataTable
+        Dim group_id = LoginInfo.Getgroup_id()
+        If LoginInfo.getUserType <> 8 Then
+            dt = DBManager.Getdatatable("select * from tbl_group_operations where form_operation_id  in  (select id from tbl_form_operations where active=1 and parent=" + id + ") and group_perm_id=" + group_id)
+            If dt.Rows.Count <> 0 Then
+                Return True
+            Else
+                Return False
+
+            End If
+        Else
+            Return False
+        End If
+
+
     End Function
 End Class

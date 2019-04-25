@@ -111,7 +111,7 @@ function checkstudent() {
 
 function drawConditionsTable() {
     try {
-        debugger
+       
         var diplomeID = ($("#Lbldiplome_id").html());
         diplome_registerCls.get_courseFiles(diplomeID, function (val) {
 
@@ -163,47 +163,65 @@ function drawConditionsTable() {
 
 
 
+function drawcourseConditions() {
+    try {
+        
+        var diplomeID = ($("#Lbldiplome_id").html());
+        diplome_registerCls.get_courseFiles(diplomeID, function (val) {
+            var data = "";
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+                    data = data + `<tr><td>${element.condition} </td>
+                    <td><div id="img_${element.id}" class="comp-logo"><label id="lblSec_${element.id}" style="display:none;"></label></div>
+                    <div class="up-btn" id="upload" onclick="uploadClick(${element.id});">رفع</div></td></tr>`;
+                                                     
+                 });
+
+            }
+            $("#action_courseStudents").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+var section_id;
+function uploadClick(id) {
+    section_id = id;
+    $("#fuPhoto1").find('input[type="file"]').click();
+}
+
 
 function sendRequest() {
 
     try {
-
-
         if (checkRequired("divformsignin") == 1) {
             alert("ادخل البيانات المطلوبة")
-        }
-
-        else {
+        }else {
             $("#SavedivLoader").show();
-            debugger
-           // var StudentId = $("#lblStudentID").html();
-            var diplomeID = ($("#Lbldiplome_id").html());
-            var code = ($("#lblcode").html());
-            var fURL = document.getElementById("fileURL4").value;
-            var fName = document.getElementById("FName4").value;
-            var basicData = generateJSONFromControls("divformsignin");
+            var diplomeID = $("#Lbldiplome_id").html();
+            var code = $("#lblcode").html();
+            var stdREq = $("#studentRequest").val();
 
+            var filesJson = [];
+            $("#action_courseStudents").find("label").each(function () {
 
-            var Id = "";
-            console.log(basicData);
-            diplome_registerCls.SaveRegister(Id, diplomeID, code ,fURL, fName, basicData, function (val) {
+                if ($(this).html() != "") {
+                    filesJson.push({ "related_id": $(this).attr("id").split("lblSec_")[1], "Image_path": $(this).html(), "Image_name": $(this).attr("name"), "Source": "registeration" });
+                }
+            });
+            diplome_registerCls.SaveRegister(diplomeID, code, stdREq, filesJson, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
                     alert("تم الحفظ بنجاح");
                     $("#register_Course").modal('hide');
                     window.location.reload();
-                    //resetDivControls("divformsignin");
                     resetAll();
                     prepareAdd();
-
-
-
-
                 } else {
                     alert("لم يتم الحفظ");
                 }
-
-
             });
         }
 

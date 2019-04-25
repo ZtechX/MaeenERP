@@ -6,7 +6,7 @@ var formAutoCodeControl = "lblmainid";
 
 
 var subjectList = [];
-var records_per_page = 4;
+var records_per_page = 6;
 var numPages = 0;
 var current_page = 1;
 
@@ -136,20 +136,28 @@ function archiveSemester() {
 
 function drawFinanceStudent() {
     try {
-        debugger
+        
         var diplomeId = ($("#Lbldeploma_id").html());
         Diploma_CoursesCls.get_StudentFnance(diplomeId, function (val) {
 
             var data = "";
 
             if (val[0] === "1") {
+                debugger
                 var check = ""
                 var arr1 = JSON.parse(val[1]);
                 var total = 0;
+                var rest = arr1[0].price;
+            
+                
                 arr1.forEach(function (element) {
+
+                    var diplome_Price = element.price;
+                  
                     if (element.approved == 1) {
                         check = "  تم تاكيد المبلغ "
                         total = total + element.amount;
+                        rest = diplome_Price - total;
                     }
                     else if (element.approved == 2) {
                         check = "  لم يتم تاكيد المبلغ "
@@ -182,6 +190,7 @@ function drawFinanceStudent() {
 
             $("#financestudent").html(data);
             $("#total_money").html(total);
+            $("#Rest_money").html(rest);
         });
     }
     catch (err) {
@@ -194,39 +203,50 @@ function addfinancial() {
     //add financial
 
     try {
-        debugger
 
+        debugger
         if (checkRequired("divformstudentFinanc") == 1) {
             alert("يرجى ادخال البيانات المطلوبة");
 
         }
         else {
-            $("#SavedivLoader").show();
-         
-            var diplomeID = ($("#Lbldeploma_id").html());
 
-            var basicData = generateJSONFromControls("divformstudentFinanc");
+            var diplome_Price = ($("#lbldiplomePrice").html());
+            var rest_money = ($("#Rest_money").html());
+            var studentAmount = ($("#amount").val());
 
-            var Id = "";
+            if (studentAmount <= diplome_Price && studentAmount <= rest_money) {
+                $("#SavedivLoader").show();
 
-            Diploma_CoursesCls.Savefinanc(Id, diplomeID, Pub_date_m, Pub_date_hj, basicData, function (val) {
-                if (val == true) {
-                    $("#SavedivLoader").hide();
-                    // debugger;
-                    drawFinanceStudent();
-                    alert("تم الحفظ بنجاح");
-                    $("#add_Financial").modal('hide');
-                  
-                    resetDivControls("divformstudentFinanc");
+                var diplomeID = ($("#Lbldeploma_id").html());
+
+                var basicData = generateJSONFromControls("divformstudentFinanc");
+
+                var Id = "";
+
+                Diploma_CoursesCls.Savefinanc(Id, diplomeID, Pub_date_m, Pub_date_hj, basicData, function (val) {
+                    if (val == true) {
+                        $("#SavedivLoader").hide();
+                        // debugger;
+                        drawFinanceStudent();
+                        alert("تم الحفظ بنجاح");
+                        $("#add_Financial").modal('hide');
+
+                        resetDivControls("divformstudentFinanc");
 
 
 
-                } else {
-                    alert("لم يتم الحفظ");
-                }
+                    } else {
+                        alert("لم يتم الحفظ");
+                    }
 
 
-            });
+                });
+
+            }
+            else {
+                alert("المبلغ المضاف اكبر من سعر الدبلوم")
+            }
         }
 
 
@@ -280,6 +300,12 @@ function drawStudentfinanceforAdmin() {
                                                       <td>
                                                
                                                   <label>${element.amount} </label>
+                                                     
+                                                            </td>
+
+                                                    <td>
+
+                                                  <label>${element.date_hj} </label>
                                                      
                                                             </td>
                                                       <td>
@@ -400,6 +426,94 @@ function refuse_finance(Studentid, payId) {
 }
 
 
+function drawConditionsTable() {
+    try {
+        debugger
+        var diplomeID = ($("#Lbldeploma_id").html());
+        Diploma_CoursesCls.get_Condition(diplomeID, function (val) {
+
+            
+            var data = "";
+            var del_op = $("#dplm_delete_condtion").html();
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+                arr1.forEach(function (element) {
+                    var del_btn = "";
+                    if (del_op == "True") {
+                        del_btn = `      <button type="button" class="btn btn-danger  btn-s" onclick="DeleteCondition(${element.id});" >
+
+                                                   <i class="fa fa-trash"></i>
+
+                                                                </button>`;
+                    }
+                    var file_nm = "";
+                    var path = element.image;
+                    if (path != "" && path != null) {
+                        if (path.indexOf("Acadmies_module/images/") != -1) {
+                            file_nm = path.split("Acadmies_module/images/")[1];
+                        }
+                    }
+                    data = data + `
+                                                     <tr>
+                                                      <td>${element.condition} </td>
+                                                     <td>
+                                                       <li>
+                                                        <a href="../${element.image}" download>
+                                                            <i class="fa fa-download"></i>   
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li>
+
+                                                     </td>
+                                                       <td>
+
+                                                          <div class="btn-group pull-left" style="position:absolute">
+                                                  ${del_btn}
+                                                      
+                                                     </div>
+                                                           </td>
+
+                                                   
+
+                                                                            </tr>
+                 
+                                                                               
+                                                                      
+`;
+                });
+
+
+            }
+            $("#conditions-table").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
+function DeleteCondition(condID) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+        // debugger
+        Diploma_CoursesCls.Delete_condition(condID, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                drawConditionsTable();
+
+            } else {
+                alert('لم يتم الحذف');
+            }
+
+        });
+    }
+
+}
+
+
 function savediplome() {
 
     try {
@@ -445,38 +559,45 @@ function savediplome() {
 function savesubject(){
 
     try {
-
+        debugger
         setRequired_Date("divdate1");
         //setRequired_Date("divdate2");
-        var diplomeID = ($("#Lbldeploma_id").html());      
-        
+        var diplomeID = ($("#Lbldeploma_id").html());  
+        var final_Degree = parseInt($("#finaldegree").val());
+        var activityDegree = parseInt($("#activityDegree").val());
+        var sum = (final_Degree + activityDegree);
         if (checkRequired("divForm") == 1) {
             alert("يرجى ادخال البيانات المطلوبة");
         }
+        else if (sum !=100) {
+            alert("مجموع درجة الاختبار النهائي زدرجة نصف العام يجب ان يكون 100 درجة")
+
+        }
         else {
-            $("#date_m").val($("#txtDatem").val());
-            $("#date_hj").val($("#txtDateh").val());
-        
-            var basicData = generateJSONFromControls("divForm");
-      
-            var Id = "";
-            console.log(basicData);
-            Diploma_CoursesCls.Save(Id, diplomeID, basicData, function (val) {
-                if (val == true) {
-                   
-                    alert("تم الحفظ بنجاح");
-                    drawCourses(); 
-                  
-                    $("#addsubject").modal('hide');
-                    resetDivControls("divForm");
-                   
+          
 
-                } else {
-                    alert("لم يتم الحفظ");
-                }
+                var basicData = generateJSONFromControls("divForm");
 
+                var Id = "";
                
-            });
+            Diploma_CoursesCls.Save(Id, diplomeID, Pub_date_m, Pub_date_hj,basicData, function (val) {
+                    if (val == true) {
+
+                        alert("تم الحفظ بنجاح");
+                        drawCourses();
+
+                        $("#addsubject").modal('hide');
+                        resetDivControls("divForm");
+
+
+                    } else {
+                        alert("لم يتم الحفظ");
+                    }
+
+
+                });
+            
+            
         }
            
        
@@ -521,18 +642,18 @@ function changePage(page) {
                             <h5><a href="DiplomaSubjectDetails.aspx?code=${element.code}">${element.subjectName}</a></h5>
                         </div>
                         <div class="block-desc">
-                            <p class="desc">${element.subject_goal}</p>
+                            <p class="desc" style="height:100px;">${element.subject_goal.substring(0, 200)}....</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
                                     <img class="avatar" src="${element.trainerImage}" />
                                     <span>${element.full_name}</span>
                                 </div> 
                                     <div class="block-date pull-left">
-                                 
+                                  <i class="fa fa-calendar-check-o"></i>
                                     <span> ${element.created_at_hj} </span>
-                                     <i class="fa fa-calendar-check-o"></i>
+                                  <br>
+                                     <i class="fa fa-book"></i>
                                     <span>${element.semster}</span>
-
                                 </div>
                              
                                    
@@ -885,6 +1006,23 @@ function studentDegreesIN_Diplome() {
 }
 
 
+function fillsubject() {
+
+    var str = "";
+  
+    Diploma_CoursesCls.get_DiplomeSubject("", function (val) {
+        console.log(val);
+        debugger
+        if (val[0] == 1) {
+            var arr1 = JSON.parse(val[1]);
+            arr1.forEach(function (element) {
+                str = str + `<option value="${element.id}">${element.Description}</option>`;
+            });
+        }
+        $("#ddlcourse").html(str);
+    });
+}
+
 function addsubject() {
 
     try {
@@ -899,12 +1037,12 @@ function addsubject() {
             var basicData = generateJSONFromControls("divFormnewsub");
 
             var Id = "";
-            console.log(basicData);
+            //console.log(basicData);
             Diploma_CoursesCls.addsubject(Id, basicData, function (val) {
                 if (val == true) {
                     debugger;
                     alert("تم الحفظ بنجاح");
-
+                    fillsubject();
                     $("#newsubject").modal('hide');
                     resetDivControls("divFormnewsub");
                     $("#newsubject").modal('hide');
@@ -947,13 +1085,10 @@ function drawCourses(){
         var diplomeID = ($("#Lbldeploma_id").html());
         Diploma_CoursesCls.get_Courses(diplomeID,"",function (val) {
            
-          //  var data = "";
-           // var arr1 = JSON.parse(val[1]);
-         
           
-
             var arr1 = JSON.parse(val[1]);
             $("#diplome_title").html(arr1[0].dpname);
+            $("#lbldiplomePrice").html(arr1[0].diplomePrice);
             subjectList = arr1;
             numPages = Math.ceil(subjectList.length / records_per_page);
 
@@ -981,11 +1116,13 @@ function drawCourses(){
 }
 function searchCourses() {
     try {
-        
+        debugger
+        var diplomeID = ($("#Lbldeploma_id").html());
             
-            var courseName = $("#txt_Search").val();
-        Diploma_Courses.get_Courses(diplomeID,courseName, function (val) {
-                debugger
+        var courseName = $("#txt_Search").val();
+        //alert(courseName);
+        Diploma_CoursesCls.get_Courses(diplomeID,courseName, function (val) {
+               
 
                 var data = "";
                
@@ -999,17 +1136,18 @@ function searchCourses() {
                         <div class="block-title">
                             <h5><a href="DiplomaSubjectDetails.aspx?subject_id=${element.id}">${element.subjectName}</a></h5>
                         </div>
-                        <div class="block-desc">
-                            <p class="desc">${element.subject_goal}</p>
+                        <div class="block-desc" >
+                            <p class="desc" style="height:100px;">${element.subject_goal.substring(0, 200)}....</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
                                     <img class="avatar" src="${element.trainerImage}" />
                                     <span>${element.full_name}</span>
                                 </div> 
                                     <div class="block-date pull-left">
-                                 
+                                  <i class="fa fa-calendar-check-o"></i>
                                     <span> ${element.created_at_hj} </span>
-                                     <i class="fa fa-calendar-check-o"></i>
+<br>
+                                     <i class="fa fa-book"></i>
                                     <span>${element.semster}</span>
                                 </div>
                              

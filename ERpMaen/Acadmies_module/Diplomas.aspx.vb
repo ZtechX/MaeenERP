@@ -42,8 +42,11 @@ Public Class Diplomas
                 Dim clsapprove_category As New clsFillComboByDataSource("select * from tblLock_up where type='CD' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_category.SetComboItems(ddlcategory, "", True, "--اختر--", False)
 
+                Dim clsDiplomeCoordinator As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='14'  and comp_id=" + LoginInfo.GetComp_id, "full_name", "id", "")
+                clsDiplomeCoordinator.SetComboItems(ddlcoordinator, "", True, "--اختر--", False)
 
-                'LoginInfo.CheckPermisionsNew(cmdAdd, cmdUpdate, cmdDelete, Me.Page, UserId, lblFormName, DynamicTable)
+
+
 
 
             End If

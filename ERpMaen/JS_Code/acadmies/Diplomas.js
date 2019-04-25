@@ -52,8 +52,8 @@ function saveCourse() {
                     alert("تم الحفظ بنجاح");
                    
                     $("#addCourse").modal('hide');
-                    resetDivControls("divForm");
                     drawAllCourses();
+                    resetDivControls("divForm");
                   
                  
                     
@@ -118,13 +118,18 @@ function changePage(page) {
     var colors = ["#5cb85c", "#428bca", "#000"];
     for (var i = (page - 1) * records_per_page; i < (page * records_per_page) && i < diplomasList.length; i++) {
         var element = diplomasList[i];
+        var costdiv = `<i class="fa fa-money" style="color:brown;"></i>
+                <span style="color:brown;">${element.price}   </span>`;
+        if (element.price == 0) {
+            costdiv = ` <span style="color:blue;">مجاناً</span>`;
+        }
         data = data + `<div class="col-md-4 col-sm-12">
                     <div class="block"  >
                         <div class="block-title" style="background:${colors[element.status]}">
                             <h5><a href="DiplomaCourses.aspx?code=${element.code}">${element.name}</a></h5>
                         </div>
                         <div class="block-desc">
-                            <p class="desc">${element.description}</p>
+                            <p class="desc" style="height:100px;">${element.description.substring(0, 200)}....</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
                                   
@@ -134,8 +139,8 @@ function changePage(page) {
                                 </div>
                                
                                      <div class="block-date pull-left">
-                                    <i class="fa fa-price"></i>
-                                    <span>${element.price}   </span>
+                                   
+${costdiv}
                                 </div>
                             </div>
                         </div>
@@ -231,8 +236,8 @@ function searchDiploma() {
         
             
             var diplomaName = $("#txt_Search").val();
-        DiplomasCls.get_deplomas(diplomaName, function (val) {
-                debugger
+        DiplomasCls.get_deplomas("",diplomaName, function (val) {
+                
 
                 var data = "";
                 //console.log(val);
@@ -240,7 +245,11 @@ function searchDiploma() {
                     var arr1 = JSON.parse(val[1]);
 
                     arr1.forEach(function (element) {
-
+                        var costdiv = `<i class="fa fa-money" style="color:brown;"></i>
+                <span style="color:brown;">${element.price}   </span>`;
+                        if (element.price == 0) {
+                            costdiv = ` <span style="color:blue;">مجاناً</span>`;
+                        }
 
                         data = data + `<div class="col-md-4 col-sm-12">
                     <div class="block"  >
@@ -248,7 +257,7 @@ function searchDiploma() {
                             <h5><a href="DiplomaCourses.aspx?deploma_id=${element.id}">${element.name}</a></h5>
                         </div>
                         <div class="block-desc">
-                            <p class="desc">${element.description}</p>
+                            <p class="desc" style="height:100px;">${element.description.substring(0, 200)}....</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
                                   
@@ -258,8 +267,7 @@ function searchDiploma() {
                                 </div>
                                
                                      <div class="block-date pull-left">
-                                    <i class="fa fa-price"></i>
-                                    <span>${element.price}   </span>
+                              ${costdiv}
                                 </div>
                             </div>
                         </div>

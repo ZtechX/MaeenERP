@@ -35,7 +35,7 @@ Public Class Diploma_CoursesCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function Save(ByVal id As String, ByVal diploma_id As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
+    Public Function Save(ByVal id As String, ByVal diploma_id As String, ByVal date_m As String, ByVal date_hj As String, ByVal basicDataJson As Dictionary(Of String, Object)) As Boolean
         Try
 
             _sqlconn.Open()
@@ -43,7 +43,6 @@ Public Class Diploma_CoursesCls
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
             Dim dt_user As DataTable
             Dim dt_tr As DataTable
-            'Dim dt_subject As DataTable
 
             dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
             Dim comp_id = dt_user.Rows(0).Item("comp_id").ToString
@@ -54,17 +53,13 @@ Public Class Diploma_CoursesCls
                 tr_id = dt_tr.Rows(0).Item("id").ToString
             End If
 
-            'dt_subject = DBManager.Getdatatable("select * from tblLock_up where type='subj'")
-            'Dim subject_id = ""
-            'If dt_subject.Rows.Count <> 0 Then
-            '    subject_id = dt_subject.Rows(0).Item("id").ToString
-            'End If
-
             Dim rnd As New Random
             Dim code = "CRS" & rnd.Next(10000000, 99999999).ToString
             dictBasicDataJson.Add("code", code)
 
-            dictBasicDataJson.Add("status", "60")
+            dictBasicDataJson.Add("status", "0")
+            dictBasicDataJson.Add("created_at_m", date_m)
+            dictBasicDataJson.Add("created_at_hj", date_hj)
             dictBasicDataJson.Add("training_center_id", tr_id)
             dictBasicDataJson.Add("diplome_id", diploma_id)
 
@@ -206,7 +201,7 @@ Public Class Diploma_CoursesCls
         End Try
     End Function
 #End Region
-    '
+
 
 #Region "Save"
     ''' <summary>
@@ -275,7 +270,7 @@ Public Class Diploma_CoursesCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select amount , approved from acd_payments where type=2 and course_id=" + diplomeID + "and student_id=" + LoginInfo.GetUser__Id())
+            dt = DBManager.Getdatatable("select  acd_diplomes.price ,acd_payments.amount ,acd_payments.approved from acd_payments join acd_diplomes on acd_diplomes.id=acd_payments.course_id where acd_payments.type=2  and acd_payments.course_id=" + diplomeID + "and acd_payments.student_id=" + LoginInfo.GetUser__Id())
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -361,7 +356,7 @@ Public Class Diploma_CoursesCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_payments.id ,acd_payments.approved ,acd_payments.amount,acd_payments.image,acd_payments.student_id ,tblUsers.full_name as 'name' from acd_payments join tblUsers on tblUsers.id=acd_payments.student_id  where type=2 and course_id=" + diplomeId)
+            dt = DBManager.Getdatatable("select acd_payments.id ,acd_payments.approved, acd_payments.date_hj,acd_payments.amount,acd_payments.image,acd_payments.student_id ,tblUsers.full_name as 'name' from acd_payments join tblUsers on tblUsers.id=acd_payments.student_id  where type=2 and course_id=" + diplomeId)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -662,9 +657,55 @@ Public Class Diploma_CoursesCls
             Dim dt As New DataTable
             Dim condation = ""
             If name <> "" Then
-                condation = " where name LIKE '%" + name + "%'"
+                condation = " and tbllock_up.Description LIKE '%" + name + "%'"
             End If
-            dt = DBManager.Getdatatable("select acd_diplomes.name as 'dpname' , acd_diplome_subjects.code , acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , acd_diplome_subjects.subject_goal , acd_diplome_subjects.trainer_id,tblUsers.full_name,tblUsers.User_Image as 'trainerImage' ,tbllock_up.Description as 'subjectName' , acd_semester.name  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join acd_semester  on acd_diplome_subjects.semster_id=acd_semester.id join acd_diplomes on acd_diplomes.id=acd_diplome_subjects.diplome_id where acd_diplome_subjects.archive=0 and  diplome_id=" + diploma_id + condation)
+
+            If LoginInfo.getUserType = 4 Then
+                dt = DBManager.Getdatatable("select acd_diplomes.name as 'dpname',acd_diplomes.price as 'diplomePrice' , acd_diplome_subjects.code , acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , IsNull(acd_diplome_subjects.subject_goal,'') as subject_goal , acd_diplome_subjects.trainer_id,tblUsers.full_name,tblUsers.User_Image as 'trainerImage' ,tbllock_up.Description as 'subjectName' , acd_semester.name  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join acd_semester  on acd_diplome_subjects.semster_id=acd_semester.id  join acd_diplomes on acd_diplomes.id=acd_diplome_subjects.diplome_id where acd_diplome_subjects.archive=0 and acd_diplome_subjects.trainer_id=" + LoginInfo.GetUser__Id() + " and  diplome_id=" + diploma_id + condation)
+            Else
+
+                dt = DBManager.Getdatatable("select acd_diplomes.name as 'dpname',acd_diplomes.price as 'diplomePrice' , acd_diplome_subjects.code , acd_diplome_subjects.id , acd_diplome_subjects.subject_id , acd_diplome_subjects.semster_id , acd_diplome_subjects.created_at_hj , IsNull(acd_diplome_subjects.subject_goal,'') as subject_goal, acd_diplome_subjects.trainer_id,tblUsers.full_name,tblUsers.User_Image as 'trainerImage' ,tbllock_up.Description as 'subjectName' , acd_semester.name  as 'semster' from acd_diplome_subjects join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join acd_semester  on acd_diplome_subjects.semster_id=acd_semester.id left join acd_diplomes on acd_diplomes.id=acd_diplome_subjects.diplome_id where acd_diplome_subjects.archive=0 and  diplome_id=" + diploma_id + condation)
+
+            End If
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+#End Region
+
+
+
+#Region "get_data"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_DiplomeSubject(ByVal name As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select * from tblLock_up where type='subj' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id() + " order by id desc")
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -689,6 +730,75 @@ Public Class Diploma_CoursesCls
     End Function
 
 #End Region
+
+#Region "get_condition"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_Condition(ByVal diplomeId As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select id, condition,image from acd_course_conditions where type=2 and  acd_course_conditions.course_id=" + diplomeId)
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+
+
+#End Region
+
+
+#Region "Delete condition"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function Delete_condition(ByVal deleteItem As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            If PublicFunctions.DeleteFromTable(deleteItem, "acd_course_conditions") Then
+                Names.Add("1")
+                Names.Add("تم الحذف بنجاح!")
+            Else
+                Names.Add("2")
+                Names.Add("لا يمكن الحذف!")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+            Names.Add("لا يمكن الحذف!")
+            Return Names.ToArray
+        End Try
+
+    End Function
+#End Region
+
 #Region "Check user"
     ''' <summary>
     ''' Save  Type

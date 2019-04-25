@@ -80,7 +80,10 @@
                             <div class="clear"></div>
                             <asp:Panel ID="pnlForm" runat="server">
                                
-                                  <div class="col-md-12">
+                                  
+
+                                  <div class="col-md-6">
+                                     <div class="col-md-12">
                                     
                                     <div class=" row form-group">
                                         <div class="col-md-3 col-sm-12">
@@ -97,24 +100,8 @@
                                         </div>
                                     </div>
 
-                                  <div class="row form-group ">
-                                <div class="col-md-3 col-sm-12">
-                                    <label> السنة الدراسية</label>
-                                </div>
-
-                                <div class="col-md-9 col-sm-12">
-                                    <asp:DropDownList dbcolumn="year_id" class="form-control" ClientIDMode="Static" ID="ddlyear" runat="server">
-                                    </asp:DropDownList>
-                                    <br />
-                                </div>
-                            </div>
-
-                                      
 
                                       </div>
-
-                                  <div class="col-md-6">
-
                                     <div class=" row form-group">
                                      <div class="col-md-3 col-sm-12">
                                          <label class="label-required">
@@ -124,7 +111,7 @@
 
                                      <div class="col-md-9 col-sm-12" >
 
-                                         <div class="fancy-form" id="divdate1" style="float:right" >
+                                         <div class="fancy-form" id="divdate1">
                                              <input dbcolumn="start_date_m" type="hidden" id="start_date_m" />
                                              <input dbcolumn="start_date_hj" type="hidden" id="start_date_hj" />
                                              <uc1:hijricalendar runat="server" id="HijriCalendar" />
@@ -136,6 +123,17 @@
                                         </div>
                                 
                                  <div class="col-md-6">
+                                        <div class="row form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label> السنة الدراسية</label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                    <asp:DropDownList dbcolumn="year_id" SkinID="form-control"  class="form-control" ClientIDMode="Static" ID="ddlyear" runat="server">
+                                    </asp:DropDownList>
+                                    <br />
+                                </div>
+                            </div>
                                  <div class="form-group">
                                      <div class="col-md-3 col-sm-12">
                                          <label class="label-required">

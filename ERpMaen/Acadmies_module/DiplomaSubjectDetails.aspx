@@ -48,31 +48,13 @@
     });
 </script>
 
-  <%--  <script>
-        Breakpoints();
-    </script>--%>
-    <style>
-        .btn-group {
+  <style>
+           .btn-group {
             margin: 0px !important;
             width: auto;
         }
-    </style>
- <%-- <script src="../assets/js/core.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../libs/bower/moment/moment.js"></script>
-    <script src="../libs/bower/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="../assets/js/fullcalendar.js"></script>
-    <script src="../libs/bower/switchery/dist/switchery.min.js"></script>
-    <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>--%>
-<%--    <script src="../assets/js/ontime.js"></script>--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--%>
-
-<!-- Latest compiled and minified CSS -->
-
-
-<!-- Latest compiled JavaScript -->
-
-    <style>
+        .modal-content .table-responsive{max-height: 430px;}
+        .add-hint .table-responsive{max-height: 1000px;}
         .app-main {
             opacity: 1;
         }
@@ -92,17 +74,16 @@
         }
 
         #student {
-            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
             border-collapse: collapse;
             width: 100%;
         }
 
-            #student td:first-child {
-                width: 35%;
+            #student td:nth-child(2){
+                width: 25%;
             }
 
             #student td:last-child {
-                width: 20%;
+                width: 15%;
             }
 
             #student td {
@@ -154,7 +135,6 @@
 
 
     </style>
-
     <style type="text/css" >
     .Empty
     {
@@ -198,6 +178,8 @@
                         <label style="display:none" id="subject_code" runat="server"></label>
                       <label style="display:none" id="lbldiplomeCode" runat="server"></label>
                      <label style="display:none" id="LblLecture_id" ></label>
+                     <label style="display:none" id="lblsub_FinalDegree" ></label>
+                     <label style="display:none" id="lblsub_ActivityDegree" ></label>
                       <label style="display:none" id="LblHomework_id" ></label>
                        <label style="display:none" id="LblExam_id" ></label>
                        <label style="display:none" id="LblDegree_id" ></label>
@@ -216,38 +198,56 @@
                                     <i class="menu-icon zmdi zmdi-layers zmdi-hc-lg"></i>
                                     <span id="subject_title" > </span>
                                   </h3>
-                                  <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                                  <% if ERpMaen.LoginInfo.getUserType <> 8 Then
+                                          If ERpMaen.LoginInfo.get_form_operation("11") = True Or ERpMaen.LoginInfo.get_form_operation_group("11") Then
+                                          %>
                                 <div class="btn-group pull-left">
   <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     الخيارات
       <i class="fa fa-cogs"></i>
   </button>
   <ul class="dropdown-menu">
+       <% if ERpMaen.LoginInfo.get_form_operation("12") = True Then   %>
       <li>
           <a  onclick="subjectView();">
-              تعديل
+              تعديل بيانات المادة
           </a></li>
-      
+      <% End If %>
+        <% if ERpMaen.LoginInfo.get_form_operation("14") = True Then   %>
       <li><a data-toggle="modal"  href="#exams">
           الاختبارات العامة
       </a></li>
+      <% End If %>
+        <% if ERpMaen.LoginInfo.get_form_operation("15") = True Then   %>
       <li><a data-toggle="modal" href="#homeworks">
           الواجبات العامة
       </a></li>
+      <% End If %>
+        <% if ERpMaen.LoginInfo.get_form_operation("32") = True Then   %>
       <li><a data-toggle="modal" href="#courseEvalution" onclick="viewEvaluation();">
           تقييم المادة
       </a></li>
-
+      <% End If %>
+        <% if ERpMaen.LoginInfo.get_form_operation("16") = True Then   %>
        <li><a data-toggle="modal" href="#publicStudentDegree" onclick="drawpublicDegreeTable();">
-           درجات الطلاب
+           رصد درجات الطلاب
       </a></li>
+      <% End If %>
+        <% if ERpMaen.LoginInfo.get_form_operation("17") = True Then   %>
+        <li><a data-toggle="modal" href="#publicStudentDegree_Admin" onclick="drawApproved_StudentDegree();">
+            اعتماد درجات الطلاب
+      </a></li>
+      <% End If %>
         
       
 
  
   </ul>
 </div>
-                               <%  End If    %>
+                               <% 
+                                       End If
+                                   End If
+                                   %>
 
                             </div>
                             <div class="order-card col-xs-12">
@@ -294,7 +294,9 @@
                                         </div>
 
                                     </div>
-
+                                    <% if ERpMaen.LoginInfo.getUserType <> 8 Then
+                                If ERpMaen.LoginInfo.get_form_operation("18") = True Or ERpMaen.LoginInfo.get_form_operation_group("18") Then
+                                          %>
                                     <div class="inner">
                                         <div class="order-desc row">
                                             <div class="desc-head order_wid col-md-12"">
@@ -304,10 +306,12 @@
                                                     </div>
                                                <div class=" pull-left">
                                                      <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                                                    <% if ERpMaen.LoginInfo.get_form_operation("19") = True Then   %>
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#order_addLec">
                                                     اضافة محاضرة   <i class="fa fa-plus"></i>
 
                                                 </button>
+                                                     <% End if   %>
                                                      <% End if   %>
                                                    </div>
                                               
@@ -347,8 +351,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                      <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
-                                    <div class="inner">
+                                    <% End if
+                                        End If %> 
+                                    <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                                    <div class="inner" style="display:none;">
                                         <div class="order-desc row">
                                             <div class="desc-head order_wid col-md-12"">
                                                 <div class=" pull-right">
@@ -439,13 +445,6 @@
                                                                             </tr>
 
                                                                             <tbody id="studenthomeworktable">
-
-                     
-                                                                        
-                                                                            
-
-
-
                                                                                    </tbody>
                                                                         </table>
                                                                     </div>
@@ -462,7 +461,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="inner">
+                                    <div class="inner" style="display:none;">
                                         <div class="order-desc row">
                                             <div class="desc-head order_wid col-md-12"">
                                                 <div class=" pull-right">
@@ -566,18 +565,20 @@
                                     </div>
 
                                <% End If %>
-
+       <% 
+           If ERpMaen.LoginInfo.get_form_operation("28") = True Or ERpMaen.LoginInfo.get_form_operation_group("28") Then
+                                          %>
                                     <div class="inner">
                                         <div class="order-desc row">
                                             <div class="desc-head order_wid col-md-12"">
                                                 <div class=" pull-right">
                                                 <i class="zmdi zmdi-file-text zmdi-hc-lg"></i>
-                                                <h3>ملفات الدورة  </h3>
+                                                <h3>مرفقات المادة  </h3>
                                                     </div>
                                                <div class=" pull-left">
-                                                     <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                                                     <% if ERpMaen.LoginInfo.getUserType <> 8 And ERpMaen.LoginInfo.get_form_operation("29") = True Then   %>
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#order_addfiles">
-                                                     اضاقة ملف   <i class="fa fa-plus"></i>
+                                                     اضاقة مرفق   <i class="fa fa-plus"></i>
                                                     
                                                 </button>
                                                      <%End If  %>
@@ -601,8 +602,8 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover">
                         <tr>
-                            <th>الملاحظة </th>
-                            <th>الملف</th>
+                            <th>عنوان المرفق </th>
+                            <th>تحميل</th>
                               <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
                             <th>الاجراء</th>
                               <% End If   %>
@@ -625,7 +626,68 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                     <% End If %>
+
+                                    <% 
+           If ERpMaen.LoginInfo.get_form_operation("37") = True Or ERpMaen.LoginInfo.get_form_operation_group("37") Then
+                                          %>
+                                    <div class="inner">
+                                        <div class="order-desc row">
+                                            <div class="desc-head order_wid col-md-12"">
+                                                <div class=" pull-right">
+                                                <i class="zmdi zmdi-file-text zmdi-hc-lg"></i>
+                                                <h3>روابط مفيده  </h3>
+                                                    </div>
+                                               <div class=" pull-left">
+                                                  <% if  ERpMaen.LoginInfo.get_form_operation("38") = True Then   %>
+
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLinks_modal">
+                                                    اضافة رابط   <i class="fa fa-plus"></i>
+                                                    
+                                                </button>
+                                                     <% End If %>
+                                                   </div>
+                                              
+                                            </div>
+                                            <div class="desc-body">
+
+                                                <section class="app-content">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12 col-xs-12 pull-right"  >
+                                                             <div class="widget-body">
+                <div class="trans-data col-xs-12" >
+                                                                  
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                          
+                            <th>الرابط</th>
+                            <th>الوصف</th>
+                             <th>الاجراء</th>
+                            
+
+                        </tr>
+                        <tbody id="course_Links">
+
+                        </tbody>
+                        </table>
+                    </div>
+                    </div>
+                                                                 </div>    </div>
+                                                          
+                                                            
+                                                      
+                                                    </div>
+                                                </section>
+
+                                           
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <% End If %>
+                                    <%
+                                            If ERpMaen.LoginInfo.get_form_operation("31") = True Or ERpMaen.LoginInfo.get_form_operation_group("31") Then
+%>
                                     <div class="inner">
                                         <div class="edit-order">
                                             <div class="edit-head order_wid">
@@ -634,24 +696,26 @@
                                               
                                             </div>
                                             <div class="edit-body">
+                                                 <% If ERpMaen.LoginInfo.get_form_operation("32") = True Then   %>
                                             <button type="button" class="btn btn_rate btn-warning" data-toggle="modal" data-target="#courseEvalution" onclick="viewEvaluation();">
                                                     <i class="zmdi zmdi-star"></i>تقييم المادة
                                                
-                                              
-                                                  <% if ERpMaen.LoginInfo.getUserType <> 4 Then   %>
+                                              </button>
+                                                    <% End If %>
+                                                  <% If ERpMaen.LoginInfo.get_form_operation("36") = True Then   %>
 
                                                 <button type="button" class="btn btn_com btn-purple" data-toggle="modal" data-target="#contact_Trainer">
                                                     <i class="zmdi zmdi-headset-mic"></i> تواصل مع المدرب
                                                 </button>
                                                 <% End If %>
-                                                  <% if ERpMaen.LoginInfo.getUserType = 2 Then   %>
+                                                    <% If ERpMaen.LoginInfo.get_form_operation("33") = True Then   %>
                                                     <button type="button" class="btn btn_rec btn-danger" onclick="deleteCourse();">
                                                     <i class="zmdi zmdi-headset-mic"></i>
                                                        حذف المادة</button>
-                                                </button>
+                                                
                                                  <% End If %>
                                              
-                                                 <% if ERpMaen.LoginInfo.getUserType = 2 Then   %>
+                                                 <% If ERpMaen.LoginInfo.get_form_operation("34") = True Then   %>
                                                    <button type="button" class="btn btn_rec btn-dark" onclick="archiveCourse();">
                                                     <i class="zmdi zmdi-headset-mic"></i>
                                                         اضافة الى الارشيف</button>
@@ -662,8 +726,8 @@
                                         
                                         </div>
                                     </div>
-
-                                    <div class="inner">
+                                      <% End If %>
+                                    <%--<div class="inner">
                                         <div class="comments">
                                              <div class="edit-head order_wid">
                                                 <i class="zmdi zmdi-wrench zmdi-hc-lg"></i>
@@ -694,8 +758,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-
+                                    </div>--%>
+                                                                      <%
+                                            If ERpMaen.LoginInfo.get_form_operation("40") = True Or ERpMaen.LoginInfo.get_form_operation_group("40") Then
+%>
                                     <div class="inner">
                                         <div class="comments">
                                          
@@ -719,18 +785,19 @@
                                                 </asp:TextBox>
                                      </div>
                                                         </div>
-                                                   
+                                                     <% If ERpMaen.LoginInfo.get_form_operation("43") = True Then   %>
                                                         <div class="form-group">
 
                                                             <button type="button" class="btn" onclick="addComment();">ارسال</button>
                                                            
                                                         </div>
-                                                     
+                                                      <% End If %>
                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                  <% End If %>
                                 </div>
                                 <div class="order-sidebar order col-md-4 col-xs-12">
                                    
@@ -806,7 +873,7 @@
                                      
 
 
-                                    <div class="inner">
+                                    <div class="inner" >
                                         <div class="add-hint">
                                             <div class="hint-head side_head">
                                                 <h3>
@@ -840,7 +907,7 @@
 
 
                                                                         
-                                    <div class="inner">
+                                    <div class="inner" style="display:none;">
                                         <div class="add-hint">
                                             <div class="hint-head side_head">
                                                 <h3>
@@ -931,23 +998,22 @@
                     </div>
                  </section>
             
-          
-
-            
             <div class="modal" id="editDiplomaSubject" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"> تعديل المادة</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="col-md-12" id="divFormsubjectEdit">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"> تعديل المادة</h4>
+                        </div>
+                       
+                        <div class="modal-body">
+                            
+                            <div class="row" id="divFormsubjectEdit">
                              <div class="col-md-6">
                           
                             <div class="row form-group ">
                                 <div class="col-md-3 col-sm-12">
-                                    <label>المادة  </label>
+                                    <label class="label-required">المادة  </label>
                                 </div>
 
                                 <div class="col-md-9 col-sm-12">
@@ -971,7 +1037,7 @@
 
                                   <div class="row form-group ">
                                 <div class="col-md-3 col-sm-12">
-                                    <label>الفصل الدراسى  </label>
+                                    <label class="label-required">الفصل الدراسى  </label>
                                 </div>
 
                                 <div class="col-md-9 col-sm-12">
@@ -980,54 +1046,8 @@
                                    
                                 </div>
                             </div>
-                                    <div class="row form-group">
-                                 <div class="col-md-3 col-sm-12">
-                                        <label >   الدرجة النهائية      </label>
-                                            </div>
 
-                                      <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);" dbcolumn="final_exam_degrees" type="text" id="Text2"
-                                                class="form-control" runat="server" clientidmode="Static" />
-                                          
-                                    <br />
-                                        </div>
-                            </div>
-
-
-                                   <div class="row form-group">
-                                 <div class="col-md-3 col-sm-12">
-                                        <label > درجة نصف العام  </label>
-                                            </div>
-
-                                      <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);" dbcolumn="activity_degrees" type="text" id="Text3"
-                                                class="form-control" runat="server" clientidmode="Static" />
-                                 
-                                        </div>
-                            </div>
-                                               
-                            </div>
-                                
-                             <div class="col-md-6">
-                                  <div class=" row form-group">
-                                <div class="col-md-3 col-sm-12">
-                                    <label class="label-required">
-                                     التاريخ   </label>
-                                </div>
-
-                                <div class="col-md-9 col-sm-12">
-
-                                    <div class="fancy-form"   id="divdatediplomasub">
-                                        <input dbColumn="created_at_hj"  type="hidden" id="date_hj" />
-                                        <input dbColumn="created_at_m"  type="hidden" id="date_m" />
-                                     <uc1:hijricalendar runat="server" id="HijriCalendar7" />
-                                    </div>
-                                  
-                                </div>
-                            </div>
-
-
-                            <div class=" row form-group ">
+                                   <div class=" row form-group ">
                                 <div class="col-md-3 col-sm-12">
                                     <label  class="label-required">  المدرب</label>
                                 </div>
@@ -1038,7 +1058,37 @@
                                     
                                 </div>
                             </div>
-                           
+
+                                    
+                                               
+                            </div>
+                                
+                             <div class="col-md-6">
+                                
+                                 <div class="row form-group">
+                                 <div class="col-md-3 col-sm-12">
+                                        <label class="label-required" >    درجة الاختبار النهائي      </label>
+                                            </div>
+
+                                      <div class="col-md-9 col-sm-12">
+                                            <input onkeypress="return isNumber(event);" dbcolumn="final_exam_degrees" type="text" id="Text2"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    <br />
+                                        </div>
+                            </div>
+
+                                   <div class="row form-group">
+                                 <div class="col-md-3 col-sm-12">
+                                        <label class="label-required" >   درجة اعمال السنة  </label>
+                                            </div>
+
+                                      <div class="col-md-9 col-sm-12">
+                                            <input onkeypress="return isNumber(event);" dbcolumn="activity_degrees" type="text" id="Text3"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                 
+                                        </div>
+                            </div>
                             <div class=" row form-group">
                                 <div class="col-md-3 col-sm-12">
                                     <label for="Name" >هدف  المادة </label>
@@ -1054,20 +1104,15 @@
                                   </div>
                           
                                  </div>
-
-
-
+                            
                         </div>
-                  
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary"  onclick="saveCourse();">حفظ </button>
-
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="saveCourse();">اضافه </button>
+                        </div>
                     </div>
-                      </div>
                 </div>
             </div>
-
-            
+          
 
             <div class="modal" id="activity_edit" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -1203,7 +1248,7 @@
 
                                             </div>
                                             <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox SkinID="form-control" TextMode="multiline" required  class="form-control" dbColumn="notes" ClientIDMode="Static" ID="lecNotes" runat="server">
+                                                <asp:TextBox SkinID="form-control" TextMode="multiline"   class="form-control" dbColumn="notes" ClientIDMode="Static" ID="lecNotes" runat="server">
                                                 </asp:TextBox>
                                             </div>
                                         </div>
@@ -1275,7 +1320,7 @@
 
                                              <div class="row form-group">
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="Name" class="label-required"> وصف الملف </label>
+                                            <label for="Name" class="label-required"> عنوان الملف </label>
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
@@ -1355,13 +1400,13 @@
                             <input  id="txtstud_Search" onkeyup="SearchStudent();" type="text" class="form-control" placeholder="بحث عن طالب" />
                         </div>
                         </div>
-                        <%--  جدول الغياب--%>
+                       
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover" id="publicDeg">
                                 <tr>
                                     <th>الاسم </th>
-                                    <th>الدرجة النهائية</th>
-                                     <th> درجة نصف العام</th>
+                                    <th> درجة الاختبار النهائي</th>
+                                     <th>   درجة اعمال السنة</th>
 
 
 
@@ -1385,6 +1430,45 @@
                 </div>
             </div>
 
+            <div class="modal fade" id="publicStudentDegree_Admin" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">جدول الدرجات  </h4>
+                            <div class="col-md-6" >
+                            <input  id="txtstud_Search_Admin" onkeyup="SearchStudent();" type="text" class="form-control" placeholder="بحث عن طالب" />
+                        </div>
+                        </div>
+                       
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="publicDeg">
+                                <tr>
+                                    <th>الاسم </th>
+                                    <th>الدرجة النهائية</th>
+                                     <th> درجة نصف العام</th>
+
+
+
+                                </tr>
+                                   
+                                <tbody id="pblcstudentdegrees_Admin">
+                                 
+                              
+                              
+                                         </tbody>  
+
+
+                            </table>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="Approve_Studentdegree();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
               <div class="modal" id="AddHall" tabindex="-1" role="dialog">
             <div class="modal-dialog">
@@ -1425,9 +1509,66 @@
                       </div>
                 </div>
             </div>
-
-
             <div class="modal" id="addLinks_modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">   رابط جديد</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="divFormAddLinks">
+
+                                <div class="row form-group">
+                                        <div class="col-md-3 col-sm-12">
+                                    <label class="label-required" >العنوان  </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                            <input dbcolumn="title" required type="text" id="Text1"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                   
+                                        </div>
+                                    </div>
+
+                                <div class="form-group row">
+
+                                    <div class="col-md-3 col-sm-12">
+                                    <label class="label-required">الرابط  </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                            <input dbcolumn="URL" type="text" required id="Text4"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    <br />
+                                        </div>
+                                                                                                                   
+                                </div>
+
+                                <div class=" form-group row">
+                                        <div class="col-md-3 col-sm-12">
+                                            <label for="Name" > الوصف  </label>
+
+                                        </div>
+                                        <div class="col-md-9 col-sm-12">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="notes"   ClientIDMode="Static" ID="TextBox9" runat="server">
+                                            </asp:TextBox>
+                                        </div>
+                                    </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="addNewlink();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%--<div class="modal" id="addLinks_modal" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1488,7 +1629,7 @@
                     </div>
                       </div>
                 </div>
-            </div>
+            </div>--%>
 
               <div class="modal" id="file_upload_hw_answers" tabindex="-1" role="dialog">
                 <div class="modal-dialog">

@@ -1,13 +1,28 @@
-﻿Public Class DeliveryDate
+﻿Imports BusinessLayer.BusinessLayer
+
+Public Class DeliveryDate
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
-                Dim cls_employee As New clsFillComboByDataSource("select * from tblUsers where IsNull(Deleted,0)=0 and User_Type=5 and comp_id=" + LoginInfo.GetComp_id(), "full_name", "id", "")
+                Dim managment_id = 0
+                Dim dtmanagment = DBManager.Getdatatable("Select managment_id from tblUsers where id=" + UserId.ToString)
+                If dtmanagment.Rows.Count <> 0 Then
+                    managment_id = dtmanagment.Rows(0).Item(0).ToString
+                End If
+
+                Dim cls_employee1 As New clsFillComboByDataSource("select * from tblUsers where IsNull(Deleted,0)=0  and id in (select id from tblusers where managment_id=" + managment_id.ToString + ") and  comp_id=" + LoginInfo.GetComp_id(), "full_name", "id", "")
+                cls_employee1.SetComboItems(ddlemployee_id, "", False, "--اختر--", False)
+                Try
+                    ddlemployee_id.SelectedValue = UserId.ToString
+                Catch ex As Exception
+                End Try
+
+                'Dim cls_employee As New clsFillComboByDataSource("select * from tblUsers where IsNull(Deleted,0)=0 and User_Type=5 and comp_id=" + LoginInfo.GetComp_id(), "full_name", "id", "")
+                ''cls_employee.SetComboItems(ddlemployee_id, "", True, "--اختر--", False)
                 'cls_employee.SetComboItems(ddlemployee_id, "", True, "--اختر--", False)
-                cls_employee.SetComboItems(ddlemployee_id, "", True, "--اختر--", False)
                 Dim clstype As New clsFillComboByDataSource("select * from tbllock_up where type='CT' and IsNull(Deleted,0)=0", "Description", "id", "")
                 clstype.SetComboItems(ddltype2, "", True, "--اختر--", False)
 

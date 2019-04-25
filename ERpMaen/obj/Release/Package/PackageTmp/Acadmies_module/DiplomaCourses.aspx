@@ -172,10 +172,7 @@
                         </div>
                         <div class="col-md-2">
 
-                            <%--<div class="btn-group pull-left">
-                                <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addsubject">اضافة مادة <i class="fa fa-plus"></i></button>
-
-                            </div>--%>
+                          
                             
                             <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
                             <div class="btn-group pull-left">
@@ -186,22 +183,22 @@
                                 <ul class="dropdown-menu">
                                      <li><a data-toggle="modal" href="#addsubject"> اضافه مادة
                                     </a></li>
-                                    <li>
-                                        <a onclick="DiplomeView();">تعديل
-                                        </a></li>
-                                    <li><a data-toggle="modal" href="#semester_archiveModal">  ارشيف بالفصل الدراسى
-                                    </a></li>
-
-                                    <li><a data-toggle="modal" href="#order_addcondition"> اضافه شرط
+                                   
+                                    <li><a data-toggle="modal" href="#DiplomeConditionsModal" onclick="drawConditionsTable();">  شروط القبول
                                     </a></li>
                                      <li><a data-toggle="modal" href="#StudentFinanceModal" onclick ="drawStudentfinanceforAdmin();">  مالية الطلاب
                                     </a></li>
                                   
-                                    <li><a   onclick=" deleteDiplome();"  > حذف
+                                    <li><a data-toggle="modal" href="#addStudentModal" > تقديمات الطلاب
                                     </a></li>
-                                    <li><a data-toggle="modal" href="#addStudentModal" > الطلاب
+                                     <li><a data-toggle="modal" href="#semester_archiveModal">  ارشفه بالفصل الدراسى
                                     </a></li>
-                                     <li><a   onclick=" Archive();"  > الارشيف
+                                     <li><a   onclick=" Archive();"  > ارشيف الدبلوم
+                                    </a></li>
+                                     <li>
+                                        <a onclick="DiplomeView();">تعديل الدبلوم
+                                        </a></li>
+                                          <li><a   onclick=" deleteDiplome();"  > حذف الدبلوم
                                     </a></li>
                                    
                                 </ul>
@@ -216,7 +213,7 @@
                                   <i class="fa fa-cogs"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                     <li><a data-toggle="modal" href="#add_Financial" onclick="drawFinanceStudent();">  اضافة مالية
+                                     <li><a data-toggle="modal" href="#FinancialModal" onclick="drawFinanceStudent();">  اضافة مالية
                                     </a></li>
                                   
                                     <li><a data-toggle="modal" href="#studentDegreesDiplome" onclick="studentDegreesIN_Diplome();">درجات الدبلوم
@@ -235,16 +232,7 @@
                     </div>
                 </div>
 
-                 <%--<div class="col-md-12 col-sm-12 col-xs-12 ">
-                        <div class="col-md-4">
-
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-danger " onclick="deleteDiplome();"> حذف الدبلومه  <i class="fa fa-trash"></i></button>
-
-                            </div>
-                        </div>
-
-                     </div>--%>
+                 
             </div>
         </section>
         <section>
@@ -452,7 +440,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">اضافة شرط</h4>
+                            <h4 class="modal-title"> ارشفه الفصول الدراسية</h4>
                         </div>
                         <div class="modal-body">
                             <div id="divFormArchiveSemester">
@@ -482,8 +470,48 @@
                 </div>
             </div>
 
+        <div class="modal" id="DiplomeConditionsModal"  tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">   شروط القبول فى الدبلوم</h4>
+                        </div>
+                        <div class="modal-body">
+                           
+                      <div class="trans-data col-xs-12" >
 
-        <div class="modal" id="order_addcondition" data-easein="perspectiveRightIn" tabindex="-1" role="dialog">
+                            <button type="button" class="btn btn-info " data-toggle="modal" data-target="#order_addcondition"> اضافة شرط  <i class="fa fa-plus"></i></button>
+                                                                  
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>الشرط </th>
+                            <th>الملف</th>
+                            <th>الاجراء</th>
+                            
+
+                        </tr>
+                        <tbody id="conditions-table">
+
+                        </tbody>
+                        </table>
+                    </div>
+                    </div>
+                             
+                            </div>
+
+
+                        
+                        <div class="modal-footer">
+                            <button type="button"  data-dismiss="modal" class="btn btn-primary" >close </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            
+
+        <div class="modal" id="order_addcondition"  tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -536,7 +564,7 @@
                     </div>
                     <div class="modal-body">
                         <div id="divFormDiplome">
-                             <div class="col-md-6"> <%--col first--%>
+                             <div class="col-md-6"> 
                             <div class=" form-group ">
                                 <div class="col-md-3 col-sm-12">
                                     <label for="Name" class="label-required">عنوان الدبلوم </label>
@@ -677,16 +705,64 @@
                 </div>
             </div>
 
+        
 
-            <div class="modal fade" id="add_Financial" tabindex="-1" role="dialog">
+            <div class="modal fade" id="FinancialModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title"> مالية الطلاب   </h4>
+                            <h4 class="modal-title">   الماليات   </h4>
                         </div>
                         <div class="modal-body">
-                            <div class="col-md-6" >
+                            
+                            <div class="trans-data col-xs-12" >
+
+                                   <button type="button" class="btn btn-info " data-toggle="modal" data-target="#add_Financial"> اضافة مالية  <i class="fa fa-plus"></i></button>
+                                      <div class="table-responsive" >
+                                             
+                                                <table class="table table-bordered">
+                                                     <tr>
+                                                       
+                                                        <th>المبلغ</th>
+                                                        <th>الحاله </th>
+                                                     
+
+                                                    </tr>
+                                                    <tbody id="financestudent">
+
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td>اجمالى المبالغ المؤكدة</td>
+                                                            <td><label id="total_money"></label></td>
+                                                        </tr>
+                                                    </tfoot>
+
+                                                 
+                                                </table>
+                                            </div>
+
+                               
+                                </div>
+                           
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" data-dismiss="modal" >حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="modal fade" id="add_Financial" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">  اضافة مالية   </h4>
+                        </div>
+                        <div class="modal-body">
+                           
                             <div id="divformstudentFinanc">
 
                                 <div class="row form-group">
@@ -739,44 +815,20 @@
                                         OnClientUploadComplete="UploadComplete3" />
                                 </div>
                                  </div>
-                                </div>
-                             <div class="col-md-6" >    
-
-                                      <div class="table-responsive" >
-                                             
-                                                <table class="table table-bordered">
-                                                     <tr>
-                                                       
-                                                        <th>المبلغ</th>
-                                                        <th>الحاله </th>
-                                                     
-
-                                                    </tr>
-                                                    <tbody id="financestudent">
-
-                                                    </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <td>اجمالى المبالغ المؤكدة</td>
-                                                            <td><label id="total_money"></label></td>
-                                                        </tr>
-                                                    </tfoot>
-
-                                                 <%-- here--%>
-                                                </table>
-                                            </div>
-
-                                 </div>
-
-                           
-                            
+                             
+                             
                         </div>
+                      
                         <div class="modal-footer">
                             <button type="button"  class="btn btn-primary" onclick="addfinancial();">حفظ </button>
                         </div>
                     </div>
+                    </div>
                 </div>
+            
             </div>
+
+
              <% End If %>
 
              <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog">
@@ -849,10 +901,14 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div> 
+        
+
+
         
     </div>
 
 
-    <%-- end form--%>
+
+ 
 </asp:Content>

@@ -41,13 +41,128 @@ Public Class CLSImagesHandler
         Dim thumbimgheight As Integer = OrigHeight
         SavePath = Current.Server.MapPath("~") + "/" + DestPath
         Select Case ext
+            Case "application/msword"
+                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
+                '    myfilename = myfilename.Replace(" ", "-")
+                Dim FileAppend As Integer = 0
+                Dim i As Integer = 0
+                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".doc"
+                'myfilename = myfilename.Replace(" ", "-")
+                Dim NewFile As System.IO.FileStream
+                Try
+                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
+                    NewFile.Write(myimageData, 0, file.ContentLength)
+                    NewFile.Close()
+                    Dim UrlPath As String '= "NewsImages/" & myfilename
+                    UrlPath = DestPath & myfilename
+                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
+                    Return UrlPath
+                Catch ex As Exception
+
+                End Try
+            Case "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
+                '    myfilename = myfilename.Replace(" ", "-")
+                Dim FileAppend As Integer = 0
+                Dim i As Integer = 0
+                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".docx"
+                'myfilename = myfilename.Replace(" ", "-")
+                Dim NewFile As System.IO.FileStream
+                Try
+                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
+                    NewFile.Write(myimageData, 0, file.ContentLength)
+                    NewFile.Close()
+                    Dim UrlPath As String '= "NewsImages/" & myfilename
+                    UrlPath = DestPath & myfilename
+                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
+                    Return UrlPath
+                Catch ex As Exception
+
+                End Try
+            Case ".docx"
+                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
+                '    myfilename = myfilename.Replace(" ", "-")
+                Dim FileAppend As Integer = 0
+                Dim i As Integer = 0
+                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".docx"
+                ' myfilename = myfilename.Replace(" ", "-")
+                Dim NewFile As System.IO.FileStream
+                Try
+                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
+                    NewFile.Write(myimageData, 0, file.ContentLength)
+                    NewFile.Close()
+                    Dim UrlPath As String '= "NewsImages/" & myfilename
+                    UrlPath = DestPath & myfilename
+                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
+                    Return UrlPath
+                Catch ex As Exception
+
+                End Try
+            Case "application/vnd.ms-powerpoint"
+                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
+                '    myfilename = myfilename.Replace(" ", "-")
+                Dim FileAppend As Integer = 0
+                Dim i As Integer = 0
+                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".ppt"
+                'myfilename = myfilename.Replace(" ", "-")
+                Dim NewFile As System.IO.FileStream
+                Try
+                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
+                    NewFile.Write(myimageData, 0, file.ContentLength)
+                    NewFile.Close()
+                    Dim UrlPath As String '= "NewsImages/" & myfilename
+                    UrlPath = DestPath & myfilename
+                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
+                    Return UrlPath
+                Catch ex As Exception
+
+                End Try
+            Case "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
+                '    myfilename = myfilename.Replace(" ", "-")
+                Dim FileAppend As Integer = 0
+                Dim i As Integer = 0
+                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".pptx"
+                'myfilename = myfilename.Replace(" ", "-")
+                Dim NewFile As System.IO.FileStream
+                Try
+                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
+                    NewFile.Write(myimageData, 0, file.ContentLength)
+                    NewFile.Close()
+                    Dim UrlPath As String '= "NewsImages/" & myfilename
+                    UrlPath = DestPath & myfilename
+                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
+                    Return UrlPath
+                Catch ex As Exception
+
+                End Try
+            Case ".pptx"
+                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
+                '    myfilename = myfilename.Replace(" ", "-")
+                Dim FileAppend As Integer = 0
+                Dim i As Integer = 0
+                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".pptx"
+                ' myfilename = myfilename.Replace(" ", "-")
+                Dim NewFile As System.IO.FileStream
+                Try
+                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
+                    NewFile.Write(myimageData, 0, file.ContentLength)
+                    NewFile.Close()
+                    Dim UrlPath As String '= "NewsImages/" & myfilename
+                    UrlPath = DestPath & myfilename
+                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
+                    Return UrlPath
+                Catch ex As Exception
+
+                End Try
+
             Case "application/vnd.ms-excel"
                 Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
                 '    myfilename = myfilename.Replace(" ", "-")
                 Dim FileAppend As Integer = 0
                 Dim i As Integer = 0
                 myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".xls"
-                myfilename = myfilename.Replace(" ", "-")
+                'myfilename = myfilename.Replace(" ", "-")
                 Dim NewFile As System.IO.FileStream
                 Try
                     NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
@@ -66,7 +181,7 @@ Public Class CLSImagesHandler
                 Dim FileAppend As Integer = 0
                 Dim i As Integer = 0
                 myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".xlsx"
-                myfilename = myfilename.Replace(" ", "-")
+                'myfilename = myfilename.Replace(" ", "-")
                 Dim NewFile As System.IO.FileStream
                 Try
                     NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
@@ -85,7 +200,7 @@ Public Class CLSImagesHandler
                 Dim FileAppend As Integer = 0
                 Dim i As Integer = 0
                 myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".xlsx"
-                myfilename = myfilename.Replace(" ", "-")
+                ' myfilename = myfilename.Replace(" ", "-")
                 Dim NewFile As System.IO.FileStream
                 Try
                     NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
@@ -340,37 +455,15 @@ Public Class CLSImagesHandler
 
                 '    End Try
 
-                'Case ".xlsx"
-                '    MyFile.InputStream.Read(myimageData, 0, FileLength)
-                '    Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    Dim FileAppend As Integer = 0
-                '    Dim i As Integer = 0
-                '    myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".xls"
-                '    Dim NewFile As System.IO.FileStream
-                '    Try
-                '        NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                '        NewFile.Write(myimageData, 0, FileLength)
-                '        Dim BIT As Bitmap = New Bitmap(400, 400, PixelFormat.Format24bppRgb)
-                '        BIT.Save(NewFile, Imaging.ImageFormat.Jpeg)
-                '        NewFile.Close()
-                '        Dim UrlPath As String '= "NewsImages/" & myfilename
-                '        UrlPath = DestPath & myfilename
-                '        Return UrlPath
-                '    Catch ex As Exception
-
-                '    End Try
 
 
 
-                'Case Else
 
-                '    Return ""
-                '    Exit Function
-
-
+            Case Else
+                Return ""
+                Exit Function
         End Select
-
-
+        Return ""
     End Function
 
     Public Function FileUpload(ByVal id As String, ByVal FU As FileUpload, ByVal DestPath As String, ByRef type As String) As String

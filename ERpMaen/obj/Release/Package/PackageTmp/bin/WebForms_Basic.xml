@@ -1421,33 +1421,6 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.course_register._fileURL4">
-<summary>
-fileURL4 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.course_register._FName4">
-<summary>
-FName4 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
-<member name="F:ERpMaen.course_register._fuFile3">
-<summary>
-fuFile3 control.
-</summary>
-<remarks>
-Auto-generated field.
-To modify move field declaration from designer file to code-behind file.
-</remarks>
-</member>
 <member name="F:ERpMaen.DiplomaCourses._ToolkitScriptManager1">
 <summary>
 ToolkitScriptManager1 control.
@@ -2492,9 +2465,9 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.diplome_register._notes2">
+<member name="F:ERpMaen.diplome_register._studentRequest">
 <summary>
-notes2 control.
+studentRequest control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -2681,18 +2654,18 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.semester._ddlyear">
+<member name="F:ERpMaen.semester._HijriCalendar">
 <summary>
-ddlyear control.
+HijriCalendar control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.semester._HijriCalendar">
+<member name="F:ERpMaen.semester._ddlyear">
 <summary>
-HijriCalendar control.
+ddlyear control.
 </summary>
 <remarks>
 Auto-generated field.

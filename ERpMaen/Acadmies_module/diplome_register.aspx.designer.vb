@@ -59,38 +59,20 @@ Partial Public Class diplome_register
     Protected WithEvents img As Global.System.Web.UI.WebControls.Image
     
     '''<summary>
-    '''notes2 control.
+    '''studentRequest control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents notes2 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents studentRequest As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''fileURL4 control.
+    '''fuPhoto1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents fileURL4 As Global.System.Web.UI.HtmlControls.HtmlInputHidden
-    
-    '''<summary>
-    '''FName4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FName4 As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''fuFile3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents fuFile3 As Global.AjaxControlToolkit.AsyncFileUpload
+    Protected WithEvents fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
 End Class

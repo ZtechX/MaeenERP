@@ -122,6 +122,15 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents ddlsemster As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''ddlsubTrainer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlsubTrainer As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''Text2 control.
     '''</summary>
     '''<remarks>
@@ -138,24 +147,6 @@ Partial Public Class DiplomaSubjectDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Text3 As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''HijriCalendar7 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents HijriCalendar7 As Global.ERpMaen.CustomerCalendar
-    
-    '''<summary>
-    '''ddlsubTrainer control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlsubTrainer As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''subject_goal1 control.
@@ -311,31 +302,31 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents hall As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
-    '''link_title control.
+    '''Text1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents link_title As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents Text1 As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
-    '''link_url control.
+    '''Text4 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents link_url As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents Text4 As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
-    '''linkNote control.
+    '''TextBox9 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents linkNote As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents TextBox9 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''TextBox6 control.

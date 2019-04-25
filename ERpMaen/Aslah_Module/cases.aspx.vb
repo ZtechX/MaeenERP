@@ -36,14 +36,17 @@ Public Class cases
         Try
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUser__Id()
+                Dim managment_id = 0
                 userLoginType.Value = LoginInfo.getUserType()
-
+                Dim dtmanagment = DBManager.Getdatatable("Select managment_id from tblUsers where id=" + UserId.ToString)
+                If dtmanagment.Rows.Count <> 0 Then
+                    managment_id = dtmanagment.Rows(0).Item(0).ToString
+                End If
                 Dim cls_courts As New clsFillComboByDataSource("select * from tbllock_up where  type='court' and IsNull(Deleted,0)=0 and Comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 cls_courts.SetComboItems(ddlcourt_id, "", True, "--اختر--", False)
                 Dim cls_employee As New clsFillComboByDataSource("select * from tblUsers where IsNull(Deleted,0)=0 and User_Type=5 and comp_id=" + LoginInfo.GetComp_id(), "full_name", "id", "")
                 cls_employee.SetComboItems(ddlemployee_id3, "", False, "--اختر--", False)
                 'cls_employee.SetComboItems(ddlemployee_id4, "", False, "--اختر--", False)
-
 
                 'DropDownList Load for instrument rel
                 Dim clsapprove_instrumRel As New clsFillComboByDataSource("select * from tbllock_up where type='RT' and IsNull(Deleted,0)=0 and Comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")

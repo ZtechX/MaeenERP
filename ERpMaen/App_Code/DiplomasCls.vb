@@ -90,8 +90,6 @@ Public Class DiplomasCls
 #End Region
 
 
-
-
 #Region "get_data"
     ''' <summary>
     ''' Save  Type
@@ -99,8 +97,6 @@ Public Class DiplomasCls
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
     Public Function get_deplomas(ByVal filter As String, ByVal name As String) As String()
-        Dim dt_user As DataTable
-        dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
         Dim Names As New List(Of String)(10)
         Try
@@ -111,19 +107,25 @@ Public Class DiplomasCls
             If name <> "" Then
                 condation1 = " AND name LIKE '%" + name + "%'"
             End If
-            'dt = DBManager.Getdatatable(" select  acd_diplomes.id,acd_diplomes.add_by ,tblUsers.full_name as 'username', tblUsers.User_Image as'userImage',acd_diplomes.name , acd_diplomes.description , acd_diplomes.price from acd_diplomes join tblUsers on acd_diplomes.add_by=tblUsers.id " + condation1)
-            'Else
-            '    dt = DBManager.Getdatatable(" select  acd_diplomes.id,acd_diplomes.add_by ,tblUsers.full_name as 'username', tblUsers.User_Image as'userImage',acd_diplomes.name , acd_diplomes.description , acd_diplomes.price from acd_diplomes  join tblUsers on acd_diplomes.add_by=tblUsers.id where acd_diplomes.comp_id=" + LoginInfo.GetComp_id())
-            'End If
+
 
             If filter = "" Then
-                dt = DBManager.Getdatatable(" select  acd_diplomes.id,  acd_diplomes.status, acd_diplomes.code, acd_diplomes.add_by ,tblUsers.full_name as 'username', tblUsers.User_Image as'userImage',acd_diplomes.name , acd_diplomes.description , acd_diplomes.price from acd_diplomes  join tblUsers on acd_diplomes.add_by=tblUsers.id where acd_diplomes.archive=0 and acd_diplomes.comp_id=" + LoginInfo.GetComp_id() + condation1 + "ORDER BY acd_diplomes.id DESC")
+                If LoginInfo.getUserType = 14 Then
+                    dt = DBManager.Getdatatable("select  acd_diplomes.id,  acd_diplomes.status, acd_diplomes.code, acd_diplomes.add_by ,tblUsers.full_name as 'username', tblUsers.User_Image as'userImage',acd_diplomes.name , isnull(acd_diplomes.description,'') as 'description', isnull(acd_diplomes.price,0) as 'price' from acd_diplomes  join tblUsers on acd_diplomes.coordinator_id=tblUsers.id where acd_diplomes.archive=0  and acd_diplomes.coordinator_id=" + LoginInfo.GetUser__Id() + "and acd_diplomes.comp_id=" + LoginInfo.GetComp_id() + condation1 + "ORDER BY acd_diplomes.id DESC")
+                ElseIf LoginInfo.getUserType = 4 Then
 
+                    dt = DBManager.Getdatatable(" select  acd_diplomes.id,  acd_diplomes.status, acd_diplomes.code, acd_diplomes.add_by ,tblUsers.full_name as 'username', tblUsers.User_Image as'userImage',acd_diplomes.name , isnull(acd_diplomes.description,'') as 'description', isnull(acd_diplomes.price,0) as 'price' from acd_diplomes  join tblUsers on acd_diplomes.coordinator_id=tblUsers.id join acd_diplome_subjects on acd_diplome_subjects.diplome_id=acd_diplomes.id where acd_diplomes.archive=0 and acd_diplome_subjects.trainer_id=" + LoginInfo.GetUser__Id() + " and acd_diplomes.comp_id=" + LoginInfo.GetComp_id() + condation1 + "ORDER BY acd_diplomes.id DESC")
+
+                Else
+
+                    dt = DBManager.Getdatatable("select  acd_diplomes.id,  acd_diplomes.status, acd_diplomes.code, acd_diplomes.add_by ,tblUsers.full_name as 'username', tblUsers.User_Image as'userImage',acd_diplomes.name , isnull(acd_diplomes.description,'') as 'description', isnull(acd_diplomes.price,0) as 'price' from acd_diplomes  join tblUsers on acd_diplomes.coordinator_id=tblUsers.id where acd_diplomes.archive=0 and acd_diplomes.comp_id=" + LoginInfo.GetComp_id() + condation1 + "ORDER BY acd_diplomes.id DESC")
+
+                End If
 
             ElseIf filter <> "" And filter <> 4 Then
-                dt = DBManager.Getdatatable(" select  acd_diplomes.id,  acd_diplomes.status, acd_diplomes.code ,acd_diplomes.add_by ,tblUsers.full_name as 'username', tblUsers.User_Image as'userImage',acd_diplomes.name , acd_diplomes.description , acd_diplomes.price from acd_diplomes  join tblUsers on acd_diplomes.add_by=tblUsers.id where acd_diplomes.archive=0 and acd_diplomes.comp_id=" + LoginInfo.GetComp_id() + " and acd_diplomes.status=" + filter + condation1 + "ORDER BY acd_diplomes.id DESC")
-            Else
-                dt = DBManager.Getdatatable("select acd_courses_students.course_id, acd_diplomes.code,acd_diplomes.status,acd_diplomes.price,  acd_diplomes.name , acd_diplomes.description,  acd_diplomes.add_by,tblUsers.full_name ,tblUsers.User_Image as 'trImage'  from acd_courses_students join acd_diplomes  on acd_courses_students.course_id=acd_diplomes.id join tblUsers on acd_diplomes.add_by=tblUsers.id where acd_courses_students.approved=1 and acd_courses_students.checked=1 and acd_courses_students.deleted=0 and  acd_courses_students.type=2 and acd_diplomes.archive=0 and acd_courses_students.student_id=" + LoginInfo.GetUser__Id() + condation1 + "ORDER BY acd_diplomes.id DESC")
+                    dt = DBManager.Getdatatable(" select  acd_diplomes.id,  acd_diplomes.status, acd_diplomes.code ,acd_diplomes.add_by ,tblUsers.full_name as 'username', tblUsers.User_Image as'userImage',acd_diplomes.name , isnull(acd_diplomes.description,'') as 'description', isnull(acd_diplomes.price,0) as 'price' from acd_diplomes  join tblUsers on acd_diplomes.coordinator_id=tblUsers.id where acd_diplomes.archive=0 and acd_diplomes.comp_id=" + LoginInfo.GetComp_id() + " and acd_diplomes.status=" + filter + condation1 + "ORDER BY acd_diplomes.id DESC")
+                Else
+                    dt = DBManager.Getdatatable("select acd_courses_students.course_id, acd_diplomes.code,acd_diplomes.status,isnull(acd_diplomes.price,0) as 'price',  acd_diplomes.name , isnull(acd_diplomes.description,'') as 'description',  acd_diplomes.add_by,tblUsers.full_name ,tblUsers.User_Image as 'trImage'  from acd_courses_students join acd_diplomes  on acd_courses_students.course_id=acd_diplomes.id join tblUsers on acd_diplomes.coordinator_id=tblUsers.id where acd_courses_students.approved=1 and acd_courses_students.checked=1 and acd_courses_students.deleted=0 and  acd_courses_students.type=2 and acd_diplomes.archive=0 and acd_courses_students.student_id=" + LoginInfo.GetUser__Id() + condation1 + "ORDER BY acd_diplomes.id DESC")
 
 
             End If

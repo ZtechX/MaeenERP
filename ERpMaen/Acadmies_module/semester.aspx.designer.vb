@@ -167,15 +167,6 @@ Partial Public Class semester
     Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''ddlyear control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlyear As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
     '''HijriCalendar control.
     '''</summary>
     '''<remarks>
@@ -183,6 +174,15 @@ Partial Public Class semester
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents HijriCalendar As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
+    '''ddlyear control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlyear As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''HijriCalendar1 control.
