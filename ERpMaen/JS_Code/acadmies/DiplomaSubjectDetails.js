@@ -46,13 +46,20 @@ $(function () {
 function saveCourse() {
     
     try {
+        
         setRequired_Date("divdatediplomasub");
+        var final_Degree = parseInt($("#subject_FinalDegree").val());
+        var activityDegree = parseInt($("#subject_ActivityDegree").val());
+        var sum = (final_Degree + activityDegree);
         
 
         if (checkRequired("divFormsubjectEdit")) {
             showErrorMessage("يرجى ادخال البيانات المطلوبة");
         }
+        else if (sum != 100) {
+            alert("مجموع درجة الاختبار النهائي زدرجة نصف العام يجب ان يكون 100 درجة")
 
+        }
         
           
         else {
@@ -187,7 +194,7 @@ function saveHWanswer() {
         }
         else {
             $("#SavedivLoader").show();
-            debugger
+            
             var HomeWorkId = ($("#LblHomework_id").html());
             var subjectId = ($("#Lblsubject_id").html());
             var code = ($("#lblcode").html());
@@ -226,14 +233,14 @@ function saveExamanswer() {
 
     try {
 
-        debugger
+        
         if (checkRequired("divFormuploadexamfiles") == 1) {
             alert("يرجى ادخال البيانات المطلوبة");
 
         }
         else {
             $("#SavedivLoader").show();
-            debugger
+            
             var examID = ($("#LblExam_id").html());
             var subjectId = ($("#Lblsubject_id").html());
             var code = ($("#lblcode").html());
@@ -338,7 +345,7 @@ function SaveExam() {
 
                 $("#SavedivLoader").show();
 
-                debugger
+                
 
                 var basicData = generateJSONFromControls("divformconTr");
                 var Id = "";
@@ -445,7 +452,7 @@ function SaveExam() {
 
 
                 var basicData = generateJSONFromControls("divformHomework");
-                debugger
+                
 
                 var subjectId = ($("#Lblsubject_id").html());
                 var code = ($("#lblcode").html());
@@ -550,7 +557,7 @@ function SaveExam() {
 function addStudentdegree() {
 
     try {
-        debugger
+        
       
         if (!checkRequired()) {
             var subject_FinalDegree = parseInt($("#lblsub_FinalDegree").html());
@@ -563,10 +570,13 @@ function addStudentdegree() {
                 obj["id"]  =$(this).find("label").attr("id");
                 obj["fdegree"] = parseInt($(this).find("#finaldegee").val());
                 obj["Acdegree"] = parseInt($(this).find("#activitydegee").val());
-                if (obj["fdegree"] > subject_FinalDegree || obj["Acdegree"] > subject_ActivityDegree) {
+                if (obj["fdegree"] <= subject_FinalDegree && obj["Acdegree"] <= subject_ActivityDegree) {
+                   
+                    students_degree.push(obj);
+                }
+                else {
                     alert("الدرجات لا يمكن ان تكون اكبر من درجة المادة");
                 }
-                else { students_degree.push(obj);}
               
                 
             });
@@ -607,58 +617,62 @@ function addStudentdegree() {
 function Approve_Studentdegree() {
 
     try {
-
-
+        debugger
+        var subject_FinalDegree = parseInt($("#lblsub_FinalDegree").html());
+        var subject_ActivityDegree = parseInt($("#lblsub_ActivityDegree").html());
+        var finaldgr = parseInt($("#finaldegee").val());
+        var activitydgr = parseInt($("#activitydegee").val());
         if (!checkRequired()) {
-            var subject_FinalDegree = parseInt($("#lblsub_FinalDegree").html());
-            var subject_ActivityDegree = parseInt($("#lblsub_ActivityDegree").html());
 
-            var students_degree = [];
-            $("#pblcstudentdegrees tr").each(function () {
-                var obj = {};
-                obj["id"] = $(this).find("label").attr("id");
-                obj["fdegree"] = $(this).find("#finaldegee").val();
-                obj["Acdegree"] = $(this).find("#activitydegee").val();
-                if (obj["fdegree"] > subject_FinalDegree || obj["Acdegree"] > subject_ActivityDegree) {
-                    alert("الدرجات لا يمكن ان تكون اكبر من درجة المادة");
-                }
-                else { students_degree.push(obj);}
-                students_degree.push(obj);
-
-            });
-
-          
-            var subjectId = ($("#Lblsubject_id").html());
-            if (students_degree.length != 0) {
-
-                DiplomaSubjectDetailsCls.Approve_Studentdegree(subjectId, students_degree, function (val) {
-                    if (val == true) {
-
-                        $("#SavedivLoader").hide();
-                        alert("  تم الحفظ  ");
-                        $("#publicStudentDegree").modal('hide');
-
-                        resetAll();
-                        prepareAdd();
+            if (finaldgr <= subject_FinalDegree && activitydgr <= subject_ActivityDegree) {
 
 
+                var students_degree = [];
+                $("#pblcstudentdegrees_Admin tr").each(function () {
+
+                    var obj = {};
+                    obj["id"] = $(this).find("label").attr("id");
+                    obj["fdegree"] = parseInt($(this).find("#finaldegee").val());
+                    obj["Acdegree"] = parseInt($(this).find("#activitydegee").val());
 
 
-                    } else {
-                        alert("لم يتم الحفظ");
-                    }
+                    students_degree.push(obj);
 
 
                 });
 
+                var subjectId = ($("#Lblsubject_id").html());
+                if (students_degree.length != 0) {
+
+                    DiplomaSubjectDetailsCls.Approve_Studentdegree(subjectId, students_degree, function (val) {
+                        if (val == true) {
+
+                            $("#SavedivLoader").hide();
+                            alert("  تم الحفظ  ");
+                            $("#publicStudentDegree_Admin").modal('hide');
+
+                            resetAll();
+                            prepareAdd();
+                            
+                        } else {
+                            alert("لم يتم الحفظ");
+                        }
+
+
+                    });
+                }
+
+                
+
             }
-            //else {
-            //    alert("no result found to save")
-            //}
+
+            else {
+                alert("الدرجات لا يمكن ان تكون اكبر من درجة المادة");
+            }
         }
 
-
-    } catch (err) {
+    }
+    catch (err) {
         alert(err);
     }
 }
@@ -764,7 +778,7 @@ function addHalls() {
 
     try {
 
-        debugger
+       
         if (checkRequired("divFormnewHall") == 1) {
             alert("يرجى ادخال البيانات المطلوبة");
         }
@@ -774,13 +788,13 @@ function addHalls() {
             var basicData = generateJSONFromControls("divFormnewHall");
 
             var Id = "";
-            console.log(basicData);
+           
             DiplomaSubjectDetailsCls.addHalls(Id, basicData, function (val) {
                 if (val == true) {
-                    debugger;
+                   
                     alert("تم الحفظ بنجاح");
-
-                   // $("#newsubject").modal('hide');
+                    fillHalls();
+                  
                     resetDivControls("divFormnewHall");
                     $("#AddHall").modal('hide');
 
@@ -820,7 +834,7 @@ function addNewlink() {
            
             DiplomaSubjectDetailsCls.saveCourseLinks(Id, subjectId,  Pub_date_m, Pub_date_hj, time, basicData, function (val) {
                 if (val == true) {
-                  debugger
+                  
                     alert("تم الحفظ بنجاح");
                     
                     resetDivControls("divFormAddLinks");
@@ -936,7 +950,7 @@ function addNewlink() {
     function AddNote() {
 
         try {
-            debugger
+            
 
 
             if (checkRequired("addNote") == 1) {
@@ -1006,7 +1020,7 @@ function addNewlink() {
                 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                 DiplomaSubjectDetailsCls.SaveComment(Id, subjectId, Pub_date_m, Pub_date_hj, time, basicData, function (val) {
                     if (val == true) {
-                        debugger;
+                     
 
                         drawCourseComments();
                         resetDivControls("newdivcomment");
@@ -1496,23 +1510,30 @@ function SearchStudent() {
         $("#LblExam_id").html(examId);
     }
 
-    //function edit(val) {
-    //    debugger
-    //    resetAll();
 
-    //        if (val[0] == "1") {
-    //            var data = JSON.parse(val[1]);
-    //            fillControlsFromJson(data[0]);
 
-    //        }
-    //        $("#pnlConfirm").hide();
-    //        $("#divData").show();
-    //        $("#SavedivLoader").hide();
-    //}
+
+function fillHalls() {
+
+    var str = "";
+
+    DiplomaSubjectDetailsCls.get_Halls("", function (val) {
+        console.log(val);
+        
+        if (val[0] == 1) {
+            var arr1 = JSON.parse(val[1]);
+            arr1.forEach(function (element) {
+                str = str + `<option value="${element.id}">${element.Description}</option>`;
+            });
+        }
+        $("#ddlhallNum").html(str);
+    });
+}
+
 
     function GetCourses() {
         try {
-            debugger
+            
           
             var subjectId = ($("#Lblsubject_id").html());
            var diplomeId = ($("#LblDiplome_id").html());
@@ -1639,7 +1660,44 @@ function drawLecturesTable() {
 
                 arr1.forEach(function (element) {
                     //var end_time = count_endtime(element.start_time);
-
+                    var edit_lec = "";
+                    var del_lec = "";
+                    var abs_lec = "";
+                    var file_lec = "";
+                    var hmw_lec = "";
+                    if ($("#dplm_subj_edit_lect").html() == "True") {
+                        edit_lec = ` <li><a data-toggle="modal" href="#order_addLec" onclick="LectureView(${element.id});">
+                                    تعديل
+                                       </a></li>`;
+                    }
+                    if ($("#dplm_subj_delete_lect").html() == "True") {
+                        del_lec = `  <li><a onclick="DeleteLec(${element.id});">
+                                    حذف
+                                                                       </a></li>
+                                <li>`;
+                    }
+                    if ($("#dplm_subj_lect_absence").html() == "True") {
+                        abs_lec = `    <li>
+                                        <a data-toggle="modal" href="#absenceModal" onclick="drawAbsenceTable(${element.id});">
+                                            الغياب
+                                                                           </a>
+                                    </li>`;
+                    }
+                    if ($("#dplm_subj_lect_file").html() == "True") {
+                        file_lec = ` <li>
+                                        <a data-toggle="modal" href="#order_addfiles" onclick="setFLectId(${element.id});">
+                                            اضافة ملف
+                                                                           </a>
+                                    </li>`;
+                    }
+                    if ($("#dplm_subj_lect_homework").html() == "True") {
+                        hmw_lec = `         <li>
+                                                                            <a data-toggle="modal" href="#homeworks"  onclick="setLectId(${element.id});">
+                                                                                اضافة واجب
+                                                                               </a>
+                                                                                     </li>`;
+                    }
+                  
                     data = data + `<tr>
                                                       <td>${element.lecture_code} </td>
                                                      <td>${element.date_hj}  </td>
@@ -1654,31 +1712,11 @@ function drawLecturesTable() {
 
                             </button>
                             <ul class="dropdown-menu">
-
-                                <li><a data-toggle="modal" href="#order_addLec" onclick="LectureView(${element.id});">
-                                    تعديل
-                                                                       </a></li>
-                                <li><a onclick="DeleteLec(${element.id});">
-                                    حذف
-                                                                       </a></li>
-                                <li>
-                                    <li>
-                                        <a data-toggle="modal" href="#absenceModal" onclick="drawAbsenceTable(${element.id});">
-                                            الغياب
-                                                                           </a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="modal" href="#order_addfiles" onclick="setFLectId(${element.id});">
-                                            اضافة ملف
-                                                                           </a>
-                                    </li>
-
-                                                                         
-                                                                                    <li>
-                                                                            <a data-toggle="modal" href="#homeworks"  onclick="setLectId(${element.id});">
-                                                                                اضافة واجب
-                                                                               </a>
-                                                                                     </li>
+${edit_lec}
+${del_lec}
+${abs_lec}
+${file_lec}
+${hmw_lec}
                                                                        </ul>
                                                                                            
                                                                          </div>
@@ -1732,7 +1770,15 @@ function drawLecturesTable() {
                      <ul>
 
                                                             <li>
+
                                                                 <div class="user">
+
+                                                        <div class="btn-group pull-left">
+                                                      <button type="button"  class="btn btn-primary btn-sm" onclick="Deleteusr_comment(${element.id});">
+                                                        حذف
+                                                          <i class="fa fa-trash"></i>
+                                                      </button>
+                                                           </div>
                                                                     <div class="usr-img">
                                                                         <img  class="avatar" src="${element.suerImage}">
                                                                     </div>
@@ -1764,11 +1810,35 @@ function drawLecturesTable() {
         }
     }
 
+
+function Deleteusr_comment(commId) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+        // debugger
+        DiplomaSubjectDetailsCls.Delete_comment(commId, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                drawCourseComments();
+
+            } else {
+                alert('لم يتم الحذف');
+            }
+
+        });
+    }
+
+}
+
+
+
+
 function archiveCourse() {
 
     var f = confirm("هل  تريد ارشفة المادة");
     if (f == true) {
-        debugger
+        
        
         var subjectId = ($("#Lblsubject_id").html());
         var diplomeCode = ($("#lbldiplomeCode").html());
@@ -1795,7 +1865,7 @@ function archiveCourse() {
 
 function drawpublicDegreeTable() {
     try {
-        debugger
+        
         var subjectId = ($("#Lblsubject_id").html());
         var diplome_ID = ($("#LblDiplome_id").html());
         // $("#LblLecture_id").html(CoursLecID);
@@ -1846,7 +1916,7 @@ function drawpublicDegreeTable() {
 
 function drawApproved_StudentDegree() {
     try {
-        debugger
+        
         var subjectId = ($("#Lblsubject_id").html());
         var diplome_ID = ($("#LblDiplome_id").html());
        
@@ -1984,19 +2054,22 @@ function drawApproved_StudentDegree() {
                                 file_nm = path.split("Acadmies_module/coursefiles/")[1];
                             }
                         }
+                        var icon = "";
+                        if (file_nm != "") {
+                            icon = `   <li> <a href="../${element.image}" download>
+                                                        <i class="fa fa-download"></i>  
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li>  `
+                        }
 
                         if (document.getElementById("checkuser").value == 1) {
 
                             data = data + `<tr>
                                                       <td>${element.notes} </td>
                                                      <td>
-                                                       <li>
-                                                        <a href="../${element.image}" download>
-                                                            <i class="zmdi zmdi-cloud-download"></i>تحميل ملف  
-
-                                                        </a>
-                                                        <span>${file_nm}</span>
-                                                    </li>
+                                                      ${icon}
 
                                                         </td> 
                                                         <td>
@@ -2380,16 +2453,16 @@ function drawstudentExamsanswers(ExamId) {
             console.log(val);
             var data = "";
             if (val[0] == 1) {
-                debugger
+                
                 var arrstudent = JSON.parse(val[1]);
 
                 arrstudent.forEach(function (element) {
-                    debugger
+                    
 
                     var filename = "";
                     var path = element.homeworkanswer;
                     if (path != "" && path != null) {
-                        debugger
+                        
                         if (path.indexOf("Acadmies_module/coursefiles/") != -1) {
                             filename = path.split("Acadmies_module/coursefiles/")[1];
                         }
@@ -2731,7 +2804,7 @@ function saveExamkDegree() {
 
             var students_degree = [];
             $("#studentExamAnswers tr").each(function () {
-                debugger
+                
                 var obj = {};
                 obj["id"] = $(this).find("label").attr("id");
                 obj["hwmstuddegree"] = $(this).find("#Homeworkdegee").val();
@@ -2776,26 +2849,32 @@ function saveExamkDegree() {
 }
 
 
-    function SaveDegree() {
+function SaveDegree() {
+    
 
         try {
-          
+            var subject_FinalDegree = parseInt($("#lblsub_FinalDegree").html());
+            var subject_ActivityDegree = parseInt($("#lblsub_ActivityDegree").html());
 
+            var finalDegree = parseInt($("#finaldegree").val());
+            var activity = parseInt($("#activityDegree").val());
             if (checkRequired("divFormDegrees") == 1) {
                 alert("ادخل البيانات المطلوبة")
             }
 
-            else {
-                $("#SavedivLoader").show();
+            else if (finalDegree <= subject_FinalDegree && activity <= subject_ActivityDegree) {
+               // $("#SavedivLoader").show();
 
                 var StudentId = $("#lblStudentID").html();
                 var subjectId = ($("#Lblsubject_id").html());
+              
+
 
                 var basicData = generateJSONFromControls("divFormDegrees");
 
 
                 var Id = "";
-                console.log(basicData);
+
                 DiplomaSubjectDetailsCls.SaveDegree(Id, StudentId, subjectId, basicData, function (val) {
                     if (val == true) {
                         $("#SavedivLoader").hide();
@@ -2815,9 +2894,14 @@ function saveExamkDegree() {
 
                 });
             }
+                else {
+                    alert("مجموع درجة الاختبار النهائي وردجة نصف العام 100 درجة فقط");
+                }
+            
 
 
-        } catch (err) {
+        }
+        catch (err) {
             alert(err);
         }
     }
@@ -3051,7 +3135,7 @@ function Delete_Link(link_Id) {
             var diplome_ID = ($("#LblDiplome_id").html());
             DiplomaSubjectDetailsCls.Delete_Student(Studentid, diplome_ID, function (val) {
 
-                debugger
+                
                 if (val[0]==1) {
 
                     $("#SavedivLoader").hide();
@@ -3162,7 +3246,7 @@ function deleteCourse() {
         var f = confirm("هل  تريد الحذف");
         if (f == true) {
             DiplomaSubjectDetailsCls.Delete_course(subjectId, function (val) {
-                debugger
+                
                 if (val[0]==1) {
                     $("#SavedivLoader").hide();
                     window.location.replace("DiplomaCourses?code=" + diplomeCode)

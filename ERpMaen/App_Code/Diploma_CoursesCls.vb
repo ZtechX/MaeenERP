@@ -693,7 +693,7 @@ Public Class Diploma_CoursesCls
 
 
 
-#Region "get_data"
+#Region "get_DiplomeSubject"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
@@ -836,16 +836,14 @@ Public Class Diploma_CoursesCls
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
     Public Function get_StudentList(ByVal diplomeID As String) As String()
-        Dim dt_user As DataTable
-        dt_user = DBManager.Getdatatable("Select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
             'DBManager.ExcuteQuery("DELETE FROM acd_courses_students where approved=1 and course_id=" + course_id)
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes, tblImages.Image_path as 'registerFiles',tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id join tblImages on tblImages.Source_id=acd_courses_students.student_id and tblImages.related_id= acd_courses_students.course_id where acd_courses_students.type=2 and  acd_courses_students.checked=0 and acd_courses_students.course_id=" + diplomeID)
-
+            '   dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes, tblImages.Image_path as 'registerFiles',tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id join tblImages on tblImages.Source_id=acd_courses_students.student_id and tblImages.related_id= acd_courses_students.course_id where acd_courses_students.type=2 and  acd_courses_students.checked=0 and acd_courses_students.course_id=" + diplomeID)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id , acd_courses_students.notes, tblImages.Image_path as 'registerFiles',tblUsers.full_name as 'studentName',tblUsers.User_Image as 'studImag' from acd_courses_students  join tblUsers on tblUsers.id=acd_courses_students.student_id  join acd_course_conditions  on acd_course_conditions.course_id=" + diplomeID + " and acd_course_conditions.type=2  join tblImages on tblImages.Source_id=acd_courses_students.student_id and tblImages.related_id= acd_course_conditions.id where acd_courses_students.type=2 and  acd_courses_students.checked=0 and acd_courses_students.course_id=" + diplomeID)
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
                     Dim Str = PublicFunctions.ConvertDataTabletoString(dt)

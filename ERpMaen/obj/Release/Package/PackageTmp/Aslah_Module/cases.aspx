@@ -762,7 +762,7 @@
 
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
-                                                                        <label for="Name" class="label-required">اسم الابن</label>
+                                                                        <label for="Name" class="label-required">الأسم</label>
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">

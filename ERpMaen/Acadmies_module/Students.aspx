@@ -188,13 +188,24 @@
                                         </div>
                                     </div>
 
-                                     <div class="row form-group ">
+                                  <%--   <div class="row form-group ">
                                 <div class="col-md-3 col-sm-12">
                                     <label class="label-required">النوع </label>
                                 </div>
 
                                 <div class="col-md-9 col-sm-12" style="direction:rtl;">
                                     <asp:DropDownList dbcolumn="gender" required class="form-control" ClientIDMode="Static" ID="ddlGender" runat="server">
+                                    </asp:DropDownList>
+                                    <br />
+                                </div>
+                            </div>--%>
+                                      <div class="row form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label>  النوع</label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                    <asp:DropDownList dbcolumn="gender" SkinID="form-control" required  class="form-control" ClientIDMode="Static" ID="ddlGender" runat="server">
                                     </asp:DropDownList>
                                     <br />
                                 </div>

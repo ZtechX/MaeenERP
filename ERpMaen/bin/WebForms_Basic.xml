@@ -1781,6 +1781,51 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._dplm_subj_edit_lect">
+<summary>
+dplm_subj_edit_lect control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._dplm_subj_delete_lect">
+<summary>
+dplm_subj_delete_lect control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._dplm_subj_lect_absence">
+<summary>
+dplm_subj_lect_absence control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._dplm_subj_lect_file">
+<summary>
+dplm_subj_lect_file control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.DiplomaSubjectDetails._dplm_subj_lect_homework">
+<summary>
+dplm_subj_lect_homework control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.DiplomaSubjectDetails._Lblsubject_id">
 <summary>
 Lblsubject_id control.
@@ -1889,18 +1934,18 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.DiplomaSubjectDetails._Text2">
+<member name="F:ERpMaen.DiplomaSubjectDetails._subject_FinalDegree">
 <summary>
-Text2 control.
+subject_FinalDegree control.
 </summary>
 <remarks>
 Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:ERpMaen.DiplomaSubjectDetails._Text3">
+<member name="F:ERpMaen.DiplomaSubjectDetails._subject_ActivityDegree">
 <summary>
-Text3 control.
+subject_ActivityDegree control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -3230,6 +3275,15 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:ERpMaen.trainers._ddlGender">
+<summary>
+ddlGender control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:ERpMaen.trainers._TextBox3">
 <summary>
 TextBox3 control.
@@ -4392,6 +4446,33 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:ERpMaen.cases._ddlGender">
 <summary>
 ddlGender control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.cases._lblbod_date_m">
+<summary>
+lblbod_date_m control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.cases._lblbod_date_h">
+<summary>
+lblbod_date_h control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:ERpMaen.cases._HijriCalendar6">
+<summary>
+HijriCalendar6 control.
 </summary>
 <remarks>
 Auto-generated field.

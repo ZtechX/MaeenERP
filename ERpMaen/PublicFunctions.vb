@@ -969,12 +969,11 @@ ByVal day As String, ByVal RefCode As String, ByVal deliverer_data As String(), 
             dic_sms_archive.Add("event_id", RefCode)
             dic_sms_archive.Add("Type", "recieve_delivery")
             dic_sms_archive.Add("comp_id", LoginInfo.GetComp_id())
-            dic_sms_archive("Message") = "اليوم لديك موعد تسليم"
+            dic_sms_archive("Message") = "عزيزي المستفيد اليوم لديكم موعد تسليم واستلام لأطفالكم للمزيد ادخل على الرابط http://apps.maaen.org.sa الاصلاح الأسري جمعية معين"
             dic_sms_archive("Send_To") = deliverer_data(2)
             If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
                 Return False
             End If
-            dic_sms_archive("Message") = "اليوم لديك موعد إستلام"
             dic_sms_archive("Send_To") = reciever_data(2)
             If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
                 Return False
@@ -985,12 +984,11 @@ ByVal day As String, ByVal RefCode As String, ByVal deliverer_data As String(), 
                 Return False
             End If
             dic_sms_archive("date_m") = dayBefore
-            dic_sms_archive("Message") = "غدا لديك موعد تسليم"
+            dic_sms_archive("Message") = "عزيزي المستفيد غدا لديكم موعد تسليم واستلام لأطفالكم للمزيد ادخل على الرابط http://apps.maaen.org.sa الاصلاح الأسري جمعية معين"
             dic_sms_archive("Send_To") = deliverer_data(2)
             If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
                 Return False
             End If
-            dic_sms_archive("Message") = "غدا لديك موعد إستلام"
             dic_sms_archive("Send_To") = reciever_data(2)
             If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
                 Return False

@@ -129,6 +129,7 @@ function changePage(page) {
                             <h5><a href="DiplomaCourses.aspx?code=${element.code}">${element.name}</a></h5>
                         </div>
                         <div class="block-desc">
+                         <b>${element.department}: <b/>
                             <p class="desc" style="height:100px;">${element.description.substring(0, 200)}....</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
@@ -159,7 +160,7 @@ function drawAllCourses(){
 
         
             var data = "";
-            console.log(val);
+           
             var arr1 = JSON.parse(val[1]);
             diplomasList = arr1;
             numPages = Math.ceil(diplomasList.length / records_per_page);
@@ -182,7 +183,8 @@ function drawAllCourses(){
             changePage(1);
           
         });
-           } catch (err) {
+    }
+    catch (err) {
         alert(err);
     }
 }
@@ -236,53 +238,37 @@ function searchDiploma() {
         
             
             var diplomaName = $("#txt_Search").val();
-        DiplomasCls.get_deplomas("",diplomaName, function (val) {
-                
+        DiplomasCls.get_deplomas("", diplomaName, function (val) {
 
-                var data = "";
-                //console.log(val);
-                if (val[0] == "1") {
-                    var arr1 = JSON.parse(val[1]);
+            var data = "";
+            if (val[0] == 1) {
 
-                    arr1.forEach(function (element) {
-                        var costdiv = `<i class="fa fa-money" style="color:brown;"></i>
-                <span style="color:brown;">${element.price}   </span>`;
-                        if (element.price == 0) {
-                            costdiv = ` <span style="color:blue;">مجاناً</span>`;
-                        }
+                var arr1 = JSON.parse(val[1]);
+                diplomasList = arr1;
+                numPages = Math.ceil(diplomasList.length / records_per_page);
 
-                        data = data + `<div class="col-md-4 col-sm-12">
-                    <div class="block"  >
-                        <div class="block-title">
-                            <h5><a href="DiplomaCourses.aspx?deploma_id=${element.id}">${element.name}</a></h5>
-                        </div>
-                        <div class="block-desc">
-                            <p class="desc" style="height:100px;">${element.description.substring(0, 200)}....</p>
-                            <div class="row desc-inner">
-                                <div class="bock-trainee pull-right">
-                                  
-                                    <img  class="avatar" src="${element.userImage}" />
-                                 
-                                      <span>${element.username}</span>
-                                </div>
-                               
-                                     <div class="block-date pull-left">
-                              ${costdiv}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
-                    });
-                   
-                       $("#diplomas-list").html(data);
+                var str = "";
+                for (var i = 0; i < (numPages + 2); i++) {
 
-                } else {
-                   
-                    $("#diplomas-list").html("لا يوجد دبلومة بهذا الاسم");
+                    if (i == 0) {
+                        str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
+                    }
+                    else if (i == (numPages + 1)) {
+                        str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
+
+                    } else {
+                        str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
+
+                    }
                 }
-
-            });
+                $(".pagination").html(str);
+                changePage(1);
+            }
+            else {
+                $("#diplomas-list").html(" لا يوجد دبلومات بهذا الاسم!");
+            }
+        });
+             
        
     
     } catch (err) {

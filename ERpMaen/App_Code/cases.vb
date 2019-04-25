@@ -395,24 +395,24 @@ Public Class cases
                         End If
                         SMSResult = SMSResult + "#$"
                         If id = "" Then
-                            dic_sms_archive("Message") = "تم إنشاء حالة خاصة بك يمكنك تحميل التطبيق لمتابعتنا من خلاله"
+                            dic_sms_archive("Message") = "عزيزي المستفيد للتسهيل عليكم تم تسجيل حالة الإستلام والتسليم الخاصة بابنائكم الكترونيا يمكنكم الدخول على الرابط http://apps.maaen.org.sa اسم المستخدم " +
+                            "رقم الهوية كلمة المرور رقم الجوال الإصلاح الأسري بجمعية معين"
                             dic_sms_archive("Send_To") = dictperson_owner("phone").ToString()
                             If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
                                 _sqltrans.Rollback()
                                 _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
-                            smsres = PublicFunctions.DoSendSMS(dictperson_owner("phone").ToString(), "تم إنشاء حالة خاصة بك يمكنك تحميل التطبيق لمتابعتنا من خلاله", PublicFunctions.GetIdentity(_sqlconn, _sqltrans), dtsms)
+                            smsres = PublicFunctions.DoSendSMS(dictperson_owner("phone").ToString(), dic_sms_archive("Message").ToString, PublicFunctions.GetIdentity(_sqlconn, _sqltrans), dtsms)
                             SMSResult = SMSResult + smsres
                             SMSResult = SMSResult + "#$"
-                            dic_sms_archive("Message") = "تم إنشاء حالة لك يمكنك تحميل التطبيق لمتابعتنا من خلاله"
                             dic_sms_archive("Send_To") = dictperson_against("phone").ToString()
                             If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
                                 _sqltrans.Rollback()
                                 _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
-                            smsres = PublicFunctions.DoSendSMS(dictperson_against("phone").ToString(), "تم إنشاء حالة لك يمكنك تحميل التطبيق لمتابعتنا من خلاله", PublicFunctions.GetIdentity(_sqlconn, _sqltrans), dtsms)
+                            smsres = PublicFunctions.DoSendSMS(dictperson_against("phone").ToString(), dic_sms_archive("Message").ToString, PublicFunctions.GetIdentity(_sqlconn, _sqltrans), dtsms)
                             SMSResult = SMSResult + smsres
                             SMSResult = SMSResult + "#$"
                         End If
@@ -688,6 +688,13 @@ Public Class cases
                 Dim details_id As String = ""
                 If id <> "" Then
                     details_id = id
+                    DBManager.ExcuteQuery("delete  from ash_case_children_receiving_details  where details_id=" + details_id.ToString)
+                    For Each children As Object In childrens
+                        id = 0
+                        Dim dict_children As Dictionary(Of String, Object) = children
+                        dict_children.Add("details_id", details_id)
+                        PublicFunctions.TransUpdateInsert(dict_children, "ash_case_children_receiving_details", id, _sqlconn, _sqltrans)
+                    Next
                     _sqltrans.Commit()
                     _sqlconn.Close()
                     Return details_id.ToString + "|" + dictBasicDataJson("type").ToString
@@ -715,7 +722,6 @@ Public Class cases
                         dict_children.Add("details_id", details_id)
                         PublicFunctions.TransUpdateInsert(dict_children, "ash_case_children_receiving_details", id, _sqlconn, _sqltrans)
                     Next
-
                     If Access Then
                         _sqltrans.Commit()
                         _sqlconn.Close()

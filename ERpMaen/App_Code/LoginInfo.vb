@@ -21,6 +21,7 @@ Public Class LoginInfo
                pageName <> "courseDetails_archived" And
                pageName <> "DiplomaCourses" And
                pageName <> "DiplomaSubjectDetails" And
+                 pageName <> "Notification" And
                pageName <> "diplome_register" And pageName <> "Timeline" Then
                 Dim pf As New PublicFunctions
                 Dim dt As New DataTable
@@ -447,17 +448,15 @@ Public Class LoginInfo
     Public Shared Function get_form_operation(ByVal id As String) As Boolean
         Dim dt As New DataTable
         Dim group_id = LoginInfo.Getgroup_id()
-        If LoginInfo.getUserType <> 8 Then
-            dt = DBManager.Getdatatable("select * from tbl_group_operations  join tbl_form_operations on tbl_group_operations.form_operation_id=tbl_form_operations.id  where active=1 and  group_perm_id=" + group_id + " and form_operation_id=" + id)
+
+        dt = DBManager.Getdatatable("select * from tbl_group_operations  join tbl_form_operations on tbl_group_operations.form_operation_id=tbl_form_operations.id  where active=1 and  group_perm_id=" + group_id + " and form_operation_id=" + id)
             If dt.Rows.Count <> 0 Then
                 Return True
             Else
                 Return False
 
             End If
-        Else
-            Return False
-        End If
+
 
 
     End Function
@@ -465,17 +464,15 @@ Public Class LoginInfo
     Public Shared Function get_form_operation_group(ByVal id As String) As Boolean
         Dim dt As New DataTable
         Dim group_id = LoginInfo.Getgroup_id()
-        If LoginInfo.getUserType <> 8 Then
-            dt = DBManager.Getdatatable("select * from tbl_group_operations where form_operation_id  in  (select id from tbl_form_operations where active=1 and parent=" + id + ") and group_perm_id=" + group_id)
+
+        dt = DBManager.Getdatatable("select * from tbl_group_operations where form_operation_id  in  (select id from tbl_form_operations where active=1 and parent=" + id + ") and group_perm_id=" + group_id)
             If dt.Rows.Count <> 0 Then
                 Return True
             Else
                 Return False
 
             End If
-        Else
-            Return False
-        End If
+
 
 
     End Function

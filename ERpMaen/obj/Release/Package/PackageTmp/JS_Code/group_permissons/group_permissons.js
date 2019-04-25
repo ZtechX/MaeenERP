@@ -11,13 +11,14 @@ $(function () {
     
     $("#pnlOps").hide();
     try {
-
+        get_form_operations();
         //alert = function () { };
         group_permissons.superAdmin(function (val) {
             //alert(val);
             superAdmin = val;
             //form_load();
             get_form_for_permtion();
+          
              $("#pnlConfirm").show();
         });
 
@@ -52,6 +53,7 @@ function save() {
             var arrData = new Array;
            var saveType = $("#cmdSave").attr("CommandArgument");
             var permarrData = [];
+            var oparrData = [];
             group_permissons.menulength("1", function (val) {
                 menu = JSON.parse(val[1]);
                 for (i = 0; i < menu.length; i++) {
@@ -62,8 +64,16 @@ function save() {
                         }
                     });
                 }
+
               
-                group_permissons.SaveUser( UserId, permarrData, function (val) {
+            $("#operations_tbl").find("tr td input:checkbox").each(function () {
+                if ($(this).is(":checked")) {
+                    var value = $(this).attr("op_id");
+                    oparrData.push(value);
+                }
+                });
+                console.log(oparrData);
+                group_permissons.SaveUser(UserId, permarrData, oparrData, function (val) {
                $("#SavedivLoader").hide();
                     if (val.split("|")[0] == "True") {
                        // cancel();
@@ -97,11 +107,12 @@ function fillPerm(){
         group_permissons.Edit_permissons(ddlgroup_id,function (val) {
            
             var data = JSON.parse(val[1]);
-            
+            console.log(val);
 
         if (data != "") {
             var files = JSON.parse(val[1]);
             var menu = JSON.parse(val[2]);
+            var operations = JSON.parse(val[3]);
            
             if (files.length > 0) {
                 for (i = 0; i < files.length; i++) {
@@ -125,6 +136,14 @@ function fillPerm(){
                         
 
                     }
+                }
+            }
+            $("#operations_tbl tr td input").prop("checked", 0);
+            if (operations.length > 0) {
+                
+                for (i = 0; i < operations.length; i++) {
+                    $("#operations_tbl tr td input[op_id=" + operations[i].form_operation_id + "]").prop("checked", 1);
+
                 }
             }
         }
@@ -211,7 +230,7 @@ function get_form_for_permtion() {
 
 function select_unselectAll(obj) {
 
-
+    debugger;
     var tdNum = Number($(obj).attr("value"));
 
     var ckeckedVal = obj.checked
@@ -234,6 +253,18 @@ function select_unselectAll(obj) {
         }
     }
 }
+function check_all_group(obj) {
+
+    debugger;
+    var tdNum = Number($(obj).attr("value"));
+
+    var ckeckedVal = obj.checked
+  
+         $("#operations_tbl tr td input[value=" + tdNum + "]").prop("checked", ckeckedVal);
+     
+  
+}
+
 function addNewGroup() {
     $('#groupModal').modal({ backdrop: 'static', keyboard: false });
     
@@ -259,4 +290,40 @@ function savegroup() {
         showErrorMessage("إدخل أسم المجموعة");
     }
 
+}
+
+function get_form_operations() {
+    group_permissons.get_form_operations(function (val) {
+        var data = JSON.parse(val[1]);
+      
+        var div_show = "";
+        if (val[0] != "0") {
+            var parent = 0;
+            data.forEach(function (element) {
+             
+                if (element.id == element.parent) {
+                    parent = element.id;
+                    div_show = div_show + `
+ <tr>
+               
+                <td colspan="2"> ${element.action_name} </td>
+               <td>  <input name="form-field-checkbox" onclick="check_all_group(this)" op_id="${element.id}" value="${element.parent}" type="checkbox"  class="ace input-lg" >  </td> 
+               </tr>
+
+`;
+                }
+                if (element.id != element.parent & parent==element.parent) {
+                    div_show = div_show + `
+    <tr>
+                <td></td>
+                <td>  ${element.action_name}</td>
+          <td>  <input name="form-field-checkbox" type="checkbox" op_id="${element.id}" value="${element.parent}"   class="ace input-lg" >  </td> 
+        </tr>
+
+`;
+                }
+            })
+        }
+        $("#operations_tbl").html(div_show);
+    });
 }

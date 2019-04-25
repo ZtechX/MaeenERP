@@ -455,6 +455,33 @@ Partial Public Class cases
     Protected WithEvents ddlGender As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''lblbod_date_m control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblbod_date_m As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblbod_date_h control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblbod_date_h As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''HijriCalendar6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents HijriCalendar6 As Global.ERpMaen.CustomerCalendar
+    
+    '''<summary>
     '''age_son control.
     '''</summary>
     '''<remarks>

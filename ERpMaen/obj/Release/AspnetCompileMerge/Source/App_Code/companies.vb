@@ -116,6 +116,8 @@ Public Class companies
                         _sqltrans.Rollback()
                         _sqlconn.Close()
                         Names.Add("لم يتم الحفظ")
+                        Return Names.ToArray()
+
                     End If
                     '////////////////////////////////////////////////////////////////////////////////////////
                     ' save comp board
@@ -131,6 +133,7 @@ Public Class companies
                             _sqltrans.Rollback()
                             _sqlconn.Close()
                             Names.Add("لم يتم الحفظ")
+                            Return Names.ToArray()
                         End If
                     End If
                     '///////////////////////////////////////////////////////////////////////////////////////////
@@ -140,8 +143,8 @@ Public Class companies
                     If DBManager.ExcuteQueryTransaction("delete  from tblcomp_modules where comp_id=" + Comp_id + " ", _sqlconn, _sqltrans) = -1 Then
                         success = False
                         _sqltrans.Rollback()
-                        _sqlconn.Close()
                         Names.Add("لم يتم الحفظ")
+                        Return Names.ToArray()
                     End If
 
                     Dim comp_group_permission_id = 0
@@ -154,8 +157,8 @@ Public Class companies
                         If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id,RelatedId) values('" + comp_permission_name.ToString + "','PG'," + Comp_id + ",1)", _sqlconn, _sqltrans) = -1 Then
                             success = False
                             _sqltrans.Rollback()
-                            _sqlconn.Close()
                             Names.Add("لم يتم الحفظ")
+                            Return Names.ToArray()
                         Else
                             comp_group_permission_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString
                         End If
@@ -165,8 +168,8 @@ Public Class companies
                         If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id,RelatedId) values('" + advisor_permission_name.ToString + "','PG'," + Comp_id + ",2)", _sqlconn, _sqltrans) = -1 Then
                             success = False
                             _sqltrans.Rollback()
-                            _sqlconn.Close()
                             Names.Add("لم يتم الحفظ")
+                            Return Names.ToArray()
                         Else
                             Dim dic_advisor_permission As New Dictionary(Of String, Object)
                             dic_advisor_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
@@ -181,6 +184,7 @@ Public Class companies
                                 _sqltrans.Rollback()
                                 _sqlconn.Close()
                                 Names.Add("لم يتم الحفظ")
+                                Return Names.ToArray()
                             Else
                                 dic_advisor_permission("form_id") = 3179
                                 If Not PublicFunctions.TransUpdateInsert(dic_advisor_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
@@ -188,6 +192,7 @@ Public Class companies
                                     _sqltrans.Rollback()
                                     _sqlconn.Close()
                                     Names.Add("لم يتم الحفظ")
+                                    Return Names.ToArray()
                                 Else
                                     dic_advisor_permission("form_id") = 3187
                                     If Not PublicFunctions.TransUpdateInsert(dic_advisor_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
@@ -195,6 +200,7 @@ Public Class companies
                                         _sqltrans.Rollback()
                                         _sqlconn.Close()
                                         Names.Add("لم يتم الحفظ")
+                                        Return Names.ToArray()
                                     Else
                                         dic_advisor_permission("form_id") = 4207
                                         If Not PublicFunctions.TransUpdateInsert(dic_advisor_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
@@ -202,6 +208,7 @@ Public Class companies
                                             _sqltrans.Rollback()
                                             _sqlconn.Close()
                                             Names.Add("لم يتم الحفظ")
+                                            Return Names.ToArray()
                                         End If
                                     End If
                                 End If
@@ -213,8 +220,8 @@ Public Class companies
                         If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id,RelatedId) values('" + Beneficiaries_permission_name.ToString + "','PG'," + Comp_id + ",3)", _sqlconn, _sqltrans) = -1 Then
                             success = False
                             _sqltrans.Rollback()
-                            _sqlconn.Close()
                             Names.Add("لم يتم الحفظ")
+                            Return Names.ToArray()
                         Else
                             Dim dic_Beneficiaries_permission As New Dictionary(Of String, Object)
                             dic_Beneficiaries_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
@@ -229,6 +236,7 @@ Public Class companies
                                 _sqltrans.Rollback()
                                 _sqlconn.Close()
                                 Names.Add("لم يتم الحفظ")
+                                Return Names.ToArray()
                             Else
                                 dic_Beneficiaries_permission("form_id") = 3187
                                 If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
@@ -236,6 +244,7 @@ Public Class companies
                                     _sqltrans.Rollback()
                                     _sqlconn.Close()
                                     Names.Add("لم يتم الحفظ")
+                                    Return Names.ToArray()
                                 Else
                                     dic_Beneficiaries_permission("form_id") = 4207
                                     If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
@@ -243,6 +252,7 @@ Public Class companies
                                         _sqltrans.Rollback()
                                         _sqlconn.Close()
                                         Names.Add("لم يتم الحفظ")
+                                        Return Names.ToArray()
                                     End If
                                 End If
                             End If
@@ -254,8 +264,8 @@ Public Class companies
                         If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id,RelatedId) values('" + Student_permission_name.ToString + "','PG'," + Comp_id + ",4)", _sqlconn, _sqltrans) = -1 Then
                             success = False
                             _sqltrans.Rollback()
-                            _sqlconn.Close()
                             Names.Add("لم يتم الحفظ")
+                            Return Names.ToArray()
                         Else
                             Dim dic_Beneficiaries_permission As New Dictionary(Of String, Object)
                             dic_Beneficiaries_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
@@ -270,6 +280,7 @@ Public Class companies
                                 _sqltrans.Rollback()
                                 _sqlconn.Close()
                                 Names.Add("لم يتم الحفظ")
+                                Return Names.ToArray()
                             Else
                                 dic_Beneficiaries_permission("form_id") = 3181
                                 If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
@@ -277,6 +288,7 @@ Public Class companies
                                     _sqltrans.Rollback()
                                     _sqlconn.Close()
                                     Names.Add("لم يتم الحفظ")
+                                    Return Names.ToArray()
                                 End If
                             End If
                         End If
@@ -286,8 +298,8 @@ Public Class companies
                         If DBManager.ExcuteQueryTransaction("insert into tbllock_up (Description,Type,Comp_id,RelatedId) values('" + Trainner_permission_name.ToString + "','PG'," + Comp_id + ",5)", _sqlconn, _sqltrans) = -1 Then
                             success = False
                             _sqltrans.Rollback()
-                            _sqlconn.Close()
                             Names.Add("لم يتم الحفظ")
+                            Return Names.ToArray()
                         Else
                             Dim dic_Beneficiaries_permission As New Dictionary(Of String, Object)
                             dic_Beneficiaries_permission.Add("group_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans).ToString)
@@ -302,6 +314,7 @@ Public Class companies
                                 _sqltrans.Rollback()
                                 _sqlconn.Close()
                                 Names.Add("لم يتم الحفظ")
+                                Return Names.ToArray()
                             Else
                                 dic_Beneficiaries_permission("form_id") = 3181
                                 If Not PublicFunctions.TransUpdateInsert(dic_Beneficiaries_permission, "tblgroup_permissons", "", _sqlconn, _sqltrans) Then
@@ -309,6 +322,7 @@ Public Class companies
                                     _sqltrans.Rollback()
                                     _sqlconn.Close()
                                     Names.Add("لم يتم الحفظ")
+                                    Return Names.ToArray()
                                 End If
                             End If
                         End If
@@ -319,7 +333,12 @@ Public Class companies
                         If dt.Rows.Count <> 0 Then
                             comp_group_permission_id = dt.Rows(0)(0).ToString
                         End If
-                        DBManager.ExcuteQueryTransaction("delete  from tblgroup_permissons where group_id=" + comp_group_permission_id.ToString, _sqlconn, _sqltrans)
+                        If DBManager.ExcuteQueryTransaction("delete  from tblgroup_permissons where group_id=" + comp_group_permission_id.ToString, _sqlconn, _sqltrans) = -1 Then
+                            success = False
+                            _sqltrans.Rollback()
+                            Names.Add("لم يتم الحفظ")
+                            Return Names.ToArray()
+                        End If
 
                     End If
                     ' insert  comp modules 
@@ -333,8 +352,9 @@ Public Class companies
                                     success = False
                                     _sqltrans.Rollback()
                                     _sqlconn.Close()
-                                    Names.Add("لم يتم الحفظ")
-                                End If
+                            Names.Add("لم يتم الحفظ")
+                            Return Names.ToArray()
+                        End If
 
                                 'add module forms permissions
                                 Dim dt2 As DataTable = DBManager.Getdatatable("Select * from tblForms where type=1 And MenueId=" + dictBasicDataJson("module_id").ToString)
@@ -367,6 +387,7 @@ Public Class companies
                         _sqltrans.Rollback()
                         _sqlconn.Close()
                         Names.Add("لم يتم الحفظ")
+                        Return Names.ToArray()
                     End If
                 Else
                     Dim dictCompDataJson As Dictionary(Of String, Object) = arrDataJson(0)

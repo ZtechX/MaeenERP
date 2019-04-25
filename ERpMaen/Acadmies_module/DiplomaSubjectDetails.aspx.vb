@@ -66,7 +66,7 @@ Public Class DiplomaSubjectDetails
                 Dim clsapprove_tainer As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='4' and comp_id=" + LoginInfo.GetComp_id(), "full_name", "id", "")
                 clsapprove_tainer.SetComboItems(ddlsubTrainer, "", True, "--اختر--", False)
 
-                Dim clsapprove_semster As New clsFillComboByDataSource("select * from tblLock_up where type='semster' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
+                Dim clsapprove_semster As New clsFillComboByDataSource("select id , name from acd_semester where  comp_id=" + LoginInfo.GetComp_id(), "name", "id", "")
                 clsapprove_semster.SetComboItems(ddlsemster, "", True, "--اختر--", False)
 
                 Dim clsapprove_course As New clsFillComboByDataSource("select * from tblLock_up where type='subj' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
@@ -75,7 +75,11 @@ Public Class DiplomaSubjectDetails
                 Dim clsapprove_halls As New clsFillComboByDataSource("select * from tblLock_up where type='HallNum' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
                 clsapprove_halls.SetComboItems(ddlhallNum, "", True, "--اختر--", False)
 
-
+                dplm_subj_edit_lect.InnerHtml = ERpMaen.LoginInfo.get_form_operation("20")
+                dplm_subj_delete_lect.InnerHtml = ERpMaen.LoginInfo.get_form_operation("21")
+                dplm_subj_lect_absence.InnerHtml = ERpMaen.LoginInfo.get_form_operation("22")
+                dplm_subj_lect_file.InnerHtml = ERpMaen.LoginInfo.get_form_operation("23")
+                dplm_subj_lect_homework.InnerHtml = ERpMaen.LoginInfo.get_form_operation("24")
 
             End If
         Catch ex As Exception

@@ -53,7 +53,7 @@ function HijriDate(year, month, date, hour, minute, second, millisecond) {
       this.getFullYear();
     };
     this.getDateStringHigri = function () {
-        return addZero(this.getDate()) + '/' +
+        return addZero(this.getDate()-1) + '/' +
           addZero(this.getMonth()+1) + '/' +
           this.getFullYear();
     };

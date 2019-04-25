@@ -117,13 +117,13 @@
                         <div class="cp_margin pad10">
                             <div class="clear"></div>
                             <asp:Panel ID="pnlForm" runat="server">
-                             <div class="col-md-9">
+                             <div class="col-md-12">
                                                 <div  class="col-md-6">
-                                                  <div class="col-md-3 col-sm-12">
+                                                  <div class="col-md-6 col-sm-12">
                                                  <label for="Name" class="label-required">المجموعة </label>
 
                                                   </div>
-                                                 <div class="col-md-9 col-sm-12">
+                                                 <div class="col-md-6 col-sm-12">
                                                    <asp:DropDownList dbcolumn="type_id" onchange="fillPerm();" class="form-control" ClientIDMode="Static" ID="ddlgroup_id" runat="server">
                                                         </asp:DropDownList>
                                               
@@ -132,7 +132,7 @@
                                          
                                                   </div>
                                                 </div>
-                                                           <div class="col-md-3">
+                                                           <div class="col-md-6">
                                       <button onclick="addNewGroup(); return false;" class="btn btn-info btn-lg"  >إنشاء مجموعة جديدة</button>
        
                                 </div>
@@ -143,8 +143,79 @@
                             </asp:Panel>
                         </div>
                         <div class="row">
-                           <div id="tablePrint" style="margin-top: 20px;">
+                            <ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">صلاحيات عامة</a></li>
+  <li><a data-toggle="tab" href="#menu1">صلاحيات جزئية</a></li>
+</ul>
+                            <div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <div id="tablePrint" style="margin-top: 20px;">
                                 </div>
+  </div>
+  <div id="menu1" class="tab-pane fade in">
+      <div class="container" style="margin-top: 20px;">
+         
+            <div class="col-md-9">
+    <table class="table table-bordered" id="form_operations_table">
+       
+        <tbody id="operations_tbl">
+            <tr>
+               
+                <td colspan="2"> خيارات الدبلوم</td>
+               <td>  <input name="form-field-checkbox" onclick="select_unselectAll(this)" value="1" type="checkbox"  class="ace input-lg" >  </td> 
+               </tr>
+
+    <tr>
+                <td></td>
+                <td>  اضافة دبلوم</td>
+          <td>  <input name="form-field-checkbox" type="checkbox"  class="ace input-lg" >  </td> 
+        </tr>
+                <tr>
+                <td></td>
+                <td>  تعديل دبلوم</td>
+          <td>  <input name="form-field-checkbox" type="checkbox"  class="ace input-lg" >  </td> 
+        </tr>
+
+   
+                <tr>
+                <td></td>
+                <td>  حذف دبلوم</td>
+          <td>  <input name="form-field-checkbox" type="checkbox"  class="ace input-lg" >  </td> 
+        </tr>
+
+         <tr>
+               
+                <td colspan="2"> خيارات المادة</td>
+               <td>  <input name="form-field-checkbox" type="checkbox"  class="ace input-lg" >  </td> 
+               </tr>
+
+    <tr>
+                <td></td>
+                <td>  اضافة مادة</td>
+          <td>  <input name="form-field-checkbox" type="checkbox"  class="ace input-lg" >  </td> 
+        </tr>
+                <tr>
+                <td></td>
+                <td>  تعديل مادة</td>
+          <td>  <input name="form-field-checkbox" type="checkbox"  class="ace input-lg" >  </td> 
+        </tr>
+
+   
+                <tr>
+                <td></td>
+                <td>  حذف مادة</td>
+          <td>  <input name="form-field-checkbox" type="checkbox"  class="ace input-lg" >  </td> 
+        </tr>
+
+            </tbody>
+    </table>
+                </div>
+           <div class="col-md-3"></div>
+          </div>
+  </div>
+ 
+</div>
+                          
 
                         </div>
                    

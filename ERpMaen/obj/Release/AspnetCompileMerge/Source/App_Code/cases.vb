@@ -82,7 +82,8 @@ Public Class cases
     <System.Web.Script.Services.ScriptMethod()>
     Public Function Save(ByVal id As String, ByVal basicDataJson As Dictionary(Of String, Object), ByVal persons_owner As Dictionary(Of String, Object), ByVal person_against As Dictionary(Of String, Object), ByVal children As Dictionary(Of String, Object), ByVal status As Dictionary(Of String, Object), ByVal tabs As List(Of Object), ByVal attch_file_DataJsonList As List(Of Object)) As String
         Try
-            sendSMS = LoginInfo.SendSMS()
+            Dim dtsms = LoginInfo.GetSMSConfig()
+            sendSMS = Convert.ToBoolean(dtsms.Rows(0).Item("sendsms").ToString)
             Dim group_id As String = "0"
             Dim group_id_dt As New DataTable
             group_id_dt = DBManager.Getdatatable("select id from tbllock_up where RelatedId=3 and Type='PG' and Comp_id=" + LoginInfo.GetComp_id())
@@ -328,7 +329,7 @@ Public Class cases
                         _sqlconn.Close()
                         Return "False|لم يتم الحفظ"
                     End If
-            Dim dictPerson As New Dictionary(Of String, Object)
+                    Dim dictPerson As New Dictionary(Of String, Object)
                     dictPerson.Add("case_id", case_id)
 
                     If Not PublicFunctions.TransUpdateInsert(dictPerson, "ash_case_persons", person1_id, _sqlconn, _sqltrans) Then
@@ -377,7 +378,7 @@ Public Class cases
                                 _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
-                            smsres = PublicFunctions.DoSendSMS(New_advisor_phone, "تم إسناد حالة جديدةإليك", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                            smsres = PublicFunctions.DoSendSMS(New_advisor_phone, "تم إسناد حالة جديدةإليك", PublicFunctions.GetIdentity(_sqlconn, _sqltrans), dtsms)
                             SMSResult = SMSResult + smsres
                         End If
                         SMSResult = SMSResult + "#$"
@@ -389,29 +390,29 @@ Public Class cases
                                 _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
-                            smsres = PublicFunctions.DoSendSMS(old_advisor, "تم إلغاء اسناد حالة منك", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                            smsres = PublicFunctions.DoSendSMS(old_advisor, "تم إلغاء اسناد حالة منك", PublicFunctions.GetIdentity(_sqlconn, _sqltrans), dtsms)
                             SMSResult = SMSResult + smsres
                         End If
                         SMSResult = SMSResult + "#$"
                         If id = "" Then
-                            dic_sms_archive("Message") = "تم إنشاء حالة خاصة بك يمكنك تحميل التطبيق لمتابعتنا من خلاله"
+                            dic_sms_archive("Message") = "عزيزي المستفيد للتسهيل عليكم تم تسجيل حالة الإستلام والتسليم الخاصة بابنائكم الكترونيا يمكنكم الدخول على الرابط http://apps.maaen.org.sa اسم المستخدم " +
+                            "رقم الهوية كلمة المرور رقم الجوال الإصلاح الأسري بجمعية معين"
                             dic_sms_archive("Send_To") = dictperson_owner("phone").ToString()
                             If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
                                 _sqltrans.Rollback()
                                 _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
-                            smsres = PublicFunctions.DoSendSMS(dictperson_owner("phone").ToString(), "تم إنشاء حالة خاصة بك يمكنك تحميل التطبيق لمتابعتنا من خلاله", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                            smsres = PublicFunctions.DoSendSMS(dictperson_owner("phone").ToString(), dic_sms_archive("Message").ToString, PublicFunctions.GetIdentity(_sqlconn, _sqltrans), dtsms)
                             SMSResult = SMSResult + smsres
                             SMSResult = SMSResult + "#$"
-                            dic_sms_archive("Message") = "تم إنشاء حالة لك يمكنك تحميل التطبيق لمتابعتنا من خلاله"
                             dic_sms_archive("Send_To") = dictperson_against("phone").ToString()
                             If Not PublicFunctions.TransUpdateInsert(dic_sms_archive, "tblsms_archive", "", _sqlconn, _sqltrans) Then
                                 _sqltrans.Rollback()
                                 _sqlconn.Close()
                                 Return "False|لم يتم الحفظ"
                             End If
-                            smsres = PublicFunctions.DoSendSMS(dictperson_against("phone").ToString(), "تم إنشاء حالة لك يمكنك تحميل التطبيق لمتابعتنا من خلاله", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
+                            smsres = PublicFunctions.DoSendSMS(dictperson_against("phone").ToString(), dic_sms_archive("Message").ToString, PublicFunctions.GetIdentity(_sqlconn, _sqltrans), dtsms)
                             SMSResult = SMSResult + smsres
                             SMSResult = SMSResult + "#$"
                         End If
@@ -1593,9 +1594,8 @@ Public Class cases
 
             If DBManager.ExcuteQueryTransaction("delete from ash_case_childrens  where id=" + printItemId.ToString + " and  case_id=" + case_id, _sqlconn, _sqltrans) = -1 Then
                     _sqltrans.Rollback()
-                    _sqlconn.Close()
-                    Return False
-                End If
+                Return False
+            End If
 
             Return True
         Catch ex As Exception
@@ -1949,7 +1949,13 @@ Public Class cases
                             _sqlconn.Close()
                             Return True
                         End If
+                    Else
+                        _sqltrans.Rollback()
+                        Return False
                     End If
+                Else
+                    _sqltrans.Rollback()
+                    Return False
                 End If
             Else
                 If PublicFunctions.DeleteFromTable(id, tabel_nm) Then
@@ -2006,13 +2012,12 @@ Public Class cases
                 If DBManager.ExcuteQueryTransaction("delete tblNotifications  where RefType in (1,2,3,4) and RefCode in (select id from ash_case_receiving_delivery_details where " + condation + ")", _sqlconn, _sqltrans) Then
                     If DBManager.ExcuteQueryTransaction("delete tblsms_archive  where Type = 'recieve_delivery' and event_id in (select id from ash_case_receiving_delivery_details where " + condation + ")", _sqlconn, _sqltrans) Then
                         If DBManager.ExcuteQueryTransaction("update ash_case_receiving_delivery_details set deleted = 1 where id in (select id from ash_case_receiving_delivery_details where " + condation + ")", _sqlconn, _sqltrans) Then
-                            If DBManager.ExcuteQueryTransaction("delete  from " + tb_nm + " where id=" + id) Then
+                            If DBManager.ExcuteQueryTransaction("delete  from " + tb_nm + " where id=" + id, _sqlconn, _sqltrans) Then
                                 If access Then
                                     _sqltrans.Commit()
                                     _sqlconn.Close()
                                 End If
                                 Return "True"
-
                             End If
                         End If
                     End If
@@ -2020,7 +2025,6 @@ Public Class cases
             End If
             If access Then
                 _sqltrans.Rollback()
-                _sqlconn.Close()
             End If
             Return "False|لم يتم الحذف"
         Catch ex As Exception

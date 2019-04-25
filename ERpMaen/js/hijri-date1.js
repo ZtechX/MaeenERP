@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @description JavaScript Hijri Date Function
  * @version 2.0
  * 
@@ -112,8 +112,7 @@ Object.defineProperty(HijriDate,'UTC',{value:function(){
 	a[0]=parseInt(a[0]);a[1]=i(a[1],0);a[2]=i(a[2],1);a[3]=i(a[3],0);a[4]=i(a[4],0);a[5]=i(a[5],0);a[6]=i(a[6],0);
 	t=h.dayCount((a[0]-1)*12+a[1]);t+=a[2]-1;t*=864e5;t+=a[3]*36e5;t+=a[4]*6e4;t+=a[5]*1e3;t+=a[6];t+=h.DIFF;return t
 }});
-HijriDate.monthNames=["المحرم", "صفر", "ربيع الاول", "ربيع الاخر", "جماد الاول", "جماد الاخر",
-    "رجب", "شعبان", "رمضان", "شوال", "ذى القعدة", "ذى الحجة"];
+HijriDate.monthNames=["Muharram","Safar","Rabi'ul-Awwal","Rabi'ul-Akhir","Jumadal-Ula","Jumadal-Akhir","Rajab","Sha'ban","Ramadan","Syawwal","Dhul-Qa'da","Dhul-Hijja"];
 HijriDate.monthShortNames=["Muh","Saf","RAw","RAk","JAw","JAk","Raj","Sha","Ram","Sya","DhQ","DhH"];
 HijriDate.weekdayNames=["Ahad","Ithnin","Thulatha","Arba'a","Khams","Jumu'ah","Sabt"];
 HijriDate.weekdayShortNames=["Ahd","Ith","Thu","Arb","Kha","Jum","Sab"];

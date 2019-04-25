@@ -804,22 +804,21 @@ function SaveLec() {
 
         setRequired_time("divstartTime");
         setRequired_Date("divdate1");
-        //var check = checkRequired("divFormTable");
+   
 
         if (checkRequired("divFormTable") == 1) {
             alert("يرجى ادخال البيانات المطلوبة");
 
         }
         else {
-          // $("#SavedivLoader").show();
-
+         
             $("#dateLec_m").val($("#divdate1 #txtDatem").val());
             $("#dateLec_hj").val($("#divdate1 #txtDateh").val());
 
 
             var CourseId =$("#Lblcourse_id").html();
             var lectureID = $("#LblLecture_id").html();
-            //var id = "";
+           
 
             var basicData = generateJSONFromControls("order_addLec");
 
@@ -886,7 +885,7 @@ function SaveEvalution() {
                     alert("تم الحفظ بنجاح");
                     $("#courseEvalution").modal('hide');
                     resetDivControls("divformCourseEvalution");
-                    drawLecturesTable();
+                   
 
 
 
@@ -1816,7 +1815,7 @@ function drawLecturesTable() {
         courseDetailsCls.get_LectureTable(CourseId, function (val) {
           
             var data = "";
-            console.log(val);
+           
             if (val[0] == 1) {
                 var arr1 = JSON.parse(val[1]);
 

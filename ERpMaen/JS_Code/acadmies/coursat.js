@@ -154,7 +154,7 @@ function changePage(page) {
                             <h5><a href="courseDetails.aspx?code=${element.code}">${element.name}</a></h5>
                         </div>
                         <div class="block-desc">
-<b>${element.department}: <b/>
+                                    <b>${element.department}: <b/>
                             <p class="desc" style="height:100px;">${element.description.substring(0, 200)}....</p>
                             <div class="row desc-inner">
                                 <div class="bock-trainee pull-right">
@@ -263,6 +263,7 @@ function searchCourses() {
 
         var courseName = $("#txt_Search").val();
         coursatCls.get_Courses("", courseName, Pub_date_m, function (val) {
+            if (val[0] == 1) { 
             var data = "";
             var arr1 = JSON.parse(val[1]);
             CoursesList = arr1;
@@ -284,6 +285,10 @@ function searchCourses() {
             }
             $(".pagination").html(str);
             changePage(1);
+        }
+            else {
+                $("#courses-list").html(" لا يوجد دورات  بهذا الاسم!");
+            }
         });
 
 

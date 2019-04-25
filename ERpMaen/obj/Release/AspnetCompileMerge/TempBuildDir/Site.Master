@@ -743,7 +743,7 @@
                                     <div id="divLoaderPart" class="popover-content">
                                         <asp:Image ID="imgloader" runat="server" ImageUrl="~/App_Themes/images/ajax-loader.gif" />
                                     </div>
-                                    <div id="divNotificationPart" class="pad10">
+                                    <div id="divNotificationPart" class="pad10" style="height:400px;overflow-y:scroll;">
                                         <ul id="ulNotifications">
                                         </ul>
                                     </div>

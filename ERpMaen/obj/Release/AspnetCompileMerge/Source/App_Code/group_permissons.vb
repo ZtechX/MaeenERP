@@ -34,7 +34,7 @@ Public Class group_permissons
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function SaveUser(ByVal group_id As String, ByVal permDataJsonList As List(Of Object)) As String
+    Public Function SaveUser(ByVal group_id As String, ByVal permDataJsonList As List(Of Object), ByVal opDataJsonList As List(Of Object)) As String
         Try
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
@@ -43,15 +43,20 @@ Public Class group_permissons
 
 
             If save_permtion(permDataJsonList, group_id, "Insert") Then
-
-                If Not PublicFunctions.TransUsers_logs("2157", "tblgroup_permissons", "ادخال", _sqlconn, _sqltrans) Then
-                    success = False
-                Else
+                If save_operations(opDataJsonList, group_id) Then
+                    If Not PublicFunctions.TransUsers_logs("2157", "tblgroup_permissons", "ادخال", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
                     success = True
+                Else
+                    success = False
+
                 End If
-                success = True
+
             Else
-                success = False
+                    success = False
 
             End If
 
@@ -96,7 +101,30 @@ Public Class group_permissons
     End Function
 
 #End Region
+#Region "save_operations"
+    ''' <summary>"
+    ''' Save About images into db 
+    ''' </summary>
+    Private Function save_operations(ByVal permDataJsonList As List(Of Object), ByVal group_id As String) As Boolean
+        Try
+            DBManager.ExcuteQuery("delete from tbl_group_operations where  group_perm_id ='" + group_id.ToString + "'")
+            For Each permJSON As Object In permDataJsonList
 
+                Dim dictperm As New Dictionary(Of String, Object)
+                Dim id = ""
+                dictperm("form_operation_id") = permJSON
+                dictperm("group_perm_id") = group_id
+                If Not PublicFunctions.TransUpdateInsert(dictperm, "tbl_group_operations", id, _sqlconn, _sqltrans) Then
+                    Return False
+                End If
+            Next
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+#End Region
 #Region "get_data"
     ''' <summary>
     ''' Save  Type
@@ -186,6 +214,13 @@ Public Class group_permissons
             If dtmenu.Rows.Count <> 0 Then
                 Dim s2 = PublicFunctions.ConvertDataTabletoString(dtmenu)
                 Names.Add(s2)
+            Else
+                Names.Add("0")
+            End If
+            Dim dtops = DBManager.Getdatatable("Select form_operation_id from tbl_group_operations where group_perm_id=" + editItemId.ToString)
+            If dtops.Rows.Count <> 0 Then
+                Dim s3 = PublicFunctions.ConvertDataTabletoString(dtops)
+                Names.Add(s3)
             Else
                 Names.Add("0")
             End If
@@ -316,6 +351,7 @@ Public Class group_permissons
 
 #End Region
 
+
 #Region "superAdmin"
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
@@ -399,6 +435,45 @@ Public Class group_permissons
             Return "False|لم يتم الحفظ"
         End Try
     End Function
+#End Region
+
+
+#Region "get_form_operations"
+    ''' <summary>
+    ''' get  Type data from db when update
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_form_operations() As String()
+        Dim user_id = LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+            Dim super = superAdmin()
+
+            dt = DBManager.Getdatatable("SELECT  * from tbl_form_operations where active=1 order by parent ")
+
+            If dt.Rows.Count <> 0 Then
+                Dim str As String = PublicFunctions.ConvertDataTabletoString(dt)
+
+                Names.Add("1")
+                Names.Add(str)
+
+                Return Names.ToArray
+            Else
+                Names.Add("0")
+                Names.Add(" No Results were Found!")
+
+                Return Names.ToArray
+            End If
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+    End Function
+
 #End Region
 
 End Class

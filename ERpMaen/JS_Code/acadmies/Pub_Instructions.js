@@ -39,17 +39,17 @@ function saveInstruction() {
 
 
     try {
-        debugger
+        
         if (checkRequired("divForm") == 1) {
 
             alert("يرجى ادخال البيانات المطلوبة");
         } else {
-            
+            debugger
                     var basicData = generateJSONFromControls("divForm");
 
-                    var Id = "";
+            var instructionId = $("#lblInstruction_id").html();
                     $("#SavedivLoader").show();
-            Pub_InstructionsCls.Save(Id, Pub_date_m, Pub_date_hj,basicData, function (val) {
+            Pub_InstructionsCls.Save(instructionId, Pub_date_m, Pub_date_hj,basicData, function (val) {
                         if (val === true) {
 
                             $("#addInstruction").modal('hide');
@@ -240,41 +240,82 @@ function drawAllCourses() {
 //    }
 //}
 
-function searchCourses() {
-    try {
+//function searchCourses() {
+//    try {
 
 
-        var courseName = $("#txt_Search").val();
-        Pub_InstructionsCls.get_Courses(courseName, Pub_date_m, function (val) {
-            var data = "";
-            var arr1 = JSON.parse(val[1]);
-            CoursesList = arr1;
-            numPages = Math.ceil(CoursesList.length / records_per_page);
+//        var courseName = $("#txt_Search").val();
+//        Pub_InstructionsCls.get_Courses(courseName, Pub_date_m, function (val) {
+//            var data = "";
+//            var arr1 = JSON.parse(val[1]);
+//            CoursesList = arr1;
+//            numPages = Math.ceil(CoursesList.length / records_per_page);
 
-            var str = "";
-            for (var i = 0; i < (numPages + 2); i++) {
+//            var str = "";
+//            for (var i = 0; i < (numPages + 2); i++) {
 
-                if (i == 0) {
-                    str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
-                }
-                else if (i == (numPages + 1)) {
-                    str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
+//                if (i == 0) {
+//                    str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
+//                }
+//                else if (i == (numPages + 1)) {
+//                    str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
 
-                } else {
-                    str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
+//                } else {
+//                    str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
 
-                }
+//                }
+//            }
+//            $(".pagination").html(str);
+//            changePage(1);
+//        });
+
+
+//    } catch (err) {
+//        alert(err);
+//    }
+//}
+
+function deleteInstruct(instructId) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+       
+        Pub_InstructionsCls.Delete_instruction(instructId, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                drawAllCourses();
+
+            } else {
+                alert('لم يتم الحذف');
             }
-            $(".pagination").html(str);
-            changePage(1);
+
         });
-
-
-    } catch (err) {
-        alert(err);
     }
+
 }
 
+
+function EditInstruct(instID) {
+    debugger
+    $("#lblInstruction_id").html(instID);
+    Pub_InstructionsCls.Edit_Instruction(instID, function (val) {
+        if (val[0] == "1") {
+            
+
+            var data = JSON.parse(val[1]);
+            fillControlsFromJson(data[0]);
+           
+
+            $("#addInstruction").modal();
+            
+
+        }
+
+
+    });
+
+}
 
 function UploadComplete2(sender, args) {
 

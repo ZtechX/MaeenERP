@@ -144,7 +144,7 @@
                             <input  id="txt_Search" onkeyup="searchDiploma();" type="text" class="form-control" placeholder="بحث عن دبلوم" />
                         </div>
                         <div class="col-md-2">
-                              <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                              <% if ERpMaen.LoginInfo.getUserType <> 8 And ERpMaen.LoginInfo.get_form_operation("1") = True Then   %>
                             <div class="btn-group pull-left">
                                 <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addCourse">اضافة دبلوم <i class="fa fa-plus"></i></button>
 
@@ -165,7 +165,7 @@
 								<button type="button" class="btn btn-primary"  style="width:100px; float: right;" onclick=" drawCourses(1);">حالية</button>
 								<button type="button" class="btn btn-dark"  style="width:100px; float: right;" onclick=" drawCourses(2);">مكتملة</button>
                                  <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
-                                <button type="button" class="btn btn-info"  style="width:100px; float: right;" onclick=" drawCourses(4)">دوراتى</button>
+                                <button type="button" class="btn btn-info"  style="width:100px; float: right;" onclick=" drawCourses(4)">دبلوماتى</button>
                                  <% End If%>
  <br />
                                 <br />
@@ -209,8 +209,6 @@
                                     <asp:TextBox SkinID="form-control" required class="form-control" dbColumn="name" ClientIDMode="Static" ID="courseTitle" runat="server">
                                     </asp:TextBox>
 
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="courseTitle"
-                                        ErrorMessage="من فضلك أدخل عنوان الدبلوم  " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
 
                                 </div>
                             </div>
@@ -229,32 +227,40 @@
                             </div>
                                    <div class=" form-group ">
                                 <div class="col-md-3 col-sm-12">
-                                    <label>القسم </label>
+                                    <label class="label-required">القسم </label>
                                 </div>
 
                                 <div class="col-md-9 col-sm-12">
-                                    <asp:DropDownList dbcolumn="category_id" class="form-control" ClientIDMode="Static" ID="ddlcategory" runat="server">
+                                    <asp:DropDownList dbcolumn="category_id" required class="form-control" ClientIDMode="Static" ID="ddlcategory" runat="server">
                                     </asp:DropDownList>
                                     <br />
                                 </div>
                             </div>
 
 
-                         
-           
                                  </div>
-                              <div class="col-md-6"> <%--second col--%>
+                              <div class="col-md-6"> 
                            
-                                 
-                           
+                                   <div class=" form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label class="label-required">المنسق </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                    <asp:DropDownList dbcolumn="coordinator_id" required class="form-control" ClientIDMode="Static" ID="ddlcoordinator" runat="server">
+                                    </asp:DropDownList>
+                                    <br />
+                                </div>
+                            </div>
+
                           
                               <div class="form-group">
                                  <div class="col-md-3 col-sm-12">
-                                        <label > عدد الطلاب    </lable>
+                                        <label>سعة الدبلوم</label>
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);" dbcolumn="student_number" type="text" id="studentnum"
+                                            <input onkeypress="return isNumber(event);" placeholder="اجمالى عدد الطلاب" dbcolumn="student_number" type="text" id="studentnum"
                                                 class="form-control" runat="server" clientidmode="Static" />
                                           
                                     <br />
@@ -265,7 +271,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-3 col-sm-12">
-                                    <label for="Name" >تفاصيل الدورة </label>
+                                    <label for="Name" >تفاصيل الدبلوم </label>
 
                                 </div>
                                 <div class="col-md-9 col-sm-12">

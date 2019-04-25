@@ -23,6 +23,51 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents ToolkitScriptManager1 As Global.System.Web.UI.ScriptManager
     
     '''<summary>
+    '''dplm_subj_edit_lect control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_edit_lect As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_delete_lect control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_delete_lect As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_lect_absence control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_lect_absence As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_lect_file control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_lect_file As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_lect_homework control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_lect_homework As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''Lblsubject_id control.
     '''</summary>
     '''<remarks>
@@ -131,22 +176,22 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents ddlsubTrainer As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
-    '''Text2 control.
+    '''subject_FinalDegree control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text2 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents subject_FinalDegree As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
-    '''Text3 control.
+    '''subject_ActivityDegree control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text3 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents subject_ActivityDegree As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''subject_goal1 control.

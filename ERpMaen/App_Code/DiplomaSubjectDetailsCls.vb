@@ -752,21 +752,22 @@ Public Class DiplomaSubjectDetailsCls
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dt As DataTable
-            dt = DBManager.Getdatatable("delete from acd_student_degrees where type=2 and course_id=" + subjectID)
+            'dt = DBManager.Getdatatable("delete from acd_student_degrees where type=2 and course_id=" + subjectID)
 
-            Dim id = ""
+            'Dim id = ""
             Dim success2 As Boolean = True
             For Each item As Object In studentDegrees
-                Dim dictBasicDataJson As New Dictionary(Of String, Object)
-                dictBasicDataJson.Add("course_id", subjectID)
+                'Dim dictBasicDataJson As New Dictionary(Of String, Object)
+                'dictBasicDataJson.Add("course_id", subjectID)
 
-                dictBasicDataJson.Add("student_id", item("id"))
-                dictBasicDataJson.Add("final_degree", item("fdegree"))
-                dictBasicDataJson.Add("activity_degree", item("Acdegree"))
-                dictBasicDataJson.Add("type", "2")
-                dictBasicDataJson.Add("approved", True)
+                'dictBasicDataJson.Add("student_id", item("id"))
+                'dictBasicDataJson.Add("final_degree", item("fdegree"))
+                'dictBasicDataJson.Add("activity_degree", item("Acdegree"))
+                'dictBasicDataJson.Add("type", "2")
+                'dictBasicDataJson.Add("approved", True)
+                If DBManager.ExcuteQuery("UPDATE acd_student_degrees set  final_degree=" + item("fdegree").ToString() + ", activity_degree=" + item("Acdegree").ToString() + ", approved=1 where type=2 and course_id=" + subjectID + " and student_id=" + item("id").ToString()) <> -1 Then
 
-                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_student_degrees", id, _sqlconn, _sqltrans) Then
+                    'If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_student_degrees", id, _sqlconn, _sqltrans) Then
                     If Not PublicFunctions.TransUsers_logs("4203", "acd_student_degrees", "ادخال", _sqlconn, _sqltrans) Then
                         success = False
                     Else
@@ -1345,14 +1346,6 @@ Public Class DiplomaSubjectDetailsCls
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dictBasicDataJson As Dictionary(Of String, Object) = basicDataJson
-            Dim dt_user As DataTable
-
-            dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
-
-
-
-            'dictBasicDataJson.Add("course_id", CourseId)
-
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_diplome_subjects", Id, _sqlconn, _sqltrans) Then
                 If Not PublicFunctions.TransUsers_logs("4203", "acd_diplome_subjects", "تعديل", _sqlconn, _sqltrans) Then
@@ -1597,7 +1590,7 @@ Public Class DiplomaSubjectDetailsCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_course_comments.user_id,tblUsers.full_name as 'username',tblUsers.User_Image as 'suerImage', acd_course_comments.comment,acd_course_comments.date_hj , acd_course_comments.time from acd_course_comments join tblUsers on acd_course_comments.user_id=tblUsers.id where acd_course_comments.type=2 and acd_course_comments.course_id=" + CourseID)
+            dt = DBManager.Getdatatable("select  acd_course_comments.id,acd_course_comments.user_id,tblUsers.full_name as 'username',tblUsers.User_Image as 'suerImage', acd_course_comments.comment,acd_course_comments.date_hj , acd_course_comments.time from acd_course_comments join tblUsers on acd_course_comments.user_id=tblUsers.id where acd_course_comments.type=2 and acd_course_comments.course_id=" + CourseID)
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
                     Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
@@ -1622,7 +1615,78 @@ Public Class DiplomaSubjectDetailsCls
 
 #End Region
 
-#Region "get_data"
+
+
+
+#Region "Delete comment"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function Delete_comment(ByVal deleteItem As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            If PublicFunctions.DeleteFromTable(deleteItem, "acd_course_comments") Then
+                Names.Add("1")
+                Names.Add("تم الحذف بنجاح!")
+            Else
+                Names.Add("2")
+                Names.Add("لا يمكن الحذف!")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+            Names.Add("لا يمكن الحذف!")
+            Return Names.ToArray
+        End Try
+
+    End Function
+#End Region
+
+#Region "get_Halls"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_Halls(ByVal name As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select * from tblLock_up where type='HallNum' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id() + " order by id desc")
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+#End Region
+
+
+
+
+#Region "get_course"
     ''' <summary>
     ''' Save  Type
     ''' </summary>
@@ -1634,7 +1698,7 @@ Public Class DiplomaSubjectDetailsCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_diplome_subjects.id, acd_diplome_subjects.final_exam_degrees,acd_diplome_subjects.activity_degrees, acd_diplome_subjects.lecture_time ,tbllock_up.Description as 'subjectName', tbllock_up2.Description as'semster',acd_diplome_subjects.subject_id,acd_diplome_subjects.semster_id,acd_diplome_subjects.diplome_id,acd_diplome_subjects.created_at_hj,acd_diplome_subjects.trainer_id,tblUsers.full_name as 'trainerName', tblUsers.User_Image as 'trainerImage',acd_diplome_subjects.subject_goal from acd_diplome_subjects join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join tbllock_up as tbllock_up2 on acd_diplome_subjects.semster_id=tbllock_up2.id join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id where acd_diplome_subjects.id=" + subject_id)
+            dt = DBManager.Getdatatable("select acd_diplome_subjects.id, acd_diplome_subjects.final_exam_degrees,acd_diplome_subjects.activity_degrees, acd_diplome_subjects.lecture_time ,tbllock_up.Description as 'subjectName', acd_semester.name as'semster',acd_diplome_subjects.subject_id,acd_diplome_subjects.semster_id,acd_diplome_subjects.diplome_id,acd_diplome_subjects.created_at_hj,acd_diplome_subjects.trainer_id,tblUsers.full_name as 'trainerName', tblUsers.User_Image as 'trainerImage',acd_diplome_subjects.subject_goal from acd_diplome_subjects join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id  join acd_semester  on acd_diplome_subjects.semster_id=acd_semester.id join tblUsers on acd_diplome_subjects.trainer_id=tblUsers.id where acd_diplome_subjects.id=" + subject_id)
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
@@ -1673,7 +1737,7 @@ Public Class DiplomaSubjectDetailsCls
             Dim dt As New DataTable
 
             If LoginInfo.getUserType = 8 Then
-                dt = DBManager.Getdatatable("select final_degree ,activity_degree from acd_student_degrees where type=2 and course_id=" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
+                dt = DBManager.Getdatatable("select IsNull(final_degree,0) as 'final_degree' , IsNull(activity_degree,0) as 'activity_degree' from acd_student_degrees where approved=1 and  type=2 and course_id=" + course_id + " and student_id=" + LoginInfo.GetUser__Id())
 
             End If
 

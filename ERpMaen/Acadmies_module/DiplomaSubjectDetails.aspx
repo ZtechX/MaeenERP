@@ -172,6 +172,12 @@
                 </div>
             <section class="app-content">
                 <div class="row">
+                    <label hidden runat="server" id="dplm_subj_edit_lect"></label>
+                    <label hidden runat="server" id="dplm_subj_delete_lect"></label>
+                    <label hidden runat="server" id="dplm_subj_lect_absence"></label>
+                    <label hidden runat="server" id="dplm_subj_lect_file"></label>
+                    <label hidden runat="server" id="dplm_subj_lect_homework"></label>
+
                      <label style="display:none" id="Lblsubject_id" runat="server" ></label>
                        <label style="display:none" id="lblcode" runat="server" ></label>
                        <label style="display:none" id="LblDiplome_id" runat="server"></label>
@@ -199,7 +205,7 @@
                                     <span id="subject_title" > </span>
                                   </h3>
                                   <% if ERpMaen.LoginInfo.getUserType <> 8 Then
-                                          If ERpMaen.LoginInfo.get_form_operation("11") = True Or ERpMaen.LoginInfo.get_form_operation_group("11") Then
+                                          If ERpMaen.LoginInfo.get_form_operation("11") = True Or ERpMaen.LoginInfo.get_form_operation_group("11") = True Then
                                           %>
                                 <div class="btn-group pull-left">
   <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -263,10 +269,9 @@
                                             <ul>
 
                                                 <li>
-                                                    <span id="course_date" class="fa fa-calendar-check-o">
-                                                     
-                                                        <i class="zmdi zmdi-calendar-note" ></i>
-                                                     
+                                                   
+                                                    <span  class="fa fa-calendar-check-o" id ="course_date" >
+                                                       <i class="zmdi zmdi-calendar-note" ></i>
                                                         
                                                 </span>
                                                 </li>
@@ -294,8 +299,8 @@
                                         </div>
 
                                     </div>
-                                    <% if ERpMaen.LoginInfo.getUserType <> 8 Then
-                                If ERpMaen.LoginInfo.get_form_operation("18") = True Or ERpMaen.LoginInfo.get_form_operation_group("18") Then
+                                    <% 
+                                        If ERpMaen.LoginInfo.get_form_operation("18") = True Or ERpMaen.LoginInfo.get_form_operation_group("18") = True Then
                                           %>
                                     <div class="inner">
                                         <div class="order-desc row">
@@ -351,7 +356,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <% End if
+                                    <%
                                         End If %> 
                                     <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
                                     <div class="inner" style="display:none;">
@@ -538,8 +543,8 @@
                                                                     <div class="table-responsive">
                                                                         <table class="table table-bordered table-hover">
                                                                             <tr>
-                                                                                <th> الدرجة النهائية </th>
-                                                                                <th> درجة النشاط</th>
+                                                                                <th>  درجة الاختبار النهائي </th>
+                                                                                <th>  درجة نصف العام</th>
                                                                                
 
                                                                             </tr>
@@ -831,7 +836,10 @@
 
                                     
                                       <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
-
+                                                 <%
+                                            If ERpMaen.LoginInfo.get_form_operation("45") = True Or ERpMaen.LoginInfo.get_form_operation_group("45") Then
+                                                         %>
+                        
                                     <div class="inner">
                                         <div class="add-hint">
                                             
@@ -871,8 +879,10 @@
                                        
                                         </div>
                                      
-
-
+                                    <% End If %>
+                                     <%
+                                            If ERpMaen.LoginInfo.get_form_operation("49") = True Or ERpMaen.LoginInfo.get_form_operation_group("49") Then
+                                                         %>
                                     <div class="inner" >
                                         <div class="add-hint">
                                             <div class="hint-head side_head">
@@ -898,14 +908,16 @@
 
 
                                             </div>
-
+                                                <%
+                                            If ERpMaen.LoginInfo.get_form_operation("50") = True %>
                                             
                                             <button type="button" class="btn btn-purple btn-hint" data-toggle="modal" data-target="#homeworks">اضافة واجب </button>
-                                        </div>
+                                       <% End if %>
+                                                </div>
                                             </div>
                                     </div>
 
-
+                                     <% End If %>
                                                                         
                                     <div class="inner" style="display:none;">
                                         <div class="add-hint">
@@ -942,7 +954,9 @@
 
 
                                      
-
+                                         <%
+                                            If ERpMaen.LoginInfo.get_form_operation("55") = True Or ERpMaen.LoginInfo.get_form_operation_group("55") Then
+                                                         %>
                                     <div class="inner">
                                         <div class="add-hint">
                                             <div class="hint-head side_head">
@@ -959,16 +973,18 @@
 
                                                     </p>
                                                 </div>
-                                                 <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                                                 <% if ERpMaen.LoginInfo.getUserType <> 8 And ERpMaen.LoginInfo.get_form_operation("56") = True Then   %>
                                                 <button type="button" class="btn btn-purple btn-hint" data-toggle="modal" data-target="#addNote">اضافة ملاحظة </button>
                                              <% End If %>
                                             </div>
                                         </div>
                                     </div>
-
+                                            <% End If %>
                                     
 
-
+                                       <%
+                                            If ERpMaen.LoginInfo.get_form_operation("59") = True Or ERpMaen.LoginInfo.get_form_operation_group("59") Then
+                                                         %>
                                     <div class="inner">
                                         <div class="add-hint">
                                             <div class="hint-head side_head">
@@ -985,12 +1001,13 @@
 
                                                     </p>
                                                 </div>
-                                                 <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                                                 <% if ERpMaen.LoginInfo.getUserType <> 8 And ERpMaen.LoginInfo.get_form_operation("60") = True   %>
                                                 <button type="button" class="btn btn-purple btn-hint" data-toggle="modal" data-target="#activity_edit">اضافة انشطة </button>
                                              <% End If %>
                                             </div>
                                         </div>
                                     </div>
+                                     <% End If %>
                                 </div>
                             </div>
                         </div>
@@ -1017,7 +1034,7 @@
                                 </div>
 
                                 <div class="col-md-9 col-sm-12">
-                                    <asp:DropDownList dbcolumn="subject_id" class="form-control" ClientIDMode="Static" ID="ddlsubject" runat="server">
+                                    <asp:DropDownList dbcolumn="subject_id" class="form-control" required ClientIDMode="Static" ID="ddlsubject" runat="server">
                                     </asp:DropDownList>
                                    
                                 </div>
@@ -1041,7 +1058,7 @@
                                 </div>
 
                                 <div class="col-md-9 col-sm-12">
-                                    <asp:DropDownList dbcolumn="semster_id" class="form-control" ClientIDMode="Static" ID="ddlsemster" runat="server">
+                                    <asp:DropDownList dbcolumn="semster_id" class="form-control" ClientIDMode="Static"  required ID="ddlsemster" runat="server">
                                     </asp:DropDownList>
                                    
                                 </div>
@@ -1071,7 +1088,7 @@
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);" dbcolumn="final_exam_degrees" type="text" id="Text2"
+                                            <input onkeypress="return isNumber(event);" dbcolumn="final_exam_degrees"  required type="text" id="subject_FinalDegree"
                                                 class="form-control" runat="server" clientidmode="Static" />
                                           
                                     <br />
@@ -1084,7 +1101,7 @@
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
-                                            <input onkeypress="return isNumber(event);" dbcolumn="activity_degrees" type="text" id="Text3"
+                                            <input onkeypress="return isNumber(event);" dbcolumn="activity_degrees" required  type="text" id="subject_ActivityDegree"
                                                 class="form-control" runat="server" clientidmode="Static" />
                                  
                                         </div>
@@ -1471,7 +1488,7 @@
             </div>
 
               <div class="modal" id="AddHall" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="width:350px;">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

@@ -130,17 +130,21 @@ function drawConditionsTable() {
                             file_nm = path.split("Acadmies_module/images/")[1];
                         }
                     }
-                    data = data + `
-                                                     <tr>
-                                                      <td>${element.condition} </td>
-                                                     <td>
-                                                       <li>
+                    var icon = "";
+                    if (file_nm != "") {
+                        icon = `  <li>
                                                         <a href="../${element.image}" download>
                                                             <i class="fa fa-download"></i> 
 
                                                         </a>
                                                         <span>${file_nm}</span>
-                                                    </li>
+                                                    </li>`
+                    }
+                    data = data + `
+                                                     <tr>
+                                                      <td>${element.condition} </td>
+                                                     <td>
+                                                       ${icon}
 
                                                      </td>
                                                       

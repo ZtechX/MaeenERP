@@ -453,22 +453,26 @@ function drawConditionsTable() {
                             file_nm = path.split("Acadmies_module/images/")[1];
                         }
                     }
+                    var icon = "";
+                    if (file_nm != "") {
+                        icon = `   <li> <a href="../${element.image}" download>
+                                                        <i class="fa fa-download"></i>  
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li>  `
+                    }
+                   
                     data = data + `
                                                      <tr>
                                                       <td>${element.condition} </td>
                                                      <td>
-                                                       <li>
-                                                        <a href="../${element.image}" download>
-                                                            <i class="fa fa-download"></i>   
-
-                                                        </a>
-                                                        <span>${file_nm}</span>
-                                                    </li>
+                                                      ${icon}
 
                                                      </td>
                                                        <td>
 
-                                                          <div class="btn-group pull-left" style="position:absolute">
+                                                          <div class="btn-group pull-left" style="align:center; display: block; margin: auto;">
                                                   ${del_btn}
                                                       
                                                      </div>
@@ -671,19 +675,19 @@ function changePage(page) {
 function Studentlistview() {
     try {
         debugger
-
         var diplomeID = ($("#Lbldeploma_id").html());
         Diploma_CoursesCls.get_StudentList(diplomeID, function (val) {
-
-
             var data = "";
-
-            console.log(val);
+            var studid = -1;
             var arr1 = JSON.parse(val[1]);
-
             arr1.forEach(function (element) {
                 //طلبات الطلاب
-
+                var stdID = element.student_id;
+               
+                var td_student = "";
+                var td_files = "";
+                var td_request = "";
+                var td_action = "";
                 var file_nm = "";
                 var path = element.registerFiles;
                 if (path != "" && path != null) {
@@ -691,32 +695,21 @@ function Studentlistview() {
                         file_nm = path.split("Acadmies_module/images/")[1];
                     }
                 }
-
-                data = data + `
-                                <tr >
-                                    <td><label id="${element.student_id}" > ${element.studentName}</label> </td>
-                                    <td><label id="notes_student"> ${element.notes}</label> </td>
-                                       <td>
-                                                   <li>
-                                                        <a id="registerFiles" href="../${element.registerFiles}" download>
-                                                            <i class="fa fa-download"></i>   
-
-                                                        </a>
-                                                        <span>${file_nm}</span>
-                                                    </li> </td>
-                                                            <td>
-                                               
-                                                  <select  style="width:100px;" id="action" >
-                                                    <option value="0">رفض</option>
-                                                    <option value="1">قبول</option>
-                                                      </select>
-                                                     
-                                                            </td>
-                                 
-                                </tr>
-
-                                                                     
-`;
+                if (stdID != studid) {
+                    data += td_student + td_request + td_files + td_action;
+                    data = data + " </tr >";
+                    studid = stdID;
+                    data = data + " <tr >";
+                    td_student = `<td><label id="${ element.student_id } > ${element.studentName}</label> </td>`;
+                    td_request = ` <td><label id='notes_student'> ${element.notes}</label> </td>`;
+                    td_action = `<td><select  style="width: 100px; " id="action" > <option value="0">رفض</option><option value="1">قبول</option> </select></td>`;
+                    td_files = "<td>";
+                } else {
+                    td_files += `<li><a id="registerFiles" href="../${element.registerFiles}" download>
+                            <i class="fa fa-download"></i></a><span>${file_nm}</span> </li> `;
+                }
+               
+                         
             });
 
             $("#action_courseStudents").html(data);

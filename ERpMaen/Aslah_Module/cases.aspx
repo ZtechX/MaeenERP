@@ -788,13 +788,26 @@
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label class="label-required">
-                                                                        العمر  </lable>
+                                                                        تاريخ الميلاد   </label>
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" required dbcolumn="age" type="text" id="age_son"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
 
+                                                                        <div class="fancy-form" id="divdate6">
+                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="bod_date_m" ID="lblbod_date_m"></asp:Label>
+                                                                            <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="bod_date_h" ID="lblbod_date_h"></asp:Label>
+                                                                            <uc1:HijriCalendar runat="server" ID="HijriCalendar6" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div style="display:none"  class="col-md-12 form-group ">
+                                                                    <div class="col-md-3 col-sm-12">
+                                                                        <label class="label-required">
+                                                                        العمر  </lable>
+                                                                    </div>
+                                                                    <div class="col-md-9 col-sm-12">
+                                                                        <input value="1" onkeypress="return isDecimal(this);" readonly required dbcolumn="age" type="text" id="age_son"
+                                                                            class="form-control" runat="server" clientidmode="Static" />
                                                                         <br />
                                                                     </div>
                                                                 </div>
@@ -840,7 +853,7 @@
                                                                             <tr>
 
                                                                                 <th>الاسم</th>
-                                                                                <th>العمر</th>
+                                                                                <th>تاريخ الميلاد</th>
                                                                                 <th>حذف/مشاهدة</th>
 
                                                                             </tr>

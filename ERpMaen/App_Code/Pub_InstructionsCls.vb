@@ -221,18 +221,44 @@ Public Class Pub_InstructionsCls
 
 #End Region
 
+#Region "Delete_instruction"
+    ''' <summary>
+    ''' </summary>
+    <WebMethod()>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function Delete_instruction(ByVal deleteItem As String) As String()
 
-#Region "Edit"
+        Dim Names As New List(Of String)(10)
+        Try
+            If PublicFunctions.DeleteFromTable(deleteItem, "acd_Pub_Instructions") Then
+                Names.Add("1")
+                Names.Add("تم الحذف بنجاح!")
+            Else
+                Names.Add("2")
+                Names.Add("لا يمكن الحذف!")
+
+            End If
+            Return Names.ToArray
+        Catch
+            Names.Add("2")
+            Names.Add("لا يمكن الحذف!")
+            Return Names.ToArray
+        End Try
+
+    End Function
+#End Region
+
+#Region "Edit_Instruction"
     ''' <summary>
     ''' get  Type data from db when update
     ''' </summary>
     <WebMethod()>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function Edit(ByVal editItemId As String) As String()
+    Public Function Edit_Instruction(ByVal editItemId As String) As String()
 
         Dim Names As New List(Of String)(10)
         Try
-            Dim str As String = PublicFunctions.GetDataForUpdate("acd_courses", editItemId)
+            Dim str As String = PublicFunctions.GetDataForUpdate("acd_Pub_Instructions", editItemId)
             Names.Add("1")
             Names.Add(str)
             Return Names.ToArray

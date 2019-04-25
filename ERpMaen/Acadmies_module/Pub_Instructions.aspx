@@ -308,6 +308,7 @@
 
         <section>
             <div class="row">
+                 <label style="display:none" id="lblInstruction_id" ></label>
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <div class="white-block row">
                         <div class="col-md-4">
@@ -342,22 +343,7 @@
 				<ul class="event-list" id="Instructions-list">
 				
 
-					<%--<li>
-						<time datetime="2014-07-20 0000">
-							<span class="day">8</span>
-							<span class="month">Jul</span>
-							<span class="year">2014</span>
-							<span class="time">12:00 AM</span>
-						</time>
-						<div class="info">
-							<h2 class="title">One Piece Unlimited World Red</h2>
-							<p class="desc">Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-							<ul>
-								<li style="width:50%;"><a href="#website"><span class="fa fa-file"></span> Website</a></li>
-							</ul>
-						</div>
-						
-					</li>--%>
+					
 
 				</ul>
 			</div>

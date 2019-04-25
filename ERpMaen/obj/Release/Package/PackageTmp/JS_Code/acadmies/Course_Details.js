@@ -15,7 +15,7 @@ $(function () {
 
         getlectureCode();
         GetCourses();
-        drawFinanceStudent();
+      
         drawLecturesTable();
         drawStudentTable();
         drawNotes();
@@ -26,12 +26,12 @@ $(function () {
         drawExams();
         drawCourseFile();
         drawStudentCertificateTable();
-     
+        drawCourseLinksTable();
         drawstudentHomeworkTable();
         drawStudentfinanceforAdmin();
         drawstudentExamsTable();
         drawstudentcourseDegreesTable();
-       
+        drawFinanceStudent();
         setInterval(function () {
             drawCourseComments();
         }, 10000);
@@ -40,6 +40,7 @@ $(function () {
         alert(err);
     }
 });
+
 
 function saveCourse() {
     
@@ -623,11 +624,11 @@ function drawpublicDegreeTable() {
                                         <label id=" ${element.student_id}"> ${element.studentname}</label>
                                     </td>
                                     <td>
-               <input id="finaldegee" type="text" value=" ${element.final}"   />
+               <input onkeypress="return isNumber(event);" id="finaldegee" type="text" value=" ${element.final}"   />
                                    
                                     </td>
                                     <td>
-               <input id="activitydegee" type="text" value=" ${element.activityDegree}" />
+               <input  onkeypress="return isNumber(event);" id="activitydegee" type="text" value=" ${element.activityDegree}" />
                                     
                                     </td>
                                 </tr> `
@@ -803,22 +804,21 @@ function SaveLec() {
 
         setRequired_time("divstartTime");
         setRequired_Date("divdate1");
-        //var check = checkRequired("divFormTable");
+   
 
         if (checkRequired("divFormTable") == 1) {
             alert("يرجى ادخال البيانات المطلوبة");
 
         }
         else {
-          // $("#SavedivLoader").show();
-
+         
             $("#dateLec_m").val($("#divdate1 #txtDatem").val());
             $("#dateLec_hj").val($("#divdate1 #txtDateh").val());
 
 
             var CourseId =$("#Lblcourse_id").html();
             var lectureID = $("#LblLecture_id").html();
-            //var id = "";
+           
 
             var basicData = generateJSONFromControls("order_addLec");
 
@@ -885,7 +885,7 @@ function SaveEvalution() {
                     alert("تم الحفظ بنجاح");
                     $("#courseEvalution").modal('hide');
                     resetDivControls("divformCourseEvalution");
-                    drawLecturesTable();
+                   
 
 
 
@@ -1053,31 +1053,44 @@ function addfinancial() {
 
         }
         else {
-            $("#SavedivLoader").show();
-            var CourseId = ($("#Lblcourse_id").html());
-           
-            var basicData = generateJSONFromControls("divformstudentFinanc");
 
-            var Id = "";
-           
-            courseDetailsCls.Savefinanc(Id, CourseId, Pub_date_m, Pub_date_hj, basicData, function (val) {
-                if (val == true) {
-                    $("#SavedivLoader").hide();
-                    // debugger;
-                    alert("تم الحفظ بنجاح");
-                    drawFinanceStudent();
-                    $("#add_Financial").modal('hide');
-                    drawCourseFile();
-                    resetDivControls("divformstudentFinanc");
+            var course_Price = ($("#course_price").html());
+            var rest_money = ($("#Rest_money").html());
+            var studentAmount = ($("#amount").val());
+            if (studentAmount <= course_Price && studentAmount <= rest_money) {
+                
+                $("#SavedivLoader").show();
+                var CourseId = ($("#Lblcourse_id").html());
+
+                var basicData = generateJSONFromControls("divformstudentFinanc");
+
+                var Id = "";
 
 
 
-                } else {
-                    alert("لم يتم الحفظ");
-                }
+                courseDetailsCls.Savefinanc(Id, CourseId, Pub_date_m, Pub_date_hj, basicData, function (val) {
+                    if (val == true) {
+                        $("#SavedivLoader").hide();
+                        // debugger;
+                        alert("تم الحفظ بنجاح");
+                        drawFinanceStudent();
+                        $("#add_Financial").modal('hide');
+                        drawCourseFile();
+                        resetDivControls("divformstudentFinanc");
 
 
-            });
+
+                    } else {
+                        alert("لم يتم الحفظ");
+                    }
+
+
+                });
+            }
+            else {
+                alert("القيمة  المضافه اكبر من سعر الدورة")
+            }
+
         }
 
 
@@ -1103,13 +1116,13 @@ function addCondition() {
             var basicData = generateJSONFromControls("divFormcondition");
 
             var Id = "";
-            //console.log(basicData);
+           
         
-            console.log( $("#fileURL").val());
+          //  console.log( $("#fileURL").val());
             courseDetailsCls.SaveCondition(Id, CourseId, basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
-                   // debugger;
+                   
                     alert("تم الحفظ بنجاح");
                     $("#order_addcondition").modal('hide');
                     drawConditionsTable();
@@ -1235,61 +1248,7 @@ function saveCertificate() {
     }
 }
 
-function drawCourseLinks() {
-    
-    //روابط مفيدة
-    try {
 
-        var CourseId = ($("#Lblcourse_id").html());
-        courseDetailsCls.get_courseLinks(CourseId, function (val) {
-
-
-            var data = "";
-
-            if (val[0] == 1) {
-                var arr1 = JSON.parse(val[1]);
-
-                arr1.forEach(function (element) {
-
-
-
-                    data = data + `
-                     <ul>
-
-                                                            <li>
-                                                                <div class="user">
-                                                                    <div class="usr-img">
-                                                                        <img  class="avatar" src="${element.suerImage}">
-                                                                    </div>
-                                                                    <div class="usr-data">
-                                                                        <h3>
-                                                                            <a href="#"> ${element.username}</a>
-                                                                        </h3>
-                                                                          <span>
-                                                                        <i class="zmdi zmdi-calendar"></i>
-                                                                      ${element.date_hj}
-                                                               
-                                                                </span>
-                                                            <span> <h3>
-                                                                <a href="${element.URL}"> ${element.title}</a>
-                                                                        </h3></span>
-                                                                        <p>${element.notes} </p>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-    </u>
-
-
-    `;
-                });
-
-            }
-            $("#divformLinks").html(data);
-        });
-    } catch (err) {
-        alert(err);
-    }
-}
 
 function addNewlink() {
 
@@ -1312,11 +1271,10 @@ function addNewlink() {
                 if (val == true) {
                     debugger
                     alert("تم الحفظ بنجاح");
-
+                    drawCourseLinksTable();
                     resetDivControls("divFormAddLinks");
                     $("#addLinks_modal").modal('hide');
-                    drawCourseLinks();
-
+                   
 
 
                 } else {
@@ -1857,7 +1815,7 @@ function drawLecturesTable() {
         courseDetailsCls.get_LectureTable(CourseId, function (val) {
           
             var data = "";
-            console.log(val);
+           
             if (val[0] == 1) {
                 var arr1 = JSON.parse(val[1]);
 
@@ -1918,10 +1876,10 @@ function drawLecturesTable() {
                     else {
                         switch (element.absence ) {
                             default:
-                                text = "<i class='success fa fa-check'><i/>";
+                                text = "<i class='success fa fa-check'> </i>" +  " "+"حاضر";
                                 break;
                             case true:
-                                text = "<i class=' danger fa fa-times'><i/>";
+                                text = "<i class=' danger fa fa-times'></i>" +"  غائب ";
                                 break;
                             //case false:
                             //    text = "<i class='danger fa fa-times'><i/>";
@@ -2010,7 +1968,7 @@ function drawstudentHomeworkTable() {
                                                        </td>
                                                         <td> ${degree} </td>
                                                                      
-                                                                                <td> done </td>
+                                                                                <td> تم الحل </td>
                                                    
 
                                                                             </tr>
@@ -2097,7 +2055,7 @@ function drawstudentExamsTable() {
                                                        
                                                        </td>
                                                   <td> ${dgr}</td>
-                                                                                <td> done</td>
+                                                                                <td> تم الحل</td>
                                                                         
                                                                      
 
@@ -2187,6 +2145,12 @@ function drawCourseComments() {
 
                                                         <li>
                                                             <div class="user">
+                                                        <div class="btn-group pull-left">
+                                                      <button type="button"  class="btn btn-primary btn-sm" onclick="Deleteusr_comment(${element.id});">
+                                                        حذف
+                                                          <i class="fa fa-trash"></i>
+                                                      </button>
+</div>
                                                                 <div class="usr-img">
                                                                     <img src="${element.image}">
                                                                 </div>
@@ -2199,8 +2163,9 @@ function drawCourseComments() {
                                                                       ${element.date_hj}
                                                             <i class="zmdi zmdi-calendar"></i>
                                                                       ${element.time}
+                                                                 
                                                                 </span>
-                                                                    <p>${element.comment} </p>
+                                                                    <p>${element.comment} </p> 
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -2242,11 +2207,11 @@ function SearchStudent() {
                                         <label id=" ${element.student_id}"> ${element.studentname}</label>
                                     </td>
                                     <td>
-               <input id="finaldegee" type="text" value=" ${element.final}"   />
+               <input onkeypress="return isNumber(event);" id="finaldegee" type="text" value=" ${element.final}"   />
                                    
                                     </td>
                                     <td>
-               <input id="activitydegee" type="text" value=" ${element.activityDegree}" />
+               <input onkeypress="return isNumber(event);" id="activitydegee" type="text" value=" ${element.activityDegree}" />
                                     
                                     </td>
                                 </tr> `
@@ -2326,6 +2291,69 @@ function drawStudentCertificateTable() {
     }
 }
 
+
+
+
+function drawCourseLinksTable() {
+    try {
+        debugger
+        var CourseId = ($("#Lblcourse_id").html());
+        courseDetailsCls.get_courseLinks(CourseId, function (val) {
+
+
+            var data = "";
+         
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+                    
+                    data = data + `
+                                                     <tr>
+                                                     
+                                                     <td>
+                                                         <a href="${element.URL}"> ${element.title}</a>
+                                                                      
+                                                      
+                                                     </td>
+
+                                         <td><p>${element.notes}</p></td>
+                                                       <td>
+                                                          <div class="btn-group pull-left" style="position:absolute">
+                                                        <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                                   <i class="fa fa-cogs"></i>
+
+                                                                </button>
+                                                                <ul  class="dropdown-menu">
+
+                                                                 <li>
+                                                                                            <a   onclick="Delete_Link(${element.id});">
+                                                                                                حذف
+                                                                                            </a>
+                                                                                                    </li>
+                                                  
+                                                      </ul>
+                                                     </div>
+                                                           </td>
+
+                                                   
+
+                                                                            </tr>
+                 
+                                                                               
+                                                                      
+`;
+                });
+
+
+            }
+            $("#course_Links").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
 
 
 
@@ -2565,7 +2593,7 @@ function drawStudentTable() {
 
                                                                                                <li>
                                                                                             <a   data-toggle="modal" href="#certificateModal" onclick="Setstudentid(${element.student_id});">
-                                                                                                اضافة شهادة 
+                                                                                                ارفاق شهادة 
                                                                                             </a>
                                                                                                     </li>
                                                                                                 </ul>
@@ -2638,6 +2666,11 @@ function drawStudentfinanceforAdmin() {
                                                   <label>${element.amount} </label>
                                                      
                                                             </td>
+                                                  <td>
+
+                                                  <label>${element.date_hj} </label>
+                                                     
+                                                            </td>
                                                       <td>
                                                        <li>
                                                         <a href="../${element.image}" download>
@@ -2646,9 +2679,9 @@ function drawStudentfinanceforAdmin() {
                                                         </a>
                                                         <span>${file_nm}</span>
                                                     </li>
-                                    <td> ${status}</td>
+                                          </td>
+                                    <td> <label>${status}</label></td>
 
-                                                     </td>
                                                          <td>
                                                              <div class="btn-group pull-left"  style="position:absolute; margin-bottom:5px;">
                                                                                         <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -2984,6 +3017,7 @@ function drawFinanceStudent() {
     try {
         debugger
         var CourseId = ($("#Lblcourse_id").html());
+      
         courseDetailsCls.get_StudentFnance(CourseId, function (val) {
 
             var data = "";
@@ -2992,10 +3026,15 @@ function drawFinanceStudent() {
                 var check = ""
                 var arr1 = JSON.parse(val[1]);
                 var total = 0;
+                var Rest = arr1[0].price;
                 arr1.forEach(function (element) {
+                    var course_price = element.price;
                     if (element.approved == 1) {
+                       
                         check = "  تم تاكيد المبلغ "
                         total = total + element.amount;
+                        Rest = course_price - total;
+                        
                     }
                     else if (element.approved == 2) {
                         check = "  لم يتم تاكيد المبلغ "
@@ -3028,6 +3067,7 @@ function drawFinanceStudent() {
 
             $("#financestudent").html(data);
             $("#total_money").html(total);
+            $("#Rest_money").html(Rest);
         });
     }
     catch (err) {
@@ -3536,6 +3576,46 @@ function DeleteStudent(Studentid) {
 
             } else {
                 showErrorMessage('لم يتم الحذف');
+            }
+
+        });
+    }
+
+}
+
+function Delete_Link(link_Id) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+        // debugger
+        courseDetailsCls.Delete_Link(link_Id, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                drawCourseLinksTable();
+
+            } else {
+                alert('لم يتم الحذف');
+            }
+
+        });
+    }
+
+}
+
+function Deleteusr_comment(commId) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+        // debugger
+        courseDetailsCls.Delete_comment(commId, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                drawCourseComments();
+
+            } else {
+                alert('لم يتم الحذف');
             }
 
         });

@@ -37,9 +37,8 @@ Public Class trainers
             If Page.IsPostBack = False Then
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
                 '  
-
-                'Dim clsapprove_type As New clsFillComboByDataSource("select * from tblLock_up where type='spec' and IsNull(Deleted,0)=0", "Description", "id", "")
-                'clsapprove_type.SetComboItems(ddlspecial_id, "", True, "--اختر--", False)
+                Dim clsapprove_gender As New clsFillComboByDataSource("select * from tblLock_up where type='gen' and IsNull(Deleted,0)=0 and comp_id=" + LoginInfo.GetComp_id(), "Description", "id", "")
+                clsapprove_gender.SetComboItems(ddlGender, "", True, "--اختر--", False)
 
                 'LoginInfo.CheckPermisionsNew(cmdAdd, cmdUpdate, cmdDelete, Me.Page, UserId, lblFormName, DynamicTable)
 
