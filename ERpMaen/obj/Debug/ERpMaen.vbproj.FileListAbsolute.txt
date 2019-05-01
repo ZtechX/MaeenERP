@@ -640,4 +640,3 @@ E:\DotNet\MaeenERP\ERpMaen\obj\Debug\ERpMaen.vbproj.CopyComplete
 E:\DotNet\MaeenERP\ERpMaen\obj\Debug\ERpMaen.dll
 E:\DotNet\MaeenERP\ERpMaen\obj\Debug\WebForms_Basic.xml
 E:\DotNet\MaeenERP\ERpMaen\obj\Debug\ERpMaen.pdb
-E:\DotNet\MaeenERP\ERpMaen\obj\Debug\ERpMaen.vbprojAssemblyReference.cache

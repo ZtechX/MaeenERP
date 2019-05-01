@@ -38,8 +38,6 @@ Public Class DiplomaCourses
                 Dim UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
 
 
-
-
                 Dim code = Request.QueryString("code")
                 lbldiplomeCode.InnerHtml = code
                 Dim dt = DBManager.Getdatatable(" select  acd_diplomes.id,acd_diplomes.name from acd_diplomes where acd_diplomes.code='" + code.ToString + "'")
@@ -79,6 +77,10 @@ Public Class DiplomaCourses
 
                 Dim clsapprove_semster As New clsFillComboByDataSource("select id , name from acd_semester where  comp_id=" + LoginInfo.GetComp_id(), "name", "id", "")
                 clsapprove_semster.SetComboItems(ddlsemster, "", True, "--اختر--", False)
+
+
+                Dim clsapprove_subjectsemster As New clsFillComboByDataSource("select id , name from acd_semester where  comp_id=" + LoginInfo.GetComp_id(), "name", "id", "")
+                clsapprove_subjectsemster.SetComboItems(ddlsubject_Semester, "", True, "--اختر--", False)
 
                 Dim clsapprove_semster2 As New clsFillComboByDataSource("select id , name from acd_semester where  comp_id=" + LoginInfo.GetComp_id(), "name", "id", "")
                 clsapprove_semster2.SetComboItems(ddlsemster2, "", True, "--اختر--", False)
@@ -138,7 +140,9 @@ Public Class DiplomaCourses
                     Prepare_Sheet(fu)
 
                     CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
-
+                Case "fuPhoto1"
+                    fu = fuPhoto1
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
 
             End Select
             ClearContents(sender)

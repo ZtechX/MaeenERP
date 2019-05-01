@@ -1,6 +1,5 @@
 ﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="ERpMaen.SiteMaster" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -83,11 +82,13 @@
      <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/vfs_fonts.js")%>"></script>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/jquery.dataTables.min.css")%>"></script>
      <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/buttons.dataTables.min.css")%>"></script>
-       <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/calendar.js")%>"></script>
-        <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/hijri-date.js")%>"></script>
-        <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/bootstrap.min.js")%>"></script>
-              <link href="css/calendar.css" rel="stylesheet" type="text/css" />
-
+      <%-- <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/calendar.js")%>"></script>
+        <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/hijri-date.js")%>"></script>--%>
+    <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/bootstrap.min.js")%>")%></script>
+  <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/customCalender/CustomerCalendar.js")%>")%></script>
+      
+    <%-- <link href="css/calendar.css" rel="stylesheet" type="text/css" />--%>
+   
     <style>
          .error {
 	border:#bf6464 2px dashed !important;
@@ -191,6 +192,7 @@
         $(document).ready(function () {
             checkLanguage();
             $(".access_btn_User").click(function () {
+                
                 $(".toggle_box_User").slideToggle();
             });
         });
@@ -634,11 +636,10 @@
                $("#cssmenu ul").removeClass("hidden-xs");
            }
       </script>
+ 
     <%--<body>--%>
     <form id="form1" runat="server" enctype="multipart/form-data" method="post">
-        <div class="fancy-form" id="CurrentDate" style="display:none;"> 
-                                <uc1:HijriCalendar runat="server" ID="HijriCalendar1" />  
-                                    </div>
+       
         <div class="zeromarg_pad col-md-12 ">
             <asp:Label ID="lblUserId" runat="server" Style="display: none"></asp:Label>
             <asp:Label ID="lblQueryString" runat="server" Style="display: none"></asp:Label>
@@ -714,7 +715,7 @@
                                 <a class="access_btn_User">
                                     <asp:Image ID="imgUser" runat="server" CssClass="user_photo_menu" />
                                     <span id="lbUsername" runat="server" class="user_text"></span><i class="fa fa-caret-down"></i></a>
-                                <div class="toggle_box_User popover bottom dropdown-menu" style="z-index: -1;top:auto; ">
+                                <div class="toggle_box_User popover bottom dropdown-menu" style="z-index:0;top:auto;left:auto;right:auto; ">
                                     <div class="arrow"></div>
                                     <ul style="direction:rtl;">
                                           <li style="padding:7px 0px;">

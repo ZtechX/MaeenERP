@@ -8,7 +8,6 @@
 var mdate1 = "";
 
 function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
-    
     if (typeof HijriDate == 'undefined') throw new Error('HijriDate() class required!');
     let cd = typeof this == 'object' ? this : window, gdate = new Date(), hdate = new HijriDate(), dispDate, tzOffset = Date.parse('01 Jan 1970'),
         gridAni = 'zoom', actTmoId, isDispToday = false, isAttached = false, isAccOpened = false, isAutoNewTheme, isRTL = true,

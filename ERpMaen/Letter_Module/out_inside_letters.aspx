@@ -37,6 +37,7 @@
         #divAreaList1{    max-height: 200px; overflow: auto;}
     </style>
                 <div>
+                    <script src="../js/customCalender/CustomerCalendar.js"></script>
                     <script src="../JS_Code/out_inside_letters/out_inside_letters.js"></script>
   <%--                  <script src="../JS_Code/sessions/halls_Save.js"></script>
                     <script src="../JS_Code/sessions/halls_Edit.js"></script>

@@ -68,6 +68,96 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents dplm_subj_lect_homework As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''dplm_subj_delete_file control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_delete_file As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_del_url control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_del_url As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_del_comment control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_del_comment As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dblm_subj_stud_degrees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dblm_subj_stud_degrees As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_delete_stud control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_delete_stud As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_stud_note control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_stud_note As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_edit_hw control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_edit_hw As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_del_hw control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_del_hw As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_sol_hw control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_sol_hw As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''dplm_subj_dwn_hw control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents dplm_subj_dwn_hw As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''Lblsubject_id control.
     '''</summary>
     '''<remarks>
@@ -158,6 +248,15 @@ Partial Public Class DiplomaSubjectDetails
     Protected WithEvents lecture_time As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
+    '''subject_units control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents subject_units As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''ddlsemster control.
     '''</summary>
     '''<remarks>
@@ -174,6 +273,15 @@ Partial Public Class DiplomaSubjectDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlsubTrainer As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''sub_code control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents sub_code As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''subject_FinalDegree control.
@@ -336,6 +444,24 @@ Partial Public Class DiplomaSubjectDetails
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents fuFile4 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
+    '''subjectTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents subjectTitle As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''RefuseId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RefuseId As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''hall control.

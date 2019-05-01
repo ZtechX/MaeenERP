@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="diplome_moneyDS" targetNamespace="http://tempuri.org/diplome_moneyDS.xsd" xmlns:mstns="http://tempuri.org/diplome_moneyDS.xsd" xmlns="http://tempuri.org/diplome_moneyDS.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="diplome_moneyDS" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="diplome_moneyDS" msprop:Generator_UserDSName="diplome_moneyDS">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="diplome_money" msprop:Generator_TableClassName="diplome_moneyDataTable" msprop:Generator_TableVarName="tablediplome_money" msprop:Generator_TablePropName="diplome_money" msprop:Generator_RowDeletingName="diplome_moneyRowDeleting" msprop:Generator_RowChangingName="diplome_moneyRowChanging" msprop:Generator_RowEvHandlerName="diplome_moneyRowChangeEventHandler" msprop:Generator_RowDeletedName="diplome_moneyRowDeleted" msprop:Generator_UserTableName="diplome_money" msprop:Generator_RowChangedName="diplome_moneyRowChanged" msprop:Generator_RowEvArgName="diplome_moneyRowChangeEvent" msprop:Generator_RowClassName="diplome_moneyRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="diplome" msprop:Generator_ColumnVarNameInTable="columndiplome" msprop:Generator_ColumnPropNameInRow="diplome" msprop:Generator_ColumnPropNameInTable="diplomeColumn" msprop:Generator_UserColumnName="diplome" type="xs:string" minOccurs="0" />
+              <xs:element name="student" msprop:Generator_ColumnVarNameInTable="columnstudent" msprop:Generator_ColumnPropNameInRow="student" msprop:Generator_ColumnPropNameInTable="studentColumn" msprop:Generator_UserColumnName="student" type="xs:string" minOccurs="0" />
+              <xs:element name="paid" msprop:Generator_ColumnVarNameInTable="columnpaid" msprop:Generator_ColumnPropNameInRow="paid" msprop:Generator_ColumnPropNameInTable="paidColumn" msprop:Generator_UserColumnName="paid" type="xs:string" minOccurs="0" />
+              <xs:element name="price" msprop:Generator_ColumnVarNameInTable="columnprice" msprop:Generator_ColumnPropNameInRow="price" msprop:Generator_ColumnPropNameInTable="priceColumn" msprop:Generator_UserColumnName="price" type="xs:string" minOccurs="0" />
+              <xs:element name="amount" msprop:Generator_ColumnVarNameInTable="columnamount" msprop:Generator_ColumnPropNameInRow="amount" msprop:Generator_ColumnPropNameInTable="amountColumn" msprop:Generator_UserColumnName="amount" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

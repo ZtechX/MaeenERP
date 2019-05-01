@@ -123,7 +123,7 @@ Public Class cases
             If id <> "" Then
                 DBManager.ExcuteQuery("delete from ash_case_tabs where case_id=" + id)
                 dt_person_cases = DBManager.Getdatatable("Select person1_id,person2_id,isNull(tblUsers.id,'0') as 'advisor_id',isNull(User_PhoneNumber,0) User_PhoneNumber from ash_cases  left join tblUsers" +
-                                                         " on tblUsers.related_id=ash_cases.advisor_id and tblUsers.User_Type = 6  where ash_cases.id=" + id.ToString())
+                                                         " on tblUsers.related_id=ash_cases.advisor_id and tblUsers.User_Type in (6,15)  where ash_cases.id=" + id.ToString())
                 person1_id = dt_person_cases.Rows(0).Item("person1_id")
                 person2_id = dt_person_cases.Rows(0).Item("person2_id")
                 old_advisor = dt_person_cases.Rows(0).Item("advisor_id")
@@ -538,7 +538,7 @@ Public Class cases
 
             dt = DBManager.Getdatatable("select person1_id,person2_id ," &
 " child_custody,advisor_id,advisor.User_PhoneNumber as advisor_phone from ash_cases" &
-" left join tblUsers advisor on advisor.related_id=advisor_id and advisor.User_Type=6 where ash_cases.id=" + case_id)
+" left join tblUsers advisor on advisor.related_id=advisor_id and advisor.User_Type in(6,15) where ash_cases.id=" + case_id)
             If dt.Rows.Count <> 0 Then
                 deliverer_id = dt.Rows(0).Item("child_custody").ToString()
                 advisor = dt.Rows(0).Item("advisor_id").ToString()
@@ -1228,8 +1228,7 @@ Public Class cases
             Dim condation As String = ""
             If LoginInfo.getUserType = "9" Then
                 condation = " and (deliverer_id = " + related_id + " or reciever_id= " + related_id + " )"
-            End If
-            If LoginInfo.getUserType = "6" Then
+            ElseIf LoginInfo.getUserType = "6" Then
                 condation = " and advisor = " + related_id
             End If
 
@@ -1240,7 +1239,7 @@ Public Class cases
             If dt.Rows.Count <> 0 Then
                 Names(0) = PublicFunctions.ConvertDataTabletoString(dt)
             End If
-            If LoginInfo.getUserType = "9" Then
+            If LoginInfo.getUserType = "9" Or LoginInfo.getUserType = "16" Then
                 Return Names.ToArray
             End If
             Dim query1 As String = "SELECT * FROM   ash_case_sessions  where date_m between " + start_dt + " and " + end_dt + "  and case_id in (select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")" + condation
@@ -1296,7 +1295,7 @@ Public Class cases
             If dt.Rows.Count <> 0 Then
                 Names(0) = PublicFunctions.ConvertDataTabletoString(dt)
             End If
-            If LoginInfo.getUserType = "9" Then
+            If LoginInfo.getUserType = "9" Or LoginInfo.getUserType = "16" Then
                 Return Names.ToArray
             End If
             Dim query1 As String = "SELECT ash_case_sessions.id as id,ash_cases.code as cases,ash_case_persons.indenty as num,ash_case_persons.name as person FROM  ash_case_sessions join ash_cases on ash_case_sessions.case_id= ash_cases.id  join ash_case_persons on ash_cases.person1_id=ash_case_persons.id  where ash_case_sessions.date_m = '" + _date + "' And ash_case_sessions.case_id In (Select id from ash_cases where comp_id=" + LoginInfo.GetComp_id() + ")"

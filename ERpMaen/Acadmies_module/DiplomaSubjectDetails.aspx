@@ -107,8 +107,14 @@
                 background-color: #3A364A;
                 color: white;
             }
-
-            #student tbody td img  {
+               .table-head th {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                text-align: center;
+                background-color: #3A364A;
+                color: white;
+            }
+            #StudentTable  td img  {
                
               width:50px;
                 height: 50px;
@@ -177,6 +183,16 @@
                     <label hidden runat="server" id="dplm_subj_lect_absence"></label>
                     <label hidden runat="server" id="dplm_subj_lect_file"></label>
                     <label hidden runat="server" id="dplm_subj_lect_homework"></label>
+                    <label hidden runat="server" id="dplm_subj_delete_file"></label>
+                    <label hidden runat="server" id="dplm_subj_del_url"></label>
+                    <label hidden runat="server" id="dplm_subj_del_comment"></label>
+                    <label hidden runat="server" id="dblm_subj_stud_degrees"></label>
+                    <label hidden runat="server" id="dplm_subj_delete_stud"></label>
+                    <label hidden runat="server" id="dplm_subj_stud_note"></label>
+                    <label hidden runat="server" id="dplm_subj_edit_hw"></label>
+                    <label hidden runat="server" id="dplm_subj_del_hw"></label>
+                    <label hidden runat="server" id="dplm_subj_sol_hw"></label>
+                    <label hidden runat="server" id="dplm_subj_dwn_hw"></label>
 
                      <label style="display:none" id="Lblsubject_id" runat="server" ></label>
                        <label style="display:none" id="lblcode" runat="server" ></label>
@@ -187,6 +203,8 @@
                      <label style="display:none" id="lblsub_FinalDegree" ></label>
                      <label style="display:none" id="lblsub_ActivityDegree" ></label>
                       <label style="display:none" id="LblHomework_id" ></label>
+                      <label style="display:none" id="LblNotes_id" ></label>
+                    <label style="display:none" id="LblActivity_id" ></label>
                        <label style="display:none" id="LblExam_id" ></label>
                        <label style="display:none" id="LblDegree_id" ></label>
                       <label style="display:none" id="lect_time" ></label>
@@ -862,17 +880,26 @@
                                                         </div>
                                                 
                                             <div class="table-responsive" >
-                                                <div id="StudentTable">
+                                              
 
                                               
 
-                                                <table id="student">
+                                                <table class="table table-bordered table-head" >
+                                                    <thead>
+                                                        <tr>
+                                                        <th>#</th>
+                                                        <th>الصورة</th>
+                                                        <th>الاسم</th>
+                                                        <th>الاجراء</th>
+                                                            </tr>
+                                                    </thead>
+                                                    <tbody id="StudentTable">
 
-
+                                                    </tbody>
                                                
                                                
                                                 </table>
-                                            </div>
+                                            
 
                                          </div>
                                              </div>
@@ -895,13 +922,15 @@
 
                                             <div class="table-responsive">
 
-                                                <table id="student">
+                                                <table class="table table-bordered table-head">
+                                                    <thead>
                                                     <tr>
                                                         <th>الواجب </th>
                                                         <th>التاريخ</th>
                                                         <th>الاجراء </th>
 
                                                     </tr>
+                                                        </thead>
                                                     <tbody id="homework">
                                                     </tbody>
                                                 </table>
@@ -1052,6 +1081,20 @@
                                         </div>
                             </div>
 
+
+                                     <div class="row form-group">
+                                 <div class="col-md-3 col-sm-12">
+                                        <label  class="label-required">  عدد الوحدات </label>
+                                            </div>
+
+                                      <div class="col-md-9 col-sm-12">
+                                            <input onkeypress="return isNumber(event);" dbcolumn="Units_Num" required   id="subject_units"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    
+                                        </div>
+                            </div>
+
                                   <div class="row form-group ">
                                 <div class="col-md-3 col-sm-12">
                                     <label class="label-required">الفصل الدراسى  </label>
@@ -1064,7 +1107,7 @@
                                 </div>
                             </div>
 
-                                   <div class=" row form-group ">
+                                   <div class="row form-group ">
                                 <div class="col-md-3 col-sm-12">
                                     <label  class="label-required">  المدرب</label>
                                 </div>
@@ -1075,16 +1118,25 @@
                                     
                                 </div>
                             </div>
-
-                                    
-                                               
+           
                             </div>
                                 
                              <div class="col-md-6">
                                 
+                                 <div class=" row form-group">
+                                 <div class="col-md-3 col-sm-12">
+                                        <label class="label-required" > الرمز </label>
+                                            </div>
+
+                                      <div class="col-md-9 col-sm-12">
+                                            <input  placeholder="رمز المادة" dbcolumn="sub_code"  required type="text" id="sub_code" class="form-control" runat="server" clientidmode="Static" />
+                                        </div>
+                                              </div>
+
+
                                  <div class="row form-group">
                                  <div class="col-md-3 col-sm-12">
-                                        <label class="label-required" >    درجة الاختبار النهائي      </label>
+                                        <label class="label-required" >     الاختبار النهائي      </label>
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
@@ -1097,7 +1149,7 @@
 
                                    <div class="row form-group">
                                  <div class="col-md-3 col-sm-12">
-                                        <label class="label-required" >   درجة اعمال السنة  </label>
+                                        <label class="label-required" >    اعمال السنة  </label>
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
@@ -1420,10 +1472,16 @@
                        
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover" id="publicDeg">
+                                                                            <tr>
+                                                <td> </td> 
+                                                   <td><label>تنشيط<input type="checkbox" id="col1" style="width:20px;margin-left: 18px; margin-top: 0px;" onchange="markcol('col1');"/></label> </td> 
+                                                   <td> <label>تنشيط<input type="checkbox" id="col2" style="width:20px;margin-left: 18px; margin-top: 0px;" onchange="markcol('col2');" /></label></td> 
+                                            </tr>
                                 <tr>
                                     <th>الاسم </th>
+                                      <th>   درجة اعمال السنة</th>
                                     <th> درجة الاختبار النهائي</th>
-                                     <th>   درجة اعمال السنة</th>
+                                   
 
 
 
@@ -1452,7 +1510,11 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">جدول الدرجات  </h4>
+                            <h1 class="modal-title" style="text-align:center; font-size:large"> شاشة اعتماد درجات مادة 
+                              <span id="subjectTitle" runat="server">  </span>
+                               
+                            </h1> 
+                             <br />
                             <div class="col-md-6" >
                             <input  id="txtstud_Search_Admin" onkeyup="SearchStudent();" type="text" class="form-control" placeholder="بحث عن طالب" />
                         </div>
@@ -1461,9 +1523,12 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover" id="publicDeg">
                                 <tr>
-                                    <th>الاسم </th>
-                                    <th>الدرجة النهائية</th>
-                                     <th> درجة نصف العام</th>
+                                     <th> # </th>
+                                    <th>اسم الطالب </th>
+                                      <th>   درجة اعمال السنه</th>
+                                    <th> درجة الاختبار النهائي</th>
+                                   
+                                       <th> المجموع</th>
 
 
 
@@ -1481,11 +1546,86 @@
 
 
                         <div class="modal-footer">
-                            <button type="button"  class="btn btn-primary" onclick="Approve_Studentdegree();">حفظ </button>
+                            <button type="button"  class="btn btn-primary mr-auto" onclick="Approve_Studentdegree();">اعتماد</button>
+                              <a data-toggle="modal" href="#refuseDegree" type="button"   class="btn btn-danger" style="font-size: 10px;">
+                                     رفض        
+                                </a>
+                           
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="modal" id="refuseDegree" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"> سبب رفض الاعتماد </h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                              <div  id="divFormRefuseDegree">
+                          
+                          
+                               <div class=" form-group row">
+                                        <div class="col-md-3 col-sm-12">
+                                            <label for="Name" > السبب  </label>
+
+                                        </div>
+                                        <div class="col-md-9 col-sm-12">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="Refuse"   ClientIDMode="Static" ID="RefuseId" runat="server">
+                                            </asp:TextBox>
+                                        </div>
+                                    </div>
+
+                          
+                                 </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="send_Reason();">رفض الاعتماد </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <%--<div class="modal" id="refuseDegree" tabindex="-1" role="dialog">
+            <div class="modal-dialog" style="width:400px;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> سبب رفض اعتماد الدرجات </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div  id="divFormRefuseDegree">
+                          
+                          
+                               <div class=" form-group row">
+                                        <div class="col-md-3 col-sm-12">
+                                            <label for="Name" > السبب  </label>
+
+                                        </div>
+                                        <div class="col-md-9 col-sm-12">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline"  class="form-control" dbColumn="Refuse"   ClientIDMode="Static" ID="RefuseId" runat="server">
+                                            </asp:TextBox>
+                                        </div>
+                                    </div>
+
+                          
+                                 </div>
+
+
+                       </div>                  
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary"  onclick="send_Reason();">حفظ </button>
+
+                    </div>
+                     
+                      </div>
+                </div>
+            </div>--%>
 
               <div class="modal" id="AddHall" tabindex="-1" role="dialog">
             <div class="modal-dialog" style="width:350px;">
@@ -1526,6 +1666,7 @@
                       </div>
                 </div>
             </div>
+
             <div class="modal" id="addLinks_modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -1845,7 +1986,7 @@
                                         <uc1:Result runat="server"  ID ="Result2" />
                                     </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
 
                                     <div class="row form-group">
 
@@ -1862,7 +2003,9 @@
 
                                         </div>
                                     </div>
-
+                                    </div>
+                                 <div class="col-md-12">
+                                     <div class="col-md-6">
                                     <div class=" row form-group">
                                         <div class="col-md-3 col-sm-12">
                                             <label class="label-required">
@@ -1911,7 +2054,7 @@
       
                                     
                                 </div>
-
+                                      </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -1932,7 +2075,7 @@
 
                                 <div class=" row form-group">
                                             <div class="col-md-3 col-sm-12">
-                                                <label>درجة نصف العام       </label>
+                                                <label>  درجة اعمال السنة       </label>
                                             </div>
 
                                             <div class="col-md-9 col-sm-12">
@@ -1946,7 +2089,7 @@
 
                                  <div class=" row form-group">
                                             <div class="col-md-3 col-sm-12">
-                                                <label>الدرجة النهائية  </label>
+                                                <label> درجة الاختبار النهائي  </label>
                                             </div>
 
                                             <div class="col-md-9 col-sm-12">

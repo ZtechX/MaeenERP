@@ -179,7 +179,8 @@ function drawcourseConditions() {
                 arr1.forEach(function (element) {
                     data = data + `<tr><td>${element.condition} </td>
                     <td><div id="img_${element.id}" class="comp-logo"><label id="lblSec_${element.id}" style="display:none;"></label></div>
-                    <div class="up-btn" id="upload" onclick="uploadClick(${element.id});">رفع</div></td></tr>`;
+                    <div class="up-btn" id="upload" onclick="uploadClick(${element.id});">رفع</div></td>
+</tr>`;
                                                      
                  });
 

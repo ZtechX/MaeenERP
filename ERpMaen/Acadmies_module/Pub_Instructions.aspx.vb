@@ -43,8 +43,8 @@ Public Class Pub_Instructions
 
 
 
-                'Dim clsapprove_tainer As New clsFillComboByDataSource("select id , full_name from tblUsers where User_Type='4' and comp_id= " + LoginInfo.GetComp_id(), "full_name", "id", "")
-                'clsapprove_tainer.SetComboItems(ddltrainer, "", True, "--اختر--", False)
+                Dim clsapprove_tainer As New clsFillComboByDataSource("select id , name from tblUser_Type where IsNull(Deleted,0)=0 ", "name", "id", "")
+                clsapprove_tainer.SetComboItems(lblUsers, "", True, "--اختر--", False)
 
 
 

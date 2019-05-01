@@ -4,7 +4,7 @@ var deleteWebServiceMethod = "Pub_InstructionsCls.asmx/Delete";
 var editWebServiceMethod = "Pub_InstructionsCls.asmx/Edit";
 var formAutoCodeControl = "lblmainid";
 var CoursesList = [];
-var records_per_page = 3;
+var records_per_page = 4;
 var numPages = 0;
 var current_page = 1;
 $(function () {
@@ -14,7 +14,7 @@ $(function () {
 
     try {
 
-        drawAllCourses();
+        drawCourses(0);
       
     } catch (err) {
         alert(err);
@@ -32,6 +32,11 @@ function resetAll() {
 }
 
 
+
+function uploadClick(id) {
+    section_id = id;
+    $("#fuPhoto1").find('input[type="file"]').click();
+}
 
 
 
@@ -54,7 +59,7 @@ function saveInstruction() {
 
                             $("#addInstruction").modal('hide');
                             resetDivControls("divForm");
-                            drawAllCourses();
+                            drawCourses(0);
                             $("#SavedivLoader").hide();
                             alert("تم الحفظ بنجاح");
                             getcousreCode();
@@ -131,6 +136,25 @@ function changePage(page) {
         var date = element.Created_at_m;
 
         var arr1 = date.split('/');
+        var edit = "";
+        var del = "";
+        var view = "";
+        var img =  element.image;
+        if (img.endsWith(".pdf")) {
+            img = "../images/pdf_img.png";
+        }
+        if (img.endsWith(".xls") || img.endsWith(".xlsx")) {
+            img = "../images/excel_img.png";
+        }
+        if (img.endsWith(".ppt") || img.endsWith(".pptx")) {
+            img = "../images/powerPoint_img.png";
+        }
+        if (img.endsWith(".doc") || img.endsWith(".docs")) {
+            img = "../images/word_img.png";
+        }
+        del = `	<li  style="width:33%;"><a href="#" class="bg-danger" onclick="deleteInstruct(${element.id});"><span class="fa fa-trash text-danger"></span></a></li>`;
+        edit = `<li style="width:33%;"><a href="#" class="bg-warning"  onclick="EditInstruct(${element.id});"><span class="fa fa-edit text-warning"></span></a></li>`;
+        view = ` <li  style="width:33%;"><a href="#" class="bg-info" onclick="viewed(${element.id});"><span class="fa fa-eye-slash text-info"></span></a></li>`;
         data = data + `
 
                         <li>
@@ -140,6 +164,12 @@ function changePage(page) {
 							<span class="year">${arr1[2]}</span>
 							
 						</time>
+                          
+                   
+                    	<a target="_blank" href="../${element.image}"><img  src="../${img}"/></a>
+                              
+                                  
+                            
 						<div class="info">
 							<h2 class="title">${element.title}</h2>
 							<p class="desc">${element.description}</p>
@@ -149,8 +179,10 @@ function changePage(page) {
 						</div>
                            <div class="social">
 							<ul>
-								<li class="facebook" style="width:33%;"><a href="#" onclick="deleteInstruct(${element.id});"><span class="fa fa-trash"></span></a></li>
-								<li class="facebook" style="width:33%;"><a href="#" onclick="EditInstruct(${element.id});"><span class="fa fa-edit"></span></a></li>
+${view}
+							${edit}
+							${del}
+
 							</ul>
 						</div>
 						
@@ -164,8 +196,8 @@ function changePage(page) {
  
 function drawAllCourses() {
     try {
-        
-        Pub_InstructionsCls.get_Courses("", Pub_date_m,function (val) {
+        debugger
+        Pub_InstructionsCls.get_Courses("", "",function (val) {
            
             var data = "";
             var arr1 = JSON.parse(val[1]);
@@ -194,86 +226,92 @@ function drawAllCourses() {
     }
 }
 
-//function drawCourses(filter){
-//    try {
+function drawCourses(filter){
+    try {
 
-//        debugger
-//        Pub_InstructionsCls.get_Courses(filter, "", Pub_date_m, function (val) {
-//            //debugger
-//            var data = "";
-//            if (val[0] == "0") {
+        debugger
+        Pub_InstructionsCls.get_Courses("", filter, function (val) {
+            debugger
+            var data = "";
+            if (val[0] == "0") {
                 
-//                     $("#courses-list").html("لا يوجد كورسات تم التسجيل بها ");
+                $("#Instructions-list").html("لايوجد تعاميم");
                   
            
-//            }
-//            else {
-//                var arr1 = JSON.parse(val[1]);
-//                CoursesList = arr1;
+            }
+            else {
+                var arr1 = JSON.parse(val[1]);
+                CoursesList = arr1;
 
-//               // debugger
-//                numPages = Math.ceil(CoursesList.length / records_per_page);
+               // debugger
+                numPages = Math.ceil(CoursesList.length / records_per_page);
 
-//                var str = "";
-//                for (var i = 0; i < (numPages + 2); i++) {
+                var str = "";
+                for (var i = 0; i < (numPages + 2); i++) {
 
-//                    if (i == 0) {
-//                        str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
-//                    }
-//                    else if (i == (numPages + 1)) {
-//                        str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
+                    if (i == 0) {
+                        str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
+                    }
+                    else if (i == (numPages + 1)) {
+                        str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
 
-//                    } else {
-//                        str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
+                    } else {
+                        str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
 
-//                    }
-//                }
-//                $(".pagination").html(str);
-//                changePage(1);
+                    }
+                }
+                $(".pagination").html(str);
+                changePage(1);
 
-//            }
+            }
            
            
-//        });
-//           } catch (err) {
-//        alert(err);
-//    }
-//}
+        });
+           } catch (err) {
+        alert(err);
+    }
+}
 
-//function searchCourses() {
-//    try {
+function searchCourses() {
+    try {
+
+        debugger
+        var courseName = $("#txt_Search").val();
+        Pub_InstructionsCls.get_Courses(courseName, "", function (val) {
+            var data = "";
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+                CoursesList = arr1;
+                numPages = Math.ceil(CoursesList.length / records_per_page);
+
+                var str = "";
+                for (var i = 0; i < (numPages + 2); i++) {
+
+                    if (i == 0) {
+                        str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
+                    }
+                    else if (i == (numPages + 1)) {
+                        str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
+
+                    } else {
+                        str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
+
+                    }
+                }
+                $(".pagination").html(str);
+                changePage(1);
+            }
+            else {
+                $("#Instructions-list").html(" لا يوجد تعاميم بهذا الاسم!");
+
+            }
+        });
 
 
-//        var courseName = $("#txt_Search").val();
-//        Pub_InstructionsCls.get_Courses(courseName, Pub_date_m, function (val) {
-//            var data = "";
-//            var arr1 = JSON.parse(val[1]);
-//            CoursesList = arr1;
-//            numPages = Math.ceil(CoursesList.length / records_per_page);
-
-//            var str = "";
-//            for (var i = 0; i < (numPages + 2); i++) {
-
-//                if (i == 0) {
-//                    str += '<li class="paginate_button previous"><a onclick="prevPage();">السابق</a></li>';
-//                }
-//                else if (i == (numPages + 1)) {
-//                    str += '<li class="paginate_button next" id="default-datatable_next"><a onclick="nextPage();">التالي</a></li>';
-
-//                } else {
-//                    str += '<li id="li_' + i + '" class="paginate_button"><a onclick="changePage(' + i + ');">' + i + '</a></li>';
-
-//                }
-//            }
-//            $(".pagination").html(str);
-//            changePage(1);
-//        });
-
-
-//    } catch (err) {
-//        alert(err);
-//    }
-//}
+    } catch (err) {
+        alert(err);
+    }
+}
 
 function deleteInstruct(instructId) {
     var f = confirm("هل  تريد الحذف");
@@ -294,6 +332,24 @@ function deleteInstruct(instructId) {
     }
 
 }
+
+function viewed(instructId) {
+    debugger
+    Pub_InstructionsCls.Seen_instruction(instructId, function (val) {
+        if (val == true) {
+                $("#SavedivLoader").hide();
+              //  alert("تم الحذف بنجاح");
+                drawAllCourses();
+
+            } else {
+                alert('لم يتم ');
+            }
+
+        });
+    
+
+}
+
 
 
 function EditInstruct(instID) {

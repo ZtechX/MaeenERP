@@ -37,7 +37,8 @@
                 <script type="text/javascript" src="../Clock/ng_all.js"></script>
 <script type="text/javascript" src="../Clock/ng_ui.js"></script>
 <script type="text/javascript" src="../Clock/components/timepicker.js"></script>
-
+             
+                <script src="../js/customCalender/CustomerCalendar.js"></script>
 <script type="text/javascript">
     ng.ready(function () {
       

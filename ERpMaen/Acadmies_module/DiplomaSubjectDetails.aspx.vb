@@ -43,10 +43,11 @@ Public Class DiplomaSubjectDetails
                 Dim code = Request.QueryString("code")
                 lblcode.InnerHtml = code
 
-                Dim dt = DBManager.Getdatatable(" select acd_diplome_subjects.id from acd_diplome_subjects where acd_diplome_subjects.code='" + code.ToString + "'")
+                Dim dt = DBManager.Getdatatable(" select acd_diplome_subjects.id , tbllock_up.Description as 'subjectName' from acd_diplome_subjects join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id where acd_diplome_subjects.code='" + code.ToString + "'")
                 If dt.Rows.Count <> 0 Then
                     Dim subject_id = dt.Rows(0)(0).ToString
                     Lblsubject_id.InnerHtml = subject_id
+                    subjectTitle.InnerHtml = dt.Rows(0)(1).ToString
 
                 End If
                 Dim dt2 = DBManager.Getdatatable(" select acd_diplome_subjects.diplome_id from acd_diplome_subjects where acd_diplome_subjects.code='" + code.ToString + "'")
@@ -80,6 +81,15 @@ Public Class DiplomaSubjectDetails
                 dplm_subj_lect_absence.InnerHtml = ERpMaen.LoginInfo.get_form_operation("22")
                 dplm_subj_lect_file.InnerHtml = ERpMaen.LoginInfo.get_form_operation("23")
                 dplm_subj_lect_homework.InnerHtml = ERpMaen.LoginInfo.get_form_operation("24")
+                dplm_subj_delete_file.InnerHtml = ERpMaen.LoginInfo.get_form_operation("30")
+                dplm_subj_del_url.InnerHtml = ERpMaen.LoginInfo.get_form_operation("39")
+                dplm_subj_del_comment.InnerHtml = ERpMaen.LoginInfo.get_form_operation("44")
+                dblm_subj_stud_degrees.InnerHtml = ERpMaen.LoginInfo.get_form_operation("46")
+                dplm_subj_delete_stud.InnerHtml = ERpMaen.LoginInfo.get_form_operation("47")
+                dplm_subj_edit_hw.InnerHtml = ERpMaen.LoginInfo.get_form_operation("51")
+                dplm_subj_del_hw.InnerHtml = ERpMaen.LoginInfo.get_form_operation("52")
+                dplm_subj_sol_hw.InnerHtml = ERpMaen.LoginInfo.get_form_operation("53")
+                dplm_subj_dwn_hw.InnerHtml = ERpMaen.LoginInfo.get_form_operation("54")
 
             End If
         Catch ex As Exception

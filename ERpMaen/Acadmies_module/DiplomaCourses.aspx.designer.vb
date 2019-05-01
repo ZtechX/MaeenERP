@@ -77,6 +77,15 @@ Partial Public Class DiplomaCourses
     Protected WithEvents Text4 As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
+    '''subject_units control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents subject_units As Global.System.Web.UI.HtmlControls.HtmlInputText
+    
+    '''<summary>
     '''ddlsemster control.
     '''</summary>
     '''<remarks>
@@ -93,6 +102,15 @@ Partial Public Class DiplomaCourses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddltrainer As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''sub_code control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents sub_code As Global.System.Web.UI.HtmlControls.HtmlInputText
     
     '''<summary>
     '''finaldegree control.
@@ -239,6 +257,15 @@ Partial Public Class DiplomaCourses
     Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''ddlsubject_Semester control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlsubject_Semester As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''amount control.
     '''</summary>
     '''<remarks>
@@ -291,4 +318,13 @@ Partial Public Class DiplomaCourses
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents fufile3 As Global.AjaxControlToolkit.AsyncFileUpload
+    
+    '''<summary>
+    '''fuPhoto1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fuPhoto1 As Global.AjaxControlToolkit.AsyncFileUpload
 End Class

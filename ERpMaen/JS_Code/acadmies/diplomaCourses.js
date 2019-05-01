@@ -18,6 +18,7 @@ $(function () {
     try {
         drawCourses();
         Studentlistview();
+        drawStudents_Certficate();
        // drawFinanceStudent();
        
      
@@ -133,6 +134,85 @@ function archiveSemester() {
     }
 
 
+function drawStudents_Certficate() {
+    try {
+
+        var diplomeID = ($("#Lbldeploma_id").html());
+        Diploma_CoursesCls.get_students_diplome(diplomeID, function (val) {
+            var data = "";
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+
+                arr1.forEach(function (element) {
+                    data = data + `<tr>  <td>
+                                        <label id=" ${element.student_id}"> ${element.student_Name}</label>
+                                    </td>
+                          <td>
+               <input class="form-control"    id="certificate_code" type="text"  value=" ${element.certificate_code}" />
+                                    
+                                    </td>
+
+                    <td><div id="img_${element.student_id}" class="comp-logo"><label id="lblSec_${element.student_id}" style="display:none;"></label></div>
+                    <div class="up-btn" id="upload" onclick="uploadClick(${element.student_id});">ارفاق</div></td>
+                       </tr>`;
+
+                });
+
+            }
+            $("#Students_Certificates").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
+var section_id;
+function uploadClick(id) {
+    section_id = id;
+    $("#fuPhoto1").find('input[type="file"]').click();
+}
+
+function AddStudent_Certificate() {
+
+    try {
+        if (checkRequired("divformsignin") == 1) {
+            alert("ادخل البيانات المطلوبة")
+        } else {
+
+            var students_jason = [];
+            $("#Students_Certificates tr").each(function () {
+               // debugger
+                var obj = {};
+                obj["id"] = $(this).find("label").attr("id");
+                obj["certificateCode"] = ($(this).find("#certificate_code").val());
+                obj["image_path"] = ($(this).find("label").html());
+               
+                    students_jason.push(obj);
+            
+            });
+        
+            var diplomeID = $("#Lbldeploma_id").html();
+           
+            Diploma_CoursesCls.SaveStudent_Certificate(diplomeID, students_jason, Pub_date_hj, Pub_date_m,function (val) {
+                if (val == true) {
+                  
+                    alert("تم الحفظ بنجاح");
+                    $("#certificateStudentModal").modal('hide');
+                    drawStudents_Certficate();
+                    resetAll();
+                    prepareAdd();
+                } else {
+                    alert("لم يتم الحفظ");
+                }
+            });
+        }
+
+
+    } catch (err) {
+        alert(err);
+    }
+}
+
+
 
 function drawFinanceStudent() {
     try {
@@ -215,7 +295,7 @@ function addfinancial() {
             var rest_money = ($("#Rest_money").html());
             var studentAmount = ($("#amount").val());
 
-            if (studentAmount <= diplome_Price && studentAmount <= rest_money) {
+         //   if (studentAmount <= diplome_Price && studentAmount <= rest_money) {
                 $("#SavedivLoader").show();
 
                 var diplomeID = ($("#Lbldeploma_id").html());
@@ -243,10 +323,10 @@ function addfinancial() {
 
                 });
 
-            }
-            else {
-                alert("المبلغ المضاف اكبر من سعر الدبلوم")
-            }
+            //}
+            //else {
+            //    alert("المبلغ المضاف اكبر من سعر الدبلوم")
+            //}
         }
 
 
@@ -320,7 +400,7 @@ function drawStudentfinanceforAdmin() {
 
                                                      </td>
                                                          <td>
-                                                             <div class="btn-group pull-left"  style="position:absolute; margin-bottom:5px;">
+                                                             <div class="btn-group pull-left"  style="">
                                                                                         <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                                                                             <i class="fa fa-cogs"></i>
@@ -674,21 +754,24 @@ function changePage(page) {
 
 function Studentlistview() {
     try {
-        debugger
+        
         var diplomeID = ($("#Lbldeploma_id").html());
         Diploma_CoursesCls.get_StudentList(diplomeID, function (val) {
+           
             var data = "";
+            var td_student = "";
+            var td_files = "";
+            var td_request = "";
+            var td_action = "";
+            var file_nm = "";
             var studid = -1;
             var arr1 = JSON.parse(val[1]);
             arr1.forEach(function (element) {
+                
                 //طلبات الطلاب
                 var stdID = element.student_id;
                
-                var td_student = "";
-                var td_files = "";
-                var td_request = "";
-                var td_action = "";
-                var file_nm = "";
+               
                 var path = element.registerFiles;
                 if (path != "" && path != null) {
                     if (path.indexOf("Acadmies_module/images/") != -1) {
@@ -696,22 +779,34 @@ function Studentlistview() {
                     }
                 }
                 if (stdID != studid) {
+                    if (td_files != "") {
+                        td_files = td_files + " </td >";
+                    }
                     data += td_student + td_request + td_files + td_action;
-                    data = data + " </tr >";
+                    if (data != "") {
+                        data = data + " </tr >";
+                    }
                     studid = stdID;
                     data = data + " <tr >";
-                    td_student = `<td><label id="${ element.student_id } > ${element.studentName}</label> </td>`;
+                    td_student = `<td><label id="${ element.student_id } "> ${element.studentName}</label> </td>`;
                     td_request = ` <td><label id='notes_student'> ${element.notes}</label> </td>`;
                     td_action = `<td><select  style="width: 100px; " id="action" > <option value="0">رفض</option><option value="1">قبول</option> </select></td>`;
-                    td_files = "<td>";
+                    td_files = `<td><li style="margin-bottom: 7px;"><a id="registerFiles" href="../${element.registerFiles}" download>
+                            <i class="fa fa-download"></i></a><span> ${file_nm} </span> </li> `;
                 } else {
-                    td_files += `<li><a id="registerFiles" href="../${element.registerFiles}" download>
-                            <i class="fa fa-download"></i></a><span>${file_nm}</span> </li> `;
+                    td_files += `<li style="margin-bottom: 7px;"><a id="registerFiles" href="../${element.registerFiles}" download>
+                            <i class="fa fa-download"></i></a><span> ${file_nm} </span> </li> `;
                 }
                
                          
             });
-
+            if (td_files != "") {
+                td_files = td_files + " </td >";
+            }
+            data += td_student + td_request + td_files + td_action;
+            if (data != "") {
+                data = data + " </tr >";
+            }
             $("#action_courseStudents").html(data);
             //var xx = document.getElementById("action").value;
             //console.log(xx);
@@ -926,10 +1021,11 @@ function studentDegreesIN_Diplome() {
     try {
         //debugger
         // $("#SavedivLoader").show();
+        var semester_ID = ($("#ddlsubject_Semester").val());
+       // alert(semester_ID);
         var diplomeID = ($("#Lbldeploma_id").html());
-        Diploma_CoursesCls.get_diplomeDegree(diplomeID, function (val) {
-
-
+        Diploma_CoursesCls.get_diplomeDegree(diplomeID, semester_ID, function (val) {
+            debugger
             var data = "";
             console.log(val);
             if (val[0] == 1) {
@@ -969,15 +1065,10 @@ function studentDegreesIN_Diplome() {
                         grad = "E"
                     }
                   
-                    
 
-
-
-                    data = data + `
-                                                           <tr>
-                                                            <td> ${element.subjectName}  </td>
-                                                      <td>${element.activity_degree}   </td>
+                    data = data + ` <tr> <td> ${element.subjectName}  </td> <td>${element.activity_degree}   </td>
                                                           <td> ${element.final_degree}  </td>
+                                                          <td> ${element.total} </td>
                                                           <td>  ${grad} </td>   
                                                                             
                                                                             </tr>

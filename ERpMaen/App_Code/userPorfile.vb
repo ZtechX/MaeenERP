@@ -85,7 +85,6 @@ Public Class userPorfile
         Dim UserId = LoginInfo.GetUser__Id()
         Dim Names As New List(Of String)(10)
         Names.Add("")
-        Names.Add("")
         Try
             Dim dt As New DataTable
             dt = DBManager.Getdatatable("SELECT tblUsers.id,full_name ,User_Email,Active ,Researcher,User_Password,User_PhoneNumber,User_Image," +
@@ -93,12 +92,7 @@ Public Class userPorfile
  " FROM tblUsers left join tblUser_Type on tblUser_Type.id=User_Type where tblUsers.id  =" + UserId)
             If dt.Rows.Count <> 0 Then
                 Names(0) = PublicFunctions.ConvertDataTabletoString(dt)
-                If Convert.ToBoolean(dt.Rows(0).Item("Researcher")) Then
-                    dt = DBManager.Getdatatable("select * from tblusers_area where user_id =" + UserId)
-                    If dt.Rows.Count <> 0 Then
-                        Names(1) = PublicFunctions.ConvertDataTabletoString(dt)
-                    End If
-                End If
+
             End If
             Return Names.ToArray
         Catch ex As Exception

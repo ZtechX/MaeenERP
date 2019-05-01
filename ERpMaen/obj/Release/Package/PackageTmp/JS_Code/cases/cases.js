@@ -247,9 +247,9 @@ function save() {
 /////////////////////////////////
 // save_children
 function save_children() {
-    
-    var children = generateJSONFromControls("children_info");
-   
+    $("#lblbod_date_m").html($("#divdate6 #txtDatem").val());
+    $("#lblbod_date_h").html($("#divdate6 #txtDateh").val());
+    var children = generateJSONFromControls("children_info"); 
     if (!checkRequired("children_info")) {
     var case_id = $("#lblcase_id").html();
     var PosId = $("#lblchild").html();
@@ -799,7 +799,7 @@ function find_persons(flag,flag2) {
     });
 }
 function save_new_person() {
-    
+    debugger;
     if (!checkRequired("collapseExample")) {
         if ($("#collapseExample").find("#txt_phone").val().length != 10) {
             showErrorMessage("رقم الجوال يجب أن يكون 10 ارقام");
@@ -809,7 +809,7 @@ function save_new_person() {
             showErrorMessage("رقم الهوية يجب أن يكون 10 ارقام");
             return;
         }
-        var case_id = $("#combobox").val();
+        var case_id = $("#ddlcase_id").val();
         if (case_id == "0") {
             showErrorMessage("إختار الحالة اولا");
             return;
@@ -822,7 +822,7 @@ function save_new_person() {
       
 
     var PosId = 0;
-    cases.Save_person(children_gson, PosId, case_id,  function (val) {
+        cases.Save_person(children_gson, PosId, case_id, function (val) {
         if (val) {
             var result_person1 = "";
             if (type_draw == 1) {
@@ -1253,7 +1253,7 @@ function show_all(id, flag, type = "0") {
                 var result_children = ""
                 for (var y = 0; y < children.length; y++) {
                     result_children = result_children + '<tr id="tr_child_' + children[y].id+'">' + '<td>' + children[y].name + '</td>' +
-                        '<td>' + children[y].age + '</td>' +
+                        '<td>' + children[y].bod_date_h + '</td>' +
                         '<td><button class="btn btn-xs btn-primary btn-quick" title="view Row" onclick="show_cases_details(' + children[y].id + ',1); return false; "><i class="fa fa-eye"></i></button><button class="btn btn-xs btn-danger btn-quick" title = "Delete" onclick = "delete_children(' + children[y].id + ','+case_id+'); return false;" > <i class="fa fa-times"></i></button ></td>' +
                         '</tr >';
                 }
@@ -1406,7 +1406,9 @@ function show_cases_details(flag1,flag3) {
             //$("#worker_panel").css('display', 'block');
             //$("#worker_collapse").removeClass("plus");
             var children_details = JSON.parse(val[0]);
-            fillControlsFromJson(children_details[0], "children_info")
+            fillControlsFromJson(children_details[0], "children_info");
+            $("#divdate6 #txtDatem").val(children_details[0].bod_date_m);
+            $("#divdate6 #txtDateh").val(children_details[0].bod_date_h);
 
 
         } else if (flag3 == 2) {
@@ -1869,4 +1871,15 @@ function delete_Period(id, type, case_id) {
             showErrorMessage(arr[1]);
         }
     });
+}
+function _calculateAge() { // birthday is a date
+    birthday = parseDate($("#divdate6 #txtDatem").val());
+    var ageDifMs = Date.now() - birthday.getTime();
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    alert(Math.abs(ageDate.getUTCFullYear() - 1970));
+}
+
+function parseDate(input) {
+    var parts = input.match(/(\d+)/g);
+    return new Date(parts[0], parts[1] - 1, parts[2]); // months are 0-based
 }

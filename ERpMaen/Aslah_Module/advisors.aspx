@@ -110,7 +110,16 @@
                                         </div>
 
                                     </div>
+                                    <div class="row">
+                                        <br />
+                                        <div class="col-md-3 col-sm-12">
+                                            <label for="email">مدير قسم </label>
+                                        </div>
+                                        <div class="col-md-3 col-sm-12">
+                                            <input dbcolumn="depart_manager" type="checkbox" id="depart_manager" style="width: 40px;" class="form-control" />
 
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="col-md-6">

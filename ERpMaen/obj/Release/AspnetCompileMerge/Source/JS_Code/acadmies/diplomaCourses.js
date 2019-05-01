@@ -674,11 +674,12 @@ function changePage(page) {
 
 function Studentlistview() {
     try {
+        debugger
         var diplomeID = ($("#Lbldeploma_id").html());
         Diploma_CoursesCls.get_StudentList(diplomeID, function (val) {
             var data = "";
             var studid = -1;
-
+            var arr1 = JSON.parse(val[1]);
             arr1.forEach(function (element) {
                 //طلبات الطلاب
                 var stdID = element.student_id;
@@ -708,10 +709,6 @@ function Studentlistview() {
                             <i class="fa fa-download"></i></a><span>${file_nm}</span> </li> `;
                 }
                
-                
-
-                                                           
-
                          
             });
 

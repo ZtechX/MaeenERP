@@ -688,6 +688,13 @@ Public Class cases
                 Dim details_id As String = ""
                 If id <> "" Then
                     details_id = id
+                    DBManager.ExcuteQuery("delete  from ash_case_children_receiving_details  where details_id=" + details_id.ToString)
+                    For Each children As Object In childrens
+                        id = 0
+                        Dim dict_children As Dictionary(Of String, Object) = children
+                        dict_children.Add("details_id", details_id)
+                        PublicFunctions.TransUpdateInsert(dict_children, "ash_case_children_receiving_details", id, _sqlconn, _sqltrans)
+                    Next
                     _sqltrans.Commit()
                     _sqlconn.Close()
                     Return details_id.ToString + "|" + dictBasicDataJson("type").ToString
@@ -715,7 +722,6 @@ Public Class cases
                         dict_children.Add("details_id", details_id)
                         PublicFunctions.TransUpdateInsert(dict_children, "ash_case_children_receiving_details", id, _sqlconn, _sqltrans)
                     Next
-
                     If Access Then
                         _sqltrans.Commit()
                         _sqlconn.Close()

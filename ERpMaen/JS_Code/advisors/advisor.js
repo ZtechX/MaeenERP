@@ -51,7 +51,7 @@ function isValidEmailAddress(emailAddress) {
     return pattern.test(emailAddress);
 }
 function save() {
-
+    debugger
     try {
         $("input").removeClass('error');
         $("select").removeClass('error');

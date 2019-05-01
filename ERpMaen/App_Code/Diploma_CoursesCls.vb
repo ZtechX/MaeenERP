@@ -258,6 +258,110 @@ Public Class Diploma_CoursesCls
 #End Region
 
 
+
+#Region "addStudentdegree"
+    ''' <summary>
+    ''' Save  Type  درجات الطلاب 
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function SaveStudent_Certificate(ByVal diplome_ID As String, ByVal students_jason As Object, ByVal date_hj As String, ByVal date_m As String) As Boolean
+        Try
+
+            _sqlconn.Open()
+            _sqltrans = _sqlconn.BeginTransaction
+            Dim dt As DataTable
+            'dt = DBManager.Getdatatable("delete from acd_student_degrees where type=2 and course_id=" + subjectID)
+
+            Dim id = ""
+            Dim success2 As Boolean = True
+            For Each item As Object In students_jason
+                Dim dictBasicDataJson As New Dictionary(Of String, Object)
+                dictBasicDataJson.Add("course_id", diplome_ID)
+                dictBasicDataJson.Add("type", "2")
+                dictBasicDataJson.Add("student_id", item("id"))
+                dictBasicDataJson.Add("certificate_code", item("certificateCode"))
+                dictBasicDataJson.Add("image", item("image_path"))
+                dictBasicDataJson.Add("date_hj", date_hj)
+                dictBasicDataJson.Add("date_m", date_m)
+
+                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_certificates", id, _sqlconn, _sqltrans) Then
+                    If Not PublicFunctions.TransUsers_logs("4209", "acd_certificates", "ادخال", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
+                    success = True
+                Else
+                    success = False
+
+                End If
+                If success Then
+
+                    success2 = True
+                Else
+                    success2 = False
+                End If
+            Next
+            If success2 Then
+
+                _sqltrans.Commit()
+                _sqlconn.Close()
+                Return True
+            Else
+                _sqltrans.Rollback()
+                _sqlconn.Close()
+                Return False
+            End If
+
+        Catch ex As Exception
+            _sqltrans.Rollback()
+            _sqlconn.Close()
+            Return False
+        End Try
+    End Function
+#End Region
+
+#Region "get_data"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_students_diplome(ByVal diplomeID As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'student_Name' , acd_certificates.certificate_code from acd_courses_students left join tblUsers on acd_courses_students.student_id=tblUsers.id left join acd_certificates  on acd_certificates.student_id=acd_courses_students.student_id and acd_certificates.course_id=acd_courses_students.course_id  where  acd_courses_students.type=2 and acd_courses_students.approved=1 and acd_courses_students.checked=1 and acd_courses_students.deleted=0 and acd_courses_students.course_id=" + diplomeID)
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+
+
+#End Region
+
 #Region "get_data"
     ''' <summary>
     ''' Save  Type
@@ -503,14 +607,14 @@ Public Class Diploma_CoursesCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function get_diplomeDegree(ByVal diplomeId As String) As String()
+    Public Function get_diplomeDegree(ByVal diplomeId As String, ByVal semester_Id As String) As String()
 
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
 
             If LoginInfo.getUserType = 8 Then
-                dt = DBManager.Getdatatable("select  acd_diplome_subjects.final_exam_degrees , acd_diplome_subjects.activity_degrees ,acd_diplome_subjects.id, acd_student_degrees.final_degree,  acd_student_degrees.activity_degree,acd_diplome_subjects.subject_id ,tbllock_up.Description as 'subjectName'  from  acd_diplome_subjects join tbllock_up on tbllock_up.id =acd_diplome_subjects.subject_id join acd_student_degrees on acd_student_degrees.course_id=acd_diplome_subjects.id and student_id=" + LoginInfo.GetUser__Id() + " and acd_student_degrees.type=2 where diplome_id=" + diplomeId)
+                dt = DBManager.Getdatatable("select acd_diplome_subjects.final_exam_degrees , acd_diplome_subjects.activity_degrees ,acd_diplome_subjects.id, acd_student_degrees.final_degree,  acd_student_degrees.activity_degree, acd_student_degrees.final_degree + acd_student_degrees.activity_degree as ' total', acd_diplome_subjects.subject_id ,tbllock_up.Description as 'subjectName'  from  acd_diplome_subjects join tbllock_up on tbllock_up.id =acd_diplome_subjects.subject_id join acd_student_degrees on acd_student_degrees.course_id=acd_diplome_subjects.id and student_id=" + LoginInfo.GetUser__Id() + " and acd_student_degrees.type=2 and acd_student_degrees.approved=1  where acd_diplome_subjects.semster_id=" + semester_Id + " and acd_diplome_subjects.diplome_id=" + diplomeId)
 
             End If
 
@@ -827,6 +931,9 @@ Public Class Diploma_CoursesCls
     End Function
 
 #End Region
+
+
+
 
 
 #Region "get_data"

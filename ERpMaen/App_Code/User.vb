@@ -45,58 +45,77 @@ Public Class User
             dictBasicDataJson.Add("User_Image", image)
             Researcher = dictBasicDataJson("Researcher")
             Dim dtcheckemailphone As DataTable
+            Dim dt As New DataTable
             If UserId = "" Then
                 dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where  user_indenty='" + dictBasicDataJson("user_indenty") + "' or User_PhoneNumber='" + dictBasicDataJson("User_PhoneNumber") + "'")
             Else
                 dtcheckemailphone = DBManager.Getdatatable("Select * from TblUsers where ( user_indenty='" + dictBasicDataJson("user_indenty") + "' or User_PhoneNumber='" + dictBasicDataJson("User_PhoneNumber") + "')  and  Id!='" + UserId.ToString + "'")
             End If
 
-
+            Dim Id = ""
             If dtcheckemailphone.Rows.Count = 0 Then
+                Dim advisor_id = ""
+                Dim userType = dictBasicDataJson("User_Type").ToString
+                If userType = "6" Or userType = "15" Then
+                    Dim dictadvisorJson As New Dictionary(Of String, Object)
+                    dictadvisorJson.Add("comp_id", LoginInfo.GetComp_id())
+                    dictadvisorJson.Add("name", dictBasicDataJson("full_name"))
+                    dictadvisorJson.Add("tel", dictBasicDataJson("User_PhoneNumber"))
+                    dictadvisorJson.Add("active", dictBasicDataJson("Active"))
+                    dictadvisorJson.Add("advisor_identiy", dictBasicDataJson("user_indenty"))
+                    dictadvisorJson.Add("email", dictBasicDataJson("User_Email"))
+                    If userType = "15" Then
+                        dictadvisorJson.Add("depart_manager", 1)
+                    End If
+                    If UserId = "" Then
+                        dictadvisorJson.Add("code", PublicFunctions.GetRandom())
+                    Else
+                        dt = DBManager.Getdatatable("select related_id from tblUsers where id=" + UserId)
+                        If dt.Rows.Count <> 0 Then
+                            advisor_id = dt.Rows(0)(0).ToString
+                        End If
+                    End If
 
-                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblUsers", UserId, _sqlconn, _sqltrans) Then
-                    success = True
+                    If PublicFunctions.TransUpdateInsert(dictadvisorJson, "ash_advisors", advisor_id, _sqlconn, _sqltrans) Then
+                        success = True
+                        If advisor_id = "" Then
+                            advisor_id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                        End If
+                    End If
                 Else
-                    success = False
+                    success = True
                 End If
+                If success Then
+                    dictBasicDataJson.Add("related_id", advisor_id)
+                    dictBasicDataJson.Add("parent_id", LoginInfo.GetUser__Id())
+                    If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "tblUsers", UserId, _sqlconn, _sqltrans) Then
+                        If UserId = "" Then
+                            Id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
+                        Else
+                            Id = UserId
+                        End If
+                    Else
+                        success = False
+
+                    End If
+                End If
+
             Else
                 Return "False|رقم الهوية او التلفون مُستخدم"
             End If
 
-            If UserId = "" And success Then
-                Dim Id = PublicFunctions.GetIdentity(_sqlconn, _sqltrans)
-                'If save_permtion(permDataJsonList, Id, "Insert") Then
-                If Researcher Then
-                        If save_researchArea(researchAreaJsonList, Id) Then
-                            success = True
-                        Else
-                            success = False
-                        End If
-                    Else
-                        success = True
-                    End If
-                    'Else
-                    '    success = False
-                    'End If
-                ElseIf UserId <> "" And success Then
-
-                ' If save_permtion(permDataJsonList, UserId, "Update") Then
-                If Researcher Then
-                        If save_researchArea(researchAreaJsonList, UserId) Then
-                            success = True
-                        Else
-                            success = False
-                        End If
-                    Else
-                        DBManager.ExcuteQuery("delete from tblusers_area where  user_id ='" + UserId + "'")
-                        success = True
-                    End If
-
-                    'Else
-                    '    success = False
-                    'End If
-                End If
             If success Then
+
+                If Researcher Then
+                    If save_researchArea(researchAreaJsonList, Id) Then
+                        success = True
+                    Else
+                        success = False
+                    End If
+                End If
+
+            End If
+                If success Then
                 _sqltrans.Commit()
                 _sqlconn.Close()
                 Return "True|تم الحفظ بنجاح"
@@ -368,6 +387,7 @@ Public Class User
     ''' </summary>
     Private Function save_researchArea(ByVal researchAreaJsonList As List(Of Object), ByVal usertId As String) As Boolean
         Try
+
             DBManager.ExcuteQuery("delete from tblusers_area where  user_id ='" + usertId + "'")
 
             For Each areaJSON As Object In researchAreaJsonList

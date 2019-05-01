@@ -557,56 +557,59 @@ function SaveExam() {
 function addStudentdegree() {
 
     try {
-        
-      
+
+       // debugger
         if (!checkRequired()) {
             var subject_FinalDegree = parseInt($("#lblsub_FinalDegree").html());
             var subject_ActivityDegree = parseInt($("#lblsub_ActivityDegree").html());
-         
-            var students_degree=[];
-            $("#pblcstudentdegrees tr").each(function ()
-            {
-                var obj = {};
-                obj["id"]  =$(this).find("label").attr("id");
-                obj["fdegree"] = parseInt($(this).find("#finaldegee").val());
-                obj["Acdegree"] = parseInt($(this).find("#activitydegee").val());
-                if (obj["fdegree"] <= subject_FinalDegree && obj["Acdegree"] <= subject_ActivityDegree) {
-                   
-                    students_degree.push(obj);
-                }
-                else {
-                    alert("الدرجات لا يمكن ان تكون اكبر من درجة المادة");
-                }
-              
+            //var finalDegree = parseInt($("#finaldegee").val());
+            //var activityDegree = parseInt($("#activitydegee").val());
+
+           
+
+                var students_degree = [];
+            $("#pblcstudentdegrees tr").each(function () {
+                debugger
+                    var obj = {};
+                    obj["id"] = $(this).find("label").attr("id");
+                    obj["fdegree"] = parseInt($(this).find("#finaldegee").val());
+                    obj["Acdegree"] = parseInt($(this).find("#activitydegee").val());
+                    if (obj["fdegree"] <= subject_FinalDegree && obj["Acdegree"] <= subject_ActivityDegree) {
+                        students_degree.push(obj);
+                    }
+                    else {
+                        alert("مجموع الدرجات لا يمكن ان يكون اكبر من درجة الماده")
+                    }
                 
             });
+            debugger
+            var rowCount = $("#pblcstudentdegrees tr").length;
 
-           
-            var subjectId = ($("#Lblsubject_id").html());
-            if (students_degree.length!=0) {
+                var subjectId = ($("#Lblsubject_id").html());
+            if (students_degree.length == rowCount) {
 
-                DiplomaSubjectDetailsCls.addStudentdegree(subjectId, students_degree, function (val) {
-                    if (val == true) {
+                    DiplomaSubjectDetailsCls.addStudentdegree(subjectId, students_degree, function (val) {
+                        if (val == true) {
 
-                        $("#SavedivLoader").hide();
-                        alert("  تم الحفظ  ");
-                        $("#publicStudentDegree").modal('hide');
+                            $("#SavedivLoader").hide();
+                            alert("  تم الحفظ  ");
+                            $("#publicStudentDegree").modal('hide');
 
-                        resetAll();
-                        prepareAdd();
-
-
-
-
-                    } else {
-                        alert("لم يتم الحفظ");
-                    }
+                            resetAll();
+                            prepareAdd();
 
 
-                });
-            }
-           
-        }
+
+
+                        } else {
+                            alert("لم يتم الحفظ");
+                        }
+
+
+                    });
+                }
+         
+    }
 
 
     } catch (err) {
@@ -677,6 +680,50 @@ function Approve_Studentdegree() {
     }
 }
 
+function send_Reason() {
+
+    try {
+     
+        if (checkRequired("divFormRefuseDegree") == 1) {
+            alert("يرجى ادخال البيانات المطلوبة");
+
+        }
+
+        else {
+            debugger
+            var subjectId = ($("#Lblsubject_id").html());
+        
+            var refuse = ($("#RefuseId").val());
+            var Id = "";
+            var code = $("#lblcode").html();
+                
+            DiplomaSubjectDetailsCls.saveRefuse(Id, subjectId, refuse, Pub_date_m, Pub_date_hj, code,function (val) {
+                        if (val == true) {
+
+                            $("#SavedivLoader").hide();
+                            alert(" تم رفض الاعتماد  ");
+                            $("#refuseDegree").modal('hide');
+                            $("#publicStudentDegree_Admin").modal('hide');
+
+                            resetAll();
+                            prepareAdd();
+
+                        } else {
+                            alert("لم يتم الحفظ");
+                        }
+
+
+                    });
+                
+            
+
+            }
+      
+    }
+    catch (err) {
+        alert(err);
+    }
+}
 
     function SaveLec() {
 
@@ -969,9 +1016,9 @@ function addNewlink() {
 
                 var basicData = generateJSONFromControls("divformNote");
 
-                var Id = "";
+                var NoteId = $("#LblNotes_id").html();
                 console.log(basicData);
-                DiplomaSubjectDetailsCls.Savenote(Id, diplomeId, code, studentId, subjectId, basicData, function (val) {
+                DiplomaSubjectDetailsCls.Savenote(NoteId, diplomeId, code, studentId, subjectId, basicData, function (val) {
                     if (val == true) {
                         $("#SavedivLoader").hide();
                        // debugger;
@@ -1062,9 +1109,9 @@ function addNewlink() {
                 var basicData = generateJSONFromControls("divformactivity");
 
 
-                var Id = "";
-                console.log(basicData);
-                DiplomaSubjectDetailsCls.SaveActivit(Id, diplomeId, code , subjectId, basicData, function (val) {
+                var Actv_Id = $("#LblActivity_id").html();
+                //console.log(basicData);
+                DiplomaSubjectDetailsCls.SaveActivit(Actv_Id, diplomeId, code , subjectId, basicData, function (val) {
                     if (val == true) {
                         $("#SavedivLoader").hide();
 
@@ -1187,7 +1234,12 @@ function drawCourseLinksTable() {
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
-
+                    var del_btn = "";
+                    if ($("#dplm_subj_del_url").html() == "True") {
+                        del_btn = ` <a class="btn btn-danger btn-xs"  onclick="Delete_Link(${element.id});">
+                                                                                                <i class="fa fa-trash"></i>
+                                                                                            </a>`;
+                    }
                     data = data + `
                                                      <tr>
                                                      
@@ -1199,22 +1251,10 @@ function drawCourseLinksTable() {
 
                                          <td><p>${element.notes}</p></td>
                                                        <td>
-                                                          <div class="btn-group pull-left" style="position:absolute">
-                                                        <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                                   <i class="fa fa-cogs"></i>
-
-                                                                </button>
-                                                                <ul  class="dropdown-menu">
-
-                                                                 <li>
-                                                                                            <a   onclick="Delete_Link(${element.id});">
-                                                                                                حذف
-                                                                                            </a>
-                                                                                                    </li>
-                                                  
-                                                      </ul>
-                                                     </div>
+                                                   
+                                                                                           ${del_btn}
+                                                            
+                                                    
                                                            </td>
 
                                                    
@@ -1235,6 +1275,39 @@ function drawCourseLinksTable() {
     }
 }
 
+
+function Edit_Notes(NoteID) {
+    $("#LblNotes_id").html(NoteID);
+    
+    DiplomaSubjectDetailsCls.Edit_Notes(NoteID, function (val) {
+        if (val[0] == "1") {
+            var data = JSON.parse(val[1]);
+            fillControlsFromJson(data[0]);
+            $("#divdate2 #txtDatem").val(data[0].date_m);
+            $("#divdate2 #txtDateh").val(data[0].date_hj);
+
+        }
+    });
+
+}
+
+function Edit_Activity(ActivityID) {
+    $("#LblActivity_id").html(ActivityID);
+
+    DiplomaSubjectDetailsCls.Edit_Activity(ActivityID, function (val) {
+        if (val[0] == "1") {
+            var data = JSON.parse(val[1]);
+            fillControlsFromJson(data[0]);
+
+
+            $("#divdate3 #txtDatem").val(data[0].date_m);
+            $("#divdate3 #txtDateh").val(data[0].date_hj);
+        }
+
+
+    });
+
+}
 
 
 ///////////////////
@@ -1323,7 +1396,7 @@ function viewHomework(HMWID) {
                                        <table id="student">
 
                                                         <tr>
-<td>${i}</td>
+                                                  <td>${i}</td>
                                                             <td><img src="${element.studImag}"/></td>
 
                                                             <td>
@@ -1443,7 +1516,7 @@ function SearchStudent() {
     try {
         
         var diplome_ID = ($("#LblDiplome_id").html());
-    //    var subjectId = ($("#Lblsubject_id").html());
+   
         var StudentName = ($("#txtstud_Search").val());
         DiplomaSubjectDetailsCls.search_pub_Students(StudentName, diplome_ID, function (val) {
             var data = "";
@@ -1459,14 +1532,15 @@ function SearchStudent() {
                                     <td>
                                         <label id=" ${element.student_id}"> ${element.studentname}</label>
                                     </td>
-                                    <td>
-               <input  onkeypress="return isNumber(event);" id="finaldegee" type="text" value=" ${element.final}"   />
-                                   
-                                    </td>
-                                    <td>
-               <input  onkeypress="return isNumber(event);" id="activitydegee" type="text" value=" ${element.activityDegree}" />
+    <td>
+               <input  onkeypress="return isNumber(event);"  hidden id="activitydegee" type="text" class=" col1" value=" ${element.activityDegree}" />
                                     
                                     </td>
+                                    <td>
+               <input  onkeypress="return isNumber(event);"  hidden id="finaldegee" type="text"  class=" col2" value=" ${element.final}"   />
+                                   
+                                    </td>
+                                   
                                 </tr> `
 
 
@@ -1491,6 +1565,15 @@ function SearchStudent() {
     }
 }
 
+function markcol(id) {
+  
+    var chk = document.getElementById(id);
+    if (chk.checked == true) {
+        $("." + id).removeAttr("hidden");
+    }
+    else { $("." + id).attr("hidden","hidden");}
+}
+   
 
     function setLectId(lecutreId) {
        $("#LblLecture_id").html(lecutreId);
@@ -1764,7 +1847,13 @@ ${hmw_lec}
 
                     arr1.forEach(function (element) {
 
-
+                        var del_btn = "";
+                        if ($("#dplm_subj_del_comment").html() == "True") {
+                            del_btn = `         <button type="button"  class="btn btn-danger btn-xs" onclick="Deleteusr_comment(${element.id});">
+                                                        
+                                                          <i class="fa fa-trash"></i>
+                                                      </button>`;
+                        }
 
                         data = data + `
                      <ul>
@@ -1774,10 +1863,7 @@ ${hmw_lec}
                                                                 <div class="user">
 
                                                         <div class="btn-group pull-left">
-                                                      <button type="button"  class="btn btn-primary btn-sm" onclick="Deleteusr_comment(${element.id});">
-                                                        حذف
-                                                          <i class="fa fa-trash"></i>
-                                                      </button>
+                                             ${del_btn}
                                                            </div>
                                                                     <div class="usr-img">
                                                                         <img  class="avatar" src="${element.suerImage}">
@@ -1832,6 +1918,48 @@ function Deleteusr_comment(commId) {
 }
 
 
+function Delete_Activity(activity_Id) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+        // debugger
+        DiplomaSubjectDetailsCls.Delete_Activity(activity_Id, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                //drawNotes();
+
+
+            } else {
+                alert('لم يتم الحذف');
+            }
+
+        });
+    }
+
+}
+
+
+function Delete_Note(noteId) {
+    var f = confirm("هل  تريد الحذف");
+    if (f == true) {
+        $("#SavedivLoader").show();
+        // debugger
+        DiplomaSubjectDetailsCls.Delete_Notes(noteId, function (val) {
+            if (val[0] == 1) {
+                $("#SavedivLoader").hide();
+                alert("تم الحذف بنجاح");
+                drawNotes();
+               
+
+            } else {
+                alert('لم يتم الحذف');
+            }
+
+        });
+    }
+
+}
 
 
 function archiveCourse() {
@@ -1884,14 +2012,15 @@ function drawpublicDegreeTable() {
                                     <td>
                                         <label id=" ${element.student_id}"> ${element.studentname}</label>
                                     </td>
-                                    <td>
-               <input   onkeypress="return isNumber(event);" id="finaldegee" type="text" value=" ${element.final}"   />
-                                   
-                                    </td>
-                                    <td>
-               <input onkeypress="return isNumber(event);" id="activitydegee" type="text" value=" ${element.activityDegree}" />
+            <td>
+               <input onkeypress="return isNumber(event);" hidden id="activitydegee" class="col1" type="text" value=" ${element.activityDegree}" />
                                     
                                     </td>
+                                    <td>
+               <input   onkeypress="return isNumber(event);" hidden id="finaldegee" type="text"  class="col2" value=" ${element.final}"   />
+                                   
+                                    </td>
+                                   
                                 </tr> `
 
 
@@ -1924,22 +2053,30 @@ function drawApproved_StudentDegree() {
 
             console.log(val);
             var data = "";
+            var count = 0;
             if (val[0] == 1) {
                 var arrstudent = JSON.parse(val[1]);
-
+                count++;
                 arrstudent.forEach(function (element) {
 
 
                     data = data + `   <tr>
+                            <td>${count}</td>
                                     <td>
                                         <label id=" ${element.student_id}"> ${element.studentname}</label>
                                     </td>
+                                   
                                     <td>
-               <input   onkeypress="return isNumber(event);" id="finaldegee" type="text" value=" ${element.final}"   />
+               <input onkeypress="return isNumber(event);" id="activitydegee" readonly type="text" value=" ${element.activityDegree}" />
+                                    
+                                    </td>
+
+                  <td>
+               <input   onkeypress="return isNumber(event);" id="finaldegee" readonly type="text" value=" ${element.final}"   />
                                    
                                     </td>
                                     <td>
-               <input onkeypress="return isNumber(event);" id="activitydegee" type="text" value=" ${element.activityDegree}" />
+               <input onkeypress="return isNumber(event);" id="sumDegree" readonly type="text" value=" ${element.total}" />
                                     
                                     </td>
                                 </tr> `
@@ -2046,7 +2183,12 @@ function drawApproved_StudentDegree() {
                     var arr1 = JSON.parse(val[1]);
 
                     arr1.forEach(function (element) {
-
+                        var del_btn = "";
+                        if ($("#dplm_subj_delete_file").html() == "True") {
+                            del_btn = `    <a  class="btn btn-danger btn-xs"  onclick="DeleteFile(${element.id});">
+                                                                                                <i class="fa fa-trash"></i>
+                                                                                            </a>`;
+                        }
                         var file_nm = "";
                         var path = element.image;
                         if (path != "" && path != null) {
@@ -2074,22 +2216,10 @@ function drawApproved_StudentDegree() {
                                                         </td> 
                                                         <td>
 
-                                                          <div class="btn-group pull-left" style="position:absolute">
-                                                        <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                                   <i class="fa fa-cogs"></i>
-
-                                                                </button>
-                                                                <ul  class="dropdown-menu">
-
-                                                                 <li>
-                                                                                            <a   onclick="DeleteFile(${element.id});">
-                                                                                                حذف
-                                                                                            </a>
-                                                                                                    </li>
-                                                  
-                                                      </ul>
-                                                     </div>
+                                                       
+                                                                
+                                                                                        ${del_btn}
+                                                                       
                                                            </td> 
                                                          </tr>`;
                         }
@@ -2138,7 +2268,32 @@ function drawApproved_StudentDegree() {
                 var i = 0;
                 arr1.forEach(function (element) {
                     i++;
-                    data = data + `<table id="student">
+                    var st_deg = "";
+                    var st_note = "";
+                    var st_del = "";
+                    if ($("#dblm_subj_stud_degrees").html()=="True") {
+                        st_deg = `   <li> <a   data-toggle="modal" href="#studentDegrees"  onclick=" viewstudDegrees(${element.student_id});Setstudentid(${element.student_id});">
+                                                                                                الدرجات 
+                                                                                            </a>  </li>`;
+                    }
+                    if ($("#dplm_subj_stud_note").html() == "True") {
+                        st_note = `  
+                                                                                                <li>
+                                                                                            <a   data-toggle="modal" href="#addNote" onclick="Setstudentid(${element.student_id});">
+                                                                                                اضافة ملاحظة
+                                                                                            </a>
+                                                                                                    </li>`;
+
+                    }
+                    if ($("#dplm_subj_delete_stud").html() == "True") {
+                        st_del = `          <li>
+                                                                                            <a   onclick="DeleteStudent(${element.student_id});">
+                                                                                                حذف
+                                                                                            </a>
+                                                                                                    </li>
+                                                                                               `;
+                    }
+                    data = data + `
 
                                                     <tr>
   <td>${i}</td>
@@ -2151,30 +2306,18 @@ function drawApproved_StudentDegree() {
 
                                                         </td>
                                                         <td>
-                                                             <div class="btn-group pull-left"  >
+                                                             <div class="btn-group pull-left" style="position:absolute;" >
                                                                                         <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                          
                                                                                             <i class="fa fa-cogs"></i>
       
                                                                                         </button>
                                                                                         <ul class="dropdown-menu">
-                                                                                           
-                                     
-                                                                                                <li>
-                                                                                            <a   onclick="DeleteStudent(${element.student_id});">
-                                                                                                حذف
-                                                                                            </a>
-                                                                                                    </li>
-                                                                                                <li>
-                                                                                            <a   data-toggle="modal" href="#studentDegrees"  onclick=" viewstudDegrees(${element.student_id});Setstudentid(${element.student_id});">
-                                                                                                الدرجات 
-                                                                                            </a>
-                                                                                                    </li>
-                                                                                                <li>
-                                                                                            <a   data-toggle="modal" href="#addNote" onclick="Setstudentid(${element.student_id});">
-                                                                                                اضافة ملاحظة
-                                                                                            </a>
-                                                                                                    </li>
+
+                                    ${st_deg}
+                                    ${st_note}
+                                    ${st_del}
+                                                                                      
                                                                                                 </ul>
                                                                                            
                                                                                         </div>
@@ -2183,15 +2326,13 @@ function drawApproved_StudentDegree() {
                                                         </td>
 
                                                     </tr>
-                                                  
-                                                </table>
+                             
                  
                                                                                
                                                                       
 `;
                 });
-                //data += "</table></div></div ></div >";
-                //console.log(data);
+              
                 $("#StudentTable").html(data);
             });
         } catch (err) {
@@ -2212,7 +2353,40 @@ function drawApproved_StudentDegree() {
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
-
+                 
+                    var hw_edit = "";
+                    var hw_del = "";
+                    var hw_sol = "";
+                    var hw_dwn = "";
+                
+                    if ($("#dplm_subj_edit_hw").html() == "True") {
+                        hw_edit = `<li>
+                                                                                                <a   data-toggle="modal" href="#homeworks"  onclick="viewHomework(${element.id});">
+                                                                                                  تعديل 
+                                                                                                </a>
+                                                                                                        </li>`;
+                    }
+                    if ($("#dplm_subj_del_hw").html() == "True") {
+                        hw_del = ` <li>
+                                                                                                <a   onclick="DeleteHomework(${element.id});">
+                                                                                                    حذف
+                                                                                                </a>
+                                                                                                        </li>`;
+                    }
+                    if ($("#dplm_subj_sol_hw").html() == "True") {
+                        hw_sol = `   <li>
+                                                                                            <a   data-toggle="modal" href="#StudenthomeworkAnswers"  onclick="drawstudenthomeworkanswers(${element.id}) ">
+                                                                                              حلول الواجب  
+                                                                                            </a>
+                                                                                                    </li>`;
+                    }
+                    if ($("#dplm_subj_dwn_hw").html() == "True") {
+                        hw_dwn = `     <li>
+                                                                                                <a href="../${element.image}" download>
+                                                                                                    تحميل
+                                                                                                </a>
+                                                                                                        </li>`;
+                    }
                     data = data + `<table id="student">
 
                                                         <tr>
@@ -2233,7 +2407,7 @@ function drawApproved_StudentDegree() {
 
                                                             </td>
                                                             <td>
-                                                                 <div class="btn-group pull-left"  >
+                                                                 <div class="btn-group pull-left" style="position:absolute;"  >
                                                                                             <button type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                                                                                 <i class="fa fa-cogs"></i>
@@ -2241,26 +2415,10 @@ function drawApproved_StudentDegree() {
                                                                                             </button>
                                                                                             <ul class="dropdown-menu">
 
-                                                                                                    <li>
-                                                                                                <a   onclick="DeleteHomework(${element.id});">
-                                                                                                    حذف
-                                                                                                </a>
-                                                                                                        </li>
-                                                                                                      <li>
-                                                                                                <a href="../${element.image}" download>
-                                                                                                    تحميل
-                                                                                                </a>
-                                                                                                        </li>
-                                                                                                    <li>
-                                                                                                <a   data-toggle="modal" href="#homeworks"  onclick="viewHomework(${element.id});">
-                                                                                                  تعديل 
-                                                                                                </a>
-                                                                                                        </li>
-                                                                                                      <li>
-                                                                                            <a   data-toggle="modal" href="#StudenthomeworkAnswers"  onclick="drawstudenthomeworkanswers(${element.id}) ">
-                                                                                              حلول الواجب  
-                                                                                            </a>
-                                                                                                    </li>
+                                                                                               ${hw_edit}
+                                                                                               ${hw_del}
+                                                                                               ${hw_sol}
+                                                                                               ${hw_dwn}
 
                                                                                                     </ul>
 
@@ -2703,7 +2861,27 @@ function drawstudentHomeworkTable() {
 
                 arr1.forEach(function (element) {
 
-                    data = data + `<p>${element.comment}</p>
+                    data = data + `
+
+        <div class="btn-group pull-left">
+  <button  style="margin:6px;" type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    
+      <i class="fa fa-cogs"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      <li>
+          <a  onclick="Delete_Note(${element.id});">
+              حذف  
+          </a></li>
+        <li>
+          <a  data-toggle="modal" href="#addNote" onclick="Edit_Notes(${element.id});">
+              تعديل  
+          </a></li>
+      
+  </ul>
+</div>
+<p>${element.comment}</p>
 
     `;
                 });
@@ -2728,9 +2906,26 @@ function drawstudentHomeworkTable() {
 
                 arr1.forEach(function (element) {
 
-                    data = data + `<p>${element.activity}</p>
+                    data = data + `
 
-    `;
+ <div class="btn-group pull-left">
+  <button  style="margin:6px;" type="button" class="btn btn-info dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+      <i class="fa fa-cogs"></i>
+  </button>
+  <ul class="dropdown-menu">
+
+      <li>
+          <a  onclick="Delete_Activity(${element.id});">
+              حذف  
+          </a></li>
+        <li>
+          <a   data-toggle="modal" href="#activity_edit" onclick="Edit_Activity(${element.id});">
+              تعديل  
+          </a></li>
+      
+  </ul>
+</div><p>${element.activity}</p> `;
                 });
 
                 $("#studentActivity").html(data);
@@ -2895,7 +3090,7 @@ function SaveDegree() {
                 });
             }
                 else {
-                    alert("مجموع درجة الاختبار النهائي وردجة نصف العام 100 درجة فقط");
+                    alert("مجموع الدرجات اكبر من درجة المادة");
                 }
             
 

@@ -27,19 +27,7 @@ Public Class advisor
     Dim _sqlconn As New SqlConnection(DBManager.GetConnectionString)
     Dim _sqltrans As SqlTransaction
 #End Region
-    Private Function GetRandom() As String
-        Dim Random As New Random()
-        Dim rNum As String = Random.Next()
-        Dim len As Integer = rNum.Length
-        If len < 4 Then
-            For i As Integer = len To 3
-                rNum = rNum + "0"
-            Next
-        ElseIf len > 4 Then
-            rNum = rNum.Substring(0, 4)
-        End If
-        Return rNum
-    End Function
+
 #Region "Save"
     ''' <summary>
     ''' Save  Type
@@ -57,13 +45,13 @@ Public Class advisor
             Dim dt As New DataTable
             If id = "" Then
 
-                dictBasicDataJson.Add("code", GetRandom())
+                dictBasicDataJson.Add("code", PublicFunctions.GetRandom())
                 dt = DBManager.Getdatatable("select id from tbllock_up where RelatedId=2 and Type='PG' and Comp_id=" + LoginInfo.GetComp_id())
                 If dt.Rows.Count <> 0 Then
                     group_id = dt.Rows(0)(0).ToString
                 End If
             Else
-                dt = DBManager.Getdatatable("select id from tblUsers where User_Type=6 and related_id=" + id)
+                dt = DBManager.Getdatatable("select id from tblUsers where User_Type in (6,15) and related_id=" + id)
                 If dt.Rows.Count <> 0 Then
                     user_id = dt.Rows(0)(0).ToString
                 End If
@@ -81,7 +69,11 @@ Public Class advisor
                 dictBasicDataJson1.Add("User_PhoneNumber", dictBasicDataJson("tel"))
                 dictBasicDataJson1.Add("user_indenty", dictBasicDataJson("advisor_identiy"))
                 dictBasicDataJson1.Add("comp_id", LoginInfo.GetComp_id())
-                dictBasicDataJson1.Add("User_Type", 6)
+                Dim User_Type = "6"
+                If Convert.ToBoolean(dictBasicDataJson("depart_manager")) Then
+                    User_Type = "15"
+                End If
+                dictBasicDataJson1.Add("User_Type", User_Type)
                 If id = "" Then
                     dictBasicDataJson1.Add("related_id", PublicFunctions.GetIdentity(_sqlconn, _sqltrans))
                     dictBasicDataJson1.Add("group_id", group_id)
@@ -202,7 +194,7 @@ Public Class advisor
 
         Dim Names As New List(Of String)(10)
         Try
-            Return PublicFunctions.ConvertDataTabletoString(DBManager.Getdatatable("SELECT User_Password as 'password',ash_advisors.id,ash_advisors.comp_id ,code ,name ,specialty ,tel ,email ,ash_advisors.active,advisor_identiy  FROM ash_advisors left join tblUsers on ash_advisors.id=tblUsers.related_id where ash_advisors.id=" + editItemId))
+            Return PublicFunctions.ConvertDataTabletoString(DBManager.Getdatatable("SELECT User_Password as 'password',ash_advisors.id,ash_advisors.comp_id ,code ,name ,specialty ,tel ,email ,ash_advisors.active,advisor_identiy,depart_manager  FROM ash_advisors left join tblUsers on ash_advisors.id=tblUsers.related_id where ash_advisors.id=" + editItemId))
         Catch ex As Exception
             Return ""
         End Try

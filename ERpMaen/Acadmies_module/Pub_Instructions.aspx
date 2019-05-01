@@ -21,6 +21,12 @@
 		margin: 0px;
 		padding: 0px;
 	}
+         .event-list > li > a > img {
+		width: 100%;
+	}
+         .event-list > li > a > img  {
+			display: inline-block;
+		}
 	.event-list > li {
 		background-color: rgb(255, 255, 255);
 		box-shadow: 0px 0px 5px rgb(51, 51, 51);
@@ -55,7 +61,7 @@
 		font-weight: 900;
 		line-height: 1;
 	}
-	.event-list > li > img {
+	.event-list > li > a > img {
 		width: 100%;
 	}
 	.event-list > li > .info {
@@ -145,11 +151,11 @@
 			padding: 0px;
 		}
 		.event-list > li > time,
-		.event-list > li > img  {
+		.event-list > li > a > img  {
 			display: inline-block;
 		}
 		.event-list > li > time,
-		.event-list > li > img {
+		.event-list > li > a > img {
 			width: 120px;
 			float: right;
 		}
@@ -158,7 +164,7 @@
 			overflow: hidden;
 		}
 		.event-list > li > time,
-		.event-list > li > img {
+		.event-list > li > a > img {
 			width: 120px;
 			height: 120px;
 			padding: 0px;
@@ -308,6 +314,7 @@
 
         <section>
             <div class="row">
+
                  <label style="display:none" id="lblInstruction_id" ></label>
                 <div class="col-md-12 col-sm-12 col-xs-12 ">
                     <div class="white-block row">
@@ -339,6 +346,20 @@
         <section>
             <div class="container">
 		<div class="row">
+
+             <div class="col-md-12" style="text-align: center; ">
+							<div class="btn-group">
+							
+								<button type="button" class="btn btn-success"  style="width:100px; float: right;" onclick="drawCourses(0);">جديدة</button>
+								<button type="button" class="btn btn-primary"  style="width:100px; float: right;" onclick=" drawCourses(1);">ارشيف</button>
+                                	<button type="button" class="btn btn-secondary" style="width:100px; float: right;" onclick="drawAllCourses();">الكل</button>
+			
+                                
+                              <br />
+                                <br />
+                                <br />
+							</div>
+						</div>
 			<div class="[ col-xs-12 col-md-12 col-sm-8 ]">
 				<ul class="event-list" id="Instructions-list">
 				
@@ -405,7 +426,7 @@
                            
                                  </div>
                              <div class="col-md-6">
-                            <div class=" row form-group">
+                         <%--   <div class=" row form-group">
                                             <div class="col-md-3 col-sm-12">
                                                 <label class="">مسنده الى     </label>
                                             </div>
@@ -414,13 +435,27 @@
                                                 <select class="form-control" dbcolumn="User_Type">
                                                     <option value="8">طلاب</option>
                                                     <option value="4">مدربين </option>
+                                                     <option value="5">موظفين </option>
+                                                     <option value="4">مدربين </option>
                                                     <option value="2">لكل</option>
                                                    
                                                 </select>
 
 
                                             </div>
-                                        </div>
+                                        </div>--%>
+
+                                 <div class="row form-group ">
+                                <div class="col-md-3 col-sm-12">
+                                    <label class="label-required">مسنده الى  </label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                    <asp:DropDownList dbcolumn="User_Type" class="form-control" required ClientIDMode="Static" ID="lblUsers" runat="server">
+                                    </asp:DropDownList>
+                                   
+                                </div>
+                            </div>
 
                             <div class=" row form-group ">
                                 <div class="col-md-3 col-sm-12">

@@ -1,6 +1,7 @@
 ﻿var doRedirect = false;
 $(function () {
     try {
+        debugger
         $("input").attr("class", "");
         $("select").attr("class", "");
         $("input").addClass("form-control");
@@ -60,6 +61,7 @@ function save() {
 function edit(val) {
     try {
         //cancel();
+        debugger
         resetAll();
         if (val[0] != "") {
             var data = JSON.parse(val[0]);

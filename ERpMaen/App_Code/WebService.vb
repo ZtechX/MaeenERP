@@ -3975,9 +3975,15 @@ Public Class WebService
                 quaryStr = quaryStr + " where AssignedTo=" + LoginInfo.GetUser__Id() + " and  (RefType not in (1,2,3,4)  or (RefType in (1,2,3,4) and Date=" + currdate.ToString + ")) order by date desc"
             ElseIf Not LoginInfo.isSuperAdmin() Then
                 If formName = "Users" Then
+                    Dim userType = LoginInfo.getUserType()
+                    Dim condation = ""
+                    If userType <> "2" Then
+                        condation = " and parent_id = " + LoginInfo.GetUser__Id()
+                    End If
+
                     quaryStr = "Select tblUsers.id As 'AutoCodeHide', full_name as 'الاسم بالكامل', isNull(name, '') as 'دور المستخدم', user_indenty as 'رقم الهوية', User_PhoneNumber as 'رقم الجوال'," +
                " Description as 'الصلاحية' from tblUsers Left Join tblUser_Type on tblUser_Type.id = User_Type Left Join tbllock_up on tbllock_up.id = group_id " +
-               " where isNull(superAdmin, 0) = 0 And TblUsers.comp_id =" + LoginInfo.GetComp_id()
+               " where isNull(superAdmin, 0) = 0 And TblUsers.comp_id =" + LoginInfo.GetComp_id() + condation
                 ElseIf formName = "Advisors" Then
                     quaryStr = quaryStr + " where ash_advisors.comp_id=" + LoginInfo.GetComp_id()
                 ElseIf formName = "Students" Then

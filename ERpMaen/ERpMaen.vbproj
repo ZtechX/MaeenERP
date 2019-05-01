@@ -183,6 +183,7 @@
     <Content Include="Acadmies_module\Students.aspx" />
     <Content Include="Acadmies_module\trainers.aspx" />
     <Content Include="Acadmies_module\training_centers.aspx" />
+    <Content Include="AccessDenied.aspx" />
     <Content Include="App_Themes\alt_raw_bg.png" />
     <Content Include="App_Themes\cp\StyleSheet.css" />
     <Content Include="App_Themes\design\btn-create-left.gif" />
@@ -763,6 +764,7 @@
     <Content Include="ASMX_WebServices\orders.asmx" />
     <Content Include="ASMX_WebServices\DiplomaSubjectDetailsCls.asmx" />
     <Content Include="ASMX_WebServices\Pub_InstructionsCls.asmx" />
+    <Content Include="ASMX_WebServices\reports_academy.asmx" />
     <Content Include="ASMX_WebServices\semesterCls.asmx" />
     <Content Include="ASMX_WebServices\studentCls.asmx" />
     <Content Include="ASMX_WebServices\Timeline.asmx" />
@@ -1656,6 +1658,7 @@
     <Content Include="css\plugins\xeditable\bootstrap-editable.css" />
     <Content Include="css\style.css" />
     <Content Include="css\StyleSheet.css" />
+    <Content Include="css\customCalender\CustomCalenderCSS.css" />
     <Content Include="css\themes.css" />
     <Content Include="css\Timeline\Timeline.css" />
     <Content Include="css\uploadify.css" />
@@ -1712,7 +1715,6 @@
     <Content Include="js\highcharts.js" />
     <Content Include="js\highcharts.src.js" />
     <Content Include="js\hijri-date.js" />
-    <Content Include="js\hijri-date1.js" />
     <Content Include="js\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="js\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="js\images\ui-bg_flat_10_000000_40x100.png" />
@@ -1865,6 +1867,7 @@
     <Content Include="JS_Code\acadmies\student.js" />
     <Content Include="JS_Code\acadmies\trainers.js" />
     <Content Include="JS_Code\acadmies\training_centers.js" />
+    <Content Include="JS_Code\reports_academy\reports_academy.js" />
     <Content Include="JS_Code\userPorfile\userPorfile.js" />
     <Content Include="JS_Code\orders\orders.js" />
     <Content Include="JS_Code\advisors\advisor.js" />
@@ -2043,6 +2046,10 @@
     <Content Include="Members_Module\payments.aspx" />
     <Content Include="Members_Module\sessions.aspx" />
     <Content Include="Notification.aspx" />
+    <Content Include="report_Module\Academy\academy_session_rep.aspx" />
+    <Content Include="report_Module\Academy\diplome_money_rep.aspx" />
+    <Content Include="report_Module\Academy\student_money_rep.aspx" />
+    <Content Include="report_Module\Academy\subj_degree_rep.aspx" />
     <Content Include="report_Module\Aslah\agreementRep.aspx" />
     <Content Include="report_Module\Aslah\AttendanceRegistRep.aspx" />
     <Content Include="report_Module\Aslah\caseClassificationRep.aspx" />
@@ -2066,6 +2073,7 @@
     <Content Include="report_Module\Images\footer_ph.png" />
     <Content Include="report_Module\Images\header_ph.png" />
     <Content Include="report_Module\Images\logo_ph.png" />
+    <Content Include="report_Module\reports_academy.aspx" />
     <Content Include="Scripts\nicEdit.js" />
     <Content Include="Settings_Module\CommonQuest.aspx" />
     <Content Include="Settings_Module\email_setting.aspx" />
@@ -2125,10 +2133,12 @@
     <Content Include="Sms_Module\sms.aspx" />
     <Content Include="Sms_Module\template_sms.aspx" />
     <Content Include="UserControls\Appraisal.ascx" />
+    <Content Include="UserControls\customCalenderstyle.css" />
     <Content Include="UserControls\CustomerCalendar.ascx" />
     <Content Include="UserControls\DeliveryDate.ascx" />
     <Content Include="UserControls\DeualCalendar1.ascx" />
     <Content Include="UserControls\HijriCalendar.ascx" />
+    <Content Include="js\customCalender\CustomerCalendar.js" />
     <Content Include="UserControls\Person.ascx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="fonts\DroidKufi-Regular.ttf" />
@@ -2154,6 +2164,34 @@
     <Content Include="report_Module\Aslah\agreement.rpt" />
     <Content Include="report_Module\Aslah\agreementDS.xsc">
       <DependentUpon>agreementDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Academy\academy_sessionDS.xsc">
+      <DependentUpon>academy_sessionDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Academy\academy_sessionDS.xsd" />
+    <Content Include="report_Module\Academy\academy_sessionDS.xss">
+      <DependentUpon>academy_sessionDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Academy\diplome_moneyDS.xsc">
+      <DependentUpon>diplome_moneyDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Academy\diplome_moneyDS.xsd" />
+    <Content Include="report_Module\Academy\diplome_moneyDS.xss">
+      <DependentUpon>diplome_moneyDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Academy\student_moneyDS.xsc">
+      <DependentUpon>student_moneyDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Academy\student_moneyDS.xsd" />
+    <Content Include="report_Module\Academy\student_moneyDS.xss">
+      <DependentUpon>student_moneyDS.xsd</DependentUpon>
+    </Content>
+    <Content Include="report_Module\Academy\subj_degDS.xsc">
+      <DependentUpon>subj_degDS.xsd</DependentUpon>
+    </Content>
+    <None Include="report_Module\Academy\subj_degDS.xsd" />
+    <Content Include="report_Module\Academy\subj_degDS.xss">
+      <DependentUpon>subj_degDS.xsd</DependentUpon>
     </Content>
     <None Include="report_Module\Aslah\agreementDS.xsd" />
     <Content Include="report_Module\Aslah\agreementDS.xss">
@@ -2579,6 +2617,13 @@
     <Content Include="App_Code\Archived_DiplomaSubjectDetailsCls.vb">
       <SubType>Component</SubType>
     </Content>
+    <Compile Include="AccessDenied.aspx.designer.vb">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AccessDenied.aspx.vb">
+      <DependentUpon>AccessDenied.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="App_Code\members.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -2628,6 +2673,9 @@
       <SubType>Component</SubType>
     </Content>
     <Content Include="App_Code\Pub_InstructionsCls.vb">
+      <SubType>Component</SubType>
+    </Content>
+    <Content Include="App_Code\reports_academy.vb">
       <SubType>Component</SubType>
     </Content>
     <Compile Include="App_Start\BundleConfig.vb" />
@@ -2855,6 +2903,70 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PublicFunctions.vb" />
+    <Compile Include="report_Module\Academy\academy_session.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Academy\academy_sessionDS.Designer.vb">
+      <DependentUpon>academy_sessionDS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\academy_sessionDS.vb">
+      <DependentUpon>academy_sessionDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\academy_session_rep.aspx.designer.vb">
+      <DependentUpon>academy_session_rep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\academy_session_rep.aspx.vb">
+      <DependentUpon>academy_session_rep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Academy\diplome_money.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Academy\diplome_moneyDS.Designer.vb">
+      <DependentUpon>diplome_moneyDS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\diplome_moneyDS.vb">
+      <DependentUpon>diplome_moneyDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\diplome_money_rep.aspx.designer.vb">
+      <DependentUpon>diplome_money_rep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\diplome_money_rep.aspx.vb">
+      <DependentUpon>diplome_money_rep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Academy\student_money.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Academy\student_moneyDS.Designer.vb">
+      <DependentUpon>student_moneyDS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\student_moneyDS.vb">
+      <DependentUpon>student_moneyDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\student_money_rep.aspx.designer.vb">
+      <DependentUpon>student_money_rep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\student_money_rep.aspx.vb">
+      <DependentUpon>student_money_rep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="report_Module\Academy\subj_degDS.Designer.vb">
+      <DependentUpon>subj_degDS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\subj_degDS.vb">
+      <DependentUpon>subj_degDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\subj_degree.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report_Module\Academy\subj_degree_rep.aspx.designer.vb">
+      <DependentUpon>subj_degree_rep.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\Academy\subj_degree_rep.aspx.vb">
+      <DependentUpon>subj_degree_rep.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="report_Module\Aslah\agreement.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -3084,6 +3196,13 @@
       <DependentUpon>TechRepForMembersRep.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="report_Module\reports_academy.aspx.designer.vb">
+      <DependentUpon>reports_academy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="report_Module\reports_academy.aspx.vb">
+      <DependentUpon>reports_academy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Settings_Module\CommonQuest.aspx.designer.vb">
       <DependentUpon>CommonQuest.aspx</DependentUpon>
     </Compile>
@@ -3294,6 +3413,22 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Academy\academy_session.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>academy_session1.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Academy\diplome_money.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>diplome_money1.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Academy\student_money.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>student_money1.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report_Module\Academy\subj_degree.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>subj_degree1.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

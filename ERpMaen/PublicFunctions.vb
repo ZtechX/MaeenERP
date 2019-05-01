@@ -1002,5 +1002,17 @@ ByVal day As String, ByVal RefCode As String, ByVal deliverer_data As String(), 
         Return True
     End Function
 #End Region
-
+    Public Shared Function GetRandom() As String
+        Dim Random As New Random()
+        Dim rNum As String = Random.Next()
+        Dim len As Integer = rNum.Length
+        If len < 4 Then
+            For i As Integer = len To 3
+                rNum = rNum + "0"
+            Next
+        ElseIf len > 4 Then
+            rNum = rNum.Substring(0, 4)
+        End If
+        Return rNum
+    End Function
 End Class

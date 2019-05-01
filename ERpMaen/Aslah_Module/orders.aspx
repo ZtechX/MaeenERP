@@ -23,7 +23,7 @@
 
                 <div>
                     <script src="../JS_Code/orders/orders.js"></script>
-
+                    <script src="../js/customCalender/CustomerCalendar.js"></script>
                 </div>
                 <div>
                     <div class="main-title">
