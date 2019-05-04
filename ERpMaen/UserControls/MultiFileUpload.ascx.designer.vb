@@ -23,13 +23,13 @@ Partial Public Class MultiFileUpload
     Protected WithEvents pnlMultiFileUpload As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''mdu control.
+    '''uploader control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents mdu As Global.AjaxControlToolkit.ModalPopupExtender
+    Protected WithEvents uploader As Global.AjaxControlToolkit.AsyncFileUpload
     
     '''<summary>
     '''pnl control.
@@ -57,15 +57,6 @@ Partial Public Class MultiFileUpload
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbClose As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''AjaxFileUpload1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents AjaxFileUpload1 As Global.AjaxControlToolkit.AjaxFileUpload
     
     '''<summary>
     '''cmdok control.

@@ -69,13 +69,7 @@
                             clearContents(sender);
                         }
                       
-                        //var prm = Sys.WebForms.PageRequestManager.getInstance();
-                        //prm.add_pageLoaded(setupSB);
-                        //function setupSB() {
-                        //    Shadowbox.init({ skipSetup: true });
-                        //    Shadowbox.clearCache();
-                        //    Shadowbox.setup();
-                        //}
+                       
                         function ClearMe(sender) {
                             sender.value = '';
                         }
@@ -148,7 +142,7 @@
                                                     <label class="label-required">الاسم بالكامل</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                    <asp:TextBox  required class="form-control" dbColumn="full_name" ClientIDMode="Static" ID="TextBox1" runat="server">
+                                                    <asp:TextBox  required CssClass="form-control" SkinID="form-control" dbColumn="full_name" ClientIDMode="Static" ID="TextBox1" runat="server">
                                                     </asp:TextBox>
                                                     
                                                 </div>
@@ -160,7 +154,7 @@
                                                     <label >البريد الإلكترونى</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                    <asp:TextBox SkinID="form-control" class="form-control"  dbColumn="User_Email" ClientIDMode="Static" ID="TextBox2" runat="server">
+                                                    <asp:TextBox SkinID="form-control" CssClass="form-control"  dbColumn="User_Email" ClientIDMode="Static" ID="TextBox2" runat="server">
                                                     </asp:TextBox>
 
                                                 </div>
@@ -173,8 +167,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="user_indenty" type="text" id="txtindenty"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="user_indenty" ID="txtindenty"
+                                                                            CssClass="form-control" runat="server" ClientIDMode="Static" SkinID="form-control" ></asp:TextBox>
 
                                                                         <br />
                                                                     </div>
@@ -203,7 +197,7 @@
                                                     <label class="label-required">كلمة المرور</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                    <asp:TextBox required class="form-control"   TextMode="Password" dbColumn="User_Password" ClientIDMode="Static" ID="txtUserPassword" runat="server">
+                                                    <asp:TextBox required CssClass="form-control" SkinID="form-control"  TextMode="Password" dbColumn="User_Password" ClientIDMode="Static" ID="txtUserPassword" runat="server">
                                                     </asp:TextBox>
                                                   
 
@@ -218,7 +212,7 @@
                                                     <label class="label-required">رقم الجوال</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                    <asp:TextBox onkeypress="return cust_chkNumber(event,this,10);" class="form-control" required dbColumn="User_PhoneNumber" ClientIDMode="Static" ID="phone" runat="server">
+                                                    <asp:TextBox onkeypress="return cust_chkNumber(event,this,10);" SkinID="form-control" CssClass="form-control" required dbColumn="User_PhoneNumber" ClientIDMode="Static" ID="phone" runat="server">
                                                     </asp:TextBox>
 
                                                 </div>

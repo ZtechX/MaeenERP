@@ -249,7 +249,7 @@ Public Class diplome_registerCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select  id,image, condition from acd_course_conditions where type=2 and course_id=" + diplomeId)
+            dt = DBManager.Getdatatable("select  id,image, Mandatory ,condition from acd_course_conditions where type=2 and course_id=" + diplomeId)
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
                     Dim Str = PublicFunctions.ConvertDataTabletoString(dt)

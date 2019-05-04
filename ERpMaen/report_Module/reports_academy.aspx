@@ -53,7 +53,16 @@
                        <li runat="server" id="Li2" class=""  ClientIDMode="Static">
                         <a data-toggle="tab" href="#academy_session">
                             <i class="green ace-icon fa fa-bars bigger-120"></i>
-                           تقرير السجل الاكاديمى
+                           تقرير السجل الاكاديمى الفصلى
+
+                        </a>
+
+                    </li>
+
+                         <li runat="server" id="Li6" class=""  ClientIDMode="Static">
+                        <a data-toggle="tab" href="#academy_diplome">
+                            <i class="green ace-icon fa fa-bars bigger-120"></i>
+                           تقرير السجل الاكاديمى العام
 
                         </a>
 
@@ -61,15 +70,33 @@
                     <li runat="server" id="Li1" class="">
                         <a data-toggle="tab" href="#students_money">
                             <i class="green ace-icon fa fa-bars bigger-120"></i>
-                          التقرير المالى للطلبة
+                          التقرير المالى للدبلوم
 
                         </a>
 
                     </li>
-                        <li runat="server" id="Li3" class="">
+                    <li runat="server" id="Li3" class="">
                         <a data-toggle="tab" href="#details_student_money">
                             <i class="green ace-icon fa fa-bars bigger-120"></i>
-                            تقرير التفاصيل المالية لكل طالب
+                            تقرير الدفعات المالية 
+
+                        </a>
+
+                    </li>
+
+                    <li runat="server" id="Li4" class="">
+                        <a data-toggle="tab" href="#lecture_attendence">
+                            <i class="green ace-icon fa fa-bars bigger-120"></i>
+                            تقرير  الغياب والحضور 
+
+                        </a>
+
+                    </li>
+
+                       <li runat="server" id="Li5" class="">
+                        <a data-toggle="tab" href="#course_attendence">
+                            <i class="green ace-icon fa fa-bars bigger-120"></i>
+                            التقرير العام للغياب والحضور 
 
                         </a>
 
@@ -99,11 +126,11 @@
 
                                                      <div class="form-group">
                                                          <div class="col-md-3 col-sm-12">
-                                                             <label class="label-required">الدبلومة</label>
+                                                             <label class="label-required">الدبلوم</label>
                                                          </div>
 
                                                          <div class="col-md-9 col-sm-12">
-                                                             <asp:DropDownList required dbcolumn="specialty" class="form-control" ClientIDMode="Static" ID="ddldiplomes" runat="server">
+                                                             <asp:DropDownList required dbcolumn="specialty" class="form-control" onchange="get_deplomes_subjects(1);" ClientIDMode="Static" ID="ddldiplomes" runat="server">
                                                              </asp:DropDownList>
 
                                                          </div>
@@ -115,7 +142,7 @@
                                                          </div>
 
                                                          <div class="col-md-9 col-sm-12">
-                                                             <asp:DropDownList required dbcolumn="semster" onchange="get_deplomes_subjects();" class="form-control" ClientIDMode="Static" ID="ddlsemster" runat="server">
+                                                             <asp:DropDownList required dbcolumn="semster" onchange="get_deplomes_subjects(1);" class="form-control" ClientIDMode="Static" ID="ddlsemster" runat="server">
                                                              </asp:DropDownList>
 
                                                          </div>
@@ -123,7 +150,7 @@
 
                                                      <div class="form-group">
                                                          <div class="col-md-3 col-sm-12">
-                                                             <label class="label-required">المواد</label>
+                                                             <label class="label-required">المادة</label>
                                                          </div>
 
                                                          <div class="col-md-9 col-sm-12">
@@ -137,8 +164,8 @@
 
                                                      <div class="form-group">
                                                          <div class="col-md-9 col-sm-12">
-                                                             <button onclick="get_report_degree(); return false" class="btn btn-success">التقرير</button>
-
+                                                             <button onclick="get_report_degree(1); return false" class="btn btn-success">التقرير</button>
+                                                             <button onclick="get_report_degree(2); return false" class="btn btn-success">التقريرفارغ</button>
                                                          </div>
                                                      </div>
                                                  </div>
@@ -175,11 +202,23 @@
 
                                                         <div class="form-group">
                                                             <div class="col-md-3 col-sm-12">
-                                                                <label class="label-required">الدبلومة</label>
+                                                                <label class="label-required">الدبلوم</label>
                                                             </div>
 
                                                             <div class="col-md-9 col-sm-12">
                                                                 <asp:DropDownList required dbcolumn="specialty" onchange="get_deplome_students(1)" class="form-control" ClientIDMode="Static" ID="ddldiplomes1" runat="server">
+                                                                </asp:DropDownList>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-md-3 col-sm-12">
+                                                                <label class="label-required">الترم</label>
+                                                            </div>
+
+                                                            <div class="col-md-9 col-sm-12">
+                                                                <asp:DropDownList required dbcolumn="semster" onchange="get_deplome_students(1)" class="form-control" ClientIDMode="Static" ID="ddlsemster1" runat="server">
                                                                 </asp:DropDownList>
 
                                                             </div>
@@ -240,11 +279,11 @@
 
                                                         <div class="form-group">
                                                             <div class="col-md-3 col-sm-12">
-                                                                <label class="label-required">الدبلومة</label>
+                                                                <label class="label-required">الدبلوم</label>
                                                             </div>
 
                                                             <div class="col-md-9 col-sm-12">
-                                                                <asp:DropDownList required dbcolumn="specialty" onchange="get_deplome_students()" class="form-control" ClientIDMode="Static" ID="ddldiplomes2" runat="server">
+                                                                <asp:DropDownList required dbcolumn="specialty" class="form-control" ClientIDMode="Static" ID="ddldiplomes2" runat="server">
                                                                 </asp:DropDownList>
 
                                                             </div>
@@ -292,7 +331,7 @@
 
                                                         <div class="form-group">
                                                             <div class="col-md-3 col-sm-12">
-                                                                <label class="label-required">الدبلومة</label>
+                                                                <label class="label-required">الدبلوم</label>
                                                             </div>
 
                                                             <div class="col-md-9 col-sm-12">
@@ -318,6 +357,237 @@
                                                         <div class="form-group">
                                                             <div class="col-md-9 col-sm-12">
                                                                 <button onclick="get_report_details_student_money(); return false" class="btn btn-success">التقرير</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="clearfix"></div>
+                                                </asp:Panel>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                    </div>
+
+                     </div>
+
+                      <!-- # بداية التاب الخامس -->
+
+                      <div id="lecture_attendence" class="tab-pane fade in">
+
+                       
+                    <!-- # بداية محتويات التبويب -->
+                        <div class="form-horizontal" role="form">
+                             <div class="row">
+                                 <div class="widget-box">
+                                     <div class="widget-body">
+                                           <div class="newformstyle form_continer" style="direction: rtl;">
+                                            <div class="clear"></div>
+                                            <div class="cp_margin pad10">
+
+                                                 <div class="col-md-6">
+
+                                                     <div class="form-group">
+                                                         <div class="col-md-3 col-sm-12">
+                                                             <label class="label-required">الدبلوم</label>
+                                                         </div>
+
+                                                         <div class="col-md-9 col-sm-12">
+                                                             <asp:DropDownList required dbcolumn="specialty" onchange="get_deplomes_subjects(2);" class="form-control" ClientIDMode="Static" ID="ddldiplomes4" runat="server">
+                                                             </asp:DropDownList>
+
+                                                         </div>
+                                                     </div>
+
+                                                     <div class="form-group">
+                                                         <div class="col-md-3 col-sm-12">
+                                                             <label class="label-required">الترم</label>
+                                                         </div>
+
+                                                         <div class="col-md-9 col-sm-12">
+                                                             <asp:DropDownList required dbcolumn="semster" onchange="get_deplomes_subjects(2);" class="form-control" ClientIDMode="Static" ID="ddlsemster2" runat="server">
+                                                             </asp:DropDownList>
+
+                                                         </div>
+                                                     </div>
+
+                                                     <div class="form-group">
+                                                         <div class="col-md-3 col-sm-12">
+                                                             <label class="label-required">المادة</label>
+                                                         </div>
+
+                                                         <div class="col-md-9 col-sm-12">
+                                                             <select id="ddlsubject1" onchange="get_lecture();" class="form-control">
+                                                                 <option value="0">اختر</option>
+
+                                                             </select>
+
+                                                         </div>
+                                                     </div>
+
+                                                     <div class="form-group">
+                                                         <div class="col-md-3 col-sm-12">
+                                                             <label class="label-required">المحاضرة</label>
+                                                         </div>
+
+                                                         <div class="col-md-9 col-sm-12">
+                                                             <select id="ddllecture"  class="form-control">
+                                                                 <option value="0">اختر</option>
+
+                                                             </select>
+
+                                                         </div>
+                                                     </div>
+
+                                                     <div class="form-group">
+                                                         <div class="col-md-9 col-sm-12">
+                                                             <button onclick="get_report_lecture_attendence(); return false" class="btn btn-success">التقرير</button>
+
+                                                         </div>
+                                                     </div>
+                                                 </div>
+
+
+                                             </div>
+                                         </div>
+
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+
+
+                
+                
+                    </div>
+
+                                  <!-- # بداية التاب السادس -->
+
+                      <div id="course_attendence" class="tab-pane fade in">
+
+                       
+                    <!-- # بداية محتويات التبويب -->
+                        <div class="form-horizontal" role="form">
+                             <div class="row">
+                                 <div class="widget-box">
+                                     <div class="widget-body">
+                                           <div class="newformstyle form_continer" style="direction: rtl;">
+                                            <div class="clear"></div>
+                                            <div class="cp_margin pad10">
+
+                                                 <div class="col-md-6">
+
+                                                     <div class="form-group">
+                                                         <div class="col-md-3 col-sm-12">
+                                                             <label class="label-required">الدبلوم</label>
+                                                         </div>
+
+                                                         <div class="col-md-9 col-sm-12">
+                                                             <asp:DropDownList required dbcolumn="specialty" class="form-control" ClientIDMode="Static" ID="ddldiplomes5" runat="server">
+                                                             </asp:DropDownList>
+
+                                                         </div>
+                                                     </div>
+
+                                                     <div class="form-group">
+                                                         <div class="col-md-3 col-sm-12">
+                                                             <label class="label-required">الترم</label>
+                                                         </div>
+
+                                                         <div class="col-md-9 col-sm-12">
+                                                             <asp:DropDownList required dbcolumn="semster" onchange="get_deplomes_subjects(3);" class="form-control" ClientIDMode="Static" ID="ddlsemster3" runat="server">
+                                                             </asp:DropDownList>
+
+                                                         </div>
+                                                     </div>
+
+                                                     <div class="form-group">
+                                                         <div class="col-md-3 col-sm-12">
+                                                             <label class="label-required">المادة</label>
+                                                         </div>
+
+                                                         <div class="col-md-9 col-sm-12">
+                                                             <select id="ddlsubject2"  class="form-control">
+                                                                 <option value="0">اختر</option>
+
+                                                             </select>
+
+                                                         </div>
+                                                     </div>
+                                                     <div class="form-group">
+                                                         <div class="col-md-9 col-sm-12">
+                                                             <button onclick="get_report_course_attendence(); return false" class="btn btn-success">التقرير</button>
+
+                                                         </div>
+                                                     </div>
+                                                 </div>
+
+
+                                             </div>
+                                         </div>
+
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+
+
+                
+                
+                    </div>
+                          <!-- # بداية التاب السابع -->
+                     <div id="academy_diplome" class="tab-pane fade  ">
+                         
+                     <div class="form-horizontal" role="form">
+                            <!-- #بداية النموذج -->
+
+                            <div class="row">
+                                <div class="widget-box">
+                                    <div class="widget-body">
+                                        <div class="newformstyle form_continer" style="direction: rtl;">
+                                            <div class="clear"></div>
+                                            <div class="cp_margin pad10">
+
+                                                <asp:Panel ID="Panel4" runat="server">
+
+                                                    <div class="col-md-6">
+
+                                                        <div class="form-group">
+                                                            <div class="col-md-3 col-sm-12">
+                                                                <label class="label-required">الدبلوم</label>
+                                                            </div>
+
+                                                            <div class="col-md-9 col-sm-12">
+                                                                <asp:DropDownList required dbcolumn="specialty" onchange="get_deplome_students(3)" class="form-control" ClientIDMode="Static" ID="ddldiplomes6" runat="server">
+                                                                </asp:DropDownList>
+
+                                                            </div>
+                                                        </div>
+
+          
+                                                        <div class="form-group">
+                                                            <div class="col-md-3 col-sm-12">
+                                                                <label class="label-required">الطلاب</label>
+                                                            </div>
+
+                                                            <div class="col-md-9 col-sm-12">
+                                                                <select id="ddlstudents2" class="form-control">
+                                                                    <option value="0">اختر</option>
+
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-md-9 col-sm-12">
+                                                                <button onclick="get_report_student_public(); return false" class="btn btn-success">التقرير</button>
 
                                                             </div>
                                                         </div>

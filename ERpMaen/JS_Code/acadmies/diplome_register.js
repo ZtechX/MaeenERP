@@ -177,12 +177,22 @@ function drawcourseConditions() {
                 var arr1 = JSON.parse(val[1]);
 
                 arr1.forEach(function (element) {
-                    data = data + `<tr><td>${element.condition} </td>
+                    var status = element.Mandatory;
+                    if (status == 1) {
+
+                        data = data + `<tr><td>${element.condition} </td>
                     <td><div id="img_${element.id}" class="comp-logo"><label id="lblSec_${element.id}" style="display:none;"></label></div>
                     <div class="up-btn" id="upload" onclick="uploadClick(${element.id});">رفع</div></td>
-</tr>`;
-                                                     
-                 });
+                    </tr>`;
+                    }
+                    else {
+                        data = data + `<tr><td>${element.condition} </td>
+                    <td><div id="img_${element.id}" class="comp-logo"><label class="label-required" id="lblSec_${element.id}" style="display:none;"></label></div>
+                    <div class="up-btn" id="upload" onclick="uploadClick(${element.id});">رفع</div></td>
+                    </tr>`;
+                    }
+                    });
+            
 
             }
             $("#action_courseStudents").html(data);

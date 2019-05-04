@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Pub_Instructions.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.Pub_Instructions" %>
-<%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 
@@ -13,7 +12,7 @@
         </Services>
     </asp:ScriptManager>
 
-    <style>
+ <style>
 
          .event-list {
 		list-style: none;
@@ -304,11 +303,12 @@
     display: -webkit-box;
 }
     </style>
-    
     <div class="wrap">
          <div>
                     <script src="../JS_Code/acadmies/Pub_Instructions.js"></script>
-            
+                                <label hidden runat="server" id="inst_edit"></label>
+                                <label hidden runat="server" id="inst_del"></label>
+
          
                 </div>
 
@@ -331,7 +331,9 @@
                         <div class="col-md-2">
 
                             <div class="btn-group pull-left">
-                                      <% if ERpMaen.LoginInfo.getUserType <> 8 Then   %>
+                                      <% If ERpMaen.LoginInfo.get_form_operation("64") = True Or ERpMaen.LoginInfo.get_form_operation_group("64") = True Then
+
+                                              %>
                                 <button type="button" class="btn btn-info " data-toggle="modal" data-target="#addInstruction" >اضافة تعميم <i class="fa fa-plus"></i></button>
                                 <% End If %>
                             </div>

@@ -38,9 +38,7 @@
     </style>
                 <div>
                     <script src="../JS_Code/out_inside_letters/out_inside_letters.js"></script>
-  <%--                  <script src="../JS_Code/sessions/halls_Save.js"></script>
-                    <script src="../JS_Code/sessions/halls_Edit.js"></script>
-                    <script src="../JS_Code/sessions/halls_Upload.js"></script>--%>
+                    <script src="../js/customCalender/CustomerCalendar.js"></script>
                 </div>
                 <div>
                     <div class="main-title">
@@ -99,7 +97,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox runat="server" ReadOnly="true" ClientIDMode="Static" dbColumn="parcode" ID="txtcode" placeholder="" SkinID="form-control" CssClass="form-control"></asp:TextBox>
+                                            <asp:TextBox runat="server"  ReadOnly="true" ClientIDMode="Static" dbColumn="parcode" ID="txtcode" placeholder="" SkinID="form-control" CssClass="form-control"></asp:TextBox>
 
                                         </div>
                                     </div>
@@ -139,7 +137,7 @@
                                             <label for="TextBox1" class="label-required">صادر من  </label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:DropDownList dbcolumn="from_dep" class="form-control" ClientIDMode="Static" ID="ddlfrom_dep" runat="server">
+                                            <asp:DropDownList dbcolumn="from_dep" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlfrom_dep" runat="server">
                                             </asp:DropDownList>
                                         </div>
 
@@ -156,7 +154,7 @@
                                             <label for="TextBox1" class="label-required">صادر الي  </label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:DropDownList dbcolumn="to_dep" class="form-control" ClientIDMode="Static" ID="ddlto_dep" runat="server">
+                                            <asp:DropDownList dbcolumn="to_dep" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlto_dep" runat="server">
                                             </asp:DropDownList>
                                         </div>
 
@@ -168,7 +166,7 @@
                                             <label for="TextBox1" class="label-required">نوع الخطاب </label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                           <asp:DropDownList dbcolumn="Continue_id" class="form-control" ClientIDMode="Static" ID="ddlContinue" runat="server"></asp:DropDownList>
+                                           <asp:DropDownList dbcolumn="Continue_id" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlContinue" runat="server"></asp:DropDownList>
 
                                         </div>
 
@@ -205,7 +203,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:DropDownList dbcolumn="priority_id" class="form-control" ClientIDMode="Static" ID="ddlpriority" runat="server">
+                                            <asp:DropDownList dbcolumn="priority_id" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlpriority" runat="server">
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -217,7 +215,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                          <asp:DropDownList dbcolumn="secrecy_id" class="form-control" ClientIDMode="Static" ID="ddlsecrecy" runat="server">
+                                          <asp:DropDownList dbcolumn="secrecy_id" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlsecrecy" runat="server">
                                     </asp:DropDownList>
                                         </div>
                                     </div>
@@ -229,7 +227,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                       <asp:DropDownList dbcolumn="stutse_id" class="form-control" ClientIDMode="Static" ID="ddlstutse" runat="server">
+                                       <asp:DropDownList dbcolumn="stutse_id" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlstutse" runat="server">
                                     </asp:DropDownList>
                                         </div>
                                     </div>
@@ -241,7 +239,7 @@
                                             <label for="TextBox1">ملاحظات  </label>
 
                                         </div>
-                                        <div class="col-md-3 col-sm-12 fancy-form">
+                                        <div class="col-md-9 col-sm-12 fancy-form">
                                             <textarea dbcolumn="note" runat="server" class="form-control" id="txtdetails"></textarea>
                                         </div>
                                     </div>

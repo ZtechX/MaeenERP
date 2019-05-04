@@ -149,13 +149,13 @@ Partial Public Class advisors
     Protected WithEvents Name As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txttel control.
+    '''txttel_ control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txttel As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txttel_ As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''TextBox3 control.
@@ -164,7 +164,7 @@ Partial Public Class advisors
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox3 As Global.System.Web.UI.HtmlControls.HtmlInputPassword
+    Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''ddlspecial_id control.
@@ -191,7 +191,7 @@ Partial Public Class advisors
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtNumber As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtNumber As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''DynamicTable control.

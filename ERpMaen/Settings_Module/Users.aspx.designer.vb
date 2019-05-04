@@ -155,7 +155,7 @@ Partial Public Class Users
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtindenty As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtindenty As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''ddlUser_Type control.
@@ -264,6 +264,15 @@ Partial Public Class Users
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddlcomp_id As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''fuPhoto1_saved_nm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fuPhoto1_saved_nm As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''imgItemURL control.

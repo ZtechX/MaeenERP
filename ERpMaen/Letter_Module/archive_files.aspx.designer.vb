@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class archive_files
-
+    
     '''<summary>
     '''ToolkitScriptManager1 control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ToolkitScriptManager1 As Global.System.Web.UI.ScriptManager
-
+    
     '''<summary>
     '''up control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents up As Global.System.Web.UI.UpdatePanel
-
+    
     '''<summary>
     '''upg control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents upg As Global.System.Web.UI.UpdateProgress
-
+    
     '''<summary>
     '''lblFormName control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblFormName As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''pnlOps control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlOps As Global.System.Web.UI.WebControls.Panel
-
+    
     '''<summary>
     '''pnlFunctions control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlFunctions As Global.System.Web.UI.WebControls.Panel
-
+    
     '''<summary>
     '''cmdAdd control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cmdAdd As Global.System.Web.UI.WebControls.LinkButton
-
+    
     '''<summary>
     '''cmdDelete control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cmdDelete As Global.System.Web.UI.WebControls.LinkButton
-
+    
     '''<summary>
     '''pnlDelete control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlDelete As Global.System.Web.UI.WebControls.Panel
-
+    
     '''<summary>
     '''cmdUpdate control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cmdUpdate As Global.System.Web.UI.WebControls.LinkButton
-
+    
     '''<summary>
     '''PnlConfirm control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PnlConfirm As Global.ERpMaen.PnlConfirm
-
+    
     '''<summary>
     '''Result control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Result As Global.ERpMaen.Result
-
+    
     '''<summary>
     '''ValidationSummary2 control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ValidationSummary2 As Global.System.Web.UI.WebControls.ValidationSummary
-
+    
     '''<summary>
     '''lblmianid control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblmianid As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''Label2 control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''user_id control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents user_id As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''pnlForm control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlForm As Global.System.Web.UI.WebControls.Panel
-
+    
     '''<summary>
     '''txtcode control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtcode As Global.System.Web.UI.WebControls.TextBox
-
+    
     '''<summary>
     '''txtname_ar control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtname_ar As Global.System.Web.UI.WebControls.TextBox
-
+    
     '''<summary>
     '''Textarea1 control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Textarea1 As Global.System.Web.UI.HtmlControls.HtmlTextArea
-
+    
     '''<summary>
     '''ddldep control.
     '''</summary>
@@ -201,25 +201,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddldep As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''cmdPOP control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cmdPOP As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''txtUploadedFiles control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtUploadedFiles As Global.System.Web.UI.WebControls.TextBox
-
+    
     '''<summary>
     '''lbldate control.
     '''</summary>
@@ -228,7 +210,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbldate As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''lbldate_hj control.
     '''</summary>
@@ -237,7 +219,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbldate_hj As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''HijriCalendar1 control.
     '''</summary>
@@ -246,7 +228,25 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents HijriCalendar1 As Global.ERpMaen.CustomerCalendar
-
+    
+    '''<summary>
+    '''cmdPOP control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cmdPOP As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''txtUploadedFiles control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtUploadedFiles As Global.System.Web.UI.WebControls.TextBox
+    
     '''<summary>
     '''MultiPhotoUpload control.
     '''</summary>
@@ -255,7 +255,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MultiPhotoUpload As Global.ERpMaen.MultiPhotoUpload
-
+    
     '''<summary>
     '''DynamicTable control.
     '''</summary>
@@ -264,7 +264,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents DynamicTable As Global.ERpMaen.DynamicTable
-
+    
     '''<summary>
     '''lblRes control.
     '''</summary>
@@ -273,7 +273,7 @@ Partial Public Class archive_files
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblRes As Global.System.Web.UI.WebControls.Label
-
+    
     '''<summary>
     '''tblH control.
     '''</summary>

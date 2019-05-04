@@ -39,9 +39,6 @@
                 <div>
                     <script src="../js/customCalender/CustomerCalendar.js"></script>
                     <script src="../JS_Code/Circulars/Circulars.js"></script>
-  <%--                  <script src="../JS_Code/sessions/halls_Save.js"></script>
-                    <script src="../JS_Code/sessions/halls_Edit.js"></script>
-                    <script src="../JS_Code/sessions/halls_Upload.js"></script>--%>
                 </div>
                 <div>
                     <div class="main-title">
@@ -153,7 +150,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:DropDownList dbcolumn="priority_id" class="form-control" ClientIDMode="Static" ID="ddlpriority" runat="server">
+                                            <asp:DropDownList dbcolumn="priority_id" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlpriority" runat="server">
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -164,7 +161,7 @@
                                             <label for="TextBox1">ملاحظات  </label>
 
                                         </div>
-                                        <div class="col-md-3 col-sm-12 fancy-form">
+                                        <div class="col-md-9 col-sm-12 fancy-form">
                                             <textarea dbcolumn="note" runat="server" class="form-control" id="txtdetails"></textarea>
                                         </div>
                                     </div>

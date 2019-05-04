@@ -131,28 +131,28 @@ Public Class CourseDetails
                     ' Dim PostedPhoto As System.Drawing.Image = System.Drawing.Image.FromStream(fu.PostedFile.InputStream)
                     'Dim ImgHeight As Integer = PostedPhoto.Height
                     'Dim ImgWidth As Integer = PostedPhoto.Width
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
                     ' Session("UserPhoto") = x
                 Case "fuFile2"
                     fu = fuFile2
 
                     Path = "Acadmies_module/exams/"
                     Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
                 Case "fuFile3"
                     fu = fuFile3
 
                     Path = "Acadmies_module/homework/"
                     Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
                 Case "fuFile4"
                     fu = fuFile4
 
                     Path = "Acadmies_module/coursefiles/"
                     Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
 
                 Case "fuFile5"
@@ -160,7 +160,7 @@ Public Class CourseDetails
 
                     Path = "Acadmies_module/coursefiles/"
                     Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
 
                 Case "fuFile6"
@@ -168,7 +168,7 @@ Public Class CourseDetails
 
                     Path = "Acadmies_module/coursefiles/"
                     Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
 
                 Case "fuFile9"
@@ -176,14 +176,14 @@ Public Class CourseDetails
 
                     Path = "Acadmies_module/coursefiles/"
                     Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
                 Case "fuFile7"
                     fu = fufile7
 
                     Path = "Acadmies_module/coursefiles/"
                     Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
             End Select
             ClearContents(sender)
             '    ScriptManager.RegisterClientScriptBlock(Me, Me.[GetType](), "newfile", "document.getElementById('imgEmployee').src = '" & url & "';", True)

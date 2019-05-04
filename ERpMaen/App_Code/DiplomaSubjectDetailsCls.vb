@@ -101,13 +101,17 @@ Public Class DiplomaSubjectDetailsCls
 
                 Dim dictNotification As New Dictionary(Of String, Object)
                 Dim assignTo = ""
-                dt = DBManager.Getdatatable("select trainer_id from acd_diplome_subjects where id=" + subjectid)
+                Dim subjectName = ""
+                Dim diplomeName = ""
+                dt = DBManager.Getdatatable("select trainer_id , tbllock_up.Description ,acd_diplomes.name from acd_diplome_subjects join tbllock_up on tbllock_up.id=acd_diplome_subjects.subject_id join acd_diplomes on acd_diplomes.id=acd_diplome_subjects.diplome_id  where acd_diplome_subjects.id=" + subjectid)
                 If dt.Rows.Count <> 0 Then
                     assignTo = dt.Rows(0)(0).ToString
+                    subjectName = dt.Rows(0)(1).ToString
+                    diplomeName = dt.Rows(0)(2).ToString
                 End If
 
                 dictNotification.Add("RefCode", subjectid)
-                dictNotification.Add("NotTitle", "  رفض اعتماد الدرجات ")
+                dictNotification.Add("NotTitle", " رفض اعتماد درجات ماده " + subjectName + "فى دبلوم  " + diplomeName)
                 dictNotification.Add("Date", DateTime.Now.ToString("dd/MM/yyyy"))
                 dictNotification.Add("AssignedTo", assignTo)
                 dictNotification.Add("CreatedBy", LoginInfo.GetUser__Id())
@@ -825,7 +829,7 @@ Public Class DiplomaSubjectDetailsCls
             Dim success2 As Boolean = True
             For Each item As Object In studentDegrees
 
-                If DBManager.ExcuteQuery("UPDATE acd_student_degrees set  final_degree=" + item("fdegree").ToString() + ", activity_degree=" + item("Acdegree").ToString() + ", approved=1 where type=2 and course_id=" + subjectID + " and student_id=" + item("id").ToString()) <> -1 Then
+                If DBManager.ExcuteQuery("UPDATE acd_student_degrees set approved=1 where type=2 and course_id=" + subjectID + " and student_id=" + item("id").ToString()) <> -1 Then
 
                     'If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_student_degrees", id, _sqlconn, _sqltrans) Then
                     If Not PublicFunctions.TransUsers_logs("4203", "acd_student_degrees", "ادخال", _sqlconn, _sqltrans) Then
@@ -1643,14 +1647,12 @@ Public Class DiplomaSubjectDetailsCls
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
     Public Function get_courseComments(ByVal CourseID As String) As String()
-        Dim dt_user As DataTable
-        dt_user = DBManager.Getdatatable("select * from tblUsers where id=" + LoginInfo.GetUserCode(Context.Request.Cookies("UserInfo")).ToString())
 
         Dim Names As New List(Of String)(10)
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select  acd_course_comments.id,acd_course_comments.user_id,tblUsers.full_name as 'username',tblUsers.User_Image as 'suerImage', acd_course_comments.comment,acd_course_comments.date_hj , acd_course_comments.time from acd_course_comments join tblUsers on acd_course_comments.user_id=tblUsers.id where acd_course_comments.type=2 and acd_course_comments.course_id=" + CourseID)
+            dt = DBManager.Getdatatable("select  acd_course_comments.id,acd_course_comments.user_id,tblUsers.full_name as 'username',tblUsers.User_Image as 'suerImage', acd_course_comments.comment,acd_course_comments.date_hj , acd_course_comments.time from acd_course_comments join tblUsers on acd_course_comments.user_id=tblUsers.id where acd_course_comments.deleted=0 and acd_course_comments.type=2 and acd_course_comments.course_id=" + CourseID)
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then
                     Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
@@ -1743,7 +1745,8 @@ Public Class DiplomaSubjectDetailsCls
 
         Dim Names As New List(Of String)(10)
         Try
-            If PublicFunctions.DeleteFromTable(deleteItem, "acd_course_comments") Then
+            If DBManager.ExcuteQuery("update acd_course_comments set deleted=1 where id=" + deleteItem) <> -1 Then
+
                 Names.Add("1")
                 Names.Add("تم الحذف بنجاح!")
             Else
@@ -2269,7 +2272,7 @@ Public Class DiplomaSubjectDetailsCls
             Dim dt As New DataTable
 
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'studentname',COALESCE( stdg.final_degree ,0) as 'final',COALESCE (stdg.activity_degree,0) as 'activityDegree' , isNull(stdg.final_degree+stdg.activity_degree,0) as 'total' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id left  JOIN acd_student_degrees stdg on  acd_courses_students.student_id=stdg.student_id AND stdg.type=2 and stdg.course_id=" + subjectId + " where  acd_courses_students.approved=1 and acd_courses_students.deleted=0 and acd_courses_students.type=2  and acd_courses_students.course_id=" + diplomeID + "order by tblUsers.full_name")
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id,stdg.approved ,tblUsers.full_name as 'studentname',COALESCE( stdg.final_degree ,0) as 'final',COALESCE (stdg.activity_degree,0) as 'activityDegree' , isNull(stdg.final_degree+stdg.activity_degree,0) as 'total' from acd_courses_students join tblUsers on tblUsers.id=acd_courses_students.student_id left  JOIN acd_student_degrees stdg on  acd_courses_students.student_id=stdg.student_id AND stdg.type=2 and stdg.course_id=" + subjectId + " where  acd_courses_students.approved=1 and acd_courses_students.deleted=0 and acd_courses_students.type=2  and acd_courses_students.course_id=" + diplomeID + "order by tblUsers.full_name")
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then

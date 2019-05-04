@@ -37,6 +37,12 @@
                         max-height: 200px;
                         overflow: auto;
                     }
+                    #pnlForm th {
+                        text-align:right !important;
+                    }
+                   #pnlForm td{
+                        text-align:right;
+                    }
                 </style>
                 <div>
                     <script src="../JS_Code/members_boards/members_boards.js"></script>
@@ -104,8 +110,9 @@
                                             <label for="Name" class="label-required">المجلس</label>
 
                                         </div>
+                                        <br />
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:DropDownList required dbcolumn="board_id" onchange="get_member_boards() ; " class="form-control" ClientIDMode="Static" ID="ddlboard_id" runat="server">
+                                            <asp:DropDownList required dbcolumn="board_id" onchange="get_member_boards() ; " CssClass="form-control" ClientIDMode="Static" SkinID="form-control" ID="ddlboard_id" runat="server">
                                             </asp:DropDownList>
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlboard_id"
                                                 ErrorMessage="من فضلك المجلس " ValidationGroup="vgroup"></asp:RequiredFieldValidator>

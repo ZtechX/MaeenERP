@@ -1002,17 +1002,25 @@ ByVal day As String, ByVal RefCode As String, ByVal deliverer_data As String(), 
         Return True
     End Function
 #End Region
-    Public Shared Function GetRandom() As String
+    Public Shared Function GetRandom(Optional ByVal R_len As Integer = 4) As String
         Dim Random As New Random()
         Dim rNum As String = Random.Next()
         Dim len As Integer = rNum.Length
-        If len < 4 Then
-            For i As Integer = len To 3
+        If len < R_len Then
+            For i As Integer = len To (R_len - 1)
                 rNum = rNum + "0"
             Next
-        ElseIf len > 4 Then
-            rNum = rNum.Substring(0, 4)
+        ElseIf len > R_len Then
+            rNum = rNum.Substring(0, R_len)
         End If
         Return rNum
+    End Function
+    Public Shared Function deleteFile(ByVal path As String) As Boolean
+        Try
+            System.IO.File.Delete(HttpContext.Current.Server.MapPath(New Uri(path).AbsolutePath))
+        Catch ex As Exception
+            Return False
+        End Try
+        Return True
     End Function
 End Class

@@ -281,10 +281,14 @@ function save_children() {
 ////////////////////////////////////////////
 function getDate_m_hj(date_m) {
     
-    var cal1 =new  Calendar(false, 1, true, true, date_m.getFullYear(), date_m.getMonth() , date_m.getDate());
-    var dt_m = cal1.getDate().getDateString();
-    cal1.changeDateMode();
-    var dt_hj = cal1.getDate().getDateStringHigri();
+    var cal1 = new Datepicker();
+    cal1.getPickedDate().setFullYear(date_m.getFullYear());
+    cal1.getPickedDate().setMonth(date_m.getMonth());
+    cal1.getPickedDate().setDate(date_m.getDate());
+    var dt_m = cal1.getPickedDate().getDateString();
+    cal1.getOppositePickedDate().setTime(cal1.getPickedDate().getTime())
+    cal1.setHijriMode = true;
+    var dt_hj = cal1.getOppositePickedDate().getDateString();
     return dt_m + "|" + dt_hj;
 
     
@@ -327,7 +331,7 @@ function save_children_receive() {
                 var days_num = Number($("#txtdelivery_period").val());
                 var return_days_num = Number($("#txtreturn_period").val());
                 var arr_dt = start_dt_m.split("/");
-                var dateString = arr_dt[1] + "/" + arr_dt[0] + "/" + arr_dt[2];
+                var dateString = addZero(Number(arr_dt[1])) + "/" +  arr_dt[0] + "/" + arr_dt[2];
                 var dateObject = new Date(dateString);
                 var end_dt = new Date(dateString);
 
@@ -365,6 +369,7 @@ function save_children_receive() {
                     return_dateObject.setDate(return_dateObject.getDate() + days_num);
                     dateObject.setDate(dateObject.getDate() + days_num);
                 }
+                debugger
                 cases.save_case_receiving_delivery(PosId, case_id, children_receive, reciveJson,true,1, function (_val) {
                     $("#SavedivLoader").hide();
                     var Res_arr = _val.split("|");
@@ -415,7 +420,7 @@ function save_anotherPeriod() {
                 var return_days_num = Number($("#another_return_period").val());
                 
                 var arr_dt = start_dt_m.split("/");
-                var dateString = arr_dt[1] + "/" + arr_dt[0] + "/" + arr_dt[2];
+                var dateString = addZero(Number(arr_dt[1])) + "/" + arr_dt[0] + "/" + arr_dt[2];
                 var dateObject = new Date(dateString);
                 var end_dt = new Date(dateString);
                 var return_dateObject = new Date(dateString);
@@ -717,7 +722,7 @@ function save_expense_basic() {
                 var days_num = Number($("#txtdelivery_period_expenses").val());
                 
                 var arr_dt = start_dt_m.split("/");
-                var dateString = arr_dt[1] + "/" + arr_dt[0] + "/" + arr_dt[2];
+                var dateString = addZero(Number(arr_dt[1]))+ "/" + arr_dt[0] + "/" + arr_dt[2];
                 var dateObject = new Date(dateString);
                 var end_dt = new Date(dateString);
                 

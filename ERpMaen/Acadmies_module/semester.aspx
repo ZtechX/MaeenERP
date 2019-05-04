@@ -30,9 +30,7 @@
                 </style>
                 <div>
                     <script src="../JS_Code/acadmies/semester.js"></script>
-                     <script type="text/javascript">
-                      
-                    </script>
+                    <script src="../js/customCalender/CustomerCalendar.js"></script>
                 </div>
                 <div>
                     <div class="main-title">

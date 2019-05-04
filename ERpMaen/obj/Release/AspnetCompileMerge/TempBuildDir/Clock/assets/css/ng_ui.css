@@ -10,26 +10,29 @@
 .rtl {direction:rtl;}
 
 /* standard button */
-.ng-button {cursor:pointer;
-	display:inline-block;
-	padding:5px;
-	position:relative;
-	text-align:center;
-	background:#eeeeee;
-	color:#000000;
-	font-weight:300;
-	text-decoration:none;
-	border:solid #acacac 1px;
-	-webkit-border-radius:5px;
-	-moz-border-radius:5px;
-	border-radius:5px;
-	-webkit-transition:background-color 0.1s, border-color 0.1s;
-	-moz-transition:background-color 0.1s, border-color 0.1s;
-	transition:background-color 0.1s, border-color 0.1s;
-	white-space:nowrap;
-	nav-index:auto;
-	-webkit-appearance: none;
-	vertical-align:middle;}
+.ng-button {
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px;
+    position: relative;
+    text-align: center;
+    background: #eeeeee;
+    float: right;
+    color: #000000;
+    font-weight: 300;
+    text-decoration: none;
+    border: solid #acacac 1px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-transition: background-color 0.1s, border-color 0.1s;
+    -moz-transition: background-color 0.1s, border-color 0.1s;
+    transition: background-color 0.1s, border-color 0.1s;
+    white-space: nowrap;
+    nav-index: auto;
+    -webkit-appearance: none;
+    vertical-align: middle;
+}
 	
 .ng-button .ng-icon {margin:0px auto !important;}
 

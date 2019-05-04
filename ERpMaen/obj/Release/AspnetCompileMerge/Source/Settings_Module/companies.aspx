@@ -125,6 +125,7 @@
 
 
                     </script>
+    <script src="../js/customCalender/CustomerCalendar.js"></script>
                     <script src="../JS_Code/companies/companies.js"></script>
                     <script src="../JS_Code/companies/companies_Upload.js"></script>
                 </div>

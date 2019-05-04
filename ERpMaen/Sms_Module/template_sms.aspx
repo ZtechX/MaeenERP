@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="template_sms.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.template_sms" Theme="Theme5"%>
+﻿<%@ Page Language="vb" AutoEventWireup="false" EnableEventValidation="false" CodeBehind="template_sms.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.template_sms" Theme="Theme5"%>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>

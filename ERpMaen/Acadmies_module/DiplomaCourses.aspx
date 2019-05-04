@@ -207,7 +207,7 @@
                           var fileType = args.get_contentType();
                            var Sender_id = $(sender.get_element()).attr("id");
                           if (Sender_id == "fuPhoto1") {
-                              debugger
+                              
                               if (fileType.indexOf("image/") != -1) {
                                   $('#img_' + section_id).css('background', 'url("images/' + args.get_fileName() + '")');
                               }
@@ -300,8 +300,8 @@
                                     </a></li>
                                      <% End If %>
 
-                                    <% if ERpMaen.LoginInfo.get_form_operation("7") = True Then   %>
-                                    <li><a data-toggle="modal" href="#certificateStudentModal" >  ارفاق شهادة
+                                    <% if ERpMaen.LoginInfo.get_form_operation("63") = True Then   %>
+                                    <li><a data-toggle="modal" href="#certificateStudentModal" >  ارفاق الشهادات
                                     </a></li>
                                      <% End If %>
                                      <% if ERpMaen.LoginInfo.get_form_operation("8") = True Then   %>
@@ -335,6 +335,8 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                      <li><a data-toggle="modal" href="#FinancialModal" onclick="drawFinanceStudent();"> الدفعات المالية
+                                    </a></li>
+                                     <li><a data-toggle="modal" href="#Certificate_Modal" onclick="drawStudent_certificate();">  شهادة الدبلوم
                                     </a></li>
                                   
                                     <li><a data-toggle="modal" href="#studentDegreesDiplome" onclick="studentDegreesIN_Diplome();">السجل الاكاديمى 
@@ -649,6 +651,23 @@
                         <div class="modal-body">
                             <div id="divFormcondition">
 
+
+                                     <div class=" row form-group">
+                                            <div class="col-md-3 col-sm-12">
+                                                <label class=""> نوع الشرط </label>
+                                            </div>
+
+                                            <div class="col-md-9 col-sm-12" >
+                                                <select class="form-control" dbcolumn="Mandatory">
+                                                    <option value="1">اجبارى</option>
+                                                    <option value="0">اختيارى </option>
+                                                  
+                                                   
+                                                </select>
+
+
+                                            </div>
+                                        </div>
                                 <div class=" row form-group">
                                     <div class="col-md-3 col-sm-12">
                                         <label>الشرط      </label>
@@ -670,7 +689,7 @@
                                     <div class="clear">
                                     </div>
                                     <asp:AsyncFileUpload ID="fuFile1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
-                                        OnClientUploadComplete="UploadComplete2" />
+                                        OnClientUploadComplete="UploadComplete4" />
                                 </div>
                             </div>
 
@@ -830,11 +849,13 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">السجل الاكاديمى</h4>
                         </div>
-                        <br /> 
                        
-                        <div class="col-md-12">
+                         <div class="modal-body">
+                       
+                        
+                       
 
-                        <div class="  form-group ">
+                            <div class="form-group">
                                 <div class="col-md-3 col-sm-12">
                                     <label  class="label-required">اختر الفصل الدراسى</label>
                                 </div>
@@ -845,9 +866,9 @@
                                     
                                 </div>
                             </div>
-                      </div>
+                           
                         <div class="table-responsive" >
-                            <table class="table table-bordered table-hover"  id="newitem">
+                            <table class="table table-bordered table-hover" >
                                <thead>
                                 <tr>
                                     <th>المادة </th>
@@ -866,12 +887,12 @@
 
                             </table>
                         </div>
-
-
+                      
+                             </div>
                         <div class="modal-footer">
                             <button type="button"   data-dismiss="modal" class="btn btn-primary" >close </button>
                         </div>
-                    </div>
+                   </div>
                 </div>
             </div>
 
@@ -928,6 +949,51 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="Certificate_Modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">   شهادة الدبلوم   </h4>
+                        </div>
+
+                         <style>
+                            #certficate_student th {
+                                text-align:right;
+                            }
+                        </style>
+                        <div class="modal-body" style="direction:rtl;" >
+                            
+                             <div class="trans-data col-xs-12" >
+                                                
+                <div class="table-responsive" id="certficate_student">
+                    <table class="table table-bordered table-hover">
+                        
+                        <tr>
+                            <th>اسم الطالب </th>
+                            <th>شهادة الدبلوم</th>
+                           
+                        </tr>
+                        
+                       
+                        <tbody id="Student_certificate">
+
+                        </tbody>
+                        </table>
+                    </div>
+                    </div>
+                           
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" data-dismiss="modal" >close </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         <div class="modal fade" id="add_Financial" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -1050,7 +1116,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">ارافاق شهادة    </h4>
+                            <h4 class="modal-title">ارفاق الشهادات    </h4>
                         </div>
                         <%--  جدول الطلاب--%>
                         <style>
@@ -1062,8 +1128,9 @@
                             <table class="table table-bordered table-hover"  id="newitem">
                                <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>الطالب </th>
-                                    <th> كود الشهادة</th>
+                                    <th style="width:30%"> كود الشهادة</th>
                                      <th>ارفاق شهادة</th>
                                    
                                   

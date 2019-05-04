@@ -13,9 +13,20 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <script src="../js/jquery-1.2.6.min.js"></script>
 
+
     <%-- Slider --%>
     <script src="../JS_Code/Public/PublicFunctions.js"></script>
-
+      <script src="../js/customCalender/CustomerCalendar.js"></script>
+    <script>
+        $(function () {
+            var curr_date = new Datepicker();
+            $("#date_m").val(curr_date.getPickedDate().getDateString());
+    curr_date.setHijriMode = true;
+            $("#date_h").val(curr_date.getOppositePickedDate().getDateString());
+           
+        });
+      
+    </script>
     <script type="text/javascript">
 
         /*** 
@@ -101,6 +112,8 @@ box-sizing:border-box;
             </header>
             <section class="main">	
                 <div class="row">
+                    <input type="hidden" id="date_m" runat="server" />
+                    <input type="hidden" id="date_h" runat="server"/>
                     <div class="hint">
                     
 <img alt="" src="images/name.png" style="width:60%;" />

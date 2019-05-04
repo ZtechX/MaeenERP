@@ -53,14 +53,14 @@ function saveInstruction() {
                     var basicData = generateJSONFromControls("divForm");
 
             var instructionId = $("#lblInstruction_id").html();
-                    $("#SavedivLoader").show();
+                   // $("#SavedivLoader").show();
             Pub_InstructionsCls.Save(instructionId, Pub_date_m, Pub_date_hj,basicData, function (val) {
                         if (val === true) {
 
                             $("#addInstruction").modal('hide');
                             resetDivControls("divForm");
-                            drawCourses(0);
-                            $("#SavedivLoader").hide();
+                            drawAllCourses();
+                          //  $("#SavedivLoader").hide();
                             alert("تم الحفظ بنجاح");
                             getcousreCode();
 
@@ -107,7 +107,7 @@ function prevPage() {
     }
 }
 function changePage(page) {
-    
+
     current_page = page;
     if (page < 1) {
         page = 1;
@@ -119,19 +119,19 @@ function changePage(page) {
     $("#li_" + page).addClass("active");
     $("#courses-list").html("");
     var data = "";
-  //  var colors = ["#5cb85c", "#428bca", "#000"];
-   
+    //  var colors = ["#5cb85c", "#428bca", "#000"];
+
 
     for (var i = (page - 1) * records_per_page; i < (page * records_per_page) && i < CoursesList.length; i++) {
         debugger
-            var element = CoursesList[i];
-            var file_nm = "";
-            var path = element.image;
-            if (path != "" && path != null) {
-                if (path.indexOf("Acadmies_module/images/") != -1) {
-                    file_nm = path.split("Acadmies_module/images/")[1];
-                }
+        var element = CoursesList[i];
+        var file_nm = "";
+        var path = element.image;
+        if (path != "" && path != null) {
+            if (path.indexOf("Acadmies_module/images/") != -1) {
+                file_nm = path.split("Acadmies_module/images/")[1];
             }
+        }
 
         var date = element.Created_at_m;
 
@@ -139,7 +139,7 @@ function changePage(page) {
         var edit = "";
         var del = "";
         var view = "";
-        var img =  element.image;
+        var img = element.image;
         if (img.endsWith(".pdf")) {
             img = "../images/pdf_img.png";
         }
@@ -149,13 +149,19 @@ function changePage(page) {
         if (img.endsWith(".ppt") || img.endsWith(".pptx")) {
             img = "../images/powerPoint_img.png";
         }
-        if (img.endsWith(".doc") || img.endsWith(".docs")) {
+        if (img.endsWith(".doc") || img.endsWith(".docx")) {
             img = "../images/word_img.png";
         }
-        del = `	<li  style="width:33%;"><a href="#" class="bg-danger" onclick="deleteInstruct(${element.id});"><span class="fa fa-trash text-danger"></span></a></li>`;
-        edit = `<li style="width:33%;"><a href="#" class="bg-warning"  onclick="EditInstruct(${element.id});"><span class="fa fa-edit text-warning"></span></a></li>`;
-        view = ` <li  style="width:33%;"><a href="#" class="bg-info" onclick="viewed(${element.id});"><span class="fa fa-eye-slash text-info"></span></a></li>`;
-        data = data + `
+        if ($("#inst_edit").html() == "True") {
+            edit = `<li style="width:33%;"><a href="#" class="bg-warning"  onclick="EditInstruct(${element.id});"><span class="fa fa-edit text-warning"></span></a></li>`;
+
+        } if ($("#inst_del").html() == "True") {
+            del = `	<li  style="width:33%;"><a href="#" class="bg-danger" onclick="deleteInstruct(${element.id});"><span class="fa fa-trash text-danger"></span></a></li>`;
+        }
+        if (element.status == 1) {
+            view = ` <li  style="width:33%;"><a href="#" class="bg-info" id="vw_inst" onclick="viewed(${element.id});"><span class="fa fa-eye-slash text-info"></span></a></li>`;
+        }
+            data = data + `
 
                         <li>
 						<time datetime="${element.Created_at_m}">
@@ -188,10 +194,11 @@ ${view}
 						
 					</li>
 `;
-        }
-    $("#Instructions-list").html(data);
-     
     }
+    $("#Instructions-list").html(data);
+
+}
+
 
  
 function drawAllCourses() {
@@ -229,7 +236,12 @@ function drawAllCourses() {
 function drawCourses(filter){
     try {
 
-        debugger
+        //if (filter == 1) {
+        //    document.getElementById("vwId").style.visibility = "hidden";
+        //}
+        //else {
+        //    document.getElementById("vwId").style.visibility = "hidden";
+        //}
         Pub_InstructionsCls.get_Courses("", filter, function (val) {
             debugger
             var data = "";
@@ -334,12 +346,14 @@ function deleteInstruct(instructId) {
 }
 
 function viewed(instructId) {
-    debugger
-    Pub_InstructionsCls.Seen_instruction(instructId, function (val) {
+    
+    Pub_InstructionsCls.Seen_instruction(instructId, Pub_date_m, Pub_date_hj, function (val) {
         if (val == true) {
+            drawCourses(0);
                 $("#SavedivLoader").hide();
               //  alert("تم الحذف بنجاح");
-                drawAllCourses();
+            //  document.getElementById("vw_inst").style.visibility = "hidden";
+            $(this).closest("li").remove();
 
             } else {
                 alert('لم يتم ');

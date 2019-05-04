@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="contact_group.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.contact_group" Theme="Theme5"%>
+﻿<%@ Page Language="vb" AutoEventWireup="false" EnableEventValidation="false" CodeBehind="contact_group.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.contact_group" Theme="Theme5"%>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
@@ -23,20 +23,33 @@
             </div>
             <div class="wraper">
                 <style>
-        table#divAreaList td {
-    border: 1px solid gainsboro;
+                    .tbl_details thead tr {
+    background: #148083;
+    color: #fff;
+    font-size: 12px;
+    font-weight: normal;
 }
-                table#divAreaList th {
-    border: 1px solid gainsboro;
-}
-        #divAreaList1{    max-height: 200px; overflow: auto;}
-    </style>
+                    .tbl_details thead th {
+                        text-align:center;
+                        padding:10px;
+                    }
+                    .tbl_details td {
+                        text-align:center;
+                        padding-top:10px;
+                    }
+                    .tbl_details {
+                        width:100%;
+                            margin: .5% 1%;
+                        direction:rtl;
+                    }
+                </style>
+                
                 <div>
                     <script src="../JS_Code/contact_group/contact_group.js"></script>
                          </div>
-                <div>
+                
                     <div class="main-title">
-                        <asp:Label ID="lblFormName" runat="server" Text="رسائل الجوال" SkinID="page_title"></asp:Label>
+                        <asp:Label ID="lblFormName" runat="server" Text="مجموعات الاتصال" SkinID="page_title"></asp:Label>
                     </div>
                     <div class="strip_menu">
                         <asp:Panel ID="pnlOps" runat="server" Style="text-align: right">
@@ -88,7 +101,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                         <asp:DropDownList dbcolumn="group_id" onchange="get_groups();" required class="form-control" ClientIDMode="Static" ID="ddlgroup_id" runat="server">
+                                         <asp:DropDownList dbcolumn="group_id" onchange="get_groups();" required SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlgroup_id" runat="server">
                                     </asp:DropDownList>
 
 
@@ -105,25 +118,18 @@
                                 <div class="clearfix"></div>
                             </asp:Panel>
                         </div>
-                   
-                    </div>
-                  
                     <asp:Label ID="lblRes" runat="server" Visible="false"></asp:Label>
                     <asp:HiddenField ID="tblH" runat="server" />
-                </div>
+               </div>
                   <div class="row">
-                        <div class="card-box table-responsive">
-
-                            <table class="table table-striped">
-      
-                        </div>
+                            <table class="tbl_details">
                         <thead>
                             <tr class="row-name">
 
                                 <th>#</th>
                                 <th>الاسم </th>
                                 <th>رقم التليفون</th>
-                                <th style="width: 12%">Check</th>
+                                <th style="width: 12%">تحديد</th>
                             </tr>
                         </thead>
                         <tbody id="invoices" style="text-align: center">
@@ -131,6 +137,7 @@
                         </table>
                         <%--                    <uc1:DynamicTable runat="server" ID="DynamicTable" />--%>
                     </div>
+                          
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>

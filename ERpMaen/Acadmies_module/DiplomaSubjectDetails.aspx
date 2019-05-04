@@ -32,6 +32,7 @@
      <script type="text/javascript" src="../Clock/ng_all.js"></script>
 <script type="text/javascript" src="../Clock/ng_ui.js"></script>
 <script type="text/javascript" src="../Clock/components/timepicker.js"></script>
+    <script src="../js/customCalender/CustomerCalendar.js"></script>
     <script type="text/javascript">
     ng.ready(function () {
       
@@ -1464,8 +1465,8 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">جدول الدرجات  </h4>
-                            <div class="col-md-6" >
+                            <h4 class="modal-title text-center label-bold">جدول رصد درجات الطلاب  </h4>
+                            <div class="col-md-12" >
                             <input  id="txtstud_Search" onkeyup="SearchStudent();" type="text" class="form-control" placeholder="بحث عن طالب" />
                         </div>
                         </div>
@@ -1473,11 +1474,13 @@
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover" id="publicDeg">
                                                                             <tr>
-                                                <td> </td> 
+                                                <td colspan="2"> </td> 
+                                                
                                                    <td><label>تنشيط<input type="checkbox" id="col1" style="width:20px;margin-left: 18px; margin-top: 0px;" onchange="markcol('col1');"/></label> </td> 
                                                    <td> <label>تنشيط<input type="checkbox" id="col2" style="width:20px;margin-left: 18px; margin-top: 0px;" onchange="markcol('col2');" /></label></td> 
                                             </tr>
                                 <tr>
+                                    <th>#</th>
                                     <th>الاسم </th>
                                       <th>   درجة اعمال السنة</th>
                                     <th> درجة الاختبار النهائي</th>
@@ -1498,7 +1501,7 @@
                         </div>
 
 
-                        <div class="modal-footer">
+                        <div class="modal-footer" id="degrees_add">
                             <button type="button"  class="btn btn-primary" onclick="addStudentdegree();">حفظ </button>
                         </div>
                     </div>
@@ -1545,7 +1548,7 @@
                         </div>
 
 
-                        <div class="modal-footer">
+                        <div class="modal-footer" id="approve_action">
                             <button type="button"  class="btn btn-primary mr-auto" onclick="Approve_Studentdegree();">اعتماد</button>
                               <a data-toggle="modal" href="#refuseDegree" type="button"   class="btn btn-danger" style="font-size: 10px;">
                                      رفض        
@@ -2046,7 +2049,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" required TextMode="multiline" class="form-control" dbColumn="details" ClientIDMode="Static" ID="TextBox3" runat="server">
+                                            <asp:TextBox SkinID="form-control"  TextMode="multiline" class="form-control" dbColumn="details" ClientIDMode="Static" ID="TextBox3" runat="server">
                                             </asp:TextBox>
                                         </div>
                                     </div>

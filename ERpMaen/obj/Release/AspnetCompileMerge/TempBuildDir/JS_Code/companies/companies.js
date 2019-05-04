@@ -46,7 +46,9 @@ function get_admin() {
             $("#liStep4").hide();
             $("#activate-step-2").hide();
             $("#Save").show();
-        if (val[1] != "") {
+            if (val[1] != "") {
+           debugger
+       
             var comp = JSON.parse(val[1]);
             var comp_admin = JSON.parse(val[0]);
 
@@ -100,7 +102,7 @@ function get_admin() {
 function edit(val) {
     resetAll();
     if (val[0] == "1") {
-        
+        debugger
         var data = JSON.parse(val[1]);
         $("#lblmainid").html(data[0].id);
         $("#divdate2 #txtDatem").val(data[0].deal_start_date_m);

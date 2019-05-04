@@ -23,6 +23,24 @@ Partial Public Class Pub_Instructions
     Protected WithEvents ToolkitScriptManager1 As Global.System.Web.UI.ScriptManager
     
     '''<summary>
+    '''inst_edit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents inst_edit As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''inst_del control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents inst_del As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''img control.
     '''</summary>
     '''<remarks>

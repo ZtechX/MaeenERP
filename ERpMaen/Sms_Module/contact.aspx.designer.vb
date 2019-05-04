@@ -149,6 +149,60 @@ Partial Public Class contact1
     Protected WithEvents pnlForm As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''name_ar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents name_ar As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''tele control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tele As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''tele2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tele2 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''email control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents email As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtsite control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtsite As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtnotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtnotes As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''DynamicTable control.
     '''</summary>
     '''<remarks>

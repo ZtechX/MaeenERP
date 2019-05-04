@@ -35,6 +35,7 @@ Public Class Users
     Dim comp_id As String
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
+
             UserId = LoginInfo.GetUserId(Request.Cookies("UserInfo"), Me.Page)
             comp_id = LoginInfo.GetComp_id()
 
@@ -66,15 +67,11 @@ Public Class Users
     End Sub
 
     Protected Sub PhotoUploaded(ByVal sender As Object, ByVal e As System.EventArgs)
-        Dim x As String = ""
-        Dim rnd As New Random
-        Dim namer As String = ""
+
         Dim i As Integer = 0
         Dim Path As String = ""
         Dim fu As New AjaxControlToolkit.AsyncFileUpload
         Try
-            i = rnd.Next(10000, 99999)
-            '  namer = i.ToString
             Select Case sender.id.ToString
                 Case "fuPhoto1"
                     fu = fuPhoto1
@@ -83,8 +80,8 @@ Public Class Users
                     Dim PostedPhoto As System.Drawing.Image = System.Drawing.Image.FromStream(fu.PostedFile.InputStream)
                     Dim ImgHeight As Integer = PostedPhoto.Height
                     Dim ImgWidth As Integer = PostedPhoto.Width
-                    x = CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, ImgWidth, ImgHeight, ImgWidth, ImgHeight, "Employees", namer)
-                    Session("UserPhoto") = x
+                    fuPhoto1_saved_nm.Text = CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, ImgWidth, ImgHeight, ImgWidth, ImgHeight)
+
             End Select
             ClearContents(sender)
             '    ScriptManager.RegisterClientScriptBlock(Me, Me.[GetType](), "newfile", "document.getElementById('imgEmployee').src = '" & url & "';", True)

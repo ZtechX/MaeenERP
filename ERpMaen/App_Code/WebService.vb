@@ -4005,6 +4005,11 @@ Public Class WebService
                     End If
                 ElseIf formName = "Semester" Then
                     quaryStr = quaryStr + " where acd_semester.comp_id=" + LoginInfo.GetComp_id()
+                ElseIf formName = "contact" Then
+                    quaryStr = quaryStr + " and tblcontacts.comp_id=" + LoginInfo.GetComp_id()
+                ElseIf formName = "template_sms" Then
+                    quaryStr = quaryStr + " and tblsms_templates.comp_id=" + LoginInfo.GetComp_id()
+
                 ElseIf formName = "CommonQuest" Or formName = "email_setting" Or formName = "Signature_setting" Or formName = "sms_setting" Then
                     quaryStr = quaryStr + " where comp_id=" + LoginInfo.GetComp_id()
                 End If

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="contact.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.contact1" Theme="Theme5"%>
+﻿<%@ Page Language="vb" AutoEventWireup="false" EnableEventValidation="false" CodeBehind="contact.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.contact1" Theme="Theme5"%>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
@@ -36,7 +36,7 @@
                          </div>
                 <div>
                     <div class="main-title">
-                        <asp:Label ID="lblFormName" runat="server" Text="رسائل الجوال" SkinID="page_title"></asp:Label>
+                        <asp:Label ID="lblFormName" runat="server" Text="جهات الاتصال" SkinID="page_title"></asp:Label>
                     </div>
                     <div class="strip_menu">
                         <asp:Panel ID="pnlOps" runat="server" Style="text-align: right">
@@ -88,7 +88,8 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                        <input dbcolumn="name_ar" required type="text" id="name_ar" placeholder="" class="form-control" />
+                                        <asp:TextBox SkinID="form-control" runat="server" dbcolumn="name_ar" required ID="name_ar" 
+                                            CssClass="form-control" ></asp:TextBox>
 
 
                                         </div>
@@ -98,10 +99,10 @@
                                     <div class="row">
                                         <br />
                                         <div class="col-md-3 col-sm-12">
-                                            <label for="TextBox1">رقم التليفون </label>
+                                            <label for="TextBox1" class="label-required">رقم التليفون </label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                              <input dbcolumn="tel1" required type="text" id="tele" placeholder="" class="form-control" onkeypress="return isNumber(event);" />
+                                              <asp:TextBox SkinID="form-control" runat="server" dbcolumn="tel1" required ID="tele" CssClass="form-control" onkeypress="return cust_chkNumber(event,this,10);" ></asp:TextBox>
                                         </div>
 
                                     </div>
@@ -112,17 +113,18 @@
                                             <label>رقم التليفون(2)</label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                           <input dbcolumn="tel2" type="text" id="Text8" placeholder="" class="form-control" onkeypress="return isNumber(event);" />
+                                           <asp:TextBox SkinID="form-control" runat="server" dbcolumn="tel2" ID="tele2"
+                                               CssClass="form-control" onkeypress="return cust_chkNumber(event,this,10);" ></asp:TextBox>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <br />
                                         <div class="col-md-3 col-sm-12">
-                                            <label class="required">البريد الالكترونى</label>
+                                            <label >البريد الالكترونى</label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <input dbcolumn="email" required type="email" id="email" placeholder="example@example.com" class="form-control" />
+                                            <asp:TextBox SkinID="form-control" runat="server" dbcolumn="email" TextMode="Email"  ID="email" placeholder="example@example.com" CssClass="form-control" ></asp:TextBox>
                                         </div>
 
                                     </div>
@@ -133,7 +135,7 @@
                                             <label>الموقع الالكترونى</label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                              <input dbcolumn="site" type="text" id="txtsite" placeholder="" class="form-control" />
+                                              <asp:TextBox SkinID="form-control" runat="server" dbcolumn="site" ID="txtsite"  CssClass="form-control" ></asp:TextBox>
                                         </div>
 
                                     </div>
@@ -143,7 +145,7 @@
                                       <label>ملاحظات</label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                                 <input dbcolumn="notes" type="text" id="txtnotes" placeholder="" class="form-control" />
+                                                 <asp:TextBox SkinID="form-control" TextMode="MultiLine" dbcolumn="notes" ID="txtnotes"  CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
 
                                     </div>

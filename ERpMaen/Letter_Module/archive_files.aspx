@@ -40,9 +40,6 @@
                     <script src="../js/customCalender/CustomerCalendar.js"></script>
                     <script src="../JS_Code/archive_files/archive_files.js"></script>
                        <script src="../JS_Code/archive_files/archive_files_Upload.js"></script>
-  <%--                  <script src="../JS_Code/sessions/halls_Save.js"></script>
-                    <script src="../JS_Code/sessions/halls_Edit.js"></script>
-                    <script src="../JS_Code/sessions/halls_Upload.js"></script>--%>
                 </div>
                 <div>
                     <div class="main-title">
@@ -143,22 +140,11 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                                     <asp:DropDownList dbcolumn="dep_id" class="form-control" ClientIDMode="Static" ID="ddldep" runat="server">
+                                                     <asp:DropDownList dbcolumn="dep_id" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddldep" runat="server">
                                                     </asp:DropDownList>
                                                    
                                         </div>
                                     </div>
-                    
-                                    <div class="row">
-                                         <br />
-                                            <div class="col-md-12 col-sm-12" >
-                                                <asp:Button ID="cmdPOP" runat="server" SkinID="uploadBtn_plus" Text="+" CausesValidation="False" />
-                                                <asp:TextBox SkinID="txt80percentage" ID="txtUploadedFiles" ReadOnly="true" onclick="showUploadedFilesTable(this);" runat="server" MaxLength="20"
-                                                    ClientIDMode="Static"></asp:TextBox>
-                                                <label for="txtUploadedFiles">الملفات</label>
-                                            </div>
-                                        </div>
-
                                            <div class="row">
                                         <br />
                                         <div class="col-md-3 col-sm-12">
@@ -171,7 +157,15 @@
          
                                         </div>
                                     </div>
-                                        
+                                           <div class="row">
+                                         <br />
+                                            <div class="col-md-12 col-sm-12" >
+                                                <asp:Button ID="cmdPOP" runat="server" SkinID="uploadBtn_plus" Text="+" CausesValidation="False" />
+                                                <asp:TextBox SkinID="txt80percentage" ID="txtUploadedFiles" ReadOnly="true" onclick="showUploadedFilesTable(this);" runat="server" MaxLength="20"
+                                                    ClientIDMode="Static"></asp:TextBox>
+                                                <label for="txtUploadedFiles">الملفات</label>
+                                            </div>
+                                        </div>
                                 </div>
                           
                                 <div class="clearfix"></div>

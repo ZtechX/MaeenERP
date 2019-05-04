@@ -13,9 +13,49 @@
         </Services>
     </asp:ScriptManager>
 
- 
+    <style>
+        .comp-logo {
+    width: 100%;
+    height: auto;
+    min-height: 70px;
+    max-height:70px;
+    background-color: #efefef;
+    overflow-y: hidden;
+    border:2px solid #efefef;
+}
+
+.up-btn:hover {
+    background-color: #0b4d73;
+}
+.up-btn {
+    width: 100%;
+    height: 30px;
+    background: #0b669a;
+    color: #fff;
+    border: none;
+    border-radius: 0px 0px 10px 10px;
+    transition: all ease 01s;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.comp-logo
+{
+   background-size: contain!important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+}
+        .btn-group {
+            margin: 0px !important;
+            width: auto;
+        }
+    </style>
 
     <style>
+         .modal-content .table-responsive{max-height: 430px; overflow:auto}
         .wrap {
             margin-top: 50px;
             direction: rtl;
@@ -91,7 +131,7 @@
         }
 
           #student {
-            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+         
             border-collapse: collapse;
             width: 100%;
         }
@@ -156,9 +196,64 @@
                     .form-control { direction:rtl;
                     }
                 </style>
-         <div>
+                   <div>
                     <script src="../JS_Code/acadmies/diplomaCourses.js"></script>
 
+
+                          <script type="text/javascript">
+                      function UploadComplete2(sender, args) {
+                          
+                            var fileLength = args.get_length();
+                          var fileType = args.get_contentType();
+                           var Sender_id = $(sender.get_element()).attr("id");
+                          if (Sender_id == "fuPhoto1") {
+                              
+                              if (fileType.indexOf("image/") != -1) {
+                                  $('#img_' + section_id).css('background', 'url("images/' + args.get_fileName() + '")');
+                              }
+                              else if (fileType.indexOf("presentation") != -1 || fileType.indexOf("ms-powerpoint") != -1 || fileType.indexOf(".pptx") != -1) {
+                                  $('#img_' + section_id).css('background', 'url("../images/powerPoint_img.png")');
+                              }
+                              else if (fileType.indexOf("sheet") != -1 || fileType.indexOf("vnd.ms-excel") != -1 || fileType.indexOf(".xlsx") != -1) {
+                                  $('#img_' + section_id).css('background', 'url("../images/excel_img.png")');
+                              }
+                              else if (fileType.indexOf("document") != -1 || fileType.indexOf("msword") != -1 || fileType.indexOf(".docx") != -1) {
+                                  $('#img_' + section_id).css('background', 'url("../images/word_img.png")');
+                              }
+                              else if (fileType.indexOf("application/pdf") != -1) {
+                                  $('#img_' + section_id).css('background', 'url("../images/pdf_img.png")');
+                              }
+                              var file_nm = args.get_fileName();
+                              $('#lblSec_' + section_id).html("Acadmies_module/images/" + file_nm);
+                              $('#lblSec_' + section_id).attr("name", file_nm.split('.').slice(0, -1).join('.'));
+
+                          } 
+                         
+                            switch (true) {
+                                case (fileLength > 1000000):
+
+                                    fileLength = fileLength / 1000000 + 'MB';
+                                    break;
+
+                                case (fileLength < 1000000):
+
+                                    fileLength = fileLength / 1000000 + 'KB';
+                                    break;
+
+                                default:
+                                    fileLength = '1 MB';
+                                    break;
+                            }
+                            clearContents(sender);
+                        }
+                      function ClearMe(sender) {
+                            sender.value = '';
+                        }
+                        function clearContents(sender) {
+                            { $(sender._element).find('input').val(''); }
+                        }
+
+                 </script>
                 </div>
 
         <section>
@@ -204,6 +299,11 @@
                                     <li><a data-toggle="modal" href="#addStudentModal" > تقديمات الطلاب
                                     </a></li>
                                      <% End If %>
+
+                                    <% if ERpMaen.LoginInfo.get_form_operation("63") = True Then   %>
+                                    <li><a data-toggle="modal" href="#certificateStudentModal" >  ارفاق الشهادات
+                                    </a></li>
+                                     <% End If %>
                                      <% if ERpMaen.LoginInfo.get_form_operation("8") = True Then   %>
                                      <li><a data-toggle="modal" href="#semester_archiveModal">  ارشفه بالفصل الدراسى
                                     </a></li>
@@ -234,10 +334,12 @@
                                   <i class="fa fa-cogs"></i>
                                 </button>
                                 <ul class="dropdown-menu">
-                                     <li><a data-toggle="modal" href="#FinancialModal" onclick="drawFinanceStudent();">  اضافة مالية
+                                     <li><a data-toggle="modal" href="#FinancialModal" onclick="drawFinanceStudent();"> الدفعات المالية
+                                    </a></li>
+                                     <li><a data-toggle="modal" href="#Certificate_Modal" onclick="drawStudent_certificate();">  شهادة الدبلوم
                                     </a></li>
                                   
-                                    <li><a data-toggle="modal" href="#studentDegreesDiplome" onclick="studentDegreesIN_Diplome();">درجات الدبلوم
+                                    <li><a data-toggle="modal" href="#studentDegreesDiplome" onclick="studentDegreesIN_Diplome();">السجل الاكاديمى 
                                     </a></li>
 
                                     
@@ -320,6 +422,20 @@
                                         </div>
                             </div>
 
+
+                                             <div class=" form-group">
+                                 <div class="col-md-3 col-sm-12">
+                                        <label  class="label-required">  عدد الوحدات </label>
+                                            </div>
+
+                                      <div class="col-md-9 col-sm-12">
+                                            <input onkeypress="return isNumber(event);" dbcolumn="Units_Num" required  placeholder=" عدد وحدات المادة" id="subject_units"
+                                                class="form-control" runat="server" clientidmode="Static" />
+                                          
+                                    
+                                        </div>
+                            </div>
+
                                   <div class=" form-group ">
                                 <div class="col-md-3 col-sm-12">
                                     <label class="label-required">الفصل الدراسى  </label>
@@ -349,7 +465,16 @@
                                 
                              <div class="col-md-6">
                                  
-                                
+                                 <div class=" form-group">
+                                 <div class="col-md-3 col-sm-12">
+                                        <label class="label-required" > الرمز </label>
+                                            </div>
+
+                                      <div class="col-md-9 col-sm-12">
+                                            <input  placeholder="رمز المادة" dbcolumn="sub_code"  required type="text" id="sub_code" class="form-control" runat="server" clientidmode="Static" />
+                                        </div>
+                            </div>
+
                                  
                                    <div class=" form-group">
                                  <div class="col-md-3 col-sm-12">
@@ -526,6 +651,23 @@
                         <div class="modal-body">
                             <div id="divFormcondition">
 
+
+                                     <div class=" row form-group">
+                                            <div class="col-md-3 col-sm-12">
+                                                <label class=""> نوع الشرط </label>
+                                            </div>
+
+                                            <div class="col-md-9 col-sm-12" >
+                                                <select class="form-control" dbcolumn="Mandatory">
+                                                    <option value="1">اجبارى</option>
+                                                    <option value="0">اختيارى </option>
+                                                  
+                                                   
+                                                </select>
+
+
+                                            </div>
+                                        </div>
                                 <div class=" row form-group">
                                     <div class="col-md-3 col-sm-12">
                                         <label>الشرط      </label>
@@ -547,7 +689,7 @@
                                     <div class="clear">
                                     </div>
                                     <asp:AsyncFileUpload ID="fuFile1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
-                                        OnClientUploadComplete="UploadComplete2" />
+                                        OnClientUploadComplete="UploadComplete4" />
                                 </div>
                             </div>
 
@@ -705,16 +847,34 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title"> درجات مواد الدبلوم   </h4>
+                            <h4 class="modal-title">السجل الاكاديمى</h4>
                         </div>
-                      
+                       
+                         <div class="modal-body">
+                       
+                        
+                       
+
+                            <div class="form-group">
+                                <div class="col-md-3 col-sm-12">
+                                    <label  class="label-required">اختر الفصل الدراسى</label>
+                                </div>
+
+                                <div class="col-md-9 col-sm-12">
+                                    <asp:DropDownList dbcolumn="semster_id" required class="form-control" ClientIDMode="Static" onchange="studentDegreesIN_Diplome();" ID="ddlsubject_Semester" runat="server">
+                                    </asp:DropDownList>
+                                    
+                                </div>
+                            </div>
+                           
                         <div class="table-responsive" >
-                            <table class="table table-bordered table-hover"  id="newitem">
+                            <table class="table table-bordered table-hover" >
                                <thead>
                                 <tr>
                                     <th>المادة </th>
-                                    <th>درجة النشاط</th>
-                                     <th>الدرجة النهائية</th>
+                                    <th>  درجة اعمال السنة </th>
+                                     <th> درجة الاختبار النهائي</th>
+                                     <th> المجموع</th>
                                       <th> التقدير</th>
                                     
                                   
@@ -727,12 +887,12 @@
 
                             </table>
                         </div>
-
-
+                      
+                             </div>
                         <div class="modal-footer">
                             <button type="button"   data-dismiss="modal" class="btn btn-primary" >close </button>
                         </div>
-                    </div>
+                   </div>
                 </div>
             </div>
 
@@ -749,7 +909,7 @@
                             
                             <div class="trans-data col-xs-12" >
 
-                                   <button type="button" class="btn btn-info " data-toggle="modal" data-target="#add_Financial"> اضافة مالية  <i class="fa fa-plus"></i></button>
+                                   <button type="button" class="btn btn-info " data-toggle="modal" data-target="#add_Financial"> اضافة دفعة مالية  <i class="fa fa-plus"></i></button>
                                       <div class="table-responsive" >
                                              
                                                 <table class="table table-bordered">
@@ -789,12 +949,57 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="Certificate_Modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">   شهادة الدبلوم   </h4>
+                        </div>
+
+                         <style>
+                            #certficate_student th {
+                                text-align:right;
+                            }
+                        </style>
+                        <div class="modal-body" style="direction:rtl;" >
+                            
+                             <div class="trans-data col-xs-12" >
+                                                
+                <div class="table-responsive" id="certficate_student">
+                    <table class="table table-bordered table-hover">
+                        
+                        <tr>
+                            <th>اسم الطالب </th>
+                            <th>شهادة الدبلوم</th>
+                           
+                        </tr>
+                        
+                       
+                        <tbody id="Student_certificate">
+
+                        </tbody>
+                        </table>
+                    </div>
+                    </div>
+                           
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" data-dismiss="modal" >close </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         <div class="modal fade" id="add_Financial" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">  اضافة مالية   </h4>
+                            <h4 class="modal-title">  اضافة دفعة مالية   </h4>
                         </div>
                         <div class="modal-body">
                            
@@ -874,6 +1079,11 @@
                             <h4 class="modal-title">تقديمات الطلاب   </h4>
                         </div>
                         <%--  جدول الطلاب--%>
+                        <style>
+                            #allStudentlist th {
+                                text-align:right;
+                            }
+                        </style>
                         <div class="table-responsive" id="allStudentlist" style="direction:rtl;">
                             <table class="table table-bordered table-hover"  id="newitem">
                                <thead>
@@ -896,6 +1106,47 @@
 
                         <div class="modal-footer">
                             <button type="button"  class="btn btn-primary" onclick="AddDiplome_Student();">حفظ </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="modal fade" id="certificateStudentModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">ارفاق الشهادات    </h4>
+                        </div>
+                        <%--  جدول الطلاب--%>
+                        <style>
+                            #StudentlistCertificates th {
+                                text-align:right;
+                            }
+                        </style>
+                        <div class="table-responsive" id="StudentlistCertificates" style="direction:rtl;">
+                            <table class="table table-bordered table-hover"  id="newitem">
+                               <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>الطالب </th>
+                                    <th style="width:30%"> كود الشهادة</th>
+                                     <th>ارفاق شهادة</th>
+                                   
+                                  
+                                </tr>
+                                 </thead>
+                                <tbody  id="Students_Certificates">
+                                         
+                                </tbody>
+                                    
+
+                            </table>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button"  class="btn btn-primary" onclick="AddStudent_Certificate();">حفظ </button>
                         </div>
                     </div>
                 </div>
@@ -941,6 +1192,8 @@
         
     </div>
 
-        
+         <asp:AsyncFileUpload ID="fuPhoto1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
+                                                    OnClientUploadComplete="UploadComplete2" style="display:none;"
+                                                    FailedValidation="False" />
  
 </asp:Content>

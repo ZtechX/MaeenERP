@@ -36,6 +36,7 @@
                         max-height: 200px;
                         overflow: auto;
                     }
+                   
                 </style>
 
                 <script type="text/javascript">
@@ -120,7 +121,7 @@
                         <uc1:PnlConfirm runat="server" ID="PnlConfirm" />
                     </div>
                     <uc1:Result runat="server" ID="Result" />
-                    <div id="divForm" class="newformstyle form_continer">
+                    <div id="divForm" class="newformstyle form_continer" >
                         <div class="clear"></div>
                         <asp:ValidationSummary ID="ValidationSummary2" runat="server" ValidationGroup="vgroup" />
                         <asp:Label ID="lblmainid" ClientIDMode="Static" Style="display: none" runat="server" dbColumn="id"></asp:Label>
@@ -132,7 +133,7 @@
                         <asp:Label ClientIDMode="Static" runat="server" Style="display: none" ID="lblUpdate">1</asp:Label>
                         <div class="cp_margin pad10">
                             <div class="clear"></div>
-                            <asp:Panel ID="pnlForm" runat="server">
+                            <asp:Panel ID="pnlForm" runat="server" >
                                 <div class="col-md-6">
 
 
@@ -142,7 +143,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" class="form-control" dbColumn="name" ClientIDMode="Static" ID="Name" runat="server">
+                                            <asp:TextBox SkinID="form-control" CssClass="form-control" dbColumn="name"  ClientIDMode="Static" ID="Name" runat="server">
                                             </asp:TextBox>
 
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="Name"
@@ -156,7 +157,7 @@
                                             <label for="TextBox1">الصفة  </label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox SkinID="form-control" class="form-control" dbColumn="adjective" ClientIDMode="Static" ID="Textdetails" runat="server">
+                                            <asp:TextBox SkinID="form-control" CssClass="form-control" dbColumn="adjective" ClientIDMode="Static" ID="Textdetails" runat="server">
                                             </asp:TextBox>
                                         </div>
 
@@ -170,7 +171,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:DropDownList SkinID="form-control" class="form-control" dbColumn="job_id" ClientIDMode="Static" ID="job_id" runat="server">
+                                            <asp:DropDownList SkinID="form-control" CssClass="form-control" dbColumn="job_id" ClientIDMode="Static" ID="job_id" runat="server">
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -198,7 +199,7 @@
                                             </div>
                                         <div class="col-md-9 col-sm-12">
                                             <div class="fancy-form">
-                                                <input dbcolumn="amount_money" type="text" id="amount_money" class="form-control" />
+                                                <asp:TextBox dbcolumn="amount_money" ID="amount_money" CssClass="form-control" />
                                             </div>
 
                                             <label class="required">تاريخ استحقاق الدفعة المالية   </label>

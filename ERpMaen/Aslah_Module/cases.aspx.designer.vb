@@ -137,7 +137,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtcode As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtcode As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lblstart_date control.
@@ -182,7 +182,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text9 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents Text9 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''txtinstrument_date_m control.
@@ -236,16 +236,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtindenty As Global.System.Web.UI.HtmlControls.HtmlInputText
-    
-    '''<summary>
-    '''tel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents tel As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtindenty As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''txtauthorization_no control.
@@ -254,7 +245,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtauthorization_no As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtauthorization_no As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''txtpassword control.
@@ -263,7 +254,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtpassword As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtpassword As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''txtname2 control.
@@ -290,7 +281,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtindenty2 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtindenty2 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''tel1 control.
@@ -308,7 +299,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtauthorization_no2 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtauthorization_no2 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''txtpassword2 control.
@@ -317,7 +308,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtpassword2 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtpassword2 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''ddlchild_custody control.
@@ -335,7 +326,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtchildrens_no As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtchildrens_no As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''ddlstatus control.
@@ -488,7 +479,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents age_son As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents age_son As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''ddlhealth_status control.
@@ -560,7 +551,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents num_months As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents num_months As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''txtreceiving_time control.
@@ -605,7 +596,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtcode_conciliation As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtcode_conciliation As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lblconciliation_date_m control.
@@ -722,7 +713,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents expense_amount As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents expense_amount As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''expense_month control.
@@ -731,7 +722,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents expense_month As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents expense_month As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''ImageSlider control.
@@ -785,7 +776,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents month_number As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents month_number As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''another_return_period control.
@@ -812,7 +803,7 @@ Partial Public Class cases
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text1 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents Text1 As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''TextBox2 control.

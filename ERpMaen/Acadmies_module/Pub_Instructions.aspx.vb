@@ -43,7 +43,7 @@ Public Class Pub_Instructions
 
 
 
-                Dim clsapprove_tainer As New clsFillComboByDataSource("select id , name from tblUser_Type where IsNull(Deleted,0)=0 ", "name", "id", "")
+                Dim clsapprove_tainer As New clsFillComboByDataSource("select id , name from tblUser_Type   where  IsNull(Deleted,0)=0", "name", "id", "")
                 clsapprove_tainer.SetComboItems(lblUsers, "", True, "--اختر--", False)
 
 
@@ -52,6 +52,8 @@ Public Class Pub_Instructions
                 'clsapprove_category.SetComboItems(ddlcategory, "", True, "--اختر--", False)
 
 
+                inst_edit.InnerHtml = ERpMaen.LoginInfo.get_form_operation("66")
+                inst_del.InnerHtml = ERpMaen.LoginInfo.get_form_operation("67")
 
 
 
@@ -84,7 +86,7 @@ Public Class Pub_Instructions
                     ' Dim PostedPhoto As System.Drawing.Image = System.Drawing.Image.FromStream(fu.PostedFile.InputStream)
                     'Dim ImgHeight As Integer = PostedPhoto.Height
                     'Dim ImgWidth As Integer = PostedPhoto.Width
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
                     ' Session("UserPhoto") = x
 
 

@@ -5,9 +5,187 @@
  * Revised to using W3CSS, @Gorontalo, Indonesia, 14 January 2019
  */
 'use strict';
+function HijriDate() {
+   
+    let hd = typeof this == 'object' ? this : window, time, tzom = Date.parse('01 Jan 1970'), tzo = parseInt(parseInt(tzom / 1000) / 60), tzs = Date(1970, 0, 1),
+        utc = { yyy: 0, mmm: 0, ddd: 0, day: 0, hh: 0, mm: 0, ss: 0, ms: 0 }, loc = { yyy: 0, mmm: 0, ddd: 0, day: 0, hh: 0, mm: 0, ss: 0, ms: 0 };
+    tzs = tzs.substring(tzs.lastIndexOf('GMT'));
+    time = HijriDate.UTC(arguments[0], arguments[1], arguments[2], arguments[3], arguments[4], arguments[5], arguments[6]);
+    if (isNaN(time)) time = Date.now();
+    else if (arguments.length == 1) time = HijriDate.int(arguments[0], Date.now());
+    else time += tzom;
+    updDt(utc, time); updDt(loc, time - tzom);
+    function getUTCTmStr() { let d = HijriDate.toNDigit; return d(utc.hh, 2) + ':' + d(utc.mm, 2) + ':' + d(utc.ss, 2) }
+    function getLocTmStr() { let d = HijriDate.toNDigit; return d(loc.hh, 2) + ':' + d(loc.mm, 2) + ':' + d(loc.ss, 2) }
+    function updUTCTm() { updTm(utc); updDt(utc, time); updDt(loc, time - tzom) }
+    function updLocTm() { updTm(loc); updDt(loc, time); time += tzom; updDt(utc, time) }
+    function updTm(r) { time = HijriDate.UTC(r.yyy, r.mmm, r.ddd, r.hh, r.mm, r.ss, r.ms) }
+    function updDt(r, t) { HijriDate.parseTime(r, t) }
+    hd.getDate = function () { return loc.ddd };
+    hd.getDay = function () { return loc.day };
+    hd.getFullYear = function () { return loc.yyy };
+    hd.getHours = function () { return loc.hh };
+    hd.getMilliseconds = function () { return loc.ms };
+    hd.getMinutes = function () { return loc.mm };
+    hd.getMonth = function () { return loc.mmm };
+    hd.getSeconds = function () { return loc.ss };
+    hd.getTime = function () { return time };
+    hd.getTimezoneOffset = function () { return tzo };
+    hd.getUTCDate = function () { return utc.ddd };
+    hd.getUTCDay = function () { return utc.day };
+    hd.getUTCFullYear = function () { return utc.yyy };
+    hd.getUTCHours = function () { return utc.hh };
+    hd.getUTCMilliseconds = function () { return utc.ms };
+    hd.getUTCMinutes = function () { return utc.mm };
+    hd.getUTCMonth = function () { return utc.mmm };
+    hd.getUTCSeconds = function () { return utc.ss };
+    hd.setDate = function (dt) { loc.ddd = HijriDate.int(dt, loc.ddd); updLocTm() };
+    hd.setFullYear = function (yr) { loc.yyy = HijriDate.int(yr, loc.yyy); updLocTm() };
+    hd.setHours = function (hr) { loc.hh = HijriDate.int(hr, loc.hh); updLocTm() };
+    hd.setMilliseconds = function (ms) { loc.ms = HijriDate.int(ms, loc.ms); updLocTm() };
+    hd.setMinutes = function (min) { loc.mm = HijriDate.int(min, loc.mm); updLocTm() };
+    hd.setMonth = function (mon) { loc.mmm = HijriDate.int(mon, loc.mmm); updLocTm() };
+    hd.setSeconds = function (sec) { loc.ss = HijriDate.int(sec, loc.ss); updLocTm() };
+    hd.setTime = function (tm) { time = HijriDate.int(tm, time); updDt(utc, time); updDt(loc, time - tzom) };
+    hd.setUTCDate = function (dt) { utc.ddd = HijriDate.int(dt, utc.ddd); updUTCTm() };
+    hd.setUTCFullYear = function (yr) { utc.yyy = HijriDate.int(yr, utc.yyy); updUTCTm() };
+    hd.setUTCHours = function (hr) { utc.hh = HijriDate.int(hr, utc.hh); updUTCTm() };
+    hd.setUTCMilliseconds = function (ms) { utc.ms = HijriDate.int(ms, utc.ms); updUTCTm() };
+    hd.setUTCMinutes = function (min) { utc.mm = HijriDate.int(min, utc.mm); updUTCTm() };
+    hd.setUTCMonth = function (mon) { utc.mmm = HijriDate.int(mon, utc.mmm); updUTCTm() };
+    hd.setUTCSeconds = function (sec) { utc.ss = HijriDate.int(sec, utc.ss); updUTCTm() };
+    hd.toDateString = function () {
+        let h = HijriDate, d = h.toNDigit; return h.weekdayShortNames[loc.day] + ' ' + h.monthShortNames[loc.mmm] + ' ' + d(loc.ddd, 2) + ' ' + d(loc.yyy, 4)
+    };
+    hd.toISOString = function () {
+        let d = HijriDate.toNDigit; return d(utc.yyy, utc.yyy < 0 ? 6 : 4) + '-' + d(utc.mmm + 1, 2) + '-' + d(utc.ddd, 2) + 'T' + getUTCTmStr() + '.' + d(utc.ms, 3) + 'Z'
+    };
+    hd.toJSON = function () { return hd.toISOString() };
+    hd.toString = function () { return hd.toDateString() + ' ' + hd.toTimeString() };
+    hd.toTimeString = function () { return getLocTmStr() + ' ' + tzs };
+    hd.toUTCString = function () {
+        let h = HijriDate, d = h.toNDigit;
+        return h.weekdayShortNames[utc.day] + ', ' + d(utc.ddd, 2) + ' ' + h.monthShortNames[utc.mmm] + ' ' + d(utc.yyy, 4) + ' ' + getUTCTmStr() + ' GMT'
+    };
+    hd.valueOf = function () { return time };
+    hd.getDayCountInMonth = function () { return HijriDate.dayCountInMonth((loc.yyy - 1) * 12 + loc.mmm) };
+    hd.getUTCDayCountInMonth = function () { return HijriDate.dayCountInMonth((utc.yyy - 1) * 12 + utc.mmm) };
+    return hd.toString()
+}
+Object.defineProperty(HijriDate, 'DIFF', { value: -425215872e5 });//Value of time interval in milliseconds from January 1, 1970AD, 00:00:00 AM to July 19, 622AD, 00:00:00 AM
+Object.defineProperty(HijriDate, 'MOON_CYCLE', { value: 29.5305882 });
+Object.defineProperty(HijriDate, 'dayCount', {
+    value: function (m) {
+        let h = HijriDate.MOON_CYCLE;
+        if (m >= 0) return parseInt(m * h);
+        let r = (parseInt(m / 360) - 1) * 360;//30 years cycle
+        return parseInt(r * h) - parseInt((r - m) * h)
+    }
+});
+Object.defineProperty(HijriDate, 'dayCountInMonth', { value: function (m) { return HijriDate.dayCount(m + 1) - HijriDate.dayCount(m) } });
+Object.defineProperty(HijriDate, 'int', { value: function (n, d) { n = parseInt(n); return isNaN(n) ? d : n } });
+Object.defineProperty(HijriDate, 'now', { value: function () { return Date.now() } });
+Object.defineProperty(HijriDate, 'parseTime', {
+    value: function (r, t) {
+        let h = HijriDate, hdc = h.dayCount;
+        t -= h.DIFF;
+        let tp = t % 864e5, dc = parseInt(t / 864e5), m = parseInt(dc / h.MOON_CYCLE);
+        if (t < 0) {
+            if (tp < 0) { dc--; tp += 864e5 }
+            if (dc < hdc(m)) m--
+        }
+        r.ddd = 1 + dc - hdc(m);
+        if (r.ddd > h.dayCountInMonth(m)) r.ddd -= h.dayCountInMonth(m++);
+        r.yyy = Math.floor(m / 12) + 1;
+        r.mmm = (m % 12 + 12) % 12;
+        r.ms = tp % 1e3; tp = parseInt(tp / 1e3);
+        r.ss = tp % 60; tp = parseInt(tp / 60);
+        r.mm = tp % 60; tp = parseInt(tp / 60);
+        r.hh = tp % 24;
+        r.day = ((dc + 5) % 7 + 7) % 7
+    }
+});
+Object.defineProperty(HijriDate, 'toNDigit', {
+    value: function (n, d) {
+        let s = Math.abs(n).toString(); if (s.length < d) s = ('00000000' + s).slice(-d); if (n < 0) s = '-' + s; return s
+    }
+});
+Object.defineProperty(HijriDate, 'UTC', {
+    value: function () {
+        let h = HijriDate, i = h.int, a = arguments, t;
+        if (isNaN(a[0])) return NaN;
+        a[0] = parseInt(a[0]); a[1] = i(a[1], 0); a[2] = i(a[2], 1); a[3] = i(a[3], 0); a[4] = i(a[4], 0); a[5] = i(a[5], 0); a[6] = i(a[6], 0);
+        t = h.dayCount((a[0] - 1) * 12 + a[1]); t += a[2] - 1; t *= 864e5; t += a[3] * 36e5; t += a[4] * 6e4; t += a[5] * 1e3; t += a[6]; t += h.DIFF; return t
+    }
+});
+
+HijriDate.monthNames = ["Muharram", "Safar", "Rabi'ul-Awwal", "Rabi'ul-Akhir", "Jumadal-Ula", "Jumadal-Akhir", "Rajab", "Sha'ban", "Ramadan", "Syawwal", "Dhul-Qa'da", "Dhul-Hijja"];
+HijriDate.monthShortNames = ["Muh", "Saf", "RAw", "RAk", "JAw", "JAk", "Raj", "Sha", "Ram", "Sya", "DhQ", "DhH"];
+HijriDate.weekdayNames = ["Ahad", "Ithnin", "Thulatha", "Arba'a", "Khams", "Jumu'ah", "Sabt"];
+HijriDate.weekdayShortNames = ["Ahd", "Ith", "Thu", "Arb", "Kha", "Jum", "Sab"];
+Date.prototype.getDayCountInMonth = function () {
+    let y = this.getFullYear(), isLeapYear = (y % 100 != 0) && (y % 4 == 0) || (y % 400 == 0), c = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    return c[this.getMonth()]
+};
+Date.prototype.getUTCDayCountInMonth = function () {
+    let y = this.getUTCFullYear(), isLeapYear = (y % 100 != 0) && (y % 4 == 0) || (y % 400 == 0), c = [31, isLeapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    return c[this.getUTCMonth()]
+};
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+function openSidebar() {
+    document.getElementById("mySidebar").style.display = "block"
+}
+
+function closeSidebar() {
+    document.getElementById("mySidebar").style.display = "none"
+}
+
+function dropdown(el) {
+    if (el.className.indexOf('expanded') == -1) {
+        el.className = el.className.replace('collapsed', 'expanded');
+    } else {
+        el.className = el.className.replace('expanded', 'collapsed');
+    }
+}
+
+function selectLang(el) {
+    el.children[0].checked = true;
+    cal.setLanguage(el.children[0].value)
+}
+
+function setYear() {
+    let el = document.getElementById('valYear');
+    cal.setFullYear(el.value)
+}
+
+function setMonth() {
+    let el = document.getElementById('valMonth');
+    cal.setMonth(el.value)
+}
+
+function setTheme() {
+    let el = document.getElementById('txtTheme');
+    let n = parseInt(el.value);
+    if (!isNaN(n)) cal.setTheme(n);
+    else cal.setTheme(el.value)
+}
+
+function setTodayTimeout() {
+    let el = document.getElementById('valTimeout');
+    cal.setTodayTimeout(el.value)
+}
+
+
+
 var mdate1 = "";
 
-function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
+function Calendar(isHijr, year, month, firstDay=1, lang = "ar", theme, tmout) {
+    debugger
     if (typeof HijriDate == 'undefined') throw new Error('HijriDate() class required!');
     let cd = typeof this == 'object' ? this : window, gdate = new Date(), hdate = new HijriDate(), dispDate, tzOffset = Date.parse('01 Jan 1970'),
         gridAni = 'zoom', actTmoId, isDispToday = false, isAttached = false, isAccOpened = false, isAutoNewTheme, isRTL = true,
@@ -139,6 +317,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
 
         },
         createWdayTitle = function () {
+            debugger
             let el = accFirstDayElm.children[firstDay];
             replaceClass(el, 'w3-button w3-ripple', 'w3-transparent'); el.disabled = true;
             for (let i = firstDay; i < 7 + firstDay; i++) {
@@ -152,7 +331,6 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
             while (wdayTitleElm.firstChild) wdayTitleElm.removeChild(wdayTitleElm.firstChild); createWdayTitle()
         },
         createDates = function () {
-            debugger
             let dispTm = dispDate.getTime(), ppdr = dispDate.getDay() - firstDay;
             if (ppdr < 0) ppdr += 7;
             let pcdr = dispDate.getDayCountInMonth(), pndr = (7 - (ppdr + pcdr) % 7) % 7;
@@ -171,7 +349,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
             //    month = month;
             //}
             //var new_date_h = month + "/" + year;
-            debugger
+            
            var first_Grid_day = getOppsDate;
             first_Grid_day().setDate(sdate);
             var first_day = first_Grid_day().getDateString();
@@ -197,7 +375,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                 if (val[2] != "0") {
                     monthdata2 = JSON.parse(val[2]);
                 }
-                debugger
+                
                     for (let i = 1; i <= ppdr + pcdr + pndr; i++) {
                         if (gridCtr == 0) { var row = createElm('div', 'w3-cell-row w3-center'); gridsElm.appendChild(row) }
                         let grid = createElmgrid('div', 'w3-cell w3-animate-' + gridAni, getOppsDate().getDayCountInMonth()),
@@ -223,7 +401,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
                             grid.className += ' w3-btn w3-ripple w3-round-large w3-black'; grid.style.cursor = 'pointer'; addEvt(grid, 'click', onAbout)
                         }
                         mdate1 = (sdate < 10 ? "0" + sdate : sdate) + '/' + ((getOppsDate().getMonth() + 1) < 10 ? "0" + (getOppsDate().getMonth() + 1) : (getOppsDate().getMonth() + 1)) + '/' + (getOppsDate().getFullYear());
-                        debugger
+                        
                         var res = comparedate(monthdata, mdate1);
                         var res1 = comparedate(monthdata1, mdate1);
                         var res2 = comparedate(monthdata2, mdate1);
@@ -298,6 +476,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
             else { replaceClass(menuFirstDayElm, 'expanded', 'collapsed'); isAccOpened = false }
         },
         onSelFirstDay = function (ev) {
+            debugger
             ev = ev || window.event; let el = ev.target || ev.srcElement; cd.setFirstDayOfWeek(el.getAttribute('firstday')); applyTodayTmout();
         },
         onDispToday = function () { cd.today() },
@@ -325,7 +504,8 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
         decYear = function () { dispDate.setFullYear(dispDate.getFullYear() - 1); updCal(); applyTodayTmout() },
         incYear = function () { dispDate.setFullYear(dispDate.getFullYear() + 1); updCal(); applyTodayTmout() },
         syncDates = function () { getOppsDate().setTime(dispDate.getTime()) },
-        getOppsDate = function () { return isHijr ? gdate : hdate },
+      
+        getOppsDate = function () {  return isHijr ? gdate : hdate },
         getFixTime = function (t) { t -= tzOffset; return t - t % 864e5 + 36e5 + tzOffset },
         getCurTime = function () { return getFixTime(Date.now()) },
         beginNewDate = function () {
@@ -354,6 +534,7 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
         return false
     };
     cd.setFirstDayOfWeek = function (f) {
+        debugger
         f = HijriDate.int(f, firstDay) % 7;
         if (f != firstDay) {
             let el = accFirstDayElm.children[firstDay];
@@ -428,6 +609,11 @@ function Calendar(isHijr, year, month, firstDay, lang, theme, tmout) {
     }
     createStyle(); createAboutModal(); createCal(); applyTodayTmout()
 }
+Date.prototype.getDateString = function () {
+    return addZero(this.getDate()) + '/' +
+        addZero(this.getMonth() + 1) + '/' +
+        this.getFullYear();
+};
 Date.prototype.getMonthName = function (m) {
     m = (HijriDate.int(m, this.getMonth()) % 12 + 12) % 12;
     return Calendar.getVal('monthNames')[m]
@@ -460,6 +646,11 @@ Date.prototype.todayString = function () {
     let t = this.getTime(); this.setTime(Date.now());
     let s = this.getWeekdayName() + ', ' + this.getDate() + ' ' + this.getMonthName() + ' ' + this.getFullYear();
     this.setTime(t); return Calendar.getDigit(s)
+};
+HijriDate.prototype.getDateString = function () {
+    return addZero(this.getDate()) + '/' +
+        addZero(this.getMonth() + 1) + '/' +
+        this.getFullYear();
 };
 HijriDate.prototype.getMonthName = function (m) {
     m = (HijriDate.int(m, this.getMonth()) % 12 + 12) % 12;

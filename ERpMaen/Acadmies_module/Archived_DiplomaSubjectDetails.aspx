@@ -3,7 +3,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
 
-<%--<%@ Register Src="~/UserControls/MultiPhotoUpload.ascx" TagPrefix="ucmf" TagName="MultiPhotoUpload" %>--%>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
@@ -13,19 +12,8 @@
             <asp:ServiceReference Path="~/ASMX_WebServices/MultiFileUploader.asmx" />
         </Services>
     </asp:ScriptManager>
-<%--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">--%>
+ <link rel="stylesheet" href="../assets/css/app.min.css"/>
 
-<%--    <link rel="stylesheet" href="../libs/bower/font-awesome/css/font-awesome.min.css">--%>
-<%--    <link rel="stylesheet" href="../libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">--%>
-    <link rel="stylesheet" href="../assets/css/app.min.css">
-<%--    <script src="../libs/bower/breakpoints.js/dist/breakpoints.min.js"></script>--%>
- <%--   <link rel="stylesheet" type="text/css" href="../libs/bower/switchery/dist/switchery.min.css">
-    <link rel="stylesheet" type="text/css" href="../libs/bower/lightbox2/dist/css/lightbox.min.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/jquery.mCustomScrollbar.min.css">--%>
-    <%--<link rel="stylesheet" href="../libs/bower/bootstrap-fileInput/fileinput.min.css">
-    <link rel="stylesheet" href="../libs/bower/bootstrap-fileInput/explorer/theme.css">--%>
-<%--    <link rel="stylesheet" href="../assets/css/owl.carousel.css">--%>
-<%--    <link rel="stylesheet" href="../assets/css/star-rating.min.css">--%>
     <link rel="stylesheet" type="text/css" href="../assets/css/ontime.css"/>
     <link rel="stylesheet" type="text/css" href="../assets/css/ontime-rtl.css"/>
 
@@ -48,29 +36,12 @@
     });
 </script>
 
-  <%--  <script>
-        Breakpoints();
-    </script>--%>
     <style>
         .btn-group {
             margin: 0px !important;
             width: auto;
         }
     </style>
- <%-- <script src="../assets/js/core.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../libs/bower/moment/moment.js"></script>
-    <script src="../libs/bower/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="../assets/js/fullcalendar.js"></script>
-    <script src="../libs/bower/switchery/dist/switchery.min.js"></script>
-    <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>--%>
-<%--    <script src="../assets/js/ontime.js"></script>--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--%>
-
-<!-- Latest compiled and minified CSS -->
-
-
-<!-- Latest compiled JavaScript -->
 
     <style>
         .app-main {
@@ -187,7 +158,7 @@
                       
                     </script>
                     <script src="../JS_Code/acadmies/Archived_DiplomaSubjectDetails.js"></script>
-
+                 <script src="../js/customCalender/CustomerCalendar.js"></script>
 
                 </div>
             <section class="app-content">

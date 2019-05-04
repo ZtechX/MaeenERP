@@ -90,17 +90,7 @@
             margin: 0px !important;
             width: auto;
         }
-        /*popup edit*/
-        /*.modal-dialog {
-          
-    position: absolute;
-    width: 700px; height: 300px;
-    left: 50%; top: 30%;
-    margin: -155px 0 0 -300px;
-    border: solid 2px #cccccc;
-    background-color: #ffffff;
-   
-        }*/
+      
            .modal-dialog {
             
     position: absolute;
@@ -162,8 +152,8 @@
 							<div class="btn-group">
 								<button type="button" class="btn btn-secondary" style="width:100px; float: right;" onclick="drawAllCourses();">الكل</button>
 								<button type="button" class="btn btn-success"  style="width:100px; float: right;" onclick="drawCourses(0);">جديدة</button>
-								<button type="button" class="btn btn-primary"  style="width:100px; float: right;" onclick=" drawCourses(1);">حالية</button>
-								<button type="button" class="btn btn-dark"  style="width:100px; float: right;" onclick=" drawCourses(2);">مكتملة</button>
+								<button type="button" class="btn btn-primary"  style="width:100px; float: right;" onclick="drawCourses(1);">حالية</button>
+								<button type="button" class="btn btn-dark"  style="width:100px; float: right;" onclick="drawCourses(2);">مكتملة</button>
                                  <% if ERpMaen.LoginInfo.getUserType = 8 Then   %>
                                 <button type="button" class="btn btn-info"  style="width:100px; float: right;" onclick=" drawCourses(4)">دبلوماتى</button>
                                  <% End If%>

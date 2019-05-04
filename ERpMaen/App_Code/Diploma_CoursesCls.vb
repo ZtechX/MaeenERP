@@ -271,7 +271,7 @@ Public Class Diploma_CoursesCls
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
             Dim dt As DataTable
-            'dt = DBManager.Getdatatable("delete from acd_student_degrees where type=2 and course_id=" + subjectID)
+            dt = DBManager.Getdatatable("delete from acd_certificates where type=2 and course_id=" + diplome_ID)
 
             Dim id = ""
             Dim success2 As Boolean = True
@@ -334,7 +334,47 @@ Public Class Diploma_CoursesCls
         Try
             Dim dt As New DataTable
 
-            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'student_Name' , acd_certificates.certificate_code from acd_courses_students left join tblUsers on acd_courses_students.student_id=tblUsers.id left join acd_certificates  on acd_certificates.student_id=acd_courses_students.student_id and acd_certificates.course_id=acd_courses_students.course_id  where  acd_courses_students.type=2 and acd_courses_students.approved=1 and acd_courses_students.checked=1 and acd_courses_students.deleted=0 and acd_courses_students.course_id=" + diplomeID)
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'student_Name' , acd_certificates.certificate_code ,acd_certificates.image from acd_courses_students left join tblUsers on acd_courses_students.student_id=tblUsers.id left join acd_certificates  on acd_certificates.student_id=acd_courses_students.student_id and acd_certificates.course_id=acd_courses_students.course_id  where  acd_courses_students.type=2 and acd_courses_students.approved=1 and acd_courses_students.checked=1 and acd_courses_students.deleted=0 and acd_courses_students.course_id=" + diplomeID + "order by tblUsers.full_name ")
+
+            If dt IsNot Nothing Then
+                If dt.Rows.Count <> 0 Then
+                    Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                    Names.Add("1")
+                    Names.Add(Str)
+                    Return Names.ToArray
+                End If
+
+            End If
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+
+
+#End Region
+
+#Region "get_data"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_students_certificate(ByVal diplomeID As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+
+            dt = DBManager.Getdatatable("select acd_courses_students.student_id ,tblUsers.full_name as 'student_Name' , acd_certificates.image from acd_courses_students left join tblUsers on acd_courses_students.student_id=tblUsers.id  left join acd_certificates  on acd_certificates.student_id=acd_courses_students.student_id and acd_certificates.course_id=acd_courses_students.course_id  where  acd_courses_students.type=2 and acd_courses_students.approved=1 and acd_courses_students.checked=1 and acd_courses_students.deleted=0 and acd_courses_students.course_id=" + diplomeID + "and acd_courses_students.student_id=" + LoginInfo.GetUser__Id())
 
             If dt IsNot Nothing Then
                 If dt.Rows.Count <> 0 Then

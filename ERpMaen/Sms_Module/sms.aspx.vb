@@ -35,10 +35,10 @@ Public Class sms
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             If Page.IsPostBack = False Then
-                Dim comp = get_admin()
-                Dim clsddltype6 As New clsFillComboByDataSource("select * from tblsms_templates where ISNUll(deleted,0)=0and comp_id=" + comp.ToString, "name", "id", "")
+                Dim comp = LoginInfo.GetComp_id()
+                Dim clsddltype6 As New clsFillComboByDataSource("select * from tblsms_templates where ISNUll(deleted,0)=0 and comp_id=" + comp, "name", "id", "")
                 clsddltype6.SetComboItems(ddltemplate, "", True, "--اختر--", False)
-                Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='GP'", "description", "id", "")
+                Dim clsddltype5 As New clsFillComboByDataSource("select * from tbllock_up where ISNUll(deleted,0)=0 and type='GP' and comp_id=" + comp, "description", "id", "")
                 clsddltype5.SetComboItems(ddlgroup_id, "", True, "--اختر--", False)
 
 

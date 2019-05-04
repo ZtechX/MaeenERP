@@ -96,6 +96,7 @@
              <div>
 
                     <script src="../JS_Code/acadmies/course_register.js"></script>
+                 <script src="../js/customCalender/CustomerCalendar.js"></script>
                  <script type="text/javascript">
                       function UploadComplete2(sender, args) {
                            debugger

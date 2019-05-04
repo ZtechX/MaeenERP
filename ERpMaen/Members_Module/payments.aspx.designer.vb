@@ -263,7 +263,7 @@ Partial Public Class payments
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents HijriCalendar2 As Global.ERpMaen.HijriCalendar
+    Protected WithEvents HijriCalendar2 As Global.ERpMaen.CustomerCalendar
     
     '''<summary>
     '''payment_method control.

@@ -101,7 +101,7 @@ Public Class course_register
             fu = fuPhoto1
             Path = "Acadmies_module/images/"
             Prepare_Sheet(fu)
-            CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+            CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
             ClearContents(sender)
         Catch ex As Exception

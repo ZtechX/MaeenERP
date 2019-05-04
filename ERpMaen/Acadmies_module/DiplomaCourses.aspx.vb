@@ -126,23 +126,22 @@ Public Class DiplomaCourses
                 Case "fuFile1"
                     fu = fuFile1
 
-
                     Path = "Acadmies_module/images/"
                     Prepare_Sheet(fu)
 
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
 
                 Case "fufile3"
-                    fu = fuFile1
+                    fu = fufile3
 
                     Path = "Acadmies_module/coursefiles /"
                     Prepare_Sheet(fu)
 
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
                 Case "fuPhoto1"
                     fu = fuPhoto1
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
             End Select
             ClearContents(sender)

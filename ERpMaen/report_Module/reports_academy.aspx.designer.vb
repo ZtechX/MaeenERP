@@ -86,6 +86,15 @@ Partial Public Class reports_academy
     Protected WithEvents Li2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
+    '''Li6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Li6 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''Li1 control.
     '''</summary>
     '''<remarks>
@@ -102,6 +111,24 @@ Partial Public Class reports_academy
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Li3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''Li4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Li4 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''Li5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Li5 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''result1 control.
@@ -149,6 +176,15 @@ Partial Public Class reports_academy
     Protected WithEvents ddldiplomes1 As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''ddlsemster1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlsemster1 As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
     '''Panel2 control.
     '''</summary>
     '''<remarks>
@@ -183,6 +219,60 @@ Partial Public Class reports_academy
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ddldiplomes3 As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''ddldiplomes4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddldiplomes4 As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''ddlsemster2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlsemster2 As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''ddldiplomes5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddldiplomes5 As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''ddlsemster3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddlsemster3 As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''Panel4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Panel4 As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''ddldiplomes6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ddldiplomes6 As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''Result control.

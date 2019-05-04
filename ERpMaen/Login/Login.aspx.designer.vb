@@ -32,6 +32,24 @@ Partial Public Class Login
     Protected WithEvents ScriptManager1 As Global.System.Web.UI.ScriptManager
     
     '''<summary>
+    '''date_m control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents date_m As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
+    '''date_h control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents date_h As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    
+    '''<summary>
     '''txtUserName control.
     '''</summary>
     '''<remarks>

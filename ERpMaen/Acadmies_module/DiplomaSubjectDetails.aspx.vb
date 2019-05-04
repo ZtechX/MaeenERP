@@ -122,14 +122,14 @@ Public Class DiplomaSubjectDetails
 
                     Path = "Acadmies_module/exams/"
                     Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
                 Case "fuFile6"
                     fu = fuFile6
 
                     Path = "Acadmies_module/coursefiles/"
                     Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
 
                     'Case "fuFile3"
                     '    fu = fuFile3
@@ -144,7 +144,7 @@ Public Class DiplomaSubjectDetails
 
                     Path = "Acadmies_module/coursefiles/"
                     Prepare_Sheet(fu)
-                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0, "Employees", namer)
+                    CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, 0, 0, 0, 0)
                     'Case "fuFile4"
                     '    fu = fuFile4
 

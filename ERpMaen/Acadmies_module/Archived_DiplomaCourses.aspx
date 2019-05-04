@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Archived_DiplomaCourses.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.Archived_DiplomaCourses" %>
-<%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
 
@@ -115,7 +114,6 @@
     <div class="wrap">
          <div>
                     <script src="../JS_Code/acadmies/Archived_diplomaCourses.js"></script>
-
                 </div>
 
         <section>

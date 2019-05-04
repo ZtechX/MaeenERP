@@ -314,7 +314,7 @@ function get_form_operations() {
                 }
                 if (element.id != element.parent & parent==element.parent) {
                     div_show = div_show + `
-    <tr>
+    <tr style="background: aliceblue;">
                 <td></td>
                 <td>  ${element.action_name}</td>
           <td>  <input name="form-field-checkbox" type="checkbox" op_id="${element.id}" value="${element.parent}"   class="ace input-lg" >  </td> 

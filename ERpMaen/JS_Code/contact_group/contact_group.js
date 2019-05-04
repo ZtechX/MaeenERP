@@ -14,33 +14,13 @@ var formAutoCodeControl = "lblmainid";
 var clean = true;
 $(function () {
     try {
-      //  get_groups();
-
+        $("#pnlConfirm").hide();
 
     } catch (err) {
         alert(err);
     }
 });
 
-// draw dynamic table for existing travel_agencies
-function drawDynamicTable() {
-    try {
-        var tableSortingColumns = [
-                { orderable: false }, null, null, null,
-        ];
-        var tableFilteringColumns = [
-            { type: "null" }, { type: "text" },{ type: "text" }, { type: "text" },
-        ];
-
-        var tableColumnDefs = [
-
-        ];
-        var initialSortingColumn = 1;
-        loadDynamicTable('contact_group', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
-    } catch (err) {
-        alert(err);
-    }
-}
 
 // empty pnlform and show it and hide function panel
 function add() {

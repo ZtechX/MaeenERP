@@ -85,11 +85,15 @@
       <%-- <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/calendar.js")%>"></script>
         <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/hijri-date.js")%>"></script>--%>
     <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/bootstrap.min.js")%>")%></script>
-  <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/customCalender/CustomerCalendar.js")%>")%></script>
-      
+ <%-- <script type="text/javascript" src="<%# Page.ResolveClientUrl("~/js/customCalender/CustomerCalendar.js")%>")%></script>
+   --%>   
     <%-- <link href="css/calendar.css" rel="stylesheet" type="text/css" />--%>
    
     <style>
+        #divForm {
+            direction:rtl;
+        }
+
          .error {
 	border:#bf6464 2px dashed !important;
 	background-color:#fdfbfb !important;
@@ -787,5 +791,7 @@
     	"handle":".modal-header"
       });
 </script>
+     <input type="hidden" id="date_m" runat="server" />
+                    <input type="hidden" id="date_h" runat="server"/>
 </body>
 </html>

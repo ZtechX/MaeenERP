@@ -45,18 +45,21 @@ Public Class Pub_InstructionsCls
             Dim rnd As New Random
             Dim code = "CRS" & rnd.Next(10000000, 99999999).ToString
             dictBasicDataJson.Add("code", code)
-            dictBasicDataJson.Add("Seen", False)
+            'dictBasicDataJson.Add("archived", False)
             dictBasicDataJson.Add("Created_at_m", date_m)
             dictBasicDataJson.Add("Created_at_hj", date_hj)
             dictBasicDataJson.Add("comp_id", LoginInfo.GetComp_id())
 
             If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_Pub_Instructions", id, _sqlconn, _sqltrans) Then
-                If Not PublicFunctions.TransUsers_logs("4215", "acd_Pub_Instructions", "ادخال", _sqlconn, _sqltrans) Then
-                    success = False
-                Else
+                dictBasicDataJson.Item("User_Type") = LoginInfo.getUserType()
+                If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_Pub_Instructions", id, _sqlconn, _sqltrans) Then
+                    If Not PublicFunctions.TransUsers_logs("4215", "acd_Pub_Instructions", "ادخال", _sqlconn, _sqltrans) Then
+                        success = False
+                    Else
+                        success = True
+                    End If
                     success = True
                 End If
-                success = True
             Else
                 success = False
 
@@ -89,15 +92,22 @@ Public Class Pub_InstructionsCls
     ''' </summary>
     <WebMethod(True)>
     <System.Web.Script.Services.ScriptMethod()>
-    Public Function Seen_instruction(ByVal id As String) As Boolean
+    Public Function Seen_instruction(ByVal instruct_Id As String, ByVal date_m As String, ByVal date_hj As String) As Boolean
         Try
 
             _sqlconn.Open()
             _sqltrans = _sqlconn.BeginTransaction
+            Dim id = ""
 
+            Dim dictBasicDataJson As New Dictionary(Of String, Object)
+            dictBasicDataJson.Add("Instruction_id", instruct_Id)
+            dictBasicDataJson.Add("date_m", date_m)
+            dictBasicDataJson.Add("time", String.Format("{0:hh:mm:ss tt}", DateTime.Now))
+            dictBasicDataJson.Add("date_hj", date_hj)
+            dictBasicDataJson.Add("User_id", LoginInfo.GetUser__Id())
 
-            If DBManager.ExcuteQuery("UPDATE  acd_Pub_Instructions  set  Seen=1 where  id=" + id) <> -1 Then
-                If Not PublicFunctions.TransUsers_logs("4215", "acd_Pub_Instructions", "تعديل", _sqlconn, _sqltrans) Then
+            If PublicFunctions.TransUpdateInsert(dictBasicDataJson, "acd_Instruction_Archive", id, _sqlconn, _sqltrans) Then
+                If Not PublicFunctions.TransUsers_logs("4215", "acd_Instruction_Archive", "حفظ", _sqlconn, _sqltrans) Then
                     success = False
                 Else
                     success = True
@@ -107,6 +117,7 @@ Public Class Pub_InstructionsCls
                 success = False
 
             End If
+
             If success Then
 
                 _sqltrans.Commit()
@@ -144,37 +155,34 @@ Public Class Pub_InstructionsCls
             End If
 
             If Filter = "" Then
-                If LoginInfo.getUserType = 8 Then
-                    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.User_Type=8 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
 
-                ElseIf LoginInfo.getUserType = 4 Then
-                    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id,  acd_Pub_Instructions.code, acd_Pub_Instructions.image,acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.User_Type=4 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
+                dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.User_Type=" + LoginInfo.getUserType + " and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
+                'If LoginInfo.getUserType = 1 Then
 
-                Else
-                    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image,acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
+                '    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image,acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
 
-                End If
+                'End If
 
 
 
             ElseIf Filter <> "" And Filter <> 1 Then
-                If LoginInfo.getUserType = 8 Then
-                    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.Seen=0 and acd_Pub_Instructions.User_Type=8 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
-                ElseIf LoginInfo.getUserType = 4 Then
-                    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.Seen=0 and acd_Pub_Instructions.User_Type=4 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
+                'If LoginInfo.getUserType = 8 Then
+                dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id , acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m,1 as status from acd_Pub_Instructions where acd_Pub_Instructions.User_Type=" + LoginInfo.getUserType() + " and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + "and acd_Pub_Instructions.id not in(select Instruction_id from acd_Instruction_Archive where user_id=" + LoginInfo.GetUser__Id() + ")" + condation + "ORDER BY acd_Pub_Instructions.id DESC")
+                'ElseIf LoginInfo.getUserType = 4 Then
+                '    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id , acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.User_Type=4 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + "and acd_Pub_Instructions.id not in(select Instruction_id from acd_Instruction_Archive where user_id=" + LoginInfo.GetUser__Id() + ")" + condation + "ORDER BY acd_Pub_Instructions.id DESC")
 
-                Else
-                    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.Seen=0 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
-                End If
+                'Else
+                '    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id , acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + "and acd_Pub_Instructions.id not in(select Instruction_id from acd_Instruction_Archive where user_id=" + LoginInfo.GetUser__Id() + ")" + condation + "ORDER BY acd_Pub_Instructions.id DESC")
+                'End If
             Else
-                If LoginInfo.getUserType = 8 Then
-                    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.Seen=1 and acd_Pub_Instructions.User_Type=8 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
-                ElseIf LoginInfo.getUserType = 4 Then
-                    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.Seen=1 and acd_Pub_Instructions.User_Type=4 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
+                'If LoginInfo.getUserType = 8 Then
+                dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m, 2 as status from acd_Pub_Instructions join acd_Instruction_Archive on acd_Instruction_Archive.Instruction_id=acd_Pub_Instructions.id where acd_Pub_Instructions.User_Type=" + LoginInfo.getUserType() + " and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + "and acd_Instruction_Archive.User_id=" + LoginInfo.GetUser__Id() + "ORDER BY acd_Pub_Instructions.id DESC")
+                'ElseIf LoginInfo.getUserType = 4 Then
+                '    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.Seen=1 and acd_Pub_Instructions.User_Type=4 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
 
-                Else
-                    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.Seen=1 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
-                End If
+                'Else
+                '    dt = DBManager.Getdatatable("select  acd_Pub_Instructions.id, acd_Pub_Instructions.code, acd_Pub_Instructions.image, acd_Pub_Instructions.User_Type ,acd_Pub_Instructions.title, acd_Pub_Instructions.description , acd_Pub_Instructions.Created_at_m from acd_Pub_Instructions where acd_Pub_Instructions.Seen=1 and acd_Pub_Instructions.comp_id=" + LoginInfo.GetComp_id() + condation + "ORDER BY acd_Pub_Instructions.id DESC")
+                'End If
 
             End If
 

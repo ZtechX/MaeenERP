@@ -80,7 +80,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox required class="form-control" dbColumn="name" ClientIDMode="Static" ID="Name" runat="server">
+                                            <asp:TextBox required CssClass="form-control" dbColumn="name" ClientIDMode="Static" SkinID="form-control" ID="Name" runat="server">
                                             </asp:TextBox>
 
                                             
@@ -94,7 +94,7 @@
                                         </div>
 
                                          <div class="col-md-9 col-sm-12">
-                                            <input required onkeypress="return cust_chkNumber(event,this,10);" dbcolumn="tel" runat="server" type="text" id="txttel" class="form-control" />
+                                            <asp:TextBox  required  onkeypress="return cust_chkNumber(event,this,10);" dbcolumn="tel" runat="server"  SkinID="form-control" ID="txttel_" CssClass ="form-control" ></asp:TextBox>
                                            
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <input type="password" required class="form-control" dbColumn="password" ClientIDMode="Static" ID="TextBox3" runat="server"/>
+                                            <asp:TextBox  TextMode="Password"  required CssClass="form-control" dbColumn="password" ClientIDMode="Static" SkinID="form-control" ID="TextBox3" runat="server"></asp:TextBox>
                                             
                                             <br />
                                         </div>
@@ -116,7 +116,7 @@
                                             <label for="email">مدير قسم </label>
                                         </div>
                                         <div class="col-md-3 col-sm-12">
-                                            <input dbcolumn="depart_manager" type="checkbox" id="depart_manager" style="width: 40px;" class="form-control" />
+                                            <input dbcolumn="depart_manager" type="checkbox"  id="depart_manager" style="width: 40px;"  class="form-control" />
 
                                         </div>
                                     </div>
@@ -130,7 +130,7 @@
                                             </div>
 
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:DropDownList required dbcolumn="specialty" class="form-control" ClientIDMode="Static" ID="ddlspecial_id" runat="server">
+                                            <asp:DropDownList required dbcolumn="specialty" CssClass="form-control" ClientIDMode="Static" SkinID="form-control" ID="ddlspecial_id" runat="server">
                                             </asp:DropDownList>
 
                                         </div>
@@ -141,7 +141,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:TextBox  class="form-control" dbColumn="email" ClientIDMode="Static" ID="TextEmail" runat="server">
+                                            <asp:TextBox  CssClass="form-control" dbColumn="email" ClientIDMode="Static" SkinID="form-control" ID="TextEmail" runat="server">
                                             </asp:TextBox>
                                             <br />
                                         </div>
@@ -152,8 +152,8 @@
                                             </div>
 
                                       <div class="col-md-9 col-sm-12">
-                                            <input required onkeypress="return cust_chkNumber(event,this,10);" dbcolumn="advisor_identiy" type="text" id="txtNumber"
-                                                class="form-control" runat="server" clientidmode="Static" />
+                                            <asp:TextBox required onkeypress="return cust_chkNumber(event,this,10);" dbcolumn="advisor_identiy"  ID="txtNumber" SkinID="form-control"
+                                                CssClass="form-control" runat="server" ClientIDMode="Static" />
                                           
                                     <br />
                                         </div>

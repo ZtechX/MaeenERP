@@ -31,6 +31,10 @@ Public Class Login
                     Session("User_Type") = dt.Rows(0).Item("User_Type").ToString
                     Session("comp_id") = dt.Rows(0).Item("comp_id").ToString
                     Session("group_id") = dt.Rows(0).Item("group_id").ToString
+                    userCookie("date_m") = date_m.Value
+                    Session("date_m") = date_m.Value
+                    userCookie("date_h") = date_h.Value
+                    Session("date_h") = date_h.Value
                     Response.Cookies.Add(userCookie)
                     If dt.Rows(0).Item("User_Type").ToString = "9" Then
                         If Convert.ToBoolean(dt.Rows(0).Item("pass_changed")) Then
@@ -70,6 +74,10 @@ Public Class Login
                     userCookie("UserType") = dt.Rows(0).Item("User_Type").ToString
                     userCookie("comp_id") = dt.Rows(0).Item("comp_id").ToString
                     userCookie("group_id") = dt.Rows(0).Item("group_id").ToString
+                    userCookie("date_m") = date_m.Value
+                    Session("date_m") = date_m.Value
+                    userCookie("date_h") = date_h.Value
+                    Session("date_h") = date_h.Value
                     If dt.Rows(0).Item("User_Type").ToString = "9" Then
                         If Convert.ToBoolean(dt.Rows(0).Item("pass_changed")) Then
                             Response.Redirect("~/main.aspx")

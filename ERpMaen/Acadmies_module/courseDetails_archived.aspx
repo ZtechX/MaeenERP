@@ -1,9 +1,6 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false"   CodeBehind="courseDetails_archived.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.courseDetails_archived" EnableEventValidation="false" %>
-<%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
-
-<%--<%@ Register Src="~/UserControls/MultiPhotoUpload.ascx" TagPrefix="ucmf" TagName="MultiPhotoUpload" %>--%>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
@@ -14,19 +11,8 @@
 
         </Services>
     </asp:ScriptManager>
-<%--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">--%>
+<link rel="stylesheet" href="../assets/css/app.min.css"/>
 
-<%--    <link rel="stylesheet" href="../libs/bower/font-awesome/css/font-awesome.min.css">--%>
-<%--    <link rel="stylesheet" href="../libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">--%>
-    <link rel="stylesheet" href="../assets/css/app.min.css">
-<%--    <script src="../libs/bower/breakpoints.js/dist/breakpoints.min.js"></script>--%>
- <%--   <link rel="stylesheet" type="text/css" href="../libs/bower/switchery/dist/switchery.min.css">
-    <link rel="stylesheet" type="text/css" href="../libs/bower/lightbox2/dist/css/lightbox.min.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/jquery.mCustomScrollbar.min.css">--%>
-    <%--<link rel="stylesheet" href="../libs/bower/bootstrap-fileInput/fileinput.min.css">
-    <link rel="stylesheet" href="../libs/bower/bootstrap-fileInput/explorer/theme.css">--%>
-<%--    <link rel="stylesheet" href="../assets/css/owl.carousel.css">--%>
-<%--    <link rel="stylesheet" href="../assets/css/star-rating.min.css">--%>
     <link rel="stylesheet" type="text/css" href="../assets/css/ontime.css"/>
     <link rel="stylesheet" type="text/css" href="../assets/css/ontime-rtl.css"/>
     <script type="text/javascript" src="../Clock/ng_all.js"></script>
@@ -41,36 +27,16 @@
             end: '11:00 pm',  // what's the last avaliable hour
             top_hour: 12,  // what's the top hour (in the clock face, 0 = midnight)
             name: 'startTime',
-            
         });
-         
-        
     });
 </script>
 
-  <%--  <script>
-        Breakpoints();
-    </script>--%>
     <style>
         .btn-group {
             margin: 0px !important;
             width: auto;
         }
     </style>
- <%-- <script src="../assets/js/core.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../libs/bower/moment/moment.js"></script>
-    <script src="../libs/bower/fullcalendar/dist/fullcalendar.min.js"></script>
-    <script src="../assets/js/fullcalendar.js"></script>
-    <script src="../libs/bower/switchery/dist/switchery.min.js"></script>
-    <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>--%>
-<%--    <script src="../assets/js/ontime.js"></script>--%>
-<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--%>
-
-<!-- Latest compiled and minified CSS -->
-
-
-<!-- Latest compiled JavaScript -->
 
     <style>
         .app-main {
@@ -184,11 +150,7 @@
         <div class="wrap">
              <div>
 
-                   <script type="text/javascript">
-                      
-                    </script>
                     <script src="../JS_Code/acadmies/courseDetails_archived.js"></script>
-
 
                 </div>
             <section class="app-content">
@@ -657,16 +619,7 @@
                     </div>
                  </section>
             
-          
-
-            
-
-            
-
-            
-
-            
-
+          </div>
 
             <div class="modal fade" id="absenceModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -679,7 +632,7 @@
                         </div>
                         </div>
                         <%--  جدول الغياب--%>
-                        <div class="table-responsive">
+                        <div class="table-responsive"  style="padding:10px;">
                             <table class="table table-bordered table-hover">
                                 <tr>
                                     <th>الاسم </th>
@@ -701,8 +654,6 @@
                 </div>
             </div>
             
-
-            
             <div class="modal fade" id="studentDegrees" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -711,7 +662,7 @@
                             <h4 class="modal-title">درجات الطالب </h4>
                         </div>
                         <div class="modal-body">
-                           <div id="divFormDegrees">
+                           <div id="divFormDegrees"  style="padding:10px;">
 
                                 <div class=" row form-group">
                                             <div class="col-md-3 col-sm-12">
@@ -746,7 +697,6 @@
             </div>
                  </div>
             
-           
             <div class="modal fade" id="unarchivecourse_modal" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -755,7 +705,7 @@
                             <h4 class="modal-title">  سبب الازالة من الارشيف  </h4>
                         </div>
                         <div class="modal-body">
-                            <div id="divformunarchive">
+                            <div id="divformunarchive"  style="padding:10px;">
                                 <div class=" row form-group">
                                     <div class="col-md-3 col-sm-12">
                                         <label> السبب      </label>
@@ -790,7 +740,7 @@
                         </div>
                         </div>
                         <%--  جدول الغياب--%>
-                        <div class="table-responsive">
+                        <div class="table-responsive"  style="padding:10px;">
                             <table class="table table-bordered table-hover" id="publicDeg">
                                 <tr>
                                     <th>الاسم </th>
@@ -840,7 +790,7 @@
                         </div>
                         </div>
                         <%--  جدول الغياب--%>
-                        <div class="table-responsive">
+                        <div class="table-responsive"  style="padding:10px;">
                             <table class="table table-bordered table-hover" id="publicDeg">
                                 <tr>
                                     <th>الاسم </th>
@@ -889,7 +839,7 @@
                         </div>
                         </div>
                         <%--  جدول الغياب--%>
-                        <div class="table-responsive">
+                        <div class="table-responsive"  style="padding:10px">
                             <table class="table table-bordered table-hover" id="publicDeg">
                                 <tr>
                                     <th>الاسم </th>

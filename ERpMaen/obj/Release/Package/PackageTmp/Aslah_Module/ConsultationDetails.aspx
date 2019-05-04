@@ -29,6 +29,7 @@
                     <script src="../JS_Code/ConsultationDetails/ConsultationDetails.js"></script>
                      <link href="../css/cases/cases.css" rel="stylesheet" />
                      <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+                    <script src="../js/customCalender/CustomerCalendar.js"></script>
                     <style>
                         .listbox {
                             margin-right:0px;

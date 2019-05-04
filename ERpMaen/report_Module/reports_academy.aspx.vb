@@ -43,9 +43,15 @@ Public Class reports_academy
                 clsapprove_type.SetComboItems(ddldiplomes1, "", False, "--اختر--", False)
                 clsapprove_type.SetComboItems(ddldiplomes2, "", False, "--اختر--", False)
                 clsapprove_type.SetComboItems(ddldiplomes3, "", False, "--اختر--", False)
+                clsapprove_type.SetComboItems(ddldiplomes4, "", False, "--اختر--", False)
+                clsapprove_type.SetComboItems(ddldiplomes5, "", False, "--اختر--", False)
+                clsapprove_type.SetComboItems(ddldiplomes6, "", False, "--اختر--", False)
 
                 Dim cls_type As New clsFillComboByDataSource("select * from acd_semester where  Comp_id =" + LoginInfo.GetComp_id(), "name", "id", "")
                 cls_type.SetComboItems(ddlsemster, "", True, "--اختر--", False)
+                cls_type.SetComboItems(ddlsemster1, "", False, "--اختر--", False)
+                cls_type.SetComboItems(ddlsemster2, "", False, "--اختر--", False)
+                cls_type.SetComboItems(ddlsemster3, "", False, "--اختر--", False)
                 'LoginInfo.CheckPermisionsNew(cmdAdd, cmdUpdate, cmdDelete, Me.Page, UserId, lblFormName, DynamicTable)
 
 

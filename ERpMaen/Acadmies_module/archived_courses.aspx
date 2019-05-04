@@ -1,7 +1,4 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="archived_courses.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.archived_courses" %>
-<%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
-
-
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services> 
@@ -56,7 +53,7 @@
         }
 
             .block-title a:hover {
-                color: #428bca;
+                color: #fff;
                 cursor: pointer;
             }
 
@@ -115,7 +112,6 @@
     <div class="wrap">
          <div>
                     <script src="../JS_Code/acadmies/archived_courses.js"></script>
-            
          
                 </div>
 

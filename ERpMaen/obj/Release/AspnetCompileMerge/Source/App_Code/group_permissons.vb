@@ -324,8 +324,8 @@ Public Class group_permissons
                 Else
                     dt2 = DBManager.Getdatatable("SELECT tblForms.Id,FormName,FormTitle ,ArFormTitle,FormUrl" +
                 " ,FormQuery,GroupId,Icon,OPeration,MenueId,tblForms.Deleted,FormQueryAr" +
-                " FROM tblgroup_permissons left join tblForms on tblgroup_permissons.form_id =tblForms.Id" +
-                " where   group_id = " + LoginInfo.Getgroup_id())
+                " FROM tblgroup_permissons  join tblForms on tblgroup_permissons.form_id =tblForms.Id" +
+                " where   group_id = " + LoginInfo.Getgroup_id() + " and f_access =1")
                 End If
 
 

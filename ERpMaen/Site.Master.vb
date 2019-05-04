@@ -31,6 +31,10 @@ Imports AjaxControlToolkit
 Public Class SiteMaster
     Inherits MasterPage
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+        If HttpContext.Current.Request.Cookies.Get("UserInfo") IsNot Nothing Then
+            date_m.Value = HttpContext.Current.Request.Cookies("UserInfo")("date_m")
+            date_h.Value = HttpContext.Current.Request.Cookies("UserInfo")("date_h")
+        End If
         group_id = LoginInfo.Getgroup_id()
 
         LoginInfo.CheckPermisionsNew(Me.Page, group_id)

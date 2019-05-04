@@ -136,23 +136,31 @@ function archiveSemester() {
 
 function drawStudents_Certficate() {
     try {
+        
 
         var diplomeID = ($("#Lbldeploma_id").html());
         Diploma_CoursesCls.get_students_diplome(diplomeID, function (val) {
             var data = "";
             if (val[0] == 1) {
+                
                 var arr1 = JSON.parse(val[1]);
-
+               
+                var i = 0;
                 arr1.forEach(function (element) {
-                    data = data + `<tr>  <td>
-                                        <label id=" ${element.student_id}"> ${element.student_Name}</label>
+                    i++;
+                    var stId =element.student_id;
+                    var cert_image = element.image;
+                    $("#img_" + stId).css("background-image", "url('" + cert_image+"')");
+                    $("#lblSec_" + stId).html(cert_image);
+                    data = data + `<tr> <td>${i}</td> <td>
+                                        <label id="${element.student_id}"> ${element.student_Name}</label>
                                     </td>
                           <td>
-               <input class="form-control"    id="certificate_code" type="text"  value=" ${element.certificate_code}" />
+               <input  class="form-control"   id="certificate_code" type="text"  value=" ${element.certificate_code}" />
                                     
                                     </td>
 
-                    <td><div id="img_${element.student_id}" class="comp-logo"><label id="lblSec_${element.student_id}" style="display:none;"></label></div>
+                    <td><div id="img_${element.student_id}" style="background-image:url('../${cert_image}')" class="comp-logo"><label id="lblSec_${element.student_id}" style="display:none;"></label></div>
                     <div class="up-btn" id="upload" onclick="uploadClick(${element.student_id});">ارفاق</div></td>
                        </tr>`;
 
@@ -174,17 +182,19 @@ function uploadClick(id) {
 function AddStudent_Certificate() {
 
     try {
+        
         if (checkRequired("divformsignin") == 1) {
             alert("ادخل البيانات المطلوبة")
         } else {
 
             var students_jason = [];
             $("#Students_Certificates tr").each(function () {
-               // debugger
+                
+                var std_id = $(this).find("label").attr("id");
                 var obj = {};
-                obj["id"] = $(this).find("label").attr("id");
+                obj["id"] = std_id;
                 obj["certificateCode"] = ($(this).find("#certificate_code").val());
-                obj["image_path"] = ($(this).find("label").html());
+                obj["image_path"] = ($(this).find("#lblSec_" + std_id).html());
                
                     students_jason.push(obj);
             
@@ -508,7 +518,7 @@ function refuse_finance(Studentid, payId) {
 
 function drawConditionsTable() {
     try {
-        debugger
+        
         var diplomeID = ($("#Lbldeploma_id").html());
         Diploma_CoursesCls.get_Condition(diplomeID, function (val) {
 
@@ -520,7 +530,7 @@ function drawConditionsTable() {
                 arr1.forEach(function (element) {
                     var del_btn = "";
                     if (del_op == "True") {
-                        del_btn = `      <button type="button" class="btn btn-danger  btn-s" onclick="DeleteCondition(${element.id});" >
+                        del_btn = ` <button type="button" class="btn btn-danger  btn-s" onclick="DeleteCondition(${element.id});" >
 
                                                    <i class="fa fa-trash"></i>
 
@@ -576,6 +586,57 @@ function drawConditionsTable() {
     }
 }
 
+function drawStudent_certificate() {
+    try {
+        
+        var diplomeID = ($("#Lbldeploma_id").html());
+        Diploma_CoursesCls.get_students_certificate(diplomeID, function (val) {
+
+
+            var data = "";
+            //var del_op = $("#dplm_delete_condtion").html();
+            if (val[0] == 1) {
+                var arr1 = JSON.parse(val[1]);
+                arr1.forEach(function (element) {
+                   
+                    var file_nm = "";
+                    var path = element.image;
+                    if (path != "" && path != null) {
+                        if (path.indexOf("Acadmies_module/images/") != -1) {
+                            file_nm = path.split("Acadmies_module/images/")[1];
+                        }
+                    }
+                    var icon = "";
+                    if (file_nm != "") {
+                        icon = `   <li> <a href="../${element.image}" download>
+                                                        <i class="fa fa-download"></i>  
+
+                                                        </a>
+                                                        <span>${file_nm}</span>
+                                                    </li>  `
+                    }
+
+                    data = data + `
+                                                     <tr>
+                                                      <td>${element.student_Name} </td>
+                                                     <td>
+                                                      ${icon}
+
+                                                     </td> </tr>
+                 
+                                                                               
+                                                                      
+`;
+                });
+
+
+            }
+            $("#Student_certificate").html(data);
+        });
+    } catch (err) {
+        alert(err);
+    }
+}
 
 function DeleteCondition(condID) {
     var f = confirm("هل  تريد الحذف");
@@ -827,8 +888,8 @@ function Archive() {
 }
 
 
-function UploadComplete2(sender, args) {
-
+function UploadComplete4(sender, args) {
+    debugger
     var fileLength = args.get_length();
     var fileType = args.get_contentType();
     //alert(sender);
@@ -885,7 +946,9 @@ function UploadComplete3(sender, args) {
 function ClearMe(sender) {
     sender.value = '';
 }
+
 function clearContents(sender) {
+    debugger
     { $(sender._element).find('input').val(''); }
 }
 
@@ -906,18 +969,16 @@ function addCondition() {
             var basicData = generateJSONFromControls("divFormcondition");
 
             var Id = "";
-            //console.log(basicData);
-
-           // console.log($("#fileURL").val());
+      
             Diploma_CoursesCls.SaveCondition(Id, diplomeID, basicData, function (val) {
                 if (val == true) {
                     $("#SavedivLoader").hide();
-                    // debugger;
+                   
                     alert("تم الحفظ بنجاح");
+                    resetDivControls("divFormcondition");
                     $("#order_addcondition").modal('hide');
                     drawConditionsTable();
-                    resetDivControls("divFormcondition");
-
+                   
 
 
                 } else {

@@ -28,10 +28,10 @@ $(function () {
 function drawDynamicTable() {
     try {
         var tableSortingColumns = [
-                { orderable: false }, null, null, null, null, null,
+                { orderable: false }, null, null, null, null, 
         ];
         var tableFilteringColumns = [
-            { type: "null" }, { type: "text" },{ type: "text" }, { type: "text" }, { type: "text" }, { type: "text" },
+            { type: "null" }, { type: "text" }, { type: "text" }, { type: "text" }, { type: "text" },
         ];
 
         var tableColumnDefs = [
@@ -71,6 +71,15 @@ function save() {
         $("input").removeClass('error');
         $("select").removeClass('error');
         if (!checkRequired()) {
+            if ($("#tele").val().length != 10) {
+                showErrorMessage("رقم الهاتف يجب أن يكون عشرة ارقام");
+                return;
+            }
+            var tel2_len = $("#tele2").val().length;
+            if (tel2_len != 0 && tel2_len != 10) {
+                showErrorMessage("رقم الهاتف يجب أن يكون عشرة ارقام");
+                return;
+            }
             var basicData = generateJSONFromControls("divForm");
             var saveType = $("#cmdSave").attr("CommandArgument");
             var PosId = $("#lblmainid").html();

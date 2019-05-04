@@ -5,9 +5,14 @@
 /************************************/
 var Pub_date_m;
 var Pub_date_hj;
+function setCurrDate(dt_m, dt_hj) {
+    debugger
+    Pub_date_m = dt_m;
+    Pub_date_hj = dt_hj;
+}
 $(function () {
- 
-    GetCurrentDate_m_hj();
+    Pub_date_m = $("#date_m").val();
+    Pub_date_hj = $("#date_h").val();
     $("#UlMenu").css("height", document.documentElement.clientHeight);
 });
 
@@ -1021,7 +1026,7 @@ function FilterTableAndExport() {
     }
 }
 function cust_chkNumber(evt, element, len) {
-    debugger
+    
     if ($(element).val().length >= len) {
         return false;
     } else {
@@ -1342,13 +1347,7 @@ function setRequired_time(div) {
     $("#" + div + " input:text").first().attr("dbcolumn", "");
     //$("#Text9").prop("required", true);
 }
-function GetCurrentDate_m_hj() {
-    
-    var curr_date = new Datepicker();
-    Pub_date_m = curr_date.getPickedDate().getDateString();
-    curr_date.setHijriMode = true;
-    Pub_date_hj = curr_date.getOppositePickedDate().getDateString();
-}
+
 function resetPassword() {
     
     var user_name = $("#txtUserName").val();

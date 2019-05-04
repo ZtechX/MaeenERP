@@ -5,10 +5,17 @@
 /************************************/
 var Pub_date_m;
 var Pub_date_hj;
+function setCurrDate(dt_m, dt_hj) {
+    debugger
+    Pub_date_m = dt_m;
+    Pub_date_hj = dt_hj;
+}
 $(function () {
-    GetCurrentDate_m_hj();
+    Pub_date_m = $("#date_m").val();
+    Pub_date_hj = $("#date_h").val();
     $("#UlMenu").css("height", document.documentElement.clientHeight);
 });
+
 // enable pnl form for update for each form
 function setformforupdate_all() {
     try {
@@ -1019,7 +1026,7 @@ function FilterTableAndExport() {
     }
 }
 function cust_chkNumber(evt, element, len) {
-    debugger
+    
     if ($(element).val().length >= len) {
         return false;
     } else {
@@ -1340,31 +1347,9 @@ function setRequired_time(div) {
     $("#" + div + " input:text").first().attr("dbcolumn", "");
     //$("#Text9").prop("required", true);
 }
-function GetCurrentDate_m_hj() {
-    var arr_date = [];
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
 
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-
-    today = dd + '/' + mm + '/' + yyyy;
-    $("#CurrentDate").find("#txtDatem").val(today);
-    showHideCalendar($("#CurrentDate").find("#txtDatem"));
-    cal2.callback();
-    Pub_date_m = today;
-    Pub_date_hj = $("#CurrentDate").find("#txtDateh").val();
- 
-}
 function resetPassword() {
-    debugger
+    
     var user_name = $("#txtUserName").val();
     if (user_name != "") {
         var phone = prompt("من فضل إدخل رقم الجوال لارسال كلمة المرور");

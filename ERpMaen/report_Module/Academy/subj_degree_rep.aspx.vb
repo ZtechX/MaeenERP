@@ -6,9 +6,10 @@ Public Class subj_degree_rep1
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim diplome_subject = Request.QueryString("diplome_subject")
-        getReportData(diplome_subject)
+        Dim type = Request.QueryString("type")
+        getReportData(diplome_subject, type)
     End Sub
-    Private Sub getReportData(diplome_subject)
+    Private Sub getReportData(diplome_subject, type)
         Try
             Dim message As String = " لا يوجد بيانات متاحة للعرض"
             Dim rdoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument
@@ -25,14 +26,26 @@ Public Class subj_degree_rep1
 
 
             If dt2.Rows.Count <> 0 Then
+                Dim activity = ""
+                Dim total = ""
+                Dim final_degree = ""
                 Dim rowsCount = dt2.Rows.Count - 1
                 For index As Integer = 0 To rowsCount
+                    If type = 1 Then
+                        activity = dt2.Rows(index).Item("activity_degree").ToString
+                        final_degree = dt2.Rows(index).Item("final_degree").ToString
+                        total = Convert.ToInt32(dt2.Rows(index).Item("final_degree").ToString) + Convert.ToInt32(dt2.Rows(index).Item("activity_degree").ToString)
+                    Else
+                        activity = ""
+                        total = ""
+                        final_degree = ""
+                    End If
                     ds.Tables("basic_report").Rows.Add()
                     ds.Tables("basic_report").Rows(row).Item("all") = row + 1
                     ds.Tables("basic_report").Rows(row).Item("student") = dt2.Rows(index).Item("name").ToString
-                    ds.Tables("basic_report").Rows(row).Item("midterm") = dt2.Rows(index).Item("activity_degree").ToString
-                    ds.Tables("basic_report").Rows(row).Item("final") = dt2.Rows(index).Item("final_degree").ToString
-                    ds.Tables("basic_report").Rows(row).Item("total") = Convert.ToInt32(dt2.Rows(index).Item("final_degree").ToString) + Convert.ToInt32(dt2.Rows(index).Item("activity_degree").ToString)
+                    ds.Tables("basic_report").Rows(row).Item("midterm") = activity
+                    ds.Tables("basic_report").Rows(row).Item("final") = final_degree
+                    ds.Tables("basic_report").Rows(row).Item("total") = total
                     row = row + 1
                 Next
 
@@ -61,25 +74,25 @@ Public Class subj_degree_rep1
             CrystalReportViewer1.ReportSource = rdoc
 
             CrystalReportViewer1.DataBind()
-            Try
-                Dim objDS As New DataSet
-                Dim dfdoFile As New CrystalDecisions.Shared.DiskFileDestinationOptions
-                Dim strServerPath As String
-                Dim szFileName As String
-                'Create dataset as per requirement
-                szFileName = Session.SessionID & ".pdf"         ' rptDailyCalls.pdf
-                strServerPath = MapPath("~") & "\Report\"        ' Here the pdf file will be saved.   
-                File.Delete(strServerPath & "\" & szFileName)    ' Delete file first
-                dfdoFile.DiskFileName = strServerPath & "\" & szFileName
-                With rdoc
-                    .ExportOptions.ExportDestinationType = CrystalDecisions.Shared.ExportDestinationType.DiskFile
-                    .ExportOptions.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat
-                    .ExportOptions.DestinationOptions = dfdoFile
-                    .Export()
-                End With
-                ScriptManager.RegisterClientScriptBlock(Me, Me.[GetType](), "", "showpdf('" + Session.SessionID + "');", True)
-            Catch ex As Exception
-            End Try
+            'Try
+            '    Dim objDS As New DataSet
+            '    Dim dfdoFile As New CrystalDecisions.Shared.DiskFileDestinationOptions
+            '    Dim strServerPath As String
+            '    Dim szFileName As String
+            '    'Create dataset as per requirement
+            '    szFileName = Session.SessionID & ".pdf"         ' rptDailyCalls.pdf
+            '    strServerPath = MapPath("~") & "\Report\"        ' Here the pdf file will be saved.   
+            '    File.Delete(strServerPath & "\" & szFileName)    ' Delete file first
+            '    dfdoFile.DiskFileName = strServerPath & "\" & szFileName
+            '    With rdoc
+            '        .ExportOptions.ExportDestinationType = CrystalDecisions.Shared.ExportDestinationType.DiskFile
+            '        .ExportOptions.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat
+            '        .ExportOptions.DestinationOptions = dfdoFile
+            '        .Export()
+            '    End With
+            '    ScriptManager.RegisterClientScriptBlock(Me, Me.[GetType](), "", "showpdf('" + Session.SessionID + "');", True)
+            'Catch ex As Exception
+            'End Try
             'Else
             'Dim script As String = "<script type='text/javascript' defer='defer'> alert('" + message + "');</script>"
             'ClientScript.RegisterClientScriptBlock(Me.GetType(), "AlertBox", script)

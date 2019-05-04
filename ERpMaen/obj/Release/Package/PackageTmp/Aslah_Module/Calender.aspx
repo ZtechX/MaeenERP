@@ -5,11 +5,11 @@
 <%@ Register Src="~/UserControls/DeliveryDate.ascx" TagPrefix="uc1" TagName="DeliveryDate" %>
 <%@ Register Src="~/UserControls/Appraisal.ascx" TagPrefix="uc1" TagName="Appraisal" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
-    
+
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
         <style>.w3-bar-item input[type=radio],.w3-bar-item label{cursor:pointer}</style>
-      <link rel='stylesheet' href='https://ZulNs.github.io/w3css/w3.css'/>
+    <link href="../css/cases/w3.css" rel="stylesheet" />
     <asp:ScriptManager ID="ToolkitScriptManager1" runat="server">
         <Services>
             <asp:ServiceReference Path="~/ASMX_WebServices/cases.asmx" />
@@ -40,7 +40,7 @@
 	<div id="calendar"     class="w3-container w3-margin-top"></div>
 
   <uc1:Result  runat ="server"/>
-    <script src="../js/hijri-date1.js"></script>
+    <%--<script src="../js/hijri-date1.js"></script>--%>
              <script src="../js/calendar1.js"></script>
          <script src="../js_code/cases/cases.js"></script>
     <script type="text/javascript">
@@ -51,47 +51,9 @@
             return false;
 
         });
-   
-      //          conver_dates($(".w3-xxlarge").html())
-      //    var year  = $(".w3-xxxlarge").html().replace("AD", "");
-      //          var newdate = day + "/" + month + "/" + year;
-      //             var dateParts = new Date((Number(newdate.split("/")[2])), (Number(newdate.split("/")[1]) - 1), (Number(newdate.split("/")[0])));
-      //          var date_hj= kuwaiticalendar(dateParts)
-      //          alert(newdate);
-      //          $("#lbldelivery_date_m").html(newdate)
-      //          $("#lbldelivery_date_h").html(date_hj)
-      //          alert(date_hj);
-      //          $(this).css("color","red")
-
-                
-      //$("#receiving_delivery_details").dialog({
-      //    width: "600px",
-      //          });
-            
-      //          $('.w3-xlarge').off('click')
-      //      });
-            
-      //    $('.calendar').off('click')
-      //  });
-      //  function find_row(evt) {
-      //      console.log(evt);
-      //  }
-        //$(function () {
-        // $("#calendar").click(function(callback) {
-
-        //         callback();
-          
-        //});
-        //      $(".w3-xlarge").click(function () {
-        //        console.log(cal);
-        //        alert($(this).html());
-        //        alert($(".w3-xxlarge").html());
-        //        alert($(".w3-xxxlarge").html());
-
-        //});
-
-
-
+        let cal = new Calendar(true);
+        
+cal.attachTo(document.getElementById('calendar'));
         function conver_dates(ele) {
             if (ele == "March") {
 
@@ -140,63 +102,7 @@
         }
     </style>
 </div>
-      <script>
-          'use strict';
-    
-let cal=new Calendar(true);
-          cal.attachTo(document.getElementById('calendar'));
-          cal.setLanguage('ar');
-        
-          //cal.setFirstDayOfWeek(0);
-  
-function openSidebar(){
-	document.getElementById("mySidebar").style.display = "block"
-}
-
-function closeSidebar(){
-	document.getElementById("mySidebar").style.display = "none"
-}
-
-function dropdown(el){
-	if(el.className.indexOf('expanded')==-1){
-		el.className=el.className.replace('collapsed','expanded');
-	}else{
-		el.className=el.className.replace('expanded','collapsed');
-	}
-}
-
-          function selectLang(el) {
-
-	el.children[0].checked=true;
-	cal.setLanguage(el.children[0].value)
-}
-
-function setYear(){
-	let el=document.getElementById('valYear');
-	cal.setFullYear(el.value)
-}
-
-function setMonth(){
-	let el=document.getElementById('valMonth');
-	cal.setMonth(el.value)
-}
-
-function setTheme(){
-	let el=document.getElementById('txtTheme');
-	let n=parseInt(el.value);
-	if(!isNaN(n))cal.setTheme(n);
-	else cal.setTheme(el.value)
-}
-
-          function setTodayTimeout() {
-              alert("setTodayTimeout");
-	let el=document.getElementById('valTimeout');
-    cal.setTodayTimeout(el.value);
    
-          }
-         
-
-    </script>
   </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

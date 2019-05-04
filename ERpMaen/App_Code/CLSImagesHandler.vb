@@ -5,9 +5,10 @@ Imports System.Drawing
 Imports System.Drawing.Imaging
 Imports System.Math
 Imports System.Drawing.Drawing2D
+Imports ERpMaen
 
 Public Class CLSImagesHandler
-    
+
     Private Function ResizeImage(streamImage As Stream, ByRef maxWidth As Integer, ByRef maxHeight As Integer, OrigWidth As Integer, origHeight As Integer) As Boolean
 
         Try
@@ -30,8 +31,8 @@ Public Class CLSImagesHandler
             Return False
         End Try
     End Function
-    Public Shared Function Upload_Me(ByVal file As HttpPostedFile, ByVal ext As String, ByVal st As Stream, ByVal myimageData() As Byte, ByVal DestPath As String, ByVal imgthumbWidth As Integer, ByVal ImgThumbHeight As Integer, _
-                              ByVal OrigWidth As Integer, ByVal OrigHeight As Integer, ByVal Imagepage As String, ByVal Namer As String) As String
+    Public Shared Function Upload_Me(ByVal file As HttpPostedFile, ByVal ext As String, ByVal st As Stream, ByVal myimageData() As Byte, ByVal DestPath As String, ByVal imgthumbWidth As Integer, ByVal ImgThumbHeight As Integer,
+                              ByVal OrigWidth As Integer, ByVal OrigHeight As Integer) As String
         Dim x As Integer = 1000
         Dim y As Integer = 1000
         Dim SavePath As String
@@ -40,430 +41,82 @@ Public Class CLSImagesHandler
         Dim thumbIMGWidth As Integer = OrigWidth
         Dim thumbimgheight As Integer = OrigHeight
         SavePath = Current.Server.MapPath("~") + "/" + DestPath
+        Dim file_nm = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName)
+        Dim uset_id = LoginInfo.GetUser__Id()
+
+        Dim saved_file_nm = uset_id & "_" & file_nm & "_" & PublicFunctions.GetRandom(6)
+        Dim FileAppend As Integer = 0
+        Dim i As Integer = 0
+        Dim NewFile As System.IO.FileStream
+        Dim file_NotImage As Boolean = True
+
         Select Case ext
-            Case "application/msword"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    myfilename = myfilename.Replace(" ", "-")
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".doc"
-                'myfilename = myfilename.Replace(" ", "-")
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    NewFile.Write(myimageData, 0, file.ContentLength)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    myfilename = myfilename.Replace(" ", "-")
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".docx"
-                'myfilename = myfilename.Replace(" ", "-")
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    NewFile.Write(myimageData, 0, file.ContentLength)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case ".docx"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    myfilename = myfilename.Replace(" ", "-")
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".docx"
-                ' myfilename = myfilename.Replace(" ", "-")
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    NewFile.Write(myimageData, 0, file.ContentLength)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case "application/vnd.ms-powerpoint"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    myfilename = myfilename.Replace(" ", "-")
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".ppt"
-                'myfilename = myfilename.Replace(" ", "-")
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    NewFile.Write(myimageData, 0, file.ContentLength)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case "application/vnd.openxmlformats-officedocument.presentationml.presentation"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    myfilename = myfilename.Replace(" ", "-")
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".pptx"
-                'myfilename = myfilename.Replace(" ", "-")
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    NewFile.Write(myimageData, 0, file.ContentLength)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case ".pptx"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    myfilename = myfilename.Replace(" ", "-")
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".pptx"
-                ' myfilename = myfilename.Replace(" ", "-")
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    NewFile.Write(myimageData, 0, file.ContentLength)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-
-            Case "application/vnd.ms-excel"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    myfilename = myfilename.Replace(" ", "-")
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".xls"
-                'myfilename = myfilename.Replace(" ", "-")
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    NewFile.Write(myimageData, 0, file.ContentLength)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    myfilename = myfilename.Replace(" ", "-")
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".xlsx"
-                'myfilename = myfilename.Replace(" ", "-")
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    NewFile.Write(myimageData, 0, file.ContentLength)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case ".xlsx"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    myfilename = myfilename.Replace(" ", "-")
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".xlsx"
-                ' myfilename = myfilename.Replace(" ", "-")
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    NewFile.Write(myimageData, 0, file.ContentLength)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    '    UrlPath = "http://www.whatthepost.com/" & UrlPath
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case "image/jpeg"
-                '      MyFile.InputStream.Read(myimageData, 0, FileLength)
-
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".jpg"
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    '    NewFile.Write(myimageData, 0, FileLength)
-                    Dim BIT As Bitmap = New Bitmap(st)
-                    Dim thumb As Image = BIT.GetThumbnailImage(imgthumbWidth, ImgThumbHeight, Nothing, New IntPtr)
-                    Dim oGraphics As Graphics = Graphics.FromImage(thumb)
-
-                    ' Set the properties for the new graphic file
-                    oGraphics.SmoothingMode = SmoothingMode.AntiAlias
-                    oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic
-                    ' Draw the new graphic based on the resized bitmap
-                    oGraphics.DrawImage(BIT, 0, 0, thumbIMGWidth, ImgThumbHeight)
-                    thumb.Save(NewFile, Imaging.ImageFormat.Jpeg)
-
-                    'BIT.Save(NewFile, Imaging.ImageFormat.Jpeg)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case "image/tiff"
-                '      MyFile.InputStream.Read(myimageData, 0, FileLength)
-
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".tif"
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    '    NewFile.Write(myimageData, 0, FileLength)
-                    Dim BIT As Bitmap = New Bitmap(st)
-                    Dim thumb As Image = BIT.GetThumbnailImage(imgthumbWidth, ImgThumbHeight, Nothing, New IntPtr)
-                    Dim oGraphics As Graphics = Graphics.FromImage(thumb)
-
-                    ' Set the properties for the new graphic file
-                    oGraphics.SmoothingMode = SmoothingMode.AntiAlias
-                    oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic
-                    ' Draw the new graphic based on the resized bitmap
-                    oGraphics.DrawImage(BIT, 0, 0, thumbIMGWidth, ImgThumbHeight)
-                    thumb.Save(NewFile, Imaging.ImageFormat.Jpeg)
-
-                    'BIT.Save(NewFile, Imaging.ImageFormat.Jpeg)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case "image/png"
-
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".png"
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    '    NewFile.Write(myimageData, 0, FileLength)
-                    Dim BIT As Bitmap = New Bitmap(st)
-                    Dim thumb As Image = BIT.GetThumbnailImage(OrigWidth, OrigHeight, Nothing, New IntPtr)
-                    Dim oGraphics As Graphics = Graphics.FromImage(thumb)
-
-                    ' Set the properties for the new graphic file
-                    oGraphics.SmoothingMode = SmoothingMode.AntiAlias
-                    oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic
-                    ' Draw the new graphic based on the resized bitmap
-                    oGraphics.DrawImage(BIT, 0, 0, OrigWidth, OrigHeight)
-                    thumb.Save(NewFile, Imaging.ImageFormat.Png)
-
-                    'BIT.Save(NewFile, Imaging.ImageFormat.Jpeg)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case "image/bmp"
-
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".bmp"
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    '    NewFile.Write(myimageData, 0, FileLength)
-                    Dim BIT As Bitmap = New Bitmap(st)
-                    Dim thumb As Image = BIT.GetThumbnailImage(imgthumbWidth, ImgThumbHeight, Nothing, New IntPtr)
-                    Dim oGraphics As Graphics = Graphics.FromImage(thumb)
-
-                    ' Set the properties for the new graphic file
-                    oGraphics.SmoothingMode = SmoothingMode.AntiAlias
-                    oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic
-                    ' Draw the new graphic based on the resized bitmap
-                    oGraphics.DrawImage(BIT, 0, 0, thumbIMGWidth, ImgThumbHeight)
-                    thumb.Save(NewFile, Imaging.ImageFormat.Jpeg)
-
-                    'BIT.Save(NewFile, Imaging.ImageFormat.Jpeg)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-            Case "image/gif"
-
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".gif"
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    '    NewFile.Write(myimageData, 0, FileLength)
-                    Dim BIT As Bitmap = New Bitmap(st)
-                    Dim thumb As Image = BIT.GetThumbnailImage(imgthumbWidth, ImgThumbHeight, Nothing, New IntPtr)
-                    Dim oGraphics As Graphics = Graphics.FromImage(thumb)
-
-                    ' Set the properties for the new graphic file
-                    oGraphics.SmoothingMode = SmoothingMode.AntiAlias
-                    oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic
-                    ' Draw the new graphic based on the resized bitmap
-                    oGraphics.DrawImage(BIT, 0, 0, thumbIMGWidth, ImgThumbHeight)
-                    thumb.Save(NewFile, Imaging.ImageFormat.Jpeg)
-
-                    'BIT.Save(NewFile, Imaging.ImageFormat.Jpeg)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-
-            Case ".png"
-
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".png"
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    '    NewFile.Write(myimageData, 0, FileLength)
-                    Dim BIT As Bitmap = New Bitmap(st)
-                    Dim thumb As Image = BIT.GetThumbnailImage(OrigWidth, OrigHeight, Nothing, New IntPtr)
-                    Dim oGraphics As Graphics = Graphics.FromImage(thumb)
-
-                    ' Set the properties for the new graphic file
-                    oGraphics.SmoothingMode = SmoothingMode.AntiAlias
-                    oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic
-                    ' Draw the new graphic based on the resized bitmap
-                    oGraphics.DrawImage(BIT, 0, 0, OrigWidth, OrigHeight)
-                    thumb.Save(NewFile, Imaging.ImageFormat.Png)
-
-                    'BIT.Save(NewFile, Imaging.ImageFormat.Jpeg)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-
-            Case ".gif"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".gif"
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    '    NewFile.Write(myimageData, 0, FileLength)
-                    Dim BIT As Bitmap = New Bitmap(st)
-                    Dim thumb As Image = BIT.GetThumbnailImage(imgthumbWidth, ImgThumbHeight, Nothing, New IntPtr)
-                    Dim oGraphics As Graphics = Graphics.FromImage(thumb)
-
-                    ' Set the properties for the new graphic file
-                    oGraphics.SmoothingMode = SmoothingMode.AntiAlias
-                    oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic
-                    ' Draw the new graphic based on the resized bitmap
-                    oGraphics.DrawImage(BIT, 0, 0, thumbIMGWidth, ImgThumbHeight)
-                    thumb.Save(NewFile, Imaging.ImageFormat.Jpeg)
-
-                    'BIT.Save(NewFile, Imaging.ImageFormat.Jpeg)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
             Case "application/pdf"
-                Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                Dim FileAppend As Integer = 0
-                Dim i As Integer = 0
-                myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".pdf"
-                Dim NewFile As System.IO.FileStream
-                Try
-                    NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                    NewFile.Write(myimageData, 0, file.ContentLength)
-                    NewFile.Close()
-                    Dim UrlPath As String '= "NewsImages/" & myfilename
-                    UrlPath = DestPath & myfilename
-                    Return UrlPath
-                Catch ex As Exception
-
-                End Try
-                'Case "application/vnd.ms-excel"
-                '    MyFile.InputStream.Read(myimageData, 0, FileLength)
-                '    Dim myfilename As String = System.IO.Path.GetFileName(MyFile.FileName)
-                '    Dim FileAppend As Integer = 0
-                '    Dim i As Integer = 0
-                '    myfilename = System.IO.Path.GetFileNameWithoutExtension(MyFile.FileName) & Namer & ".xls"
-                '    Dim NewFile As System.IO.FileStream
-                '    Try
-                '        NewFile = New System.IO.FileStream(SavePath & myfilename, FileMode.Create)
-                '        NewFile.Write(myimageData, 0, FileLength)
-                '        Dim BIT As Bitmap = New Bitmap(400, 400, PixelFormat.Format24bppRgb)
-                '        BIT.Save(NewFile, Imaging.ImageFormat.Jpeg)
-                '        NewFile.Close()
-                '        Dim UrlPath As String '= "NewsImages/" & myfilename
-                '        UrlPath = DestPath & myfilename
-                '        Return UrlPath
-                '    Catch ex As Exception
-
-                '    End Try
-
-
-
-
-
+                saved_file_nm = saved_file_nm & ".pdf"
+            Case "application/msword"
+                saved_file_nm = saved_file_nm & ".doc"
+            Case "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                saved_file_nm = saved_file_nm & ".docx"
+            Case ".docx"
+                saved_file_nm = saved_file_nm & ".docx"
+            Case "application/vnd.ms-powerpoint"
+                saved_file_nm = saved_file_nm & ".ppt"
+            Case "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                saved_file_nm = saved_file_nm & ".pptx"
+            Case ".pptx"
+                saved_file_nm = saved_file_nm & ".pptx"
+            Case "application/vnd.ms-excel"
+                saved_file_nm = saved_file_nm & ".xls"
+            Case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                saved_file_nm = saved_file_nm & ".xlsx"
+            Case ".xlsx"
+                saved_file_nm = saved_file_nm & ".xlsx"
+            Case "image/jpeg"
+                file_NotImage = False
+                saved_file_nm = saved_file_nm & ".jpg"
+            Case "image/tiff"
+                file_NotImage = False
+                saved_file_nm = saved_file_nm & ".tif"
+            Case "image/png"
+                file_NotImage = False
+                saved_file_nm = saved_file_nm & ".png"
+            Case "image/bmp"
+                file_NotImage = False
+                saved_file_nm = saved_file_nm & ".bmp"
+            Case "image/gif"
+                file_NotImage = False
+                saved_file_nm = saved_file_nm & ".gif"
+            Case ".png"
+                file_NotImage = False
+                saved_file_nm = saved_file_nm & ".png"
+            Case ".gif"
+                file_NotImage = False
+                saved_file_nm = saved_file_nm & ".gif"
             Case Else
-                Return ""
-                Exit Function
+
         End Select
-        Return ""
+        Try
+            NewFile = New System.IO.FileStream(SavePath & saved_file_nm, FileMode.Create)
+            If file_NotImage Then
+                NewFile.Write(myimageData, 0, file.ContentLength)
+            Else
+                Dim BIT As Bitmap = New Bitmap(st)
+                Dim thumb As Image = BIT.GetThumbnailImage(imgthumbWidth, ImgThumbHeight, Nothing, New IntPtr)
+                Dim oGraphics As Graphics = Graphics.FromImage(thumb)
+                ' Set the properties for the new graphic file
+                oGraphics.SmoothingMode = SmoothingMode.AntiAlias
+                oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic
+                ' Draw the new graphic based on the resized bitmap
+                oGraphics.DrawImage(BIT, 0, 0, thumbIMGWidth, ImgThumbHeight)
+                thumb.Save(NewFile, Imaging.ImageFormat.Jpeg)
+
+            End If
+        Catch ex As Exception
+            NewFile.Close()
+            Return ""
+        End Try
+        NewFile.Close()
+        Return saved_file_nm
     End Function
 
     Public Function FileUpload(ByVal id As String, ByVal FU As FileUpload, ByVal DestPath As String, ByRef type As String) As String

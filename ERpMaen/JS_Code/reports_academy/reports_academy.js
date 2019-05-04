@@ -158,19 +158,34 @@ function setformforupdate() {
         alert(err);
     }
 }
-function get_deplomes_subjects() {
-    var ddldiplomes = $("#ddldiplomes").val();
-    var ddlsemster = $("#ddlsemster").val();
+function get_deplomes_subjects(flag) {
+    if (flag == 1) {
+        var ddldiplomes = $("#ddldiplomes").val();
+        var ddlsemster = $("#ddlsemster").val();
+    } else if (flag == 2) {
+        var ddldiplomes = $("#ddldiplomes4").val();
+        var ddlsemster = $("#ddlsemster2").val();
+
+    } else {
+        var ddldiplomes = $("#ddldiplomes5").val();
+        var ddlsemster = $("#ddlsemster3").val();
+    }
 
     reports_academy.get_deplomes_subjects(ddldiplomes, ddlsemster,function (val) {
         if (val[0] != 0) {
             var data = JSON.parse(val[0]);
-            var result = "";
+            var result = "<option value = '0'> اختر</option>";
             for (var x = 0; x < data.length; x++) {
                 result = result + "<option value=" + data[x].id + '|' + data[x].subject_id+">" + data[x].subject+"</option>";
 
             }
-            $("#ddlsubject").html(result);
+            if (flag == 1) {
+                $("#ddlsubject").html(result);
+            } else if (flag == 2) {
+                $("#ddlsubject1").html(result);
+            } else {
+                $("#ddlsubject2").html(result);
+            }
         }
 
 
@@ -180,8 +195,10 @@ function get_deplomes_subjects() {
 function get_deplome_students(flag) {
     if (flag == 1) {
         var ddldiplomes = $("#ddldiplomes1").val();
-    } else {
+    } else if (flag == 2) {
         var ddldiplomes = $("#ddldiplomes3").val();
+    } else {
+        var ddldiplomes = $("#ddldiplomes6").val();
     }
     reports_academy.get_deplome_students(ddldiplomes,function (val) {
         if (val[0] != "0") {
@@ -193,21 +210,42 @@ function get_deplome_students(flag) {
             }
             if (flag == 1) {
                 $("#ddlstudents").html(result);
-            } else {
+            } else if (flag == 2) {
                 $("#ddlstudents1").html(result);
+            } else {
+                $("#ddlstudents2").html(result);
             }
         } else {
             $("#ddlstudents").html("");
             $("#ddlstudents1").html("");
+            $("#ddlstudents2").html("");
         }
 
 
     });
 }
-function get_report_degree() {
+function get_lecture() {
+    var subject = $("#ddlsubject1").val().split("|")[0];
+    reports_academy.get_lecture(subject, function (val) {
+        var result = "";
+        if (val[0] != "0") {
+            var data = JSON.parse(val[0]);
+            var result = "";
+            for (var x = 0; x < data.length; x++) {
+                result = result + "<option value=" + data[x].id + ">" + data[x].lecture_code + "</option>";
+            }
+            $("#ddllecture").html(result);
+        } else {
+            $("#ddllecture").html("");
+        }
+
+
+    });
+}
+function get_report_degree(flag) {
 
     if ($("#ddldiplomes").val() == "0") {
-        alert("من فضلك اختار الدبلومة");
+        alert("من فضلك اختار الدبلوم");
         return;
     }
     if ($("#ddlsemster").val() == "0") {
@@ -217,25 +255,31 @@ function get_report_degree() {
     var ddlsemster = $("#ddlsemster").val();
     var diplome_subject = $("#ddlsubject").val().split("|")[0];
     var subject = $("#ddlsubject").val().split("|")[1];
-    window.open("Academy/subj_degree_rep.aspx?subject_id=" + subject + "&diplome_subject=" + diplome_subject + "&semster_id=" + ddlsemster, '_blank');
+    window.open("Academy/subj_degree_rep.aspx?subject_id=" + subject + "&diplome_subject=" + diplome_subject + "&semster_id=" + ddlsemster+ "&type="+flag, '_blank');
 
 }
 
 function get_report_student() {
-
+    
     if ($("#ddldiplomes1").val() == "0") {
-        alert("من فضلك اختار الدبلومة");
+        alert("من فضلك اختار الدبلوم");
+        return;
+    }
+
+    if ($("#ddlsemster1").val() == "0") {
+        alert("من فضلك اختار الترم");
         return;
     }
     var diplome_subject = $("#ddldiplomes1").val();
     var students = $("#ddlstudents").val();
-    window.open("Academy/academy_session_rep.aspx?diplome_id=" + diplome_subject + "&diplome_user=" + students, '_blank');
+    var ddlsemster = $("#ddlsemster1").val();
+    window.open("Academy/academy_session_rep.aspx?diplome_id=" + diplome_subject + "&diplome_user=" + students + "&semster_id=" + ddlsemster, '_blank');
 
 }
 
 function get_report_diplome_money() {
     if ($("#ddldiplomes2").val() == "0") {
-        alert("من فضلك اختار الدبلومة");
+        alert("من فضلك اختار الدبلوم");
         return;
     }
     var diplome = $("#ddldiplomes2").val();
@@ -247,7 +291,7 @@ function get_report_diplome_money() {
 function get_report_details_student_money() {
 
     if ($("#ddldiplomes3").val() == "0") {
-        alert("من فضلك اختار الدبلومة");
+        alert("من فضلك اختار الدبلوم");
         return;
     }
     var diplome_subject = $("#ddldiplomes3").val();
@@ -255,6 +299,61 @@ function get_report_details_student_money() {
     window.open("Academy/student_money_rep.aspx?diplome_id=" + diplome_subject + "&diplome_user=" + students, '_blank');
 
 }
+function get_report_lecture_attendence() {
+
+    if ($("#ddldiplomes4").val() == "0") {
+        alert("من فضلك اختار الدبلوم");
+        return;
+    }
+
+    if ($("#ddlsemster2").val() == "0") {
+        alert("من فضلك اختار الترم");
+        return;
+    }
+
+    if ($("#ddlsubject1").val() == "0") {
+        alert("من فضلك اختار المادة");
+        return;
+    }
+    var ddldiplome_subject = $("#ddlsubject1").val().split("|")[0];
+    var ddllecture = $("#ddllecture").val();
+    var ddldiplome_id = $("#ddldiplomes4").val();
+    window.open("Academy/lecture_attendence_rep.aspx?diplome_subject=" + ddldiplome_subject + "&diplome_lecture=" + ddllecture + "&diplome_id=" + ddldiplome_id, '_blank');
+}
+
+function get_report_course_attendence() {
+
+    if ($("#ddldiplomes5").val() == "0") {
+        alert("من فضلك اختار الدبلوم");
+        return;
+    }
+
+    if ($("#ddlsemster3").val() == "0") {
+        alert("من فضلك اختار الترم");
+        return;
+    }
+
+    if ($("#ddlsubject2").val() == "0") {
+        alert("من فضلك اختار المادة");
+        return;
+    }
+    var ddldiplome_subject = $("#ddlsubject2").val().split("|")[0];
+    var ddldiplome_id = $("#ddldiplomes5").val();
+    window.open("Academy/course_attendence_rep.aspx?diplome_subject=" + ddldiplome_subject + "&diplome_id=" + ddldiplome_id, '_blank');
+}
+
+function get_report_student_public() {
+
+    if ($("#ddldiplomes6").val() == "0") {
+        alert("من فضلك اختار الدبلوم");
+        return;
+    }
+    var diplome_subject = $("#ddldiplomes6").val();
+    var students = $("#ddlstudents2").val();
+    window.open("Academy/academy_diplome_rep.aspx?diplome_id=" + diplome_subject + "&diplome_user=" + students, '_blank');
+
+}
+
 
 
 //function getAdvisorCode() {

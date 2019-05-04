@@ -22,11 +22,7 @@ Public Class diplome_money_rep
             dt2 = DBManager.Getdatatable(query)
             dt3 = DBManager.Getdatatable(query1)
             Dim row = 0
-            If dt2.Rows.Count <> 0 Then
-                ds.Tables("diplome_money").Rows.Add()
-                ds.Tables("diplome_money").Rows(0).Item("diplome") = dt2.Rows(0).Item("diplome").ToString
-                ds.Tables("diplome_money").Rows(0).Item("price") = dt2.Rows(0).Item("price").ToString
-            End If
+
 
             If dt3.Rows.Count <> 0 Then
                 Dim rowsCount = dt3.Rows.Count - 1
@@ -38,6 +34,11 @@ Public Class diplome_money_rep
                     row = row + 1
                 Next
 
+            End If
+
+            If dt2.Rows.Count <> 0 Then
+                ds.Tables("diplome_money").Rows(0).Item("diplome") = dt2.Rows(0).Item("diplome").ToString
+                ds.Tables("diplome_money").Rows(0).Item("price") = dt2.Rows(0).Item("price").ToString
             End If
 
             rdoc.Load(Server.MapPath("diplome_money.rpt"))

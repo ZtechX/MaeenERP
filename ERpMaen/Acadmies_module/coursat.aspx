@@ -56,7 +56,7 @@
         }
 
             .block-title a:hover {
-                color: #428bca;
+                color: #fff;
                 cursor: pointer;
             }
 
@@ -115,7 +115,7 @@
     <div class="wrap">
          <div>
                     <script src="../JS_Code/acadmies/coursat.js"></script>
-            
+             <script src="../js/customCalender/CustomerCalendar.js"></script>
          
                 </div>
 
@@ -192,7 +192,7 @@
                                                    
 
                         <div id="divForm">
-                            <div class="col-md-12">
+                            <div class="col-md-9">
                                       <div class=" row form-group ">
                                      <div class="col-md-3 col-sm-12">
                                          <label for="Name" class="label-required">عنوان الدورة </label>
@@ -206,7 +206,7 @@
                                      </div>
                                  </div>
 
-                                 <div class="row form-group">
+                                 <div class="form-group row">
                                 <div class="col-md-3 col-sm-12">
                                     <label for="Name" >تفاصيل الدورة </label>
 
@@ -219,13 +219,23 @@
                                 </div>
                             </div>
                             </div>
+                             <div class="col-md-3">
+                                
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="email">مميزة </label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="checkbox" dbcolumn="features" id="features" style="width: 40px;" class="form-control" />
+
+                                </div>
+                            </div>
                              <div class="col-md-6"> 
                            
                                  
                             
 
 
-                                 <div class=" row form-group">
+                                 <div class="form-group row">
                                      <div class="col-md-3 col-sm-12">
                                          <label class="label-required">
                                              تاريخ البداية  
@@ -234,7 +244,7 @@
 
                                      <div class="col-md-9 col-sm-12" >
 
-                                         <div class="fancy-form" id="divdate1" style="float:right" >
+                                         <div class="fancy-form" id="divdate1"  >
                                              <input dbcolumn="start_dt_m" type="hidden" id="start_date_m" />
                                              <input dbcolumn="start_dt_hj" type="hidden" id="start_date_hj" />
                                              <uc1:hijricalendar runat="server" id="HijriCalendar" />
@@ -242,7 +252,7 @@
 
                                      </div>
                                  </div>
-                                 <div class=" row form-group">
+                                 <div class="form-group row">
                                      <div class="col-md-3 col-sm-12">
                                          <label class="label-required">
                                              تاريخ النهاية  
@@ -337,16 +347,7 @@
                             </div>
 
                            
-                            <div class="row">
-                                <br />
-                                <div class="col-md-3 col-sm-12">
-                                    <label for="email">مميزة </label>
-                                </div>
-                                <div class="col-md-3 col-sm-12">
-                                    <input type="checkbox" dbcolumn="features" id="features" style="width: 40px;" class="form-control" />
-
-                                </div>
-                            </div>
+                           
                                  </div>
 
 

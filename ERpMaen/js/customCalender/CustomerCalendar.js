@@ -12,7 +12,7 @@
  */
 'use strict';
 function HijriDate() {
-    
+    debugger
     let hd = typeof this == 'object' ? this : window, time, tzom = Date.parse('01 Jan 1970'), tzo = parseInt(parseInt(tzom / 1000) / 60), tzs = Date(1970, 0, 1),
         utc = { yyy: 0, mmm: 0, ddd: 0, day: 0, hh: 0, mm: 0, ss: 0, ms: 0 }, loc = { yyy: 0, mmm: 0, ddd: 0, day: 0, hh: 0, mm: 0, ss: 0, ms: 0 };
     tzs = tzs.substring(tzs.lastIndexOf('GMT'));

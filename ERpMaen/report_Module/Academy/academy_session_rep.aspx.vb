@@ -7,9 +7,10 @@ Public Class academy_session_rep
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Dim diplome_id = Request.QueryString("diplome_id")
         Dim diplome_user = Request.QueryString("diplome_user")
-        getReportData(diplome_id, diplome_user)
+        Dim ddlsemster = Request.QueryString("semster_id")
+        getReportData(diplome_id, diplome_user, ddlsemster)
     End Sub
-    Private Sub getReportData(diplome_id, diplome_user)
+    Private Sub getReportData(diplome_id, diplome_user, ddlsemster)
         Try
             Dim message As String = " لا يوجد بيانات متاحة للعرض"
             Dim rdoc As New CrystalDecisions.CrystalReports.Engine.ReportDocument
@@ -21,14 +22,14 @@ Public Class academy_session_rep
             Dim ds As New academy_sessionDS
             Dim query1 = "select tblusers.full_name as full_name ,tblusers.user_indenty as user_indenty from tblusers where tblusers.id=" + diplome_user
             Dim query2 = "select acd_diplomes.name as diplome from acd_diplomes where acd_diplomes.id=" + diplome_id
-            Dim query3 = "select tbllock_up.Description as subject,(acd_student_degrees.activity_degree+acd_student_degrees.final_degree) as total_degree,acd_diplome_subjects.code as code,acd_diplome_subjects.sub_code as symbol,acd_diplome_subjects.Units_Num as unit from acd_diplome_subjects join acd_diplomes on acd_diplome_subjects.diplome_id=acd_diplomes.id  join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id join acd_student_degrees on acd_diplome_subjects.id=acd_student_degrees.course_id   where acd_student_degrees.student_id=" + diplome_user.ToString + " and acd_diplome_subjects.diplome_id=" + diplome_id.ToString
+            Dim query3 = "select acd_semester.name as semster, tbllock_up.Description as subject,(acd_student_degrees.activity_degree+acd_student_degrees.final_degree) as total_degree,acd_diplome_subjects.code as code,acd_diplome_subjects.sub_code as symbol,acd_diplome_subjects.Units_Num as unit,period.Description as year from acd_diplome_subjects join acd_diplomes on acd_diplome_subjects.diplome_id=acd_diplomes.id  join tbllock_up on acd_diplome_subjects.subject_id=tbllock_up.id join acd_student_degrees on acd_diplome_subjects.id=acd_student_degrees.course_id join acd_semester on acd_semester.id=acd_diplome_subjects.semster_id join tbllock_up as period on acd_semester.year_id=period.id  where acd_student_degrees.approved=1 and acd_student_degrees.student_id=" + diplome_user.ToString + "  and acd_diplome_subjects.diplome_id=" + diplome_id.ToString + " and acd_diplome_subjects.semster_id=" + ddlsemster.ToString
             dt2 = DBManager.Getdatatable(query1)
             dt3 = DBManager.Getdatatable(query2)
             dt4 = DBManager.Getdatatable(query3)
             Dim row = 0
             Dim code = ""
-            Dim total_units = 0
-            Dim total_points = 0
+            Dim total_units As Double = 0
+            Dim total_points As Double = 0
             If dt4.Rows.Count <> 0 Then
                 Dim rowsCount = dt4.Rows.Count - 1
                 For index As Integer = 0 To rowsCount
@@ -62,7 +63,7 @@ Public Class academy_session_rep
                     ds.Tables("accadmy_session").Rows(row).Item("symbol") = dt4.Rows(index).Item("symbol").ToString
                     ds.Tables("accadmy_session").Rows(row).Item("unit") = Convert.ToInt32(dt4.Rows(index).Item("unit").ToString)
                     total_units = total_units + Convert.ToInt32(dt4.Rows(index).Item("unit").ToString)
-                    total_points = total_points + ((Convert.ToInt32(dt4.Rows(index).Item("total_degree").ToString) / (Convert.ToInt32(dt4.Rows(index).Item("unit").ToString) * 10)) * Convert.ToInt32(dt4.Rows(index).Item("unit").ToString))
+                    total_points = total_points + ((dt4.Rows(index).Item("total_degree").ToString / (dt4.Rows(index).Item("unit").ToString * 10)) * dt4.Rows(index).Item("unit").ToString)
                     row = row + 1
                 Next
                 'ds.Tables("accadmy_session").Rows(row).Item("total_units") = total_units
@@ -77,6 +78,8 @@ Public Class academy_session_rep
 
             If dt3.Rows.Count <> 0 Then
                 ds.Tables("accadmy_session").Rows(0).Item("diplome") = dt3.Rows(0).Item("diplome").ToString
+                ds.Tables("accadmy_session").Rows(0).Item("semster") = dt4.Rows(0).Item("semster").ToString
+                ds.Tables("accadmy_session").Rows(0).Item("year") = dt4.Rows(0).Item("year").ToString
             End If
 
             rdoc.Load(Server.MapPath("academy_session.rpt"))

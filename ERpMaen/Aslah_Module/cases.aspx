@@ -225,8 +225,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" required disabled dbcolumn="code" type="text" id="txtcode"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox onkeypress="return isNumber(event);" required disabled dbcolumn="code"  ID="txtcode"
+                                                                         SkinID="form-control"   CssClass="form-control" runat="server" clientidmode="Static" ></asp:TextBox>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group ">
@@ -251,7 +251,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="court_id" required SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlcourt_id" runat="server">
+                                                                        <asp:DropDownList dbcolumn="court_id" required SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlcourt_id" runat="server">
                                                                         </asp:DropDownList>
 
                                                                     </div>
@@ -265,8 +265,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);"  dbcolumn="instrument_no" type="text" id="Text9"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox onkeypress="return isNumber(event);"  dbcolumn="instrument_no"  SkinID="form-control" ID="Text9"
+                                                                            CssClass="form-control" runat="server" ClientIDMode="Static" ></asp:TextBox>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group ">
@@ -298,7 +298,7 @@
                                                         </div>
                                                         <div id="collapse2" class="panel-collapse collapse">
                                                             <div class="panel-body" id="person_owner">
-                                                                <input  dbcolumn="id" type="text" style="display:none;"/>
+                                                                <asp:TextBox  dbcolumn="id" SkinID="form-control" runat="server" style="display:none;"></asp:TextBox>
 
                                                                 <%--stsrt group2--%>
 
@@ -308,7 +308,8 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" required class="form-control" onchange="get_name();" dbColumn="name" ClientIDMode="Static" ID="txtname" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" required CssClass="form-control" onchange="get_name();" 
+                                                                            dbColumn="name" ClientIDMode="Static" ID="txtname"  runat="server">
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
@@ -318,7 +319,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="relationship_id" required class="form-control" SkinID="form-control" ClientIDMode="Static" ID="ddlrelationship_id" runat="server">
+                                                                        <asp:DropDownList dbcolumn="relationship_id" required CssClass="form-control" SkinID="form-control" ClientIDMode="Static" ID="ddlrelationship_id" runat="server">
                                                                         </asp:DropDownList>
 
                                                                     </div>
@@ -330,9 +331,9 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input placeholder="رقم الهوية يتكون من 10 رقم"  onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="indenty" type="text" id="txtindenty"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
-
+                                                                        <asp:TextBox placeholder="رقم الهوية يتكون من 10 رقم"  onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="indenty" SkinID="form-control"  ID="txtindenty"
+                                                                            CssClass="form-control" runat="server" ClientIDMode="Static" >
+                                                                            </asp:TextBox>
                                                                         <br />
                                                                     </div>
                                                                 </div>
@@ -343,9 +344,10 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input placeholder="رقم الجوال يتكون من 10 رقم"  onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="phone" type="text" id="tel"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
-
+                                                                        <asp:TextBox placeholder="رقم الجوال يتكون من 10 رقم"  onkeypress="return cust_chkNumber(event,this,10);"  required
+                                                                            dbcolumn="phone"  iID="tel" SkinID="form-control"
+                                                                            CssClass="form-control" runat="server" ClientIDMode="Static" >
+                                                                        </asp:TextBox>
                                                                         <br />
                                                                     </div>
                                                                 </div>
@@ -356,8 +358,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" dbcolumn="authorization_no" type="text" id="txtauthorization_no"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox onkeypress="return isNumber(event);" dbcolumn="authorization_no" ID="txtauthorization_no"
+                                                                            CssClass="form-control" runat="server" ClientIDMode="Static" SkinID="form-control" ></asp:TextBox>
 
                                                                         <br />
                                                                     </div>
@@ -369,8 +371,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);"  dbcolumn="User_Password" type="text" id="txtpassword"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox  onkeypress="return isNumber(event);"  dbcolumn="User_Password" ID="txtpassword"
+                                                                            CssClass="form-control" runat="server" ClientIDMode="Static" SkinID="form-control" ></asp:TextBox>
 
                                                                         <br />
                                                                     </div>
@@ -400,7 +402,7 @@
 
                                                                         </div>
                                                                         <div class="col-md-9 col-sm-12">
-                                                                            <asp:TextBox SkinID="form-control" required onchange="get_name();" class="form-control" dbColumn="name" ClientIDMode="Static" ID="txtname2" runat="server">
+                                                                            <asp:TextBox SkinID="form-control" required onchange="get_name();" CssClass="form-control" dbColumn="name" ClientIDMode="Static" ID="txtname2" runat="server">
                                                                             </asp:TextBox>
 
                                                                         </div>
@@ -411,7 +413,7 @@
                                                                         </div>
 
                                                                         <div class="col-md-9 col-sm-12">
-                                                                            <asp:DropDownList dbcolumn="relationship_id" required SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddrelationship_id2" runat="server">
+                                                                            <asp:DropDownList dbcolumn="relationship_id" required SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddrelationship_id2" runat="server">
                                                                             </asp:DropDownList>
 
                                                                         </div>
@@ -423,8 +425,9 @@
                                                                         </div>
 
                                                                         <div class="col-md-9 col-sm-12">
-                                                                            <input placeholder="رقم الهوية يتكون من 10 رقم" onkeypress="return cust_chkNumber(event,this,10);" required  dbcolumn="indenty" type="text" id="txtindenty2"
-                                                                                class="form-control" runat="server" clientidmode="Static" />
+                                                                            <asp:TextBox placeholder="رقم الهوية يتكون من 10 رقم" onkeypress="return cust_chkNumber(event,this,10);" required  dbcolumn="indenty" 
+                                                                                ID="txtindenty2" SkinID="form-control"
+                                                                                CssClass="form-control" runat="server" ClientIDMode="Static" ></asp:TextBox>
 
                                                                             <br />
                                                                         </div>
@@ -449,8 +452,8 @@
                                                                         </div>
 
                                                                         <div class="col-md-9 col-sm-12">
-                                                                            <input onkeypress="return isNumber(event);" dbcolumn="authorization_no" type="text" id="txtauthorization_no2"
-                                                                                class="form-control" runat="server" clientidmode="Static" />
+                                                                            <asp:TextBox onkeypress="return isNumber(event);" dbcolumn="authorization_no" ID="txtauthorization_no2"
+                                                                                CssClass="form-control" runat="server" SkinID="form-control" ClientIDMode="Static" ></asp:TextBox>
 
                                                                             <br />
                                                                         </div>
@@ -463,8 +466,8 @@
                                                                         </div>
 
                                                                         <div class="col-md-9 col-sm-12">
-                                                                            <input onkeypress="return isNumber(event);"  dbcolumn="User_Password" type="text" id="txtpassword2"
-                                                                                class="form-control" runat="server" clientidmode="Static" />
+                                                                            <asp:TextBox onkeypress="return isNumber(event);"  dbcolumn="User_Password" ID="txtpassword2"
+                                                                                CssClass="form-control" runat="server" ClientIDMode="Static" SkinID="form-control"></asp:TextBox>
 
                                                                             <br />
                                                                         </div>
@@ -495,7 +498,7 @@
                                                                         </div>
 
                                                                         <div class="col-md-9 col-sm-12">
-                                                                            <asp:DropDownList dbcolumn="child_custody" required SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlchild_custody" runat="server">
+                                                                            <asp:DropDownList dbcolumn="child_custody" required SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlchild_custody" runat="server">
                                                                             </asp:DropDownList>
 
                                                                         </div>
@@ -507,8 +510,8 @@
                                                                         </div>
 
                                                                         <div class="col-md-9 col-sm-12">
-                                                                            <input type="text" onchange="calc_total();" onkeypress="return isNumber(event);" required dbcolumn="boys_no" id="txtboys_no"
-                                                                                class="form-control" />
+                                                                            <asp:TextBox  OnTextChanged="calc_total();" onkeypress="return isNumber(event);" required dbcolumn="boys_no" ID="txtboys_no"
+                                                                                CssClass="form-control" SkinID="form-control" ></asp:TextBox>
                                                                         </div>
                                                                     </div>
 
@@ -519,8 +522,8 @@
                                                                         </div>
 
                                                                         <div class="col-md-9 col-sm-12">
-                                                                            <input type="text" onchange="calc_total();" onkeypress="return isNumber(event);" required dbcolumn="girls_no" id="txtgirls_no"
-                                                                                class="form-control" />
+                                                                            <asp:TextBox  OnTextChanged="calc_total();" onkeypress="return isNumber(event);" required dbcolumn="girls_no" ID="txtgirls_no"
+                                                                                CssClass="form-control" SkinID="form-control" ></asp:TextBox>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-12 form-group ">
@@ -530,7 +533,8 @@
                                                                         </div>
 
                                                                         <div class="col-md-9 col-sm-12">
-                                                                            <input type="text" id="txtchildrens_no" disabled dbcolumn="childrens_no" class="form-control" runat="server" clientidmode="Static" />
+                                                                            <asp:TextBox ID="txtchildrens_no" disabled dbcolumn="childrens_no" CssClass="form-control" 
+                                                                                runat="server" ClientIDMode="Static" SkinID="form-control" ></asp:TextBox>
 
                                                                         </div>
                                                                     </div>
@@ -558,7 +562,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="status" required SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlstatus" runat="server">
+                                                                        <asp:DropDownList dbcolumn="status" required SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlstatus" runat="server">
                                                                         </asp:DropDownList>
 
                                                                     </div>
@@ -569,7 +573,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="depart" class="form-control" required SkinID="form-control" ClientIDMode="Static" ID="ddldepart" runat="server">
+                                                                        <asp:DropDownList dbcolumn="depart" CssClass="form-control" required SkinID="form-control" ClientIDMode="Static" ID="ddldepart" runat="server">
                                                                         </asp:DropDownList>
 
                                                                     </div>
@@ -580,7 +584,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="advisor_id" SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlAdvisor" runat="server">
+                                                                        <asp:DropDownList dbcolumn="advisor_id" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlAdvisor" runat="server">
                                                                         </asp:DropDownList>
 
                                                                     </div>
@@ -592,7 +596,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="court_details" ClientIDMode="Static" ID="txtcourt_details" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" CssClass="form-control" dbColumn="court_details" ClientIDMode="Static" ID="txtcourt_details" runat="server">
                                                                         </asp:TextBox>
 
 
@@ -604,7 +608,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" class="form-control" dbColumn="details" ClientIDMode="Static" ID="txtdetails" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" TextMode="multiline" CssClass="form-control" dbColumn="details" ClientIDMode="Static" ID="txtdetails" runat="server">
                                                                         </asp:TextBox>
 
 
@@ -722,7 +726,7 @@
                                         </div>
 
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:DropDownList class="form-control" ClientIDMode="Static" ID="ddldone" runat="server">
+                                            <asp:DropDownList CssClass="form-control" SkinID="form-control" ClientIDMode="Static" ID="ddldone" runat="server">
                                                 <asp:ListItem Value="True|" Selected="True" Text="تمت بالفعل"></asp:ListItem>
                                                 <asp:ListItem Value="False|" Text="لم تحدث بعد"></asp:ListItem>
                                                   <asp:ListItem Value="True|False" Text="جميع الاحداث"></asp:ListItem>
@@ -767,7 +771,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" required class="form-control" dbColumn="name" ClientIDMode="Static" ID="txtname_child" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" required CssClass="form-control" dbColumn="name" ClientIDMode="Static" ID="txtname_child" runat="server">
                                                                         </asp:TextBox>
 
                                                                     </div>
@@ -779,7 +783,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="gender" SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlGender" runat="server">
+                                                                        <asp:DropDownList dbcolumn="gender" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlGender" runat="server">
                                                                             <asp:ListItem Value="1">ذكر</asp:ListItem>
                                                                             <asp:ListItem Value="2">انثى</asp:ListItem>
                                                                         </asp:DropDownList>
@@ -807,8 +811,8 @@
                                                                         العمر  </lable>
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input value="1" onkeypress="return isDecimal(this);" readonly required dbcolumn="age" type="text" id="age_son"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox value="1" onkeypress="return isDecimal(this);" readonly required dbcolumn="age" ID="age_son"
+                                                                            CssClass="form-control" runat="server" ClientIDMode="Static" SkinID="form-control"></asp:TextBox>
                                                                         <br />
                                                                     </div>
                                                                 </div>
@@ -818,28 +822,18 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList SkinID="form-control" dbcolumn="health_status" class="form-control" ClientIDMode="Static" ID="ddlhealth_status" runat="server">
+                                                                        <asp:DropDownList SkinID="form-control" dbcolumn="health_status" CssClass="form-control" ClientIDMode="Static" ID="ddlhealth_status" runat="server">
                                                                         </asp:DropDownList>
 
                                                                     </div>
                                                                 </div>
-                                                                <%-- <div class="col-md-12 form-group ">
-                                                                           <label for="ddlLanguage"  class="col-md-3 col-sm-12 control-label no-padding-right">صورة شخصية </label>
-                                                                        <div class="col-sm-8">
-                                                                        <div class="photo-upload-box">
-                                                                                        <asp:AsyncFileUpload ID="fuPhoto1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
-                                                                                            OnClientUploadComplete="UploadComplete2" OnClientUploadStarted="UploadStarted2"
-                                                                                            FailedValidation="False" />
-                                                                                    </div>
-                                                                        </div>
-                                                                    </div>--%>
                                                                 <div class="col-md-12 form-group ">
                                                                     <div class="col-md-3 col-sm-12">
                                                                         <label for="Name" >ملاحظات المشرف</label>
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control"  TextMode="multiline" class="form-control" dbColumn="details" ClientIDMode="Static" ID="txtdetails_child" runat="server">
+                                                                        <asp:TextBox SkinID="form-control"  TextMode="multiline" CssClass="form-control" dbColumn="details" ClientIDMode="Static" ID="txtdetails_child" runat="server">
                                                                         </asp:TextBox>
 
 
@@ -901,7 +895,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control"  required onkeypress="return isNumber(event);" class="form-control" dbColumn="delivery_period" ClientIDMode="Static" ID="txtdelivery_period" runat="server">
+                                                                        <asp:TextBox SkinID="form-control"  required onkeypress="return isNumber(event);" CssClass="form-control" dbColumn="delivery_period" ClientIDMode="Static" ID="txtdelivery_period" runat="server">
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
@@ -929,8 +923,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" required  dbColumn="month_number" type="text" id="num_months"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox onkeypress="return isNumber(event);" required  dbColumn="month_number" ID="num_months"
+                                                                            CssClass="form-control" runat="server" ClientIDMode="Static" SkinID="form-control"></asp:TextBox>
 
                                                                         <br />
                                                                     </div>
@@ -968,7 +962,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" dbcolumn="back_period" required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="txtreturn_period" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" dbcolumn="back_period" required onkeypress="return isNumber(event);" CssClass="form-control"  ClientIDMode="Static" ID="txtreturn_period" runat="server">
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
@@ -1052,8 +1046,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" disabled dbcolumn="code" type="text" id="txtcode_conciliation"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox onkeypress="return isNumber(event);" disabled dbcolumn="code" ID="txtcode_conciliation"
+                                                                            CssClass="form-control" runat="server" ClientIDMode="Static" SkinID="form-control"></asp:TextBox>
 
                                                                         <br />
                                                                     </div>
@@ -1080,7 +1074,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="owner_id" SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlowner_id" runat="server">
+                                                                        <asp:DropDownList dbcolumn="owner_id" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlowner_id" runat="server">
                                                                         </asp:DropDownList>
                                                                         <button class="btn btn-primary" type="button" onclick="find_persons('ddlowner_id',1)">اضافة طرف اول </button>
                                                                     </div>
@@ -1091,7 +1085,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="second_party_id" SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlsecond_party_id" runat="server">
+                                                                        <asp:DropDownList dbcolumn="second_party_id" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlsecond_party_id" runat="server">
                                                                         </asp:DropDownList>
                                                                         <button class="btn btn-primary" type="button" onclick="find_persons('ddlsecond_party_id',1)">اضافة طرف ثانى </button>
 
@@ -1104,7 +1098,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" required TextMode="multiline" class="form-control" dbColumn="notes" ClientIDMode="Static" ID="txtnotes" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" required TextMode="multiline" CssClass="form-control" dbColumn="notes" ClientIDMode="Static" ID="txtnotes" runat="server">
                                                                         </asp:TextBox>
 
 
@@ -1116,7 +1110,7 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:DropDownList dbcolumn="employee_id" SkinID="form-control" class="form-control" ClientIDMode="Static" ID="ddlemployee_id3" runat="server">
+                                                                        <asp:DropDownList dbcolumn="employee_id" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddlemployee_id3" runat="server">
                                                                         </asp:DropDownList>
 
                                                                     </div>
@@ -1159,7 +1153,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" required onkeypress="return isNumber(event);" class="form-control" dbColumn="delivery_period" ClientIDMode="Static" ID="txtdelivery_period_expenses" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" required onkeypress="return isNumber(event);" CssClass="form-control" dbColumn="delivery_period" ClientIDMode="Static" ID="txtdelivery_period_expenses" runat="server">
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
@@ -1188,8 +1182,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" required dbcolumn="amount" type="text" id="expense_amount"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox onkeypress="return isNumber(event);" required dbcolumn="amount" ID="expense_amount"
+                                                                         SkinID="form-control"   CssClass="form-control" runat="server" ClientIDMode="Static" ></asp:TextBox>
                                                                     </div>
                                                                 </div>
 
@@ -1200,8 +1194,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" required  dbColumn="month_number" type="text" id="expense_month"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox onkeypress="return isNumber(event);" required  dbColumn="month_number" ID="expense_month"
+                                                                         SkinID="form-control"   CssClass="form-control" runat="server" ClientIDMode="Static" ></asp:TextBox>
 
                                                                         <br />
                                                                     </div>
@@ -1275,11 +1269,6 @@
                      <uc1:MultiPhotoUpload runat="server" ID="MultiPhotoUpload" />
                         <uc1:Person runat="server" ID="Person" />
                            <uc1:Appraisal runat="server" ID="Appraisal1" />
-                        <%--  <uc1:ImageSlider runat="server" ID="ImageSlider" />
-                    <uc1:MultiPhotoUpload runat="server" ID="MultiPhotoUpload" />
-                    <uc1:DynamicTable runat="server" ID="DynamicTable" />
-                    <asp:Label ID="lblRes" runat="server" Visible="false"></asp:Label>
-                    <asp:HiddenField ID="tblH" runat="server" />--%>
                     </div>
                 </div>
         
@@ -1292,7 +1281,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control"  required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="delivery_period" runat="server">
+                                                                        <asp:TextBox SkinID="form-control"  required onkeypress="return isNumber(event);" CssClass="form-control"  ClientIDMode="Static" ID="delivery_period" runat="server">
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
@@ -1305,8 +1294,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" required  type="text" id="month_number"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox onkeypress="return isNumber(event);" required  ID="month_number"
+                                                                            CssClass="form-control" runat="server" clientidmode="Static" SkinID="form-control"></asp:TextBox>
 
                                                                         <br />
                                                                     </div>
@@ -1317,7 +1306,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" dbcolumn="back_period" required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="another_return_period" runat="server">
+                                                                        <asp:TextBox SkinID="form-control" dbcolumn="back_period" required onkeypress="return isNumber(event);" CssClass="form-control"  ClientIDMode="Static" ID="another_return_period" runat="server">
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
@@ -1338,7 +1327,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control"  required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="TextBox1" runat="server">
+                                                                        <asp:TextBox SkinID="form-control"  required onkeypress="return isNumber(event);" CssClass="form-control"  ClientIDMode="Static" ID="TextBox1" runat="server">
                                                                         </asp:TextBox>
                                                                     </div>
                                                                 </div>
@@ -1351,9 +1340,9 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return isNumber(event);" required  type="text" id="Text1"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
-
+                                                                        <asp:TextBox onkeypress="return isNumber(event);" required  ID="Text1"
+                                                                          SkinID="form-control"  CssClass="form-control" runat="server" ClientIDMode="Static" >
+                                                                            </asp:TextBox>
                                                                         <br />
                                                                     </div>
                                                                 </div>
@@ -1363,8 +1352,7 @@
 
                                                                     </div>
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <asp:TextBox SkinID="form-control" dbcolumn="back_period" required onkeypress="return isNumber(event);" class="form-control"  ClientIDMode="Static" ID="TextBox2" runat="server">
-                                                                        </asp:TextBox>
+                                                                        <asp:TextBox onkeypress="return isNumber(event);" required SkinID="form-control" ClientIDMode="Static" dbcolumn="back_period" CssClass="form-control" runat="server" ID="TextBox2"/></asp:TextBox>
                                                                     </div>
                                                                 </div>
 

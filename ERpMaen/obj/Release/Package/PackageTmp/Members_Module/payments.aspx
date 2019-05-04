@@ -1,13 +1,11 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="payments.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.payments" Theme="Theme5"%>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
 <%@ Register Src="~/UserControls/MultiPhotoUpload.ascx" TagPrefix="uc1" TagName="MultiPhotoUpload" %>
 <%@ Register Src="~/UserControls/DynamicTable.ascx" TagPrefix="uc1" TagName="DynamicTable" %>
 <%@ Register Src="~/UserControls/ImageSlider.ascx" TagPrefix="uc1" TagName="ImageSlider" %>
 <%@ Register Src="~/UserControls/PnlConfirm.ascx" TagPrefix="uc1" TagName="PnlConfirm" %>
-<%@ Register Src="~/UserControls/HijriCalendar.ascx" TagPrefix="uc1" TagName="HijriCalendar" %>
-
+<%@ Register Src="~/UserControls/CustomerCalendar.ascx" TagPrefix="uc1" TagName="CustomerCalendar" %>
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="content">
     <asp:ScriptManager  ID="ToolkitScriptManager1" runat="server">
@@ -38,9 +36,42 @@
     </style>
                 <div>
                     <script src="../JS_Code/payments/payments.js"></script>
-  <%--                  <script src="../JS_Code/payments/halls_Save.js"></script>
-                    <script src="../JS_Code/payments/halls_Edit.js"></script>
-                    <script src="../JS_Code/payments/halls_Upload.js"></script>--%>
+                    <script src="../js/customCalender/CustomerCalendar.js"></script>
+                    <script>
+function UploadComplete(sender, args) {
+                           
+                            var fileLength = args.get_length();
+                            var fileType = args.get_contentType();
+                            //alert(sender);
+                            document.getElementById('imgItemURL').src = 'images/' + args.get_fileName();
+                           
+                            switch (true) {
+                                case (fileLength > 1000000):
+
+                                    fileLength = fileLength / 1000000 + 'MB';
+                                    break;
+
+                                case (fileLength < 1000000):
+
+                                    fileLength = fileLength / 1000000 + 'KB';
+                                    break;
+
+                                default:
+                                    fileLength = '1 MB';
+                                    break;
+                            }
+                            clearContents(sender);
+                        }
+                      
+                       
+                        function ClearMe(sender) {
+                            sender.value = '';
+                        }
+                        function clearContents(sender) {
+                            { $(sender._element).find('input').val(''); }
+                        }
+
+                    </script>
                 </div>
                 <div>
                     <div class="main-title">
@@ -103,7 +134,7 @@
 
                                                   </div>
                                                  <div class="col-md-9 col-sm-12">
-                                                      <asp:DropDownList dbcolumn="member_id" onchange="get_member_money()" required class="form-control" ClientIDMode="Static" ID="member_id" runat="server">
+                                                      <asp:DropDownList dbcolumn="member_id" onchange="get_member_money()" required CssClass="form-control" ClientIDMode="Static" SkinID="form-control" ID="member_id" runat="server">
                                             </asp:DropDownList>
                                                           
                                               
@@ -118,7 +149,7 @@
                                                     <label for="TextBox1" class="label-required"> الدفعات المالية  </label>
                                                     </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox  class="form-control"  dbcolumn="amount_money" type="text" id="amount_money" ClientIDMode="Static"  runat="server">
+                                                <asp:TextBox  CssClass="form-control"  dbcolumn="amount_money" SkinID="form-control" ID="amount_money" ClientIDMode="Static"  runat="server">
                                                 </asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="amount_money"
                                                     ErrorMessage="من فضلك  ادخل الدفعات " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
@@ -129,16 +160,17 @@
 
                                     <div class="row">
                                                 <br />
-                                                <div class="col-md-4 col-sm-12">
+                                                <div class="col-md-3 col-sm-12">
                                                    
                                                 <label for="TextBox1">تاريخ استحقاق الدفعة المالية    </label>
 
                                                     </div>
-                                                <div class="col-md-4 col-sm-12 fancy-form" id="divdate2">
+                                                <div class="col-md-9 col-sm-12 fancy-form" id="divdate2">
                                                   
                                             <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_m" ID="lbldate_m"></asp:Label>
                                             <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_hj" ID="lbldate_hj"></asp:Label>
-                                        <uc1:HijriCalendar runat="server" ID="HijriCalendar2" />
+                              
+                                                    <uc1:CustomerCalendar runat="server" ID="HijriCalendar2" />
                                                     </div>
                                                  </div>
 
@@ -159,7 +191,7 @@
 
                                                     </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                <asp:DropDownList dbcolumn="payment_method"  required class="form-control" ClientIDMode="Static" ID="payment_method" runat="server">
+                                                <asp:DropDownList dbcolumn="payment_method"  required CssClass="form-control" ClientIDMode="Static" SkinID="payment_method" ID="payment_method" runat="server">
                                             </asp:DropDownList>
                                                     </div>
                                                </div>   
@@ -169,8 +201,8 @@
                                                 <div class="col-md-3 col-sm-12">
                                                 <label class="required">الحالة</label>
                                                     </div>
-                                                <div class="col-md-3 col-sm-12">
-                                                <select  dbcolumn="paid" id="paid">
+                                                <div class="col-md-9 col-sm-12">
+                                                <select  dbcolumn="paid" id="paid" class="form-control">
                                                 <option value="0">دفعت</option>
                                                 <option value="1">لم تدفع</option>
                                                       </select>

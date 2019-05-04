@@ -23,11 +23,6 @@ Public Class student_money_rep
             dt2 = DBManager.Getdatatable(query)
             dt3 = DBManager.Getdatatable(query1)
             Dim row = 0
-            If dt2.Rows.Count <> 0 Then
-                ds.Tables("student_money").Rows.Add()
-                ds.Tables("student_money").Rows(0).Item("student") = dt2.Rows(0).Item("full_name").ToString
-                ds.Tables("student_money").Rows(0).Item("user_identy") = dt2.Rows(0).Item("user_indenty").ToString
-            End If
 
             If dt3.Rows.Count <> 0 Then
                 Dim rowsCount = dt3.Rows.Count - 1
@@ -49,6 +44,12 @@ Public Class student_money_rep
                 Next
 
             End If
+
+            If dt2.Rows.Count <> 0 Then
+                ds.Tables("student_money").Rows(0).Item("student") = dt2.Rows(0).Item("full_name").ToString
+                ds.Tables("student_money").Rows(0).Item("user_identy") = dt2.Rows(0).Item("user_indenty").ToString
+            End If
+
 
             rdoc.Load(Server.MapPath("student_money.rpt"))
             'rdoc.SetDataSource(ds.Tables("degrees"))

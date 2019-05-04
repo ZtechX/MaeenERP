@@ -119,7 +119,7 @@ Partial Public Class userPorfile
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtindenty As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtindenty As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''Checkbox1 control.

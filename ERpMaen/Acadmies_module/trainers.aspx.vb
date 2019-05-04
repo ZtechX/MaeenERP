@@ -68,7 +68,7 @@ Public Class trainers
                     Dim PostedPhoto As System.Drawing.Image = System.Drawing.Image.FromStream(fu.PostedFile.InputStream)
                     Dim ImgHeight As Integer = PostedPhoto.Height
                     Dim ImgWidth As Integer = PostedPhoto.Width
-                    x = CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, ImgWidth, ImgHeight, ImgWidth, ImgHeight, "Employees", namer)
+                    x = CLSImagesHandler.Upload_Me(fu.PostedFile, Session("FileType"), fu.FileContent, Session("FileArray"), Path, ImgWidth, ImgHeight, ImgWidth, ImgHeight)
                     Session("UserPhoto") = x
             End Select
             ClearContents(sender)

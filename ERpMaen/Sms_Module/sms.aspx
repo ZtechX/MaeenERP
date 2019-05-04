@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="sms.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.sms" Theme="Theme5"%>
+﻿<%@ Page Language="vb" AutoEventWireup="false"  EnableEventValidation="false"CodeBehind="sms.aspx.vb" MasterPageFile="~/Site.Master" Inherits="ERpMaen.sms" Theme="Theme5"%>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Src="~/UserControls/Result.ascx" TagPrefix="uc1" TagName="Result" %>
@@ -22,15 +22,27 @@
                 </asp:UpdateProgress>
             </div>
             <div class="wraper">
-                <style>
-        table#divAreaList td {
-    border: 1px solid gainsboro;
+           <style>
+                    .tbl_details thead tr {
+    background: #148083;
+    color: #fff;
+    font-size: 12px;
+    font-weight: normal;
 }
-                table#divAreaList th {
-    border: 1px solid gainsboro;
-}
-        #divAreaList1{    max-height: 200px; overflow: auto;}
-    </style>
+                    .tbl_details thead th {
+                        text-align:center;
+                        padding:10px;
+                    }
+                    .tbl_details td {
+                        text-align:center;
+                        padding-top:10px;
+                    }
+                    .tbl_details {
+                        width:100%;
+                            margin: .5% 1%;
+                        direction:rtl;
+                    }
+                </style>
                 <div>
                     <script src="../JS_Code/sms/sms.js"></script>
                          </div>
@@ -88,7 +100,7 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <asp:DropDownList dbcolumn="" onchange="get_template();" class="form-control" ClientIDMode="Static" ID="ddltemplate" runat="server">
+                                            <asp:DropDownList dbcolumn="" onchange="get_template();" SkinID="form-control" CssClass="form-control" ClientIDMode="Static" ID="ddltemplate" runat="server">
                                             </asp:DropDownList>
 
 
@@ -105,7 +117,8 @@
                                             <label for="TextBox1">العنوان </label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <input dbcolumn="title" required type="text" id="txttitle" placeholder="" class="form-control" />
+                                            <asp:TextBox dbcolumn="title" required  SkinID="form-control" 
+                                                ID="txttitle" runat="server" CssClass="form-control" />
                                         </div>
 
                                     </div>
@@ -116,7 +129,8 @@
                                             <label for="email">الرسالة </label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                            <textarea dbcolumn="body"  required id="txtbody" placeholder="" class="form-control"></textarea>
+                                            <asp:TextBox SkinID="form-control" TextMode="MultiLine" dbcolumn="body"  required ID="txtbody" class="form-control" runat="server">
+                                            </asp:TextBox>
                                         </div>
                                     </div>
 
@@ -128,9 +142,7 @@
                                         <div class="col-md-9 col-sm-12">
                                         <select id="ddl_type" dbcolumn="" required class="form-control"  onchange="get_group(1);">
                                       <option value="0">اختر</option>
-                                      <option value="1">المنفذون</option>
-                                      <option value="2">العملاء</option>
-                                      <option value="3">المجموعات</option>
+                                      <option value="_3">المجموعات</option>
                                   </select>
                                         </div>
 
@@ -142,7 +154,7 @@
                                             <label for="TextBox1">اسم المجموعة </label>
                                         </div>
                                         <div class="col-md-9 col-sm-12">
-                                                   <asp:DropDownList dbcolumn="group_id" onchange="get_group(2);"  class="form-control" ClientIDMode="Static" ID="ddlgroup_id" runat="server">
+                                                   <asp:DropDownList dbcolumn="group_id" SkinID="form-control" onchange="get_group(2);"  CssClass="form-control" ClientIDMode="Static" ID="ddlgroup_id" runat="server">
                                     </asp:DropDownList>
                                         </div>
 
@@ -159,22 +171,9 @@
                    
                     </div>
                 <div class="row">
-                  <%--       <div class="dropdown">
-                                    <button class="btn btn-default dropdown-toggle pull-right" type="button" data-toggle="dropdown">
-                                        <span class="glyphicon glyphicon-check"></span>&nbspMark/ UnMark All
-                                       <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-right" style="margin-top: 17px">
-                                        <li><a href="#" onclick="mark_all();">Mark All</a></li>
-                                        <li><a href="#" onclick="unmark_all();">Unmark All</a></li>
+                 
 
-                                    </ul>
-                                    <div style="text-align: left">
-                                        <input onkeyup="search_table();" style="height: 40px;" placeholder="بحث بالاسم" id="lblsearch" type="text" />
-                                    </div>
-                                </div>--%>
-
-                            <table id="table_sms" class="table table-striped">
+                            <table id="table_sms" class="tbl_details">
                               
                       
                         <thead>
@@ -183,7 +182,7 @@
                                 <th>#</th>
                                 <th>الاسم </th>
                                 <th>رقم التليفون</th>
-                                <th style="width: 12%">Check</th>
+                                <th style="width: 12%">تحديد</th>
                             </tr>
                         </thead>
                         <tbody id="invoices" style="text-align: center">

@@ -39,9 +39,7 @@
     </style>
                 <div>
                     <script src="../JS_Code/sessions/sessions.js"></script>
-  <%--                  <script src="../JS_Code/sessions/halls_Save.js"></script>
-                    <script src="../JS_Code/sessions/halls_Edit.js"></script>
-                    <script src="../JS_Code/sessions/halls_Upload.js"></script>--%>
+                    <script src="../js/customCalender/CustomerCalendar.js"></script>
                 </div>
                 <div>
                     <div class="main-title">
@@ -81,7 +79,7 @@
                         <uc1:PnlConfirm runat="server" ID="PnlConfirm" />
                     </div>
                     <uc1:Result runat="server" ID="Result" />
-                    <div id="divForm" class="newformstyle form_continer">
+                    <div id="divForm" class="newformstyle form_continer" style="direction:rtl;">
                         <div class="clear"></div>
                         <asp:ValidationSummary ID="ValidationSummary2" runat="server" ValidationGroup="vgroup" />
                       <asp:Label ID="lblmainid" ClientIDMode="Static" Style="display: none" runat="server" dbColumn="id"></asp:Label>
@@ -104,7 +102,7 @@
 
                                                   </div>
                                                  <div class="col-md-9 col-sm-12">
-                                                      <asp:DropDownList  class="form-control" dbColumn="board_id" ClientIDMode="Static" ID="board_id" runat="server">
+                                                      <asp:DropDownList SkinID="board_id" class="form-control" dbColumn="board_id" ClientIDMode="Static" ID="board_id" runat="server">
                                                          </asp:DropDownList>
                                                           
                                               
@@ -119,7 +117,7 @@
                                                     <label for="TextBox1" class="label-required"> الاسم بالعربية  </label>
                                                     </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                <asp:TextBox  class="form-control"  dbColumn="name" ClientIDMode="Static" ID="txtname_ar" runat="server">
+                                                <asp:TextBox  class="form-control"  dbColumn="name" ClientIDMode="Static" SkinID="txtname_ar" ID="txtname_ar" runat="server">
                                                 </asp:TextBox>
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtname_ar"
                                                     ErrorMessage="من فضلك  ادخل الاسم " ValidationGroup="vgroup"></asp:RequiredFieldValidator>
@@ -135,7 +133,7 @@
                                                     </div>
                                                 <div class="col-md-9 col-sm-12">
                                                 
-                                                     <textarea dbcolumn="notes" id="notest" placeholder="" class="form-control" ClientIDMode="Static"  runat="server"></textarea>
+                                                     <textarea dbcolumn="notes"  id="notest" placeholder="" class="form-control" ClientIDMode="Static"  runat="server"></textarea>
                                                     </div>
                                                    </div>
 
@@ -154,7 +152,7 @@
 
                                                     </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                <textarea dbcolumn="discussion" id="discussion" placeholder="" class="form-control" ClientIDMode="Static"  runat="server"></textarea>
+                                                <textarea  dbcolumn="discussion" id="discussion" placeholder="" class="form-control" ClientIDMode="Static"  runat="server"></textarea>
                                                     </div>
                                                </div>   
                                             <div class="row">
@@ -164,7 +162,7 @@
                                                 <label for="TextBox1">تاريخ الجلسة   </label>
 
                                                     </div>
-                                                <div class="col-md-3 col-sm-12 fancy-form" id="divdate2">
+                                                <div class="col-md-9 col-sm-12 fancy-form" id="divdate2">
                                                   
                                             <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_m" ID="lbldate_m"></asp:Label>
                                             <asp:Label runat="server" ClientIDMode="static" Style="display: none" dbColumn="date_hj" ID="lbldate_hj"></asp:Label>

@@ -53,7 +53,8 @@
                             var fileLength = args.get_length();
                             var fileType = args.get_contentType();
                             //alert(sender);
-                            document.getElementById('imgItemURL').src = 'images/' + args.get_fileName();
+                            debugger
+                            document.getElementById('imgItemURL').src = 'images/' +$("#fuPhoto1_saved_nm").val();
                             var img = document.getElementById('imgLoader');
                             img.style.display = 'none';
                             switch (true) {
@@ -78,13 +79,7 @@
                             var img = document.getElementById('imgLoader');
                             img.style.display = 'block';
                         }
-                        //var prm = Sys.WebForms.PageRequestManager.getInstance();
-                        //prm.add_pageLoaded(setupSB);
-                        //function setupSB() {
-                        //    Shadowbox.init({ skipSetup: true });
-                        //    Shadowbox.clearCache();
-                        //    Shadowbox.setup();
-                        //}
+                        
                         function ClearMe(sender) {
                             sender.value = '';
                         }
@@ -134,15 +129,9 @@
                 <!-- page content -->
                 <div id="content" class="padding-20 newformstyle form_continer">
                     <!--     -------tabs start-------->
-              
-                     
                                 <div class="row">
-                                 
                                     <asp:Label ID="lblmainid" ClientIDMode="Static" Style="display: none" runat="server" dbColumn="id"></asp:Label>
-
-
-
-                                    <div class="col-md-12" id="divForm">
+<div class="col-md-12" id="divForm">
                                         <!----------------column 1 -------------------->
 
                                      <%--   <div id="SavedivLoader" class="loader" style="display: none; text-align: center;">
@@ -155,7 +144,7 @@
                                                     <label class="label-required">الاسم بالكامل</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                    <asp:TextBox  required class="form-control" dbColumn="full_name" ClientIDMode="Static" ID="TextBox1" runat="server">
+                                                    <asp:TextBox  required CssClass="form-control" dbColumn="full_name" ClientIDMode="Static" SkinID="form-control" ID="TextBox1" runat="server">
                                                     </asp:TextBox>
                                                     
                                                 </div>
@@ -167,7 +156,7 @@
                                                     <label >البريد الإلكترونى</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                    <asp:TextBox SkinID="form-control" class="form-control"  dbColumn="User_Email" ClientIDMode="Static" ID="TextBox2" runat="server">
+                                                    <asp:TextBox SkinID="form-control" CssClass="form-control"  dbColumn="User_Email" ClientIDMode="Static" ID="TextBox2" runat="server">
                                                     </asp:TextBox>
 
                                                 </div>
@@ -180,8 +169,8 @@
                                                                     </div>
 
                                                                     <div class="col-md-9 col-sm-12">
-                                                                        <input onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="user_indenty" type="text" id="txtindenty"
-                                                                            class="form-control" runat="server" clientidmode="Static" />
+                                                                        <asp:TextBox onkeypress="return cust_chkNumber(event,this,10);"  required dbcolumn="user_indenty"  ID="txtindenty"
+                                                                         SkinID="form-control"   CssClass="form-control" runat="server" clientidmode="Static"> </asp:TextBox>
 
                                                                         <br />
                                                                     </div>
@@ -192,7 +181,7 @@
 
                                                   </div>
                                                  <div class="col-md-9 col-sm-12">
-                                                   <asp:DropDownList dbcolumn="User_Type" required class="form-control" ClientIDMode="Static" ID="ddlUser_Type" runat="server"> </asp:DropDownList>
+                                                   <asp:DropDownList dbcolumn="User_Type" required CssClass="form-control" ClientIDMode="Static" SkinID="form-control" ID="ddlUser_Type" runat="server"> </asp:DropDownList>
                                                   </div>
                                                   </div>
                                             <div class="form-group row">
@@ -201,14 +190,14 @@
 
                                                   </div>
                                                  <div class="col-md-9 col-sm-12">
-                                                   <asp:DropDownList dbcolumn="group_id" required class="form-control" ClientIDMode="Static" ID="ddlgroup_id" runat="server"> </asp:DropDownList>
+                                                   <asp:DropDownList dbcolumn="group_id" required CssClass="form-control" ClientIDMode="Static" SkinID="form-control" ID="ddlgroup_id" runat="server"> </asp:DropDownList>
                                                   </div>
                                                   </div>
                                                <div class="form-group row">
                                                 <div class="col-md-6">
                                                     <div class="col-md-3 col-sm-12">
 
-                                                    <label>نشط   </label>
+                                                    <label>نشط</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
                                                      <input name="chkManual" id="Checkbox1" dbcolumn="Active" runat="server"  type="checkbox" />
@@ -220,7 +209,7 @@
                                                 
                                                 <div class="col-md-5 col-sm-12">
 
-                                                    <label>استلام استشارات   </label>
+                                                    <label>استلام استشارات</label>
                                                 </div>
                                                 <div class="col-md-7 col-sm-12">
                                                      <input name="chkManual" id="Checkbox2" dbcolumn="recieve_Consult" runat="server"  type="checkbox" />
@@ -233,16 +222,16 @@
                                             </div>
                                            
                                                       <div id="divResearcher" runat="server" class="form-group row">
-                                                
+                                                <div class="col-md-6">
                                                 <div  class="col-md-3 col-sm-12">
 
-                                                    <label>باحث   </label>
+                                                    <label>باحث</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
                                                      <input name="chkManual" id="Researcher" onchange="changeResearcher();" dbcolumn="Researcher" runat="server" runat="server"  type="checkbox" />
 
                                                 </div>
-
+</div>
 
                                             </div>
                                                                          
@@ -254,7 +243,7 @@
                                                     <label >الإدارة</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                    <asp:DropDownList dbcolumn="managment_id"   class="form-control" ClientIDMode="Static" ID="ddlmanagment_id" runat="server">
+                                                    <asp:DropDownList dbcolumn="managment_id"   CssClass="form-control" ClientIDMode="Static" SkinID="form-control" ID="ddlmanagment_id" runat="server">
                                                     </asp:DropDownList>
                                                     <i class="fancy-arrow"></i>
                                                 </div>
@@ -266,7 +255,7 @@
                                                     <label class="label-required">كلمة المرور</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                    <asp:TextBox required class="form-control"   TextMode="Password" dbColumn="User_Password" ClientIDMode="Static" ID="txtUserPassword" runat="server">
+                                                    <asp:TextBox required CssClass="form-control"   TextMode="Password" dbColumn="User_Password" ClientIDMode="Static" SkinID="form-control" ID="txtUserPassword" runat="server">
                                                     </asp:TextBox>
                                                   
 
@@ -281,7 +270,7 @@
                                                     <label class="label-required">رقم الجوال</label>
                                                 </div>
                                                 <div class="col-md-9 col-sm-12">
-                                                    <asp:TextBox onkeypress="return cust_chkNumber(event,this,10);" class="form-control" required dbColumn="User_PhoneNumber" ClientIDMode="Static" ID="phone" runat="server">
+                                                    <asp:TextBox onkeypress="return cust_chkNumber(event,this,10);" CssClass="form-control" required dbColumn="User_PhoneNumber" SkinID="form-control" ClientIDMode="Static" ID="phone" runat="server">
                                                     </asp:TextBox>
 
                                                 </div>
@@ -298,7 +287,7 @@
                                                     </div>
                                                     <div class="col-md-9 col-sm-12">
                                                 
-                                                         <asp:DropDownList required class="form-control" dbColumn="comp_id" ClientIDMode="Static" ID="ddlcomp_id" runat="server"  >
+                                                         <asp:DropDownList required CssClass="form-control" dbColumn="comp_id" ClientIDMode="Static" SkinID="form-control" ID="ddlcomp_id" runat="server"  >
                                                           </asp:DropDownList>
                                                         <i class="fancy-arrow"></i>
                                                     </div>
@@ -310,6 +299,8 @@
                                  
                                                                             <div class="form-group row">
 <div class="col-md-6 col-md-offset-3">
+         <asp:TextBox  ID="fuPhoto1_saved_nm" runat="server" ClientIDMode="Static" ></asp:TextBox>
+                                   
                                     <div >
                                         <asp:Image ID="imgItemURL" ClientIDMode="Static" runat="server" Width="114px" ImageUrl="~/App_Themes/images/add-icon.jpg" />
                                         <div class="update-progress-img">
@@ -318,11 +309,12 @@
                                     </div>
                                     <div class="clear">
                                     </div>
+    
                                     <div class="photo-upload-box">
-                                        <span>تحميل صورة</span>
+                                        <span >تحميل صورة</span>
                                         <asp:AsyncFileUpload ID="fuPhoto1" SkinID="image-upload" runat="server" OnUploadedComplete="PhotoUploaded"
                                             OnClientUploadComplete="UploadComplete2" OnClientUploadStarted="UploadStarted2"
-                                            FailedValidation="False"  />
+                                            FailedValidation="False"/>
                                     </div>
                                 </div>
                           

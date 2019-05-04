@@ -194,6 +194,43 @@ Public Class reports_academy
 
 #End Region
 
+
+#Region "get_lecture"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_lecture(ByVal diplome_id As String) As String()
+
+        Dim Names As New List(Of String)(10)
+        Try
+            Dim dt As New DataTable
+            Dim query = "select * from acd_lectures where type=2 and course_id=" + diplome_id.ToString
+            dt = DBManager.Getdatatable(query)
+
+            If dt.Rows.Count <> 0 Then
+                Dim Str = PublicFunctions.ConvertDataTabletoString(dt)
+                Names.Add(Str)
+
+            Else
+                Names.Add("0")
+            End If
+
+            Return Names.ToArray
+        Catch ex As Exception
+            Names.Add("0")
+            Names.Add(" No Results were Found!")
+            Return Names.ToArray
+        End Try
+        Names.Add("0")
+        Names.Add(" No Results were Found!")
+        Return Names.ToArray
+    End Function
+
+#End Region
+
+
 #Region "Check user"
     ''' <summary>
     ''' Save  Type

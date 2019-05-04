@@ -133,13 +133,12 @@ Public Class sms
             Dim query = ""
             ' TblInvoice.TblInvoiceFields.SAccount_cd
             If flag = 1 Then
-                If type = 1 Then
-                    query = "select name_ar as 'name',tel,id from tblworker"
+                If type = "_3" Then
+                    query = "select tblcontacts.id as id, tblcontacts.name_ar as 'name',tblcontacts.tel1 as tel from tblcontacts_groups right join tblcontacts on tblcontacts_groups.contact_id=tblcontacts.id   where ISNUll(tblcontacts_groups.deleted,0)=0 and tblcontacts_groups.group_id=" + dep_Id.ToString + ""
                 Else
-                    query = "select name_ar as 'name',tel,id  from tblcustomers"
+                    query = "select full_name as 'name',User_PhoneNumber as tel,id from tblUsers where parent_id=" + LoginInfo.GetUser__Id() + " and comp_id = " + LoginInfo.GetComp_id() + " and  User_Type='" + type + "'  "
                 End If
             Else
-                query = "select tblcontacts.id as id, tblcontacts.name_ar as 'name',tblcontacts.tel1 as tel from tblcontacts_groups right join tblcontacts on tblcontacts_groups.contact_id=tblcontacts.id   where ISNUll(tblcontacts_groups.deleted,0)=0 and tblcontacts_groups.group_id=" + dep_Id.ToString + ""
             End If
 
             dt = DBManager.Getdatatable(query)
@@ -193,6 +192,25 @@ Public Class sms
 
 #End Region
 
+#Region "get user Types"
+    ''' <summary>
+    ''' Save  Type
+    ''' </summary>
+    <WebMethod(True)>
+    <System.Web.Script.Services.ScriptMethod()>
+    Public Function get_userTypes() As String
+        Try
+            Dim dt As New DataTable
+            dt = DBManager.Getdatatable("select * from tblUser_Type where isNull(deleted,0) !=1")
+            If dt.Rows.Count <> 0 Then
+                Return PublicFunctions.ConvertDataTabletoString(dt)
+            End If
+        Catch ex As Exception
+            Return ""
+        End Try
+        Return ""
+    End Function
 
+#End Region
 
 End Class

@@ -17,7 +17,8 @@ var confirm_save = true;
 var arrObjects = [];
 $(function () {
     try {
-       
+        $("#pnlConfirm").hide();
+        fill_ddl_type();
         //showHideCalendar($("#txtDateh"));
         //showHideCalendar($("#txtDatem"));
         //add_date();
@@ -28,24 +29,17 @@ $(function () {
     }
 });
 
-// draw dynamic table for existing travel_agencies
-function drawDynamicTable() {
-    try {
-        var tableSortingColumns = [
-                { orderable: false }, null, null, null,
-        ];
-        var tableFilteringColumns = [
-            { type: "null" }, { type: "text" },{ type: "text" }, { type: "text" },
-        ];
-
-        var tableColumnDefs = [
-
-        ];
-        var initialSortingColumn = 1;
-        loadDynamicTable('contact_group', "AutoCodeHide", tableColumnDefs, tableFilteringColumns, tableSortingColumns, initialSortingColumn, "Form");
-    } catch (err) {
-        alert(err);
-    }
+function fill_ddl_type() {
+    sms.get_userTypes(function (val) {
+        if (val != "") {
+            var str = "";
+            var arr = JSON.parse(val);
+            arr.forEach(function (row) {
+                str += "<option value="+row.id+">"+row.name+"</option>";
+            });
+            $("#ddl_type").append(str);
+        }
+    });
 }
 
 // empty pnlform and show it and hide function panel
@@ -190,7 +184,7 @@ function get_group(flag) {
 
     // alert(dep_Id);
     if (flag == 1) {
-        if (type == 3) {
+        if (type == "_3") {
             $("#group_contact").css('display', 'block');
             $('#invoices').html("");
             return;

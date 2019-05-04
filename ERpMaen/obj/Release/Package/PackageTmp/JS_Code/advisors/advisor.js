@@ -5,10 +5,6 @@ var editWebServiceMethod = "advisor.asmx/Edit";
 var formAutoCodeControl = "lblmainid";
 var superAdmin = false;
 $(function () {
-      $("input").attr("class","");
-    $("select").attr("class", "");
-    $("input").addClass("form-control");
-    $("select").addClass("form-control");
     $("#pnlConfirm").hide();
     $("#divData").hide();
     $("#SavedivLoader").show();
@@ -51,7 +47,7 @@ function isValidEmailAddress(emailAddress) {
     return pattern.test(emailAddress);
 }
 function save() {
-
+    
     try {
         $("input").removeClass('error');
         $("select").removeClass('error');
@@ -59,7 +55,7 @@ function save() {
             showErrorMessage("رقم الهوية  يجب أن يكون 10 ارقام");
             return;
         }
-        if ($("#txttel").val().length != 10) {
+        if ($("#txttel_").val().length != 10) {
             showErrorMessage("رقم الهاتف  يجب أن يكون 10 ارقام");
             return;
         }

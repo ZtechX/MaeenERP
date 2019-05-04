@@ -305,6 +305,10 @@ Partial Public Class academy_sessionDS
         
         Private columnid_number As Global.System.Data.DataColumn
         
+        Private columnsemster As Global.System.Data.DataColumn
+        
+        Private columnyear As Global.System.Data.DataColumn
+        
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub New()
@@ -429,6 +433,22 @@ Partial Public Class academy_sessionDS
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public ReadOnly Property semsterColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnsemster
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public ReadOnly Property yearColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnyear
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0"),  _
          Global.System.ComponentModel.Browsable(false)>  _
         Public ReadOnly Property Count() As Integer
@@ -465,9 +485,9 @@ Partial Public Class academy_sessionDS
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
-        Public Overloads Function Addaccadmy_sessionRow(ByVal course As String, ByVal code As String, ByVal unit As Integer, ByVal final_degree As Double, ByVal weight As String, ByVal symbol As String, ByVal points As String, ByVal student As String, ByVal nationality As String, ByVal diplome As String, ByVal id_number As String) As accadmy_sessionRow
+        Public Overloads Function Addaccadmy_sessionRow(ByVal course As String, ByVal code As String, ByVal unit As Integer, ByVal final_degree As Double, ByVal weight As String, ByVal symbol As String, ByVal points As String, ByVal student As String, ByVal nationality As String, ByVal diplome As String, ByVal id_number As String, ByVal semster As String, ByVal year As String) As accadmy_sessionRow
             Dim rowaccadmy_sessionRow As accadmy_sessionRow = CType(Me.NewRow,accadmy_sessionRow)
-            Dim columnValuesArray() As Object = New Object() {course, code, unit, final_degree, weight, symbol, points, student, nationality, diplome, id_number}
+            Dim columnValuesArray() As Object = New Object() {course, code, unit, final_degree, weight, symbol, points, student, nationality, diplome, id_number, semster, year}
             rowaccadmy_sessionRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowaccadmy_sessionRow)
             Return rowaccadmy_sessionRow
@@ -501,6 +521,8 @@ Partial Public Class academy_sessionDS
             Me.columnnationality = MyBase.Columns("nationality")
             Me.columndiplome = MyBase.Columns("diplome")
             Me.columnid_number = MyBase.Columns("id_number")
+            Me.columnsemster = MyBase.Columns("semster")
+            Me.columnyear = MyBase.Columns("year")
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -528,6 +550,10 @@ Partial Public Class academy_sessionDS
             MyBase.Columns.Add(Me.columndiplome)
             Me.columnid_number = New Global.System.Data.DataColumn("id_number", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnid_number)
+            Me.columnsemster = New Global.System.Data.DataColumn("semster", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnsemster)
+            Me.columnyear = New Global.System.Data.DataColumn("year", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnyear)
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -839,6 +865,36 @@ Partial Public Class academy_sessionDS
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property semster() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableaccadmy_session.semsterColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'semster' in table 'accadmy_session' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableaccadmy_session.semsterColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Property year() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableaccadmy_session.yearColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'year' in table 'accadmy_session' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableaccadmy_session.yearColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Function IscourseNull() As Boolean
             Return Me.IsNull(Me.tableaccadmy_session.courseColumn)
         End Function
@@ -967,6 +1023,30 @@ Partial Public Class academy_sessionDS
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
         Public Sub Setid_numberNull()
             Me(Me.tableaccadmy_session.id_numberColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IssemsterNull() As Boolean
+            Return Me.IsNull(Me.tableaccadmy_session.semsterColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetsemsterNull()
+            Me(Me.tableaccadmy_session.semsterColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Function IsyearNull() As Boolean
+            Return Me.IsNull(Me.tableaccadmy_session.yearColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")>  _
+        Public Sub SetyearNull()
+            Me(Me.tableaccadmy_session.yearColumn) = Global.System.Convert.DBNull
         End Sub
     End Class
     

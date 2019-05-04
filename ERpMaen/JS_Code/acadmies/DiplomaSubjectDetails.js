@@ -566,23 +566,32 @@ function addStudentdegree() {
             //var activityDegree = parseInt($("#activitydegee").val());
 
            
-
+            var error = 0;
                 var students_degree = [];
             $("#pblcstudentdegrees tr").each(function () {
-                debugger
+                
                     var obj = {};
                     obj["id"] = $(this).find("label").attr("id");
                     obj["fdegree"] = parseInt($(this).find("#finaldegee").val());
-                    obj["Acdegree"] = parseInt($(this).find("#activitydegee").val());
+                obj["Acdegree"] = parseInt($(this).find("#activitydegee").val());
+                $(this).find("#finaldegee").removeClass("error");
+                $(this).find("#activitydegee").removeClass("error");
                     if (obj["fdegree"] <= subject_FinalDegree && obj["Acdegree"] <= subject_ActivityDegree) {
                         students_degree.push(obj);
                     }
                     else {
-                        alert("مجموع الدرجات لا يمكن ان يكون اكبر من درجة الماده")
+                        if (obj["fdegree"] > subject_FinalDegree)
+                        { $(this).find("#finaldegee").addClass("error"); }
+                        if (obj["Acdegree"] > subject_ActivityDegree)
+                        { $(this).find("#activitydegee").addClass("error"); }
+                        error = 1;
+                      
                     }
                 
             });
-            debugger
+            if (error) {
+                alert("درجات الخانات المحددة اكبر من الدرجة النهائية ")
+            }
             var rowCount = $("#pblcstudentdegrees tr").length;
 
                 var subjectId = ($("#Lblsubject_id").html());
@@ -620,15 +629,10 @@ function addStudentdegree() {
 function Approve_Studentdegree() {
 
     try {
-        debugger
-        var subject_FinalDegree = parseInt($("#lblsub_FinalDegree").html());
-        var subject_ActivityDegree = parseInt($("#lblsub_ActivityDegree").html());
-        var finaldgr = parseInt($("#finaldegee").val());
-        var activitydgr = parseInt($("#activitydegee").val());
+        
+       
         if (!checkRequired()) {
-
-            if (finaldgr <= subject_FinalDegree && activitydgr <= subject_ActivityDegree) {
-
+            
 
                 var students_degree = [];
                 $("#pblcstudentdegrees_Admin tr").each(function () {
@@ -637,7 +641,6 @@ function Approve_Studentdegree() {
                     obj["id"] = $(this).find("label").attr("id");
                     obj["fdegree"] = parseInt($(this).find("#finaldegee").val());
                     obj["Acdegree"] = parseInt($(this).find("#activitydegee").val());
-
 
                     students_degree.push(obj);
 
@@ -665,13 +668,8 @@ function Approve_Studentdegree() {
                     });
                 }
 
-                
-
-            }
-
-            else {
-                alert("الدرجات لا يمكن ان تكون اكبر من درجة المادة");
-            }
+             
+            
         }
 
     }
@@ -699,7 +697,7 @@ function send_Reason() {
                 
             DiplomaSubjectDetailsCls.saveRefuse(Id, subjectId, refuse, Pub_date_m, Pub_date_hj, code,function (val) {
                         if (val == true) {
-
+                            
                             $("#SavedivLoader").hide();
                             alert(" تم رفض الاعتماد  ");
                             $("#refuseDegree").modal('hide');
@@ -2004,20 +2002,24 @@ function drawpublicDegreeTable() {
             var data = "";
             if (val[0] == 1) {
                 var arrstudent = JSON.parse(val[1]);
-
+                var i = 0;
+                if (arrstudent[0].approved) {
+                    $("#degrees_add").html("");
+                }
                 arrstudent.forEach(function (element) {
 
-
+                    i++;
                     data = data + `   <tr>
+<td>${i}</td>
                                     <td>
                                         <label id=" ${element.student_id}"> ${element.studentname}</label>
                                     </td>
             <td>
-               <input onkeypress="return isNumber(event);" hidden id="activitydegee" class="col1" type="text" value=" ${element.activityDegree}" />
+               <input onkeypress="return isNumber(event);" hidden id="activitydegee" maxlength="2" class="col1 text-center" type="text " value=" ${element.activityDegree}" />
                                     
                                     </td>
                                     <td>
-               <input   onkeypress="return isNumber(event);" hidden id="finaldegee" type="text"  class="col2" value=" ${element.final}"   />
+               <input   onkeypress="return isNumber(event);" hidden id="finaldegee" type="text" maxlength="2"   class="col2 text-center" value=" ${element.final}"   />
                                    
                                     </td>
                                    
@@ -2056,10 +2058,12 @@ function drawApproved_StudentDegree() {
             var count = 0;
             if (val[0] == 1) {
                 var arrstudent = JSON.parse(val[1]);
-                count++;
+                if (arrstudent[0].approved) {
+                    $("#approve_action").html("");
+                }
                 arrstudent.forEach(function (element) {
-
-
+                    count++;
+                    
                     data = data + `   <tr>
                             <td>${count}</td>
                                     <td>
@@ -2067,16 +2071,16 @@ function drawApproved_StudentDegree() {
                                     </td>
                                    
                                     <td>
-               <input onkeypress="return isNumber(event);" id="activitydegee" readonly type="text" value=" ${element.activityDegree}" />
+               <input  id="activitydegee" readonly type="text" class="text-center" style=" background: #eceaea;" value=" ${element.activityDegree}" />
                                     
                                     </td>
 
                   <td>
-               <input   onkeypress="return isNumber(event);" id="finaldegee" readonly type="text" value=" ${element.final}"   />
+               <input    id="finaldegee" readonly type="text" class="text-center" style=" background: #eceaea;" value=" ${element.final}"   />
                                    
                                     </td>
                                     <td>
-               <input onkeypress="return isNumber(event);" id="sumDegree" readonly type="text" value=" ${element.total}" />
+               <input  id="sumDegree" readonly type="text" class="text-center" style=" background: #eceaea;" value=" ${element.total}" />
                                     
                                     </td>
                                 </tr> `
